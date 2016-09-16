@@ -65,7 +65,6 @@
                     </execution>
                 </executions>
             </plugin>
-
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-dependency-plugin</artifactId>
@@ -91,6 +90,51 @@
                 </executions>
             </plugin>
 
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>unpack-docs</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>unpack</goal>
+                        </goals>
+                        <configuration>
+                            <artifactItems>
+                                <artifactItem>
+                                    <groupId>org.jetbrains.kotlin</groupId>
+                                    <artifactId>kotlin-js-library</artifactId>
+                                    <version>${kotlin.version}</version>
+                                    <outputDirectory>../docs/js/lib/kotlin</outputDirectory>
+                                    <includes>*.js</includes>
+                                </artifactItem>
+                                <artifactItem>
+                                    <groupId>freshlyground</groupId>
+                                    <artifactId>elements</artifactId>
+                                    <version>${project.version}</version>
+                                    <outputDirectory>../docs/js/lib/fg/el</outputDirectory>
+                                    <includes>*.js</includes>
+                                </artifactItem>
+                                <artifactItem>
+                                    <groupId>freshlyground</groupId>
+                                    <artifactId>md</artifactId>
+                                    <version>${project.version}</version>
+                                    <outputDirectory>../docs/js/lib/fg/md</outputDirectory>
+                                    <includes>*.js</includes>
+                                </artifactItem>
+                                <artifactItem>
+                                    <groupId>freshlyground</groupId>
+                                    <artifactId>docs-source</artifactId>
+                                    <version>${project.version}</version>
+                                    <outputDirectory>../docs/js/docs</outputDirectory>
+                                    <includes>*.js,*.map</includes>
+                                </artifactItem>
+                            </artifactItems>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
     </build>
 </project>
