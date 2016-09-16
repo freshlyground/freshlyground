@@ -17,6 +17,7 @@
     <modules>
         <module>elements</module>
         <module>md</module>
+        <module>docs-source</module>
     </modules>
 
     <repositories>
