@@ -1587,70 +1587,70 @@ var elements = function (Kotlin) {
             };
           }
         }),
-        article: Kotlin.createClass(function () {
+        Article: Kotlin.createClass(function () {
           return [_.fg.elements.Element];
-        }, function article() {
-          article.baseInitializer.call(this, 'article');
+        }, function Article() {
+          Article.baseInitializer.call(this, 'article');
         }),
-        section: Kotlin.createClass(function () {
+        Section: Kotlin.createClass(function () {
           return [_.fg.elements.Element];
-        }, function section() {
-          section.baseInitializer.call(this, 'section');
+        }, function Section() {
+          Section.baseInitializer.call(this, 'section');
         }),
-        nav: Kotlin.createClass(function () {
+        Nav: Kotlin.createClass(function () {
           return [_.fg.elements.Element];
-        }, function nav() {
-          nav.baseInitializer.call(this, 'nav');
+        }, function Nav() {
+          Nav.baseInitializer.call(this, 'nav');
         }),
-        aside: Kotlin.createClass(function () {
+        Aside: Kotlin.createClass(function () {
           return [_.fg.elements.Element];
-        }, function aside() {
-          aside.baseInitializer.call(this, 'aside');
+        }, function Aside() {
+          Aside.baseInitializer.call(this, 'aside');
         }),
-        h1: Kotlin.createClass(function () {
+        H1: Kotlin.createClass(function () {
           return [_.fg.elements.Element];
-        }, function h1() {
-          h1.baseInitializer.call(this, 'h1');
+        }, function H1() {
+          H1.baseInitializer.call(this, 'h1');
         }),
-        h2: Kotlin.createClass(function () {
+        H2: Kotlin.createClass(function () {
           return [_.fg.elements.Element];
-        }, function h2() {
-          h2.baseInitializer.call(this, 'h2');
+        }, function H2() {
+          H2.baseInitializer.call(this, 'h2');
         }),
-        h3: Kotlin.createClass(function () {
+        H3: Kotlin.createClass(function () {
           return [_.fg.elements.Element];
-        }, function h3() {
-          h3.baseInitializer.call(this, 'h3');
+        }, function H3() {
+          H3.baseInitializer.call(this, 'h3');
         }),
-        h4: Kotlin.createClass(function () {
+        H4: Kotlin.createClass(function () {
           return [_.fg.elements.Element];
-        }, function h4() {
-          h4.baseInitializer.call(this, 'h4');
+        }, function H4() {
+          H4.baseInitializer.call(this, 'h4');
         }),
-        h5: Kotlin.createClass(function () {
+        H5: Kotlin.createClass(function () {
           return [_.fg.elements.Element];
-        }, function h5() {
-          h5.baseInitializer.call(this, 'h5');
+        }, function H5() {
+          H5.baseInitializer.call(this, 'h5');
         }),
-        h6: Kotlin.createClass(function () {
+        H6: Kotlin.createClass(function () {
           return [_.fg.elements.Element];
-        }, function h6() {
-          h6.baseInitializer.call(this, 'h6');
+        }, function H6() {
+          H6.baseInitializer.call(this, 'h6');
         }),
-        header: Kotlin.createClass(function () {
+        Header: Kotlin.createClass(function () {
           return [_.fg.elements.Element];
-        }, function header() {
-          header.baseInitializer.call(this, 'header');
+        }, function Header() {
+          Header.baseInitializer.call(this, 'header');
         }),
-        footer: Kotlin.createClass(function () {
+        Footer: Kotlin.createClass(function () {
           return [_.fg.elements.Element];
-        }, function footer() {
-          footer.baseInitializer.call(this, 'footer');
+        }, function Footer() {
+          Footer.baseInitializer.call(this, 'footer');
         }),
-        address: Kotlin.createClass(function () {
+        Address: Kotlin.createClass(function () {
           return [_.fg.elements.Element];
-        }, function address() {
-          address.baseInitializer.call(this, 'address');
+        }, function Address() {
+          Address.baseInitializer.call(this, 'address');
         }),
         Selector: Kotlin.createClass(null, function Selector() {
         }, null, /** @lends _.fg.elements.Selector */ {

@@ -1,13 +1,13 @@
 package fg.elements.todo
 
 import fg.elements.Text
-import fg.elements.H12
-import fg.elements.Header2
-import fg.elements.Section2
+import fg.elements.H1
+import fg.elements.Header
+import fg.elements.Section
 import fg.style.ClassStyle
 import fg.style.classStyle
 
-class TodoApp : Section2() {
+class TodoApp : Section() {
 
     override val styleClass: ClassStyle? = classStyle {
         background = "#fff"
@@ -16,14 +16,14 @@ class TodoApp : Section2() {
         boxShadow = "0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 25px 50px 0 rgba(0, 0, 0, 0.1)"
     }
 
-    private val header: Header2 by lazy {
-        val header = Header2()
+    private val header: Header by lazy {
+        val header = Header()
         header.appendChild(headerH1)
         header
     }
 
-    private val headerH1: H12 by lazy {
-        val h1 = H12()
+    private val headerH1: H1 by lazy {
+        val h1 = H1()
         h1.appendChild(Text("todos"))
         h1
     }
