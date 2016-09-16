@@ -2,7 +2,7 @@ package fg.md.card
 
 import fg.elements.ClassSelector
 import fg.elements.Div
-import fg.elements.h1
+import fg.elements.H12
 import fg.md.colour.MDGrayPalette
 import fg.style.classStyle
 
