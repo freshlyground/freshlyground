@@ -17,8 +17,6 @@
     <modules>
         <module>elements</module>
         <module>md</module>
-        <module>spices</module>
-        <module>tapas</module>
     </modules>
 
     <repositories>
