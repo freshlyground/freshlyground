@@ -13,4 +13,3 @@ open class H6() : Element(name = "h6")
 open class Header() : Element(name = "header")
 open class Footer() : Element(name = "footer")
 open class Address() : Element(name = "address")
-

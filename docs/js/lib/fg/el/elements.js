@@ -645,8 +645,26 @@ var elements = function (Kotlin) {
         vmax_s8ev3o$: function ($receiver) {
           return new _.fg.elements.VMax($receiver);
         },
+        header_4tl54c$: function ($receiver, init) {
+          return _.fg.elements.initAndAppendNode($receiver, new _.fg.elements.Header(), init);
+        },
+        h1_sk18k8$: function ($receiver, init) {
+          return _.fg.elements.initAndAppendNode($receiver, new _.fg.elements.H1(), init);
+        },
+        h2_3mh653$: function ($receiver, init) {
+          return _.fg.elements.initAndAppendNode($receiver, new _.fg.elements.H2(), init);
+        },
+        p_ykyrxp$: function ($receiver, init) {
+          return _.fg.elements.initAndAppendNode($receiver, new _.fg.elements.P(), init);
+        },
         div_tvzmks$: function ($receiver, init) {
           return _.fg.elements.initAndAppendNode($receiver, new _.fg.elements.Div(), init);
+        },
+        pre_mz29ae$: function ($receiver, init) {
+          return _.fg.elements.initAndAppendNode($receiver, new _.fg.elements.Pre(), init);
+        },
+        img_dgbhyk$: function ($receiver, src, init) {
+          return _.fg.elements.initAndAppendNode($receiver, new _.fg.elements.Img(src), init);
         },
         div$f: Kotlin.createClass(function () {
           return [_.fg.elements.Div];
@@ -667,9 +685,6 @@ var elements = function (Kotlin) {
         }),
         div_1q790e$: function ($receiver, className, init) {
           return _.fg.elements.initAndAppendNode($receiver, new _.fg.elements.div$f(className), init);
-        },
-        img_dgbhyk$: function ($receiver, src, init) {
-          return _.fg.elements.initAndAppendNode($receiver, new _.fg.elements.Img(src), init);
         },
         initAndAppendNode: function ($receiver, node, init) {
           init.call(node);
