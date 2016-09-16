@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: org.jetbrains.kotlin:kotlin-js-library:1.0.4-eap-118">
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/org/jetbrains/kotlin/kotlin-js-library/1.0.4-eap-118/kotlin-js-library-1.0.4-eap-118.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$MAVEN_REPOSITORY$/org/jetbrains/kotlin/kotlin-js-library/1.0.4-eap-118/kotlin-js-library-1.0.4-eap-118-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$MAVEN_REPOSITORY$/org/jetbrains/kotlin/kotlin-js-library/1.0.4-eap-118/kotlin-js-library-1.0.4-eap-118-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
