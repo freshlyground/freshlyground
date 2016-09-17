@@ -654,6 +654,18 @@ var elements = function (Kotlin) {
         h2_3mh653$: function ($receiver, init) {
           return _.fg.elements.initAndAppendNode_i6bvtr$($receiver, new _.fg.elements.H2(), init);
         },
+        h3_lb2wa2$: function ($receiver, init) {
+          return _.fg.elements.initAndAppendNode_i6bvtr$($receiver, new _.fg.elements.H3(), init);
+        },
+        h4_osh39x$: function ($receiver, init) {
+          return _.fg.elements.initAndAppendNode_i6bvtr$($receiver, new _.fg.elements.H4(), init);
+        },
+        h5_52z58$: function ($receiver, init) {
+          return _.fg.elements.initAndAppendNode_i6bvtr$($receiver, new _.fg.elements.H5(), init);
+        },
+        h6_p2n1kd$: function ($receiver, init) {
+          return _.fg.elements.initAndAppendNode_i6bvtr$($receiver, new _.fg.elements.H6(), init);
+        },
         p_ykyrxp$: function ($receiver, init) {
           return _.fg.elements.initAndAppendNode_i6bvtr$($receiver, new _.fg.elements.P(), init);
         },

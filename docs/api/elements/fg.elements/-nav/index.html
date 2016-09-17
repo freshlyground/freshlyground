@@ -1,0 +1,554 @@
+<HTML>
+<HEAD>
+<title>Nav - elements</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">elements</a>&nbsp;/&nbsp;<a href="../index.html">fg.elements</a>&nbsp;/&nbsp;<a href=".">Nav</a><br/>
+<br/>
+<h1>Nav</h1>
+<code><span class="keyword">open</span> <span class="keyword">class </span><span class="identifier">Nav</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="../-element/index.html"><span class="identifier">Element</span></a></code>
+<h3>Constructors</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<a href="-init-.html">&lt;init&gt;</a></td>
+<td>
+<code><span class="identifier">Nav</span><span class="symbol">(</span><span class="symbol">)</span></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Inherited Properties</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<a href="../-element/hidden.html">hidden</a></td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">hidden</span><span class="symbol">: </span><span class="identifier">Boolean</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-element/style.html">style</a></td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">style</span><span class="symbol">: </span><span class="identifier">CSSStyleDeclaration</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-element/style-class.html">styleClass</a></td>
+<td>
+<code><span class="keyword">open</span> <span class="keyword">val </span><span class="identifier">styleClass</span><span class="symbol">: </span><a href="../-i-class-style/index.html"><span class="identifier">IClassStyle</span></a><span class="symbol">?</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-element/style-class-name.html">styleClassName</a></td>
+<td>
+<code><span class="keyword">open</span> <span class="keyword">val </span><span class="identifier">styleClassName</span><span class="symbol">: </span><a href="../-class-selector/index.html"><span class="identifier">ClassSelector</span></a><span class="symbol">?</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-element/style-class-prefix.html">styleClassPrefix</a></td>
+<td>
+<code><span class="keyword">open</span> <span class="keyword">val </span><span class="identifier">styleClassPrefix</span><span class="symbol">: </span><span class="identifier">String</span><span class="symbol">?</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-element/type-style.html">typeStyle</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">typeStyle</span><span class="symbol">: </span><a href="../../fg.style/-type-style/index.html"><span class="identifier">TypeStyle</span></a><span class="symbol">?</span></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Inherited Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<a href="../-element/add-class.html">addClass</a></td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">addClass</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">Unit</span></code><br/>
+<code><span class="keyword">fun </span><span class="identifier">addClass</span><span class="symbol">(</span><span class="identifier" id="fg.elements.Element$addClass(fg.elements.ClassSelector)/selector">selector</span><span class="symbol">:</span>&nbsp;<a href="../-class-selector/index.html"><span class="identifier">ClassSelector</span></a><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">Unit</span></code><br/>
+<code><span class="keyword">fun </span><span class="identifier">addClass</span><span class="symbol">(</span><span class="identifier" id="fg.elements.Element$addClass(kotlin.String)/name">name</span><span class="symbol">:</span>&nbsp;<span class="identifier">String</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">Unit</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-element/did-mount.html">didMount</a></td>
+<td>
+<code><span class="keyword">open</span> <span class="keyword">fun </span><span class="identifier">didMount</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">Unit</span></code>
+<p>Called after render(). On children before parent elements.
+Override when needed, but remember to call super.didMount().</p>
+</td>
+</tr>
+<tr>
+<td>
+<a href="../-element/hide.html">hide</a></td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">hide</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">Unit</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-element/remove-class.html">removeClass</a></td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">removeClass</span><span class="symbol">(</span><span class="identifier" id="fg.elements.Element$removeClass(fg.elements.ClassSelector)/selector">selector</span><span class="symbol">:</span>&nbsp;<a href="../-class-selector/index.html"><span class="identifier">ClassSelector</span></a><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">Unit</span></code><br/>
+<code><span class="keyword">fun </span><span class="identifier">removeClass</span><span class="symbol">(</span><span class="identifier" id="fg.elements.Element$removeClass(kotlin.String)/name">name</span><span class="symbol">:</span>&nbsp;<span class="identifier">String</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">Unit</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-element/remove-classes.html">removeClasses</a></td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">removeClasses</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">Unit</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-element/render.html">render</a></td>
+<td>
+<code><span class="keyword">open</span> <span class="keyword">fun </span><span class="identifier">render</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">Unit</span></code>
+<p>Called before didMount(). On parent elements before children.
+Override when needed, but remember to call super.render().</p>
+</td>
+</tr>
+<tr>
+<td>
+<a href="../-element/show.html">show</a></td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">show</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">Unit</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-element/toggle-class.html">toggleClass</a></td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">toggleClass</span><span class="symbol">(</span><span class="identifier" id="fg.elements.Element$toggleClass(kotlin.String, kotlin.Boolean)/name">name</span><span class="symbol">:</span>&nbsp;<span class="identifier">String</span><span class="symbol">, </span><span class="identifier" id="fg.elements.Element$toggleClass(kotlin.String, kotlin.Boolean)/force">force</span><span class="symbol">:</span>&nbsp;<span class="identifier">Boolean</span>&nbsp;<span class="symbol">=</span>&nbsp;false<span class="symbol">)</span><span class="symbol">: </span><span class="identifier">Unit</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-element/unary-plus.html">unaryPlus</a></td>
+<td>
+<code><span class="keyword">operator</span> <span class="keyword">fun </span><span class="identifier">String</span><span class="symbol">.</span><span class="identifier">unaryPlus</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">Unit</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-element/will-un-mount.html">willUnMount</a></td>
+<td>
+<code><span class="keyword">open</span> <span class="keyword">fun </span><span class="identifier">willUnMount</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">Unit</span></code>
+<p>Called just before the element is removed from the dom.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<h3>Extension Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<a href="../a.html">a</a></td>
+<td>
+<code><span class="keyword">fun </span><a href="../-element/index.html"><span class="identifier">Element</span></a><span class="symbol">.</span><span class="identifier">a</span><span class="symbol">(</span><span class="identifier" id="fg.elements$a(fg.elements.Element, kotlin.String, kotlin.String, kotlin.Function1((fg.elements.A, kotlin.Unit)))/href">href</span><span class="symbol">:</span>&nbsp;<span class="identifier">String</span><span class="symbol">?</span>&nbsp;<span class="symbol">=</span>&nbsp;null<span class="symbol">, </span><span class="identifier" id="fg.elements$a(fg.elements.Element, kotlin.String, kotlin.String, kotlin.Function1((fg.elements.A, kotlin.Unit)))/target">target</span><span class="symbol">:</span>&nbsp;<span class="identifier">String</span><span class="symbol">?</span>&nbsp;<span class="symbol">=</span>&nbsp;null<span class="symbol">, </span><span class="identifier" id="fg.elements$a(fg.elements.Element, kotlin.String, kotlin.String, kotlin.Function1((fg.elements.A, kotlin.Unit)))/init">init</span><span class="symbol">:</span>&nbsp;<a href="../-a/index.html"><span class="identifier">A</span></a><span class="symbol">.</span><span class="symbol">(</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<span class="identifier">Unit</span><span class="symbol">)</span><span class="symbol">: </span><a href="../-a/index.html"><span class="identifier">A</span></a></code></td>
+</tr>
+<tr>
+<td>
+<a href="../../fg.style/class-style.html">classStyle</a></td>
+<td>
+<code><span class="keyword">fun </span><a href="../-element/index.html"><span class="identifier">Element</span></a><span class="symbol">.</span><span class="identifier">classStyle</span><span class="symbol">(</span><span class="identifier" id="fg.style$classStyle(fg.elements.Element, kotlin.Function1((fg.style.ClassStyle, kotlin.Unit)))/init">init</span><span class="symbol">:</span>&nbsp;<a href="../../fg.style/-class-style/index.html"><span class="identifier">ClassStyle</span></a><span class="symbol">.</span><span class="symbol">(</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<span class="identifier">Unit</span><span class="symbol">)</span><span class="symbol">: </span><a href="../../fg.style/-class-style/index.html"><span class="identifier">ClassStyle</span></a></code></td>
+</tr>
+<tr>
+<td>
+<a href="../div.html">div</a></td>
+<td>
+<code><span class="keyword">fun </span><a href="../-element/index.html"><span class="identifier">Element</span></a><span class="symbol">.</span><span class="identifier">div</span><span class="symbol">(</span><span class="identifier" id="fg.elements$div(fg.elements.Element, kotlin.Function1((fg.elements.Div, kotlin.Unit)))/init">init</span><span class="symbol">:</span>&nbsp;<a href="../-div/index.html"><span class="identifier">Div</span></a><span class="symbol">.</span><span class="symbol">(</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<span class="identifier">Unit</span><span class="symbol">)</span><span class="symbol">: </span><a href="../-div/index.html"><span class="identifier">Div</span></a></code><br/>
+<code><span class="keyword">fun </span><a href="../-element/index.html"><span class="identifier">Element</span></a><span class="symbol">.</span><span class="identifier">div</span><span class="symbol">(</span><span class="identifier" id="fg.elements$div(fg.elements.Element, kotlin.String, kotlin.Function1((fg.elements.Div, kotlin.Unit)))/className">className</span><span class="symbol">:</span>&nbsp;<span class="identifier">String</span><span class="symbol">, </span><span class="identifier" id="fg.elements$div(fg.elements.Element, kotlin.String, kotlin.Function1((fg.elements.Div, kotlin.Unit)))/init">init</span><span class="symbol">:</span>&nbsp;<a href="../-div/index.html"><span class="identifier">Div</span></a><span class="symbol">.</span><span class="symbol">(</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<span class="identifier">Unit</span><span class="symbol">)</span><span class="symbol">: </span><a href="../-div/index.html"><span class="identifier">Div</span></a></code></td>
+</tr>
+<tr>
+<td>
+<a href="../h1.html">h1</a></td>
+<td>
+<code><span class="keyword">fun </span><a href="../-element/index.html"><span class="identifier">Element</span></a><span class="symbol">.</span><span class="identifier">h1</span><span class="symbol">(</span><span class="identifier" id="fg.elements$h1(fg.elements.Element, kotlin.Function1((fg.elements.H1, kotlin.Unit)))/init">init</span><span class="symbol">:</span>&nbsp;<a href="../-h1/index.html"><span class="identifier">H1</span></a><span class="symbol">.</span><span class="symbol">(</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<span class="identifier">Unit</span><span class="symbol">)</span><span class="symbol">: </span><a href="../-h1/index.html"><span class="identifier">H1</span></a></code></td>
+</tr>
+<tr>
+<td>
+<a href="../h2.html">h2</a></td>
+<td>
+<code><span class="keyword">fun </span><a href="../-element/index.html"><span class="identifier">Element</span></a><span class="symbol">.</span><span class="identifier">h2</span><span class="symbol">(</span><span class="identifier" id="fg.elements$h2(fg.elements.Element, kotlin.Function1((fg.elements.H2, kotlin.Unit)))/init">init</span><span class="symbol">:</span>&nbsp;<a href="../-h2/index.html"><span class="identifier">H2</span></a><span class="symbol">.</span><span class="symbol">(</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<span class="identifier">Unit</span><span class="symbol">)</span><span class="symbol">: </span><a href="../-h2/index.html"><span class="identifier">H2</span></a></code></td>
+</tr>
+<tr>
+<td>
+<a href="../h3.html">h3</a></td>
+<td>
+<code><span class="keyword">fun </span><a href="../-element/index.html"><span class="identifier">Element</span></a><span class="symbol">.</span><span class="identifier">h3</span><span class="symbol">(</span><span class="identifier" id="fg.elements$h3(fg.elements.Element, kotlin.Function1((fg.elements.H3, kotlin.Unit)))/init">init</span><span class="symbol">:</span>&nbsp;<a href="../-h3/index.html"><span class="identifier">H3</span></a><span class="symbol">.</span><span class="symbol">(</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<span class="identifier">Unit</span><span class="symbol">)</span><span class="symbol">: </span><a href="../-h3/index.html"><span class="identifier">H3</span></a></code></td>
+</tr>
+<tr>
+<td>
+<a href="../h4.html">h4</a></td>
+<td>
+<code><span class="keyword">fun </span><a href="../-element/index.html"><span class="identifier">Element</span></a><span class="symbol">.</span><span class="identifier">h4</span><span class="symbol">(</span><span class="identifier" id="fg.elements$h4(fg.elements.Element, kotlin.Function1((fg.elements.H4, kotlin.Unit)))/init">init</span><span class="symbol">:</span>&nbsp;<a href="../-h4/index.html"><span class="identifier">H4</span></a><span class="symbol">.</span><span class="symbol">(</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<span class="identifier">Unit</span><span class="symbol">)</span><span class="symbol">: </span><a href="../-h4/index.html"><span class="identifier">H4</span></a></code></td>
+</tr>
+<tr>
+<td>
+<a href="../h5.html">h5</a></td>
+<td>
+<code><span class="keyword">fun </span><a href="../-element/index.html"><span class="identifier">Element</span></a><span class="symbol">.</span><span class="identifier">h5</span><span class="symbol">(</span><span class="identifier" id="fg.elements$h5(fg.elements.Element, kotlin.Function1((fg.elements.H5, kotlin.Unit)))/init">init</span><span class="symbol">:</span>&nbsp;<a href="../-h5/index.html"><span class="identifier">H5</span></a><span class="symbol">.</span><span class="symbol">(</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<span class="identifier">Unit</span><span class="symbol">)</span><span class="symbol">: </span><a href="../-h5/index.html"><span class="identifier">H5</span></a></code></td>
+</tr>
+<tr>
+<td>
+<a href="../h6.html">h6</a></td>
+<td>
+<code><span class="keyword">fun </span><a href="../-element/index.html"><span class="identifier">Element</span></a><span class="symbol">.</span><span class="identifier">h6</span><span class="symbol">(</span><span class="identifier" id="fg.elements$h6(fg.elements.Element, kotlin.Function1((fg.elements.H6, kotlin.Unit)))/init">init</span><span class="symbol">:</span>&nbsp;<a href="../-h6/index.html"><span class="identifier">H6</span></a><span class="symbol">.</span><span class="symbol">(</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<span class="identifier">Unit</span><span class="symbol">)</span><span class="symbol">: </span><a href="../-h6/index.html"><span class="identifier">H6</span></a></code></td>
+</tr>
+<tr>
+<td>
+<a href="../header.html">header</a></td>
+<td>
+<code><span class="keyword">fun </span><a href="../-element/index.html"><span class="identifier">Element</span></a><span class="symbol">.</span><span class="identifier">header</span><span class="symbol">(</span><span class="identifier" id="fg.elements$header(fg.elements.Element, kotlin.Function1((fg.elements.Header, kotlin.Unit)))/init">init</span><span class="symbol">:</span>&nbsp;<a href="../-header/index.html"><span class="identifier">Header</span></a><span class="symbol">.</span><span class="symbol">(</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<span class="identifier">Unit</span><span class="symbol">)</span><span class="symbol">: </span><a href="../-header/index.html"><span class="identifier">Header</span></a></code></td>
+</tr>
+<tr>
+<td>
+<a href="../i.html">i</a></td>
+<td>
+<code><span class="keyword">fun </span><a href="../-element/index.html"><span class="identifier">Element</span></a><span class="symbol">.</span><span class="identifier">i</span><span class="symbol">(</span><span class="identifier" id="fg.elements$i(fg.elements.Element, kotlin.Function1((fg.elements.I, kotlin.Unit)))/init">init</span><span class="symbol">:</span>&nbsp;<a href="../-i/index.html"><span class="identifier">I</span></a><span class="symbol">.</span><span class="symbol">(</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<span class="identifier">Unit</span><span class="symbol">)</span><span class="symbol">: </span><a href="../-i/index.html"><span class="identifier">I</span></a></code></td>
+</tr>
+<tr>
+<td>
+<a href="../img.html">img</a></td>
+<td>
+<code><span class="keyword">fun </span><a href="../-element/index.html"><span class="identifier">Element</span></a><span class="symbol">.</span><span class="identifier">img</span><span class="symbol">(</span><span class="identifier" id="fg.elements$img(fg.elements.Element, kotlin.String, kotlin.Function1((fg.elements.Img, kotlin.Unit)))/src">src</span><span class="symbol">:</span>&nbsp;<span class="identifier">String</span><span class="symbol">, </span><span class="identifier" id="fg.elements$img(fg.elements.Element, kotlin.String, kotlin.Function1((fg.elements.Img, kotlin.Unit)))/init">init</span><span class="symbol">:</span>&nbsp;<a href="../-img/index.html"><span class="identifier">Img</span></a><span class="symbol">.</span><span class="symbol">(</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<span class="identifier">Unit</span><span class="symbol">)</span><span class="symbol">: </span><a href="../-img/index.html"><span class="identifier">Img</span></a></code></td>
+</tr>
+<tr>
+<td>
+<a href="../init-and-append-node.html">initAndAppendNode</a></td>
+<td>
+<code><span class="keyword">fun </span><span class="symbol">&lt;</span><span class="identifier">T</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="../-node/index.html"><span class="identifier">Node</span></a><span class="symbol">&gt;</span> <a href="../-node/index.html"><span class="identifier">Node</span></a><span class="symbol">.</span><span class="identifier">initAndAppendNode</span><span class="symbol">(</span><span class="identifier" id="fg.elements$initAndAppendNode(fg.elements.Node, fg.elements.initAndAppendNode.T, kotlin.Function1((fg.elements.initAndAppendNode.T, kotlin.Unit)))/node">node</span><span class="symbol">:</span>&nbsp;<span class="identifier">T</span><span class="symbol">, </span><span class="identifier" id="fg.elements$initAndAppendNode(fg.elements.Node, fg.elements.initAndAppendNode.T, kotlin.Function1((fg.elements.initAndAppendNode.T, kotlin.Unit)))/init">init</span><span class="symbol">:</span>&nbsp;<span class="identifier">T</span><span class="symbol">.</span><span class="symbol">(</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<span class="identifier">Unit</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">T</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../li.html">li</a></td>
+<td>
+<code><span class="keyword">fun </span><a href="../-element/index.html"><span class="identifier">Element</span></a><span class="symbol">.</span><span class="identifier">li</span><span class="symbol">(</span><span class="identifier" id="fg.elements$li(fg.elements.Element, kotlin.Function1((fg.elements.Li, kotlin.Unit)))/init">init</span><span class="symbol">:</span>&nbsp;<a href="../-li/index.html"><span class="identifier">Li</span></a><span class="symbol">.</span><span class="symbol">(</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<span class="identifier">Unit</span><span class="symbol">)</span><span class="symbol">: </span><a href="../-li/index.html"><span class="identifier">Li</span></a></code></td>
+</tr>
+<tr>
+<td>
+<a href="../ol.html">ol</a></td>
+<td>
+<code><span class="keyword">fun </span><a href="../-element/index.html"><span class="identifier">Element</span></a><span class="symbol">.</span><span class="identifier">ol</span><span class="symbol">(</span><span class="identifier" id="fg.elements$ol(fg.elements.Element, kotlin.Function1((fg.elements.Ol, kotlin.Unit)))/init">init</span><span class="symbol">:</span>&nbsp;<a href="../-ol/index.html"><span class="identifier">Ol</span></a><span class="symbol">.</span><span class="symbol">(</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<span class="identifier">Unit</span><span class="symbol">)</span><span class="symbol">: </span><a href="../-ol/index.html"><span class="identifier">Ol</span></a></code></td>
+</tr>
+<tr>
+<td>
+<a href="../on-blur.html">onBlur</a></td>
+<td>
+<code><span class="keyword">fun </span><a href="../-element/index.html"><span class="identifier">Element</span></a><span class="symbol">.</span><span class="identifier">onBlur</span><span class="symbol">(</span><span class="identifier" id="fg.elements$onBlur(fg.elements.Element, kotlin.Function1((org.w3c.dom.events.Event, kotlin.Unit)))/listener">listener</span><span class="symbol">:</span>&nbsp;<span class="symbol">(</span><span class="identifier">Event</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<span class="identifier">Unit</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">Unit</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../on-change.html">onChange</a></td>
+<td>
+<code><span class="keyword">fun </span><a href="../-element/index.html"><span class="identifier">Element</span></a><span class="symbol">.</span><span class="identifier">onChange</span><span class="symbol">(</span><span class="identifier" id="fg.elements$onChange(fg.elements.Element, kotlin.Function1((org.w3c.dom.events.Event, kotlin.Unit)))/listener">listener</span><span class="symbol">:</span>&nbsp;<span class="symbol">(</span><span class="identifier">Event</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<span class="identifier">Unit</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">Unit</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../on-click.html">onClick</a></td>
+<td>
+<code><span class="keyword">fun </span><a href="../-element/index.html"><span class="identifier">Element</span></a><span class="symbol">.</span><span class="identifier">onClick</span><span class="symbol">(</span><span class="identifier" id="fg.elements$onClick(fg.elements.Element, kotlin.Function1((org.w3c.dom.events.Event, kotlin.Unit)))/listener">listener</span><span class="symbol">:</span>&nbsp;<span class="symbol">(</span><span class="identifier">Event</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<span class="identifier">Unit</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">Unit</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../on-dbl-click.html">onDblClick</a></td>
+<td>
+<code><span class="keyword">fun </span><a href="../-element/index.html"><span class="identifier">Element</span></a><span class="symbol">.</span><span class="identifier">onDblClick</span><span class="symbol">(</span><span class="identifier" id="fg.elements$onDblClick(fg.elements.Element, kotlin.Function1((org.w3c.dom.events.Event, kotlin.Unit)))/listener">listener</span><span class="symbol">:</span>&nbsp;<span class="symbol">(</span><span class="identifier">Event</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<span class="identifier">Unit</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">Unit</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../on-drag.html">onDrag</a></td>
+<td>
+<code><span class="keyword">fun </span><a href="../-element/index.html"><span class="identifier">Element</span></a><span class="symbol">.</span><span class="identifier">onDrag</span><span class="symbol">(</span><span class="identifier" id="fg.elements$onDrag(fg.elements.Element, kotlin.Function1((org.w3c.dom.events.Event, kotlin.Unit)))/listener">listener</span><span class="symbol">:</span>&nbsp;<span class="symbol">(</span><span class="identifier">Event</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<span class="identifier">Unit</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">Unit</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../on-drag-end.html">onDragEnd</a></td>
+<td>
+<code><span class="keyword">fun </span><a href="../-element/index.html"><span class="identifier">Element</span></a><span class="symbol">.</span><span class="identifier">onDragEnd</span><span class="symbol">(</span><span class="identifier" id="fg.elements$onDragEnd(fg.elements.Element, kotlin.Function1((org.w3c.dom.events.Event, kotlin.Unit)))/listener">listener</span><span class="symbol">:</span>&nbsp;<span class="symbol">(</span><span class="identifier">Event</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<span class="identifier">Unit</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">Unit</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../on-drag-enter.html">onDragEnter</a></td>
+<td>
+<code><span class="keyword">fun </span><a href="../-element/index.html"><span class="identifier">Element</span></a><span class="symbol">.</span><span class="identifier">onDragEnter</span><span class="symbol">(</span><span class="identifier" id="fg.elements$onDragEnter(fg.elements.Element, kotlin.Function1((org.w3c.dom.events.Event, kotlin.Unit)))/listener">listener</span><span class="symbol">:</span>&nbsp;<span class="symbol">(</span><span class="identifier">Event</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<span class="identifier">Unit</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">Unit</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../on-drag-leave.html">onDragLeave</a></td>
+<td>
+<code><span class="keyword">fun </span><a href="../-element/index.html"><span class="identifier">Element</span></a><span class="symbol">.</span><span class="identifier">onDragLeave</span><span class="symbol">(</span><span class="identifier" id="fg.elements$onDragLeave(fg.elements.Element, kotlin.Function1((org.w3c.dom.events.Event, kotlin.Unit)))/listener">listener</span><span class="symbol">:</span>&nbsp;<span class="symbol">(</span><span class="identifier">Event</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<span class="identifier">Unit</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">Unit</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../on-drag-over.html">onDragOver</a></td>
+<td>
+<code><span class="keyword">fun </span><a href="../-element/index.html"><span class="identifier">Element</span></a><span class="symbol">.</span><span class="identifier">onDragOver</span><span class="symbol">(</span><span class="identifier" id="fg.elements$onDragOver(fg.elements.Element, kotlin.Function1((org.w3c.dom.events.Event, kotlin.Unit)))/listener">listener</span><span class="symbol">:</span>&nbsp;<span class="symbol">(</span><span class="identifier">Event</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<span class="identifier">Unit</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">Unit</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../on-drag-start.html">onDragStart</a></td>
+<td>
+<code><span class="keyword">fun </span><a href="../-element/index.html"><span class="identifier">Element</span></a><span class="symbol">.</span><span class="identifier">onDragStart</span><span class="symbol">(</span><span class="identifier" id="fg.elements$onDragStart(fg.elements.Element, kotlin.Function1((org.w3c.dom.events.Event, kotlin.Unit)))/listener">listener</span><span class="symbol">:</span>&nbsp;<span class="symbol">(</span><span class="identifier">Event</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<span class="identifier">Unit</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">Unit</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../on-drop.html">onDrop</a></td>
+<td>
+<code><span class="keyword">fun </span><a href="../-element/index.html"><span class="identifier">Element</span></a><span class="symbol">.</span><span class="identifier">onDrop</span><span class="symbol">(</span><span class="identifier" id="fg.elements$onDrop(fg.elements.Element, kotlin.Function1((org.w3c.dom.events.Event, kotlin.Unit)))/listener">listener</span><span class="symbol">:</span>&nbsp;<span class="symbol">(</span><span class="identifier">Event</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<span class="identifier">Unit</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">Unit</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../on-focus.html">onFocus</a></td>
+<td>
+<code><span class="keyword">fun </span><a href="../-element/index.html"><span class="identifier">Element</span></a><span class="symbol">.</span><span class="identifier">onFocus</span><span class="symbol">(</span><span class="identifier" id="fg.elements$onFocus(fg.elements.Element, kotlin.Function1((org.w3c.dom.events.Event, kotlin.Unit)))/listener">listener</span><span class="symbol">:</span>&nbsp;<span class="symbol">(</span><span class="identifier">Event</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<span class="identifier">Unit</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">Unit</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../on-input.html">onInput</a></td>
+<td>
+<code><span class="keyword">fun </span><a href="../-element/index.html"><span class="identifier">Element</span></a><span class="symbol">.</span><span class="identifier">onInput</span><span class="symbol">(</span><span class="identifier" id="fg.elements$onInput(fg.elements.Element, kotlin.Function1((org.w3c.dom.events.Event, kotlin.Unit)))/listener">listener</span><span class="symbol">:</span>&nbsp;<span class="symbol">(</span><span class="identifier">Event</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<span class="identifier">Unit</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">Unit</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../on-key-down.html">onKeyDown</a></td>
+<td>
+<code><span class="keyword">fun </span><a href="../-element/index.html"><span class="identifier">Element</span></a><span class="symbol">.</span><span class="identifier">onKeyDown</span><span class="symbol">(</span><span class="identifier" id="fg.elements$onKeyDown(fg.elements.Element, kotlin.Function1((org.w3c.dom.events.Event, kotlin.Unit)))/listener">listener</span><span class="symbol">:</span>&nbsp;<span class="symbol">(</span><span class="identifier">Event</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<span class="identifier">Unit</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">Unit</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../on-key-press.html">onKeyPress</a></td>
+<td>
+<code><span class="keyword">fun </span><a href="../-element/index.html"><span class="identifier">Element</span></a><span class="symbol">.</span><span class="identifier">onKeyPress</span><span class="symbol">(</span><span class="identifier" id="fg.elements$onKeyPress(fg.elements.Element, kotlin.Function1((org.w3c.dom.events.Event, kotlin.Unit)))/listener">listener</span><span class="symbol">:</span>&nbsp;<span class="symbol">(</span><span class="identifier">Event</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<span class="identifier">Unit</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">Unit</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../on-key-up.html">onKeyUp</a></td>
+<td>
+<code><span class="keyword">fun </span><a href="../-element/index.html"><span class="identifier">Element</span></a><span class="symbol">.</span><span class="identifier">onKeyUp</span><span class="symbol">(</span><span class="identifier" id="fg.elements$onKeyUp(fg.elements.Element, kotlin.Function1((org.w3c.dom.events.Event, kotlin.Unit)))/listener">listener</span><span class="symbol">:</span>&nbsp;<span class="symbol">(</span><span class="identifier">Event</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<span class="identifier">Unit</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">Unit</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../on-mouse-down.html">onMouseDown</a></td>
+<td>
+<code><span class="keyword">fun </span><a href="../-element/index.html"><span class="identifier">Element</span></a><span class="symbol">.</span><span class="identifier">onMouseDown</span><span class="symbol">(</span><span class="identifier" id="fg.elements$onMouseDown(fg.elements.Element, kotlin.Function1((org.w3c.dom.events.MouseEvent, kotlin.Unit)))/listener">listener</span><span class="symbol">:</span>&nbsp;<span class="symbol">(</span><span class="identifier">MouseEvent</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<span class="identifier">Unit</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">Unit</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../on-mouse-enter.html">onMouseEnter</a></td>
+<td>
+<code><span class="keyword">fun </span><a href="../-element/index.html"><span class="identifier">Element</span></a><span class="symbol">.</span><span class="identifier">onMouseEnter</span><span class="symbol">(</span><span class="identifier" id="fg.elements$onMouseEnter(fg.elements.Element, kotlin.Function1((org.w3c.dom.events.MouseEvent, kotlin.Unit)))/listener">listener</span><span class="symbol">:</span>&nbsp;<span class="symbol">(</span><span class="identifier">MouseEvent</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<span class="identifier">Unit</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">Unit</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../on-mouse-leave.html">onMouseLeave</a></td>
+<td>
+<code><span class="keyword">fun </span><a href="../-element/index.html"><span class="identifier">Element</span></a><span class="symbol">.</span><span class="identifier">onMouseLeave</span><span class="symbol">(</span><span class="identifier" id="fg.elements$onMouseLeave(fg.elements.Element, kotlin.Function1((org.w3c.dom.events.MouseEvent, kotlin.Unit)))/listener">listener</span><span class="symbol">:</span>&nbsp;<span class="symbol">(</span><span class="identifier">MouseEvent</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<span class="identifier">Unit</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">Unit</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../on-mouse-move.html">onMouseMove</a></td>
+<td>
+<code><span class="keyword">fun </span><a href="../-element/index.html"><span class="identifier">Element</span></a><span class="symbol">.</span><span class="identifier">onMouseMove</span><span class="symbol">(</span><span class="identifier" id="fg.elements$onMouseMove(fg.elements.Element, kotlin.Function1((org.w3c.dom.events.MouseEvent, kotlin.Unit)))/listener">listener</span><span class="symbol">:</span>&nbsp;<span class="symbol">(</span><span class="identifier">MouseEvent</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<span class="identifier">Unit</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">Unit</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../on-mouse-out.html">onMouseOut</a></td>
+<td>
+<code><span class="keyword">fun </span><a href="../-element/index.html"><span class="identifier">Element</span></a><span class="symbol">.</span><span class="identifier">onMouseOut</span><span class="symbol">(</span><span class="identifier" id="fg.elements$onMouseOut(fg.elements.Element, kotlin.Function1((org.w3c.dom.events.MouseEvent, kotlin.Unit)))/listener">listener</span><span class="symbol">:</span>&nbsp;<span class="symbol">(</span><span class="identifier">MouseEvent</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<span class="identifier">Unit</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">Unit</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../on-mouse-over.html">onMouseOver</a></td>
+<td>
+<code><span class="keyword">fun </span><a href="../-element/index.html"><span class="identifier">Element</span></a><span class="symbol">.</span><span class="identifier">onMouseOver</span><span class="symbol">(</span><span class="identifier" id="fg.elements$onMouseOver(fg.elements.Element, kotlin.Function1((org.w3c.dom.events.MouseEvent, kotlin.Unit)))/listener">listener</span><span class="symbol">:</span>&nbsp;<span class="symbol">(</span><span class="identifier">MouseEvent</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<span class="identifier">Unit</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">Unit</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../on-mouse-up.html">onMouseUp</a></td>
+<td>
+<code><span class="keyword">fun </span><a href="../-element/index.html"><span class="identifier">Element</span></a><span class="symbol">.</span><span class="identifier">onMouseUp</span><span class="symbol">(</span><span class="identifier" id="fg.elements$onMouseUp(fg.elements.Element, kotlin.Function1((org.w3c.dom.events.MouseEvent, kotlin.Unit)))/listener">listener</span><span class="symbol">:</span>&nbsp;<span class="symbol">(</span><span class="identifier">MouseEvent</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<span class="identifier">Unit</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">Unit</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../on-scroll.html">onScroll</a></td>
+<td>
+<code><span class="keyword">fun </span><a href="../-element/index.html"><span class="identifier">Element</span></a><span class="symbol">.</span><span class="identifier">onScroll</span><span class="symbol">(</span><span class="identifier" id="fg.elements$onScroll(fg.elements.Element, kotlin.Function1((org.w3c.dom.events.Event, kotlin.Unit)))/listener">listener</span><span class="symbol">:</span>&nbsp;<span class="symbol">(</span><span class="identifier">Event</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<span class="identifier">Unit</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">Unit</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../p.html">p</a></td>
+<td>
+<code><span class="keyword">fun </span><a href="../-element/index.html"><span class="identifier">Element</span></a><span class="symbol">.</span><span class="identifier">p</span><span class="symbol">(</span><span class="identifier" id="fg.elements$p(fg.elements.Element, kotlin.Function1((fg.elements.P, kotlin.Unit)))/init">init</span><span class="symbol">:</span>&nbsp;<a href="../-p/index.html"><span class="identifier">P</span></a><span class="symbol">.</span><span class="symbol">(</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<span class="identifier">Unit</span><span class="symbol">)</span><span class="symbol">: </span><a href="../-p/index.html"><span class="identifier">P</span></a></code></td>
+</tr>
+<tr>
+<td>
+<a href="../pre.html">pre</a></td>
+<td>
+<code><span class="keyword">fun </span><a href="../-element/index.html"><span class="identifier">Element</span></a><span class="symbol">.</span><span class="identifier">pre</span><span class="symbol">(</span><span class="identifier" id="fg.elements$pre(fg.elements.Element, kotlin.Function1((fg.elements.Pre, kotlin.Unit)))/init">init</span><span class="symbol">:</span>&nbsp;<a href="../-pre/index.html"><span class="identifier">Pre</span></a><span class="symbol">.</span><span class="symbol">(</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<span class="identifier">Unit</span><span class="symbol">)</span><span class="symbol">: </span><a href="../-pre/index.html"><span class="identifier">Pre</span></a></code></td>
+</tr>
+<tr>
+<td>
+<a href="../../fg.style/resolve-class-style-name.html">resolveClassStyleName</a></td>
+<td>
+<code><span class="keyword">fun </span><a href="../-element/index.html"><span class="identifier">Element</span></a><span class="symbol">.</span><span class="identifier">resolveClassStyleName</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="../-class-selector/index.html"><span class="identifier">ClassSelector</span></a></code></td>
+</tr>
+<tr>
+<td>
+<a href="../../fg.style/type-style.html">typeStyle</a></td>
+<td>
+<code><span class="keyword">fun </span><a href="../-element/index.html"><span class="identifier">Element</span></a><span class="symbol">.</span><span class="identifier">typeStyle</span><span class="symbol">(</span><span class="identifier" id="fg.style$typeStyle(fg.elements.Element, kotlin.Function1((fg.style.TypeStyle, kotlin.Unit)))/init">init</span><span class="symbol">:</span>&nbsp;<a href="../../fg.style/-type-style/index.html"><span class="identifier">TypeStyle</span></a><span class="symbol">.</span><span class="symbol">(</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<span class="identifier">Unit</span><span class="symbol">)</span><span class="symbol">: </span><a href="../../fg.style/-type-style/index.html"><span class="identifier">TypeStyle</span></a></code></td>
+</tr>
+<tr>
+<td>
+<a href="../ul.html">ul</a></td>
+<td>
+<code><span class="keyword">fun </span><a href="../-element/index.html"><span class="identifier">Element</span></a><span class="symbol">.</span><span class="identifier">ul</span><span class="symbol">(</span><span class="identifier" id="fg.elements$ul(fg.elements.Element, kotlin.Function1((fg.elements.Ul, kotlin.Unit)))/init">init</span><span class="symbol">:</span>&nbsp;<a href="../-ul/index.html"><span class="identifier">Ul</span></a><span class="symbol">.</span><span class="symbol">(</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<span class="identifier">Unit</span><span class="symbol">)</span><span class="symbol">: </span><a href="../-ul/index.html"><span class="identifier">Ul</span></a></code></td>
+</tr>
+<tr>
+<td>
+<a href="../un-blur.html">unBlur</a></td>
+<td>
+<code><span class="keyword">fun </span><a href="../-element/index.html"><span class="identifier">Element</span></a><span class="symbol">.</span><span class="identifier">unBlur</span><span class="symbol">(</span><span class="identifier" id="fg.elements$unBlur(fg.elements.Element, kotlin.Function1((org.w3c.dom.events.Event, kotlin.Unit)))/listener">listener</span><span class="symbol">:</span>&nbsp;<span class="symbol">(</span><span class="identifier">Event</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<span class="identifier">Unit</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">Unit</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../un-change.html">unChange</a></td>
+<td>
+<code><span class="keyword">fun </span><a href="../-element/index.html"><span class="identifier">Element</span></a><span class="symbol">.</span><span class="identifier">unChange</span><span class="symbol">(</span><span class="identifier" id="fg.elements$unChange(fg.elements.Element, kotlin.Function1((org.w3c.dom.events.Event, kotlin.Unit)))/listener">listener</span><span class="symbol">:</span>&nbsp;<span class="symbol">(</span><span class="identifier">Event</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<span class="identifier">Unit</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">Unit</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../un-click.html">unClick</a></td>
+<td>
+<code><span class="keyword">fun </span><a href="../-element/index.html"><span class="identifier">Element</span></a><span class="symbol">.</span><span class="identifier">unClick</span><span class="symbol">(</span><span class="identifier" id="fg.elements$unClick(fg.elements.Element, kotlin.Function1((org.w3c.dom.events.Event, kotlin.Unit)))/listener">listener</span><span class="symbol">:</span>&nbsp;<span class="symbol">(</span><span class="identifier">Event</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<span class="identifier">Unit</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">Unit</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../un-dbl-click.html">unDblClick</a></td>
+<td>
+<code><span class="keyword">fun </span><a href="../-element/index.html"><span class="identifier">Element</span></a><span class="symbol">.</span><span class="identifier">unDblClick</span><span class="symbol">(</span><span class="identifier" id="fg.elements$unDblClick(fg.elements.Element, kotlin.Function1((org.w3c.dom.events.Event, kotlin.Unit)))/listener">listener</span><span class="symbol">:</span>&nbsp;<span class="symbol">(</span><span class="identifier">Event</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<span class="identifier">Unit</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">Unit</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../un-drag.html">unDrag</a></td>
+<td>
+<code><span class="keyword">fun </span><a href="../-element/index.html"><span class="identifier">Element</span></a><span class="symbol">.</span><span class="identifier">unDrag</span><span class="symbol">(</span><span class="identifier" id="fg.elements$unDrag(fg.elements.Element, kotlin.Function1((org.w3c.dom.events.Event, kotlin.Unit)))/listener">listener</span><span class="symbol">:</span>&nbsp;<span class="symbol">(</span><span class="identifier">Event</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<span class="identifier">Unit</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">Unit</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../un-drag-end.html">unDragEnd</a></td>
+<td>
+<code><span class="keyword">fun </span><a href="../-element/index.html"><span class="identifier">Element</span></a><span class="symbol">.</span><span class="identifier">unDragEnd</span><span class="symbol">(</span><span class="identifier" id="fg.elements$unDragEnd(fg.elements.Element, kotlin.Function1((org.w3c.dom.events.Event, kotlin.Unit)))/listener">listener</span><span class="symbol">:</span>&nbsp;<span class="symbol">(</span><span class="identifier">Event</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<span class="identifier">Unit</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">Unit</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../un-drag-enter.html">unDragEnter</a></td>
+<td>
+<code><span class="keyword">fun </span><a href="../-element/index.html"><span class="identifier">Element</span></a><span class="symbol">.</span><span class="identifier">unDragEnter</span><span class="symbol">(</span><span class="identifier" id="fg.elements$unDragEnter(fg.elements.Element, kotlin.Function1((org.w3c.dom.events.Event, kotlin.Unit)))/listener">listener</span><span class="symbol">:</span>&nbsp;<span class="symbol">(</span><span class="identifier">Event</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<span class="identifier">Unit</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">Unit</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../un-drag-leave.html">unDragLeave</a></td>
+<td>
+<code><span class="keyword">fun </span><a href="../-element/index.html"><span class="identifier">Element</span></a><span class="symbol">.</span><span class="identifier">unDragLeave</span><span class="symbol">(</span><span class="identifier" id="fg.elements$unDragLeave(fg.elements.Element, kotlin.Function1((org.w3c.dom.events.Event, kotlin.Unit)))/listener">listener</span><span class="symbol">:</span>&nbsp;<span class="symbol">(</span><span class="identifier">Event</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<span class="identifier">Unit</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">Unit</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../un-drag-over.html">unDragOver</a></td>
+<td>
+<code><span class="keyword">fun </span><a href="../-element/index.html"><span class="identifier">Element</span></a><span class="symbol">.</span><span class="identifier">unDragOver</span><span class="symbol">(</span><span class="identifier" id="fg.elements$unDragOver(fg.elements.Element, kotlin.Function1((org.w3c.dom.events.Event, kotlin.Unit)))/listener">listener</span><span class="symbol">:</span>&nbsp;<span class="symbol">(</span><span class="identifier">Event</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<span class="identifier">Unit</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">Unit</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../un-drag-start.html">unDragStart</a></td>
+<td>
+<code><span class="keyword">fun </span><a href="../-element/index.html"><span class="identifier">Element</span></a><span class="symbol">.</span><span class="identifier">unDragStart</span><span class="symbol">(</span><span class="identifier" id="fg.elements$unDragStart(fg.elements.Element, kotlin.Function1((org.w3c.dom.events.Event, kotlin.Unit)))/listener">listener</span><span class="symbol">:</span>&nbsp;<span class="symbol">(</span><span class="identifier">Event</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<span class="identifier">Unit</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">Unit</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../un-drop.html">unDrop</a></td>
+<td>
+<code><span class="keyword">fun </span><a href="../-element/index.html"><span class="identifier">Element</span></a><span class="symbol">.</span><span class="identifier">unDrop</span><span class="symbol">(</span><span class="identifier" id="fg.elements$unDrop(fg.elements.Element, kotlin.Function1((org.w3c.dom.events.Event, kotlin.Unit)))/listener">listener</span><span class="symbol">:</span>&nbsp;<span class="symbol">(</span><span class="identifier">Event</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<span class="identifier">Unit</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">Unit</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../un-focus.html">unFocus</a></td>
+<td>
+<code><span class="keyword">fun </span><a href="../-element/index.html"><span class="identifier">Element</span></a><span class="symbol">.</span><span class="identifier">unFocus</span><span class="symbol">(</span><span class="identifier" id="fg.elements$unFocus(fg.elements.Element, kotlin.Function1((org.w3c.dom.events.Event, kotlin.Unit)))/listener">listener</span><span class="symbol">:</span>&nbsp;<span class="symbol">(</span><span class="identifier">Event</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<span class="identifier">Unit</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">Unit</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../un-input.html">unInput</a></td>
+<td>
+<code><span class="keyword">fun </span><a href="../-element/index.html"><span class="identifier">Element</span></a><span class="symbol">.</span><span class="identifier">unInput</span><span class="symbol">(</span><span class="identifier" id="fg.elements$unInput(fg.elements.Element, kotlin.Function1((org.w3c.dom.events.Event, kotlin.Unit)))/listener">listener</span><span class="symbol">:</span>&nbsp;<span class="symbol">(</span><span class="identifier">Event</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<span class="identifier">Unit</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">Unit</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../un-key-down.html">unKeyDown</a></td>
+<td>
+<code><span class="keyword">fun </span><a href="../-element/index.html"><span class="identifier">Element</span></a><span class="symbol">.</span><span class="identifier">unKeyDown</span><span class="symbol">(</span><span class="identifier" id="fg.elements$unKeyDown(fg.elements.Element, kotlin.Function1((org.w3c.dom.events.Event, kotlin.Unit)))/listener">listener</span><span class="symbol">:</span>&nbsp;<span class="symbol">(</span><span class="identifier">Event</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<span class="identifier">Unit</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">Unit</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../un-key-press.html">unKeyPress</a></td>
+<td>
+<code><span class="keyword">fun </span><a href="../-element/index.html"><span class="identifier">Element</span></a><span class="symbol">.</span><span class="identifier">unKeyPress</span><span class="symbol">(</span><span class="identifier" id="fg.elements$unKeyPress(fg.elements.Element, kotlin.Function1((org.w3c.dom.events.Event, kotlin.Unit)))/listener">listener</span><span class="symbol">:</span>&nbsp;<span class="symbol">(</span><span class="identifier">Event</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<span class="identifier">Unit</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">Unit</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../un-key-up.html">unKeyUp</a></td>
+<td>
+<code><span class="keyword">fun </span><a href="../-element/index.html"><span class="identifier">Element</span></a><span class="symbol">.</span><span class="identifier">unKeyUp</span><span class="symbol">(</span><span class="identifier" id="fg.elements$unKeyUp(fg.elements.Element, kotlin.Function1((org.w3c.dom.events.Event, kotlin.Unit)))/listener">listener</span><span class="symbol">:</span>&nbsp;<span class="symbol">(</span><span class="identifier">Event</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<span class="identifier">Unit</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">Unit</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../un-mouse-down.html">unMouseDown</a></td>
+<td>
+<code><span class="keyword">fun </span><a href="../-element/index.html"><span class="identifier">Element</span></a><span class="symbol">.</span><span class="identifier">unMouseDown</span><span class="symbol">(</span><span class="identifier" id="fg.elements$unMouseDown(fg.elements.Element, kotlin.Function1((org.w3c.dom.events.MouseEvent, kotlin.Unit)))/listener">listener</span><span class="symbol">:</span>&nbsp;<span class="symbol">(</span><span class="identifier">MouseEvent</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<span class="identifier">Unit</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">Unit</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../un-mouse-enter.html">unMouseEnter</a></td>
+<td>
+<code><span class="keyword">fun </span><a href="../-element/index.html"><span class="identifier">Element</span></a><span class="symbol">.</span><span class="identifier">unMouseEnter</span><span class="symbol">(</span><span class="identifier" id="fg.elements$unMouseEnter(fg.elements.Element, kotlin.Function1((org.w3c.dom.events.MouseEvent, kotlin.Unit)))/listener">listener</span><span class="symbol">:</span>&nbsp;<span class="symbol">(</span><span class="identifier">MouseEvent</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<span class="identifier">Unit</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">Unit</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../un-mouse-leave.html">unMouseLeave</a></td>
+<td>
+<code><span class="keyword">fun </span><a href="../-element/index.html"><span class="identifier">Element</span></a><span class="symbol">.</span><span class="identifier">unMouseLeave</span><span class="symbol">(</span><span class="identifier" id="fg.elements$unMouseLeave(fg.elements.Element, kotlin.Function1((org.w3c.dom.events.MouseEvent, kotlin.Unit)))/listener">listener</span><span class="symbol">:</span>&nbsp;<span class="symbol">(</span><span class="identifier">MouseEvent</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<span class="identifier">Unit</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">Unit</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../un-mouse-move.html">unMouseMove</a></td>
+<td>
+<code><span class="keyword">fun </span><a href="../-element/index.html"><span class="identifier">Element</span></a><span class="symbol">.</span><span class="identifier">unMouseMove</span><span class="symbol">(</span><span class="identifier" id="fg.elements$unMouseMove(fg.elements.Element, kotlin.Function1((org.w3c.dom.events.MouseEvent, kotlin.Unit)))/listener">listener</span><span class="symbol">:</span>&nbsp;<span class="symbol">(</span><span class="identifier">MouseEvent</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<span class="identifier">Unit</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">Unit</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../un-mouse-out.html">unMouseOut</a></td>
+<td>
+<code><span class="keyword">fun </span><a href="../-element/index.html"><span class="identifier">Element</span></a><span class="symbol">.</span><span class="identifier">unMouseOut</span><span class="symbol">(</span><span class="identifier" id="fg.elements$unMouseOut(fg.elements.Element, kotlin.Function1((org.w3c.dom.events.MouseEvent, kotlin.Unit)))/listener">listener</span><span class="symbol">:</span>&nbsp;<span class="symbol">(</span><span class="identifier">MouseEvent</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<span class="identifier">Unit</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">Unit</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../un-mouse-over.html">unMouseOver</a></td>
+<td>
+<code><span class="keyword">fun </span><a href="../-element/index.html"><span class="identifier">Element</span></a><span class="symbol">.</span><span class="identifier">unMouseOver</span><span class="symbol">(</span><span class="identifier" id="fg.elements$unMouseOver(fg.elements.Element, kotlin.Function1((org.w3c.dom.events.MouseEvent, kotlin.Unit)))/listener">listener</span><span class="symbol">:</span>&nbsp;<span class="symbol">(</span><span class="identifier">MouseEvent</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<span class="identifier">Unit</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">Unit</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../un-mouse-up.html">unMouseUp</a></td>
+<td>
+<code><span class="keyword">fun </span><a href="../-element/index.html"><span class="identifier">Element</span></a><span class="symbol">.</span><span class="identifier">unMouseUp</span><span class="symbol">(</span><span class="identifier" id="fg.elements$unMouseUp(fg.elements.Element, kotlin.Function1((org.w3c.dom.events.MouseEvent, kotlin.Unit)))/listener">listener</span><span class="symbol">:</span>&nbsp;<span class="symbol">(</span><span class="identifier">MouseEvent</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<span class="identifier">Unit</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">Unit</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../un-scroll.html">unScroll</a></td>
+<td>
+<code><span class="keyword">fun </span><a href="../-element/index.html"><span class="identifier">Element</span></a><span class="symbol">.</span><span class="identifier">unScroll</span><span class="symbol">(</span><span class="identifier" id="fg.elements$unScroll(fg.elements.Element, kotlin.Function1((org.w3c.dom.events.Event, kotlin.Unit)))/listener">listener</span><span class="symbol">:</span>&nbsp;<span class="symbol">(</span><span class="identifier">Event</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<span class="identifier">Unit</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">Unit</span></code></td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

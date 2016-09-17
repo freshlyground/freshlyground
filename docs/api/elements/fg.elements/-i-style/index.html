@@ -1,0 +1,57 @@
+<HTML>
+<HEAD>
+<title>IStyle - elements</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">elements</a>&nbsp;/&nbsp;<a href="../index.html">fg.elements</a>&nbsp;/&nbsp;<a href=".">IStyle</a><br/>
+<br/>
+<h1>IStyle</h1>
+<code><span class="keyword">interface </span><span class="identifier">IStyle</span></code>
+<h3>Properties</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<a href="selector.html">selector</a></td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">val </span><span class="identifier">selector</span><span class="symbol">: </span><a href="../-selector/index.html"><span class="identifier">Selector</span></a></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<a href="to-css.html">toCss</a></td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">fun </span><span class="identifier">toCss</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">List</span><span class="symbol">&lt;</span><span class="identifier">String</span><span class="symbol">&gt;</span></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Inheritors</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<a href="../-i-class-style/index.html">IClassStyle</a></td>
+<td>
+<code><span class="keyword">interface </span><span class="identifier">IClassStyle</span>&nbsp;<span class="symbol">:</span>&nbsp;<span class="identifier">IStyle</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../../fg.style/-style/index.html">Style</a></td>
+<td>
+<code><span class="keyword">open</span> <span class="keyword">class </span><span class="identifier">Style</span>&nbsp;<span class="symbol">:</span>&nbsp;<span class="identifier">IStyle</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../../fg.style/-type-style/index.html">TypeStyle</a></td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">TypeStyle</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="../../fg.style/-style/index.html"><span class="identifier">Style</span></a><span class="symbol">, </span><span class="identifier">IStyle</span></code></td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

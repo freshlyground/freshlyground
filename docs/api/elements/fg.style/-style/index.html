@@ -1,0 +1,1479 @@
+<HTML>
+<HEAD>
+<title>Style - elements</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">elements</a>&nbsp;/&nbsp;<a href="../index.html">fg.style</a>&nbsp;/&nbsp;<a href=".">Style</a><br/>
+<br/>
+<h1>Style</h1>
+<code><span class="keyword">open</span> <span class="keyword">class </span><span class="identifier">Style</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="../../fg.elements/-i-style/index.html"><span class="identifier">IStyle</span></a></code>
+<h3>Types</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<a href="-property/index.html">Property</a></td>
+<td>
+<code><span class="keyword">inner</span> <span class="keyword">class </span><span class="identifier">Property</span></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Constructors</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<a href="-init-.html">&lt;init&gt;</a></td>
+<td>
+<code><span class="identifier">Style</span><span class="symbol">(</span><span class="identifier" id="fg.style.Style$<init>(fg.elements.Selector)/selector">selector</span><span class="symbol">:</span>&nbsp;<a href="../../fg.elements/-selector/index.html"><span class="identifier">Selector</span></a><span class="symbol">)</span></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Properties</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<a href="_camel_cased_attribute.html">_camel_cased_attribute</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">_camel_cased_attribute</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="_dashed_attribute.html">_dashed_attribute</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">_dashed_attribute</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="_map.html">_map</a></td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">_map</span><span class="symbol">: </span><span class="identifier">MutableMap</span><span class="symbol">&lt;</span><span class="identifier">String</span><span class="symbol">,</span>&nbsp;<span class="identifier">String</span><span class="symbol">&gt;</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="align-content.html">alignContent</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">alignContent</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="align-items.html">alignItems</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">alignItems</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="align-self.html">alignSelf</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">alignSelf</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="animation.html">animation</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">animation</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="animation-delay.html">animationDelay</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">animationDelay</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="animation-direction.html">animationDirection</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">animationDirection</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="animation-duration.html">animationDuration</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">animationDuration</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="animation-fill-mode.html">animationFillMode</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">animationFillMode</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="animation-iteration-count.html">animationIterationCount</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">animationIterationCount</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="animation-name.html">animationName</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">animationName</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="animation-play-state.html">animationPlayState</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">animationPlayState</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="animation-timing-function.html">animationTimingFunction</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">animationTimingFunction</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="backface-visibility.html">backfaceVisibility</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">backfaceVisibility</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="background.html">background</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">background</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="background-attachment.html">backgroundAttachment</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">backgroundAttachment</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="background-clip.html">backgroundClip</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">backgroundClip</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="background-color.html">backgroundColor</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">backgroundColor</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="background-image.html">backgroundImage</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">backgroundImage</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="background-origin.html">backgroundOrigin</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">backgroundOrigin</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="background-position.html">backgroundPosition</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">backgroundPosition</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="background-repeat.html">backgroundRepeat</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">backgroundRepeat</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="background-size.html">backgroundSize</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">backgroundSize</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="border.html">border</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">border</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="border-bottom.html">borderBottom</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">borderBottom</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="border-bottom-color.html">borderBottomColor</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">borderBottomColor</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="border-bottom-left-radius.html">borderBottomLeftRadius</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">borderBottomLeftRadius</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="border-bottom-right-radius.html">borderBottomRightRadius</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">borderBottomRightRadius</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="border-bottom-style.html">borderBottomStyle</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">borderBottomStyle</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="border-bottom-width.html">borderBottomWidth</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">borderBottomWidth</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="border-collapse.html">borderCollapse</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">borderCollapse</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="border-color.html">borderColor</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">borderColor</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="border-image.html">borderImage</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">borderImage</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="border-image-outset.html">borderImageOutset</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">borderImageOutset</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="border-image-repeat.html">borderImageRepeat</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">borderImageRepeat</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="border-image-slice.html">borderImageSlice</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">borderImageSlice</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="border-image-source.html">borderImageSource</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">borderImageSource</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="border-image-width.html">borderImageWidth</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">borderImageWidth</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="border-left.html">borderLeft</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">borderLeft</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="border-left-color.html">borderLeftColor</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">borderLeftColor</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="border-left-style.html">borderLeftStyle</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">borderLeftStyle</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="border-left-width.html">borderLeftWidth</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">borderLeftWidth</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="border-radius.html">borderRadius</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">borderRadius</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="border-right.html">borderRight</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">borderRight</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="border-right-color.html">borderRightColor</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">borderRightColor</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="border-right-style.html">borderRightStyle</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">borderRightStyle</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="border-right-width.html">borderRightWidth</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">borderRightWidth</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="border-spacing.html">borderSpacing</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">borderSpacing</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="border-style.html">borderStyle</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">borderStyle</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="border-top.html">borderTop</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">borderTop</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="border-top-color.html">borderTopColor</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">borderTopColor</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="border-top-left-radius.html">borderTopLeftRadius</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">borderTopLeftRadius</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="border-top-right-radius.html">borderTopRightRadius</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">borderTopRightRadius</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="border-top-style.html">borderTopStyle</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">borderTopStyle</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="border-top-width.html">borderTopWidth</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">borderTopWidth</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="border-width.html">borderWidth</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">borderWidth</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="bottom.html">bottom</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">bottom</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="box-decoration-break.html">boxDecorationBreak</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">boxDecorationBreak</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="box-shadow.html">boxShadow</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">boxShadow</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="box-sizing.html">boxSizing</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">boxSizing</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="break-after.html">breakAfter</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">breakAfter</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="break-before.html">breakBefore</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">breakBefore</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="break-inside.html">breakInside</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">breakInside</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="caption-side.html">captionSide</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">captionSide</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="clear.html">clear</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">clear</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="clip.html">clip</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">clip</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="color.html">color</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">color</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="column-count.html">columnCount</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">columnCount</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="column-fill.html">columnFill</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">columnFill</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="column-gap.html">columnGap</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">columnGap</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="column-rule.html">columnRule</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">columnRule</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="column-rule-color.html">columnRuleColor</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">columnRuleColor</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="column-rule-style.html">columnRuleStyle</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">columnRuleStyle</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="column-rule-width.html">columnRuleWidth</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">columnRuleWidth</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="column-span.html">columnSpan</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">columnSpan</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="column-width.html">columnWidth</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">columnWidth</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="columns.html">columns</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">columns</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="content.html">content</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">content</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="counter-increment.html">counterIncrement</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">counterIncrement</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="counter-reset.html">counterReset</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">counterReset</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="css-float.html">cssFloat</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">cssFloat</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="cursor.html">cursor</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">cursor</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="direction.html">direction</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">direction</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="display.html">display</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">display</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="empty-cells.html">emptyCells</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">emptyCells</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="filter.html">filter</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">filter</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="flex.html">flex</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">flex</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="flex-basis.html">flexBasis</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">flexBasis</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="flex-direction.html">flexDirection</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">flexDirection</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="flex-flow.html">flexFlow</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">flexFlow</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="flex-grow.html">flexGrow</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">flexGrow</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="flex-shrink.html">flexShrink</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">flexShrink</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="flex-wrap.html">flexWrap</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">flexWrap</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="font.html">font</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">font</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="font-family.html">fontFamily</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">fontFamily</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="font-feature-settings.html">fontFeatureSettings</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">fontFeatureSettings</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="font-kerning.html">fontKerning</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">fontKerning</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="font-language-override.html">fontLanguageOverride</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">fontLanguageOverride</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="font-size.html">fontSize</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">fontSize</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="font-size-adjust.html">fontSizeAdjust</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">fontSizeAdjust</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="font-stretch.html">fontStretch</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">fontStretch</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="font-style.html">fontStyle</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">fontStyle</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="font-synthesis.html">fontSynthesis</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">fontSynthesis</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="font-variant.html">fontVariant</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">fontVariant</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="font-variant-alternates.html">fontVariantAlternates</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">fontVariantAlternates</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="font-variant-caps.html">fontVariantCaps</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">fontVariantCaps</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="font-variant-east-asian.html">fontVariantEastAsian</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">fontVariantEastAsian</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="font-variant-ligatures.html">fontVariantLigatures</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">fontVariantLigatures</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="font-variant-numeric.html">fontVariantNumeric</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">fontVariantNumeric</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="font-variant-position.html">fontVariantPosition</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">fontVariantPosition</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="font-weight.html">fontWeight</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">fontWeight</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="hanging-punctuation.html">hangingPunctuation</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">hangingPunctuation</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="height.html">height</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">height</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="hyphens.html">hyphens</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">hyphens</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="image-orientation.html">imageOrientation</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">imageOrientation</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="image-rendering.html">imageRendering</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">imageRendering</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="image-resolution.html">imageResolution</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">imageResolution</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="ime-mode.html">imeMode</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">imeMode</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="justify-content.html">justifyContent</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">justifyContent</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="left.html">left</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">left</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="letter-spacing.html">letterSpacing</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">letterSpacing</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="line-break.html">lineBreak</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">lineBreak</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="line-height.html">lineHeight</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">lineHeight</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="list-style.html">listStyle</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">listStyle</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="list-style-image.html">listStyleImage</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">listStyleImage</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="list-style-position.html">listStylePosition</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">listStylePosition</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="list-style-type.html">listStyleType</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">listStyleType</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="margin.html">margin</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">margin</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="margin-bottom.html">marginBottom</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">marginBottom</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="margin-left.html">marginLeft</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">marginLeft</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="margin-right.html">marginRight</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">marginRight</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="margin-top.html">marginTop</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">marginTop</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="mark.html">mark</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">mark</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="mark-after.html">markAfter</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">markAfter</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="mark-before.html">markBefore</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">markBefore</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="marks.html">marks</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">marks</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="marquee-direction.html">marqueeDirection</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">marqueeDirection</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="marquee-play-count.html">marqueePlayCount</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">marqueePlayCount</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="marquee-speed.html">marqueeSpeed</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">marqueeSpeed</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="marquee-style.html">marqueeStyle</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">marqueeStyle</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="mask.html">mask</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">mask</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="mask-type.html">maskType</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">maskType</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="max-height.html">maxHeight</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">maxHeight</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="max-width.html">maxWidth</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">maxWidth</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="min-height.html">minHeight</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">minHeight</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="min-width.html">minWidth</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">minWidth</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="nav-down.html">navDown</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">navDown</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="nav-index.html">navIndex</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">navIndex</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="nav-left.html">navLeft</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">navLeft</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="nav-right.html">navRight</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">navRight</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="nav-up.html">navUp</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">navUp</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="object-fit.html">objectFit</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">objectFit</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="object-position.html">objectPosition</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">objectPosition</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="opacity.html">opacity</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">opacity</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="order.html">order</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">order</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="orphans.html">orphans</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">orphans</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="outline.html">outline</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">outline</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="outline-color.html">outlineColor</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">outlineColor</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="outline-offset.html">outlineOffset</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">outlineOffset</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="outline-style.html">outlineStyle</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">outlineStyle</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="outline-width.html">outlineWidth</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">outlineWidth</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="overflow-wrap.html">overflowWrap</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">overflowWrap</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="overflow-x.html">overflowX</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">overflowX</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="overflow-y.html">overflowY</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">overflowY</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="padding.html">padding</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">padding</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="padding-bottom.html">paddingBottom</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">paddingBottom</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="padding-left.html">paddingLeft</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">paddingLeft</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="padding-right.html">paddingRight</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">paddingRight</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="padding-top.html">paddingTop</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">paddingTop</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="page-break-after.html">pageBreakAfter</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">pageBreakAfter</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="page-break-before.html">pageBreakBefore</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">pageBreakBefore</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="page-break-inside.html">pageBreakInside</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">pageBreakInside</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="perspective.html">perspective</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">perspective</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="perspective-origin.html">perspectiveOrigin</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">perspectiveOrigin</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="phonemes.html">phonemes</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">phonemes</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="position.html">position</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">position</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="quotes.html">quotes</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">quotes</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="resize.html">resize</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">resize</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="rest.html">rest</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">rest</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="rest-after.html">restAfter</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">restAfter</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="rest-before.html">restBefore</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">restBefore</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="right.html">right</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">right</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="selector.html">selector</a></td>
+<td>
+<code><span class="keyword">open</span> <span class="keyword">val </span><span class="identifier">selector</span><span class="symbol">: </span><a href="../../fg.elements/-selector/index.html"><span class="identifier">Selector</span></a></code></td>
+</tr>
+<tr>
+<td>
+<a href="tab-size.html">tabSize</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">tabSize</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="table-layout.html">tableLayout</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">tableLayout</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="text-align.html">textAlign</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">textAlign</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="text-align-last.html">textAlignLast</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">textAlignLast</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="text-combine-upright.html">textCombineUpright</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">textCombineUpright</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="text-decoration.html">textDecoration</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">textDecoration</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="text-decoration-color.html">textDecorationColor</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">textDecorationColor</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="text-decoration-line.html">textDecorationLine</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">textDecorationLine</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="text-decoration-style.html">textDecorationStyle</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">textDecorationStyle</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="text-indent.html">textIndent</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">textIndent</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="text-justify.html">textJustify</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">textJustify</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="text-orientation.html">textOrientation</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">textOrientation</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="text-overflow.html">textOverflow</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">textOverflow</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="text-shadow.html">textShadow</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">textShadow</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="text-transform.html">textTransform</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">textTransform</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="text-underline-position.html">textUnderlinePosition</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">textUnderlinePosition</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="top.html">top</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">top</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="transform.html">transform</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">transform</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="transform-origin.html">transformOrigin</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">transformOrigin</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="transform-style.html">transformStyle</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">transformStyle</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="transition.html">transition</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">transition</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="transition-delay.html">transitionDelay</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">transitionDelay</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="transition-duration.html">transitionDuration</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">transitionDuration</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="transition-property.html">transitionProperty</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">transitionProperty</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="transition-timing-function.html">transitionTimingFunction</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">transitionTimingFunction</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="unicode-bidi.html">unicodeBidi</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">unicodeBidi</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="vertical-align.html">verticalAlign</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">verticalAlign</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="visibility.html">visibility</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">visibility</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="voice-balance.html">voiceBalance</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">voiceBalance</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="voice-duration.html">voiceDuration</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">voiceDuration</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="voice-pitch.html">voicePitch</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">voicePitch</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="voice-pitch-range.html">voicePitchRange</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">voicePitchRange</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="voice-rate.html">voiceRate</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">voiceRate</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="voice-stress.html">voiceStress</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">voiceStress</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="voice-volume.html">voiceVolume</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">voiceVolume</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="white-space.html">whiteSpace</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">whiteSpace</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="widows.html">widows</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">widows</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="width.html">width</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">width</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="word-break.html">wordBreak</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">wordBreak</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="word-spacing.html">wordSpacing</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">wordSpacing</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="word-wrap.html">wordWrap</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">wordWrap</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="writing-mode.html">writingMode</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">writingMode</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="z-index.html">zIndex</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">zIndex</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<a href="is-not-empty.html">isNotEmpty</a></td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">isNotEmpty</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">Boolean</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="to-css.html">toCss</a></td>
+<td>
+<code><span class="keyword">open</span> <span class="keyword">fun </span><span class="identifier">toCss</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">List</span><span class="symbol">&lt;</span><span class="identifier">String</span><span class="symbol">&gt;</span></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Extension Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<a href="../and.html">and</a></td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">Style</span><span class="symbol">.</span><span class="identifier">and</span><span class="symbol">(</span><span class="identifier" id="fg.style$and(fg.style.Style, kotlin.String, kotlin.Function1((fg.style.Style, kotlin.Unit)))/selector">selector</span><span class="symbol">:</span>&nbsp;<span class="identifier">String</span><span class="symbol">, </span><span class="identifier" id="fg.style$and(fg.style.Style, kotlin.String, kotlin.Function1((fg.style.Style, kotlin.Unit)))/init">init</span><span class="symbol">:</span>&nbsp;<span class="identifier">Style</span><span class="symbol">.</span><span class="symbol">(</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<span class="identifier">Unit</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">Style</span></code><br/>
+<code><span class="keyword">fun </span><span class="identifier">Style</span><span class="symbol">.</span><span class="identifier">and</span><span class="symbol">(</span><span class="identifier" id="fg.style$and(fg.style.Style, fg.elements.Selector, kotlin.Function1((fg.style.Style, kotlin.Unit)))/selector">selector</span><span class="symbol">:</span>&nbsp;<a href="../../fg.elements/-selector/index.html"><span class="identifier">Selector</span></a><span class="symbol">, </span><span class="identifier" id="fg.style$and(fg.style.Style, fg.elements.Selector, kotlin.Function1((fg.style.Style, kotlin.Unit)))/init">init</span><span class="symbol">:</span>&nbsp;<span class="identifier">Style</span><span class="symbol">.</span><span class="symbol">(</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<span class="identifier">Unit</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">Style</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../child.html">child</a></td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">Style</span><span class="symbol">.</span><span class="identifier">child</span><span class="symbol">(</span><span class="identifier" id="fg.style$child(fg.style.Style, kotlin.String, kotlin.Function1((fg.style.Style, kotlin.Unit)))/selector">selector</span><span class="symbol">:</span>&nbsp;<span class="identifier">String</span><span class="symbol">, </span><span class="identifier" id="fg.style$child(fg.style.Style, kotlin.String, kotlin.Function1((fg.style.Style, kotlin.Unit)))/init">init</span><span class="symbol">:</span>&nbsp;<span class="identifier">Style</span><span class="symbol">.</span><span class="symbol">(</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<span class="identifier">Unit</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">Style</span></code><br/>
+<code><span class="keyword">fun </span><span class="identifier">Style</span><span class="symbol">.</span><span class="identifier">child</span><span class="symbol">(</span><span class="identifier" id="fg.style$child(fg.style.Style, fg.elements.Selector, kotlin.Function1((fg.style.Style, kotlin.Unit)))/selector">selector</span><span class="symbol">:</span>&nbsp;<a href="../../fg.elements/-selector/index.html"><span class="identifier">Selector</span></a><span class="symbol">, </span><span class="identifier" id="fg.style$child(fg.style.Style, fg.elements.Selector, kotlin.Function1((fg.style.Style, kotlin.Unit)))/init">init</span><span class="symbol">:</span>&nbsp;<span class="identifier">Style</span><span class="symbol">.</span><span class="symbol">(</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<span class="identifier">Unit</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">Style</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../desc.html">desc</a></td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">Style</span><span class="symbol">.</span><span class="identifier">desc</span><span class="symbol">(</span><span class="identifier" id="fg.style$desc(fg.style.Style, kotlin.String, kotlin.Function1((fg.style.Style, kotlin.Unit)))/selector">selector</span><span class="symbol">:</span>&nbsp;<span class="identifier">String</span><span class="symbol">, </span><span class="identifier" id="fg.style$desc(fg.style.Style, kotlin.String, kotlin.Function1((fg.style.Style, kotlin.Unit)))/init">init</span><span class="symbol">:</span>&nbsp;<span class="identifier">Style</span><span class="symbol">.</span><span class="symbol">(</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<span class="identifier">Unit</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">Style</span></code><br/>
+<code><span class="keyword">fun </span><span class="identifier">Style</span><span class="symbol">.</span><span class="identifier">desc</span><span class="symbol">(</span><span class="identifier" id="fg.style$desc(fg.style.Style, fg.elements.Selector, kotlin.Function1((fg.style.Style, kotlin.Unit)))/selector">selector</span><span class="symbol">:</span>&nbsp;<a href="../../fg.elements/-selector/index.html"><span class="identifier">Selector</span></a><span class="symbol">, </span><span class="identifier" id="fg.style$desc(fg.style.Style, fg.elements.Selector, kotlin.Function1((fg.style.Style, kotlin.Unit)))/init">init</span><span class="symbol">:</span>&nbsp;<span class="identifier">Style</span><span class="symbol">.</span><span class="symbol">(</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<span class="identifier">Unit</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">Style</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../hover.html">hover</a></td>
+<td>
+<code><span class="keyword">infix</span> <span class="keyword">fun </span><span class="identifier">Style</span><span class="symbol">.</span><span class="identifier">hover</span><span class="symbol">(</span><span class="identifier" id="fg.style$hover(fg.style.Style, kotlin.Function1((fg.style.Style, kotlin.Unit)))/init">init</span><span class="symbol">:</span>&nbsp;<span class="identifier">Style</span><span class="symbol">.</span><span class="symbol">(</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<span class="identifier">Unit</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">Style</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../not.html">not</a></td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">Style</span><span class="symbol">.</span><span class="identifier">not</span><span class="symbol">(</span><span class="identifier" id="fg.style$not(fg.style.Style, fg.elements.Selector, kotlin.Function1((fg.style.Style, kotlin.Unit)))/selector">selector</span><span class="symbol">:</span>&nbsp;<a href="../../fg.elements/-selector/index.html"><span class="identifier">Selector</span></a><span class="symbol">, </span><span class="identifier" id="fg.style$not(fg.style.Style, fg.elements.Selector, kotlin.Function1((fg.style.Style, kotlin.Unit)))/init">init</span><span class="symbol">:</span>&nbsp;<span class="identifier">Style</span><span class="symbol">.</span><span class="symbol">(</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<span class="identifier">Unit</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">Style</span></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Inheritors</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<a href="../-class-style/index.html">ClassStyle</a></td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">ClassStyle</span>&nbsp;<span class="symbol">:</span>&nbsp;<span class="identifier">Style</span><span class="symbol">, </span><a href="../../fg.elements/-i-class-style/index.html"><span class="identifier">IClassStyle</span></a></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-type-style/index.html">TypeStyle</a></td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">TypeStyle</span>&nbsp;<span class="symbol">:</span>&nbsp;<span class="identifier">Style</span><span class="symbol">, </span><a href="../../fg.elements/-i-style/index.html"><span class="identifier">IStyle</span></a></code></td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

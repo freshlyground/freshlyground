@@ -14,6 +14,7 @@ import fg.elements.Selector
 import fg.elements.a
 import fg.elements.h1
 import fg.elements.h2
+import fg.elements.h3
 import fg.elements.header
 import fg.elements.li
 import fg.elements.p
@@ -59,9 +60,33 @@ fun main(vararg args: String) {
             +"  HTML.init()\n"
             +"}\n"
         }
-        menu {
-            menuItem(SelectableAction("Menu Item 1")) {}
-            menuItem(SelectableAction("Menu Item 2")) {}
+        h2 {
+            +"Elements"
+        }
+        p {
+            a("api/elements/index.html", "_blank") {
+                +"API"
+            }
+        }
+        h2 {
+            +"Beans"
+        }
+        p {
+            a("api/beans/index.html", "_blank") {
+                +"API"
+            }
+        }
+        h3 {
+            +"Menu"
+        }
+        p {
+            menu {
+                menuItem(SelectableAction("Menu Item 1")) {}
+                menuItem(SelectableAction("Menu Item 2")) {}
+            }
+        }
+        h3 {
+            +"Button"
         }
         p {
             button(Action("Button 1")) {
