@@ -1,11 +1,11 @@
 package fg.docs
 
+import fg.elements.BODY
+import fg.elements.HTML
 import fg.elements.Selector
-import fg.elements.body
 import fg.elements.h1
 import fg.elements.h2
 import fg.elements.header
-import fg.elements.html
 import fg.elements.p
 import fg.elements.pre
 import fg.elements.with
@@ -14,7 +14,7 @@ import fg.style.Style
 
 fun main(vararg args: String) {
 
-    body with {
+    BODY with {
 
         header {
             h1 {
@@ -30,7 +30,7 @@ fun main(vararg args: String) {
         pre {
             +"fun main(vararg args: String) {\n"
             +"  \n"
-            +"  body with {\n"
+            +"  BODY with {\n"
             +"  \n"
             +"      header {\n"
             +"          h1 {\n"
@@ -42,15 +42,15 @@ fun main(vararg args: String) {
             +"      }\n"
             +"  }\n"
             +"  \n"
-            +"  html.init()\n"
+            +"  HTML.init()\n"
             +"}\n"
         }
     }
 
-    html.registerStyle(Style(Selector.ANY) with {
+    HTML.registerStyle(Style(Selector.ANY) with {
         boxSizing = "border-box"
     })
 
-    html.init()
+    HTML.init()
 }
 

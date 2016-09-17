@@ -2,7 +2,7 @@ package fg.elements
 
 import kotlin.browser.document
 
-val body = Body()
+val BODY = Body()
 
 class Body internal constructor() : Element(existingElement = document.body) {
 

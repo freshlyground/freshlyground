@@ -1,10 +1,10 @@
 package fg.md.card
 
+import fg.elements.BODY
 import fg.elements.ClassSelector
+import fg.elements.HTML
 import fg.elements.Selector
-import fg.elements.body
 import fg.elements.div
-import fg.elements.html
 import fg.elements.px
 import fg.elements.with
 import fg.md.avatar
@@ -18,18 +18,11 @@ import fg.md.title
 import fg.style.ClassStyle
 import fg.style.Style
 import fg.style.desc
-import org.w3c.dom.events.Event
 
 fun main(vararg args: String) {
 
-    val html = html
-    val body = body
 
-    val clickHandler: (Event) -> Unit = { event ->
-        console.log(event)
-    }
-
-    body with {
+    BODY with {
         div("card-container") {
             mdCard {
                 content {
@@ -84,10 +77,10 @@ fun main(vararg args: String) {
         }
     }
 
-    html.registerStyle(Style(Selector.ANY) with {
+    HTML.registerStyle(Style(Selector.ANY) with {
         boxSizing = "border-box"
     })
-    html.registerStyle(ClassStyle(ClassSelector("card-container")) with {
+    HTML.registerStyle(ClassStyle(ClassSelector("card-container")) with {
 
         desc(".md-card") {
             marginBottom = "1em"
@@ -100,5 +93,5 @@ fun main(vararg args: String) {
 
 
     })
-    html.init()
+    HTML.init()
 }

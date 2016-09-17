@@ -6,7 +6,7 @@ import org.w3c.dom.events.Event
 import kotlin.browser.document
 import kotlin.browser.window
 
-val html = Html()
+val HTML = Html()
 
 class Html internal constructor(val w3cElement: Element = document.documentElement!!) {
 
@@ -21,9 +21,9 @@ class Html internal constructor(val w3cElement: Element = document.documentEleme
         //style.appendChild(document.createTextNode(""))
         //document.head!!.appendChild(style as org.w3c.dom.Node)
 
-        body.init()
-        body.renderStyle()
-        window.setTimeout({ body.callDidMount() }, 10)
+        BODY.init()
+        BODY.renderStyle()
+        window.setTimeout({ BODY.callDidMount() }, 10)
     }
 
     fun registerStyle(style: IStyle) {

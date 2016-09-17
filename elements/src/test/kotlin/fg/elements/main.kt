@@ -1,7 +1,6 @@
 package fg.elements
 
 import fg.elements.todo.TodoApp
-import kotlin.browser.document
 
 
 fun main(vararg args: String) {
@@ -13,8 +12,6 @@ fun main(vararg args: String) {
     console.log(GeneralSiblingSelector("div".toSelector(), ".general-sibling".toSelector()).toString())
     console.log(AndSelector("div".toSelector(), ".special".toSelector()).toString())
 
-    val html = html
-    val body = body
 
     /*val button = Button()
     button.textContent = "A Button"
@@ -29,15 +26,14 @@ fun main(vararg args: String) {
 
     body.appendChild(p)
     body.appendChild(HelloWorldDiv())*/
-    body.appendChild(Hello())
+    BODY.appendChild(Hello())
     //body.appendChild(InputText())
     //body.appendChild(InputNumber())
 
-    body.appendChild(Hr())
-    body.appendChild(TodoApp())
+    BODY.appendChild(Hr())
+    BODY.appendChild(TodoApp())
 
-    html.init()
-    document.onload
+    HTML.init()
 }
 
 

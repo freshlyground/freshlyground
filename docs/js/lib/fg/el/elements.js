@@ -12,8 +12,8 @@ var elements = function (Kotlin) {
         }
       }),
       elements: Kotlin.definePackage(function () {
-        this.body = new _.fg.elements.Body();
-        this.html = new _.fg.elements.Html();
+        this.BODY = new _.fg.elements.Body();
+        this.HTML = new _.fg.elements.Html();
       }, /** @lends _.fg.elements */ {
         Body: Kotlin.createClass(function () {
           return [_.fg.elements.Element];
@@ -924,11 +924,11 @@ var elements = function (Kotlin) {
           renderStyle: function () {
             var tmp$0, tmp$1, tmp$2;
             if (this.typeStyle != null) {
-              _.fg.elements.html.registerStyle_lu0ku$((tmp$0 = this.typeStyle) != null ? tmp$0 : Kotlin.throwNPE());
+              _.fg.elements.HTML.registerStyle_lu0ku$((tmp$0 = this.typeStyle) != null ? tmp$0 : Kotlin.throwNPE());
             }
             if (this.styleClass != null) {
               var nonNullClassStyle = (tmp$1 = this.styleClass) != null ? tmp$1 : Kotlin.throwNPE();
-              _.fg.elements.html.registerStyle_lu0ku$(nonNullClassStyle);
+              _.fg.elements.HTML.registerStyle_lu0ku$(nonNullClassStyle);
               this.addClass_61zpoe$(nonNullClassStyle.className);
             }
             tmp$2 = this.childElements_vn4sdz$.iterator();
@@ -1436,8 +1436,8 @@ var elements = function (Kotlin) {
             }
           },
           init: function () {
-            _.fg.elements.body.init();
-            _.fg.elements.body.renderStyle();
+            _.fg.elements.BODY.init();
+            _.fg.elements.BODY.renderStyle();
             window.setTimeout(_.fg.elements.Html.init$f, 10);
           },
           registerStyle_lu0ku$: function (style) {
@@ -1466,7 +1466,7 @@ var elements = function (Kotlin) {
           }
         }, /** @lends _.fg.elements.Html */ {
           init$f: function () {
-            _.fg.elements.body.callDidMount();
+            _.fg.elements.BODY.callDidMount();
           },
           stylesheet_ld1o87$f: function () {
             var tmp$0;

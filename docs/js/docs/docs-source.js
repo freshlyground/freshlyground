@@ -19,7 +19,7 @@ this['docs-source'] = function (Kotlin, $module$elements) {
         f_3: function () {
           this.unaryPlus_pdl1w0$('fun main(vararg args: String) {\n');
           this.unaryPlus_pdl1w0$('  \n');
-          this.unaryPlus_pdl1w0$('  body with {\n');
+          this.unaryPlus_pdl1w0$('  BODY with {\n');
           this.unaryPlus_pdl1w0$('  \n');
           this.unaryPlus_pdl1w0$('      header {\n');
           this.unaryPlus_pdl1w0$('          h1 {\n');
@@ -31,7 +31,7 @@ this['docs-source'] = function (Kotlin, $module$elements) {
           this.unaryPlus_pdl1w0$('      }\n');
           this.unaryPlus_pdl1w0$('  }\n');
           this.unaryPlus_pdl1w0$('  \n');
-          this.unaryPlus_pdl1w0$('  html.init()\n');
+          this.unaryPlus_pdl1w0$('  HTML.init()\n');
           this.unaryPlus_pdl1w0$('}\n');
         },
         main_kand9s$f: function () {
@@ -43,9 +43,9 @@ this['docs-source'] = function (Kotlin, $module$elements) {
           this.boxSizing = 'border-box';
         },
         main_kand9s$: function (args) {
-          $module$elements.fg.elements.with_ji1yox$($module$elements.fg.elements.body, _.fg.docs.main_kand9s$f);
-            $module$elements.fg.elements.html.registerStyle_lu0ku$($module$elements.fg.elements.with_ji1yox$(new $module$elements.fg.style.Style($module$elements.fg.elements.Selector.Statics.ANY), _.fg.docs.main_kand9s$f_0));
-          $module$elements.fg.elements.html.init();
+          $module$elements.fg.elements.with_ji1yox$($module$elements.fg.elements.BODY, _.fg.docs.main_kand9s$f);
+          $module$elements.fg.elements.HTML.registerStyle_lu0ku$($module$elements.fg.elements.with_ji1yox$(new $module$elements.fg.style.Style($module$elements.fg.elements.Selector.Statics.ANY), _.fg.docs.main_kand9s$f_0));
+          $module$elements.fg.elements.HTML.init();
         }
       })
     })
