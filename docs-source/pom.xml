@@ -106,6 +106,7 @@
                             <goal>unpack</goal>
                         </goals>
                         <configuration>
+                            <overWriteSnapshots>true</overWriteSnapshots>
                             <artifactItems>
                                 <artifactItem>
                                     <groupId>org.jetbrains.kotlin</groupId>
@@ -134,6 +135,7 @@
                                     <version>${project.version}</version>
                                     <outputDirectory>../docs/js/lib</outputDirectory>
                                     <includes>**/*.*</includes>
+                                    <excludes>META-INF/**</excludes>
                                 </artifactItem>
                                 <artifactItem>
                                     <groupId>freshlyground</groupId>

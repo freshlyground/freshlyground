@@ -226,13 +226,13 @@ var beans = function (Kotlin, $module$elements) {
                             return {
                                 NORMAL: function () {
                                     return new _.fg.beans.icon.FontAwesomeIcon.Size(null);
-                                },
+                },
                                 LG: function () {
                                     return new _.fg.beans.icon.FontAwesomeIcon.Size(new $module$elements.fg.elements.ClassSelector('fa-lg'));
-                                },
+                },
                                 X2: function () {
                                     return new _.fg.beans.icon.FontAwesomeIcon.Size(new $module$elements.fg.elements.ClassSelector('fa-x2'));
-                                },
+                },
                                 X3: function () {
                                     return new _.fg.beans.icon.FontAwesomeIcon.Size(new $module$elements.fg.elements.ClassSelector('fa-x3'));
                                 },
@@ -243,7 +243,7 @@ var beans = function (Kotlin, $module$elements) {
                                     return new _.fg.beans.icon.FontAwesomeIcon.Size(new $module$elements.fg.elements.ClassSelector('fa-x5'));
                                 }
                             };
-                        })
+            })
                     }),
                     FontAwesomeIcons: Kotlin.createObject(null, function FontAwesomeIcons() {
                     }, /** @lends _.fg.beans.icon.FontAwesomeIcons.prototype */ {
@@ -398,7 +398,7 @@ var beans = function (Kotlin, $module$elements) {
                             this.cursor = 'pointer';
                         }
                     })
-                })
+        })
             })
         })
     });
