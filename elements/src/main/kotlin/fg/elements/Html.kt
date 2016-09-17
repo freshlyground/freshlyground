@@ -26,7 +26,7 @@ class Html internal constructor(val w3cElement: Element = document.documentEleme
         window.setTimeout({ body.callDidMount() }, 10)
     }
 
-    fun registerClassStyle(style: IStyle) {
+    fun registerStyle(style: IStyle) {
 
         when (style) {
 

@@ -44,7 +44,7 @@ this['docs-source'] = function (Kotlin, $module$elements) {
         },
         main_kand9s$: function (args) {
           $module$elements.fg.elements.with_ji1yox$($module$elements.fg.elements.body, _.fg.docs.main_kand9s$f);
-          $module$elements.fg.elements.html.registerClassStyle_lu0ku$($module$elements.fg.elements.with_ji1yox$(new $module$elements.fg.style.Style($module$elements.fg.elements.Selector.Statics.ANY), _.fg.docs.main_kand9s$f_0));
+            $module$elements.fg.elements.html.registerStyle_lu0ku$($module$elements.fg.elements.with_ji1yox$(new $module$elements.fg.style.Style($module$elements.fg.elements.Selector.Statics.ANY), _.fg.docs.main_kand9s$f_0));
           $module$elements.fg.elements.html.init();
         }
       })

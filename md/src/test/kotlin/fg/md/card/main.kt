@@ -5,7 +5,6 @@ import fg.elements.Selector
 import fg.elements.body
 import fg.elements.div
 import fg.elements.html
-import fg.elements.img
 import fg.elements.px
 import fg.elements.with
 import fg.md.avatar
@@ -85,10 +84,10 @@ fun main(vararg args: String) {
         }
     }
 
-    html.registerClassStyle(Style(Selector.ANY) with {
+    html.registerStyle(Style(Selector.ANY) with {
         boxSizing = "border-box"
     })
-    html.registerClassStyle(ClassStyle(ClassSelector("card-container")) with {
+    html.registerStyle(ClassStyle(ClassSelector("card-container")) with {
 
         desc(".md-card") {
             marginBottom = "1em"

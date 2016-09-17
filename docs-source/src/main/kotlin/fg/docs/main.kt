@@ -47,7 +47,7 @@ fun main(vararg args: String) {
         }
     }
 
-    html.registerClassStyle(Style(Selector.ANY) with {
+    html.registerStyle(Style(Selector.ANY) with {
         boxSizing = "border-box"
     })
 

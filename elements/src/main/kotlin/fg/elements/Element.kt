@@ -54,12 +54,12 @@ open class Element(name: String? = null,
     internal fun renderStyle() {
 
         if (typeStyle != null) {
-            html.registerClassStyle(typeStyle!!)
+            html.registerStyle(typeStyle!!)
         }
 
         if (styleClass != null) {
             val nonNullClassStyle = styleClass!!
-            html.registerClassStyle(nonNullClassStyle)
+            html.registerStyle(nonNullClassStyle)
             addClass(nonNullClassStyle.className)
         }
 

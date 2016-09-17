@@ -924,11 +924,11 @@ var elements = function (Kotlin) {
           renderStyle: function () {
             var tmp$0, tmp$1, tmp$2;
             if (this.typeStyle != null) {
-              _.fg.elements.html.registerClassStyle_lu0ku$((tmp$0 = this.typeStyle) != null ? tmp$0 : Kotlin.throwNPE());
+              _.fg.elements.html.registerStyle_lu0ku$((tmp$0 = this.typeStyle) != null ? tmp$0 : Kotlin.throwNPE());
             }
             if (this.styleClass != null) {
               var nonNullClassStyle = (tmp$1 = this.styleClass) != null ? tmp$1 : Kotlin.throwNPE();
-              _.fg.elements.html.registerClassStyle_lu0ku$(nonNullClassStyle);
+              _.fg.elements.html.registerStyle_lu0ku$(nonNullClassStyle);
               this.addClass_61zpoe$(nonNullClassStyle.className);
             }
             tmp$2 = this.childElements_vn4sdz$.iterator();
@@ -1440,7 +1440,7 @@ var elements = function (Kotlin) {
             _.fg.elements.body.renderStyle();
             window.setTimeout(_.fg.elements.Html.init$f, 10);
           },
-          registerClassStyle_lu0ku$: function (style) {
+          registerStyle_lu0ku$: function (style) {
             var tmp$1, tmp$2;
             if (Kotlin.isType(style, _.fg.elements.IClassStyle)) {
               var previous = this.registeredClassStyles_nqgd5t$.put_wn2jw4$(style.className, style);
