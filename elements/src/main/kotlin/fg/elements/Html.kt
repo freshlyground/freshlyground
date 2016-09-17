@@ -28,6 +28,10 @@ class Html internal constructor(val w3cElement: Element = document.documentEleme
 
     fun registerStyle(style: IStyle) {
 
+        if (style.selector.toString() == ".fg-beans-menu-item") {
+            console.log("fg-beans-menu-item")
+        }
+
         when (style) {
 
             is IClassStyle -> {

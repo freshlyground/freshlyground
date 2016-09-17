@@ -11,7 +11,7 @@
     </parent>
 
     <artifactId>docs-source</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>${parent.version}</version>
     <packaging>jar</packaging>
 
     <dependencies>
@@ -24,6 +24,11 @@
         <dependency>
             <groupId>freshlyground</groupId>
             <artifactId>elements</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>freshlyground</groupId>
+            <artifactId>beans</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
@@ -115,6 +120,20 @@
                                     <version>${project.version}</version>
                                     <outputDirectory>../docs/js/lib/fg/el</outputDirectory>
                                     <includes>*.js</includes>
+                                </artifactItem>
+                                <artifactItem>
+                                    <groupId>freshlyground</groupId>
+                                    <artifactId>beans</artifactId>
+                                    <version>${project.version}</version>
+                                    <outputDirectory>../docs/js/lib/fg/beans</outputDirectory>
+                                    <includes>*.js</includes>
+                                </artifactItem>
+                                <artifactItem>
+                                    <groupId>freshlyground</groupId>
+                                    <artifactId>beans-statics</artifactId>
+                                    <version>${project.version}</version>
+                                    <outputDirectory>../docs/js/lib</outputDirectory>
+                                    <includes>**/*.*</includes>
                                 </artifactItem>
                                 <artifactItem>
                                     <groupId>freshlyground</groupId>

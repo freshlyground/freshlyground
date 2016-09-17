@@ -12,10 +12,14 @@
 
     <properties>
         <kotlin.version>1.0.4-eap-118</kotlin.version>
+        <dokka.version>0.9.9</dokka.version>
+        <maven.jar.plugin>2.6</maven.jar.plugin>
     </properties>
 
     <modules>
         <module>elements</module>
+        <module>beans</module>
+        <module>beans-statics</module>
         <module>md</module>
         <module>docs-source</module>
     </modules>

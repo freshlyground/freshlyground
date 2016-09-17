@@ -1,7 +1,7 @@
 package fg.style
 
-import fg.elements.Selector
 import fg.elements.IStyle
+import fg.elements.Selector
 import fg.elements.TypeSelector
 
 class TypeStyle(selector: TypeSelector,
@@ -12,21 +12,22 @@ class TypeStyle(selector: TypeSelector,
 
         val rules: MutableList<String> = arrayListOf()
 
-        var s = ""
-        if (parentSelector != null) {
-            s += parentSelector.toString() + " "
+        if (isNotEmpty()) {
+            var s = ""
+            if (parentSelector != null) {
+                s += parentSelector.toString() + " "
+            }
+            s += selector.toString() + " { "
+            for ((key, value) in _map) {
+
+                s += key + ": " + value + "; "
+
+            }
+            s += "}"
+            rules.add(s)
         }
-        s += selector.toString() + " { "
-        for ((key, value) in map) {
 
-            s += key + ": " + value + "; "
-
-        }
-        s += "}"
-
-        rules.add(s)
-
-        for (child in childStyles) {
+        for (child in _childStyles) {
             rules.addAll(child.toCss())
         }
 

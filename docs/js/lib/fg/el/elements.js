@@ -646,25 +646,50 @@ var elements = function (Kotlin) {
           return new _.fg.elements.VMax($receiver);
         },
         header_4tl54c$: function ($receiver, init) {
-          return _.fg.elements.initAndAppendNode($receiver, new _.fg.elements.Header(), init);
+          return _.fg.elements.initAndAppendNode_i6bvtr$($receiver, new _.fg.elements.Header(), init);
         },
         h1_sk18k8$: function ($receiver, init) {
-          return _.fg.elements.initAndAppendNode($receiver, new _.fg.elements.H1(), init);
+          return _.fg.elements.initAndAppendNode_i6bvtr$($receiver, new _.fg.elements.H1(), init);
         },
         h2_3mh653$: function ($receiver, init) {
-          return _.fg.elements.initAndAppendNode($receiver, new _.fg.elements.H2(), init);
+          return _.fg.elements.initAndAppendNode_i6bvtr$($receiver, new _.fg.elements.H2(), init);
         },
         p_ykyrxp$: function ($receiver, init) {
-          return _.fg.elements.initAndAppendNode($receiver, new _.fg.elements.P(), init);
+          return _.fg.elements.initAndAppendNode_i6bvtr$($receiver, new _.fg.elements.P(), init);
+        },
+        ul_gwr2a2$: function ($receiver, init) {
+          return _.fg.elements.initAndAppendNode_i6bvtr$($receiver, new _.fg.elements.Ul(), init);
+        },
+        ol_xr01vg$: function ($receiver, init) {
+          return _.fg.elements.initAndAppendNode_i6bvtr$($receiver, new _.fg.elements.Ol(), init);
+        },
+        li_fpslb8$: function ($receiver, init) {
+          return _.fg.elements.initAndAppendNode_i6bvtr$($receiver, new _.fg.elements.Li(), init);
         },
         div_tvzmks$: function ($receiver, init) {
-          return _.fg.elements.initAndAppendNode($receiver, new _.fg.elements.Div(), init);
+          return _.fg.elements.initAndAppendNode_i6bvtr$($receiver, new _.fg.elements.Div(), init);
         },
         pre_mz29ae$: function ($receiver, init) {
-          return _.fg.elements.initAndAppendNode($receiver, new _.fg.elements.Pre(), init);
+          return _.fg.elements.initAndAppendNode_i6bvtr$($receiver, new _.fg.elements.Pre(), init);
+        },
+        a_4owu00$f: function (closure$href, closure$target) {
+          return function () {
+            this._href = closure$href;
+            this._target = closure$target;
+          };
+        },
+        a_4owu00$: function ($receiver, href, target, init) {
+          if (href === void 0)
+            href = null;
+          if (target === void 0)
+            target = null;
+          return _.fg.elements.initAndAppendNode_i6bvtr$($receiver, _.fg.elements.with_ji1yox$(new _.fg.elements.A(), _.fg.elements.a_4owu00$f(href, target)), init);
+        },
+        i_3zgx1o$: function ($receiver, init) {
+          return _.fg.elements.initAndAppendNode_i6bvtr$($receiver, new _.fg.elements.I(), init);
         },
         img_dgbhyk$: function ($receiver, src, init) {
-          return _.fg.elements.initAndAppendNode($receiver, new _.fg.elements.Img(src), init);
+          return _.fg.elements.initAndAppendNode_i6bvtr$($receiver, new _.fg.elements.Img(src), init);
         },
         div$f: Kotlin.createClass(function () {
           return [_.fg.elements.Div];
@@ -684,9 +709,9 @@ var elements = function (Kotlin) {
         }, /** @lends _.fg.elements.div$f */ {
         }),
         div_1q790e$: function ($receiver, className, init) {
-          return _.fg.elements.initAndAppendNode($receiver, new _.fg.elements.div$f(className), init);
+          return _.fg.elements.initAndAppendNode_i6bvtr$($receiver, new _.fg.elements.div$f(className), init);
         },
-        initAndAppendNode: function ($receiver, node, init) {
+        initAndAppendNode_i6bvtr$: function ($receiver, node, init) {
           init.call(node);
           $receiver.appendChild_sr04hg$(node);
           return node;
@@ -865,6 +890,7 @@ var elements = function (Kotlin) {
             w3cElement = existingElement != null ? existingElement : Kotlin.isType(tmp$0 = document.createElement(name != null ? name : Kotlin.throwNPE()), HTMLElement) ? tmp$0 : Kotlin.throwCCE();
           Element.baseInitializer.call(this, w3cElement);
           this.w3cElement = w3cElement;
+          this._displayBeforeHiding_ywpibn$ = '';
           this.typeStyle = null;
           this.$styleClassPrefix_kg27qt$ = null;
           this.$styleClassName_sfpy1e$ = null;
@@ -884,6 +910,11 @@ var elements = function (Kotlin) {
                 }
               }
               return Kotlin.isType(tmp$0 = destination, Kotlin.kotlin.collections.List) ? tmp$0 : Kotlin.throwCCE();
+            }
+          },
+          hidden: {
+            get: function () {
+              return Kotlin.equals(this.style.display, 'none');
             }
           },
           style: {
@@ -909,6 +940,8 @@ var elements = function (Kotlin) {
           render: function () {
           },
           didMount: function () {
+          },
+          willUnMount: function () {
           },
           callDidMount: function () {
             var tmp$0;
@@ -938,16 +971,42 @@ var elements = function (Kotlin) {
             }
           },
           addClass: function () {
-            this.w3cElement.classList.add(_.fg.style.resolveClassStyleName_gobym4$(this).value);
+            this.addClass_bx842b$(_.fg.style.resolveClassStyleName_gobym4$(this));
+          },
+          addClass_bx842b$: function (selector) {
+            this.addClass_61zpoe$(selector.value);
           },
           addClass_61zpoe$: function (name) {
             this.w3cElement.classList.add(name);
           },
+          removeClass_bx842b$: function (selector) {
+            this.removeClass_61zpoe$(selector.value);
+          },
           removeClass_61zpoe$: function (name) {
             this.w3cElement.classList.remove(name);
           },
+          removeClasses: function () {
+            var tmp$0;
+            while (this.w3cElement.classList.length > 0) {
+              this.w3cElement.classList.remove((tmp$0 = this.w3cElement.classList[0]) != null ? tmp$0 : Kotlin.throwNPE());
+            }
+          },
+          toggleClass_ivxn3r$: function (name, force) {
+            if (force === void 0)
+              force = false;
+            this.w3cElement.classList.toggle(name, force);
+          },
           unaryPlus_pdl1w0$: function ($receiver) {
             this.appendChild_sr04hg$(new _.fg.elements.Text($receiver));
+          },
+          show: function () {
+            if (this.hidden) {
+              this.style.display = this._displayBeforeHiding_ywpibn$;
+            }
+          },
+          hide: function () {
+            this._displayBeforeHiding_ywpibn$ = this.style.display;
+            this.style.display = 'none';
           }
         }, /** @lends _.fg.elements.Element */ {
         }),
@@ -1442,6 +1501,9 @@ var elements = function (Kotlin) {
           },
           registerStyle_lu0ku$: function (style) {
             var tmp$1, tmp$2;
+            if (Kotlin.equals(style.selector.toString(), '.fg-beans-menu-item')) {
+              console.log('fg-beans-menu-item');
+            }
             if (Kotlin.isType(style, _.fg.elements.IClassStyle)) {
               var previous = this.registeredClassStyles_nqgd5t$.put_wn2jw4$(style.className, style);
               if (previous == null) {
@@ -1589,6 +1651,17 @@ var elements = function (Kotlin) {
               var child = tmp$1.next();
               child.mountChildren();
             }
+          },
+          removeChildren: function () {
+            while (!this._childNodes_d2zqq6$.isEmpty()) {
+              this.removeChild_sr04hg$(this._childNodes_d2zqq6$.get_za3lpa$(Kotlin.kotlin.collections.get_lastIndex_a7ptmv$(this._childNodes_d2zqq6$)));
+            }
+          },
+          removeChild_sr04hg$: function (node) {
+            if (Kotlin.isType(node, _.fg.elements.Element)) {
+              node.willUnMount();
+            }
+            this.w3cNode.removeChild(node.w3cNode);
           }
         }, /** @lends _.fg.elements.Node */ {
           insertBefore_p937mc$f: function (this$Node, closure$child) {
@@ -1815,6 +1888,66 @@ var elements = function (Kotlin) {
             return new _.fg.elements.ClassSelector($receiver);
           }
         },
+        A: Kotlin.createClass(function () {
+          return [_.fg.elements.Element];
+        }, function A() {
+          A.baseInitializer.call(this, 'a');
+          this._href$delegate = _.fg.elements.W3cDelegates.nullableAttribute_61zpoe$('href');
+          this._target$delegate = _.fg.elements.W3cDelegates.nullableAttribute_61zpoe$('target');
+          this._download$delegate = _.fg.elements.W3cDelegates.nullableBooleanAttribute_61zpoe$('dowload');
+          this._rel$delegate = _.fg.elements.W3cDelegates.nullableAttribute_61zpoe$('rel');
+          this._hreflang$delegate = _.fg.elements.W3cDelegates.nullableAttribute_61zpoe$('hreflang');
+          this._type$delegate = _.fg.elements.W3cDelegates.nullableAttribute_61zpoe$('type');
+        }, /** @lends _.fg.elements.A.prototype */ {
+          _href: {
+            get: function () {
+              return this._href$delegate.getValue_dsk1ci$(this, new Kotlin.PropertyMetadata('_href'));
+            },
+            set: function (_href) {
+              this._href$delegate.setValue_w32e13$(this, new Kotlin.PropertyMetadata('_href'), _href);
+            }
+          },
+          _target: {
+            get: function () {
+              return this._target$delegate.getValue_dsk1ci$(this, new Kotlin.PropertyMetadata('_target'));
+            },
+            set: function (_target) {
+              this._target$delegate.setValue_w32e13$(this, new Kotlin.PropertyMetadata('_target'), _target);
+            }
+          },
+          _download: {
+            get: function () {
+              return this._download$delegate.getValue_dsk1ci$(this, new Kotlin.PropertyMetadata('_download'));
+            },
+            set: function (_download) {
+              this._download$delegate.setValue_w32e13$(this, new Kotlin.PropertyMetadata('_download'), _download);
+            }
+          },
+          _rel: {
+            get: function () {
+              return this._rel$delegate.getValue_dsk1ci$(this, new Kotlin.PropertyMetadata('_rel'));
+            },
+            set: function (_rel) {
+              this._rel$delegate.setValue_w32e13$(this, new Kotlin.PropertyMetadata('_rel'), _rel);
+            }
+          },
+          _hreflang: {
+            get: function () {
+              return this._hreflang$delegate.getValue_dsk1ci$(this, new Kotlin.PropertyMetadata('_hreflang'));
+            },
+            set: function (_hreflang) {
+              this._hreflang$delegate.setValue_w32e13$(this, new Kotlin.PropertyMetadata('_hreflang'), _hreflang);
+            }
+          },
+          _type: {
+            get: function () {
+              return this._type$delegate.getValue_dsk1ci$(this, new Kotlin.PropertyMetadata('_type'));
+            },
+            set: function (_type) {
+              this._type$delegate.setValue_w32e13$(this, new Kotlin.PropertyMetadata('_type'), _type);
+            }
+          }
+        }),
         Br: Kotlin.createClass(function () {
           return [_.fg.elements.Element];
         }, function Br() {
@@ -1824,6 +1957,11 @@ var elements = function (Kotlin) {
           return [_.fg.elements.Element];
         }, function Span() {
           Span.baseInitializer.call(this, 'span');
+        }),
+        I: Kotlin.createClass(function () {
+          return [_.fg.elements.Element];
+        }, function I() {
+          I.baseInitializer.call(this, 'i');
         }),
         Text: Kotlin.createClass(function () {
           return [_.fg.elements.Node];
@@ -1974,21 +2112,23 @@ var elements = function (Kotlin) {
           toCss: function () {
             var tmp$1, tmp$2;
             var rules = Kotlin.kotlin.collections.arrayListOf_9mqe4v$([]);
-            var s = '';
-            if (this.parentSelector != null) {
-              s += this.parentSelector.toString() + ' ';
+            if (this.isNotEmpty()) {
+              var s = '';
+              if (this.parentSelector != null) {
+                s += this.parentSelector.toString() + ' ';
+              }
+              s += this.selector.toString() + ' { ';
+              tmp$1 = Kotlin.kotlin.collections.iterator_efxzmg$(this._map);
+              while (tmp$1.hasNext()) {
+                var tmp$0 = tmp$1.next();
+                var key = tmp$0.key;
+                var value = tmp$0.value;
+                s += key + ': ' + value + '; ';
+              }
+              s += '}';
+              rules.add_za3rmp$(s);
             }
-            s += this.selector.toString() + ' { ';
-            tmp$1 = Kotlin.kotlin.collections.iterator_efxzmg$(this.map);
-            while (tmp$1.hasNext()) {
-              var tmp$0 = tmp$1.next();
-              var key = tmp$0.key;
-              var value = tmp$0.value;
-              s += key + ': ' + value + '; ';
-            }
-            s += '}';
-            rules.add_za3rmp$(s);
-            tmp$2 = this.childStyles.iterator();
+            tmp$2 = this._childStyles.iterator();
             while (tmp$2.hasNext()) {
               var child = tmp$2.next();
               rules.addAll_wtfk93$(child.toCss());
@@ -2010,145 +2150,145 @@ var elements = function (Kotlin) {
         and_zh0yil$: function ($receiver, selector, init) {
           var style = new _.fg.style.Style(new _.fg.elements.AndSelector($receiver.selector, _.fg.elements.toSelector_pdl1w0$(selector)));
           init.call(style);
-          $receiver.childStyles.add_za3rmp$(style);
+          $receiver._childStyles.add_za3rmp$(style);
           return style;
         },
         and_eoz44k$: function ($receiver, selector, init) {
           var style = new _.fg.style.Style(new _.fg.elements.AndSelector($receiver.selector, selector));
           init.call(style);
-          $receiver.childStyles.add_za3rmp$(style);
+          $receiver._childStyles.add_za3rmp$(style);
           return style;
         },
         desc_zh0yil$: function ($receiver, selector, init) {
           var style = new _.fg.style.Style(new _.fg.elements.DescendantSelector($receiver.selector, _.fg.elements.toSelector_pdl1w0$(selector)));
           init.call(style);
-          $receiver.childStyles.add_za3rmp$(style);
+          $receiver._childStyles.add_za3rmp$(style);
           return style;
         },
         desc_eoz44k$: function ($receiver, selector, init) {
           var style = new _.fg.style.Style(new _.fg.elements.DescendantSelector($receiver.selector, selector));
           init.call(style);
-          $receiver.childStyles.add_za3rmp$(style);
+          $receiver._childStyles.add_za3rmp$(style);
           return style;
         },
         child_zh0yil$: function ($receiver, selector, init) {
           var style = new _.fg.style.Style(new _.fg.elements.ChildSelector($receiver.selector, _.fg.elements.toSelector_pdl1w0$(selector)));
           init.call(style);
-          $receiver.childStyles.add_za3rmp$(style);
+          $receiver._childStyles.add_za3rmp$(style);
           return style;
         },
         child_eoz44k$: function ($receiver, selector, init) {
           var style = new _.fg.style.Style(new _.fg.elements.ChildSelector($receiver.selector, selector));
           init.call(style);
-          $receiver.childStyles.add_za3rmp$(style);
+          $receiver._childStyles.add_za3rmp$(style);
           return style;
         },
         active_c8jw7n$: function ($receiver, init) {
           var style = new _.fg.style.Style(new _.fg.elements.AndSelector($receiver.selector, new _.fg.elements.PseudoClassSelector('active')));
           init.call(style);
-          $receiver.childStyles.add_za3rmp$(style);
+          $receiver._childStyles.add_za3rmp$(style);
           return style;
         },
         checked_c8jw7n$: function ($receiver, init) {
           var style = new _.fg.style.Style(new _.fg.elements.AndSelector($receiver.selector, new _.fg.elements.PseudoClassSelector('checked')));
           init.call(style);
-          $receiver.childStyles.add_za3rmp$(style);
+          $receiver._childStyles.add_za3rmp$(style);
           return style;
         },
         empty_c8jw7n$: function ($receiver, init) {
           var style = new _.fg.style.Style(new _.fg.elements.AndSelector($receiver.selector, new _.fg.elements.PseudoClassSelector('empty')));
           init.call(style);
-          $receiver.childStyles.add_za3rmp$(style);
+          $receiver._childStyles.add_za3rmp$(style);
           return style;
         },
         enabled_c8jw7n$: function ($receiver, init) {
           var style = new _.fg.style.Style(new _.fg.elements.AndSelector($receiver.selector, new _.fg.elements.PseudoClassSelector('enabled')));
           init.call(style);
-          $receiver.childStyles.add_za3rmp$(style);
+          $receiver._childStyles.add_za3rmp$(style);
           return style;
         },
         first_c8jw7n$: function ($receiver, init) {
           var style = new _.fg.style.Style(new _.fg.elements.AndSelector($receiver.selector, new _.fg.elements.PseudoClassSelector('first')));
           init.call(style);
-          $receiver.childStyles.add_za3rmp$(style);
+          $receiver._childStyles.add_za3rmp$(style);
           return style;
         },
         firstChild_c8jw7n$: function ($receiver, init) {
           var style = new _.fg.style.Style(new _.fg.elements.AndSelector($receiver.selector, new _.fg.elements.PseudoClassSelector('first-child')));
           init.call(style);
-          $receiver.childStyles.add_za3rmp$(style);
+          $receiver._childStyles.add_za3rmp$(style);
           return style;
         },
         firstOfType_c8jw7n$: function ($receiver, init) {
           var style = new _.fg.style.Style(new _.fg.elements.AndSelector($receiver.selector, new _.fg.elements.PseudoClassSelector('first-of-type')));
           init.call(style);
-          $receiver.childStyles.add_za3rmp$(style);
+          $receiver._childStyles.add_za3rmp$(style);
           return style;
         },
         focus_c8jw7n$: function ($receiver, init) {
           var style = new _.fg.style.Style(new _.fg.elements.AndSelector($receiver.selector, new _.fg.elements.PseudoClassSelector('focus')));
           init.call(style);
-          $receiver.childStyles.add_za3rmp$(style);
+          $receiver._childStyles.add_za3rmp$(style);
           return style;
         },
-        hover_c8jw7n$: function ($receiver, init) {
+        hover_s2gvbj$: function ($receiver, init) {
           var style = new _.fg.style.Style(new _.fg.elements.AndSelector($receiver.selector, new _.fg.elements.PseudoClassSelector('hover')));
           init.call(style);
-          $receiver.childStyles.add_za3rmp$(style);
+          $receiver._childStyles.add_za3rmp$(style);
           return style;
         },
         indeterminate_c8jw7n$: function ($receiver, init) {
           var style = new _.fg.style.Style(new _.fg.elements.AndSelector($receiver.selector, new _.fg.elements.PseudoClassSelector('indeterminate')));
           init.call(style);
-          $receiver.childStyles.add_za3rmp$(style);
+          $receiver._childStyles.add_za3rmp$(style);
           return style;
         },
         inRange_c8jw7n$: function ($receiver, init) {
           var style = new _.fg.style.Style(new _.fg.elements.AndSelector($receiver.selector, new _.fg.elements.PseudoClassSelector('in-range')));
           init.call(style);
-          $receiver.childStyles.add_za3rmp$(style);
+          $receiver._childStyles.add_za3rmp$(style);
           return style;
         },
         invalid_c8jw7n$: function ($receiver, init) {
           var style = new _.fg.style.Style(new _.fg.elements.AndSelector($receiver.selector, new _.fg.elements.PseudoClassSelector('invalid')));
           init.call(style);
-          $receiver.childStyles.add_za3rmp$(style);
+          $receiver._childStyles.add_za3rmp$(style);
           return style;
         },
         lang_c8jw7n$: function ($receiver, init) {
           var style = new _.fg.style.Style(new _.fg.elements.AndSelector($receiver.selector, new _.fg.elements.PseudoClassSelector('lang')));
           init.call(style);
-          $receiver.childStyles.add_za3rmp$(style);
+          $receiver._childStyles.add_za3rmp$(style);
           return style;
         },
         lastChild_c8jw7n$: function ($receiver, init) {
           var style = new _.fg.style.Style(new _.fg.elements.AndSelector($receiver.selector, new _.fg.elements.PseudoClassSelector('last-child')));
           init.call(style);
-          $receiver.childStyles.add_za3rmp$(style);
+          $receiver._childStyles.add_za3rmp$(style);
           return style;
         },
         lastOfType_c8jw7n$: function ($receiver, init) {
           var style = new _.fg.style.Style(new _.fg.elements.AndSelector($receiver.selector, new _.fg.elements.PseudoClassSelector('last-of-type')));
           init.call(style);
-          $receiver.childStyles.add_za3rmp$(style);
+          $receiver._childStyles.add_za3rmp$(style);
           return style;
         },
         left_c8jw7n$: function ($receiver, init) {
           var style = new _.fg.style.Style(new _.fg.elements.AndSelector($receiver.selector, new _.fg.elements.PseudoClassSelector('left')));
           init.call(style);
-          $receiver.childStyles.add_za3rmp$(style);
+          $receiver._childStyles.add_za3rmp$(style);
           return style;
         },
         link_c8jw7n$: function ($receiver, init) {
           var style = new _.fg.style.Style(new _.fg.elements.AndSelector($receiver.selector, new _.fg.elements.PseudoClassSelector('link')));
           init.call(style);
-          $receiver.childStyles.add_za3rmp$(style);
+          $receiver._childStyles.add_za3rmp$(style);
           return style;
         },
         not_eoz44k$: function ($receiver, selector, init) {
           var style = new _.fg.style.Style(new _.fg.elements.AndSelector($receiver.selector, new _.fg.elements.NotSelector(selector)));
           init.call(style);
-          $receiver.childStyles.add_za3rmp$(style);
+          $receiver._childStyles.add_za3rmp$(style);
           return style;
         },
         resolveClassStyleName_gobym4$: function ($receiver) {
@@ -2161,7 +2301,7 @@ var elements = function (Kotlin) {
           }
           var classSelector = tmp$1;
           if ($receiver.styleClassPrefix != null)
-            return new _.fg.elements.ClassSelector(Kotlin.toString($receiver.styleClassPrefix) + '-' + classSelector);
+            return new _.fg.elements.ClassSelector(Kotlin.toString($receiver.styleClassPrefix) + '-' + classSelector.value);
           else
             return classSelector;
         },
@@ -2169,8 +2309,8 @@ var elements = function (Kotlin) {
           return [_.fg.elements.IStyle];
         }, function Style(selector) {
           this.$selector_ngq6py$ = selector;
-          this.childStyles = Kotlin.kotlin.collections.arrayListOf_9mqe4v$([]);
-          this.map = Kotlin.kotlin.collections.mutableMapOf_eoa9s7$([]);
+          this._childStyles = Kotlin.kotlin.collections.arrayListOf_9mqe4v$([]);
+          this._map = Kotlin.kotlin.collections.mutableMapOf_eoa9s7$([]);
           this.cssFloat$delegate = new _.fg.style.Style.Property(this);
           this._dashed_attribute$delegate = new _.fg.style.Style.Property(this);
           this._camel_cased_attribute$delegate = new _.fg.style.Style.Property(this);
@@ -2403,22 +2543,27 @@ var elements = function (Kotlin) {
               return this.$selector_ngq6py$;
             }
           },
+          isNotEmpty: function () {
+            return !this._map.isEmpty();
+          },
           toCss: function () {
             var tmp$1, tmp$2;
             var rules = Kotlin.kotlin.collections.arrayListOf_9mqe4v$([]);
-            var s = '';
-            s += this.selector.toString();
-            s += ' { ';
-            tmp$1 = Kotlin.kotlin.collections.iterator_efxzmg$(this.map);
-            while (tmp$1.hasNext()) {
-              var tmp$0 = tmp$1.next();
-              var key = tmp$0.key;
-              var value = tmp$0.value;
-              s += key + ': ' + value + '; ';
+            if (this.isNotEmpty()) {
+              var s = '';
+              s += this.selector.toString();
+              s += ' { ';
+              tmp$1 = Kotlin.kotlin.collections.iterator_efxzmg$(this._map);
+              while (tmp$1.hasNext()) {
+                var tmp$0 = tmp$1.next();
+                var key = tmp$0.key;
+                var value = tmp$0.value;
+                s += key + ': ' + value + '; ';
+              }
+              s += '}';
+              rules.add_za3rmp$(s);
             }
-            s += '}';
-            rules.add_za3rmp$(s);
-            tmp$2 = this.childStyles.iterator();
+            tmp$2 = this._childStyles.iterator();
             while (tmp$2.hasNext()) {
               var child = tmp$2.next();
               rules.addAll_wtfk93$(child.toCss());
@@ -4258,16 +4403,16 @@ var elements = function (Kotlin) {
             getValue_ah4kp6$: function (classStyle, prop) {
               var tmp$0, tmp$1;
               var styleName = (tmp$0 = this.name) != null ? tmp$0 : this.$outer.resolveStyleName_2a5go5$(prop);
-              return (tmp$1 = this.$outer.map.get_za3rmp$(styleName)) != null ? tmp$1 : '';
+              return (tmp$1 = this.$outer._map.get_za3rmp$(styleName)) != null ? tmp$1 : '';
             },
             setValue_vr1yzg$: function (classStyle, prop, value) {
               var tmp$0;
               var styleName = (tmp$0 = this.name) != null ? tmp$0 : this.$outer.resolveStyleName_2a5go5$(prop);
               if (value.length > 0) {
-                this.$outer.map.put_wn2jw4$(styleName, value);
+                this.$outer._map.put_wn2jw4$(styleName, value);
               }
                else {
-                this.$outer.map.remove_za3rmp$(styleName);
+                this.$outer._map.remove_za3rmp$(styleName);
               }
             }
           })
@@ -4283,21 +4428,23 @@ var elements = function (Kotlin) {
           toCss: function () {
             var tmp$1, tmp$2;
             var rules = Kotlin.kotlin.collections.arrayListOf_9mqe4v$([]);
-            var s = '';
-            if (this.parentSelector != null) {
-              s += this.parentSelector.toString() + ' ';
+            if (this.isNotEmpty()) {
+              var s = '';
+              if (this.parentSelector != null) {
+                s += this.parentSelector.toString() + ' ';
+              }
+              s += this.selector.toString() + ' { ';
+              tmp$1 = Kotlin.kotlin.collections.iterator_efxzmg$(this._map);
+              while (tmp$1.hasNext()) {
+                var tmp$0 = tmp$1.next();
+                var key = tmp$0.key;
+                var value = tmp$0.value;
+                s += key + ': ' + value + '; ';
+              }
+              s += '}';
+              rules.add_za3rmp$(s);
             }
-            s += this.selector.toString() + ' { ';
-            tmp$1 = Kotlin.kotlin.collections.iterator_efxzmg$(this.map);
-            while (tmp$1.hasNext()) {
-              var tmp$0 = tmp$1.next();
-              var key = tmp$0.key;
-              var value = tmp$0.value;
-              s += key + ': ' + value + '; ';
-            }
-            s += '}';
-            rules.add_za3rmp$(s);
-            tmp$2 = this.childStyles.iterator();
+            tmp$2 = this._childStyles.iterator();
             while (tmp$2.hasNext()) {
               var child = tmp$2.next();
               rules.addAll_wtfk93$(child.toCss());

@@ -106,5 +106,17 @@ open class Node(internal val w3cNode: org.w3c.dom.Node) {
         }
     }
 
+    fun removeChildren() {
+        while (_childNodes.isNotEmpty()) {
+            removeChild(_childNodes[_childNodes.lastIndex])
+        }
+    }
 
+    protected fun removeChild(node: Node) {
+
+        if (node is Element) {
+            node.willUnMount()
+        }
+        this.w3cNode.removeChild(node.w3cNode)
+    }
 }

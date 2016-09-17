@@ -6,29 +6,30 @@ import kotlin.reflect.KProperty
 
 open class Style(override val selector: Selector) : IStyle {
 
-    internal val childStyles: MutableList<Style> = arrayListOf()
+    internal val _childStyles: MutableList<Style> = arrayListOf()
 
-    protected val map: MutableMap<String, String> = mutableMapOf()
+    protected val _map: MutableMap<String, String> = mutableMapOf()
+
+    fun isNotEmpty(): Boolean = _map.isNotEmpty()
 
     override fun toCss(): List<String> {
 
         val rules: MutableList<String> = arrayListOf()
 
-        var s = ""
+        if (isNotEmpty()) {
+            var s = ""
+            s += selector.toString()
+            s += " { "
+            for ((key, value) in _map) {
 
-        s += selector.toString()
+                s += key + ": " + value + "; "
 
-        s += " { "
-        for ((key, value) in map) {
-
-            s += key + ": " + value + "; "
-
+            }
+            s += "}"
+            rules.add(s)
         }
-        s += "}"
 
-        rules.add(s)
-
-        for (child in childStyles) {
+        for (child in _childStyles) {
             rules.addAll(child.toCss())
         }
 
@@ -491,15 +492,15 @@ open class Style(override val selector: Selector) : IStyle {
 
         operator fun getValue(classStyle: Style?, prop: KProperty<*>): String {
             val styleName = name ?: resolveStyleName(prop)
-            return map[styleName] ?: ""
+            return _map[styleName] ?: ""
         }
 
         operator fun setValue(classStyle: Style?, prop: KProperty<*>, value: String) {
             val styleName = name ?: resolveStyleName(prop)
             if (value.isNotEmpty()) {
-                map[styleName] = value
+                _map[styleName] = value
             } else {
-                map.remove(styleName)
+                _map.remove(styleName)
             }
         }
     }

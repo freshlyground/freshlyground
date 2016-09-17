@@ -2,9 +2,9 @@
   "version": 3,
   "file": "docs-source.js",
   "sources": [
-    "file:///Users/joerunds/Private/freshlyground/elements/src/main/kotlin/fg/style/TypeStyle.kt",
+    "file:///Users/joerunds/Private/freshlyground/beans/src/main/kotlin/fg/beans/icon/IconI.kt",
     "file:///Users/joerunds/Private/freshlyground/docs-source/src/main/kotlin/fg/docs/main.kt"
   ],
   "names": [],
-  "mappings": ";;mCAOgD;6BAAA;iCAAA;;UCahC;;;UAGA;;;UAJJ;UAGA;;;UAKA;;;UAGA;UACA;UACA;UACA;UACA;UACA;UACA;UACA;UACA;UACA;UACA;UACA;UACA;UACA;UACA;UACA;;;UA3BJ;UAQA;UAGA;;;UAqBA;;;UAlCJ,uEAAA;uCAiCA,0BAAmB,0CAAA,0EAAM;uCAIzB;;;;;;;;;"
+  "mappings": ";;mCAK0B;6BAAA;iCAAA;;UC8BV;;;UAGA;;;UAJJ;UAGA;;;UAKA;;;UAGA;UACA;UACA;UACA;UACA;UACA;UACA;UACA;UACA;UACA;UACA;UACA;UACA;UACA;UACA;UACA;;;;;;;UAGA,8CAAS;UACT,8CAAS;;;;;;;UAGT,4CAAO;UAGP,4CAAO,8EAAc;;;UAKrB;;;UAKQ;;;UADJ;;;UAMI;;;UADJ;;;UAMI;;;UADJ;;;UAMI;;;UADJ;;;UAhBJ;UAKA;UAKA;UAKA;;;UA5DJ;UAQA;UAGA;UAkBA;UAIA;UAQA;UAGA;;;UAyBA;;;UAKQ;;;UADJ,oFAAI;;;UADR,kFAAK;;;UAQD;;;UADJ;;;UAjFJ,uEAAA;uCAsEA,0BAAmB,0CAAA,0EAAM;uCAGzB,0BAAmB,0CAAA,qEAAM;uCAOzB,0BAAmB,0CAAA,yEAAM;uCAMzB;;;;;;;;;"
 }
