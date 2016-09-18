@@ -3,8 +3,8 @@ package fg.style
 import fg.elements.DescendantSelector
 
 
-class DescRule(selector: DescendantSelector) :
-        CSSRule<DescendantSelector>(selector) {
+class DescendantRule(selector: DescendantSelector) :
+        Rule<DescendantSelector>(selector) {
 
     override fun cssText(): String {
         return cssText(selector)

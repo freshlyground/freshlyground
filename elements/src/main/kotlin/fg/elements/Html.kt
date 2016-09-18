@@ -1,6 +1,6 @@
 package fg.elements
 
-import fg.style.CSSRule
+import fg.style.Rule
 import fg.style.ClassRule
 import org.w3c.dom.Element
 import org.w3c.dom.css.CSSStyleSheet
@@ -13,7 +13,7 @@ val HTML = Html()
 class Html internal constructor(val w3cElement: Element = document.documentElement!!) {
 
     private val stylesheet: CSSStyleSheet by lazy { document.styleSheets[0] as CSSStyleSheet }
-    private val registeredClassStyles: MutableMap<String, CSSRule<*>> = hashMapOf()
+    private val registeredClassStyles: MutableMap<String, Rule<*>> = hashMapOf()
 
 
     fun init() {
@@ -39,7 +39,7 @@ class Html internal constructor(val w3cElement: Element = document.documentEleme
         registerCSSRule(rule)
     }
 
-    fun registerCSSRule(rule: CSSRule<*>) {
+    fun registerCSSRule(rule: Rule<*>) {
 
         val existing = registeredClassStyles.put(rule.selector.toString(), rule)
         if (existing == null) {
@@ -47,7 +47,7 @@ class Html internal constructor(val w3cElement: Element = document.documentEleme
         }
     }
 
-    fun addCSSRule(rule: CSSRule<*>) {
+    fun addCSSRule(rule: Rule<*>) {
 
         val ruleText = rule.cssText()
         console.log(ruleText)

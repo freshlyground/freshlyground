@@ -3,7 +3,7 @@ package fg.style
 import fg.elements.ClassSelector
 
 class ClassRule(selector: ClassSelector) :
-        CSSRule<ClassSelector>(selector) {
+        Rule<ClassSelector>(selector) {
 
     val className: String
         get() = selector.value

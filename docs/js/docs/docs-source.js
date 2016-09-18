@@ -140,22 +140,22 @@ this['docs-source'] = function (Kotlin, $module$elements, $module$beans) {
           this.borderBottom = '1px solid red';
         },
         f_34: function () {
-          $module$elements.fg.style.and_tkfk4p$(this, $module$beans.fg.beans.SelectableAction.Statics.selectedSelector, _.fg.docs.f_33);
+          $module$elements.fg.style.and_dbehhi$(this, $module$beans.fg.beans.SelectableAction.Statics.selectedSelector, _.fg.docs.f_33);
         },
         main_kand9s$f_1: function () {
-          $module$elements.fg.style.desc_tttmz9$(this, $module$beans.fg.beans.menu.MenuItem.MenuItem.classSelector, _.fg.docs.f_34);
+          $module$elements.fg.style.desc_4v8hhk$(this, $module$beans.fg.beans.menu.MenuItem.MenuItem.classSelector, _.fg.docs.f_34);
         },
         f_35: function () {
           this.backgroundColor = 'lightgrey';
         },
         main_kand9s$f_2: function () {
-          $module$elements.fg.style.hover_wcolqy$(this, _.fg.docs.f_35);
+          $module$elements.fg.style.hover_i5tde3$(this, _.fg.docs.f_35);
         },
         main_kand9s$: function (args) {
           $module$elements.fg.elements.with_ji1yox$($module$elements.fg.elements.BODY, _.fg.docs.main_kand9s$f);
-          $module$elements.fg.elements.HTML.addCSSRule_lzev0u$($module$elements.fg.elements.with_ji1yox$(new $module$elements.fg.style.AnyRule(), _.fg.docs.main_kand9s$f_0));
-          $module$elements.fg.elements.HTML.addCSSRule_lzev0u$($module$elements.fg.elements.with_ji1yox$(new $module$elements.fg.style.ClassRule($module$beans.fg.beans.menu.Menu.Menu.classSelector), _.fg.docs.main_kand9s$f_1));
-          $module$elements.fg.elements.HTML.addCSSRule_lzev0u$($module$elements.fg.elements.with_ji1yox$(new $module$elements.fg.style.ClassRule($module$beans.fg.beans.menu.MenuItem.MenuItem.classSelector), _.fg.docs.main_kand9s$f_2));
+          $module$elements.fg.elements.HTML.addCSSRule_3cka69$($module$elements.fg.elements.with_ji1yox$(new $module$elements.fg.style.AnyRule(), _.fg.docs.main_kand9s$f_0));
+          $module$elements.fg.elements.HTML.addCSSRule_3cka69$($module$elements.fg.elements.with_ji1yox$(new $module$elements.fg.style.ClassRule($module$beans.fg.beans.menu.Menu.Menu.classSelector), _.fg.docs.main_kand9s$f_1));
+          $module$elements.fg.elements.HTML.addCSSRule_3cka69$($module$elements.fg.elements.with_ji1yox$(new $module$elements.fg.style.ClassRule($module$beans.fg.beans.menu.MenuItem.MenuItem.classSelector), _.fg.docs.main_kand9s$f_2));
           $module$elements.fg.elements.HTML.init();
         }
       })

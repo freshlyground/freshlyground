@@ -3,11 +3,11 @@ package fg.style
 import fg.elements.Selector
 import kotlin.reflect.KProperty
 
-abstract class CSSRule<SELECTOR : Selector>(val selector: SELECTOR) {
+abstract class Rule<out SELECTOR : Selector>(val selector: SELECTOR) {
 
     protected val _map: MutableMap<String, String> = mutableMapOf()
 
-    internal val _childStyles: MutableList<CSSRule<*>> = arrayListOf()
+    internal val _childStyles: MutableList<Rule<*>> = arrayListOf()
 
     abstract fun cssText(): String
 
@@ -17,7 +17,7 @@ abstract class CSSRule<SELECTOR : Selector>(val selector: SELECTOR) {
         s += " { "
         for ((key, value) in _map) {
 
-            s += key + ": " + value + "; "
+            s += "$key: $value; "
 
         }
         s += "}"
@@ -478,12 +478,12 @@ abstract class CSSRule<SELECTOR : Selector>(val selector: SELECTOR) {
 
     inner class Property(val name: String? = null) {
 
-        operator fun getValue(rule: CSSRule<*>?, prop: KProperty<*>): String {
+        operator fun getValue(rule: Rule<*>?, prop: KProperty<*>): String {
             val styleName = name ?: resolveRuleName(prop)
             return _map[styleName] ?: ""
         }
 
-        operator fun setValue(rule: CSSRule<*>?, prop: KProperty<*>, value: String) {
+        operator fun setValue(rule: Rule<*>?, prop: KProperty<*>, value: String) {
             val styleName = name ?: resolveRuleName(prop)
             if (value.isNotEmpty()) {
                 _map[styleName] = value

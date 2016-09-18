@@ -5,7 +5,7 @@ import fg.elements.HTML
 import fg.elements.InputText
 import fg.elements.StyledClass
 import fg.elements.onKeyDown
-import fg.style.CSSRule
+import fg.style.Rule
 import fg.style.ClassRule
 import fg.style.rule
 import org.w3c.dom.events.Event
