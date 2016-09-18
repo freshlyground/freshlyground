@@ -60,55 +60,63 @@ this['docs-source'] = function (Kotlin, $module$elements, $module$beans) {
         f_12: function () {
         },
         f_13: function () {
-          $module$beans.fg.beans.menuItem_mt53wc$(this, new $module$beans.fg.beans.SelectableAction('Menu Item 1'), _.fg.docs.f_11);
-          $module$beans.fg.beans.menuItem_mt53wc$(this, new $module$beans.fg.beans.SelectableAction('Menu Item 2'), _.fg.docs.f_12);
         },
         f_14: function () {
-          $module$beans.fg.beans.menu_u9dlqt$(this, _.fg.docs.f_13);
         },
         f_15: function () {
-          this.unaryPlus_pdl1w0$('Button');
+          $module$beans.fg.beans.menuItem_mt53wc$(this, new $module$beans.fg.beans.SelectableAction('Menu Item 1', void 0, void 0, void 0, _.fg.docs.f_11), _.fg.docs.f_12);
+          $module$beans.fg.beans.menuItem_mt53wc$(this, new $module$beans.fg.beans.SelectableAction('Menu Item 2', void 0, void 0, void 0, _.fg.docs.f_13), _.fg.docs.f_14);
         },
         f_16: function () {
+          $module$beans.fg.beans.menu_u9dlqt$(this, _.fg.docs.f_15);
         },
         f_17: function () {
+          this.unaryPlus_pdl1w0$('Button');
         },
         f_18: function () {
-          $module$beans.fg.beans.button_umrm8d$(this, new $module$beans.fg.beans.Action('Button 1'), _.fg.docs.f_16);
-          $module$beans.fg.beans.button_umrm8d$(this, new $module$beans.fg.beans.Action(void 0, void 0, $module$beans.fg.beans.icon.FontAwesomeIcons.camera_retro_629h0h$()), _.fg.docs.f_17);
         },
         f_19: function () {
-          this.unaryPlus_pdl1w0$('Resources');
         },
         f_20: function () {
-          this.unaryPlus_pdl1w0$('https://kotlinlang.org/');
         },
         f_21: function () {
-          $module$elements.fg.elements.a_4owu00$(this, 'https://kotlinlang.org/', '_blank', _.fg.docs.f_20);
         },
         f_22: function () {
-          this.unaryPlus_pdl1w0$('https://www.w3.org/TR/html5/');
+          $module$beans.fg.beans.button_umrm8d$(this, new $module$beans.fg.beans.Action('Button 1', void 0, void 0, _.fg.docs.f_18), _.fg.docs.f_19);
+          $module$beans.fg.beans.button_umrm8d$(this, new $module$beans.fg.beans.Action(void 0, void 0, $module$beans.fg.beans.icon.FontAwesomeIcons.camera_retro_629h0h$(), _.fg.docs.f_20), _.fg.docs.f_21);
         },
         f_23: function () {
-          $module$elements.fg.elements.a_4owu00$(this, 'https://www.w3.org/TR/html5/', '_blank', _.fg.docs.f_22);
+          this.unaryPlus_pdl1w0$('Resources');
         },
         f_24: function () {
-          this.unaryPlus_pdl1w0$('http://html5doctor.com/');
+          this.unaryPlus_pdl1w0$('https://kotlinlang.org/');
         },
         f_25: function () {
-          $module$elements.fg.elements.a_4owu00$(this, 'http://html5doctor.com/', '_blank', _.fg.docs.f_24);
+          $module$elements.fg.elements.a_4owu00$(this, 'https://kotlinlang.org/', '_blank', _.fg.docs.f_24);
         },
         f_26: function () {
-          this.unaryPlus_pdl1w0$('https://developer.mozilla.org');
+          this.unaryPlus_pdl1w0$('https://www.w3.org/TR/html5/');
         },
         f_27: function () {
-          $module$elements.fg.elements.a_4owu00$(this, 'https://developer.mozilla.org', '_blank', _.fg.docs.f_26);
+          $module$elements.fg.elements.a_4owu00$(this, 'https://www.w3.org/TR/html5/', '_blank', _.fg.docs.f_26);
         },
         f_28: function () {
-          $module$elements.fg.elements.li_fpslb8$(this, _.fg.docs.f_21);
-          $module$elements.fg.elements.li_fpslb8$(this, _.fg.docs.f_23);
+          this.unaryPlus_pdl1w0$('http://html5doctor.com/');
+        },
+        f_29: function () {
+          $module$elements.fg.elements.a_4owu00$(this, 'http://html5doctor.com/', '_blank', _.fg.docs.f_28);
+        },
+        f_30: function () {
+          this.unaryPlus_pdl1w0$('https://developer.mozilla.org');
+        },
+        f_31: function () {
+          $module$elements.fg.elements.a_4owu00$(this, 'https://developer.mozilla.org', '_blank', _.fg.docs.f_30);
+        },
+        f_32: function () {
           $module$elements.fg.elements.li_fpslb8$(this, _.fg.docs.f_25);
           $module$elements.fg.elements.li_fpslb8$(this, _.fg.docs.f_27);
+          $module$elements.fg.elements.li_fpslb8$(this, _.fg.docs.f_29);
+          $module$elements.fg.elements.li_fpslb8$(this, _.fg.docs.f_31);
         },
         main_kand9s$f: function () {
           $module$elements.fg.elements.header_4tl54c$(this, _.fg.docs.f_1);
@@ -119,35 +127,35 @@ this['docs-source'] = function (Kotlin, $module$elements, $module$beans) {
           $module$elements.fg.elements.h2_3mh653$(this, _.fg.docs.f_7);
           $module$elements.fg.elements.p_ykyrxp$(this, _.fg.docs.f_9);
           $module$elements.fg.elements.h3_lb2wa2$(this, _.fg.docs.f_10);
-          $module$elements.fg.elements.p_ykyrxp$(this, _.fg.docs.f_14);
-          $module$elements.fg.elements.h3_lb2wa2$(this, _.fg.docs.f_15);
-          $module$elements.fg.elements.p_ykyrxp$(this, _.fg.docs.f_18);
-          $module$elements.fg.elements.h2_3mh653$(this, _.fg.docs.f_19);
-          $module$elements.fg.elements.ul_gwr2a2$(this, _.fg.docs.f_28);
+          $module$elements.fg.elements.p_ykyrxp$(this, _.fg.docs.f_16);
+          $module$elements.fg.elements.h3_lb2wa2$(this, _.fg.docs.f_17);
+          $module$elements.fg.elements.p_ykyrxp$(this, _.fg.docs.f_22);
+          $module$elements.fg.elements.h2_3mh653$(this, _.fg.docs.f_23);
+          $module$elements.fg.elements.ul_gwr2a2$(this, _.fg.docs.f_32);
         },
         main_kand9s$f_0: function () {
           this.boxSizing = 'border-box';
         },
-        f_29: function () {
+        f_33: function () {
           this.borderBottom = '1px solid red';
         },
-        f_30: function () {
-          $module$elements.fg.style.and_eoz44k$(this, $module$beans.fg.beans.SelectableAction.Statics.selectedSelector, _.fg.docs.f_29);
+        f_34: function () {
+          $module$elements.fg.style.and_tkfk4p$(this, $module$beans.fg.beans.SelectableAction.Statics.selectedSelector, _.fg.docs.f_33);
         },
         main_kand9s$f_1: function () {
-          $module$elements.fg.style.desc_eoz44k$(this, $module$beans.fg.beans.menu.MenuItem.Statics.selector, _.fg.docs.f_30);
+          $module$elements.fg.style.desc_tttmz9$(this, $module$beans.fg.beans.menu.MenuItem.MenuItem.classSelector, _.fg.docs.f_34);
         },
-        f_31: function () {
+        f_35: function () {
           this.backgroundColor = 'lightgrey';
         },
         main_kand9s$f_2: function () {
-          $module$elements.fg.style.hover_s2gvbj$(this, _.fg.docs.f_31);
+          $module$elements.fg.style.hover_wcolqy$(this, _.fg.docs.f_35);
         },
         main_kand9s$: function (args) {
           $module$elements.fg.elements.with_ji1yox$($module$elements.fg.elements.BODY, _.fg.docs.main_kand9s$f);
-          $module$elements.fg.elements.HTML.registerStyle_lu0ku$($module$elements.fg.elements.with_ji1yox$(new $module$elements.fg.style.Style($module$elements.fg.elements.Selector.Statics.ANY), _.fg.docs.main_kand9s$f_0));
-          $module$elements.fg.elements.HTML.registerStyle_lu0ku$($module$elements.fg.elements.with_ji1yox$(new $module$elements.fg.style.Style($module$beans.fg.beans.menu.Menu.Statics.selector), _.fg.docs.main_kand9s$f_1));
-          $module$elements.fg.elements.HTML.registerStyle_lu0ku$($module$elements.fg.elements.with_ji1yox$(new $module$elements.fg.style.Style($module$beans.fg.beans.menu.MenuItem.Statics.selector), _.fg.docs.main_kand9s$f_2));
+          $module$elements.fg.elements.HTML.addCSSRule_lzev0u$($module$elements.fg.elements.with_ji1yox$(new $module$elements.fg.style.AnyRule(), _.fg.docs.main_kand9s$f_0));
+          $module$elements.fg.elements.HTML.addCSSRule_lzev0u$($module$elements.fg.elements.with_ji1yox$(new $module$elements.fg.style.ClassRule($module$beans.fg.beans.menu.Menu.Menu.classSelector), _.fg.docs.main_kand9s$f_1));
+          $module$elements.fg.elements.HTML.addCSSRule_lzev0u$($module$elements.fg.elements.with_ji1yox$(new $module$elements.fg.style.ClassRule($module$beans.fg.beans.menu.MenuItem.MenuItem.classSelector), _.fg.docs.main_kand9s$f_2));
           $module$elements.fg.elements.HTML.init();
         }
       })

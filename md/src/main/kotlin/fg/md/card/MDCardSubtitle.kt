@@ -1,30 +1,34 @@
 package fg.md.card
 
-import fg.elements.ClassSelector
 import fg.elements.Div
-import fg.elements.H1
+import fg.elements.HTML
+import fg.elements.StyledClass
+import fg.elements.toClassSelector
 import fg.md.colour.MDGrayPalette
-import fg.style.classStyle
+import fg.style.ClassRule
 
 class MDCardSubtitle : Div() {
-
-    override val styleClassName = Statics.styleClassName
-
-    override val styleClass = classStyle {
-        fontSize = "14px"
-        fontWeight = "400"
-        marginBottom = "16px"
-
-        color = MDGrayPalette.s600.toHtml()
-    }
 
     override fun render() {
         super.render()
 
-        addClass()
+        addClass(classSelector)
     }
 
-    companion object Statics {
-        val styleClassName: ClassSelector = ClassSelector("md-card-subtitle")
+    companion object MDCardSubtitle : StyledClass {
+
+        override val classSelector = "md-card-subtitle".toClassSelector()
+
+        override val rule: ClassRule.() -> Unit = {
+            fontSize = "14px"
+            fontWeight = "400"
+            marginBottom = "16px"
+
+            color = MDGrayPalette.s600.toHtml()
+        }
+
+        init {
+            HTML.registerStyle(this)
+        }
     }
 }

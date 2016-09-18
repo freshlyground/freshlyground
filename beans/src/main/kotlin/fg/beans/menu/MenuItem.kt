@@ -5,16 +5,17 @@ import fg.beans.SelectableAction
 import fg.beans.pkg
 import fg.elements.ClassSelector
 import fg.elements.Div
+import fg.elements.HTML
 import fg.elements.Span
+import fg.elements.StyledClass
 import fg.elements.Text
 import fg.elements.onClick
-import fg.style.classStyle
+import fg.style.ClassRule
+import fg.style.rule
 import org.w3c.dom.events.Event
 import kotlin.reflect.KProperty
 
 class MenuItem(action: Action) : Div() {
-
-    override val styleClassPrefix = pkg
 
     val action: Action = action
 
@@ -43,21 +44,11 @@ class MenuItem(action: Action) : Div() {
         }
     }
 
-    private fun renderSelected(selected: Boolean) {
-
-        if (selected) {
-            addClass(SelectableAction.selectedSelector)
-        } else {
-            removeClass(SelectableAction.selectedSelector)
-        }
-    }
-
-    override val styleClass = classStyle {
-        cursor = "pointer"
-    }
 
     override fun render() {
         super.render()
+
+        addClass(classSelector)
 
         appendChild(primaryText)
         primaryText.appendChild(Text(action.label))
@@ -71,8 +62,25 @@ class MenuItem(action: Action) : Div() {
         onClick(clickHandler)
     }
 
-    companion object Statics {
+    private fun renderSelected(selected: Boolean) {
 
-        val selector: ClassSelector = ClassSelector("$pkg-menuitem")
+        if (selected) {
+            addClass(SelectableAction.selectedSelector)
+        } else {
+            removeClass(SelectableAction.selectedSelector)
+        }
+    }
+
+    companion object MenuItem : StyledClass {
+
+        override val classSelector = ClassSelector("$pkg-menuitem")
+
+        override val rule: ClassRule.() -> Unit = {
+            cursor = "pointer"
+        }
+
+        init {
+            HTML.registerStyle(this)
+        }
     }
 }

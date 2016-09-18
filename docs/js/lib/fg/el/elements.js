@@ -669,6 +669,9 @@ var elements = function (Kotlin) {
         p_ykyrxp$: function ($receiver, init) {
           return _.fg.elements.initAndAppendNode_i6bvtr$($receiver, new _.fg.elements.P(), init);
         },
+        hr_tcpxbd$: function ($receiver, init) {
+          return _.fg.elements.initAndAppendNode_i6bvtr$($receiver, new _.fg.elements.Hr(), init);
+        },
         ul_gwr2a2$: function ($receiver, init) {
           return _.fg.elements.initAndAppendNode_i6bvtr$($receiver, new _.fg.elements.Ul(), init);
         },
@@ -702,26 +705,6 @@ var elements = function (Kotlin) {
         },
         img_dgbhyk$: function ($receiver, src, init) {
           return _.fg.elements.initAndAppendNode_i6bvtr$($receiver, new _.fg.elements.Img(src), init);
-        },
-        div$f: Kotlin.createClass(function () {
-          return [_.fg.elements.Div];
-        }, function $fun(closure$className) {
-          $fun.baseInitializer.call(this);
-          this.$styleClassName_ku78q8$ = _.fg.elements.toClassSelector_pdl1w0$(closure$className);
-        }, /** @lends _.fg.elements.div$f.prototype */ {
-          styleClassName: {
-            get: function () {
-              return this.$styleClassName_ku78q8$;
-            }
-          },
-          render: function () {
-            _.fg.elements.Div.prototype.render.call(this);
-            this.addClass();
-          }
-        }, /** @lends _.fg.elements.div$f */ {
-        }),
-        div_1q790e$: function ($receiver, className, init) {
-          return _.fg.elements.initAndAppendNode_i6bvtr$($receiver, new _.fg.elements.div$f(className), init);
         },
         initAndAppendNode_i6bvtr$: function ($receiver, node, init) {
           init.call(node);
@@ -903,10 +886,6 @@ var elements = function (Kotlin) {
           Element.baseInitializer.call(this, w3cElement);
           this.w3cElement = w3cElement;
           this._displayBeforeHiding_ywpibn$ = '';
-          this.typeStyle = null;
-          this.$styleClassPrefix_kg27qt$ = null;
-          this.$styleClassName_sfpy1e$ = null;
-          this.$styleClass_52xnst$ = null;
         }, /** @lends _.fg.elements.Element.prototype */ {
           childElements_vn4sdz$: {
             get: function () {
@@ -924,6 +903,12 @@ var elements = function (Kotlin) {
               return Kotlin.isType(tmp$0 = destination, Kotlin.kotlin.collections.List) ? tmp$0 : Kotlin.throwCCE();
             }
           },
+          _parentElement: {
+            get: function () {
+              var tmp$0, tmp$1;
+              return Kotlin.isType(tmp$1 = (tmp$0 = this._parentNode) != null ? tmp$0 : Kotlin.throwNPE(), _.fg.elements.Element) ? tmp$1 : Kotlin.throwCCE();
+            }
+          },
           hidden: {
             get: function () {
               return Kotlin.equals(this.style.display, 'none');
@@ -932,21 +917,6 @@ var elements = function (Kotlin) {
           style: {
             get: function () {
               return this.w3cElement.style;
-            }
-          },
-          styleClassPrefix: {
-            get: function () {
-              return this.$styleClassPrefix_kg27qt$;
-            }
-          },
-          styleClassName: {
-            get: function () {
-              return this.$styleClassName_sfpy1e$;
-            }
-          },
-          styleClass: {
-            get: function () {
-              return this.$styleClass_52xnst$;
             }
           },
           render: function () {
@@ -965,25 +935,6 @@ var elements = function (Kotlin) {
                 child.didMount();
               }
             }
-          },
-          renderStyle: function () {
-            var tmp$0, tmp$1, tmp$2;
-            if (this.typeStyle != null) {
-              _.fg.elements.HTML.registerStyle_lu0ku$((tmp$0 = this.typeStyle) != null ? tmp$0 : Kotlin.throwNPE());
-            }
-            if (this.styleClass != null) {
-              var nonNullClassStyle = (tmp$1 = this.styleClass) != null ? tmp$1 : Kotlin.throwNPE();
-              _.fg.elements.HTML.registerStyle_lu0ku$(nonNullClassStyle);
-              this.addClass_61zpoe$(nonNullClassStyle.className);
-            }
-            tmp$2 = this.childElements_vn4sdz$.iterator();
-            while (tmp$2.hasNext()) {
-              var child = tmp$2.next();
-              child.renderStyle();
-            }
-          },
-          addClass: function () {
-            this.addClass_bx842b$(_.fg.style.resolveClassStyleName_gobym4$(this));
           },
           addClass_bx842b$: function (selector) {
             this.addClass_61zpoe$(selector.value);
@@ -1508,39 +1459,42 @@ var elements = function (Kotlin) {
           },
           init: function () {
             _.fg.elements.BODY.init();
-            _.fg.elements.BODY.renderStyle();
             window.setTimeout(_.fg.elements.Html.init$f, 10);
           },
-          registerStyle_lu0ku$: function (style) {
-            var tmp$1, tmp$2;
-            if (Kotlin.equals(style.selector.toString(), '.fg-beans-menu-item')) {
-              console.log('fg-beans-menu-item');
+          registerStyle_78phyd$: function (styledClass) {
+            var rule = _.fg.elements.Html.registerStyle_78phyd$rule(styledClass);
+            var rule_0 = rule(styledClass, styledClass.rule);
+            this.registerCSSRule_lzev0u$(rule_0);
+          },
+          registerCSSRule_lzev0u$: function (rule) {
+            var existing = this.registeredClassStyles_nqgd5t$.put_wn2jw4$(rule.selector.toString(), rule);
+            if (existing == null) {
+              this.addCSSRule_lzev0u$(rule);
             }
-            if (Kotlin.isType(style, _.fg.elements.IClassStyle)) {
-              var previous = this.registeredClassStyles_nqgd5t$.put_wn2jw4$(style.className, style);
-              if (previous == null) {
-                var rules = style.toCss();
-                tmp$1 = rules.iterator();
-                while (tmp$1.hasNext()) {
-                  var rule = tmp$1.next();
-                  console.log('Inserting stylesheet rule: \n' + rule);
-                  this.stylesheet_ld1o87$.insertRule(rule, this.stylesheet_ld1o87$.cssRules.length);
-                }
-              }
-            }
-             else {
-              var rules_0 = style.toCss();
-              tmp$2 = rules_0.iterator();
-              while (tmp$2.hasNext()) {
-                var rule_0 = tmp$2.next();
-                console.log('Inserting stylesheet rule: \n' + rule_0);
-                this.stylesheet_ld1o87$.insertRule(rule_0, this.stylesheet_ld1o87$.cssRules.length);
-              }
+          },
+          addCSSRule_lzev0u$: function (rule) {
+            var ruleText = rule.cssText();
+            console.log(ruleText);
+            this.stylesheet_ld1o87$.insertRule(ruleText, this.stylesheet_ld1o87$.cssRules.length);
+            var tmp$0;
+            tmp$0 = rule._childStyles.iterator();
+            while (tmp$0.hasNext()) {
+              var element = tmp$0.next();
+              this.registerCSSRule_lzev0u$(element);
             }
           }
         }, /** @lends _.fg.elements.Html */ {
           init$f: function () {
             _.fg.elements.BODY.callDidMount();
+          },
+          registerStyle_78phyd$rule: function (closure$styledClass) {
+            return function (styledClass, init) {
+              if (init === void 0)
+                init = closure$styledClass.rule;
+              var style = new _.fg.style.ClassRule(styledClass.classSelector);
+              init.call(style);
+              return style;
+            };
           },
           stylesheet_ld1o87$f: function () {
             var tmp$0;
@@ -1553,15 +1507,11 @@ var elements = function (Kotlin) {
         onLoad_ot58vi$: function ($receiver, listener) {
           $receiver.window.addEventListener('load', listener);
         },
-        IClassStyle: Kotlin.createTrait(function () {
-          return [_.fg.elements.IStyle];
-        }),
-        IStyle: Kotlin.createTrait(null),
         Node: Kotlin.createClass(null, function Node(w3cNode) {
           this.w3cNode = w3cNode;
           this._childNodes_d2zqq6$ = Kotlin.kotlin.collections.arrayListOf_9mqe4v$([]);
           this._childrenMountInstructions_6rpoce$ = Kotlin.kotlin.collections.arrayListOf_9mqe4v$([]);
-          this._parent_pyyift$ = null;
+          this._parentNode = null;
         }, /** @lends _.fg.elements.Node.prototype */ {
           childNodes: {
             get: function () {
@@ -1576,7 +1526,7 @@ var elements = function (Kotlin) {
           mounted: {
             get: function () {
               var tmp$0, tmp$1, tmp$2;
-              return (tmp$2 = (tmp$1 = (tmp$0 = this._parent_pyyift$) != null ? tmp$0.w3cNode : null) != null ? tmp$1.contains(this.w3cNode) : null) != null ? tmp$2 : false;
+              return (tmp$2 = (tmp$1 = (tmp$0 = this._parentNode) != null ? tmp$0.w3cNode : null) != null ? tmp$1.contains(this.w3cNode) : null) != null ? tmp$2 : false;
             }
           },
           textContent: {
@@ -1598,7 +1548,7 @@ var elements = function (Kotlin) {
             if (childIndex === -1) {
               throw new Kotlin.IllegalArgumentException('reference ' + child.w3cNode.nodeName + ' is expected as child');
             }
-            node._parent_pyyift$ = this;
+            node._parentNode = this;
             var mountFn = _.fg.elements.Node.insertBefore_p937mc$f(this, child);
             if (this.mounted) {
               this.mountChild_zh7waj$(mountFn, node);
@@ -1610,7 +1560,7 @@ var elements = function (Kotlin) {
             return node;
           },
           appendChild_sr04hg$: function (node) {
-            node._parent_pyyift$ = this;
+            node._parentNode = this;
             var mountFn = _.fg.elements.Node.appendChild_sr04hg$f(this);
             if (this.mounted) {
               this.mountChild_zh7waj$(mountFn, node);
@@ -1769,6 +1719,13 @@ var elements = function (Kotlin) {
           toString: function () {
             return '*';
           }
+        }, /** @lends _.fg.elements.AnySelector */ {
+          Statics: Kotlin.createObject(null, function Statics() {
+            _.fg.elements.AnySelector.Statics.GET = new _.fg.elements.AnySelector();
+          }),
+          object_initializer$: function () {
+            _.fg.elements.AnySelector.Statics;
+          }
         }),
         TypeSelector: Kotlin.createClass(function () {
           return [_.fg.elements.Selector];
@@ -1900,6 +1857,7 @@ var elements = function (Kotlin) {
             return new _.fg.elements.ClassSelector($receiver);
           }
         },
+        StyledClass: Kotlin.createTrait(null),
         A: Kotlin.createClass(function () {
           return [_.fg.elements.Element];
         }, function A() {
@@ -2102,2295 +2060,2102 @@ var elements = function (Kotlin) {
         })
       }),
       style: Kotlin.definePackage(null, /** @lends _.fg.style */ {
-        ClassStyle: Kotlin.createClass(function () {
-          return [_.fg.elements.IClassStyle, _.fg.style.Style];
-        }, function ClassStyle(className, parentSelector) {
-          if (parentSelector === void 0)
-            parentSelector = null;
-          ClassStyle.baseInitializer.call(this, className);
-          this.parentSelector = parentSelector;
-        }, /** @lends _.fg.style.ClassStyle.prototype */ {
-          selector: {
-            get: function () {
-              var tmp$0;
-              return Kotlin.isType(tmp$0 = Kotlin.callGetter(this, _.fg.style.Style, 'selector'), _.fg.elements.ClassSelector) ? tmp$0 : Kotlin.throwCCE();
-            }
-          },
+        AndRule: Kotlin.createClass(function () {
+          return [_.fg.style.CSSRule];
+        }, function AndRule(selector) {
+          AndRule.baseInitializer.call(this, selector);
+        }, /** @lends _.fg.style.AndRule.prototype */ {
+          cssText: function () {
+            return this.cssText_yidtjr$(this.selector);
+          }
+        }),
+        AnyRule: Kotlin.createClass(function () {
+          return [_.fg.style.CSSRule];
+        }, function AnyRule() {
+          AnyRule.baseInitializer.call(this, _.fg.elements.AnySelector.Statics.GET);
+        }, /** @lends _.fg.style.AnyRule.prototype */ {
+          cssText: function () {
+            return _.fg.style.CSSRule.prototype.cssText_yidtjr$.call(this, this.selector);
+          }
+        }),
+        ChildRule: Kotlin.createClass(function () {
+          return [_.fg.style.CSSRule];
+        }, function ChildRule(selector) {
+          ChildRule.baseInitializer.call(this, selector);
+        }, /** @lends _.fg.style.ChildRule.prototype */ {
+          cssText: function () {
+            return this.cssText_yidtjr$(this.selector);
+          }
+        }),
+        ClassRule: Kotlin.createClass(function () {
+          return [_.fg.style.CSSRule];
+        }, function ClassRule(selector) {
+          ClassRule.baseInitializer.call(this, selector);
+        }, /** @lends _.fg.style.ClassRule.prototype */ {
           className: {
             get: function () {
               return this.selector.value;
             }
           },
-          toCss: function () {
-            var tmp$1, tmp$2;
-            var rules = Kotlin.kotlin.collections.arrayListOf_9mqe4v$([]);
-            if (this.isNotEmpty()) {
-              var s = '';
-              if (this.parentSelector != null) {
-                s += this.parentSelector.toString() + ' ';
-              }
-              s += this.selector.toString() + ' { ';
-              tmp$1 = Kotlin.kotlin.collections.iterator_efxzmg$(this._map);
-              while (tmp$1.hasNext()) {
-                var tmp$0 = tmp$1.next();
-                var key = tmp$0.key;
-                var value = tmp$0.value;
-                s += key + ': ' + value + '; ';
-              }
-              s += '}';
-              rules.add_za3rmp$(s);
-            }
-            tmp$2 = this._childStyles.iterator();
-            while (tmp$2.hasNext()) {
-              var child = tmp$2.next();
-              rules.addAll_wtfk93$(child.toCss());
-            }
-            return rules;
+          cssText: function () {
+            return _.fg.style.CSSRule.prototype.cssText_yidtjr$.call(this, this.selector);
           }
         }),
-        typeStyle_2oxsiq$: function ($receiver, init) {
-          var style = new _.fg.style.TypeStyle(new _.fg.elements.TypeSelector($receiver._nodeName));
-          init.call(style);
-          $receiver.typeStyle = style;
-          return style;
-        },
-        classStyle_o2i1ow$: function ($receiver, init) {
-          var style = new _.fg.style.ClassStyle(_.fg.style.resolveClassStyleName_gobym4$($receiver));
-          init.call(style);
-          return style;
-        },
-        and_zh0yil$: function ($receiver, selector, init) {
-          var style = new _.fg.style.Style(new _.fg.elements.AndSelector($receiver.selector, _.fg.elements.toSelector_pdl1w0$(selector)));
-          init.call(style);
-          $receiver._childStyles.add_za3rmp$(style);
-          return style;
-        },
-        and_eoz44k$: function ($receiver, selector, init) {
-          var style = new _.fg.style.Style(new _.fg.elements.AndSelector($receiver.selector, selector));
-          init.call(style);
-          $receiver._childStyles.add_za3rmp$(style);
-          return style;
-        },
-        desc_zh0yil$: function ($receiver, selector, init) {
-          var style = new _.fg.style.Style(new _.fg.elements.DescendantSelector($receiver.selector, _.fg.elements.toSelector_pdl1w0$(selector)));
-          init.call(style);
-          $receiver._childStyles.add_za3rmp$(style);
-          return style;
-        },
-        desc_eoz44k$: function ($receiver, selector, init) {
-          var style = new _.fg.style.Style(new _.fg.elements.DescendantSelector($receiver.selector, selector));
-          init.call(style);
-          $receiver._childStyles.add_za3rmp$(style);
-          return style;
-        },
-        child_zh0yil$: function ($receiver, selector, init) {
-          var style = new _.fg.style.Style(new _.fg.elements.ChildSelector($receiver.selector, _.fg.elements.toSelector_pdl1w0$(selector)));
-          init.call(style);
-          $receiver._childStyles.add_za3rmp$(style);
-          return style;
-        },
-        child_eoz44k$: function ($receiver, selector, init) {
-          var style = new _.fg.style.Style(new _.fg.elements.ChildSelector($receiver.selector, selector));
-          init.call(style);
-          $receiver._childStyles.add_za3rmp$(style);
-          return style;
-        },
-        active_c8jw7n$: function ($receiver, init) {
-          var style = new _.fg.style.Style(new _.fg.elements.AndSelector($receiver.selector, new _.fg.elements.PseudoClassSelector('active')));
-          init.call(style);
-          $receiver._childStyles.add_za3rmp$(style);
-          return style;
-        },
-        checked_c8jw7n$: function ($receiver, init) {
-          var style = new _.fg.style.Style(new _.fg.elements.AndSelector($receiver.selector, new _.fg.elements.PseudoClassSelector('checked')));
-          init.call(style);
-          $receiver._childStyles.add_za3rmp$(style);
-          return style;
-        },
-        empty_c8jw7n$: function ($receiver, init) {
-          var style = new _.fg.style.Style(new _.fg.elements.AndSelector($receiver.selector, new _.fg.elements.PseudoClassSelector('empty')));
-          init.call(style);
-          $receiver._childStyles.add_za3rmp$(style);
-          return style;
-        },
-        enabled_c8jw7n$: function ($receiver, init) {
-          var style = new _.fg.style.Style(new _.fg.elements.AndSelector($receiver.selector, new _.fg.elements.PseudoClassSelector('enabled')));
-          init.call(style);
-          $receiver._childStyles.add_za3rmp$(style);
-          return style;
-        },
-        first_c8jw7n$: function ($receiver, init) {
-          var style = new _.fg.style.Style(new _.fg.elements.AndSelector($receiver.selector, new _.fg.elements.PseudoClassSelector('first')));
-          init.call(style);
-          $receiver._childStyles.add_za3rmp$(style);
-          return style;
-        },
-        firstChild_c8jw7n$: function ($receiver, init) {
-          var style = new _.fg.style.Style(new _.fg.elements.AndSelector($receiver.selector, new _.fg.elements.PseudoClassSelector('first-child')));
-          init.call(style);
-          $receiver._childStyles.add_za3rmp$(style);
-          return style;
-        },
-        firstOfType_c8jw7n$: function ($receiver, init) {
-          var style = new _.fg.style.Style(new _.fg.elements.AndSelector($receiver.selector, new _.fg.elements.PseudoClassSelector('first-of-type')));
-          init.call(style);
-          $receiver._childStyles.add_za3rmp$(style);
-          return style;
-        },
-        focus_c8jw7n$: function ($receiver, init) {
-          var style = new _.fg.style.Style(new _.fg.elements.AndSelector($receiver.selector, new _.fg.elements.PseudoClassSelector('focus')));
-          init.call(style);
-          $receiver._childStyles.add_za3rmp$(style);
-          return style;
-        },
-        hover_s2gvbj$: function ($receiver, init) {
-          var style = new _.fg.style.Style(new _.fg.elements.AndSelector($receiver.selector, new _.fg.elements.PseudoClassSelector('hover')));
-          init.call(style);
-          $receiver._childStyles.add_za3rmp$(style);
-          return style;
-        },
-        indeterminate_c8jw7n$: function ($receiver, init) {
-          var style = new _.fg.style.Style(new _.fg.elements.AndSelector($receiver.selector, new _.fg.elements.PseudoClassSelector('indeterminate')));
-          init.call(style);
-          $receiver._childStyles.add_za3rmp$(style);
-          return style;
-        },
-        inRange_c8jw7n$: function ($receiver, init) {
-          var style = new _.fg.style.Style(new _.fg.elements.AndSelector($receiver.selector, new _.fg.elements.PseudoClassSelector('in-range')));
-          init.call(style);
-          $receiver._childStyles.add_za3rmp$(style);
-          return style;
-        },
-        invalid_c8jw7n$: function ($receiver, init) {
-          var style = new _.fg.style.Style(new _.fg.elements.AndSelector($receiver.selector, new _.fg.elements.PseudoClassSelector('invalid')));
-          init.call(style);
-          $receiver._childStyles.add_za3rmp$(style);
-          return style;
-        },
-        lang_c8jw7n$: function ($receiver, init) {
-          var style = new _.fg.style.Style(new _.fg.elements.AndSelector($receiver.selector, new _.fg.elements.PseudoClassSelector('lang')));
-          init.call(style);
-          $receiver._childStyles.add_za3rmp$(style);
-          return style;
-        },
-        lastChild_c8jw7n$: function ($receiver, init) {
-          var style = new _.fg.style.Style(new _.fg.elements.AndSelector($receiver.selector, new _.fg.elements.PseudoClassSelector('last-child')));
-          init.call(style);
-          $receiver._childStyles.add_za3rmp$(style);
-          return style;
-        },
-        lastOfType_c8jw7n$: function ($receiver, init) {
-          var style = new _.fg.style.Style(new _.fg.elements.AndSelector($receiver.selector, new _.fg.elements.PseudoClassSelector('last-of-type')));
-          init.call(style);
-          $receiver._childStyles.add_za3rmp$(style);
-          return style;
-        },
-        left_c8jw7n$: function ($receiver, init) {
-          var style = new _.fg.style.Style(new _.fg.elements.AndSelector($receiver.selector, new _.fg.elements.PseudoClassSelector('left')));
-          init.call(style);
-          $receiver._childStyles.add_za3rmp$(style);
-          return style;
-        },
-        link_c8jw7n$: function ($receiver, init) {
-          var style = new _.fg.style.Style(new _.fg.elements.AndSelector($receiver.selector, new _.fg.elements.PseudoClassSelector('link')));
-          init.call(style);
-          $receiver._childStyles.add_za3rmp$(style);
-          return style;
-        },
-        not_eoz44k$: function ($receiver, selector, init) {
-          var style = new _.fg.style.Style(new _.fg.elements.AndSelector($receiver.selector, new _.fg.elements.NotSelector(selector)));
-          init.call(style);
-          $receiver._childStyles.add_za3rmp$(style);
-          return style;
-        },
-        resolveClassStyleName_gobym4$: function ($receiver) {
-          var tmp$0, tmp$1;
-          if ($receiver.styleClassName != null) {
-            tmp$1 = (tmp$0 = $receiver.styleClassName) != null ? tmp$0 : Kotlin.throwNPE();
-          }
-           else {
-            tmp$1 = _.fg.elements.toClassSelector_pdl1w0$(Kotlin.kotlin.js.get_jsClass_s8jyvl$($receiver).name.toLowerCase());
-          }
-          var classSelector = tmp$1;
-          if ($receiver.styleClassPrefix != null)
-            return new _.fg.elements.ClassSelector(Kotlin.toString($receiver.styleClassPrefix) + '-' + classSelector.value);
-          else
-            return classSelector;
-        },
-        Style: Kotlin.createClass(function () {
-          return [_.fg.elements.IStyle];
-        }, function Style(selector) {
-          this.$selector_ngq6py$ = selector;
-          this._childStyles = Kotlin.kotlin.collections.arrayListOf_9mqe4v$([]);
+        CSSRule: Kotlin.createClass(null, function CSSRule(selector) {
+          this.selector = selector;
           this._map = Kotlin.kotlin.collections.mutableMapOf_eoa9s7$([]);
-          this.cssFloat$delegate = new _.fg.style.Style.Property(this);
-          this._dashed_attribute$delegate = new _.fg.style.Style.Property(this);
-          this._camel_cased_attribute$delegate = new _.fg.style.Style.Property(this);
-          this.alignContent$delegate = new _.fg.style.Style.Property(this);
-          this.alignItems$delegate = new _.fg.style.Style.Property(this);
-          this.alignSelf$delegate = new _.fg.style.Style.Property(this);
-          this.animation$delegate = new _.fg.style.Style.Property(this);
-          this.animationDelay$delegate = new _.fg.style.Style.Property(this);
-          this.animationDirection$delegate = new _.fg.style.Style.Property(this);
-          this.animationDuration$delegate = new _.fg.style.Style.Property(this);
-          this.animationFillMode$delegate = new _.fg.style.Style.Property(this);
-          this.animationIterationCount$delegate = new _.fg.style.Style.Property(this);
-          this.animationName$delegate = new _.fg.style.Style.Property(this);
-          this.animationPlayState$delegate = new _.fg.style.Style.Property(this);
-          this.animationTimingFunction$delegate = new _.fg.style.Style.Property(this);
-          this.backfaceVisibility$delegate = new _.fg.style.Style.Property(this);
-          this.background$delegate = new _.fg.style.Style.Property(this);
-          this.backgroundAttachment$delegate = new _.fg.style.Style.Property(this);
-          this.backgroundClip$delegate = new _.fg.style.Style.Property(this);
-          this.backgroundColor$delegate = new _.fg.style.Style.Property(this);
-          this.backgroundImage$delegate = new _.fg.style.Style.Property(this);
-          this.backgroundOrigin$delegate = new _.fg.style.Style.Property(this);
-          this.backgroundPosition$delegate = new _.fg.style.Style.Property(this);
-          this.backgroundRepeat$delegate = new _.fg.style.Style.Property(this);
-          this.backgroundSize$delegate = new _.fg.style.Style.Property(this);
-          this.border$delegate = new _.fg.style.Style.Property(this);
-          this.borderBottom$delegate = new _.fg.style.Style.Property(this);
-          this.borderBottomColor$delegate = new _.fg.style.Style.Property(this);
-          this.borderBottomLeftRadius$delegate = new _.fg.style.Style.Property(this);
-          this.borderBottomRightRadius$delegate = new _.fg.style.Style.Property(this);
-          this.borderBottomStyle$delegate = new _.fg.style.Style.Property(this);
-          this.borderBottomWidth$delegate = new _.fg.style.Style.Property(this);
-          this.borderCollapse$delegate = new _.fg.style.Style.Property(this);
-          this.borderColor$delegate = new _.fg.style.Style.Property(this);
-          this.borderImage$delegate = new _.fg.style.Style.Property(this);
-          this.borderImageOutset$delegate = new _.fg.style.Style.Property(this);
-          this.borderImageRepeat$delegate = new _.fg.style.Style.Property(this);
-          this.borderImageSlice$delegate = new _.fg.style.Style.Property(this);
-          this.borderImageSource$delegate = new _.fg.style.Style.Property(this);
-          this.borderImageWidth$delegate = new _.fg.style.Style.Property(this);
-          this.borderLeft$delegate = new _.fg.style.Style.Property(this);
-          this.borderLeftColor$delegate = new _.fg.style.Style.Property(this);
-          this.borderLeftStyle$delegate = new _.fg.style.Style.Property(this);
-          this.borderLeftWidth$delegate = new _.fg.style.Style.Property(this);
-          this.borderRadius$delegate = new _.fg.style.Style.Property(this);
-          this.borderRight$delegate = new _.fg.style.Style.Property(this);
-          this.borderRightColor$delegate = new _.fg.style.Style.Property(this);
-          this.borderRightStyle$delegate = new _.fg.style.Style.Property(this);
-          this.borderRightWidth$delegate = new _.fg.style.Style.Property(this);
-          this.borderSpacing$delegate = new _.fg.style.Style.Property(this);
-          this.borderStyle$delegate = new _.fg.style.Style.Property(this);
-          this.borderTop$delegate = new _.fg.style.Style.Property(this);
-          this.borderTopColor$delegate = new _.fg.style.Style.Property(this);
-          this.borderTopLeftRadius$delegate = new _.fg.style.Style.Property(this);
-          this.borderTopRightRadius$delegate = new _.fg.style.Style.Property(this);
-          this.borderTopStyle$delegate = new _.fg.style.Style.Property(this);
-          this.borderTopWidth$delegate = new _.fg.style.Style.Property(this);
-          this.borderWidth$delegate = new _.fg.style.Style.Property(this);
-          this.bottom$delegate = new _.fg.style.Style.Property(this);
-          this.boxDecorationBreak$delegate = new _.fg.style.Style.Property(this);
-          this.boxShadow$delegate = new _.fg.style.Style.Property(this);
-          this.boxSizing$delegate = new _.fg.style.Style.Property(this);
-          this.breakAfter$delegate = new _.fg.style.Style.Property(this);
-          this.breakBefore$delegate = new _.fg.style.Style.Property(this);
-          this.breakInside$delegate = new _.fg.style.Style.Property(this);
-          this.captionSide$delegate = new _.fg.style.Style.Property(this);
-          this.clear$delegate = new _.fg.style.Style.Property(this);
-          this.clip$delegate = new _.fg.style.Style.Property(this);
-          this.color$delegate = new _.fg.style.Style.Property(this);
-          this.columnCount$delegate = new _.fg.style.Style.Property(this);
-          this.columnFill$delegate = new _.fg.style.Style.Property(this);
-          this.columnGap$delegate = new _.fg.style.Style.Property(this);
-          this.columnRule$delegate = new _.fg.style.Style.Property(this);
-          this.columnRuleColor$delegate = new _.fg.style.Style.Property(this);
-          this.columnRuleStyle$delegate = new _.fg.style.Style.Property(this);
-          this.columnRuleWidth$delegate = new _.fg.style.Style.Property(this);
-          this.columnSpan$delegate = new _.fg.style.Style.Property(this);
-          this.columnWidth$delegate = new _.fg.style.Style.Property(this);
-          this.columns$delegate = new _.fg.style.Style.Property(this);
-          this.content$delegate = new _.fg.style.Style.Property(this);
-          this.counterIncrement$delegate = new _.fg.style.Style.Property(this);
-          this.counterReset$delegate = new _.fg.style.Style.Property(this);
-          this.cursor$delegate = new _.fg.style.Style.Property(this);
-          this.direction$delegate = new _.fg.style.Style.Property(this);
-          this.display$delegate = new _.fg.style.Style.Property(this);
-          this.emptyCells$delegate = new _.fg.style.Style.Property(this);
-          this.filter$delegate = new _.fg.style.Style.Property(this);
-          this.flex$delegate = new _.fg.style.Style.Property(this);
-          this.flexBasis$delegate = new _.fg.style.Style.Property(this);
-          this.flexDirection$delegate = new _.fg.style.Style.Property(this);
-          this.flexFlow$delegate = new _.fg.style.Style.Property(this);
-          this.flexGrow$delegate = new _.fg.style.Style.Property(this);
-          this.flexShrink$delegate = new _.fg.style.Style.Property(this);
-          this.flexWrap$delegate = new _.fg.style.Style.Property(this);
-          this.font$delegate = new _.fg.style.Style.Property(this);
-          this.fontFamily$delegate = new _.fg.style.Style.Property(this);
-          this.fontFeatureSettings$delegate = new _.fg.style.Style.Property(this);
-          this.fontKerning$delegate = new _.fg.style.Style.Property(this);
-          this.fontLanguageOverride$delegate = new _.fg.style.Style.Property(this);
-          this.fontSize$delegate = new _.fg.style.Style.Property(this);
-          this.fontSizeAdjust$delegate = new _.fg.style.Style.Property(this);
-          this.fontStretch$delegate = new _.fg.style.Style.Property(this);
-          this.fontStyle$delegate = new _.fg.style.Style.Property(this);
-          this.fontSynthesis$delegate = new _.fg.style.Style.Property(this);
-          this.fontVariant$delegate = new _.fg.style.Style.Property(this);
-          this.fontVariantAlternates$delegate = new _.fg.style.Style.Property(this);
-          this.fontVariantCaps$delegate = new _.fg.style.Style.Property(this);
-          this.fontVariantEastAsian$delegate = new _.fg.style.Style.Property(this);
-          this.fontVariantLigatures$delegate = new _.fg.style.Style.Property(this);
-          this.fontVariantNumeric$delegate = new _.fg.style.Style.Property(this);
-          this.fontVariantPosition$delegate = new _.fg.style.Style.Property(this);
-          this.fontWeight$delegate = new _.fg.style.Style.Property(this);
-          this.hangingPunctuation$delegate = new _.fg.style.Style.Property(this);
-          this.height$delegate = new _.fg.style.Style.Property(this);
-          this.hyphens$delegate = new _.fg.style.Style.Property(this);
-          this.imageOrientation$delegate = new _.fg.style.Style.Property(this);
-          this.imageRendering$delegate = new _.fg.style.Style.Property(this);
-          this.imageResolution$delegate = new _.fg.style.Style.Property(this);
-          this.imeMode$delegate = new _.fg.style.Style.Property(this);
-          this.justifyContent$delegate = new _.fg.style.Style.Property(this);
-          this.left$delegate = new _.fg.style.Style.Property(this);
-          this.letterSpacing$delegate = new _.fg.style.Style.Property(this);
-          this.lineBreak$delegate = new _.fg.style.Style.Property(this);
-          this.lineHeight$delegate = new _.fg.style.Style.Property(this);
-          this.listStyle$delegate = new _.fg.style.Style.Property(this);
-          this.listStyleImage$delegate = new _.fg.style.Style.Property(this);
-          this.listStylePosition$delegate = new _.fg.style.Style.Property(this);
-          this.listStyleType$delegate = new _.fg.style.Style.Property(this);
-          this.margin$delegate = new _.fg.style.Style.Property(this);
-          this.marginBottom$delegate = new _.fg.style.Style.Property(this);
-          this.marginLeft$delegate = new _.fg.style.Style.Property(this);
-          this.marginRight$delegate = new _.fg.style.Style.Property(this);
-          this.marginTop$delegate = new _.fg.style.Style.Property(this);
-          this.mark$delegate = new _.fg.style.Style.Property(this);
-          this.markAfter$delegate = new _.fg.style.Style.Property(this);
-          this.markBefore$delegate = new _.fg.style.Style.Property(this);
-          this.marks$delegate = new _.fg.style.Style.Property(this);
-          this.marqueeDirection$delegate = new _.fg.style.Style.Property(this);
-          this.marqueePlayCount$delegate = new _.fg.style.Style.Property(this);
-          this.marqueeSpeed$delegate = new _.fg.style.Style.Property(this);
-          this.marqueeStyle$delegate = new _.fg.style.Style.Property(this);
-          this.mask$delegate = new _.fg.style.Style.Property(this);
-          this.maskType$delegate = new _.fg.style.Style.Property(this);
-          this.maxHeight$delegate = new _.fg.style.Style.Property(this);
-          this.maxWidth$delegate = new _.fg.style.Style.Property(this);
-          this.minHeight$delegate = new _.fg.style.Style.Property(this);
-          this.minWidth$delegate = new _.fg.style.Style.Property(this);
-          this.navDown$delegate = new _.fg.style.Style.Property(this);
-          this.navIndex$delegate = new _.fg.style.Style.Property(this);
-          this.navLeft$delegate = new _.fg.style.Style.Property(this);
-          this.navRight$delegate = new _.fg.style.Style.Property(this);
-          this.navUp$delegate = new _.fg.style.Style.Property(this);
-          this.objectFit$delegate = new _.fg.style.Style.Property(this);
-          this.objectPosition$delegate = new _.fg.style.Style.Property(this);
-          this.opacity$delegate = new _.fg.style.Style.Property(this);
-          this.order$delegate = new _.fg.style.Style.Property(this);
-          this.orphans$delegate = new _.fg.style.Style.Property(this);
-          this.outline$delegate = new _.fg.style.Style.Property(this);
-          this.outlineColor$delegate = new _.fg.style.Style.Property(this);
-          this.outlineOffset$delegate = new _.fg.style.Style.Property(this);
-          this.outlineStyle$delegate = new _.fg.style.Style.Property(this);
-          this.outlineWidth$delegate = new _.fg.style.Style.Property(this);
-          this.overflowWrap$delegate = new _.fg.style.Style.Property(this);
-          this.overflowX$delegate = new _.fg.style.Style.Property(this);
-          this.overflowY$delegate = new _.fg.style.Style.Property(this);
-          this.padding$delegate = new _.fg.style.Style.Property(this);
-          this.paddingBottom$delegate = new _.fg.style.Style.Property(this);
-          this.paddingLeft$delegate = new _.fg.style.Style.Property(this);
-          this.paddingRight$delegate = new _.fg.style.Style.Property(this);
-          this.paddingTop$delegate = new _.fg.style.Style.Property(this);
-          this.pageBreakAfter$delegate = new _.fg.style.Style.Property(this);
-          this.pageBreakBefore$delegate = new _.fg.style.Style.Property(this);
-          this.pageBreakInside$delegate = new _.fg.style.Style.Property(this);
-          this.perspective$delegate = new _.fg.style.Style.Property(this);
-          this.perspectiveOrigin$delegate = new _.fg.style.Style.Property(this);
-          this.phonemes$delegate = new _.fg.style.Style.Property(this);
-          this.position$delegate = new _.fg.style.Style.Property(this);
-          this.quotes$delegate = new _.fg.style.Style.Property(this);
-          this.resize$delegate = new _.fg.style.Style.Property(this);
-          this.rest$delegate = new _.fg.style.Style.Property(this);
-          this.restAfter$delegate = new _.fg.style.Style.Property(this);
-          this.restBefore$delegate = new _.fg.style.Style.Property(this);
-          this.right$delegate = new _.fg.style.Style.Property(this);
-          this.tabSize$delegate = new _.fg.style.Style.Property(this);
-          this.tableLayout$delegate = new _.fg.style.Style.Property(this);
-          this.textAlign$delegate = new _.fg.style.Style.Property(this);
-          this.textAlignLast$delegate = new _.fg.style.Style.Property(this);
-          this.textCombineUpright$delegate = new _.fg.style.Style.Property(this);
-          this.textDecoration$delegate = new _.fg.style.Style.Property(this);
-          this.textDecorationColor$delegate = new _.fg.style.Style.Property(this);
-          this.textDecorationLine$delegate = new _.fg.style.Style.Property(this);
-          this.textDecorationStyle$delegate = new _.fg.style.Style.Property(this);
-          this.textIndent$delegate = new _.fg.style.Style.Property(this);
-          this.textJustify$delegate = new _.fg.style.Style.Property(this);
-          this.textOrientation$delegate = new _.fg.style.Style.Property(this);
-          this.textOverflow$delegate = new _.fg.style.Style.Property(this);
-          this.textShadow$delegate = new _.fg.style.Style.Property(this);
-          this.textTransform$delegate = new _.fg.style.Style.Property(this);
-          this.textUnderlinePosition$delegate = new _.fg.style.Style.Property(this);
-          this.top$delegate = new _.fg.style.Style.Property(this);
-          this.transform$delegate = new _.fg.style.Style.Property(this);
-          this.transformOrigin$delegate = new _.fg.style.Style.Property(this);
-          this.transformStyle$delegate = new _.fg.style.Style.Property(this);
-          this.transition$delegate = new _.fg.style.Style.Property(this);
-          this.transitionDelay$delegate = new _.fg.style.Style.Property(this);
-          this.transitionDuration$delegate = new _.fg.style.Style.Property(this);
-          this.transitionProperty$delegate = new _.fg.style.Style.Property(this);
-          this.transitionTimingFunction$delegate = new _.fg.style.Style.Property(this);
-          this.unicodeBidi$delegate = new _.fg.style.Style.Property(this);
-          this.verticalAlign$delegate = new _.fg.style.Style.Property(this);
-          this.visibility$delegate = new _.fg.style.Style.Property(this);
-          this.voiceBalance$delegate = new _.fg.style.Style.Property(this);
-          this.voiceDuration$delegate = new _.fg.style.Style.Property(this);
-          this.voicePitch$delegate = new _.fg.style.Style.Property(this);
-          this.voicePitchRange$delegate = new _.fg.style.Style.Property(this);
-          this.voiceRate$delegate = new _.fg.style.Style.Property(this);
-          this.voiceStress$delegate = new _.fg.style.Style.Property(this);
-          this.voiceVolume$delegate = new _.fg.style.Style.Property(this);
-          this.whiteSpace$delegate = new _.fg.style.Style.Property(this);
-          this.widows$delegate = new _.fg.style.Style.Property(this);
-          this.width$delegate = new _.fg.style.Style.Property(this);
-          this.wordBreak$delegate = new _.fg.style.Style.Property(this);
-          this.wordSpacing$delegate = new _.fg.style.Style.Property(this);
-          this.wordWrap$delegate = new _.fg.style.Style.Property(this);
-          this.writingMode$delegate = new _.fg.style.Style.Property(this);
-          this.zIndex$delegate = new _.fg.style.Style.Property(this);
-        }, /** @lends _.fg.style.Style.prototype */ {
-          selector: {
-            get: function () {
-              return this.$selector_ngq6py$;
+          this._childStyles = Kotlin.kotlin.collections.arrayListOf_9mqe4v$([]);
+          this.cssFloat$delegate = new _.fg.style.CSSRule.Property(this);
+          this._dashed_attribute$delegate = new _.fg.style.CSSRule.Property(this);
+          this._camel_cased_attribute$delegate = new _.fg.style.CSSRule.Property(this);
+          this.alignContent$delegate = new _.fg.style.CSSRule.Property(this);
+          this.alignItems$delegate = new _.fg.style.CSSRule.Property(this);
+          this.alignSelf$delegate = new _.fg.style.CSSRule.Property(this);
+          this.animation$delegate = new _.fg.style.CSSRule.Property(this);
+          this.animationDelay$delegate = new _.fg.style.CSSRule.Property(this);
+          this.animationDirection$delegate = new _.fg.style.CSSRule.Property(this);
+          this.animationDuration$delegate = new _.fg.style.CSSRule.Property(this);
+          this.animationFillMode$delegate = new _.fg.style.CSSRule.Property(this);
+          this.animationIterationCount$delegate = new _.fg.style.CSSRule.Property(this);
+          this.animationName$delegate = new _.fg.style.CSSRule.Property(this);
+          this.animationPlayState$delegate = new _.fg.style.CSSRule.Property(this);
+          this.animationTimingFunction$delegate = new _.fg.style.CSSRule.Property(this);
+          this.backfaceVisibility$delegate = new _.fg.style.CSSRule.Property(this);
+          this.background$delegate = new _.fg.style.CSSRule.Property(this);
+          this.backgroundAttachment$delegate = new _.fg.style.CSSRule.Property(this);
+          this.backgroundClip$delegate = new _.fg.style.CSSRule.Property(this);
+          this.backgroundColor$delegate = new _.fg.style.CSSRule.Property(this);
+          this.backgroundImage$delegate = new _.fg.style.CSSRule.Property(this);
+          this.backgroundOrigin$delegate = new _.fg.style.CSSRule.Property(this);
+          this.backgroundPosition$delegate = new _.fg.style.CSSRule.Property(this);
+          this.backgroundRepeat$delegate = new _.fg.style.CSSRule.Property(this);
+          this.backgroundSize$delegate = new _.fg.style.CSSRule.Property(this);
+          this.border$delegate = new _.fg.style.CSSRule.Property(this);
+          this.borderBottom$delegate = new _.fg.style.CSSRule.Property(this);
+          this.borderBottomColor$delegate = new _.fg.style.CSSRule.Property(this);
+          this.borderBottomLeftRadius$delegate = new _.fg.style.CSSRule.Property(this);
+          this.borderBottomRightRadius$delegate = new _.fg.style.CSSRule.Property(this);
+          this.borderBottomStyle$delegate = new _.fg.style.CSSRule.Property(this);
+          this.borderBottomWidth$delegate = new _.fg.style.CSSRule.Property(this);
+          this.borderCollapse$delegate = new _.fg.style.CSSRule.Property(this);
+          this.borderColor$delegate = new _.fg.style.CSSRule.Property(this);
+          this.borderImage$delegate = new _.fg.style.CSSRule.Property(this);
+          this.borderImageOutset$delegate = new _.fg.style.CSSRule.Property(this);
+          this.borderImageRepeat$delegate = new _.fg.style.CSSRule.Property(this);
+          this.borderImageSlice$delegate = new _.fg.style.CSSRule.Property(this);
+          this.borderImageSource$delegate = new _.fg.style.CSSRule.Property(this);
+          this.borderImageWidth$delegate = new _.fg.style.CSSRule.Property(this);
+          this.borderLeft$delegate = new _.fg.style.CSSRule.Property(this);
+          this.borderLeftColor$delegate = new _.fg.style.CSSRule.Property(this);
+          this.borderLeftStyle$delegate = new _.fg.style.CSSRule.Property(this);
+          this.borderLeftWidth$delegate = new _.fg.style.CSSRule.Property(this);
+          this.borderRadius$delegate = new _.fg.style.CSSRule.Property(this);
+          this.borderRight$delegate = new _.fg.style.CSSRule.Property(this);
+          this.borderRightColor$delegate = new _.fg.style.CSSRule.Property(this);
+          this.borderRightStyle$delegate = new _.fg.style.CSSRule.Property(this);
+          this.borderRightWidth$delegate = new _.fg.style.CSSRule.Property(this);
+          this.borderSpacing$delegate = new _.fg.style.CSSRule.Property(this);
+          this.borderStyle$delegate = new _.fg.style.CSSRule.Property(this);
+          this.borderTop$delegate = new _.fg.style.CSSRule.Property(this);
+          this.borderTopColor$delegate = new _.fg.style.CSSRule.Property(this);
+          this.borderTopLeftRadius$delegate = new _.fg.style.CSSRule.Property(this);
+          this.borderTopRightRadius$delegate = new _.fg.style.CSSRule.Property(this);
+          this.borderTopStyle$delegate = new _.fg.style.CSSRule.Property(this);
+          this.borderTopWidth$delegate = new _.fg.style.CSSRule.Property(this);
+          this.borderWidth$delegate = new _.fg.style.CSSRule.Property(this);
+          this.bottom$delegate = new _.fg.style.CSSRule.Property(this);
+          this.boxDecorationBreak$delegate = new _.fg.style.CSSRule.Property(this);
+          this.boxShadow$delegate = new _.fg.style.CSSRule.Property(this);
+          this.boxSizing$delegate = new _.fg.style.CSSRule.Property(this);
+          this.breakAfter$delegate = new _.fg.style.CSSRule.Property(this);
+          this.breakBefore$delegate = new _.fg.style.CSSRule.Property(this);
+          this.breakInside$delegate = new _.fg.style.CSSRule.Property(this);
+          this.captionSide$delegate = new _.fg.style.CSSRule.Property(this);
+          this.clear$delegate = new _.fg.style.CSSRule.Property(this);
+          this.clip$delegate = new _.fg.style.CSSRule.Property(this);
+          this.color$delegate = new _.fg.style.CSSRule.Property(this);
+          this.columnCount$delegate = new _.fg.style.CSSRule.Property(this);
+          this.columnFill$delegate = new _.fg.style.CSSRule.Property(this);
+          this.columnGap$delegate = new _.fg.style.CSSRule.Property(this);
+          this.columnRule$delegate = new _.fg.style.CSSRule.Property(this);
+          this.columnRuleColor$delegate = new _.fg.style.CSSRule.Property(this);
+          this.columnRuleStyle$delegate = new _.fg.style.CSSRule.Property(this);
+          this.columnRuleWidth$delegate = new _.fg.style.CSSRule.Property(this);
+          this.columnSpan$delegate = new _.fg.style.CSSRule.Property(this);
+          this.columnWidth$delegate = new _.fg.style.CSSRule.Property(this);
+          this.columns$delegate = new _.fg.style.CSSRule.Property(this);
+          this.content$delegate = new _.fg.style.CSSRule.Property(this);
+          this.counterIncrement$delegate = new _.fg.style.CSSRule.Property(this);
+          this.counterReset$delegate = new _.fg.style.CSSRule.Property(this);
+          this.cursor$delegate = new _.fg.style.CSSRule.Property(this);
+          this.direction$delegate = new _.fg.style.CSSRule.Property(this);
+          this.display$delegate = new _.fg.style.CSSRule.Property(this);
+          this.emptyCells$delegate = new _.fg.style.CSSRule.Property(this);
+          this.filter$delegate = new _.fg.style.CSSRule.Property(this);
+          this.flex$delegate = new _.fg.style.CSSRule.Property(this);
+          this.flexBasis$delegate = new _.fg.style.CSSRule.Property(this);
+          this.flexDirection$delegate = new _.fg.style.CSSRule.Property(this);
+          this.flexFlow$delegate = new _.fg.style.CSSRule.Property(this);
+          this.flexGrow$delegate = new _.fg.style.CSSRule.Property(this);
+          this.flexShrink$delegate = new _.fg.style.CSSRule.Property(this);
+          this.flexWrap$delegate = new _.fg.style.CSSRule.Property(this);
+          this.font$delegate = new _.fg.style.CSSRule.Property(this);
+          this.fontFamily$delegate = new _.fg.style.CSSRule.Property(this);
+          this.fontFeatureSettings$delegate = new _.fg.style.CSSRule.Property(this);
+          this.fontKerning$delegate = new _.fg.style.CSSRule.Property(this);
+          this.fontLanguageOverride$delegate = new _.fg.style.CSSRule.Property(this);
+          this.fontSize$delegate = new _.fg.style.CSSRule.Property(this);
+          this.fontSizeAdjust$delegate = new _.fg.style.CSSRule.Property(this);
+          this.fontStretch$delegate = new _.fg.style.CSSRule.Property(this);
+          this.fontStyle$delegate = new _.fg.style.CSSRule.Property(this);
+          this.fontSynthesis$delegate = new _.fg.style.CSSRule.Property(this);
+          this.fontVariant$delegate = new _.fg.style.CSSRule.Property(this);
+          this.fontVariantAlternates$delegate = new _.fg.style.CSSRule.Property(this);
+          this.fontVariantCaps$delegate = new _.fg.style.CSSRule.Property(this);
+          this.fontVariantEastAsian$delegate = new _.fg.style.CSSRule.Property(this);
+          this.fontVariantLigatures$delegate = new _.fg.style.CSSRule.Property(this);
+          this.fontVariantNumeric$delegate = new _.fg.style.CSSRule.Property(this);
+          this.fontVariantPosition$delegate = new _.fg.style.CSSRule.Property(this);
+          this.fontWeight$delegate = new _.fg.style.CSSRule.Property(this);
+          this.hangingPunctuation$delegate = new _.fg.style.CSSRule.Property(this);
+          this.height$delegate = new _.fg.style.CSSRule.Property(this);
+          this.hyphens$delegate = new _.fg.style.CSSRule.Property(this);
+          this.imageOrientation$delegate = new _.fg.style.CSSRule.Property(this);
+          this.imageRendering$delegate = new _.fg.style.CSSRule.Property(this);
+          this.imageResolution$delegate = new _.fg.style.CSSRule.Property(this);
+          this.imeMode$delegate = new _.fg.style.CSSRule.Property(this);
+          this.justifyContent$delegate = new _.fg.style.CSSRule.Property(this);
+          this.left$delegate = new _.fg.style.CSSRule.Property(this);
+          this.letterSpacing$delegate = new _.fg.style.CSSRule.Property(this);
+          this.lineBreak$delegate = new _.fg.style.CSSRule.Property(this);
+          this.lineHeight$delegate = new _.fg.style.CSSRule.Property(this);
+          this.listStyle$delegate = new _.fg.style.CSSRule.Property(this);
+          this.listStyleImage$delegate = new _.fg.style.CSSRule.Property(this);
+          this.listStylePosition$delegate = new _.fg.style.CSSRule.Property(this);
+          this.listStyleType$delegate = new _.fg.style.CSSRule.Property(this);
+          this.margin$delegate = new _.fg.style.CSSRule.Property(this);
+          this.marginBottom$delegate = new _.fg.style.CSSRule.Property(this);
+          this.marginLeft$delegate = new _.fg.style.CSSRule.Property(this);
+          this.marginRight$delegate = new _.fg.style.CSSRule.Property(this);
+          this.marginTop$delegate = new _.fg.style.CSSRule.Property(this);
+          this.mark$delegate = new _.fg.style.CSSRule.Property(this);
+          this.markAfter$delegate = new _.fg.style.CSSRule.Property(this);
+          this.markBefore$delegate = new _.fg.style.CSSRule.Property(this);
+          this.marks$delegate = new _.fg.style.CSSRule.Property(this);
+          this.marqueeDirection$delegate = new _.fg.style.CSSRule.Property(this);
+          this.marqueePlayCount$delegate = new _.fg.style.CSSRule.Property(this);
+          this.marqueeSpeed$delegate = new _.fg.style.CSSRule.Property(this);
+          this.marqueeStyle$delegate = new _.fg.style.CSSRule.Property(this);
+          this.mask$delegate = new _.fg.style.CSSRule.Property(this);
+          this.maskType$delegate = new _.fg.style.CSSRule.Property(this);
+          this.maxHeight$delegate = new _.fg.style.CSSRule.Property(this);
+          this.maxWidth$delegate = new _.fg.style.CSSRule.Property(this);
+          this.minHeight$delegate = new _.fg.style.CSSRule.Property(this);
+          this.minWidth$delegate = new _.fg.style.CSSRule.Property(this);
+          this.navDown$delegate = new _.fg.style.CSSRule.Property(this);
+          this.navIndex$delegate = new _.fg.style.CSSRule.Property(this);
+          this.navLeft$delegate = new _.fg.style.CSSRule.Property(this);
+          this.navRight$delegate = new _.fg.style.CSSRule.Property(this);
+          this.navUp$delegate = new _.fg.style.CSSRule.Property(this);
+          this.objectFit$delegate = new _.fg.style.CSSRule.Property(this);
+          this.objectPosition$delegate = new _.fg.style.CSSRule.Property(this);
+          this.opacity$delegate = new _.fg.style.CSSRule.Property(this);
+          this.order$delegate = new _.fg.style.CSSRule.Property(this);
+          this.orphans$delegate = new _.fg.style.CSSRule.Property(this);
+          this.outline$delegate = new _.fg.style.CSSRule.Property(this);
+          this.outlineColor$delegate = new _.fg.style.CSSRule.Property(this);
+          this.outlineOffset$delegate = new _.fg.style.CSSRule.Property(this);
+          this.outlineStyle$delegate = new _.fg.style.CSSRule.Property(this);
+          this.outlineWidth$delegate = new _.fg.style.CSSRule.Property(this);
+          this.overflowWrap$delegate = new _.fg.style.CSSRule.Property(this);
+          this.overflowX$delegate = new _.fg.style.CSSRule.Property(this);
+          this.overflowY$delegate = new _.fg.style.CSSRule.Property(this);
+          this.padding$delegate = new _.fg.style.CSSRule.Property(this);
+          this.paddingBottom$delegate = new _.fg.style.CSSRule.Property(this);
+          this.paddingLeft$delegate = new _.fg.style.CSSRule.Property(this);
+          this.paddingRight$delegate = new _.fg.style.CSSRule.Property(this);
+          this.paddingTop$delegate = new _.fg.style.CSSRule.Property(this);
+          this.pageBreakAfter$delegate = new _.fg.style.CSSRule.Property(this);
+          this.pageBreakBefore$delegate = new _.fg.style.CSSRule.Property(this);
+          this.pageBreakInside$delegate = new _.fg.style.CSSRule.Property(this);
+          this.perspective$delegate = new _.fg.style.CSSRule.Property(this);
+          this.perspectiveOrigin$delegate = new _.fg.style.CSSRule.Property(this);
+          this.phonemes$delegate = new _.fg.style.CSSRule.Property(this);
+          this.position$delegate = new _.fg.style.CSSRule.Property(this);
+          this.quotes$delegate = new _.fg.style.CSSRule.Property(this);
+          this.resize$delegate = new _.fg.style.CSSRule.Property(this);
+          this.rest$delegate = new _.fg.style.CSSRule.Property(this);
+          this.restAfter$delegate = new _.fg.style.CSSRule.Property(this);
+          this.restBefore$delegate = new _.fg.style.CSSRule.Property(this);
+          this.right$delegate = new _.fg.style.CSSRule.Property(this);
+          this.tabSize$delegate = new _.fg.style.CSSRule.Property(this);
+          this.tableLayout$delegate = new _.fg.style.CSSRule.Property(this);
+          this.textAlign$delegate = new _.fg.style.CSSRule.Property(this);
+          this.textAlignLast$delegate = new _.fg.style.CSSRule.Property(this);
+          this.textCombineUpright$delegate = new _.fg.style.CSSRule.Property(this);
+          this.textDecoration$delegate = new _.fg.style.CSSRule.Property(this);
+          this.textDecorationColor$delegate = new _.fg.style.CSSRule.Property(this);
+          this.textDecorationLine$delegate = new _.fg.style.CSSRule.Property(this);
+          this.textDecorationStyle$delegate = new _.fg.style.CSSRule.Property(this);
+          this.textIndent$delegate = new _.fg.style.CSSRule.Property(this);
+          this.textJustify$delegate = new _.fg.style.CSSRule.Property(this);
+          this.textOrientation$delegate = new _.fg.style.CSSRule.Property(this);
+          this.textOverflow$delegate = new _.fg.style.CSSRule.Property(this);
+          this.textShadow$delegate = new _.fg.style.CSSRule.Property(this);
+          this.textTransform$delegate = new _.fg.style.CSSRule.Property(this);
+          this.textUnderlinePosition$delegate = new _.fg.style.CSSRule.Property(this);
+          this.top$delegate = new _.fg.style.CSSRule.Property(this);
+          this.transform$delegate = new _.fg.style.CSSRule.Property(this);
+          this.transformOrigin$delegate = new _.fg.style.CSSRule.Property(this);
+          this.transformStyle$delegate = new _.fg.style.CSSRule.Property(this);
+          this.transition$delegate = new _.fg.style.CSSRule.Property(this);
+          this.transitionDelay$delegate = new _.fg.style.CSSRule.Property(this);
+          this.transitionDuration$delegate = new _.fg.style.CSSRule.Property(this);
+          this.transitionProperty$delegate = new _.fg.style.CSSRule.Property(this);
+          this.transitionTimingFunction$delegate = new _.fg.style.CSSRule.Property(this);
+          this.unicodeBidi$delegate = new _.fg.style.CSSRule.Property(this);
+          this.verticalAlign$delegate = new _.fg.style.CSSRule.Property(this);
+          this.visibility$delegate = new _.fg.style.CSSRule.Property(this);
+          this.voiceBalance$delegate = new _.fg.style.CSSRule.Property(this);
+          this.voiceDuration$delegate = new _.fg.style.CSSRule.Property(this);
+          this.voicePitch$delegate = new _.fg.style.CSSRule.Property(this);
+          this.voicePitchRange$delegate = new _.fg.style.CSSRule.Property(this);
+          this.voiceRate$delegate = new _.fg.style.CSSRule.Property(this);
+          this.voiceStress$delegate = new _.fg.style.CSSRule.Property(this);
+          this.voiceVolume$delegate = new _.fg.style.CSSRule.Property(this);
+          this.whiteSpace$delegate = new _.fg.style.CSSRule.Property(this);
+          this.widows$delegate = new _.fg.style.CSSRule.Property(this);
+          this.width$delegate = new _.fg.style.CSSRule.Property(this);
+          this.wordBreak$delegate = new _.fg.style.CSSRule.Property(this);
+          this.wordSpacing$delegate = new _.fg.style.CSSRule.Property(this);
+          this.wordWrap$delegate = new _.fg.style.CSSRule.Property(this);
+          this.writingMode$delegate = new _.fg.style.CSSRule.Property(this);
+          this.zIndex$delegate = new _.fg.style.CSSRule.Property(this);
+        }, /** @lends _.fg.style.CSSRule.prototype */ {
+          cssText_yidtjr$: function (selector) {
+            var tmp$1;
+            var s = '';
+            s += selector.toString();
+            s += ' { ';
+            tmp$1 = Kotlin.kotlin.collections.iterator_efxzmg$(this._map);
+            while (tmp$1.hasNext()) {
+              var tmp$0 = tmp$1.next();
+              var key = tmp$0.key;
+              var value = tmp$0.value;
+              s += key + ': ' + value + '; ';
             }
-          },
-          isNotEmpty: function () {
-            return !this._map.isEmpty();
-          },
-          toCss: function () {
-            var tmp$1, tmp$2;
-            var rules = Kotlin.kotlin.collections.arrayListOf_9mqe4v$([]);
-            if (this.isNotEmpty()) {
-              var s = '';
-              s += this.selector.toString();
-              s += ' { ';
-              tmp$1 = Kotlin.kotlin.collections.iterator_efxzmg$(this._map);
-              while (tmp$1.hasNext()) {
-                var tmp$0 = tmp$1.next();
-                var key = tmp$0.key;
-                var value = tmp$0.value;
-                s += key + ': ' + value + '; ';
-              }
-              s += '}';
-              rules.add_za3rmp$(s);
-            }
-            tmp$2 = this._childStyles.iterator();
-            while (tmp$2.hasNext()) {
-              var child = tmp$2.next();
-              rules.addAll_wtfk93$(child.toCss());
-            }
-            return rules;
+            s += '}';
+            return s;
           },
           cssFloat: {
             get: function () {
-              return this.cssFloat$delegate.getValue_ah4kp6$(this, new Kotlin.PropertyMetadata('cssFloat'));
+              return this.cssFloat$delegate.getValue_7kda83$(this, new Kotlin.PropertyMetadata('cssFloat'));
             },
             set: function (cssFloat) {
-              this.cssFloat$delegate.setValue_vr1yzg$(this, new Kotlin.PropertyMetadata('cssFloat'), cssFloat);
+              this.cssFloat$delegate.setValue_27qitx$(this, new Kotlin.PropertyMetadata('cssFloat'), cssFloat);
             }
           },
           _dashed_attribute: {
             get: function () {
-              return this._dashed_attribute$delegate.getValue_ah4kp6$(this, new Kotlin.PropertyMetadata('_dashed_attribute'));
+              return this._dashed_attribute$delegate.getValue_7kda83$(this, new Kotlin.PropertyMetadata('_dashed_attribute'));
             },
             set: function (_dashed_attribute) {
-              this._dashed_attribute$delegate.setValue_vr1yzg$(this, new Kotlin.PropertyMetadata('_dashed_attribute'), _dashed_attribute);
+              this._dashed_attribute$delegate.setValue_27qitx$(this, new Kotlin.PropertyMetadata('_dashed_attribute'), _dashed_attribute);
             }
           },
           _camel_cased_attribute: {
             get: function () {
-              return this._camel_cased_attribute$delegate.getValue_ah4kp6$(this, new Kotlin.PropertyMetadata('_camel_cased_attribute'));
+              return this._camel_cased_attribute$delegate.getValue_7kda83$(this, new Kotlin.PropertyMetadata('_camel_cased_attribute'));
             },
             set: function (_camel_cased_attribute) {
-              this._camel_cased_attribute$delegate.setValue_vr1yzg$(this, new Kotlin.PropertyMetadata('_camel_cased_attribute'), _camel_cased_attribute);
+              this._camel_cased_attribute$delegate.setValue_27qitx$(this, new Kotlin.PropertyMetadata('_camel_cased_attribute'), _camel_cased_attribute);
             }
           },
           alignContent: {
             get: function () {
-              return this.alignContent$delegate.getValue_ah4kp6$(this, new Kotlin.PropertyMetadata('alignContent'));
+              return this.alignContent$delegate.getValue_7kda83$(this, new Kotlin.PropertyMetadata('alignContent'));
             },
             set: function (alignContent) {
-              this.alignContent$delegate.setValue_vr1yzg$(this, new Kotlin.PropertyMetadata('alignContent'), alignContent);
+              this.alignContent$delegate.setValue_27qitx$(this, new Kotlin.PropertyMetadata('alignContent'), alignContent);
             }
           },
           alignItems: {
             get: function () {
-              return this.alignItems$delegate.getValue_ah4kp6$(this, new Kotlin.PropertyMetadata('alignItems'));
+              return this.alignItems$delegate.getValue_7kda83$(this, new Kotlin.PropertyMetadata('alignItems'));
             },
             set: function (alignItems) {
-              this.alignItems$delegate.setValue_vr1yzg$(this, new Kotlin.PropertyMetadata('alignItems'), alignItems);
+              this.alignItems$delegate.setValue_27qitx$(this, new Kotlin.PropertyMetadata('alignItems'), alignItems);
             }
           },
           alignSelf: {
             get: function () {
-              return this.alignSelf$delegate.getValue_ah4kp6$(this, new Kotlin.PropertyMetadata('alignSelf'));
+              return this.alignSelf$delegate.getValue_7kda83$(this, new Kotlin.PropertyMetadata('alignSelf'));
             },
             set: function (alignSelf) {
-              this.alignSelf$delegate.setValue_vr1yzg$(this, new Kotlin.PropertyMetadata('alignSelf'), alignSelf);
+              this.alignSelf$delegate.setValue_27qitx$(this, new Kotlin.PropertyMetadata('alignSelf'), alignSelf);
             }
           },
           animation: {
             get: function () {
-              return this.animation$delegate.getValue_ah4kp6$(this, new Kotlin.PropertyMetadata('animation'));
+              return this.animation$delegate.getValue_7kda83$(this, new Kotlin.PropertyMetadata('animation'));
             },
             set: function (animation) {
-              this.animation$delegate.setValue_vr1yzg$(this, new Kotlin.PropertyMetadata('animation'), animation);
+              this.animation$delegate.setValue_27qitx$(this, new Kotlin.PropertyMetadata('animation'), animation);
             }
           },
           animationDelay: {
             get: function () {
-              return this.animationDelay$delegate.getValue_ah4kp6$(this, new Kotlin.PropertyMetadata('animationDelay'));
+              return this.animationDelay$delegate.getValue_7kda83$(this, new Kotlin.PropertyMetadata('animationDelay'));
             },
             set: function (animationDelay) {
-              this.animationDelay$delegate.setValue_vr1yzg$(this, new Kotlin.PropertyMetadata('animationDelay'), animationDelay);
+              this.animationDelay$delegate.setValue_27qitx$(this, new Kotlin.PropertyMetadata('animationDelay'), animationDelay);
             }
           },
           animationDirection: {
             get: function () {
-              return this.animationDirection$delegate.getValue_ah4kp6$(this, new Kotlin.PropertyMetadata('animationDirection'));
+              return this.animationDirection$delegate.getValue_7kda83$(this, new Kotlin.PropertyMetadata('animationDirection'));
             },
             set: function (animationDirection) {
-              this.animationDirection$delegate.setValue_vr1yzg$(this, new Kotlin.PropertyMetadata('animationDirection'), animationDirection);
+              this.animationDirection$delegate.setValue_27qitx$(this, new Kotlin.PropertyMetadata('animationDirection'), animationDirection);
             }
           },
           animationDuration: {
             get: function () {
-              return this.animationDuration$delegate.getValue_ah4kp6$(this, new Kotlin.PropertyMetadata('animationDuration'));
+              return this.animationDuration$delegate.getValue_7kda83$(this, new Kotlin.PropertyMetadata('animationDuration'));
             },
             set: function (animationDuration) {
-              this.animationDuration$delegate.setValue_vr1yzg$(this, new Kotlin.PropertyMetadata('animationDuration'), animationDuration);
+              this.animationDuration$delegate.setValue_27qitx$(this, new Kotlin.PropertyMetadata('animationDuration'), animationDuration);
             }
           },
           animationFillMode: {
             get: function () {
-              return this.animationFillMode$delegate.getValue_ah4kp6$(this, new Kotlin.PropertyMetadata('animationFillMode'));
+              return this.animationFillMode$delegate.getValue_7kda83$(this, new Kotlin.PropertyMetadata('animationFillMode'));
             },
             set: function (animationFillMode) {
-              this.animationFillMode$delegate.setValue_vr1yzg$(this, new Kotlin.PropertyMetadata('animationFillMode'), animationFillMode);
+              this.animationFillMode$delegate.setValue_27qitx$(this, new Kotlin.PropertyMetadata('animationFillMode'), animationFillMode);
             }
           },
           animationIterationCount: {
             get: function () {
-              return this.animationIterationCount$delegate.getValue_ah4kp6$(this, new Kotlin.PropertyMetadata('animationIterationCount'));
+              return this.animationIterationCount$delegate.getValue_7kda83$(this, new Kotlin.PropertyMetadata('animationIterationCount'));
             },
             set: function (animationIterationCount) {
-              this.animationIterationCount$delegate.setValue_vr1yzg$(this, new Kotlin.PropertyMetadata('animationIterationCount'), animationIterationCount);
+              this.animationIterationCount$delegate.setValue_27qitx$(this, new Kotlin.PropertyMetadata('animationIterationCount'), animationIterationCount);
             }
           },
           animationName: {
             get: function () {
-              return this.animationName$delegate.getValue_ah4kp6$(this, new Kotlin.PropertyMetadata('animationName'));
+              return this.animationName$delegate.getValue_7kda83$(this, new Kotlin.PropertyMetadata('animationName'));
             },
             set: function (animationName) {
-              this.animationName$delegate.setValue_vr1yzg$(this, new Kotlin.PropertyMetadata('animationName'), animationName);
+              this.animationName$delegate.setValue_27qitx$(this, new Kotlin.PropertyMetadata('animationName'), animationName);
             }
           },
           animationPlayState: {
             get: function () {
-              return this.animationPlayState$delegate.getValue_ah4kp6$(this, new Kotlin.PropertyMetadata('animationPlayState'));
+              return this.animationPlayState$delegate.getValue_7kda83$(this, new Kotlin.PropertyMetadata('animationPlayState'));
             },
             set: function (animationPlayState) {
-              this.animationPlayState$delegate.setValue_vr1yzg$(this, new Kotlin.PropertyMetadata('animationPlayState'), animationPlayState);
+              this.animationPlayState$delegate.setValue_27qitx$(this, new Kotlin.PropertyMetadata('animationPlayState'), animationPlayState);
             }
           },
           animationTimingFunction: {
             get: function () {
-              return this.animationTimingFunction$delegate.getValue_ah4kp6$(this, new Kotlin.PropertyMetadata('animationTimingFunction'));
+              return this.animationTimingFunction$delegate.getValue_7kda83$(this, new Kotlin.PropertyMetadata('animationTimingFunction'));
             },
             set: function (animationTimingFunction) {
-              this.animationTimingFunction$delegate.setValue_vr1yzg$(this, new Kotlin.PropertyMetadata('animationTimingFunction'), animationTimingFunction);
+              this.animationTimingFunction$delegate.setValue_27qitx$(this, new Kotlin.PropertyMetadata('animationTimingFunction'), animationTimingFunction);
             }
           },
           backfaceVisibility: {
             get: function () {
-              return this.backfaceVisibility$delegate.getValue_ah4kp6$(this, new Kotlin.PropertyMetadata('backfaceVisibility'));
+              return this.backfaceVisibility$delegate.getValue_7kda83$(this, new Kotlin.PropertyMetadata('backfaceVisibility'));
             },
             set: function (backfaceVisibility) {
-              this.backfaceVisibility$delegate.setValue_vr1yzg$(this, new Kotlin.PropertyMetadata('backfaceVisibility'), backfaceVisibility);
+              this.backfaceVisibility$delegate.setValue_27qitx$(this, new Kotlin.PropertyMetadata('backfaceVisibility'), backfaceVisibility);
             }
           },
           background: {
             get: function () {
-              return this.background$delegate.getValue_ah4kp6$(this, new Kotlin.PropertyMetadata('background'));
+              return this.background$delegate.getValue_7kda83$(this, new Kotlin.PropertyMetadata('background'));
             },
             set: function (background) {
-              this.background$delegate.setValue_vr1yzg$(this, new Kotlin.PropertyMetadata('background'), background);
+              this.background$delegate.setValue_27qitx$(this, new Kotlin.PropertyMetadata('background'), background);
             }
           },
           backgroundAttachment: {
             get: function () {
-              return this.backgroundAttachment$delegate.getValue_ah4kp6$(this, new Kotlin.PropertyMetadata('backgroundAttachment'));
+              return this.backgroundAttachment$delegate.getValue_7kda83$(this, new Kotlin.PropertyMetadata('backgroundAttachment'));
             },
             set: function (backgroundAttachment) {
-              this.backgroundAttachment$delegate.setValue_vr1yzg$(this, new Kotlin.PropertyMetadata('backgroundAttachment'), backgroundAttachment);
+              this.backgroundAttachment$delegate.setValue_27qitx$(this, new Kotlin.PropertyMetadata('backgroundAttachment'), backgroundAttachment);
             }
           },
           backgroundClip: {
             get: function () {
-              return this.backgroundClip$delegate.getValue_ah4kp6$(this, new Kotlin.PropertyMetadata('backgroundClip'));
+              return this.backgroundClip$delegate.getValue_7kda83$(this, new Kotlin.PropertyMetadata('backgroundClip'));
             },
             set: function (backgroundClip) {
-              this.backgroundClip$delegate.setValue_vr1yzg$(this, new Kotlin.PropertyMetadata('backgroundClip'), backgroundClip);
+              this.backgroundClip$delegate.setValue_27qitx$(this, new Kotlin.PropertyMetadata('backgroundClip'), backgroundClip);
             }
           },
           backgroundColor: {
             get: function () {
-              return this.backgroundColor$delegate.getValue_ah4kp6$(this, new Kotlin.PropertyMetadata('backgroundColor'));
+              return this.backgroundColor$delegate.getValue_7kda83$(this, new Kotlin.PropertyMetadata('backgroundColor'));
             },
             set: function (backgroundColor) {
-              this.backgroundColor$delegate.setValue_vr1yzg$(this, new Kotlin.PropertyMetadata('backgroundColor'), backgroundColor);
+              this.backgroundColor$delegate.setValue_27qitx$(this, new Kotlin.PropertyMetadata('backgroundColor'), backgroundColor);
             }
           },
           backgroundImage: {
             get: function () {
-              return this.backgroundImage$delegate.getValue_ah4kp6$(this, new Kotlin.PropertyMetadata('backgroundImage'));
+              return this.backgroundImage$delegate.getValue_7kda83$(this, new Kotlin.PropertyMetadata('backgroundImage'));
             },
             set: function (backgroundImage) {
-              this.backgroundImage$delegate.setValue_vr1yzg$(this, new Kotlin.PropertyMetadata('backgroundImage'), backgroundImage);
+              this.backgroundImage$delegate.setValue_27qitx$(this, new Kotlin.PropertyMetadata('backgroundImage'), backgroundImage);
             }
           },
           backgroundOrigin: {
             get: function () {
-              return this.backgroundOrigin$delegate.getValue_ah4kp6$(this, new Kotlin.PropertyMetadata('backgroundOrigin'));
+              return this.backgroundOrigin$delegate.getValue_7kda83$(this, new Kotlin.PropertyMetadata('backgroundOrigin'));
             },
             set: function (backgroundOrigin) {
-              this.backgroundOrigin$delegate.setValue_vr1yzg$(this, new Kotlin.PropertyMetadata('backgroundOrigin'), backgroundOrigin);
+              this.backgroundOrigin$delegate.setValue_27qitx$(this, new Kotlin.PropertyMetadata('backgroundOrigin'), backgroundOrigin);
             }
           },
           backgroundPosition: {
             get: function () {
-              return this.backgroundPosition$delegate.getValue_ah4kp6$(this, new Kotlin.PropertyMetadata('backgroundPosition'));
+              return this.backgroundPosition$delegate.getValue_7kda83$(this, new Kotlin.PropertyMetadata('backgroundPosition'));
             },
             set: function (backgroundPosition) {
-              this.backgroundPosition$delegate.setValue_vr1yzg$(this, new Kotlin.PropertyMetadata('backgroundPosition'), backgroundPosition);
+              this.backgroundPosition$delegate.setValue_27qitx$(this, new Kotlin.PropertyMetadata('backgroundPosition'), backgroundPosition);
             }
           },
           backgroundRepeat: {
             get: function () {
-              return this.backgroundRepeat$delegate.getValue_ah4kp6$(this, new Kotlin.PropertyMetadata('backgroundRepeat'));
+              return this.backgroundRepeat$delegate.getValue_7kda83$(this, new Kotlin.PropertyMetadata('backgroundRepeat'));
             },
             set: function (backgroundRepeat) {
-              this.backgroundRepeat$delegate.setValue_vr1yzg$(this, new Kotlin.PropertyMetadata('backgroundRepeat'), backgroundRepeat);
+              this.backgroundRepeat$delegate.setValue_27qitx$(this, new Kotlin.PropertyMetadata('backgroundRepeat'), backgroundRepeat);
             }
           },
           backgroundSize: {
             get: function () {
-              return this.backgroundSize$delegate.getValue_ah4kp6$(this, new Kotlin.PropertyMetadata('backgroundSize'));
+              return this.backgroundSize$delegate.getValue_7kda83$(this, new Kotlin.PropertyMetadata('backgroundSize'));
             },
             set: function (backgroundSize) {
-              this.backgroundSize$delegate.setValue_vr1yzg$(this, new Kotlin.PropertyMetadata('backgroundSize'), backgroundSize);
+              this.backgroundSize$delegate.setValue_27qitx$(this, new Kotlin.PropertyMetadata('backgroundSize'), backgroundSize);
             }
           },
           border: {
             get: function () {
-              return this.border$delegate.getValue_ah4kp6$(this, new Kotlin.PropertyMetadata('border'));
+              return this.border$delegate.getValue_7kda83$(this, new Kotlin.PropertyMetadata('border'));
             },
             set: function (border) {
-              this.border$delegate.setValue_vr1yzg$(this, new Kotlin.PropertyMetadata('border'), border);
+              this.border$delegate.setValue_27qitx$(this, new Kotlin.PropertyMetadata('border'), border);
             }
           },
           borderBottom: {
             get: function () {
-              return this.borderBottom$delegate.getValue_ah4kp6$(this, new Kotlin.PropertyMetadata('borderBottom'));
+              return this.borderBottom$delegate.getValue_7kda83$(this, new Kotlin.PropertyMetadata('borderBottom'));
             },
             set: function (borderBottom) {
-              this.borderBottom$delegate.setValue_vr1yzg$(this, new Kotlin.PropertyMetadata('borderBottom'), borderBottom);
+              this.borderBottom$delegate.setValue_27qitx$(this, new Kotlin.PropertyMetadata('borderBottom'), borderBottom);
             }
           },
           borderBottomColor: {
             get: function () {
-              return this.borderBottomColor$delegate.getValue_ah4kp6$(this, new Kotlin.PropertyMetadata('borderBottomColor'));
+              return this.borderBottomColor$delegate.getValue_7kda83$(this, new Kotlin.PropertyMetadata('borderBottomColor'));
             },
             set: function (borderBottomColor) {
-              this.borderBottomColor$delegate.setValue_vr1yzg$(this, new Kotlin.PropertyMetadata('borderBottomColor'), borderBottomColor);
+              this.borderBottomColor$delegate.setValue_27qitx$(this, new Kotlin.PropertyMetadata('borderBottomColor'), borderBottomColor);
             }
           },
           borderBottomLeftRadius: {
             get: function () {
-              return this.borderBottomLeftRadius$delegate.getValue_ah4kp6$(this, new Kotlin.PropertyMetadata('borderBottomLeftRadius'));
+              return this.borderBottomLeftRadius$delegate.getValue_7kda83$(this, new Kotlin.PropertyMetadata('borderBottomLeftRadius'));
             },
             set: function (borderBottomLeftRadius) {
-              this.borderBottomLeftRadius$delegate.setValue_vr1yzg$(this, new Kotlin.PropertyMetadata('borderBottomLeftRadius'), borderBottomLeftRadius);
+              this.borderBottomLeftRadius$delegate.setValue_27qitx$(this, new Kotlin.PropertyMetadata('borderBottomLeftRadius'), borderBottomLeftRadius);
             }
           },
           borderBottomRightRadius: {
             get: function () {
-              return this.borderBottomRightRadius$delegate.getValue_ah4kp6$(this, new Kotlin.PropertyMetadata('borderBottomRightRadius'));
+              return this.borderBottomRightRadius$delegate.getValue_7kda83$(this, new Kotlin.PropertyMetadata('borderBottomRightRadius'));
             },
             set: function (borderBottomRightRadius) {
-              this.borderBottomRightRadius$delegate.setValue_vr1yzg$(this, new Kotlin.PropertyMetadata('borderBottomRightRadius'), borderBottomRightRadius);
+              this.borderBottomRightRadius$delegate.setValue_27qitx$(this, new Kotlin.PropertyMetadata('borderBottomRightRadius'), borderBottomRightRadius);
             }
           },
           borderBottomStyle: {
             get: function () {
-              return this.borderBottomStyle$delegate.getValue_ah4kp6$(this, new Kotlin.PropertyMetadata('borderBottomStyle'));
+              return this.borderBottomStyle$delegate.getValue_7kda83$(this, new Kotlin.PropertyMetadata('borderBottomStyle'));
             },
             set: function (borderBottomStyle) {
-              this.borderBottomStyle$delegate.setValue_vr1yzg$(this, new Kotlin.PropertyMetadata('borderBottomStyle'), borderBottomStyle);
+              this.borderBottomStyle$delegate.setValue_27qitx$(this, new Kotlin.PropertyMetadata('borderBottomStyle'), borderBottomStyle);
             }
           },
           borderBottomWidth: {
             get: function () {
-              return this.borderBottomWidth$delegate.getValue_ah4kp6$(this, new Kotlin.PropertyMetadata('borderBottomWidth'));
+              return this.borderBottomWidth$delegate.getValue_7kda83$(this, new Kotlin.PropertyMetadata('borderBottomWidth'));
             },
             set: function (borderBottomWidth) {
-              this.borderBottomWidth$delegate.setValue_vr1yzg$(this, new Kotlin.PropertyMetadata('borderBottomWidth'), borderBottomWidth);
+              this.borderBottomWidth$delegate.setValue_27qitx$(this, new Kotlin.PropertyMetadata('borderBottomWidth'), borderBottomWidth);
             }
           },
           borderCollapse: {
             get: function () {
-              return this.borderCollapse$delegate.getValue_ah4kp6$(this, new Kotlin.PropertyMetadata('borderCollapse'));
+              return this.borderCollapse$delegate.getValue_7kda83$(this, new Kotlin.PropertyMetadata('borderCollapse'));
             },
             set: function (borderCollapse) {
-              this.borderCollapse$delegate.setValue_vr1yzg$(this, new Kotlin.PropertyMetadata('borderCollapse'), borderCollapse);
+              this.borderCollapse$delegate.setValue_27qitx$(this, new Kotlin.PropertyMetadata('borderCollapse'), borderCollapse);
             }
           },
           borderColor: {
             get: function () {
-              return this.borderColor$delegate.getValue_ah4kp6$(this, new Kotlin.PropertyMetadata('borderColor'));
+              return this.borderColor$delegate.getValue_7kda83$(this, new Kotlin.PropertyMetadata('borderColor'));
             },
             set: function (borderColor) {
-              this.borderColor$delegate.setValue_vr1yzg$(this, new Kotlin.PropertyMetadata('borderColor'), borderColor);
+              this.borderColor$delegate.setValue_27qitx$(this, new Kotlin.PropertyMetadata('borderColor'), borderColor);
             }
           },
           borderImage: {
             get: function () {
-              return this.borderImage$delegate.getValue_ah4kp6$(this, new Kotlin.PropertyMetadata('borderImage'));
+              return this.borderImage$delegate.getValue_7kda83$(this, new Kotlin.PropertyMetadata('borderImage'));
             },
             set: function (borderImage) {
-              this.borderImage$delegate.setValue_vr1yzg$(this, new Kotlin.PropertyMetadata('borderImage'), borderImage);
+              this.borderImage$delegate.setValue_27qitx$(this, new Kotlin.PropertyMetadata('borderImage'), borderImage);
             }
           },
           borderImageOutset: {
             get: function () {
-              return this.borderImageOutset$delegate.getValue_ah4kp6$(this, new Kotlin.PropertyMetadata('borderImageOutset'));
+              return this.borderImageOutset$delegate.getValue_7kda83$(this, new Kotlin.PropertyMetadata('borderImageOutset'));
             },
             set: function (borderImageOutset) {
-              this.borderImageOutset$delegate.setValue_vr1yzg$(this, new Kotlin.PropertyMetadata('borderImageOutset'), borderImageOutset);
+              this.borderImageOutset$delegate.setValue_27qitx$(this, new Kotlin.PropertyMetadata('borderImageOutset'), borderImageOutset);
             }
           },
           borderImageRepeat: {
             get: function () {
-              return this.borderImageRepeat$delegate.getValue_ah4kp6$(this, new Kotlin.PropertyMetadata('borderImageRepeat'));
+              return this.borderImageRepeat$delegate.getValue_7kda83$(this, new Kotlin.PropertyMetadata('borderImageRepeat'));
             },
             set: function (borderImageRepeat) {
-              this.borderImageRepeat$delegate.setValue_vr1yzg$(this, new Kotlin.PropertyMetadata('borderImageRepeat'), borderImageRepeat);
+              this.borderImageRepeat$delegate.setValue_27qitx$(this, new Kotlin.PropertyMetadata('borderImageRepeat'), borderImageRepeat);
             }
           },
           borderImageSlice: {
             get: function () {
-              return this.borderImageSlice$delegate.getValue_ah4kp6$(this, new Kotlin.PropertyMetadata('borderImageSlice'));
+              return this.borderImageSlice$delegate.getValue_7kda83$(this, new Kotlin.PropertyMetadata('borderImageSlice'));
             },
             set: function (borderImageSlice) {
-              this.borderImageSlice$delegate.setValue_vr1yzg$(this, new Kotlin.PropertyMetadata('borderImageSlice'), borderImageSlice);
+              this.borderImageSlice$delegate.setValue_27qitx$(this, new Kotlin.PropertyMetadata('borderImageSlice'), borderImageSlice);
             }
           },
           borderImageSource: {
             get: function () {
-              return this.borderImageSource$delegate.getValue_ah4kp6$(this, new Kotlin.PropertyMetadata('borderImageSource'));
+              return this.borderImageSource$delegate.getValue_7kda83$(this, new Kotlin.PropertyMetadata('borderImageSource'));
             },
             set: function (borderImageSource) {
-              this.borderImageSource$delegate.setValue_vr1yzg$(this, new Kotlin.PropertyMetadata('borderImageSource'), borderImageSource);
+              this.borderImageSource$delegate.setValue_27qitx$(this, new Kotlin.PropertyMetadata('borderImageSource'), borderImageSource);
             }
           },
           borderImageWidth: {
             get: function () {
-              return this.borderImageWidth$delegate.getValue_ah4kp6$(this, new Kotlin.PropertyMetadata('borderImageWidth'));
+              return this.borderImageWidth$delegate.getValue_7kda83$(this, new Kotlin.PropertyMetadata('borderImageWidth'));
             },
             set: function (borderImageWidth) {
-              this.borderImageWidth$delegate.setValue_vr1yzg$(this, new Kotlin.PropertyMetadata('borderImageWidth'), borderImageWidth);
+              this.borderImageWidth$delegate.setValue_27qitx$(this, new Kotlin.PropertyMetadata('borderImageWidth'), borderImageWidth);
             }
           },
           borderLeft: {
             get: function () {
-              return this.borderLeft$delegate.getValue_ah4kp6$(this, new Kotlin.PropertyMetadata('borderLeft'));
+              return this.borderLeft$delegate.getValue_7kda83$(this, new Kotlin.PropertyMetadata('borderLeft'));
             },
             set: function (borderLeft) {
-              this.borderLeft$delegate.setValue_vr1yzg$(this, new Kotlin.PropertyMetadata('borderLeft'), borderLeft);
+              this.borderLeft$delegate.setValue_27qitx$(this, new Kotlin.PropertyMetadata('borderLeft'), borderLeft);
             }
           },
           borderLeftColor: {
             get: function () {
-              return this.borderLeftColor$delegate.getValue_ah4kp6$(this, new Kotlin.PropertyMetadata('borderLeftColor'));
+              return this.borderLeftColor$delegate.getValue_7kda83$(this, new Kotlin.PropertyMetadata('borderLeftColor'));
             },
             set: function (borderLeftColor) {
-              this.borderLeftColor$delegate.setValue_vr1yzg$(this, new Kotlin.PropertyMetadata('borderLeftColor'), borderLeftColor);
+              this.borderLeftColor$delegate.setValue_27qitx$(this, new Kotlin.PropertyMetadata('borderLeftColor'), borderLeftColor);
             }
           },
           borderLeftStyle: {
             get: function () {
-              return this.borderLeftStyle$delegate.getValue_ah4kp6$(this, new Kotlin.PropertyMetadata('borderLeftStyle'));
+              return this.borderLeftStyle$delegate.getValue_7kda83$(this, new Kotlin.PropertyMetadata('borderLeftStyle'));
             },
             set: function (borderLeftStyle) {
-              this.borderLeftStyle$delegate.setValue_vr1yzg$(this, new Kotlin.PropertyMetadata('borderLeftStyle'), borderLeftStyle);
+              this.borderLeftStyle$delegate.setValue_27qitx$(this, new Kotlin.PropertyMetadata('borderLeftStyle'), borderLeftStyle);
             }
           },
           borderLeftWidth: {
             get: function () {
-              return this.borderLeftWidth$delegate.getValue_ah4kp6$(this, new Kotlin.PropertyMetadata('borderLeftWidth'));
+              return this.borderLeftWidth$delegate.getValue_7kda83$(this, new Kotlin.PropertyMetadata('borderLeftWidth'));
             },
             set: function (borderLeftWidth) {
-              this.borderLeftWidth$delegate.setValue_vr1yzg$(this, new Kotlin.PropertyMetadata('borderLeftWidth'), borderLeftWidth);
+              this.borderLeftWidth$delegate.setValue_27qitx$(this, new Kotlin.PropertyMetadata('borderLeftWidth'), borderLeftWidth);
             }
           },
           borderRadius: {
             get: function () {
-              return this.borderRadius$delegate.getValue_ah4kp6$(this, new Kotlin.PropertyMetadata('borderRadius'));
+              return this.borderRadius$delegate.getValue_7kda83$(this, new Kotlin.PropertyMetadata('borderRadius'));
             },
             set: function (borderRadius) {
-              this.borderRadius$delegate.setValue_vr1yzg$(this, new Kotlin.PropertyMetadata('borderRadius'), borderRadius);
+              this.borderRadius$delegate.setValue_27qitx$(this, new Kotlin.PropertyMetadata('borderRadius'), borderRadius);
             }
           },
           borderRight: {
             get: function () {
-              return this.borderRight$delegate.getValue_ah4kp6$(this, new Kotlin.PropertyMetadata('borderRight'));
+              return this.borderRight$delegate.getValue_7kda83$(this, new Kotlin.PropertyMetadata('borderRight'));
             },
             set: function (borderRight) {
-              this.borderRight$delegate.setValue_vr1yzg$(this, new Kotlin.PropertyMetadata('borderRight'), borderRight);
+              this.borderRight$delegate.setValue_27qitx$(this, new Kotlin.PropertyMetadata('borderRight'), borderRight);
             }
           },
           borderRightColor: {
             get: function () {
-              return this.borderRightColor$delegate.getValue_ah4kp6$(this, new Kotlin.PropertyMetadata('borderRightColor'));
+              return this.borderRightColor$delegate.getValue_7kda83$(this, new Kotlin.PropertyMetadata('borderRightColor'));
             },
             set: function (borderRightColor) {
-              this.borderRightColor$delegate.setValue_vr1yzg$(this, new Kotlin.PropertyMetadata('borderRightColor'), borderRightColor);
+              this.borderRightColor$delegate.setValue_27qitx$(this, new Kotlin.PropertyMetadata('borderRightColor'), borderRightColor);
             }
           },
           borderRightStyle: {
             get: function () {
-              return this.borderRightStyle$delegate.getValue_ah4kp6$(this, new Kotlin.PropertyMetadata('borderRightStyle'));
+              return this.borderRightStyle$delegate.getValue_7kda83$(this, new Kotlin.PropertyMetadata('borderRightStyle'));
             },
             set: function (borderRightStyle) {
-              this.borderRightStyle$delegate.setValue_vr1yzg$(this, new Kotlin.PropertyMetadata('borderRightStyle'), borderRightStyle);
+              this.borderRightStyle$delegate.setValue_27qitx$(this, new Kotlin.PropertyMetadata('borderRightStyle'), borderRightStyle);
             }
           },
           borderRightWidth: {
             get: function () {
-              return this.borderRightWidth$delegate.getValue_ah4kp6$(this, new Kotlin.PropertyMetadata('borderRightWidth'));
+              return this.borderRightWidth$delegate.getValue_7kda83$(this, new Kotlin.PropertyMetadata('borderRightWidth'));
             },
             set: function (borderRightWidth) {
-              this.borderRightWidth$delegate.setValue_vr1yzg$(this, new Kotlin.PropertyMetadata('borderRightWidth'), borderRightWidth);
+              this.borderRightWidth$delegate.setValue_27qitx$(this, new Kotlin.PropertyMetadata('borderRightWidth'), borderRightWidth);
             }
           },
           borderSpacing: {
             get: function () {
-              return this.borderSpacing$delegate.getValue_ah4kp6$(this, new Kotlin.PropertyMetadata('borderSpacing'));
+              return this.borderSpacing$delegate.getValue_7kda83$(this, new Kotlin.PropertyMetadata('borderSpacing'));
             },
             set: function (borderSpacing) {
-              this.borderSpacing$delegate.setValue_vr1yzg$(this, new Kotlin.PropertyMetadata('borderSpacing'), borderSpacing);
+              this.borderSpacing$delegate.setValue_27qitx$(this, new Kotlin.PropertyMetadata('borderSpacing'), borderSpacing);
             }
           },
           borderStyle: {
             get: function () {
-              return this.borderStyle$delegate.getValue_ah4kp6$(this, new Kotlin.PropertyMetadata('borderStyle'));
+              return this.borderStyle$delegate.getValue_7kda83$(this, new Kotlin.PropertyMetadata('borderStyle'));
             },
             set: function (borderStyle) {
-              this.borderStyle$delegate.setValue_vr1yzg$(this, new Kotlin.PropertyMetadata('borderStyle'), borderStyle);
+              this.borderStyle$delegate.setValue_27qitx$(this, new Kotlin.PropertyMetadata('borderStyle'), borderStyle);
             }
           },
           borderTop: {
             get: function () {
-              return this.borderTop$delegate.getValue_ah4kp6$(this, new Kotlin.PropertyMetadata('borderTop'));
+              return this.borderTop$delegate.getValue_7kda83$(this, new Kotlin.PropertyMetadata('borderTop'));
             },
             set: function (borderTop) {
-              this.borderTop$delegate.setValue_vr1yzg$(this, new Kotlin.PropertyMetadata('borderTop'), borderTop);
+              this.borderTop$delegate.setValue_27qitx$(this, new Kotlin.PropertyMetadata('borderTop'), borderTop);
             }
           },
           borderTopColor: {
             get: function () {
-              return this.borderTopColor$delegate.getValue_ah4kp6$(this, new Kotlin.PropertyMetadata('borderTopColor'));
+              return this.borderTopColor$delegate.getValue_7kda83$(this, new Kotlin.PropertyMetadata('borderTopColor'));
             },
             set: function (borderTopColor) {
-              this.borderTopColor$delegate.setValue_vr1yzg$(this, new Kotlin.PropertyMetadata('borderTopColor'), borderTopColor);
+              this.borderTopColor$delegate.setValue_27qitx$(this, new Kotlin.PropertyMetadata('borderTopColor'), borderTopColor);
             }
           },
           borderTopLeftRadius: {
             get: function () {
-              return this.borderTopLeftRadius$delegate.getValue_ah4kp6$(this, new Kotlin.PropertyMetadata('borderTopLeftRadius'));
+              return this.borderTopLeftRadius$delegate.getValue_7kda83$(this, new Kotlin.PropertyMetadata('borderTopLeftRadius'));
             },
             set: function (borderTopLeftRadius) {
-              this.borderTopLeftRadius$delegate.setValue_vr1yzg$(this, new Kotlin.PropertyMetadata('borderTopLeftRadius'), borderTopLeftRadius);
+              this.borderTopLeftRadius$delegate.setValue_27qitx$(this, new Kotlin.PropertyMetadata('borderTopLeftRadius'), borderTopLeftRadius);
             }
           },
           borderTopRightRadius: {
             get: function () {
-              return this.borderTopRightRadius$delegate.getValue_ah4kp6$(this, new Kotlin.PropertyMetadata('borderTopRightRadius'));
+              return this.borderTopRightRadius$delegate.getValue_7kda83$(this, new Kotlin.PropertyMetadata('borderTopRightRadius'));
             },
             set: function (borderTopRightRadius) {
-              this.borderTopRightRadius$delegate.setValue_vr1yzg$(this, new Kotlin.PropertyMetadata('borderTopRightRadius'), borderTopRightRadius);
+              this.borderTopRightRadius$delegate.setValue_27qitx$(this, new Kotlin.PropertyMetadata('borderTopRightRadius'), borderTopRightRadius);
             }
           },
           borderTopStyle: {
             get: function () {
-              return this.borderTopStyle$delegate.getValue_ah4kp6$(this, new Kotlin.PropertyMetadata('borderTopStyle'));
+              return this.borderTopStyle$delegate.getValue_7kda83$(this, new Kotlin.PropertyMetadata('borderTopStyle'));
             },
             set: function (borderTopStyle) {
-              this.borderTopStyle$delegate.setValue_vr1yzg$(this, new Kotlin.PropertyMetadata('borderTopStyle'), borderTopStyle);
+              this.borderTopStyle$delegate.setValue_27qitx$(this, new Kotlin.PropertyMetadata('borderTopStyle'), borderTopStyle);
             }
           },
           borderTopWidth: {
             get: function () {
-              return this.borderTopWidth$delegate.getValue_ah4kp6$(this, new Kotlin.PropertyMetadata('borderTopWidth'));
+              return this.borderTopWidth$delegate.getValue_7kda83$(this, new Kotlin.PropertyMetadata('borderTopWidth'));
             },
             set: function (borderTopWidth) {
-              this.borderTopWidth$delegate.setValue_vr1yzg$(this, new Kotlin.PropertyMetadata('borderTopWidth'), borderTopWidth);
+              this.borderTopWidth$delegate.setValue_27qitx$(this, new Kotlin.PropertyMetadata('borderTopWidth'), borderTopWidth);
             }
           },
           borderWidth: {
             get: function () {
-              return this.borderWidth$delegate.getValue_ah4kp6$(this, new Kotlin.PropertyMetadata('borderWidth'));
+              return this.borderWidth$delegate.getValue_7kda83$(this, new Kotlin.PropertyMetadata('borderWidth'));
             },
             set: function (borderWidth) {
-              this.borderWidth$delegate.setValue_vr1yzg$(this, new Kotlin.PropertyMetadata('borderWidth'), borderWidth);
+              this.borderWidth$delegate.setValue_27qitx$(this, new Kotlin.PropertyMetadata('borderWidth'), borderWidth);
             }
           },
           bottom: {
             get: function () {
-              return this.bottom$delegate.getValue_ah4kp6$(this, new Kotlin.PropertyMetadata('bottom'));
+              return this.bottom$delegate.getValue_7kda83$(this, new Kotlin.PropertyMetadata('bottom'));
             },
             set: function (bottom) {
-              this.bottom$delegate.setValue_vr1yzg$(this, new Kotlin.PropertyMetadata('bottom'), bottom);
+              this.bottom$delegate.setValue_27qitx$(this, new Kotlin.PropertyMetadata('bottom'), bottom);
             }
           },
           boxDecorationBreak: {
             get: function () {
-              return this.boxDecorationBreak$delegate.getValue_ah4kp6$(this, new Kotlin.PropertyMetadata('boxDecorationBreak'));
+              return this.boxDecorationBreak$delegate.getValue_7kda83$(this, new Kotlin.PropertyMetadata('boxDecorationBreak'));
             },
             set: function (boxDecorationBreak) {
-              this.boxDecorationBreak$delegate.setValue_vr1yzg$(this, new Kotlin.PropertyMetadata('boxDecorationBreak'), boxDecorationBreak);
+              this.boxDecorationBreak$delegate.setValue_27qitx$(this, new Kotlin.PropertyMetadata('boxDecorationBreak'), boxDecorationBreak);
             }
           },
           boxShadow: {
             get: function () {
-              return this.boxShadow$delegate.getValue_ah4kp6$(this, new Kotlin.PropertyMetadata('boxShadow'));
+              return this.boxShadow$delegate.getValue_7kda83$(this, new Kotlin.PropertyMetadata('boxShadow'));
             },
             set: function (boxShadow) {
-              this.boxShadow$delegate.setValue_vr1yzg$(this, new Kotlin.PropertyMetadata('boxShadow'), boxShadow);
+              this.boxShadow$delegate.setValue_27qitx$(this, new Kotlin.PropertyMetadata('boxShadow'), boxShadow);
             }
           },
           boxSizing: {
             get: function () {
-              return this.boxSizing$delegate.getValue_ah4kp6$(this, new Kotlin.PropertyMetadata('boxSizing'));
+              return this.boxSizing$delegate.getValue_7kda83$(this, new Kotlin.PropertyMetadata('boxSizing'));
             },
             set: function (boxSizing) {
-              this.boxSizing$delegate.setValue_vr1yzg$(this, new Kotlin.PropertyMetadata('boxSizing'), boxSizing);
+              this.boxSizing$delegate.setValue_27qitx$(this, new Kotlin.PropertyMetadata('boxSizing'), boxSizing);
             }
           },
           breakAfter: {
             get: function () {
-              return this.breakAfter$delegate.getValue_ah4kp6$(this, new Kotlin.PropertyMetadata('breakAfter'));
+              return this.breakAfter$delegate.getValue_7kda83$(this, new Kotlin.PropertyMetadata('breakAfter'));
             },
             set: function (breakAfter) {
-              this.breakAfter$delegate.setValue_vr1yzg$(this, new Kotlin.PropertyMetadata('breakAfter'), breakAfter);
+              this.breakAfter$delegate.setValue_27qitx$(this, new Kotlin.PropertyMetadata('breakAfter'), breakAfter);
             }
           },
           breakBefore: {
             get: function () {
-              return this.breakBefore$delegate.getValue_ah4kp6$(this, new Kotlin.PropertyMetadata('breakBefore'));
+              return this.breakBefore$delegate.getValue_7kda83$(this, new Kotlin.PropertyMetadata('breakBefore'));
             },
             set: function (breakBefore) {
-              this.breakBefore$delegate.setValue_vr1yzg$(this, new Kotlin.PropertyMetadata('breakBefore'), breakBefore);
+              this.breakBefore$delegate.setValue_27qitx$(this, new Kotlin.PropertyMetadata('breakBefore'), breakBefore);
             }
           },
           breakInside: {
             get: function () {
-              return this.breakInside$delegate.getValue_ah4kp6$(this, new Kotlin.PropertyMetadata('breakInside'));
+              return this.breakInside$delegate.getValue_7kda83$(this, new Kotlin.PropertyMetadata('breakInside'));
             },
             set: function (breakInside) {
-              this.breakInside$delegate.setValue_vr1yzg$(this, new Kotlin.PropertyMetadata('breakInside'), breakInside);
+              this.breakInside$delegate.setValue_27qitx$(this, new Kotlin.PropertyMetadata('breakInside'), breakInside);
             }
           },
           captionSide: {
             get: function () {
-              return this.captionSide$delegate.getValue_ah4kp6$(this, new Kotlin.PropertyMetadata('captionSide'));
+              return this.captionSide$delegate.getValue_7kda83$(this, new Kotlin.PropertyMetadata('captionSide'));
             },
             set: function (captionSide) {
-              this.captionSide$delegate.setValue_vr1yzg$(this, new Kotlin.PropertyMetadata('captionSide'), captionSide);
+              this.captionSide$delegate.setValue_27qitx$(this, new Kotlin.PropertyMetadata('captionSide'), captionSide);
             }
           },
           clear: {
             get: function () {
-              return this.clear$delegate.getValue_ah4kp6$(this, new Kotlin.PropertyMetadata('clear'));
+              return this.clear$delegate.getValue_7kda83$(this, new Kotlin.PropertyMetadata('clear'));
             },
             set: function (clear) {
-              this.clear$delegate.setValue_vr1yzg$(this, new Kotlin.PropertyMetadata('clear'), clear);
+              this.clear$delegate.setValue_27qitx$(this, new Kotlin.PropertyMetadata('clear'), clear);
             }
           },
           clip: {
             get: function () {
-              return this.clip$delegate.getValue_ah4kp6$(this, new Kotlin.PropertyMetadata('clip'));
+              return this.clip$delegate.getValue_7kda83$(this, new Kotlin.PropertyMetadata('clip'));
             },
             set: function (clip) {
-              this.clip$delegate.setValue_vr1yzg$(this, new Kotlin.PropertyMetadata('clip'), clip);
+              this.clip$delegate.setValue_27qitx$(this, new Kotlin.PropertyMetadata('clip'), clip);
             }
           },
           color: {
             get: function () {
-              return this.color$delegate.getValue_ah4kp6$(this, new Kotlin.PropertyMetadata('color'));
+              return this.color$delegate.getValue_7kda83$(this, new Kotlin.PropertyMetadata('color'));
             },
             set: function (color) {
-              this.color$delegate.setValue_vr1yzg$(this, new Kotlin.PropertyMetadata('color'), color);
+              this.color$delegate.setValue_27qitx$(this, new Kotlin.PropertyMetadata('color'), color);
             }
           },
           columnCount: {
             get: function () {
-              return this.columnCount$delegate.getValue_ah4kp6$(this, new Kotlin.PropertyMetadata('columnCount'));
+              return this.columnCount$delegate.getValue_7kda83$(this, new Kotlin.PropertyMetadata('columnCount'));
             },
             set: function (columnCount) {
-              this.columnCount$delegate.setValue_vr1yzg$(this, new Kotlin.PropertyMetadata('columnCount'), columnCount);
+              this.columnCount$delegate.setValue_27qitx$(this, new Kotlin.PropertyMetadata('columnCount'), columnCount);
             }
           },
           columnFill: {
             get: function () {
-              return this.columnFill$delegate.getValue_ah4kp6$(this, new Kotlin.PropertyMetadata('columnFill'));
+              return this.columnFill$delegate.getValue_7kda83$(this, new Kotlin.PropertyMetadata('columnFill'));
             },
             set: function (columnFill) {
-              this.columnFill$delegate.setValue_vr1yzg$(this, new Kotlin.PropertyMetadata('columnFill'), columnFill);
+              this.columnFill$delegate.setValue_27qitx$(this, new Kotlin.PropertyMetadata('columnFill'), columnFill);
             }
           },
           columnGap: {
             get: function () {
-              return this.columnGap$delegate.getValue_ah4kp6$(this, new Kotlin.PropertyMetadata('columnGap'));
+              return this.columnGap$delegate.getValue_7kda83$(this, new Kotlin.PropertyMetadata('columnGap'));
             },
             set: function (columnGap) {
-              this.columnGap$delegate.setValue_vr1yzg$(this, new Kotlin.PropertyMetadata('columnGap'), columnGap);
+              this.columnGap$delegate.setValue_27qitx$(this, new Kotlin.PropertyMetadata('columnGap'), columnGap);
             }
           },
           columnRule: {
             get: function () {
-              return this.columnRule$delegate.getValue_ah4kp6$(this, new Kotlin.PropertyMetadata('columnRule'));
+              return this.columnRule$delegate.getValue_7kda83$(this, new Kotlin.PropertyMetadata('columnRule'));
             },
             set: function (columnRule) {
-              this.columnRule$delegate.setValue_vr1yzg$(this, new Kotlin.PropertyMetadata('columnRule'), columnRule);
+              this.columnRule$delegate.setValue_27qitx$(this, new Kotlin.PropertyMetadata('columnRule'), columnRule);
             }
           },
           columnRuleColor: {
             get: function () {
-              return this.columnRuleColor$delegate.getValue_ah4kp6$(this, new Kotlin.PropertyMetadata('columnRuleColor'));
+              return this.columnRuleColor$delegate.getValue_7kda83$(this, new Kotlin.PropertyMetadata('columnRuleColor'));
             },
             set: function (columnRuleColor) {
-              this.columnRuleColor$delegate.setValue_vr1yzg$(this, new Kotlin.PropertyMetadata('columnRuleColor'), columnRuleColor);
+              this.columnRuleColor$delegate.setValue_27qitx$(this, new Kotlin.PropertyMetadata('columnRuleColor'), columnRuleColor);
             }
           },
           columnRuleStyle: {
             get: function () {
-              return this.columnRuleStyle$delegate.getValue_ah4kp6$(this, new Kotlin.PropertyMetadata('columnRuleStyle'));
+              return this.columnRuleStyle$delegate.getValue_7kda83$(this, new Kotlin.PropertyMetadata('columnRuleStyle'));
             },
             set: function (columnRuleStyle) {
-              this.columnRuleStyle$delegate.setValue_vr1yzg$(this, new Kotlin.PropertyMetadata('columnRuleStyle'), columnRuleStyle);
+              this.columnRuleStyle$delegate.setValue_27qitx$(this, new Kotlin.PropertyMetadata('columnRuleStyle'), columnRuleStyle);
             }
           },
           columnRuleWidth: {
             get: function () {
-              return this.columnRuleWidth$delegate.getValue_ah4kp6$(this, new Kotlin.PropertyMetadata('columnRuleWidth'));
+              return this.columnRuleWidth$delegate.getValue_7kda83$(this, new Kotlin.PropertyMetadata('columnRuleWidth'));
             },
             set: function (columnRuleWidth) {
-              this.columnRuleWidth$delegate.setValue_vr1yzg$(this, new Kotlin.PropertyMetadata('columnRuleWidth'), columnRuleWidth);
+              this.columnRuleWidth$delegate.setValue_27qitx$(this, new Kotlin.PropertyMetadata('columnRuleWidth'), columnRuleWidth);
             }
           },
           columnSpan: {
             get: function () {
-              return this.columnSpan$delegate.getValue_ah4kp6$(this, new Kotlin.PropertyMetadata('columnSpan'));
+              return this.columnSpan$delegate.getValue_7kda83$(this, new Kotlin.PropertyMetadata('columnSpan'));
             },
             set: function (columnSpan) {
-              this.columnSpan$delegate.setValue_vr1yzg$(this, new Kotlin.PropertyMetadata('columnSpan'), columnSpan);
+              this.columnSpan$delegate.setValue_27qitx$(this, new Kotlin.PropertyMetadata('columnSpan'), columnSpan);
             }
           },
           columnWidth: {
             get: function () {
-              return this.columnWidth$delegate.getValue_ah4kp6$(this, new Kotlin.PropertyMetadata('columnWidth'));
+              return this.columnWidth$delegate.getValue_7kda83$(this, new Kotlin.PropertyMetadata('columnWidth'));
             },
             set: function (columnWidth) {
-              this.columnWidth$delegate.setValue_vr1yzg$(this, new Kotlin.PropertyMetadata('columnWidth'), columnWidth);
+              this.columnWidth$delegate.setValue_27qitx$(this, new Kotlin.PropertyMetadata('columnWidth'), columnWidth);
             }
           },
           columns: {
             get: function () {
-              return this.columns$delegate.getValue_ah4kp6$(this, new Kotlin.PropertyMetadata('columns'));
+              return this.columns$delegate.getValue_7kda83$(this, new Kotlin.PropertyMetadata('columns'));
             },
             set: function (columns) {
-              this.columns$delegate.setValue_vr1yzg$(this, new Kotlin.PropertyMetadata('columns'), columns);
+              this.columns$delegate.setValue_27qitx$(this, new Kotlin.PropertyMetadata('columns'), columns);
             }
           },
           content: {
             get: function () {
-              return this.content$delegate.getValue_ah4kp6$(this, new Kotlin.PropertyMetadata('content'));
+              return this.content$delegate.getValue_7kda83$(this, new Kotlin.PropertyMetadata('content'));
             },
             set: function (content) {
-              this.content$delegate.setValue_vr1yzg$(this, new Kotlin.PropertyMetadata('content'), content);
+              this.content$delegate.setValue_27qitx$(this, new Kotlin.PropertyMetadata('content'), content);
             }
           },
           counterIncrement: {
             get: function () {
-              return this.counterIncrement$delegate.getValue_ah4kp6$(this, new Kotlin.PropertyMetadata('counterIncrement'));
+              return this.counterIncrement$delegate.getValue_7kda83$(this, new Kotlin.PropertyMetadata('counterIncrement'));
             },
             set: function (counterIncrement) {
-              this.counterIncrement$delegate.setValue_vr1yzg$(this, new Kotlin.PropertyMetadata('counterIncrement'), counterIncrement);
+              this.counterIncrement$delegate.setValue_27qitx$(this, new Kotlin.PropertyMetadata('counterIncrement'), counterIncrement);
             }
           },
           counterReset: {
             get: function () {
-              return this.counterReset$delegate.getValue_ah4kp6$(this, new Kotlin.PropertyMetadata('counterReset'));
+              return this.counterReset$delegate.getValue_7kda83$(this, new Kotlin.PropertyMetadata('counterReset'));
             },
             set: function (counterReset) {
-              this.counterReset$delegate.setValue_vr1yzg$(this, new Kotlin.PropertyMetadata('counterReset'), counterReset);
+              this.counterReset$delegate.setValue_27qitx$(this, new Kotlin.PropertyMetadata('counterReset'), counterReset);
             }
           },
           cursor: {
             get: function () {
-              return this.cursor$delegate.getValue_ah4kp6$(this, new Kotlin.PropertyMetadata('cursor'));
+              return this.cursor$delegate.getValue_7kda83$(this, new Kotlin.PropertyMetadata('cursor'));
             },
             set: function (cursor) {
-              this.cursor$delegate.setValue_vr1yzg$(this, new Kotlin.PropertyMetadata('cursor'), cursor);
+              this.cursor$delegate.setValue_27qitx$(this, new Kotlin.PropertyMetadata('cursor'), cursor);
             }
           },
           direction: {
             get: function () {
-              return this.direction$delegate.getValue_ah4kp6$(this, new Kotlin.PropertyMetadata('direction'));
+              return this.direction$delegate.getValue_7kda83$(this, new Kotlin.PropertyMetadata('direction'));
             },
             set: function (direction) {
-              this.direction$delegate.setValue_vr1yzg$(this, new Kotlin.PropertyMetadata('direction'), direction);
+              this.direction$delegate.setValue_27qitx$(this, new Kotlin.PropertyMetadata('direction'), direction);
             }
           },
           display: {
             get: function () {
-              return this.display$delegate.getValue_ah4kp6$(this, new Kotlin.PropertyMetadata('display'));
+              return this.display$delegate.getValue_7kda83$(this, new Kotlin.PropertyMetadata('display'));
             },
             set: function (display) {
-              this.display$delegate.setValue_vr1yzg$(this, new Kotlin.PropertyMetadata('display'), display);
+              this.display$delegate.setValue_27qitx$(this, new Kotlin.PropertyMetadata('display'), display);
             }
           },
           emptyCells: {
             get: function () {
-              return this.emptyCells$delegate.getValue_ah4kp6$(this, new Kotlin.PropertyMetadata('emptyCells'));
+              return this.emptyCells$delegate.getValue_7kda83$(this, new Kotlin.PropertyMetadata('emptyCells'));
             },
             set: function (emptyCells) {
-              this.emptyCells$delegate.setValue_vr1yzg$(this, new Kotlin.PropertyMetadata('emptyCells'), emptyCells);
+              this.emptyCells$delegate.setValue_27qitx$(this, new Kotlin.PropertyMetadata('emptyCells'), emptyCells);
             }
           },
           filter: {
             get: function () {
-              return this.filter$delegate.getValue_ah4kp6$(this, new Kotlin.PropertyMetadata('filter'));
+              return this.filter$delegate.getValue_7kda83$(this, new Kotlin.PropertyMetadata('filter'));
             },
             set: function (filter) {
-              this.filter$delegate.setValue_vr1yzg$(this, new Kotlin.PropertyMetadata('filter'), filter);
+              this.filter$delegate.setValue_27qitx$(this, new Kotlin.PropertyMetadata('filter'), filter);
             }
           },
           flex: {
             get: function () {
-              return this.flex$delegate.getValue_ah4kp6$(this, new Kotlin.PropertyMetadata('flex'));
+              return this.flex$delegate.getValue_7kda83$(this, new Kotlin.PropertyMetadata('flex'));
             },
             set: function (flex) {
-              this.flex$delegate.setValue_vr1yzg$(this, new Kotlin.PropertyMetadata('flex'), flex);
+              this.flex$delegate.setValue_27qitx$(this, new Kotlin.PropertyMetadata('flex'), flex);
             }
           },
           flexBasis: {
             get: function () {
-              return this.flexBasis$delegate.getValue_ah4kp6$(this, new Kotlin.PropertyMetadata('flexBasis'));
+              return this.flexBasis$delegate.getValue_7kda83$(this, new Kotlin.PropertyMetadata('flexBasis'));
             },
             set: function (flexBasis) {
-              this.flexBasis$delegate.setValue_vr1yzg$(this, new Kotlin.PropertyMetadata('flexBasis'), flexBasis);
+              this.flexBasis$delegate.setValue_27qitx$(this, new Kotlin.PropertyMetadata('flexBasis'), flexBasis);
             }
           },
           flexDirection: {
             get: function () {
-              return this.flexDirection$delegate.getValue_ah4kp6$(this, new Kotlin.PropertyMetadata('flexDirection'));
+              return this.flexDirection$delegate.getValue_7kda83$(this, new Kotlin.PropertyMetadata('flexDirection'));
             },
             set: function (flexDirection) {
-              this.flexDirection$delegate.setValue_vr1yzg$(this, new Kotlin.PropertyMetadata('flexDirection'), flexDirection);
+              this.flexDirection$delegate.setValue_27qitx$(this, new Kotlin.PropertyMetadata('flexDirection'), flexDirection);
             }
           },
           flexFlow: {
             get: function () {
-              return this.flexFlow$delegate.getValue_ah4kp6$(this, new Kotlin.PropertyMetadata('flexFlow'));
+              return this.flexFlow$delegate.getValue_7kda83$(this, new Kotlin.PropertyMetadata('flexFlow'));
             },
             set: function (flexFlow) {
-              this.flexFlow$delegate.setValue_vr1yzg$(this, new Kotlin.PropertyMetadata('flexFlow'), flexFlow);
+              this.flexFlow$delegate.setValue_27qitx$(this, new Kotlin.PropertyMetadata('flexFlow'), flexFlow);
             }
           },
           flexGrow: {
             get: function () {
-              return this.flexGrow$delegate.getValue_ah4kp6$(this, new Kotlin.PropertyMetadata('flexGrow'));
+              return this.flexGrow$delegate.getValue_7kda83$(this, new Kotlin.PropertyMetadata('flexGrow'));
             },
             set: function (flexGrow) {
-              this.flexGrow$delegate.setValue_vr1yzg$(this, new Kotlin.PropertyMetadata('flexGrow'), flexGrow);
+              this.flexGrow$delegate.setValue_27qitx$(this, new Kotlin.PropertyMetadata('flexGrow'), flexGrow);
             }
           },
           flexShrink: {
             get: function () {
-              return this.flexShrink$delegate.getValue_ah4kp6$(this, new Kotlin.PropertyMetadata('flexShrink'));
+              return this.flexShrink$delegate.getValue_7kda83$(this, new Kotlin.PropertyMetadata('flexShrink'));
             },
             set: function (flexShrink) {
-              this.flexShrink$delegate.setValue_vr1yzg$(this, new Kotlin.PropertyMetadata('flexShrink'), flexShrink);
+              this.flexShrink$delegate.setValue_27qitx$(this, new Kotlin.PropertyMetadata('flexShrink'), flexShrink);
             }
           },
           flexWrap: {
             get: function () {
-              return this.flexWrap$delegate.getValue_ah4kp6$(this, new Kotlin.PropertyMetadata('flexWrap'));
+              return this.flexWrap$delegate.getValue_7kda83$(this, new Kotlin.PropertyMetadata('flexWrap'));
             },
             set: function (flexWrap) {
-              this.flexWrap$delegate.setValue_vr1yzg$(this, new Kotlin.PropertyMetadata('flexWrap'), flexWrap);
+              this.flexWrap$delegate.setValue_27qitx$(this, new Kotlin.PropertyMetadata('flexWrap'), flexWrap);
             }
           },
           font: {
             get: function () {
-              return this.font$delegate.getValue_ah4kp6$(this, new Kotlin.PropertyMetadata('font'));
+              return this.font$delegate.getValue_7kda83$(this, new Kotlin.PropertyMetadata('font'));
             },
             set: function (font) {
-              this.font$delegate.setValue_vr1yzg$(this, new Kotlin.PropertyMetadata('font'), font);
+              this.font$delegate.setValue_27qitx$(this, new Kotlin.PropertyMetadata('font'), font);
             }
           },
           fontFamily: {
             get: function () {
-              return this.fontFamily$delegate.getValue_ah4kp6$(this, new Kotlin.PropertyMetadata('fontFamily'));
+              return this.fontFamily$delegate.getValue_7kda83$(this, new Kotlin.PropertyMetadata('fontFamily'));
             },
             set: function (fontFamily) {
-              this.fontFamily$delegate.setValue_vr1yzg$(this, new Kotlin.PropertyMetadata('fontFamily'), fontFamily);
+              this.fontFamily$delegate.setValue_27qitx$(this, new Kotlin.PropertyMetadata('fontFamily'), fontFamily);
             }
           },
           fontFeatureSettings: {
             get: function () {
-              return this.fontFeatureSettings$delegate.getValue_ah4kp6$(this, new Kotlin.PropertyMetadata('fontFeatureSettings'));
+              return this.fontFeatureSettings$delegate.getValue_7kda83$(this, new Kotlin.PropertyMetadata('fontFeatureSettings'));
             },
             set: function (fontFeatureSettings) {
-              this.fontFeatureSettings$delegate.setValue_vr1yzg$(this, new Kotlin.PropertyMetadata('fontFeatureSettings'), fontFeatureSettings);
+              this.fontFeatureSettings$delegate.setValue_27qitx$(this, new Kotlin.PropertyMetadata('fontFeatureSettings'), fontFeatureSettings);
             }
           },
           fontKerning: {
             get: function () {
-              return this.fontKerning$delegate.getValue_ah4kp6$(this, new Kotlin.PropertyMetadata('fontKerning'));
+              return this.fontKerning$delegate.getValue_7kda83$(this, new Kotlin.PropertyMetadata('fontKerning'));
             },
             set: function (fontKerning) {
-              this.fontKerning$delegate.setValue_vr1yzg$(this, new Kotlin.PropertyMetadata('fontKerning'), fontKerning);
+              this.fontKerning$delegate.setValue_27qitx$(this, new Kotlin.PropertyMetadata('fontKerning'), fontKerning);
             }
           },
           fontLanguageOverride: {
             get: function () {
-              return this.fontLanguageOverride$delegate.getValue_ah4kp6$(this, new Kotlin.PropertyMetadata('fontLanguageOverride'));
+              return this.fontLanguageOverride$delegate.getValue_7kda83$(this, new Kotlin.PropertyMetadata('fontLanguageOverride'));
             },
             set: function (fontLanguageOverride) {
-              this.fontLanguageOverride$delegate.setValue_vr1yzg$(this, new Kotlin.PropertyMetadata('fontLanguageOverride'), fontLanguageOverride);
+              this.fontLanguageOverride$delegate.setValue_27qitx$(this, new Kotlin.PropertyMetadata('fontLanguageOverride'), fontLanguageOverride);
             }
           },
           fontSize: {
             get: function () {
-              return this.fontSize$delegate.getValue_ah4kp6$(this, new Kotlin.PropertyMetadata('fontSize'));
+              return this.fontSize$delegate.getValue_7kda83$(this, new Kotlin.PropertyMetadata('fontSize'));
             },
             set: function (fontSize) {
-              this.fontSize$delegate.setValue_vr1yzg$(this, new Kotlin.PropertyMetadata('fontSize'), fontSize);
+              this.fontSize$delegate.setValue_27qitx$(this, new Kotlin.PropertyMetadata('fontSize'), fontSize);
             }
           },
           fontSizeAdjust: {
             get: function () {
-              return this.fontSizeAdjust$delegate.getValue_ah4kp6$(this, new Kotlin.PropertyMetadata('fontSizeAdjust'));
+              return this.fontSizeAdjust$delegate.getValue_7kda83$(this, new Kotlin.PropertyMetadata('fontSizeAdjust'));
             },
             set: function (fontSizeAdjust) {
-              this.fontSizeAdjust$delegate.setValue_vr1yzg$(this, new Kotlin.PropertyMetadata('fontSizeAdjust'), fontSizeAdjust);
+              this.fontSizeAdjust$delegate.setValue_27qitx$(this, new Kotlin.PropertyMetadata('fontSizeAdjust'), fontSizeAdjust);
             }
           },
           fontStretch: {
             get: function () {
-              return this.fontStretch$delegate.getValue_ah4kp6$(this, new Kotlin.PropertyMetadata('fontStretch'));
+              return this.fontStretch$delegate.getValue_7kda83$(this, new Kotlin.PropertyMetadata('fontStretch'));
             },
             set: function (fontStretch) {
-              this.fontStretch$delegate.setValue_vr1yzg$(this, new Kotlin.PropertyMetadata('fontStretch'), fontStretch);
+              this.fontStretch$delegate.setValue_27qitx$(this, new Kotlin.PropertyMetadata('fontStretch'), fontStretch);
             }
           },
           fontStyle: {
             get: function () {
-              return this.fontStyle$delegate.getValue_ah4kp6$(this, new Kotlin.PropertyMetadata('fontStyle'));
+              return this.fontStyle$delegate.getValue_7kda83$(this, new Kotlin.PropertyMetadata('fontStyle'));
             },
             set: function (fontStyle) {
-              this.fontStyle$delegate.setValue_vr1yzg$(this, new Kotlin.PropertyMetadata('fontStyle'), fontStyle);
+              this.fontStyle$delegate.setValue_27qitx$(this, new Kotlin.PropertyMetadata('fontStyle'), fontStyle);
             }
           },
           fontSynthesis: {
             get: function () {
-              return this.fontSynthesis$delegate.getValue_ah4kp6$(this, new Kotlin.PropertyMetadata('fontSynthesis'));
+              return this.fontSynthesis$delegate.getValue_7kda83$(this, new Kotlin.PropertyMetadata('fontSynthesis'));
             },
             set: function (fontSynthesis) {
-              this.fontSynthesis$delegate.setValue_vr1yzg$(this, new Kotlin.PropertyMetadata('fontSynthesis'), fontSynthesis);
+              this.fontSynthesis$delegate.setValue_27qitx$(this, new Kotlin.PropertyMetadata('fontSynthesis'), fontSynthesis);
             }
           },
           fontVariant: {
             get: function () {
-              return this.fontVariant$delegate.getValue_ah4kp6$(this, new Kotlin.PropertyMetadata('fontVariant'));
+              return this.fontVariant$delegate.getValue_7kda83$(this, new Kotlin.PropertyMetadata('fontVariant'));
             },
             set: function (fontVariant) {
-              this.fontVariant$delegate.setValue_vr1yzg$(this, new Kotlin.PropertyMetadata('fontVariant'), fontVariant);
+              this.fontVariant$delegate.setValue_27qitx$(this, new Kotlin.PropertyMetadata('fontVariant'), fontVariant);
             }
           },
           fontVariantAlternates: {
             get: function () {
-              return this.fontVariantAlternates$delegate.getValue_ah4kp6$(this, new Kotlin.PropertyMetadata('fontVariantAlternates'));
+              return this.fontVariantAlternates$delegate.getValue_7kda83$(this, new Kotlin.PropertyMetadata('fontVariantAlternates'));
             },
             set: function (fontVariantAlternates) {
-              this.fontVariantAlternates$delegate.setValue_vr1yzg$(this, new Kotlin.PropertyMetadata('fontVariantAlternates'), fontVariantAlternates);
+              this.fontVariantAlternates$delegate.setValue_27qitx$(this, new Kotlin.PropertyMetadata('fontVariantAlternates'), fontVariantAlternates);
             }
           },
           fontVariantCaps: {
             get: function () {
-              return this.fontVariantCaps$delegate.getValue_ah4kp6$(this, new Kotlin.PropertyMetadata('fontVariantCaps'));
+              return this.fontVariantCaps$delegate.getValue_7kda83$(this, new Kotlin.PropertyMetadata('fontVariantCaps'));
             },
             set: function (fontVariantCaps) {
-              this.fontVariantCaps$delegate.setValue_vr1yzg$(this, new Kotlin.PropertyMetadata('fontVariantCaps'), fontVariantCaps);
+              this.fontVariantCaps$delegate.setValue_27qitx$(this, new Kotlin.PropertyMetadata('fontVariantCaps'), fontVariantCaps);
             }
           },
           fontVariantEastAsian: {
             get: function () {
-              return this.fontVariantEastAsian$delegate.getValue_ah4kp6$(this, new Kotlin.PropertyMetadata('fontVariantEastAsian'));
+              return this.fontVariantEastAsian$delegate.getValue_7kda83$(this, new Kotlin.PropertyMetadata('fontVariantEastAsian'));
             },
             set: function (fontVariantEastAsian) {
-              this.fontVariantEastAsian$delegate.setValue_vr1yzg$(this, new Kotlin.PropertyMetadata('fontVariantEastAsian'), fontVariantEastAsian);
+              this.fontVariantEastAsian$delegate.setValue_27qitx$(this, new Kotlin.PropertyMetadata('fontVariantEastAsian'), fontVariantEastAsian);
             }
           },
           fontVariantLigatures: {
             get: function () {
-              return this.fontVariantLigatures$delegate.getValue_ah4kp6$(this, new Kotlin.PropertyMetadata('fontVariantLigatures'));
+              return this.fontVariantLigatures$delegate.getValue_7kda83$(this, new Kotlin.PropertyMetadata('fontVariantLigatures'));
             },
             set: function (fontVariantLigatures) {
-              this.fontVariantLigatures$delegate.setValue_vr1yzg$(this, new Kotlin.PropertyMetadata('fontVariantLigatures'), fontVariantLigatures);
+              this.fontVariantLigatures$delegate.setValue_27qitx$(this, new Kotlin.PropertyMetadata('fontVariantLigatures'), fontVariantLigatures);
             }
           },
           fontVariantNumeric: {
             get: function () {
-              return this.fontVariantNumeric$delegate.getValue_ah4kp6$(this, new Kotlin.PropertyMetadata('fontVariantNumeric'));
+              return this.fontVariantNumeric$delegate.getValue_7kda83$(this, new Kotlin.PropertyMetadata('fontVariantNumeric'));
             },
             set: function (fontVariantNumeric) {
-              this.fontVariantNumeric$delegate.setValue_vr1yzg$(this, new Kotlin.PropertyMetadata('fontVariantNumeric'), fontVariantNumeric);
+              this.fontVariantNumeric$delegate.setValue_27qitx$(this, new Kotlin.PropertyMetadata('fontVariantNumeric'), fontVariantNumeric);
             }
           },
           fontVariantPosition: {
             get: function () {
-              return this.fontVariantPosition$delegate.getValue_ah4kp6$(this, new Kotlin.PropertyMetadata('fontVariantPosition'));
+              return this.fontVariantPosition$delegate.getValue_7kda83$(this, new Kotlin.PropertyMetadata('fontVariantPosition'));
             },
             set: function (fontVariantPosition) {
-              this.fontVariantPosition$delegate.setValue_vr1yzg$(this, new Kotlin.PropertyMetadata('fontVariantPosition'), fontVariantPosition);
+              this.fontVariantPosition$delegate.setValue_27qitx$(this, new Kotlin.PropertyMetadata('fontVariantPosition'), fontVariantPosition);
             }
           },
           fontWeight: {
             get: function () {
-              return this.fontWeight$delegate.getValue_ah4kp6$(this, new Kotlin.PropertyMetadata('fontWeight'));
+              return this.fontWeight$delegate.getValue_7kda83$(this, new Kotlin.PropertyMetadata('fontWeight'));
             },
             set: function (fontWeight) {
-              this.fontWeight$delegate.setValue_vr1yzg$(this, new Kotlin.PropertyMetadata('fontWeight'), fontWeight);
+              this.fontWeight$delegate.setValue_27qitx$(this, new Kotlin.PropertyMetadata('fontWeight'), fontWeight);
             }
           },
           hangingPunctuation: {
             get: function () {
-              return this.hangingPunctuation$delegate.getValue_ah4kp6$(this, new Kotlin.PropertyMetadata('hangingPunctuation'));
+              return this.hangingPunctuation$delegate.getValue_7kda83$(this, new Kotlin.PropertyMetadata('hangingPunctuation'));
             },
             set: function (hangingPunctuation) {
-              this.hangingPunctuation$delegate.setValue_vr1yzg$(this, new Kotlin.PropertyMetadata('hangingPunctuation'), hangingPunctuation);
+              this.hangingPunctuation$delegate.setValue_27qitx$(this, new Kotlin.PropertyMetadata('hangingPunctuation'), hangingPunctuation);
             }
           },
           height: {
             get: function () {
-              return this.height$delegate.getValue_ah4kp6$(this, new Kotlin.PropertyMetadata('height'));
+              return this.height$delegate.getValue_7kda83$(this, new Kotlin.PropertyMetadata('height'));
             },
             set: function (height) {
-              this.height$delegate.setValue_vr1yzg$(this, new Kotlin.PropertyMetadata('height'), height);
+              this.height$delegate.setValue_27qitx$(this, new Kotlin.PropertyMetadata('height'), height);
             }
           },
           hyphens: {
             get: function () {
-              return this.hyphens$delegate.getValue_ah4kp6$(this, new Kotlin.PropertyMetadata('hyphens'));
+              return this.hyphens$delegate.getValue_7kda83$(this, new Kotlin.PropertyMetadata('hyphens'));
             },
             set: function (hyphens) {
-              this.hyphens$delegate.setValue_vr1yzg$(this, new Kotlin.PropertyMetadata('hyphens'), hyphens);
+              this.hyphens$delegate.setValue_27qitx$(this, new Kotlin.PropertyMetadata('hyphens'), hyphens);
             }
           },
           imageOrientation: {
             get: function () {
-              return this.imageOrientation$delegate.getValue_ah4kp6$(this, new Kotlin.PropertyMetadata('imageOrientation'));
+              return this.imageOrientation$delegate.getValue_7kda83$(this, new Kotlin.PropertyMetadata('imageOrientation'));
             },
             set: function (imageOrientation) {
-              this.imageOrientation$delegate.setValue_vr1yzg$(this, new Kotlin.PropertyMetadata('imageOrientation'), imageOrientation);
+              this.imageOrientation$delegate.setValue_27qitx$(this, new Kotlin.PropertyMetadata('imageOrientation'), imageOrientation);
             }
           },
           imageRendering: {
             get: function () {
-              return this.imageRendering$delegate.getValue_ah4kp6$(this, new Kotlin.PropertyMetadata('imageRendering'));
+              return this.imageRendering$delegate.getValue_7kda83$(this, new Kotlin.PropertyMetadata('imageRendering'));
             },
             set: function (imageRendering) {
-              this.imageRendering$delegate.setValue_vr1yzg$(this, new Kotlin.PropertyMetadata('imageRendering'), imageRendering);
+              this.imageRendering$delegate.setValue_27qitx$(this, new Kotlin.PropertyMetadata('imageRendering'), imageRendering);
             }
           },
           imageResolution: {
             get: function () {
-              return this.imageResolution$delegate.getValue_ah4kp6$(this, new Kotlin.PropertyMetadata('imageResolution'));
+              return this.imageResolution$delegate.getValue_7kda83$(this, new Kotlin.PropertyMetadata('imageResolution'));
             },
             set: function (imageResolution) {
-              this.imageResolution$delegate.setValue_vr1yzg$(this, new Kotlin.PropertyMetadata('imageResolution'), imageResolution);
+              this.imageResolution$delegate.setValue_27qitx$(this, new Kotlin.PropertyMetadata('imageResolution'), imageResolution);
             }
           },
           imeMode: {
             get: function () {
-              return this.imeMode$delegate.getValue_ah4kp6$(this, new Kotlin.PropertyMetadata('imeMode'));
+              return this.imeMode$delegate.getValue_7kda83$(this, new Kotlin.PropertyMetadata('imeMode'));
             },
             set: function (imeMode) {
-              this.imeMode$delegate.setValue_vr1yzg$(this, new Kotlin.PropertyMetadata('imeMode'), imeMode);
+              this.imeMode$delegate.setValue_27qitx$(this, new Kotlin.PropertyMetadata('imeMode'), imeMode);
             }
           },
           justifyContent: {
             get: function () {
-              return this.justifyContent$delegate.getValue_ah4kp6$(this, new Kotlin.PropertyMetadata('justifyContent'));
+              return this.justifyContent$delegate.getValue_7kda83$(this, new Kotlin.PropertyMetadata('justifyContent'));
             },
             set: function (justifyContent) {
-              this.justifyContent$delegate.setValue_vr1yzg$(this, new Kotlin.PropertyMetadata('justifyContent'), justifyContent);
+              this.justifyContent$delegate.setValue_27qitx$(this, new Kotlin.PropertyMetadata('justifyContent'), justifyContent);
             }
           },
           left: {
             get: function () {
-              return this.left$delegate.getValue_ah4kp6$(this, new Kotlin.PropertyMetadata('left'));
+              return this.left$delegate.getValue_7kda83$(this, new Kotlin.PropertyMetadata('left'));
             },
             set: function (left) {
-              this.left$delegate.setValue_vr1yzg$(this, new Kotlin.PropertyMetadata('left'), left);
+              this.left$delegate.setValue_27qitx$(this, new Kotlin.PropertyMetadata('left'), left);
             }
           },
           letterSpacing: {
             get: function () {
-              return this.letterSpacing$delegate.getValue_ah4kp6$(this, new Kotlin.PropertyMetadata('letterSpacing'));
+              return this.letterSpacing$delegate.getValue_7kda83$(this, new Kotlin.PropertyMetadata('letterSpacing'));
             },
             set: function (letterSpacing) {
-              this.letterSpacing$delegate.setValue_vr1yzg$(this, new Kotlin.PropertyMetadata('letterSpacing'), letterSpacing);
+              this.letterSpacing$delegate.setValue_27qitx$(this, new Kotlin.PropertyMetadata('letterSpacing'), letterSpacing);
             }
           },
           lineBreak: {
             get: function () {
-              return this.lineBreak$delegate.getValue_ah4kp6$(this, new Kotlin.PropertyMetadata('lineBreak'));
+              return this.lineBreak$delegate.getValue_7kda83$(this, new Kotlin.PropertyMetadata('lineBreak'));
             },
             set: function (lineBreak) {
-              this.lineBreak$delegate.setValue_vr1yzg$(this, new Kotlin.PropertyMetadata('lineBreak'), lineBreak);
+              this.lineBreak$delegate.setValue_27qitx$(this, new Kotlin.PropertyMetadata('lineBreak'), lineBreak);
             }
           },
           lineHeight: {
             get: function () {
-              return this.lineHeight$delegate.getValue_ah4kp6$(this, new Kotlin.PropertyMetadata('lineHeight'));
+              return this.lineHeight$delegate.getValue_7kda83$(this, new Kotlin.PropertyMetadata('lineHeight'));
             },
             set: function (lineHeight) {
-              this.lineHeight$delegate.setValue_vr1yzg$(this, new Kotlin.PropertyMetadata('lineHeight'), lineHeight);
+              this.lineHeight$delegate.setValue_27qitx$(this, new Kotlin.PropertyMetadata('lineHeight'), lineHeight);
             }
           },
           listStyle: {
             get: function () {
-              return this.listStyle$delegate.getValue_ah4kp6$(this, new Kotlin.PropertyMetadata('listStyle'));
+              return this.listStyle$delegate.getValue_7kda83$(this, new Kotlin.PropertyMetadata('listStyle'));
             },
             set: function (listStyle) {
-              this.listStyle$delegate.setValue_vr1yzg$(this, new Kotlin.PropertyMetadata('listStyle'), listStyle);
+              this.listStyle$delegate.setValue_27qitx$(this, new Kotlin.PropertyMetadata('listStyle'), listStyle);
             }
           },
           listStyleImage: {
             get: function () {
-              return this.listStyleImage$delegate.getValue_ah4kp6$(this, new Kotlin.PropertyMetadata('listStyleImage'));
+              return this.listStyleImage$delegate.getValue_7kda83$(this, new Kotlin.PropertyMetadata('listStyleImage'));
             },
             set: function (listStyleImage) {
-              this.listStyleImage$delegate.setValue_vr1yzg$(this, new Kotlin.PropertyMetadata('listStyleImage'), listStyleImage);
+              this.listStyleImage$delegate.setValue_27qitx$(this, new Kotlin.PropertyMetadata('listStyleImage'), listStyleImage);
             }
           },
           listStylePosition: {
             get: function () {
-              return this.listStylePosition$delegate.getValue_ah4kp6$(this, new Kotlin.PropertyMetadata('listStylePosition'));
+              return this.listStylePosition$delegate.getValue_7kda83$(this, new Kotlin.PropertyMetadata('listStylePosition'));
             },
             set: function (listStylePosition) {
-              this.listStylePosition$delegate.setValue_vr1yzg$(this, new Kotlin.PropertyMetadata('listStylePosition'), listStylePosition);
+              this.listStylePosition$delegate.setValue_27qitx$(this, new Kotlin.PropertyMetadata('listStylePosition'), listStylePosition);
             }
           },
           listStyleType: {
             get: function () {
-              return this.listStyleType$delegate.getValue_ah4kp6$(this, new Kotlin.PropertyMetadata('listStyleType'));
+              return this.listStyleType$delegate.getValue_7kda83$(this, new Kotlin.PropertyMetadata('listStyleType'));
             },
             set: function (listStyleType) {
-              this.listStyleType$delegate.setValue_vr1yzg$(this, new Kotlin.PropertyMetadata('listStyleType'), listStyleType);
+              this.listStyleType$delegate.setValue_27qitx$(this, new Kotlin.PropertyMetadata('listStyleType'), listStyleType);
             }
           },
           margin: {
             get: function () {
-              return this.margin$delegate.getValue_ah4kp6$(this, new Kotlin.PropertyMetadata('margin'));
+              return this.margin$delegate.getValue_7kda83$(this, new Kotlin.PropertyMetadata('margin'));
             },
             set: function (margin) {
-              this.margin$delegate.setValue_vr1yzg$(this, new Kotlin.PropertyMetadata('margin'), margin);
+              this.margin$delegate.setValue_27qitx$(this, new Kotlin.PropertyMetadata('margin'), margin);
             }
           },
           marginBottom: {
             get: function () {
-              return this.marginBottom$delegate.getValue_ah4kp6$(this, new Kotlin.PropertyMetadata('marginBottom'));
+              return this.marginBottom$delegate.getValue_7kda83$(this, new Kotlin.PropertyMetadata('marginBottom'));
             },
             set: function (marginBottom) {
-              this.marginBottom$delegate.setValue_vr1yzg$(this, new Kotlin.PropertyMetadata('marginBottom'), marginBottom);
+              this.marginBottom$delegate.setValue_27qitx$(this, new Kotlin.PropertyMetadata('marginBottom'), marginBottom);
             }
           },
           marginLeft: {
             get: function () {
-              return this.marginLeft$delegate.getValue_ah4kp6$(this, new Kotlin.PropertyMetadata('marginLeft'));
+              return this.marginLeft$delegate.getValue_7kda83$(this, new Kotlin.PropertyMetadata('marginLeft'));
             },
             set: function (marginLeft) {
-              this.marginLeft$delegate.setValue_vr1yzg$(this, new Kotlin.PropertyMetadata('marginLeft'), marginLeft);
+              this.marginLeft$delegate.setValue_27qitx$(this, new Kotlin.PropertyMetadata('marginLeft'), marginLeft);
             }
           },
           marginRight: {
             get: function () {
-              return this.marginRight$delegate.getValue_ah4kp6$(this, new Kotlin.PropertyMetadata('marginRight'));
+              return this.marginRight$delegate.getValue_7kda83$(this, new Kotlin.PropertyMetadata('marginRight'));
             },
             set: function (marginRight) {
-              this.marginRight$delegate.setValue_vr1yzg$(this, new Kotlin.PropertyMetadata('marginRight'), marginRight);
+              this.marginRight$delegate.setValue_27qitx$(this, new Kotlin.PropertyMetadata('marginRight'), marginRight);
             }
           },
           marginTop: {
             get: function () {
-              return this.marginTop$delegate.getValue_ah4kp6$(this, new Kotlin.PropertyMetadata('marginTop'));
+              return this.marginTop$delegate.getValue_7kda83$(this, new Kotlin.PropertyMetadata('marginTop'));
             },
             set: function (marginTop) {
-              this.marginTop$delegate.setValue_vr1yzg$(this, new Kotlin.PropertyMetadata('marginTop'), marginTop);
+              this.marginTop$delegate.setValue_27qitx$(this, new Kotlin.PropertyMetadata('marginTop'), marginTop);
             }
           },
           mark: {
             get: function () {
-              return this.mark$delegate.getValue_ah4kp6$(this, new Kotlin.PropertyMetadata('mark'));
+              return this.mark$delegate.getValue_7kda83$(this, new Kotlin.PropertyMetadata('mark'));
             },
             set: function (mark) {
-              this.mark$delegate.setValue_vr1yzg$(this, new Kotlin.PropertyMetadata('mark'), mark);
+              this.mark$delegate.setValue_27qitx$(this, new Kotlin.PropertyMetadata('mark'), mark);
             }
           },
           markAfter: {
             get: function () {
-              return this.markAfter$delegate.getValue_ah4kp6$(this, new Kotlin.PropertyMetadata('markAfter'));
+              return this.markAfter$delegate.getValue_7kda83$(this, new Kotlin.PropertyMetadata('markAfter'));
             },
             set: function (markAfter) {
-              this.markAfter$delegate.setValue_vr1yzg$(this, new Kotlin.PropertyMetadata('markAfter'), markAfter);
+              this.markAfter$delegate.setValue_27qitx$(this, new Kotlin.PropertyMetadata('markAfter'), markAfter);
             }
           },
           markBefore: {
             get: function () {
-              return this.markBefore$delegate.getValue_ah4kp6$(this, new Kotlin.PropertyMetadata('markBefore'));
+              return this.markBefore$delegate.getValue_7kda83$(this, new Kotlin.PropertyMetadata('markBefore'));
             },
             set: function (markBefore) {
-              this.markBefore$delegate.setValue_vr1yzg$(this, new Kotlin.PropertyMetadata('markBefore'), markBefore);
+              this.markBefore$delegate.setValue_27qitx$(this, new Kotlin.PropertyMetadata('markBefore'), markBefore);
             }
           },
           marks: {
             get: function () {
-              return this.marks$delegate.getValue_ah4kp6$(this, new Kotlin.PropertyMetadata('marks'));
+              return this.marks$delegate.getValue_7kda83$(this, new Kotlin.PropertyMetadata('marks'));
             },
             set: function (marks) {
-              this.marks$delegate.setValue_vr1yzg$(this, new Kotlin.PropertyMetadata('marks'), marks);
+              this.marks$delegate.setValue_27qitx$(this, new Kotlin.PropertyMetadata('marks'), marks);
             }
           },
           marqueeDirection: {
             get: function () {
-              return this.marqueeDirection$delegate.getValue_ah4kp6$(this, new Kotlin.PropertyMetadata('marqueeDirection'));
+              return this.marqueeDirection$delegate.getValue_7kda83$(this, new Kotlin.PropertyMetadata('marqueeDirection'));
             },
             set: function (marqueeDirection) {
-              this.marqueeDirection$delegate.setValue_vr1yzg$(this, new Kotlin.PropertyMetadata('marqueeDirection'), marqueeDirection);
+              this.marqueeDirection$delegate.setValue_27qitx$(this, new Kotlin.PropertyMetadata('marqueeDirection'), marqueeDirection);
             }
           },
           marqueePlayCount: {
             get: function () {
-              return this.marqueePlayCount$delegate.getValue_ah4kp6$(this, new Kotlin.PropertyMetadata('marqueePlayCount'));
+              return this.marqueePlayCount$delegate.getValue_7kda83$(this, new Kotlin.PropertyMetadata('marqueePlayCount'));
             },
             set: function (marqueePlayCount) {
-              this.marqueePlayCount$delegate.setValue_vr1yzg$(this, new Kotlin.PropertyMetadata('marqueePlayCount'), marqueePlayCount);
+              this.marqueePlayCount$delegate.setValue_27qitx$(this, new Kotlin.PropertyMetadata('marqueePlayCount'), marqueePlayCount);
             }
           },
           marqueeSpeed: {
             get: function () {
-              return this.marqueeSpeed$delegate.getValue_ah4kp6$(this, new Kotlin.PropertyMetadata('marqueeSpeed'));
+              return this.marqueeSpeed$delegate.getValue_7kda83$(this, new Kotlin.PropertyMetadata('marqueeSpeed'));
             },
             set: function (marqueeSpeed) {
-              this.marqueeSpeed$delegate.setValue_vr1yzg$(this, new Kotlin.PropertyMetadata('marqueeSpeed'), marqueeSpeed);
+              this.marqueeSpeed$delegate.setValue_27qitx$(this, new Kotlin.PropertyMetadata('marqueeSpeed'), marqueeSpeed);
             }
           },
           marqueeStyle: {
             get: function () {
-              return this.marqueeStyle$delegate.getValue_ah4kp6$(this, new Kotlin.PropertyMetadata('marqueeStyle'));
+              return this.marqueeStyle$delegate.getValue_7kda83$(this, new Kotlin.PropertyMetadata('marqueeStyle'));
             },
             set: function (marqueeStyle) {
-              this.marqueeStyle$delegate.setValue_vr1yzg$(this, new Kotlin.PropertyMetadata('marqueeStyle'), marqueeStyle);
+              this.marqueeStyle$delegate.setValue_27qitx$(this, new Kotlin.PropertyMetadata('marqueeStyle'), marqueeStyle);
             }
           },
           mask: {
             get: function () {
-              return this.mask$delegate.getValue_ah4kp6$(this, new Kotlin.PropertyMetadata('mask'));
+              return this.mask$delegate.getValue_7kda83$(this, new Kotlin.PropertyMetadata('mask'));
             },
             set: function (mask) {
-              this.mask$delegate.setValue_vr1yzg$(this, new Kotlin.PropertyMetadata('mask'), mask);
+              this.mask$delegate.setValue_27qitx$(this, new Kotlin.PropertyMetadata('mask'), mask);
             }
           },
           maskType: {
             get: function () {
-              return this.maskType$delegate.getValue_ah4kp6$(this, new Kotlin.PropertyMetadata('maskType'));
+              return this.maskType$delegate.getValue_7kda83$(this, new Kotlin.PropertyMetadata('maskType'));
             },
             set: function (maskType) {
-              this.maskType$delegate.setValue_vr1yzg$(this, new Kotlin.PropertyMetadata('maskType'), maskType);
+              this.maskType$delegate.setValue_27qitx$(this, new Kotlin.PropertyMetadata('maskType'), maskType);
             }
           },
           maxHeight: {
             get: function () {
-              return this.maxHeight$delegate.getValue_ah4kp6$(this, new Kotlin.PropertyMetadata('maxHeight'));
+              return this.maxHeight$delegate.getValue_7kda83$(this, new Kotlin.PropertyMetadata('maxHeight'));
             },
             set: function (maxHeight) {
-              this.maxHeight$delegate.setValue_vr1yzg$(this, new Kotlin.PropertyMetadata('maxHeight'), maxHeight);
+              this.maxHeight$delegate.setValue_27qitx$(this, new Kotlin.PropertyMetadata('maxHeight'), maxHeight);
             }
           },
           maxWidth: {
             get: function () {
-              return this.maxWidth$delegate.getValue_ah4kp6$(this, new Kotlin.PropertyMetadata('maxWidth'));
+              return this.maxWidth$delegate.getValue_7kda83$(this, new Kotlin.PropertyMetadata('maxWidth'));
             },
             set: function (maxWidth) {
-              this.maxWidth$delegate.setValue_vr1yzg$(this, new Kotlin.PropertyMetadata('maxWidth'), maxWidth);
+              this.maxWidth$delegate.setValue_27qitx$(this, new Kotlin.PropertyMetadata('maxWidth'), maxWidth);
             }
           },
           minHeight: {
             get: function () {
-              return this.minHeight$delegate.getValue_ah4kp6$(this, new Kotlin.PropertyMetadata('minHeight'));
+              return this.minHeight$delegate.getValue_7kda83$(this, new Kotlin.PropertyMetadata('minHeight'));
             },
             set: function (minHeight) {
-              this.minHeight$delegate.setValue_vr1yzg$(this, new Kotlin.PropertyMetadata('minHeight'), minHeight);
+              this.minHeight$delegate.setValue_27qitx$(this, new Kotlin.PropertyMetadata('minHeight'), minHeight);
             }
           },
           minWidth: {
             get: function () {
-              return this.minWidth$delegate.getValue_ah4kp6$(this, new Kotlin.PropertyMetadata('minWidth'));
+              return this.minWidth$delegate.getValue_7kda83$(this, new Kotlin.PropertyMetadata('minWidth'));
             },
             set: function (minWidth) {
-              this.minWidth$delegate.setValue_vr1yzg$(this, new Kotlin.PropertyMetadata('minWidth'), minWidth);
+              this.minWidth$delegate.setValue_27qitx$(this, new Kotlin.PropertyMetadata('minWidth'), minWidth);
             }
           },
           navDown: {
             get: function () {
-              return this.navDown$delegate.getValue_ah4kp6$(this, new Kotlin.PropertyMetadata('navDown'));
+              return this.navDown$delegate.getValue_7kda83$(this, new Kotlin.PropertyMetadata('navDown'));
             },
             set: function (navDown) {
-              this.navDown$delegate.setValue_vr1yzg$(this, new Kotlin.PropertyMetadata('navDown'), navDown);
+              this.navDown$delegate.setValue_27qitx$(this, new Kotlin.PropertyMetadata('navDown'), navDown);
             }
           },
           navIndex: {
             get: function () {
-              return this.navIndex$delegate.getValue_ah4kp6$(this, new Kotlin.PropertyMetadata('navIndex'));
+              return this.navIndex$delegate.getValue_7kda83$(this, new Kotlin.PropertyMetadata('navIndex'));
             },
             set: function (navIndex) {
-              this.navIndex$delegate.setValue_vr1yzg$(this, new Kotlin.PropertyMetadata('navIndex'), navIndex);
+              this.navIndex$delegate.setValue_27qitx$(this, new Kotlin.PropertyMetadata('navIndex'), navIndex);
             }
           },
           navLeft: {
             get: function () {
-              return this.navLeft$delegate.getValue_ah4kp6$(this, new Kotlin.PropertyMetadata('navLeft'));
+              return this.navLeft$delegate.getValue_7kda83$(this, new Kotlin.PropertyMetadata('navLeft'));
             },
             set: function (navLeft) {
-              this.navLeft$delegate.setValue_vr1yzg$(this, new Kotlin.PropertyMetadata('navLeft'), navLeft);
+              this.navLeft$delegate.setValue_27qitx$(this, new Kotlin.PropertyMetadata('navLeft'), navLeft);
             }
           },
           navRight: {
             get: function () {
-              return this.navRight$delegate.getValue_ah4kp6$(this, new Kotlin.PropertyMetadata('navRight'));
+              return this.navRight$delegate.getValue_7kda83$(this, new Kotlin.PropertyMetadata('navRight'));
             },
             set: function (navRight) {
-              this.navRight$delegate.setValue_vr1yzg$(this, new Kotlin.PropertyMetadata('navRight'), navRight);
+              this.navRight$delegate.setValue_27qitx$(this, new Kotlin.PropertyMetadata('navRight'), navRight);
             }
           },
           navUp: {
             get: function () {
-              return this.navUp$delegate.getValue_ah4kp6$(this, new Kotlin.PropertyMetadata('navUp'));
+              return this.navUp$delegate.getValue_7kda83$(this, new Kotlin.PropertyMetadata('navUp'));
             },
             set: function (navUp) {
-              this.navUp$delegate.setValue_vr1yzg$(this, new Kotlin.PropertyMetadata('navUp'), navUp);
+              this.navUp$delegate.setValue_27qitx$(this, new Kotlin.PropertyMetadata('navUp'), navUp);
             }
           },
           objectFit: {
             get: function () {
-              return this.objectFit$delegate.getValue_ah4kp6$(this, new Kotlin.PropertyMetadata('objectFit'));
+              return this.objectFit$delegate.getValue_7kda83$(this, new Kotlin.PropertyMetadata('objectFit'));
             },
             set: function (objectFit) {
-              this.objectFit$delegate.setValue_vr1yzg$(this, new Kotlin.PropertyMetadata('objectFit'), objectFit);
+              this.objectFit$delegate.setValue_27qitx$(this, new Kotlin.PropertyMetadata('objectFit'), objectFit);
             }
           },
           objectPosition: {
             get: function () {
-              return this.objectPosition$delegate.getValue_ah4kp6$(this, new Kotlin.PropertyMetadata('objectPosition'));
+              return this.objectPosition$delegate.getValue_7kda83$(this, new Kotlin.PropertyMetadata('objectPosition'));
             },
             set: function (objectPosition) {
-              this.objectPosition$delegate.setValue_vr1yzg$(this, new Kotlin.PropertyMetadata('objectPosition'), objectPosition);
+              this.objectPosition$delegate.setValue_27qitx$(this, new Kotlin.PropertyMetadata('objectPosition'), objectPosition);
             }
           },
           opacity: {
             get: function () {
-              return this.opacity$delegate.getValue_ah4kp6$(this, new Kotlin.PropertyMetadata('opacity'));
+              return this.opacity$delegate.getValue_7kda83$(this, new Kotlin.PropertyMetadata('opacity'));
             },
             set: function (opacity) {
-              this.opacity$delegate.setValue_vr1yzg$(this, new Kotlin.PropertyMetadata('opacity'), opacity);
+              this.opacity$delegate.setValue_27qitx$(this, new Kotlin.PropertyMetadata('opacity'), opacity);
             }
           },
           order: {
             get: function () {
-              return this.order$delegate.getValue_ah4kp6$(this, new Kotlin.PropertyMetadata('order'));
+              return this.order$delegate.getValue_7kda83$(this, new Kotlin.PropertyMetadata('order'));
             },
             set: function (order) {
-              this.order$delegate.setValue_vr1yzg$(this, new Kotlin.PropertyMetadata('order'), order);
+              this.order$delegate.setValue_27qitx$(this, new Kotlin.PropertyMetadata('order'), order);
             }
           },
           orphans: {
             get: function () {
-              return this.orphans$delegate.getValue_ah4kp6$(this, new Kotlin.PropertyMetadata('orphans'));
+              return this.orphans$delegate.getValue_7kda83$(this, new Kotlin.PropertyMetadata('orphans'));
             },
             set: function (orphans) {
-              this.orphans$delegate.setValue_vr1yzg$(this, new Kotlin.PropertyMetadata('orphans'), orphans);
+              this.orphans$delegate.setValue_27qitx$(this, new Kotlin.PropertyMetadata('orphans'), orphans);
             }
           },
           outline: {
             get: function () {
-              return this.outline$delegate.getValue_ah4kp6$(this, new Kotlin.PropertyMetadata('outline'));
+              return this.outline$delegate.getValue_7kda83$(this, new Kotlin.PropertyMetadata('outline'));
             },
             set: function (outline) {
-              this.outline$delegate.setValue_vr1yzg$(this, new Kotlin.PropertyMetadata('outline'), outline);
+              this.outline$delegate.setValue_27qitx$(this, new Kotlin.PropertyMetadata('outline'), outline);
             }
           },
           outlineColor: {
             get: function () {
-              return this.outlineColor$delegate.getValue_ah4kp6$(this, new Kotlin.PropertyMetadata('outlineColor'));
+              return this.outlineColor$delegate.getValue_7kda83$(this, new Kotlin.PropertyMetadata('outlineColor'));
             },
             set: function (outlineColor) {
-              this.outlineColor$delegate.setValue_vr1yzg$(this, new Kotlin.PropertyMetadata('outlineColor'), outlineColor);
+              this.outlineColor$delegate.setValue_27qitx$(this, new Kotlin.PropertyMetadata('outlineColor'), outlineColor);
             }
           },
           outlineOffset: {
             get: function () {
-              return this.outlineOffset$delegate.getValue_ah4kp6$(this, new Kotlin.PropertyMetadata('outlineOffset'));
+              return this.outlineOffset$delegate.getValue_7kda83$(this, new Kotlin.PropertyMetadata('outlineOffset'));
             },
             set: function (outlineOffset) {
-              this.outlineOffset$delegate.setValue_vr1yzg$(this, new Kotlin.PropertyMetadata('outlineOffset'), outlineOffset);
+              this.outlineOffset$delegate.setValue_27qitx$(this, new Kotlin.PropertyMetadata('outlineOffset'), outlineOffset);
             }
           },
           outlineStyle: {
             get: function () {
-              return this.outlineStyle$delegate.getValue_ah4kp6$(this, new Kotlin.PropertyMetadata('outlineStyle'));
+              return this.outlineStyle$delegate.getValue_7kda83$(this, new Kotlin.PropertyMetadata('outlineStyle'));
             },
             set: function (outlineStyle) {
-              this.outlineStyle$delegate.setValue_vr1yzg$(this, new Kotlin.PropertyMetadata('outlineStyle'), outlineStyle);
+              this.outlineStyle$delegate.setValue_27qitx$(this, new Kotlin.PropertyMetadata('outlineStyle'), outlineStyle);
             }
           },
           outlineWidth: {
             get: function () {
-              return this.outlineWidth$delegate.getValue_ah4kp6$(this, new Kotlin.PropertyMetadata('outlineWidth'));
+              return this.outlineWidth$delegate.getValue_7kda83$(this, new Kotlin.PropertyMetadata('outlineWidth'));
             },
             set: function (outlineWidth) {
-              this.outlineWidth$delegate.setValue_vr1yzg$(this, new Kotlin.PropertyMetadata('outlineWidth'), outlineWidth);
+              this.outlineWidth$delegate.setValue_27qitx$(this, new Kotlin.PropertyMetadata('outlineWidth'), outlineWidth);
             }
           },
           overflowWrap: {
             get: function () {
-              return this.overflowWrap$delegate.getValue_ah4kp6$(this, new Kotlin.PropertyMetadata('overflowWrap'));
+              return this.overflowWrap$delegate.getValue_7kda83$(this, new Kotlin.PropertyMetadata('overflowWrap'));
             },
             set: function (overflowWrap) {
-              this.overflowWrap$delegate.setValue_vr1yzg$(this, new Kotlin.PropertyMetadata('overflowWrap'), overflowWrap);
+              this.overflowWrap$delegate.setValue_27qitx$(this, new Kotlin.PropertyMetadata('overflowWrap'), overflowWrap);
             }
           },
           overflowX: {
             get: function () {
-              return this.overflowX$delegate.getValue_ah4kp6$(this, new Kotlin.PropertyMetadata('overflowX'));
+              return this.overflowX$delegate.getValue_7kda83$(this, new Kotlin.PropertyMetadata('overflowX'));
             },
             set: function (overflowX) {
-              this.overflowX$delegate.setValue_vr1yzg$(this, new Kotlin.PropertyMetadata('overflowX'), overflowX);
+              this.overflowX$delegate.setValue_27qitx$(this, new Kotlin.PropertyMetadata('overflowX'), overflowX);
             }
           },
           overflowY: {
             get: function () {
-              return this.overflowY$delegate.getValue_ah4kp6$(this, new Kotlin.PropertyMetadata('overflowY'));
+              return this.overflowY$delegate.getValue_7kda83$(this, new Kotlin.PropertyMetadata('overflowY'));
             },
             set: function (overflowY) {
-              this.overflowY$delegate.setValue_vr1yzg$(this, new Kotlin.PropertyMetadata('overflowY'), overflowY);
+              this.overflowY$delegate.setValue_27qitx$(this, new Kotlin.PropertyMetadata('overflowY'), overflowY);
             }
           },
           padding: {
             get: function () {
-              return this.padding$delegate.getValue_ah4kp6$(this, new Kotlin.PropertyMetadata('padding'));
+              return this.padding$delegate.getValue_7kda83$(this, new Kotlin.PropertyMetadata('padding'));
             },
             set: function (padding) {
-              this.padding$delegate.setValue_vr1yzg$(this, new Kotlin.PropertyMetadata('padding'), padding);
+              this.padding$delegate.setValue_27qitx$(this, new Kotlin.PropertyMetadata('padding'), padding);
             }
           },
           paddingBottom: {
             get: function () {
-              return this.paddingBottom$delegate.getValue_ah4kp6$(this, new Kotlin.PropertyMetadata('paddingBottom'));
+              return this.paddingBottom$delegate.getValue_7kda83$(this, new Kotlin.PropertyMetadata('paddingBottom'));
             },
             set: function (paddingBottom) {
-              this.paddingBottom$delegate.setValue_vr1yzg$(this, new Kotlin.PropertyMetadata('paddingBottom'), paddingBottom);
+              this.paddingBottom$delegate.setValue_27qitx$(this, new Kotlin.PropertyMetadata('paddingBottom'), paddingBottom);
             }
           },
           paddingLeft: {
             get: function () {
-              return this.paddingLeft$delegate.getValue_ah4kp6$(this, new Kotlin.PropertyMetadata('paddingLeft'));
+              return this.paddingLeft$delegate.getValue_7kda83$(this, new Kotlin.PropertyMetadata('paddingLeft'));
             },
             set: function (paddingLeft) {
-              this.paddingLeft$delegate.setValue_vr1yzg$(this, new Kotlin.PropertyMetadata('paddingLeft'), paddingLeft);
+              this.paddingLeft$delegate.setValue_27qitx$(this, new Kotlin.PropertyMetadata('paddingLeft'), paddingLeft);
             }
           },
           paddingRight: {
             get: function () {
-              return this.paddingRight$delegate.getValue_ah4kp6$(this, new Kotlin.PropertyMetadata('paddingRight'));
+              return this.paddingRight$delegate.getValue_7kda83$(this, new Kotlin.PropertyMetadata('paddingRight'));
             },
             set: function (paddingRight) {
-              this.paddingRight$delegate.setValue_vr1yzg$(this, new Kotlin.PropertyMetadata('paddingRight'), paddingRight);
+              this.paddingRight$delegate.setValue_27qitx$(this, new Kotlin.PropertyMetadata('paddingRight'), paddingRight);
             }
           },
           paddingTop: {
             get: function () {
-              return this.paddingTop$delegate.getValue_ah4kp6$(this, new Kotlin.PropertyMetadata('paddingTop'));
+              return this.paddingTop$delegate.getValue_7kda83$(this, new Kotlin.PropertyMetadata('paddingTop'));
             },
             set: function (paddingTop) {
-              this.paddingTop$delegate.setValue_vr1yzg$(this, new Kotlin.PropertyMetadata('paddingTop'), paddingTop);
+              this.paddingTop$delegate.setValue_27qitx$(this, new Kotlin.PropertyMetadata('paddingTop'), paddingTop);
             }
           },
           pageBreakAfter: {
             get: function () {
-              return this.pageBreakAfter$delegate.getValue_ah4kp6$(this, new Kotlin.PropertyMetadata('pageBreakAfter'));
+              return this.pageBreakAfter$delegate.getValue_7kda83$(this, new Kotlin.PropertyMetadata('pageBreakAfter'));
             },
             set: function (pageBreakAfter) {
-              this.pageBreakAfter$delegate.setValue_vr1yzg$(this, new Kotlin.PropertyMetadata('pageBreakAfter'), pageBreakAfter);
+              this.pageBreakAfter$delegate.setValue_27qitx$(this, new Kotlin.PropertyMetadata('pageBreakAfter'), pageBreakAfter);
             }
           },
           pageBreakBefore: {
             get: function () {
-              return this.pageBreakBefore$delegate.getValue_ah4kp6$(this, new Kotlin.PropertyMetadata('pageBreakBefore'));
+              return this.pageBreakBefore$delegate.getValue_7kda83$(this, new Kotlin.PropertyMetadata('pageBreakBefore'));
             },
             set: function (pageBreakBefore) {
-              this.pageBreakBefore$delegate.setValue_vr1yzg$(this, new Kotlin.PropertyMetadata('pageBreakBefore'), pageBreakBefore);
+              this.pageBreakBefore$delegate.setValue_27qitx$(this, new Kotlin.PropertyMetadata('pageBreakBefore'), pageBreakBefore);
             }
           },
           pageBreakInside: {
             get: function () {
-              return this.pageBreakInside$delegate.getValue_ah4kp6$(this, new Kotlin.PropertyMetadata('pageBreakInside'));
+              return this.pageBreakInside$delegate.getValue_7kda83$(this, new Kotlin.PropertyMetadata('pageBreakInside'));
             },
             set: function (pageBreakInside) {
-              this.pageBreakInside$delegate.setValue_vr1yzg$(this, new Kotlin.PropertyMetadata('pageBreakInside'), pageBreakInside);
+              this.pageBreakInside$delegate.setValue_27qitx$(this, new Kotlin.PropertyMetadata('pageBreakInside'), pageBreakInside);
             }
           },
           perspective: {
             get: function () {
-              return this.perspective$delegate.getValue_ah4kp6$(this, new Kotlin.PropertyMetadata('perspective'));
+              return this.perspective$delegate.getValue_7kda83$(this, new Kotlin.PropertyMetadata('perspective'));
             },
             set: function (perspective) {
-              this.perspective$delegate.setValue_vr1yzg$(this, new Kotlin.PropertyMetadata('perspective'), perspective);
+              this.perspective$delegate.setValue_27qitx$(this, new Kotlin.PropertyMetadata('perspective'), perspective);
             }
           },
           perspectiveOrigin: {
             get: function () {
-              return this.perspectiveOrigin$delegate.getValue_ah4kp6$(this, new Kotlin.PropertyMetadata('perspectiveOrigin'));
+              return this.perspectiveOrigin$delegate.getValue_7kda83$(this, new Kotlin.PropertyMetadata('perspectiveOrigin'));
             },
             set: function (perspectiveOrigin) {
-              this.perspectiveOrigin$delegate.setValue_vr1yzg$(this, new Kotlin.PropertyMetadata('perspectiveOrigin'), perspectiveOrigin);
+              this.perspectiveOrigin$delegate.setValue_27qitx$(this, new Kotlin.PropertyMetadata('perspectiveOrigin'), perspectiveOrigin);
             }
           },
           phonemes: {
             get: function () {
-              return this.phonemes$delegate.getValue_ah4kp6$(this, new Kotlin.PropertyMetadata('phonemes'));
+              return this.phonemes$delegate.getValue_7kda83$(this, new Kotlin.PropertyMetadata('phonemes'));
             },
             set: function (phonemes) {
-              this.phonemes$delegate.setValue_vr1yzg$(this, new Kotlin.PropertyMetadata('phonemes'), phonemes);
+              this.phonemes$delegate.setValue_27qitx$(this, new Kotlin.PropertyMetadata('phonemes'), phonemes);
             }
           },
           position: {
             get: function () {
-              return this.position$delegate.getValue_ah4kp6$(this, new Kotlin.PropertyMetadata('position'));
+              return this.position$delegate.getValue_7kda83$(this, new Kotlin.PropertyMetadata('position'));
             },
             set: function (position) {
-              this.position$delegate.setValue_vr1yzg$(this, new Kotlin.PropertyMetadata('position'), position);
+              this.position$delegate.setValue_27qitx$(this, new Kotlin.PropertyMetadata('position'), position);
             }
           },
           quotes: {
             get: function () {
-              return this.quotes$delegate.getValue_ah4kp6$(this, new Kotlin.PropertyMetadata('quotes'));
+              return this.quotes$delegate.getValue_7kda83$(this, new Kotlin.PropertyMetadata('quotes'));
             },
             set: function (quotes) {
-              this.quotes$delegate.setValue_vr1yzg$(this, new Kotlin.PropertyMetadata('quotes'), quotes);
+              this.quotes$delegate.setValue_27qitx$(this, new Kotlin.PropertyMetadata('quotes'), quotes);
             }
           },
           resize: {
             get: function () {
-              return this.resize$delegate.getValue_ah4kp6$(this, new Kotlin.PropertyMetadata('resize'));
+              return this.resize$delegate.getValue_7kda83$(this, new Kotlin.PropertyMetadata('resize'));
             },
             set: function (resize) {
-              this.resize$delegate.setValue_vr1yzg$(this, new Kotlin.PropertyMetadata('resize'), resize);
+              this.resize$delegate.setValue_27qitx$(this, new Kotlin.PropertyMetadata('resize'), resize);
             }
           },
           rest: {
             get: function () {
-              return this.rest$delegate.getValue_ah4kp6$(this, new Kotlin.PropertyMetadata('rest'));
+              return this.rest$delegate.getValue_7kda83$(this, new Kotlin.PropertyMetadata('rest'));
             },
             set: function (rest) {
-              this.rest$delegate.setValue_vr1yzg$(this, new Kotlin.PropertyMetadata('rest'), rest);
+              this.rest$delegate.setValue_27qitx$(this, new Kotlin.PropertyMetadata('rest'), rest);
             }
           },
           restAfter: {
             get: function () {
-              return this.restAfter$delegate.getValue_ah4kp6$(this, new Kotlin.PropertyMetadata('restAfter'));
+              return this.restAfter$delegate.getValue_7kda83$(this, new Kotlin.PropertyMetadata('restAfter'));
             },
             set: function (restAfter) {
-              this.restAfter$delegate.setValue_vr1yzg$(this, new Kotlin.PropertyMetadata('restAfter'), restAfter);
+              this.restAfter$delegate.setValue_27qitx$(this, new Kotlin.PropertyMetadata('restAfter'), restAfter);
             }
           },
           restBefore: {
             get: function () {
-              return this.restBefore$delegate.getValue_ah4kp6$(this, new Kotlin.PropertyMetadata('restBefore'));
+              return this.restBefore$delegate.getValue_7kda83$(this, new Kotlin.PropertyMetadata('restBefore'));
             },
             set: function (restBefore) {
-              this.restBefore$delegate.setValue_vr1yzg$(this, new Kotlin.PropertyMetadata('restBefore'), restBefore);
+              this.restBefore$delegate.setValue_27qitx$(this, new Kotlin.PropertyMetadata('restBefore'), restBefore);
             }
           },
           right: {
             get: function () {
-              return this.right$delegate.getValue_ah4kp6$(this, new Kotlin.PropertyMetadata('right'));
+              return this.right$delegate.getValue_7kda83$(this, new Kotlin.PropertyMetadata('right'));
             },
             set: function (right) {
-              this.right$delegate.setValue_vr1yzg$(this, new Kotlin.PropertyMetadata('right'), right);
+              this.right$delegate.setValue_27qitx$(this, new Kotlin.PropertyMetadata('right'), right);
             }
           },
           tabSize: {
             get: function () {
-              return this.tabSize$delegate.getValue_ah4kp6$(this, new Kotlin.PropertyMetadata('tabSize'));
+              return this.tabSize$delegate.getValue_7kda83$(this, new Kotlin.PropertyMetadata('tabSize'));
             },
             set: function (tabSize) {
-              this.tabSize$delegate.setValue_vr1yzg$(this, new Kotlin.PropertyMetadata('tabSize'), tabSize);
+              this.tabSize$delegate.setValue_27qitx$(this, new Kotlin.PropertyMetadata('tabSize'), tabSize);
             }
           },
           tableLayout: {
             get: function () {
-              return this.tableLayout$delegate.getValue_ah4kp6$(this, new Kotlin.PropertyMetadata('tableLayout'));
+              return this.tableLayout$delegate.getValue_7kda83$(this, new Kotlin.PropertyMetadata('tableLayout'));
             },
             set: function (tableLayout) {
-              this.tableLayout$delegate.setValue_vr1yzg$(this, new Kotlin.PropertyMetadata('tableLayout'), tableLayout);
+              this.tableLayout$delegate.setValue_27qitx$(this, new Kotlin.PropertyMetadata('tableLayout'), tableLayout);
             }
           },
           textAlign: {
             get: function () {
-              return this.textAlign$delegate.getValue_ah4kp6$(this, new Kotlin.PropertyMetadata('textAlign'));
+              return this.textAlign$delegate.getValue_7kda83$(this, new Kotlin.PropertyMetadata('textAlign'));
             },
             set: function (textAlign) {
-              this.textAlign$delegate.setValue_vr1yzg$(this, new Kotlin.PropertyMetadata('textAlign'), textAlign);
+              this.textAlign$delegate.setValue_27qitx$(this, new Kotlin.PropertyMetadata('textAlign'), textAlign);
             }
           },
           textAlignLast: {
             get: function () {
-              return this.textAlignLast$delegate.getValue_ah4kp6$(this, new Kotlin.PropertyMetadata('textAlignLast'));
+              return this.textAlignLast$delegate.getValue_7kda83$(this, new Kotlin.PropertyMetadata('textAlignLast'));
             },
             set: function (textAlignLast) {
-              this.textAlignLast$delegate.setValue_vr1yzg$(this, new Kotlin.PropertyMetadata('textAlignLast'), textAlignLast);
+              this.textAlignLast$delegate.setValue_27qitx$(this, new Kotlin.PropertyMetadata('textAlignLast'), textAlignLast);
             }
           },
           textCombineUpright: {
             get: function () {
-              return this.textCombineUpright$delegate.getValue_ah4kp6$(this, new Kotlin.PropertyMetadata('textCombineUpright'));
+              return this.textCombineUpright$delegate.getValue_7kda83$(this, new Kotlin.PropertyMetadata('textCombineUpright'));
             },
             set: function (textCombineUpright) {
-              this.textCombineUpright$delegate.setValue_vr1yzg$(this, new Kotlin.PropertyMetadata('textCombineUpright'), textCombineUpright);
+              this.textCombineUpright$delegate.setValue_27qitx$(this, new Kotlin.PropertyMetadata('textCombineUpright'), textCombineUpright);
             }
           },
           textDecoration: {
             get: function () {
-              return this.textDecoration$delegate.getValue_ah4kp6$(this, new Kotlin.PropertyMetadata('textDecoration'));
+              return this.textDecoration$delegate.getValue_7kda83$(this, new Kotlin.PropertyMetadata('textDecoration'));
             },
             set: function (textDecoration) {
-              this.textDecoration$delegate.setValue_vr1yzg$(this, new Kotlin.PropertyMetadata('textDecoration'), textDecoration);
+              this.textDecoration$delegate.setValue_27qitx$(this, new Kotlin.PropertyMetadata('textDecoration'), textDecoration);
             }
           },
           textDecorationColor: {
             get: function () {
-              return this.textDecorationColor$delegate.getValue_ah4kp6$(this, new Kotlin.PropertyMetadata('textDecorationColor'));
+              return this.textDecorationColor$delegate.getValue_7kda83$(this, new Kotlin.PropertyMetadata('textDecorationColor'));
             },
             set: function (textDecorationColor) {
-              this.textDecorationColor$delegate.setValue_vr1yzg$(this, new Kotlin.PropertyMetadata('textDecorationColor'), textDecorationColor);
+              this.textDecorationColor$delegate.setValue_27qitx$(this, new Kotlin.PropertyMetadata('textDecorationColor'), textDecorationColor);
             }
           },
           textDecorationLine: {
             get: function () {
-              return this.textDecorationLine$delegate.getValue_ah4kp6$(this, new Kotlin.PropertyMetadata('textDecorationLine'));
+              return this.textDecorationLine$delegate.getValue_7kda83$(this, new Kotlin.PropertyMetadata('textDecorationLine'));
             },
             set: function (textDecorationLine) {
-              this.textDecorationLine$delegate.setValue_vr1yzg$(this, new Kotlin.PropertyMetadata('textDecorationLine'), textDecorationLine);
+              this.textDecorationLine$delegate.setValue_27qitx$(this, new Kotlin.PropertyMetadata('textDecorationLine'), textDecorationLine);
             }
           },
           textDecorationStyle: {
             get: function () {
-              return this.textDecorationStyle$delegate.getValue_ah4kp6$(this, new Kotlin.PropertyMetadata('textDecorationStyle'));
+              return this.textDecorationStyle$delegate.getValue_7kda83$(this, new Kotlin.PropertyMetadata('textDecorationStyle'));
             },
             set: function (textDecorationStyle) {
-              this.textDecorationStyle$delegate.setValue_vr1yzg$(this, new Kotlin.PropertyMetadata('textDecorationStyle'), textDecorationStyle);
+              this.textDecorationStyle$delegate.setValue_27qitx$(this, new Kotlin.PropertyMetadata('textDecorationStyle'), textDecorationStyle);
             }
           },
           textIndent: {
             get: function () {
-              return this.textIndent$delegate.getValue_ah4kp6$(this, new Kotlin.PropertyMetadata('textIndent'));
+              return this.textIndent$delegate.getValue_7kda83$(this, new Kotlin.PropertyMetadata('textIndent'));
             },
             set: function (textIndent) {
-              this.textIndent$delegate.setValue_vr1yzg$(this, new Kotlin.PropertyMetadata('textIndent'), textIndent);
+              this.textIndent$delegate.setValue_27qitx$(this, new Kotlin.PropertyMetadata('textIndent'), textIndent);
             }
           },
           textJustify: {
             get: function () {
-              return this.textJustify$delegate.getValue_ah4kp6$(this, new Kotlin.PropertyMetadata('textJustify'));
+              return this.textJustify$delegate.getValue_7kda83$(this, new Kotlin.PropertyMetadata('textJustify'));
             },
             set: function (textJustify) {
-              this.textJustify$delegate.setValue_vr1yzg$(this, new Kotlin.PropertyMetadata('textJustify'), textJustify);
+              this.textJustify$delegate.setValue_27qitx$(this, new Kotlin.PropertyMetadata('textJustify'), textJustify);
             }
           },
           textOrientation: {
             get: function () {
-              return this.textOrientation$delegate.getValue_ah4kp6$(this, new Kotlin.PropertyMetadata('textOrientation'));
+              return this.textOrientation$delegate.getValue_7kda83$(this, new Kotlin.PropertyMetadata('textOrientation'));
             },
             set: function (textOrientation) {
-              this.textOrientation$delegate.setValue_vr1yzg$(this, new Kotlin.PropertyMetadata('textOrientation'), textOrientation);
+              this.textOrientation$delegate.setValue_27qitx$(this, new Kotlin.PropertyMetadata('textOrientation'), textOrientation);
             }
           },
           textOverflow: {
             get: function () {
-              return this.textOverflow$delegate.getValue_ah4kp6$(this, new Kotlin.PropertyMetadata('textOverflow'));
+              return this.textOverflow$delegate.getValue_7kda83$(this, new Kotlin.PropertyMetadata('textOverflow'));
             },
             set: function (textOverflow) {
-              this.textOverflow$delegate.setValue_vr1yzg$(this, new Kotlin.PropertyMetadata('textOverflow'), textOverflow);
+              this.textOverflow$delegate.setValue_27qitx$(this, new Kotlin.PropertyMetadata('textOverflow'), textOverflow);
             }
           },
           textShadow: {
             get: function () {
-              return this.textShadow$delegate.getValue_ah4kp6$(this, new Kotlin.PropertyMetadata('textShadow'));
+              return this.textShadow$delegate.getValue_7kda83$(this, new Kotlin.PropertyMetadata('textShadow'));
             },
             set: function (textShadow) {
-              this.textShadow$delegate.setValue_vr1yzg$(this, new Kotlin.PropertyMetadata('textShadow'), textShadow);
+              this.textShadow$delegate.setValue_27qitx$(this, new Kotlin.PropertyMetadata('textShadow'), textShadow);
             }
           },
           textTransform: {
             get: function () {
-              return this.textTransform$delegate.getValue_ah4kp6$(this, new Kotlin.PropertyMetadata('textTransform'));
+              return this.textTransform$delegate.getValue_7kda83$(this, new Kotlin.PropertyMetadata('textTransform'));
             },
             set: function (textTransform) {
-              this.textTransform$delegate.setValue_vr1yzg$(this, new Kotlin.PropertyMetadata('textTransform'), textTransform);
+              this.textTransform$delegate.setValue_27qitx$(this, new Kotlin.PropertyMetadata('textTransform'), textTransform);
             }
           },
           textUnderlinePosition: {
             get: function () {
-              return this.textUnderlinePosition$delegate.getValue_ah4kp6$(this, new Kotlin.PropertyMetadata('textUnderlinePosition'));
+              return this.textUnderlinePosition$delegate.getValue_7kda83$(this, new Kotlin.PropertyMetadata('textUnderlinePosition'));
             },
             set: function (textUnderlinePosition) {
-              this.textUnderlinePosition$delegate.setValue_vr1yzg$(this, new Kotlin.PropertyMetadata('textUnderlinePosition'), textUnderlinePosition);
+              this.textUnderlinePosition$delegate.setValue_27qitx$(this, new Kotlin.PropertyMetadata('textUnderlinePosition'), textUnderlinePosition);
             }
           },
           top: {
             get: function () {
-              return this.top$delegate.getValue_ah4kp6$(this, new Kotlin.PropertyMetadata('top'));
+              return this.top$delegate.getValue_7kda83$(this, new Kotlin.PropertyMetadata('top'));
             },
             set: function (top) {
-              this.top$delegate.setValue_vr1yzg$(this, new Kotlin.PropertyMetadata('top'), top);
+              this.top$delegate.setValue_27qitx$(this, new Kotlin.PropertyMetadata('top'), top);
             }
           },
           transform: {
             get: function () {
-              return this.transform$delegate.getValue_ah4kp6$(this, new Kotlin.PropertyMetadata('transform'));
+              return this.transform$delegate.getValue_7kda83$(this, new Kotlin.PropertyMetadata('transform'));
             },
             set: function (transform) {
-              this.transform$delegate.setValue_vr1yzg$(this, new Kotlin.PropertyMetadata('transform'), transform);
+              this.transform$delegate.setValue_27qitx$(this, new Kotlin.PropertyMetadata('transform'), transform);
             }
           },
           transformOrigin: {
             get: function () {
-              return this.transformOrigin$delegate.getValue_ah4kp6$(this, new Kotlin.PropertyMetadata('transformOrigin'));
+              return this.transformOrigin$delegate.getValue_7kda83$(this, new Kotlin.PropertyMetadata('transformOrigin'));
             },
             set: function (transformOrigin) {
-              this.transformOrigin$delegate.setValue_vr1yzg$(this, new Kotlin.PropertyMetadata('transformOrigin'), transformOrigin);
+              this.transformOrigin$delegate.setValue_27qitx$(this, new Kotlin.PropertyMetadata('transformOrigin'), transformOrigin);
             }
           },
           transformStyle: {
             get: function () {
-              return this.transformStyle$delegate.getValue_ah4kp6$(this, new Kotlin.PropertyMetadata('transformStyle'));
+              return this.transformStyle$delegate.getValue_7kda83$(this, new Kotlin.PropertyMetadata('transformStyle'));
             },
             set: function (transformStyle) {
-              this.transformStyle$delegate.setValue_vr1yzg$(this, new Kotlin.PropertyMetadata('transformStyle'), transformStyle);
+              this.transformStyle$delegate.setValue_27qitx$(this, new Kotlin.PropertyMetadata('transformStyle'), transformStyle);
             }
           },
           transition: {
             get: function () {
-              return this.transition$delegate.getValue_ah4kp6$(this, new Kotlin.PropertyMetadata('transition'));
+              return this.transition$delegate.getValue_7kda83$(this, new Kotlin.PropertyMetadata('transition'));
             },
             set: function (transition) {
-              this.transition$delegate.setValue_vr1yzg$(this, new Kotlin.PropertyMetadata('transition'), transition);
+              this.transition$delegate.setValue_27qitx$(this, new Kotlin.PropertyMetadata('transition'), transition);
             }
           },
           transitionDelay: {
             get: function () {
-              return this.transitionDelay$delegate.getValue_ah4kp6$(this, new Kotlin.PropertyMetadata('transitionDelay'));
+              return this.transitionDelay$delegate.getValue_7kda83$(this, new Kotlin.PropertyMetadata('transitionDelay'));
             },
             set: function (transitionDelay) {
-              this.transitionDelay$delegate.setValue_vr1yzg$(this, new Kotlin.PropertyMetadata('transitionDelay'), transitionDelay);
+              this.transitionDelay$delegate.setValue_27qitx$(this, new Kotlin.PropertyMetadata('transitionDelay'), transitionDelay);
             }
           },
           transitionDuration: {
             get: function () {
-              return this.transitionDuration$delegate.getValue_ah4kp6$(this, new Kotlin.PropertyMetadata('transitionDuration'));
+              return this.transitionDuration$delegate.getValue_7kda83$(this, new Kotlin.PropertyMetadata('transitionDuration'));
             },
             set: function (transitionDuration) {
-              this.transitionDuration$delegate.setValue_vr1yzg$(this, new Kotlin.PropertyMetadata('transitionDuration'), transitionDuration);
+              this.transitionDuration$delegate.setValue_27qitx$(this, new Kotlin.PropertyMetadata('transitionDuration'), transitionDuration);
             }
           },
           transitionProperty: {
             get: function () {
-              return this.transitionProperty$delegate.getValue_ah4kp6$(this, new Kotlin.PropertyMetadata('transitionProperty'));
+              return this.transitionProperty$delegate.getValue_7kda83$(this, new Kotlin.PropertyMetadata('transitionProperty'));
             },
             set: function (transitionProperty) {
-              this.transitionProperty$delegate.setValue_vr1yzg$(this, new Kotlin.PropertyMetadata('transitionProperty'), transitionProperty);
+              this.transitionProperty$delegate.setValue_27qitx$(this, new Kotlin.PropertyMetadata('transitionProperty'), transitionProperty);
             }
           },
           transitionTimingFunction: {
             get: function () {
-              return this.transitionTimingFunction$delegate.getValue_ah4kp6$(this, new Kotlin.PropertyMetadata('transitionTimingFunction'));
+              return this.transitionTimingFunction$delegate.getValue_7kda83$(this, new Kotlin.PropertyMetadata('transitionTimingFunction'));
             },
             set: function (transitionTimingFunction) {
-              this.transitionTimingFunction$delegate.setValue_vr1yzg$(this, new Kotlin.PropertyMetadata('transitionTimingFunction'), transitionTimingFunction);
+              this.transitionTimingFunction$delegate.setValue_27qitx$(this, new Kotlin.PropertyMetadata('transitionTimingFunction'), transitionTimingFunction);
             }
           },
           unicodeBidi: {
             get: function () {
-              return this.unicodeBidi$delegate.getValue_ah4kp6$(this, new Kotlin.PropertyMetadata('unicodeBidi'));
+              return this.unicodeBidi$delegate.getValue_7kda83$(this, new Kotlin.PropertyMetadata('unicodeBidi'));
             },
             set: function (unicodeBidi) {
-              this.unicodeBidi$delegate.setValue_vr1yzg$(this, new Kotlin.PropertyMetadata('unicodeBidi'), unicodeBidi);
+              this.unicodeBidi$delegate.setValue_27qitx$(this, new Kotlin.PropertyMetadata('unicodeBidi'), unicodeBidi);
             }
           },
           verticalAlign: {
             get: function () {
-              return this.verticalAlign$delegate.getValue_ah4kp6$(this, new Kotlin.PropertyMetadata('verticalAlign'));
+              return this.verticalAlign$delegate.getValue_7kda83$(this, new Kotlin.PropertyMetadata('verticalAlign'));
             },
             set: function (verticalAlign) {
-              this.verticalAlign$delegate.setValue_vr1yzg$(this, new Kotlin.PropertyMetadata('verticalAlign'), verticalAlign);
+              this.verticalAlign$delegate.setValue_27qitx$(this, new Kotlin.PropertyMetadata('verticalAlign'), verticalAlign);
             }
           },
           visibility: {
             get: function () {
-              return this.visibility$delegate.getValue_ah4kp6$(this, new Kotlin.PropertyMetadata('visibility'));
+              return this.visibility$delegate.getValue_7kda83$(this, new Kotlin.PropertyMetadata('visibility'));
             },
             set: function (visibility) {
-              this.visibility$delegate.setValue_vr1yzg$(this, new Kotlin.PropertyMetadata('visibility'), visibility);
+              this.visibility$delegate.setValue_27qitx$(this, new Kotlin.PropertyMetadata('visibility'), visibility);
             }
           },
           voiceBalance: {
             get: function () {
-              return this.voiceBalance$delegate.getValue_ah4kp6$(this, new Kotlin.PropertyMetadata('voiceBalance'));
+              return this.voiceBalance$delegate.getValue_7kda83$(this, new Kotlin.PropertyMetadata('voiceBalance'));
             },
             set: function (voiceBalance) {
-              this.voiceBalance$delegate.setValue_vr1yzg$(this, new Kotlin.PropertyMetadata('voiceBalance'), voiceBalance);
+              this.voiceBalance$delegate.setValue_27qitx$(this, new Kotlin.PropertyMetadata('voiceBalance'), voiceBalance);
             }
           },
           voiceDuration: {
             get: function () {
-              return this.voiceDuration$delegate.getValue_ah4kp6$(this, new Kotlin.PropertyMetadata('voiceDuration'));
+              return this.voiceDuration$delegate.getValue_7kda83$(this, new Kotlin.PropertyMetadata('voiceDuration'));
             },
             set: function (voiceDuration) {
-              this.voiceDuration$delegate.setValue_vr1yzg$(this, new Kotlin.PropertyMetadata('voiceDuration'), voiceDuration);
+              this.voiceDuration$delegate.setValue_27qitx$(this, new Kotlin.PropertyMetadata('voiceDuration'), voiceDuration);
             }
           },
           voicePitch: {
             get: function () {
-              return this.voicePitch$delegate.getValue_ah4kp6$(this, new Kotlin.PropertyMetadata('voicePitch'));
+              return this.voicePitch$delegate.getValue_7kda83$(this, new Kotlin.PropertyMetadata('voicePitch'));
             },
             set: function (voicePitch) {
-              this.voicePitch$delegate.setValue_vr1yzg$(this, new Kotlin.PropertyMetadata('voicePitch'), voicePitch);
+              this.voicePitch$delegate.setValue_27qitx$(this, new Kotlin.PropertyMetadata('voicePitch'), voicePitch);
             }
           },
           voicePitchRange: {
             get: function () {
-              return this.voicePitchRange$delegate.getValue_ah4kp6$(this, new Kotlin.PropertyMetadata('voicePitchRange'));
+              return this.voicePitchRange$delegate.getValue_7kda83$(this, new Kotlin.PropertyMetadata('voicePitchRange'));
             },
             set: function (voicePitchRange) {
-              this.voicePitchRange$delegate.setValue_vr1yzg$(this, new Kotlin.PropertyMetadata('voicePitchRange'), voicePitchRange);
+              this.voicePitchRange$delegate.setValue_27qitx$(this, new Kotlin.PropertyMetadata('voicePitchRange'), voicePitchRange);
             }
           },
           voiceRate: {
             get: function () {
-              return this.voiceRate$delegate.getValue_ah4kp6$(this, new Kotlin.PropertyMetadata('voiceRate'));
+              return this.voiceRate$delegate.getValue_7kda83$(this, new Kotlin.PropertyMetadata('voiceRate'));
             },
             set: function (voiceRate) {
-              this.voiceRate$delegate.setValue_vr1yzg$(this, new Kotlin.PropertyMetadata('voiceRate'), voiceRate);
+              this.voiceRate$delegate.setValue_27qitx$(this, new Kotlin.PropertyMetadata('voiceRate'), voiceRate);
             }
           },
           voiceStress: {
             get: function () {
-              return this.voiceStress$delegate.getValue_ah4kp6$(this, new Kotlin.PropertyMetadata('voiceStress'));
+              return this.voiceStress$delegate.getValue_7kda83$(this, new Kotlin.PropertyMetadata('voiceStress'));
             },
             set: function (voiceStress) {
-              this.voiceStress$delegate.setValue_vr1yzg$(this, new Kotlin.PropertyMetadata('voiceStress'), voiceStress);
+              this.voiceStress$delegate.setValue_27qitx$(this, new Kotlin.PropertyMetadata('voiceStress'), voiceStress);
             }
           },
           voiceVolume: {
             get: function () {
-              return this.voiceVolume$delegate.getValue_ah4kp6$(this, new Kotlin.PropertyMetadata('voiceVolume'));
+              return this.voiceVolume$delegate.getValue_7kda83$(this, new Kotlin.PropertyMetadata('voiceVolume'));
             },
             set: function (voiceVolume) {
-              this.voiceVolume$delegate.setValue_vr1yzg$(this, new Kotlin.PropertyMetadata('voiceVolume'), voiceVolume);
+              this.voiceVolume$delegate.setValue_27qitx$(this, new Kotlin.PropertyMetadata('voiceVolume'), voiceVolume);
             }
           },
           whiteSpace: {
             get: function () {
-              return this.whiteSpace$delegate.getValue_ah4kp6$(this, new Kotlin.PropertyMetadata('whiteSpace'));
+              return this.whiteSpace$delegate.getValue_7kda83$(this, new Kotlin.PropertyMetadata('whiteSpace'));
             },
             set: function (whiteSpace) {
-              this.whiteSpace$delegate.setValue_vr1yzg$(this, new Kotlin.PropertyMetadata('whiteSpace'), whiteSpace);
+              this.whiteSpace$delegate.setValue_27qitx$(this, new Kotlin.PropertyMetadata('whiteSpace'), whiteSpace);
             }
           },
           widows: {
             get: function () {
-              return this.widows$delegate.getValue_ah4kp6$(this, new Kotlin.PropertyMetadata('widows'));
+              return this.widows$delegate.getValue_7kda83$(this, new Kotlin.PropertyMetadata('widows'));
             },
             set: function (widows) {
-              this.widows$delegate.setValue_vr1yzg$(this, new Kotlin.PropertyMetadata('widows'), widows);
+              this.widows$delegate.setValue_27qitx$(this, new Kotlin.PropertyMetadata('widows'), widows);
             }
           },
           width: {
             get: function () {
-              return this.width$delegate.getValue_ah4kp6$(this, new Kotlin.PropertyMetadata('width'));
+              return this.width$delegate.getValue_7kda83$(this, new Kotlin.PropertyMetadata('width'));
             },
             set: function (width) {
-              this.width$delegate.setValue_vr1yzg$(this, new Kotlin.PropertyMetadata('width'), width);
+              this.width$delegate.setValue_27qitx$(this, new Kotlin.PropertyMetadata('width'), width);
             }
           },
           wordBreak: {
             get: function () {
-              return this.wordBreak$delegate.getValue_ah4kp6$(this, new Kotlin.PropertyMetadata('wordBreak'));
+              return this.wordBreak$delegate.getValue_7kda83$(this, new Kotlin.PropertyMetadata('wordBreak'));
             },
             set: function (wordBreak) {
-              this.wordBreak$delegate.setValue_vr1yzg$(this, new Kotlin.PropertyMetadata('wordBreak'), wordBreak);
+              this.wordBreak$delegate.setValue_27qitx$(this, new Kotlin.PropertyMetadata('wordBreak'), wordBreak);
             }
           },
           wordSpacing: {
             get: function () {
-              return this.wordSpacing$delegate.getValue_ah4kp6$(this, new Kotlin.PropertyMetadata('wordSpacing'));
+              return this.wordSpacing$delegate.getValue_7kda83$(this, new Kotlin.PropertyMetadata('wordSpacing'));
             },
             set: function (wordSpacing) {
-              this.wordSpacing$delegate.setValue_vr1yzg$(this, new Kotlin.PropertyMetadata('wordSpacing'), wordSpacing);
+              this.wordSpacing$delegate.setValue_27qitx$(this, new Kotlin.PropertyMetadata('wordSpacing'), wordSpacing);
             }
           },
           wordWrap: {
             get: function () {
-              return this.wordWrap$delegate.getValue_ah4kp6$(this, new Kotlin.PropertyMetadata('wordWrap'));
+              return this.wordWrap$delegate.getValue_7kda83$(this, new Kotlin.PropertyMetadata('wordWrap'));
             },
             set: function (wordWrap) {
-              this.wordWrap$delegate.setValue_vr1yzg$(this, new Kotlin.PropertyMetadata('wordWrap'), wordWrap);
+              this.wordWrap$delegate.setValue_27qitx$(this, new Kotlin.PropertyMetadata('wordWrap'), wordWrap);
             }
           },
           writingMode: {
             get: function () {
-              return this.writingMode$delegate.getValue_ah4kp6$(this, new Kotlin.PropertyMetadata('writingMode'));
+              return this.writingMode$delegate.getValue_7kda83$(this, new Kotlin.PropertyMetadata('writingMode'));
             },
             set: function (writingMode) {
-              this.writingMode$delegate.setValue_vr1yzg$(this, new Kotlin.PropertyMetadata('writingMode'), writingMode);
+              this.writingMode$delegate.setValue_27qitx$(this, new Kotlin.PropertyMetadata('writingMode'), writingMode);
             }
           },
           zIndex: {
             get: function () {
-              return this.zIndex$delegate.getValue_ah4kp6$(this, new Kotlin.PropertyMetadata('zIndex'));
+              return this.zIndex$delegate.getValue_7kda83$(this, new Kotlin.PropertyMetadata('zIndex'));
             },
             set: function (zIndex) {
-              this.zIndex$delegate.setValue_vr1yzg$(this, new Kotlin.PropertyMetadata('zIndex'), zIndex);
+              this.zIndex$delegate.setValue_27qitx$(this, new Kotlin.PropertyMetadata('zIndex'), zIndex);
             }
           },
-          resolveStyleName_2a5go5$: function (prop) {
+          resolveRuleName_2a5go5$: function (prop) {
             var tmp$0;
             var s = '';
             tmp$0 = Kotlin.kotlin.text.iterator_gw00vq$(prop.name);
@@ -4405,21 +4170,21 @@ var elements = function (Kotlin) {
             }
             return s;
           }
-        }, /** @lends _.fg.style.Style */ {
+        }, /** @lends _.fg.style.CSSRule */ {
           Property: Kotlin.createClass(null, function Property($outer, name) {
             this.$outer = $outer;
             if (name === void 0)
               name = null;
             this.name = name;
-          }, /** @lends _.fg.style.Style.Property.prototype */ {
-            getValue_ah4kp6$: function (classStyle, prop) {
+          }, /** @lends _.fg.style.CSSRule.Property.prototype */ {
+            getValue_7kda83$: function (rule, prop) {
               var tmp$0, tmp$1;
-              var styleName = (tmp$0 = this.name) != null ? tmp$0 : this.$outer.resolveStyleName_2a5go5$(prop);
+              var styleName = (tmp$0 = this.name) != null ? tmp$0 : this.$outer.resolveRuleName_2a5go5$(prop);
               return (tmp$1 = this.$outer._map.get_za3rmp$(styleName)) != null ? tmp$1 : '';
             },
-            setValue_vr1yzg$: function (classStyle, prop, value) {
+            setValue_27qitx$: function (rule, prop, value) {
               var tmp$0;
-              var styleName = (tmp$0 = this.name) != null ? tmp$0 : this.$outer.resolveStyleName_2a5go5$(prop);
+              var styleName = (tmp$0 = this.name) != null ? tmp$0 : this.$outer.resolveRuleName_2a5go5$(prop);
               if (value.length > 0) {
                 this.$outer._map.put_wn2jw4$(styleName, value);
               }
@@ -4429,41 +4194,176 @@ var elements = function (Kotlin) {
             }
           })
         }),
-        TypeStyle: Kotlin.createClass(function () {
-          return [_.fg.style.Style, _.fg.elements.IStyle];
-        }, function TypeStyle(selector, parentSelector) {
-          if (parentSelector === void 0)
-            parentSelector = null;
-          TypeStyle.baseInitializer.call(this, selector);
-          this.parentSelector = parentSelector;
-        }, /** @lends _.fg.style.TypeStyle.prototype */ {
-          toCss: function () {
-            var tmp$1, tmp$2;
-            var rules = Kotlin.kotlin.collections.arrayListOf_9mqe4v$([]);
-            if (this.isNotEmpty()) {
-              var s = '';
-              if (this.parentSelector != null) {
-                s += this.parentSelector.toString() + ' ';
-              }
-              s += this.selector.toString() + ' { ';
-              tmp$1 = Kotlin.kotlin.collections.iterator_efxzmg$(this._map);
-              while (tmp$1.hasNext()) {
-                var tmp$0 = tmp$1.next();
-                var key = tmp$0.key;
-                var value = tmp$0.value;
-                s += key + ': ' + value + '; ';
-              }
-              s += '}';
-              rules.add_za3rmp$(s);
-            }
-            tmp$2 = this._childStyles.iterator();
-            while (tmp$2.hasNext()) {
-              var child = tmp$2.next();
-              rules.addAll_wtfk93$(child.toCss());
-            }
-            return rules;
+        CSSRules: Kotlin.createClass(null, function CSSRules() {
+          this.rules_cxk7k7$ = Kotlin.kotlin.collections.arrayListOf_9mqe4v$([]);
+        }, /** @lends _.fg.style.CSSRules.prototype */ {
+          add_76sb4a$: function (rule) {
+            this.rules_cxk7k7$.add_za3rmp$(rule);
+          },
+          provide: function () {
+            return this.rules_cxk7k7$;
           }
         }),
+        DescRule: Kotlin.createClass(function () {
+          return [_.fg.style.CSSRule];
+        }, function DescRule(selector) {
+          DescRule.baseInitializer.call(this, selector);
+        }, /** @lends _.fg.style.DescRule.prototype */ {
+          cssText: function () {
+            return this.cssText_yidtjr$(this.selector);
+          }
+        }),
+        rule_olsuya$: function ($receiver, styledClass, init) {
+          if (init === void 0)
+            init = styledClass.rule;
+          var style = new _.fg.style.ClassRule(styledClass.classSelector);
+          init.call(style);
+          return style;
+        },
+        and_ajyy3w$: function ($receiver, selector, init) {
+          var style = new _.fg.style.AndRule(new _.fg.elements.AndSelector($receiver.selector, _.fg.elements.toSelector_pdl1w0$(selector)));
+          init.call(style);
+          $receiver._childStyles.add_za3rmp$(style);
+          return style;
+        },
+        and_tkfk4p$: function ($receiver, selector, init) {
+          var style = new _.fg.style.AndRule(new _.fg.elements.AndSelector($receiver.selector, selector));
+          init.call(style);
+          $receiver._childStyles.add_za3rmp$(style);
+          return style;
+        },
+        desc_6fr4ty$: function ($receiver, selector, init) {
+          var style = new _.fg.style.DescRule(new _.fg.elements.DescendantSelector($receiver.selector, _.fg.elements.toSelector_pdl1w0$(selector)));
+          init.call(style);
+          $receiver._childStyles.add_za3rmp$(style);
+          return style;
+        },
+        desc_tttmz9$: function ($receiver, selector, init) {
+          var style = new _.fg.style.DescRule(new _.fg.elements.DescendantSelector($receiver.selector, selector));
+          init.call(style);
+          $receiver._childStyles.add_za3rmp$(style);
+          return style;
+        },
+        child_ndylgx$: function ($receiver, selector, init) {
+          var style = new _.fg.style.ChildRule(new _.fg.elements.ChildSelector($receiver.selector, _.fg.elements.toSelector_pdl1w0$(selector)));
+          init.call(style);
+          $receiver._childStyles.add_za3rmp$(style);
+          return style;
+        },
+        child_ze8j1g$: function ($receiver, selector, init) {
+          var style = new _.fg.style.ChildRule(new _.fg.elements.ChildSelector($receiver.selector, selector));
+          init.call(style);
+          $receiver._childStyles.add_za3rmp$(style);
+          return style;
+        },
+        active_wcolqy$: function ($receiver, init) {
+          var style = new _.fg.style.AndRule(new _.fg.elements.AndSelector($receiver.selector, new _.fg.elements.PseudoClassSelector('active')));
+          init.call(style);
+          $receiver._childStyles.add_za3rmp$(style);
+          return style;
+        },
+        checked_wcolqy$: function ($receiver, init) {
+          var style = new _.fg.style.AndRule(new _.fg.elements.AndSelector($receiver.selector, new _.fg.elements.PseudoClassSelector('checked')));
+          init.call(style);
+          $receiver._childStyles.add_za3rmp$(style);
+          return style;
+        },
+        empty_wcolqy$: function ($receiver, init) {
+          var style = new _.fg.style.AndRule(new _.fg.elements.AndSelector($receiver.selector, new _.fg.elements.PseudoClassSelector('empty')));
+          init.call(style);
+          $receiver._childStyles.add_za3rmp$(style);
+          return style;
+        },
+        enabled_wcolqy$: function ($receiver, init) {
+          var style = new _.fg.style.AndRule(new _.fg.elements.AndSelector($receiver.selector, new _.fg.elements.PseudoClassSelector('enabled')));
+          init.call(style);
+          $receiver._childStyles.add_za3rmp$(style);
+          return style;
+        },
+        first_wcolqy$: function ($receiver, init) {
+          var style = new _.fg.style.AndRule(new _.fg.elements.AndSelector($receiver.selector, new _.fg.elements.PseudoClassSelector('first')));
+          init.call(style);
+          $receiver._childStyles.add_za3rmp$(style);
+          return style;
+        },
+        firstChild_wcolqy$: function ($receiver, init) {
+          var style = new _.fg.style.AndRule(new _.fg.elements.AndSelector($receiver.selector, new _.fg.elements.PseudoClassSelector('first-child')));
+          init.call(style);
+          $receiver._childStyles.add_za3rmp$(style);
+          return style;
+        },
+        firstOfType_wcolqy$: function ($receiver, init) {
+          var style = new _.fg.style.AndRule(new _.fg.elements.AndSelector($receiver.selector, new _.fg.elements.PseudoClassSelector('first-of-type')));
+          init.call(style);
+          $receiver._childStyles.add_za3rmp$(style);
+          return style;
+        },
+        focus_wcolqy$: function ($receiver, init) {
+          var style = new _.fg.style.AndRule(new _.fg.elements.AndSelector($receiver.selector, new _.fg.elements.PseudoClassSelector('focus')));
+          init.call(style);
+          $receiver._childStyles.add_za3rmp$(style);
+          return style;
+        },
+        hover_wcolqy$: function ($receiver, init) {
+          var style = new _.fg.style.AndRule(new _.fg.elements.AndSelector($receiver.selector, new _.fg.elements.PseudoClassSelector('hover')));
+          init.call(style);
+          $receiver._childStyles.add_za3rmp$(style);
+          return style;
+        },
+        indeterminate_wcolqy$: function ($receiver, init) {
+          var style = new _.fg.style.AndRule(new _.fg.elements.AndSelector($receiver.selector, new _.fg.elements.PseudoClassSelector('indeterminate')));
+          init.call(style);
+          $receiver._childStyles.add_za3rmp$(style);
+          return style;
+        },
+        inRange_wcolqy$: function ($receiver, init) {
+          var style = new _.fg.style.AndRule(new _.fg.elements.AndSelector($receiver.selector, new _.fg.elements.PseudoClassSelector('in-range')));
+          init.call(style);
+          $receiver._childStyles.add_za3rmp$(style);
+          return style;
+        },
+        invalid_wcolqy$: function ($receiver, init) {
+          var style = new _.fg.style.AndRule(new _.fg.elements.AndSelector($receiver.selector, new _.fg.elements.PseudoClassSelector('invalid')));
+          init.call(style);
+          $receiver._childStyles.add_za3rmp$(style);
+          return style;
+        },
+        lang_wcolqy$: function ($receiver, init) {
+          var style = new _.fg.style.AndRule(new _.fg.elements.AndSelector($receiver.selector, new _.fg.elements.PseudoClassSelector('lang')));
+          init.call(style);
+          $receiver._childStyles.add_za3rmp$(style);
+          return style;
+        },
+        lastChild_wcolqy$: function ($receiver, init) {
+          var style = new _.fg.style.AndRule(new _.fg.elements.AndSelector($receiver.selector, new _.fg.elements.PseudoClassSelector('last-child')));
+          init.call(style);
+          $receiver._childStyles.add_za3rmp$(style);
+          return style;
+        },
+        lastOfType_wcolqy$: function ($receiver, init) {
+          var style = new _.fg.style.AndRule(new _.fg.elements.AndSelector($receiver.selector, new _.fg.elements.PseudoClassSelector('last-of-type')));
+          init.call(style);
+          $receiver._childStyles.add_za3rmp$(style);
+          return style;
+        },
+        left_wcolqy$: function ($receiver, init) {
+          var style = new _.fg.style.AndRule(new _.fg.elements.AndSelector($receiver.selector, new _.fg.elements.PseudoClassSelector('left')));
+          init.call(style);
+          $receiver._childStyles.add_za3rmp$(style);
+          return style;
+        },
+        link_wcolqy$: function ($receiver, init) {
+          var style = new _.fg.style.AndRule(new _.fg.elements.AndSelector($receiver.selector, new _.fg.elements.PseudoClassSelector('link')));
+          init.call(style);
+          $receiver._childStyles.add_za3rmp$(style);
+          return style;
+        },
+        not_tkfk4p$: function ($receiver, selector, init) {
+          var style = new _.fg.style.AndRule(new _.fg.elements.AndSelector($receiver.selector, new _.fg.elements.NotSelector(selector)));
+          init.call(style);
+          $receiver._childStyles.add_za3rmp$(style);
+          return style;
+        },
         colour: Kotlin.definePackage(null, /** @lends _.fg.style.colour */ {
           Colour: Kotlin.createTrait(null),
           Hsl: Kotlin.createClass(function () {

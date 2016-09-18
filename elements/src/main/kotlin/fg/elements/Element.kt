@@ -1,7 +1,5 @@
 package fg.elements
 
-import fg.style.TypeStyle
-import fg.style.resolveClassStyleName
 import org.w3c.dom.HTMLElement
 import org.w3c.dom.css.CSSStyleDeclaration
 import kotlin.browser.document
@@ -16,6 +14,8 @@ open class Element(name: String? = null,
             return childNodes.filter({ it is Element }) as List<Element>
         }
 
+    val _parentElement: Element
+        get() = _parentNode!! as Element
 
     private var _displayBeforeHiding: String = ""
 
@@ -25,11 +25,6 @@ open class Element(name: String? = null,
     protected val style: CSSStyleDeclaration
         get() = w3cElement.style
 
-    var typeStyle: TypeStyle? = null
-
-    open val styleClassPrefix: String? = null
-    open val styleClassName: ClassSelector? = null
-    open val styleClass: IClassStyle? = null
 
     /**
      * Called before didMount(). On parent elements before children.
@@ -62,27 +57,6 @@ open class Element(name: String? = null,
                 child.didMount()
             }
         }
-    }
-
-    internal fun renderStyle() {
-
-        if (typeStyle != null) {
-            HTML.registerStyle(typeStyle!!)
-        }
-
-        if (styleClass != null) {
-            val nonNullClassStyle = styleClass!!
-            HTML.registerStyle(nonNullClassStyle)
-            addClass(nonNullClassStyle.className)
-        }
-
-        for (child in childElements) {
-            child.renderStyle()
-        }
-    }
-
-    fun addClass() {
-        addClass(this.resolveClassStyleName())
     }
 
     fun addClass(selector: ClassSelector) {
@@ -125,6 +99,4 @@ open class Element(name: String? = null,
         _displayBeforeHiding = this.style.display
         this.style.display = "none"
     }
-
-
 }

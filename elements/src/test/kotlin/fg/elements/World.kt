@@ -1,19 +1,27 @@
 package fg.elements
 
-import fg.style.classStyle
-import fg.style.ClassStyle
+import fg.style.ClassRule
 
 class World : Span() {
 
-    override val styleClassPrefix: String? = "demo"
+    override fun render() {
 
-    override val styleClass: ClassStyle? = classStyle {
-        border = "1px solid lightblue"
-        backgroundColor = "red"
+        addClass(classSelector)
+
+        appendChild(Text("World"))
     }
 
+    companion object Statics : StyledClass {
 
-    override fun render() {
-        appendChild(Text("World"))
+        override val classSelector = "hello".toClassSelector()
+
+        override val rule: ClassRule.() -> Unit = {
+            border = "1px solid lightblue"
+            backgroundColor = "red"
+        }
+
+        init {
+            HTML.registerStyle(this)
+        }
     }
 }

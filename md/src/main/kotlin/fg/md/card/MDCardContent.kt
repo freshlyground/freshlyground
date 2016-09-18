@@ -1,29 +1,38 @@
 package fg.md.card
 
 import fg.elements.Div
+import fg.elements.HTML
 import fg.elements.Selector
+import fg.elements.StyledClass
 import fg.elements.toClassSelector
+import fg.style.ClassRule
 import fg.style.child
-import fg.style.classStyle
 import fg.style.firstChild
 
 open class MDCardContent : Div() {
 
-    override val styleClassName = "md-card-content".toClassSelector()
-
-    override val styleClass = classStyle {
-        fontSize = "14px"
-
-        child(Selector.ANY) {
-            firstChild {
-                marginTop = "0"
-            }
-        }
-    }
-
     override fun render() {
         super.render()
 
-        addClass()
+        addClass(classSelector)
+    }
+
+    companion object Statics : StyledClass {
+
+        override val classSelector = "md-card-content".toClassSelector()
+
+        override val rule: ClassRule.() -> Unit = {
+            fontSize = "14px"
+
+            child(Selector.ANY) {
+                firstChild {
+                    marginTop = "0"
+                }
+            }
+        }
+
+        init {
+            HTML.registerStyle(this)
+        }
     }
 }

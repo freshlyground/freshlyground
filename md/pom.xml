@@ -26,6 +26,11 @@
             <artifactId>elements</artifactId>
             <version>${project.version}</version>
         </dependency>
+        <dependency>
+            <groupId>freshlyground</groupId>
+            <artifactId>beans</artifactId>
+            <version>${project.version}</version>
+        </dependency>
     </dependencies>
 
     <build>

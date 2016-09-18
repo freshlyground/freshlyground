@@ -3,19 +3,27 @@ package fg.beans.menu
 import fg.beans.pkg
 import fg.elements.ClassSelector
 import fg.elements.Div
+import fg.elements.HTML
+import fg.elements.StyledClass
+import fg.style.ClassRule
 
 class Menu : Div() {
-
-    override val styleClassPrefix = pkg
 
     override fun render() {
         super.render()
 
-        addClass()
+        addClass(classSelector)
     }
 
-    companion object Statics {
+    companion object Menu : StyledClass {
 
-        val selector: ClassSelector = ClassSelector("$pkg-menu")
+        override val classSelector: ClassSelector = ClassSelector("$pkg-menu")
+        override val rule: ClassRule.() -> Unit = {
+
+        }
+
+        init {
+            HTML.registerStyle(this)
+        }
     }
 }

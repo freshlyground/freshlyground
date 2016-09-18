@@ -10,7 +10,6 @@ import fg.beans.menu.MenuItem
 import fg.beans.menuItem
 import fg.elements.BODY
 import fg.elements.HTML
-import fg.elements.Selector
 import fg.elements.a
 import fg.elements.h1
 import fg.elements.h2
@@ -21,7 +20,8 @@ import fg.elements.p
 import fg.elements.pre
 import fg.elements.ul
 import fg.elements.with
-import fg.style.Style
+import fg.style.AnyRule
+import fg.style.ClassRule
 import fg.style.and
 import fg.style.desc
 import fg.style.hover
@@ -81,18 +81,18 @@ fun main(vararg args: String) {
         }
         p {
             menu {
-                menuItem(SelectableAction("Menu Item 1")) {}
-                menuItem(SelectableAction("Menu Item 2")) {}
+                menuItem(SelectableAction("Menu Item 1") {}) {}
+                menuItem(SelectableAction("Menu Item 2") {}) {}
             }
         }
         h3 {
             +"Button"
         }
         p {
-            button(Action("Button 1")) {
+            button(Action("Button 1") {}) {
 
             }
-            button(Action(icon = FontAwesomeIcons.camera_retro())) {
+            button(Action(icon = FontAwesomeIcons.camera_retro()) {}) {
 
             }
         }
@@ -123,17 +123,19 @@ fun main(vararg args: String) {
         }
     }
 
-    HTML.registerStyle(Style(Selector.ANY) with {
+    HTML.addCSSRule(AnyRule() with {
         boxSizing = "border-box"
     })
-    HTML.registerStyle(Style(Menu.selector) with {
-        desc(MenuItem.selector) {
+    HTML.addCSSRule(ClassRule(Menu.classSelector) with {
+
+        desc(MenuItem.classSelector) {
+
             and(SelectableAction.selectedSelector) {
                 borderBottom = "1px solid red"
             }
         }
     })
-    HTML.registerStyle(Style(MenuItem.selector) with {
+    HTML.addCSSRule(ClassRule(MenuItem.classSelector) with {
         hover {
             backgroundColor = "lightgrey"
         }

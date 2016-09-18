@@ -1,35 +1,44 @@
 package fg.elements
 
+import fg.style.ClassRule
 import fg.style.active
-import fg.style.classStyle
+import fg.style.and
 import fg.style.hover
 
 class Hello : Span() {
 
-    override val styleClassPrefix: String? = "demo"
-    override val styleClass = classStyle {
-        border = "1px solid green"
-        backgroundColor = "#ccc"
+    override fun render() {
 
-        /*and(":hover") {
-            backgroundColor = "lightblue"
-        }*/
-
-
-        hover {
-            backgroundColor = "lightblue"
-        }
-
-        active {
-            border = "1px solid red"
-        }
-
+        addClass(classSelector)
+        appendChild(Text("Hello"))
 
     }
 
-    override fun render() {
+    companion object Statics : StyledClass {
 
-        appendChild(Text("Hello"))
+        override val classSelector = "hello".toClassSelector()
+
+        override val rule: ClassRule.() -> Unit = {
+            border = "1px solid green"
+            backgroundColor = "#ccc"
+
+            and(":hover") {
+                backgroundColor = "lightblue"
+            }
+
+
+            hover {
+                backgroundColor = "lightblue"
+            }
+
+            active {
+                border = "1px solid red"
+            }
+        }
+
+        init {
+            HTML.registerStyle(this)
+        }
 
     }
 }

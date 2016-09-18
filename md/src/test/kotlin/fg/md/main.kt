@@ -1,29 +1,72 @@
-package fg.md.card
+package fg.md
 
+import fg.beans.Action
+import fg.beans.button
 import fg.elements.BODY
 import fg.elements.ClassSelector
 import fg.elements.HTML
-import fg.elements.Selector
 import fg.elements.div
+import fg.elements.h1
+import fg.elements.hr
+import fg.elements.p
 import fg.elements.px
 import fg.elements.with
-import fg.md.avatar
-import fg.md.content
-import fg.md.header
-import fg.md.image
-import fg.md.mdCard
-import fg.md.subtitle
-import fg.md.text
-import fg.md.title
-import fg.style.ClassStyle
-import fg.style.Style
+import fg.style.AnyRule
+import fg.style.ClassRule
 import fg.style.desc
 
 fun main(vararg args: String) {
 
 
     BODY with {
-        div("card-container") {
+        val drawer = mdDrawer {
+            hide()
+            p { +"A Drawer" }
+            mdCard {
+                header {
+                    avatar("portrait.jpg") {
+
+                    }
+                    text {
+                        title {
+                            +"Header title"
+                        }
+                        subtitle {
+                            +"Header subtitle"
+                        }
+                    }
+                }
+                content {
+                    title {
+                        +"Content title"
+                    }
+                    +"Here is some content"
+                }
+            }
+            val hideDrawerAction = Action("Hide drawer") {
+                hide()
+            }
+            hr {}
+            button(hideDrawerAction) {}
+        }
+
+        h1 {
+            +"Drawer"
+        }
+        p {
+            button(Action("Show drawer") {
+                drawer.show()
+            }) { }
+        }
+
+        hr {}
+
+        h1 {
+            +"Card"
+        }
+        hr {}
+        div() {
+            addClass("card-container")
             mdCard {
                 content {
                     +"Basic card"
@@ -77,10 +120,10 @@ fun main(vararg args: String) {
         }
     }
 
-    HTML.registerStyle(Style(Selector.ANY) with {
+    HTML.addCSSRule(AnyRule() with {
         boxSizing = "border-box"
     })
-    HTML.registerStyle(ClassStyle(ClassSelector("card-container")) with {
+    HTML.addCSSRule(ClassRule(ClassSelector("card-container")) with {
 
         desc(".md-card") {
             marginBottom = "1em"

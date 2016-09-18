@@ -4,9 +4,12 @@ import fg.beans.Action
 import fg.beans.icon.Icon
 import fg.beans.icon.IconI
 import fg.elements.Button
+import fg.elements.HTML
 import fg.elements.Span
+import fg.elements.StyledClass
 import fg.elements.onClick
-import fg.style.classStyle
+import fg.elements.toClassSelector
+import fg.style.ClassRule
 import org.w3c.dom.events.Event
 import kotlin.reflect.KProperty
 
@@ -26,12 +29,10 @@ class Button(action: Action) : Button() {
         iconI
     }
 
-    override val styleClass = classStyle {
-        cursor = "pointer"
-    }
-
     override fun render() {
         super.render()
+
+        addClass(classSelector)
 
         appendChild(icon)
         appendChild(label)
@@ -80,6 +81,18 @@ class Button(action: Action) : Button() {
         } else {
             icon.apply(this.icon)
             this.icon.show()
+        }
+    }
+
+    companion object Button : StyledClass {
+
+        override val classSelector = "button".toClassSelector()
+        override val rule: ClassRule.() -> Unit = {
+
+        }
+
+        init {
+            HTML.registerStyle(this)
         }
     }
 }

@@ -14,6 +14,10 @@ class AnySelector() : Selector() {
     override fun toString(): String {
         return "*"
     }
+
+    companion object Statics {
+        val GET = AnySelector()
+    }
 }
 
 class TypeSelector(val value: String) : Selector() {

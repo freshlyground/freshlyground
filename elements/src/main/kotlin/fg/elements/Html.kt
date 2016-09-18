@@ -1,5 +1,7 @@
 package fg.elements
 
+import fg.style.CSSRule
+import fg.style.ClassRule
 import org.w3c.dom.Element
 import org.w3c.dom.css.CSSStyleSheet
 import org.w3c.dom.events.Event
@@ -11,7 +13,7 @@ val HTML = Html()
 class Html internal constructor(val w3cElement: Element = document.documentElement!!) {
 
     private val stylesheet: CSSStyleSheet by lazy { document.styleSheets[0] as CSSStyleSheet }
-    private val registeredClassStyles: MutableMap<String, IClassStyle> = hashMapOf()
+    private val registeredClassStyles: MutableMap<String, CSSRule<*>> = hashMapOf()
 
 
     fun init() {
@@ -22,40 +24,35 @@ class Html internal constructor(val w3cElement: Element = document.documentEleme
         //document.head!!.appendChild(style as org.w3c.dom.Node)
 
         BODY.init()
-        BODY.renderStyle()
         window.setTimeout({ BODY.callDidMount() }, 10)
     }
 
-    fun registerStyle(style: IStyle) {
+    fun registerStyle(styledClass: StyledClass) {
 
-        if (style.selector.toString() == ".fg-beans-menu-item") {
-            console.log("fg-beans-menu-item")
+        fun rule(styledClass: StyledClass, init: ClassRule.() -> Unit = styledClass.rule): ClassRule {
+            val style = ClassRule(styledClass.classSelector)
+            style.init()
+            return style
         }
 
-        when (style) {
+        val rule = rule(styledClass, styledClass.rule)
+        registerCSSRule(rule)
+    }
 
-            is IClassStyle -> {
-                val previous = registeredClassStyles.put(style.className, style)
-                if (previous == null) {
+    fun registerCSSRule(rule: CSSRule<*>) {
 
-                    val rules = style.toCss()
-                    for (rule in rules) {
-                        console.log("Inserting stylesheet rule: \n" + rule)
-                        stylesheet.insertRule(rule, stylesheet.cssRules.length)
-                    }
-
-                }
-            }
-            else -> {
-                val rules = style.toCss()
-                for (rule in rules) {
-                    console.log("Inserting stylesheet rule: \n" + rule)
-                    stylesheet.insertRule(rule, stylesheet.cssRules.length)
-                }
-            }
+        val existing = registeredClassStyles.put(rule.selector.toString(), rule)
+        if (existing == null) {
+            addCSSRule(rule)
         }
+    }
 
+    fun addCSSRule(rule: CSSRule<*>) {
 
+        val ruleText = rule.cssText()
+        console.log(ruleText)
+        stylesheet.insertRule(ruleText, stylesheet.cssRules.length)
+        rule._childStyles.forEach { registerCSSRule(it) }
     }
 }
 

@@ -65,6 +65,12 @@
 <tbody>
 <tr>
 <td>
+<a href="../-element/_parent-element.html">_parentElement</a></td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">_parentElement</span><span class="symbol">: </span><a href="../-element/index.html"><span class="identifier">Element</span></a></code></td>
+</tr>
+<tr>
+<td>
 <a href="../-element/hidden.html">hidden</a></td>
 <td>
 <code><span class="keyword">val </span><span class="identifier">hidden</span><span class="symbol">: </span><span class="identifier">Boolean</span></code></td>
@@ -75,30 +81,6 @@
 <td>
 <code><span class="keyword">val </span><span class="identifier">style</span><span class="symbol">: </span><span class="identifier">CSSStyleDeclaration</span></code></td>
 </tr>
-<tr>
-<td>
-<a href="../-element/style-class.html">styleClass</a></td>
-<td>
-<code><span class="keyword">open</span> <span class="keyword">val </span><span class="identifier">styleClass</span><span class="symbol">: </span><a href="../-i-class-style/index.html"><span class="identifier">IClassStyle</span></a><span class="symbol">?</span></code></td>
-</tr>
-<tr>
-<td>
-<a href="../-element/style-class-name.html">styleClassName</a></td>
-<td>
-<code><span class="keyword">open</span> <span class="keyword">val </span><span class="identifier">styleClassName</span><span class="symbol">: </span><a href="../-class-selector/index.html"><span class="identifier">ClassSelector</span></a><span class="symbol">?</span></code></td>
-</tr>
-<tr>
-<td>
-<a href="../-element/style-class-prefix.html">styleClassPrefix</a></td>
-<td>
-<code><span class="keyword">open</span> <span class="keyword">val </span><span class="identifier">styleClassPrefix</span><span class="symbol">: </span><span class="identifier">String</span><span class="symbol">?</span></code></td>
-</tr>
-<tr>
-<td>
-<a href="../-element/type-style.html">typeStyle</a></td>
-<td>
-<code><span class="keyword">var </span><span class="identifier">typeStyle</span><span class="symbol">: </span><a href="../../fg.style/-type-style/index.html"><span class="identifier">TypeStyle</span></a><span class="symbol">?</span></code></td>
-</tr>
 </tbody>
 </table>
 <h3>Inherited Functions</h3>
@@ -108,7 +90,6 @@
 <td>
 <a href="../-element/add-class.html">addClass</a></td>
 <td>
-<code><span class="keyword">fun </span><span class="identifier">addClass</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">Unit</span></code><br/>
 <code><span class="keyword">fun </span><span class="identifier">addClass</span><span class="symbol">(</span><span class="identifier" id="fg.elements.Element$addClass(fg.elements.ClassSelector)/selector">selector</span><span class="symbol">:</span>&nbsp;<a href="../-class-selector/index.html"><span class="identifier">ClassSelector</span></a><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">Unit</span></code><br/>
 <code><span class="keyword">fun </span><span class="identifier">addClass</span><span class="symbol">(</span><span class="identifier" id="fg.elements.Element$addClass(kotlin.String)/name">name</span><span class="symbol">:</span>&nbsp;<span class="identifier">String</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">Unit</span></code></td>
 </tr>
@@ -188,16 +169,9 @@ Override when needed, but remember to call super.render().</p>
 </tr>
 <tr>
 <td>
-<a href="../../fg.style/class-style.html">classStyle</a></td>
-<td>
-<code><span class="keyword">fun </span><a href="../-element/index.html"><span class="identifier">Element</span></a><span class="symbol">.</span><span class="identifier">classStyle</span><span class="symbol">(</span><span class="identifier" id="fg.style$classStyle(fg.elements.Element, kotlin.Function1((fg.style.ClassStyle, kotlin.Unit)))/init">init</span><span class="symbol">:</span>&nbsp;<a href="../../fg.style/-class-style/index.html"><span class="identifier">ClassStyle</span></a><span class="symbol">.</span><span class="symbol">(</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<span class="identifier">Unit</span><span class="symbol">)</span><span class="symbol">: </span><a href="../../fg.style/-class-style/index.html"><span class="identifier">ClassStyle</span></a></code></td>
-</tr>
-<tr>
-<td>
 <a href="../div.html">div</a></td>
 <td>
-<code><span class="keyword">fun </span><a href="../-element/index.html"><span class="identifier">Element</span></a><span class="symbol">.</span><span class="identifier">div</span><span class="symbol">(</span><span class="identifier" id="fg.elements$div(fg.elements.Element, kotlin.Function1((fg.elements.Div, kotlin.Unit)))/init">init</span><span class="symbol">:</span>&nbsp;<a href="../-div/index.html"><span class="identifier">Div</span></a><span class="symbol">.</span><span class="symbol">(</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<span class="identifier">Unit</span><span class="symbol">)</span><span class="symbol">: </span><a href="../-div/index.html"><span class="identifier">Div</span></a></code><br/>
-<code><span class="keyword">fun </span><a href="../-element/index.html"><span class="identifier">Element</span></a><span class="symbol">.</span><span class="identifier">div</span><span class="symbol">(</span><span class="identifier" id="fg.elements$div(fg.elements.Element, kotlin.String, kotlin.Function1((fg.elements.Div, kotlin.Unit)))/className">className</span><span class="symbol">:</span>&nbsp;<span class="identifier">String</span><span class="symbol">, </span><span class="identifier" id="fg.elements$div(fg.elements.Element, kotlin.String, kotlin.Function1((fg.elements.Div, kotlin.Unit)))/init">init</span><span class="symbol">:</span>&nbsp;<a href="../-div/index.html"><span class="identifier">Div</span></a><span class="symbol">.</span><span class="symbol">(</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<span class="identifier">Unit</span><span class="symbol">)</span><span class="symbol">: </span><a href="../-div/index.html"><span class="identifier">Div</span></a></code></td>
+<code><span class="keyword">fun </span><a href="../-element/index.html"><span class="identifier">Element</span></a><span class="symbol">.</span><span class="identifier">div</span><span class="symbol">(</span><span class="identifier" id="fg.elements$div(fg.elements.Element, kotlin.Function1((fg.elements.Div, kotlin.Unit)))/init">init</span><span class="symbol">:</span>&nbsp;<a href="../-div/index.html"><span class="identifier">Div</span></a><span class="symbol">.</span><span class="symbol">(</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<span class="identifier">Unit</span><span class="symbol">)</span><span class="symbol">: </span><a href="../-div/index.html"><span class="identifier">Div</span></a></code></td>
 </tr>
 <tr>
 <td>
@@ -240,6 +214,12 @@ Override when needed, but remember to call super.render().</p>
 <a href="../header.html">header</a></td>
 <td>
 <code><span class="keyword">fun </span><a href="../-element/index.html"><span class="identifier">Element</span></a><span class="symbol">.</span><span class="identifier">header</span><span class="symbol">(</span><span class="identifier" id="fg.elements$header(fg.elements.Element, kotlin.Function1((fg.elements.Header, kotlin.Unit)))/init">init</span><span class="symbol">:</span>&nbsp;<a href="../-header/index.html"><span class="identifier">Header</span></a><span class="symbol">.</span><span class="symbol">(</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<span class="identifier">Unit</span><span class="symbol">)</span><span class="symbol">: </span><a href="../-header/index.html"><span class="identifier">Header</span></a></code></td>
+</tr>
+<tr>
+<td>
+<a href="../hr.html">hr</a></td>
+<td>
+<code><span class="keyword">fun </span><a href="../-element/index.html"><span class="identifier">Element</span></a><span class="symbol">.</span><span class="identifier">hr</span><span class="symbol">(</span><span class="identifier" id="fg.elements$hr(fg.elements.Element, kotlin.Function1((fg.elements.Hr, kotlin.Unit)))/init">init</span><span class="symbol">:</span>&nbsp;<a href="../-hr/index.html"><span class="identifier">Hr</span></a><span class="symbol">.</span><span class="symbol">(</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<span class="identifier">Unit</span><span class="symbol">)</span><span class="symbol">: </span><a href="../-hr/index.html"><span class="identifier">Hr</span></a></code></td>
 </tr>
 <tr>
 <td>
@@ -429,15 +409,9 @@ Override when needed, but remember to call super.render().</p>
 </tr>
 <tr>
 <td>
-<a href="../../fg.style/resolve-class-style-name.html">resolveClassStyleName</a></td>
+<a href="../../fg.style/rule.html">rule</a></td>
 <td>
-<code><span class="keyword">fun </span><a href="../-element/index.html"><span class="identifier">Element</span></a><span class="symbol">.</span><span class="identifier">resolveClassStyleName</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="../-class-selector/index.html"><span class="identifier">ClassSelector</span></a></code></td>
-</tr>
-<tr>
-<td>
-<a href="../../fg.style/type-style.html">typeStyle</a></td>
-<td>
-<code><span class="keyword">fun </span><a href="../-element/index.html"><span class="identifier">Element</span></a><span class="symbol">.</span><span class="identifier">typeStyle</span><span class="symbol">(</span><span class="identifier" id="fg.style$typeStyle(fg.elements.Element, kotlin.Function1((fg.style.TypeStyle, kotlin.Unit)))/init">init</span><span class="symbol">:</span>&nbsp;<a href="../../fg.style/-type-style/index.html"><span class="identifier">TypeStyle</span></a><span class="symbol">.</span><span class="symbol">(</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<span class="identifier">Unit</span><span class="symbol">)</span><span class="symbol">: </span><a href="../../fg.style/-type-style/index.html"><span class="identifier">TypeStyle</span></a></code></td>
+<code><span class="keyword">fun </span><a href="../-element/index.html"><span class="identifier">Element</span></a><span class="symbol">.</span><span class="identifier">rule</span><span class="symbol">(</span><span class="identifier" id="fg.style$rule(fg.elements.Element, fg.elements.StyledClass, kotlin.Function1((fg.style.ClassRule, kotlin.Unit)))/styledClass">styledClass</span><span class="symbol">:</span>&nbsp;<a href="../-styled-class/index.html"><span class="identifier">StyledClass</span></a><span class="symbol">, </span><span class="identifier" id="fg.style$rule(fg.elements.Element, fg.elements.StyledClass, kotlin.Function1((fg.style.ClassRule, kotlin.Unit)))/init">init</span><span class="symbol">:</span>&nbsp;<a href="../../fg.style/-class-rule/index.html"><span class="identifier">ClassRule</span></a><span class="symbol">.</span><span class="symbol">(</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<span class="identifier">Unit</span>&nbsp;<span class="symbol">=</span>&nbsp;styledClass.rule<span class="symbol">)</span><span class="symbol">: </span><a href="../../fg.style/-class-rule/index.html"><span class="identifier">ClassRule</span></a></code></td>
 </tr>
 <tr>
 <td>

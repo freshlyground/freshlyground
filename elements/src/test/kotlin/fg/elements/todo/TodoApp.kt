@@ -1,20 +1,15 @@
 package fg.elements.todo
 
-import fg.elements.Text
+import fg.elements.ClassSelector
 import fg.elements.H1
+import fg.elements.HTML
 import fg.elements.Header
 import fg.elements.Section
-import fg.style.ClassStyle
-import fg.style.classStyle
+import fg.elements.StyledClass
+import fg.elements.Text
+import fg.style.ClassRule
 
 class TodoApp : Section() {
-
-    override val styleClass: ClassStyle? = classStyle {
-        background = "#fff"
-        margin = "130px 0 40px 0"
-        position = "relative"
-        boxShadow = "0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 25px 50px 0 rgba(0, 0, 0, 0.1)"
-    }
 
     private val header: Header by lazy {
         val header = Header()
@@ -36,8 +31,26 @@ class TodoApp : Section() {
     override fun render() {
         super.render()
 
+        addClass(classSelector)
+
         appendChild(header)
         appendChild(newTodo)
+    }
+
+    companion object TodoApp : StyledClass {
+
+        override val classSelector = ClassSelector("todo-app")
+
+        override val rule: ClassRule.() -> Unit = {
+            background = "#fff"
+            margin = "130px 0 40px 0"
+            position = "relative"
+            boxShadow = "0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 25px 50px 0 rgba(0, 0, 0, 0.1)"
+        }
+
+        init {
+            HTML.registerStyle(this)
+        }
     }
 }
 

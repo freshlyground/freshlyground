@@ -18,17 +18,6 @@ fun Element.a(href: String? = null, target: String? = null, init: A.() -> Unit) 
 fun Element.i(init: I.() -> Unit) = initAndAppendNode(I(), init)
 fun Element.img(src: String, init: Img.() -> Unit) = initAndAppendNode(Img(src), init)
 
-fun Element.div(className: String, init: Div.() -> Unit): Div {
-    return initAndAppendNode(object : Div() {
-        override val styleClassName = className.toClassSelector()
-
-        override fun render() {
-            super.render()
-            addClass()
-        }
-    }, init)
-}
-
 fun <T : Node> Node.initAndAppendNode(node: T, init: T.() -> Unit): T {
     node.init()
     appendChild(node)

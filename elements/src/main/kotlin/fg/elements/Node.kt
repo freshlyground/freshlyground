@@ -7,11 +7,11 @@ open class Node(internal val w3cNode: org.w3c.dom.Node) {
     private val _childNodes: MutableList<Node> = arrayListOf()
     private val _childrenMountInstructions: MutableList<Pair<(Node) -> Unit, Node>> = arrayListOf()
 
-    private var _parent: Node? = null
+    internal var _parentNode: Node? = null
     val _nodeName: String get() = w3cNode.nodeName
 
     open val mounted: Boolean
-        get() = _parent?.w3cNode?.contains(this.w3cNode) ?: false
+        get() = _parentNode?.w3cNode?.contains(this.w3cNode) ?: false
 
 
     var textContent: String?
@@ -34,7 +34,7 @@ open class Node(internal val w3cNode: org.w3c.dom.Node) {
             throw IllegalArgumentException("reference ${child.w3cNode.nodeName} is expected as child")
         }
 
-        node._parent = this
+        node._parentNode = this
 
         val mountFn: (Node) -> Unit = { w3cNode.insertBefore(it.w3cNode, child.w3cNode) }
         if (mounted) {
@@ -50,7 +50,7 @@ open class Node(internal val w3cNode: org.w3c.dom.Node) {
 
     fun appendChild(node: Node): Node {
 
-        node._parent = this
+        node._parentNode = this
 
         val mountFn: (Node) -> Unit = { w3cNode.appendChild(it.w3cNode) }
         if (mounted) {

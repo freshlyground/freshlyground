@@ -1,39 +1,27 @@
 package fg.style
 
-import fg.elements.IStyle
 import fg.elements.Selector
 import kotlin.reflect.KProperty
 
-open class Style(override val selector: Selector) : IStyle {
-
-    internal val _childStyles: MutableList<Style> = arrayListOf()
+abstract class CSSRule<SELECTOR : Selector>(val selector: SELECTOR) {
 
     protected val _map: MutableMap<String, String> = mutableMapOf()
 
-    fun isNotEmpty(): Boolean = _map.isNotEmpty()
+    internal val _childStyles: MutableList<CSSRule<*>> = arrayListOf()
 
-    override fun toCss(): List<String> {
+    abstract fun cssText(): String
 
-        val rules: MutableList<String> = arrayListOf()
+    internal fun cssText(selector: Selector): String {
+        var s = ""
+        s += selector.toString()
+        s += " { "
+        for ((key, value) in _map) {
 
-        if (isNotEmpty()) {
-            var s = ""
-            s += selector.toString()
-            s += " { "
-            for ((key, value) in _map) {
+            s += key + ": " + value + "; "
 
-                s += key + ": " + value + "; "
-
-            }
-            s += "}"
-            rules.add(s)
         }
-
-        for (child in _childStyles) {
-            rules.addAll(child.toCss())
-        }
-
-        return rules
+        s += "}"
+        return s
     }
 
     var cssFloat: String by Property()
@@ -490,13 +478,13 @@ open class Style(override val selector: Selector) : IStyle {
 
     inner class Property(val name: String? = null) {
 
-        operator fun getValue(classStyle: Style?, prop: KProperty<*>): String {
-            val styleName = name ?: resolveStyleName(prop)
+        operator fun getValue(rule: CSSRule<*>?, prop: KProperty<*>): String {
+            val styleName = name ?: resolveRuleName(prop)
             return _map[styleName] ?: ""
         }
 
-        operator fun setValue(classStyle: Style?, prop: KProperty<*>, value: String) {
-            val styleName = name ?: resolveStyleName(prop)
+        operator fun setValue(rule: CSSRule<*>?, prop: KProperty<*>, value: String) {
+            val styleName = name ?: resolveRuleName(prop)
             if (value.isNotEmpty()) {
                 _map[styleName] = value
             } else {
@@ -508,7 +496,7 @@ open class Style(override val selector: Selector) : IStyle {
     /**
      * lowerCase -> lower-case
      */
-    private fun resolveStyleName(prop: KProperty<*>): String {
+    private fun resolveRuleName(prop: KProperty<*>): String {
 
         var s = ""
         for (c in prop.name) {
@@ -521,6 +509,3 @@ open class Style(override val selector: Selector) : IStyle {
         return s
     }
 }
-
-
-

@@ -1,19 +1,30 @@
 package fg.md.card
 
 import fg.elements.Div
+import fg.elements.HTML
+import fg.elements.StyledClass
 import fg.elements.toClassSelector
-import fg.elements.toSelector
-import fg.style.child
-import fg.style.classStyle
-import fg.style.not
+import fg.style.ClassRule
 
 class MDCardHeaderText : Div() {
 
-    override val styleClassName = "md-card-header-text".toClassSelector()
+    override fun render() {
+        super.render()
 
-    override val styleClass = classStyle {
+        addClass(classSelector)
+    }
 
-        height = "40px"
-        margin = "0 8px"
+    companion object MDCardHeaderText : StyledClass {
+
+        override val classSelector = "md-card-header-text".toClassSelector()
+
+        override val rule: ClassRule.() -> Unit = {
+            height = "40px"
+            margin = "0 8px"
+        }
+
+        init {
+            HTML.registerStyle(this)
+        }
     }
 }

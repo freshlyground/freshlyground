@@ -1,15 +1,30 @@
 package fg.md.card
 
+import fg.elements.HTML
 import fg.elements.Img
+import fg.elements.StyledClass
 import fg.elements.toClassSelector
-import fg.style.classStyle
+import fg.style.ClassRule
 
 class MDCardImage(src: String) : Img(src = src) {
 
-    override val styleClassName = "md-card-image".toClassSelector()
+    override fun render() {
+        super.render()
 
-    override val styleClass = classStyle {
-        width = "calc(100% + 48px)"
-        margin = "0 -24px 16px -24px"
+        addClass(classSelector)
+    }
+
+    companion object MDCardImage : StyledClass {
+
+        override val classSelector = "md-card-image".toClassSelector()
+
+        override val rule: ClassRule.() -> Unit = {
+            height = "40px"
+            margin = "0 8px"
+        }
+
+        init {
+            HTML.registerStyle(this)
+        }
     }
 }
