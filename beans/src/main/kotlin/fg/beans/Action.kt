@@ -6,7 +6,8 @@ import kotlin.reflect.KProperty
 
 open class Action(label: String? = null,
                   enabled: Boolean = true,
-                  icon: Icon? = null) {
+                  icon: Icon? = null,
+                  val perform: () -> Unit) {
 
     var label: String? by Delegates.observable(label) { prop, old, new ->
         notifyPropertyChanged(prop, old, new)

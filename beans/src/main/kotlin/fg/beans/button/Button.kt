@@ -5,7 +5,9 @@ import fg.beans.icon.Icon
 import fg.beans.icon.IconI
 import fg.elements.Button
 import fg.elements.Span
+import fg.elements.onClick
 import fg.style.classStyle
+import org.w3c.dom.events.Event
 import kotlin.reflect.KProperty
 
 class Button(action: Action) : Button() {
@@ -19,7 +21,7 @@ class Button(action: Action) : Button() {
     }
 
     private val icon: IconI by lazy {
-        val iconI = IconI(action.icon)
+        val iconI = IconI(this.action.icon)
         iconI.hide()
         iconI
     }
@@ -42,6 +44,12 @@ class Button(action: Action) : Button() {
         super.didMount()
 
         action.onPropertyChanged(actionPropertyChangedHandler)
+        onClick(clickHandler)
+    }
+
+    private val clickHandler: (Event) -> Unit = {
+
+        this.action.perform.invoke()
     }
 
     private val actionPropertyChangedHandler: (action: Action, property: KProperty<*>, old: Any?, new: Any?) -> Unit = {
