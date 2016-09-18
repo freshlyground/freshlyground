@@ -1,14 +1,13 @@
 package fg.md.card
 
 import fg.elements.toClassSelector
-import fg.style.ClassStyle
 import fg.style.classStyle
 
 open class MDCard : fg.elements.Div() {
 
     override val styleClassName = "md-card".toClassSelector()
 
-    override val styleClass: ClassStyle? = classStyle {
+    override val styleClass = classStyle {
         display = "block"
         position = "relative"
         padding = "24px"
