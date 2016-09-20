@@ -968,8 +968,10 @@ var elements = function (Kotlin) {
             }
           },
           hide: function () {
-            this._displayBeforeHiding_ywpibn$ = this.style.display;
-            this.style.display = 'none';
+            if (!this.hidden) {
+              this._displayBeforeHiding_ywpibn$ = this.style.display;
+              this.style.display = 'none';
+            }
           }
         }, /** @lends _.fg.elements.Element */ {
         }),
@@ -1019,6 +1021,115 @@ var elements = function (Kotlin) {
           return [_.fg.elements.Element];
         }, function Button() {
           Button.baseInitializer.call(this, 'button');
+          this._autofocus$delegate = _.fg.elements.W3cDelegates.nullableAttribute_61zpoe$('autocomplete');
+          this._disabled$delegate = _.fg.elements.W3cDelegates.nullableBooleanAttribute_61zpoe$('disabled');
+          this._form$delegate = _.fg.elements.W3cDelegates.nullableAttribute_61zpoe$('form');
+          this._formaction$delegate = _.fg.elements.W3cDelegates.nullableAttribute_61zpoe$('formaction');
+          this._formenctype$delegate = _.fg.elements.W3cDelegates.nullableAttribute_61zpoe$('formenctype');
+          this._formmethod$delegate = _.fg.elements.W3cDelegates.nullableAttribute_61zpoe$('formmethod');
+          this._formnovalidate$delegate = _.fg.elements.W3cDelegates.nullableAttribute_61zpoe$('formnovalidate');
+          this._formtarget$delegate = _.fg.elements.W3cDelegates.nullableAttribute_61zpoe$('formtarget');
+          this._menu$delegate = _.fg.elements.W3cDelegates.nullableAttribute_61zpoe$('menu');
+          this._name$delegate = _.fg.elements.W3cDelegates.nullableAttribute_61zpoe$('name');
+          this._type$delegate = _.fg.elements.W3cDelegates.nullableAttribute_61zpoe$('type');
+          this._value$delegate = _.fg.elements.W3cDelegates.nullableAttribute_61zpoe$('value');
+        }, /** @lends _.fg.elements.Button.prototype */ {
+          _autofocus: {
+            get: function () {
+              return this._autofocus$delegate.getValue_dsk1ci$(this, new Kotlin.PropertyMetadata('_autofocus'));
+            },
+            set: function (_autofocus) {
+              this._autofocus$delegate.setValue_w32e13$(this, new Kotlin.PropertyMetadata('_autofocus'), _autofocus);
+            }
+          },
+          _disabled: {
+            get: function () {
+              return this._disabled$delegate.getValue_dsk1ci$(this, new Kotlin.PropertyMetadata('_disabled'));
+            },
+            set: function (_disabled) {
+              this._disabled$delegate.setValue_w32e13$(this, new Kotlin.PropertyMetadata('_disabled'), _disabled);
+            }
+          },
+          _form: {
+            get: function () {
+              return this._form$delegate.getValue_dsk1ci$(this, new Kotlin.PropertyMetadata('_form'));
+            },
+            set: function (_form) {
+              this._form$delegate.setValue_w32e13$(this, new Kotlin.PropertyMetadata('_form'), _form);
+            }
+          },
+          _formaction: {
+            get: function () {
+              return this._formaction$delegate.getValue_dsk1ci$(this, new Kotlin.PropertyMetadata('_formaction'));
+            },
+            set: function (_formaction) {
+              this._formaction$delegate.setValue_w32e13$(this, new Kotlin.PropertyMetadata('_formaction'), _formaction);
+            }
+          },
+          _formenctype: {
+            get: function () {
+              return this._formenctype$delegate.getValue_dsk1ci$(this, new Kotlin.PropertyMetadata('_formenctype'));
+            },
+            set: function (_formenctype) {
+              this._formenctype$delegate.setValue_w32e13$(this, new Kotlin.PropertyMetadata('_formenctype'), _formenctype);
+            }
+          },
+          _formmethod: {
+            get: function () {
+              return this._formmethod$delegate.getValue_dsk1ci$(this, new Kotlin.PropertyMetadata('_formmethod'));
+            },
+            set: function (_formmethod) {
+              this._formmethod$delegate.setValue_w32e13$(this, new Kotlin.PropertyMetadata('_formmethod'), _formmethod);
+            }
+          },
+          _formnovalidate: {
+            get: function () {
+              return this._formnovalidate$delegate.getValue_dsk1ci$(this, new Kotlin.PropertyMetadata('_formnovalidate'));
+            },
+            set: function (_formnovalidate) {
+              this._formnovalidate$delegate.setValue_w32e13$(this, new Kotlin.PropertyMetadata('_formnovalidate'), _formnovalidate);
+            }
+          },
+          _formtarget: {
+            get: function () {
+              return this._formtarget$delegate.getValue_dsk1ci$(this, new Kotlin.PropertyMetadata('_formtarget'));
+            },
+            set: function (_formtarget) {
+              this._formtarget$delegate.setValue_w32e13$(this, new Kotlin.PropertyMetadata('_formtarget'), _formtarget);
+            }
+          },
+          _menu: {
+            get: function () {
+              return this._menu$delegate.getValue_dsk1ci$(this, new Kotlin.PropertyMetadata('_menu'));
+            },
+            set: function (_menu) {
+              this._menu$delegate.setValue_w32e13$(this, new Kotlin.PropertyMetadata('_menu'), _menu);
+            }
+          },
+          _name: {
+            get: function () {
+              return this._name$delegate.getValue_dsk1ci$(this, new Kotlin.PropertyMetadata('_name'));
+            },
+            set: function (_name) {
+              this._name$delegate.setValue_w32e13$(this, new Kotlin.PropertyMetadata('_name'), _name);
+            }
+          },
+          _type: {
+            get: function () {
+              return this._type$delegate.getValue_dsk1ci$(this, new Kotlin.PropertyMetadata('_type'));
+            },
+            set: function (_type) {
+              this._type$delegate.setValue_w32e13$(this, new Kotlin.PropertyMetadata('_type'), _type);
+            }
+          },
+          _value: {
+            get: function () {
+              return this._value$delegate.getValue_dsk1ci$(this, new Kotlin.PropertyMetadata('_value'));
+            },
+            set: function (_value) {
+              this._value$delegate.setValue_w32e13$(this, new Kotlin.PropertyMetadata('_value'), _value);
+            }
+          }
         }),
         Input: Kotlin.createClass(function () {
           return [_.fg.elements.Element];
@@ -1534,8 +1645,8 @@ var elements = function (Kotlin) {
               return this.w3cNode.textContent;
             },
             set: function (value) {
+              this.removeChildren();
               this.w3cNode.textContent = value;
-              this._childNodes_d2zqq6$.clear();
               this._childNodes_d2zqq6$.addAll_wtfk93$(this.parseChildrenFromDOM());
             }
           },
@@ -1623,7 +1734,10 @@ var elements = function (Kotlin) {
             if (Kotlin.isType(node, _.fg.elements.Element)) {
               node.willUnMount();
             }
-            this.w3cNode.removeChild(node.w3cNode);
+            if (this.mounted) {
+              this.w3cNode.removeChild(node.w3cNode);
+            }
+            this._childNodes_d2zqq6$.remove_za3rmp$(node);
           }
         }, /** @lends _.fg.elements.Node */ {
           insertBefore_p937mc$f: function (this$Node, closure$child) {
@@ -2020,7 +2134,7 @@ var elements = function (Kotlin) {
               var tmp$0;
               var w3cElement = thisRef.w3cElement;
               var attributeName = (tmp$0 = this.attributeName) != null ? tmp$0 : property.name;
-              if (value != null) {
+              if (value != null && value) {
                 w3cElement.setAttribute(attributeName, attributeName);
               }
                else {

@@ -96,7 +96,9 @@ open class Element(name: String? = null,
     }
 
     fun hide() {
-        _displayBeforeHiding = this.style.display
-        this.style.display = "none"
+        if (!hidden) {
+            _displayBeforeHiding = this.style.display
+            this.style.display = "none"
+        }
     }
 }

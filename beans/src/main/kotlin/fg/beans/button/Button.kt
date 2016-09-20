@@ -13,17 +13,17 @@ import fg.style.ClassRule
 import org.w3c.dom.events.Event
 import kotlin.reflect.KProperty
 
-class Button(action: Action) : Button() {
+open class Button(action: Action) : Button() {
 
     val action: Action = action
 
-    private val label: Span by lazy {
+    protected val label: Span by lazy {
         val span = Span()
         span.hide()
         span
     }
 
-    private val icon: IconI by lazy {
+    protected val icon: IconI by lazy {
         val iconI = IconI(this.action.icon)
         iconI.hide()
         iconI
@@ -50,7 +50,7 @@ class Button(action: Action) : Button() {
 
     private val clickHandler: (Event) -> Unit = {
 
-        this.action.perform.invoke()
+        this.action.perform()
     }
 
     private val actionPropertyChangedHandler: (action: Action, property: KProperty<*>, old: Any?, new: Any?) -> Unit = {

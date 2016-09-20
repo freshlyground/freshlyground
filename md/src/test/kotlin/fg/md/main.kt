@@ -2,6 +2,7 @@ package fg.md
 
 import fg.beans.Action
 import fg.beans.button
+import fg.beans.drawer.Drawer
 import fg.elements.BODY
 import fg.elements.ClassSelector
 import fg.elements.HTML
@@ -11,6 +12,7 @@ import fg.elements.hr
 import fg.elements.p
 import fg.elements.px
 import fg.elements.with
+import fg.md.button.MDButton
 import fg.style.AnyRule
 import fg.style.ClassRule
 import fg.style.desc
@@ -19,9 +21,39 @@ fun main(vararg args: String) {
 
 
     BODY with {
-        val drawer = mdDrawer {
+        val leftDrawer = mdDrawer(Drawer.Side.LEFT) {
             hide()
             p { +"A Drawer" }
+            mdCard {
+                header {
+                    avatar("portrait.jpg") {
+
+                    }
+                    text {
+                        title {
+                            +"Header title"
+                        }
+                        subtitle {
+                            +"Header subtitle"
+                        }
+                    }
+                }
+                content {
+                    title {
+                        +"Content title"
+                    }
+                    +"Here is some content"
+                }
+            }
+            val hideDrawerAction = Action("Hide drawer") {
+                hide()
+            }
+            hr {}
+            button(hideDrawerAction) {}
+        }
+        val rightDrawer = mdDrawer(Drawer.Side.RIGHT) {
+            hide()
+            p { +"A Drawer on the right side" }
             mdCard {
                 header {
                     avatar("portrait.jpg") {
@@ -54,11 +86,38 @@ fun main(vararg args: String) {
             +"Drawer"
         }
         p {
-            button(Action("Show drawer") {
-                drawer.show()
+            button(Action("Show left drawer") {
+                leftDrawer.show()
+            }) { }
+
+            button(Action("Show right drawer") {
+                rightDrawer.show()
             }) { }
         }
 
+        hr {}
+
+        h1 {
+            +"Button"
+        }
+        div {
+            addClass("flex-row")
+            p() {
+                addClass("flex-column")
+                mdButton(Action(label = "Flat", perform = {}), MDButton.Type.FLAT) {}
+                mdButton(Action(label = "Flat, disabled", enabled = false, perform = {}), MDButton.Type.FLAT) {}
+            }
+            p {
+                addClass("flex-column")
+                mdButton(Action(label = "Raised", perform = {}), MDButton.Type.RAISED) {}
+                mdButton(Action(label = "Raised, disabled", enabled = false, perform = {}), MDButton.Type.RAISED) {}
+            }
+            p {
+                addClass("flex-column")
+                mdButton(Action(label = "Floating", perform = {}), MDButton.Type.FLOATING) {}
+                mdButton(Action(label = "Floating, disabled", enabled = false, perform = {}), MDButton.Type.FLOATING) {}
+            }
+        }
         hr {}
 
         h1 {
@@ -136,5 +195,20 @@ fun main(vararg args: String) {
 
 
     })
+
+    HTML.addCSSRule(ClassRule(ClassSelector("flex-row")) with {
+
+        display = "flex"
+        flexDirection = "row"
+
+    })
+
+    HTML.addCSSRule(ClassRule(ClassSelector("flex-column")) with {
+
+        display = "flex"
+        flexDirection = "column"
+
+    })
+
     HTML.init()
 }

@@ -17,8 +17,8 @@ open class Node(internal val w3cNode: org.w3c.dom.Node) {
     var textContent: String?
         get() = w3cNode.textContent
         set(value) {
+            removeChildren()
             w3cNode.textContent = value
-            _childNodes.clear()
             _childNodes.addAll(parseChildrenFromDOM())
         }
 
@@ -117,6 +117,10 @@ open class Node(internal val w3cNode: org.w3c.dom.Node) {
         if (node is Element) {
             node.willUnMount()
         }
-        this.w3cNode.removeChild(node.w3cNode)
+
+        if (mounted) {
+            this.w3cNode.removeChild(node.w3cNode)
+        }
+        _childNodes.remove(node)
     }
 }

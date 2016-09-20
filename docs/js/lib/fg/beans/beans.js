@@ -12,7 +12,7 @@ var beans = function (Kotlin, $module$elements) {
             enabled = true;
           if (icon === void 0)
             icon = null;
-          this.perform = perform;
+          this.perform_o59y8v$ = perform;
           var initialValue = label;
           this.label$delegate = new Kotlin.kotlin.properties.Delegates.observable$f(_.fg.beans.Action.label$f(this), initialValue);
           var initialValue_0 = enabled;
@@ -54,11 +54,15 @@ var beans = function (Kotlin, $module$elements) {
             }
           },
           onPropertyChanged_uamkrm$: function (listener) {
-            var tmp$0;
-            this.propertyChangedListeners_yuw5y8$.add_za3rmp$(typeof (tmp$0 = listener) === 'function' ? tmp$0 : Kotlin.throwCCE());
+            this.propertyChangedListeners_yuw5y8$.add_za3rmp$(listener);
           },
           unPropertyChanged_uamkrm$: function (listener) {
             this.propertyChangedListeners_yuw5y8$.remove_za3rmp$(listener);
+          },
+          perform: function () {
+            if (this.enabled) {
+              this.perform_o59y8v$();
+            }
           }
         }, /** @lends _.fg.beans.Action */ {
           label$f: function (this$Action) {
@@ -126,17 +130,17 @@ var beans = function (Kotlin, $module$elements) {
           }, function Button(action) {
             Button.baseInitializer.call(this);
             this.action = action;
-            this.label$delegate = Kotlin.kotlin.lazy_un3fny$(_.fg.beans.button.Button.label_fkzj7o$f);
-            this.icon$delegate = Kotlin.kotlin.lazy_un3fny$(_.fg.beans.button.Button.icon_k48m7l$f(this));
+            this.label$delegate = Kotlin.kotlin.lazy_un3fny$(_.fg.beans.button.Button.label$f);
+            this.icon$delegate = Kotlin.kotlin.lazy_un3fny$(_.fg.beans.button.Button.icon$f(this));
             this.clickHandler_9cuniy$ = _.fg.beans.button.Button.clickHandler_9cuniy$f(this);
             this.actionPropertyChangedHandler_dzou13$ = _.fg.beans.button.Button.actionPropertyChangedHandler_dzou13$f(this);
           }, /** @lends _.fg.beans.button.Button.prototype */ {
-            label_fkzj7o$: {
+            label: {
               get: function () {
                 return Kotlin.kotlin.getValue_em0fd4$(this.label$delegate, this, new Kotlin.PropertyMetadata('label'));
               }
             },
-            icon_k48m7l$: {
+            icon: {
               get: function () {
                 return Kotlin.kotlin.getValue_em0fd4$(this.icon$delegate, this, new Kotlin.PropertyMetadata('icon'));
               }
@@ -144,32 +148,32 @@ var beans = function (Kotlin, $module$elements) {
             render: function () {
               $module$elements.fg.elements.Button.prototype.render.call(this);
               this.addClass_bx842b$(_.fg.beans.button.Button.Button.classSelector);
-              this.appendChild_sr04hg$(this.icon_k48m7l$);
-              this.appendChild_sr04hg$(this.label_fkzj7o$);
-              this.renderIcon(this.action.icon);
-              this.renderLabel(this.action.label);
+              this.appendChild_sr04hg$(this.icon);
+              this.appendChild_sr04hg$(this.label);
+              this.renderIcon_41ga0a$(this.action.icon);
+              this.renderLabel_61zpoe$(this.action.label);
             },
             didMount: function () {
               $module$elements.fg.elements.Button.prototype.didMount.call(this);
               this.action.onPropertyChanged_uamkrm$(this.actionPropertyChangedHandler_dzou13$);
               $module$elements.fg.elements.onClick_m2anqv$(this, this.clickHandler_9cuniy$);
             },
-            renderLabel: function (labelText) {
+            renderLabel_61zpoe$: function (labelText) {
               if (labelText != null) {
-                this.label_fkzj7o$.textContent = labelText;
-                this.label_fkzj7o$.show();
+                this.label.textContent = labelText;
+                this.label.show();
               }
                else {
-                this.label_fkzj7o$.hide();
+                this.label.hide();
               }
             },
-            renderIcon: function (icon) {
+            renderIcon_41ga0a$: function (icon) {
               if (icon == null) {
-                this.icon_k48m7l$.hide();
+                this.icon.hide();
               }
                else {
-                icon.apply_54c9de$(this.icon_k48m7l$);
-                this.icon_k48m7l$.show();
+                icon.apply_54c9de$(this.icon);
+                this.icon.show();
               }
             }
           }, /** @lends _.fg.beans.button.Button */ {
@@ -197,12 +201,12 @@ var beans = function (Kotlin, $module$elements) {
             object_initializer$: function () {
               _.fg.beans.button.Button.Button;
             },
-            label_fkzj7o$f: function () {
+            label$f: function () {
               var span = new $module$elements.fg.elements.Span();
               span.hide();
               return span;
             },
-            icon_k48m7l$f: function (this$Button) {
+            icon$f: function (this$Button) {
               return function () {
                 var iconI = new _.fg.beans.icon.IconI(this$Button.action.icon);
                 iconI.hide();
@@ -219,9 +223,9 @@ var beans = function (Kotlin, $module$elements) {
                 var tmp$0;
                 tmp$0 = property.name;
                 if (Kotlin.equals(tmp$0, Kotlin.getCallableRefForMemberProperty('label', true).name))
-                  this$Button.renderLabel(action.label);
+                  this$Button.renderLabel_61zpoe$(action.label);
                 else if (Kotlin.equals(tmp$0, Kotlin.getCallableRefForMemberProperty('icon', true).name))
-                  this$Button.renderIcon(action.icon);
+                  this$Button.renderIcon_41ga0a$(action.icon);
               };
             }
           })
@@ -229,14 +233,44 @@ var beans = function (Kotlin, $module$elements) {
         drawer: Kotlin.definePackage(null, /** @lends _.fg.beans.drawer */ {
           Drawer: Kotlin.createClass(function () {
             return [$module$elements.fg.elements.Div];
-          }, function Drawer() {
+          }, function Drawer(side) {
             Drawer.baseInitializer.call(this);
+            this.side$delegate = new Kotlin.kotlin.properties.Delegates.observable$f(_.fg.beans.drawer.Drawer.side$f(this), side);
           }, /** @lends _.fg.beans.drawer.Drawer.prototype */ {
+            side: {
+              get: function () {
+                return this.side$delegate.getValue_dsk1ci$(this, new Kotlin.PropertyMetadata('side'));
+              },
+              set: function (side) {
+                this.side$delegate.setValue_w32e13$(this, new Kotlin.PropertyMetadata('side'), side);
+              }
+            },
             render: function () {
               $module$elements.fg.elements.Div.prototype.render.call(this);
               this.addClass_bx842b$(_.fg.beans.drawer.Drawer.Drawer.classSelector);
+              this.renderSide_v23ult$(this.side);
+            },
+            renderSide_v23ult$: function (side) {
+              if (Kotlin.equals(side, _.fg.beans.drawer.Drawer.Side.LEFT))
+                this.style.left = '0';
+              else if (Kotlin.equals(side, _.fg.beans.drawer.Drawer.Side.RIGHT))
+                this.style.right = '0';
             }
           }, /** @lends _.fg.beans.drawer.Drawer */ {
+            Side: Kotlin.createEnumClass(function () {
+              return [Kotlin.Enum];
+            }, function Side() {
+              Side.baseInitializer.call(this);
+            }, function () {
+              return {
+                LEFT: function () {
+                  return new _.fg.beans.drawer.Drawer.Side();
+                },
+                RIGHT: function () {
+                  return new _.fg.beans.drawer.Drawer.Side();
+                }
+              };
+            }),
             Drawer: Kotlin.createObject(function () {
               return [$module$elements.fg.elements.StyledClass];
             }, function Drawer() {
@@ -258,15 +292,18 @@ var beans = function (Kotlin, $module$elements) {
               rule$f: function () {
                 this.position = 'fixed';
                 this.zIndex = '1300';
-                this.left = '0';
                 this.top = '0';
                 this.height = '100%';
                 this.backgroundColor = 'white';
-                this.boxShadow = 'rgba(0, 0, 0, 0.156863) 0px 3px 10px, ' + 'rgba(0, 0, 0, 0.227451) 0px 3px 10px';
               }
             }),
             object_initializer$: function () {
               _.fg.beans.drawer.Drawer.Drawer;
+            },
+            side$f: function (this$Drawer) {
+              return function (property, old, new_0) {
+                this$Drawer.renderSide_v23ult$(new_0);
+              };
             }
           })
         }),
@@ -321,6 +358,11 @@ var beans = function (Kotlin, $module$elements) {
               if (size === void 0)
                 size = null;
               return new _.fg.beans.icon.FontAwesomeIcon('camera-retro', size);
+            },
+            plus_629h0h$: function (size) {
+              if (size === void 0)
+                size = null;
+              return new _.fg.beans.icon.FontAwesomeIcon('plus', size);
             }
           }),
           Icon: Kotlin.createTrait(null),
@@ -339,8 +381,7 @@ var beans = function (Kotlin, $module$elements) {
               icon = null;
             IconI.baseInitializer.call(this);
             var initialValue = icon;
-            var onChange = _.fg.beans.icon.IconI.icon$f(icon, this);
-            this.icon$delegate = new Kotlin.kotlin.properties.Delegates.observable$f(onChange, initialValue);
+            this.icon$delegate = new Kotlin.kotlin.properties.Delegates.observable$f(_.fg.beans.icon.IconI.icon$f(this), initialValue);
           }, /** @lends _.fg.beans.icon.IconI.prototype */ {
             icon: {
               get: function () {
@@ -360,9 +401,9 @@ var beans = function (Kotlin, $module$elements) {
               _.fg.beans.icon.apply_gnxmu2$(icon, this);
             }
           }, /** @lends _.fg.beans.icon.IconI */ {
-            icon$f: function (closure$icon, this$IconI) {
+            icon$f: function (this$IconI) {
               return function (property, old, new_0) {
-                this$IconI.renderIcon(closure$icon);
+                this$IconI.renderIcon(new_0);
               };
             }
           })

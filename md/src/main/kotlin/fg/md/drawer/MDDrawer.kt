@@ -6,7 +6,7 @@ import fg.elements.StyledClass
 import fg.elements.toClassSelector
 import fg.style.ClassRule
 
-open class MDDrawer : Drawer() {
+open class MDDrawer(side: Side) : Drawer(side) {
 
     override fun render() {
         super.render()
@@ -19,7 +19,9 @@ open class MDDrawer : Drawer() {
         override val classSelector = "md-drawer".toClassSelector()
 
         override val rule: ClassRule.() -> Unit = {
-            backgroundColor = "pink"
+            backgroundColor = "white"
+            boxShadow = "rgba(0, 0, 0, 0.156863) 0px 3px 10px, " +
+                    "rgba(0, 0, 0, 0.227451) 0px 3px 10px"
         }
 
         init {

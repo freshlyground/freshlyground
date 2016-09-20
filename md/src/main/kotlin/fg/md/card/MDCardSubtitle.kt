@@ -24,7 +24,7 @@ class MDCardSubtitle : Div() {
             fontWeight = "400"
             marginBottom = "16px"
 
-            color = MDGrayPalette.s600.toHtml()
+            color = MDGrayPalette.p600.toHtml()
         }
 
         init {

@@ -2,7 +2,20 @@ package fg.elements
 
 import org.w3c.dom.HTMLInputElement
 
-open class Button() : Element(name = "button")
+open class Button() : Element(name = "button") {
+    var _autofocus: String? by W3cDelegates.nullableAttribute("autocomplete")
+    var _disabled: Boolean? by W3cDelegates.nullableBooleanAttribute("disabled")
+    var _form: String? by W3cDelegates.nullableAttribute("form")
+    var _formaction: String? by W3cDelegates.nullableAttribute("formaction")
+    var _formenctype: String? by W3cDelegates.nullableAttribute("formenctype")
+    var _formmethod: String? by W3cDelegates.nullableAttribute("formmethod")
+    var _formnovalidate: String? by W3cDelegates.nullableAttribute("formnovalidate")
+    var _formtarget: String? by W3cDelegates.nullableAttribute("formtarget")
+    var _menu: String? by W3cDelegates.nullableAttribute("menu")
+    var _name: String? by W3cDelegates.nullableAttribute("name")
+    var _type: String? by W3cDelegates.nullableAttribute("type")
+    var _value: String? by W3cDelegates.nullableAttribute("value")
+}
 
 /**
  * https://www.w3.org/TR/html5/forms.html#the-input-element

@@ -26,12 +26,16 @@ fun main(vararg args: String) {
 
     body.appendChild(p)
     body.appendChild(HelloWorldDiv())*/
-    BODY.appendChild(Hello())
+    //BODY.appendChild(Hello())
     //body.appendChild(InputText())
     //body.appendChild(InputNumber())
 
-    BODY.appendChild(Hr())
-    BODY.appendChild(TodoApp())
+    //BODY.appendChild(Hr())
+    //BODY.appendChild(TodoApp())
+    val span = Span()
+    span.textContent = "Test 1"
+    span.textContent = "Test 2"
+    BODY.appendChild(span)
 
     HTML.init()
 }

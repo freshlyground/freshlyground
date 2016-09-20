@@ -65,7 +65,7 @@ object W3cDelegates {
             val w3cElement = thisRef.w3cElement
             val attributeName = attributeName ?: property.name
 
-            if (value != null) {
+            if (value != null && value) {
                 w3cElement.setAttribute(attributeName, attributeName)
             } else {
                 if (w3cElement.hasAttribute(attributeName)) {
