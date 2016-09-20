@@ -1,4 +1,4 @@
 # Freshlyground - Beans
 
-The Freshlyground component library - based upon [Freshlyground Elements](../elements/README.md)
+The Freshlyground component library - based upon [Freshlyground Elements](../elements)
 
