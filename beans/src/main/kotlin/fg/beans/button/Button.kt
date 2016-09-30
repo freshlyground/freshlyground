@@ -7,15 +7,35 @@ import fg.elements.Button
 import fg.elements.HTML
 import fg.elements.Span
 import fg.elements.StyledClass
+import fg.elements.onBlur
 import fg.elements.onClick
+import fg.elements.onFocus
+import fg.elements.onMouseDown
+import fg.elements.onMouseEnter
+import fg.elements.onMouseLeave
+import fg.elements.onMouseUp
 import fg.elements.toClassSelector
+import fg.elements.unBlur
+import fg.elements.unFocus
+import fg.elements.unMouseDown
+import fg.elements.unMouseEnter
+import fg.elements.unMouseLeave
+import fg.elements.unMouseUp
 import fg.style.ClassRule
 import org.w3c.dom.events.Event
+import org.w3c.dom.events.MouseEvent
 import kotlin.reflect.KProperty
 
 open class Button(action: Action) : Button() {
 
     val action: Action = action
+
+    var hovered: Boolean = false
+        private set
+    var focused: Boolean = false
+        private set
+    var pressed: Boolean = false
+        private set
 
     protected val label: Span by lazy {
         val span = Span()
@@ -27,6 +47,74 @@ open class Button(action: Action) : Button() {
         val iconI = IconI(this.action.icon)
         iconI.hide()
         iconI
+    }
+
+    private val mouseEnterHandler: (event: MouseEvent) -> Unit = {
+
+        hovered = true
+        toggleClass("hovered", true)
+        onHover()
+    }
+
+    private val mouseLeaveHandler: (event: MouseEvent) -> Unit = {
+
+        hovered = false
+        toggleClass("hovered")
+        unHover()
+    }
+
+    private val focusHandler: (event: Event) -> Unit = {
+
+        focused = true
+        toggleClass("focused", true)
+        onFocus()
+    }
+
+    private val blurHandler: (event: Event) -> Unit = {
+
+        focused = false
+        toggleClass("focused")
+        unFocus()
+    }
+
+    private val mouseDownHandler: (MouseEvent) -> Unit = { event ->
+
+        if (action.enabled) {
+            pressed = true
+            toggleClass("pressed", true)
+            onPressed()
+        }
+    }
+
+    private val mouseUpHandler: (Event) -> Unit = { event ->
+
+        pressed = false
+        toggleClass("pressed")
+        unPressed()
+    }
+
+    open protected fun onHover() {
+
+    }
+
+    open protected fun unHover() {
+
+    }
+
+    open protected fun onFocus() {
+
+    }
+
+    open protected fun unFocus() {
+
+    }
+
+    open protected fun onPressed() {
+
+    }
+
+    open protected fun unPressed() {
+
     }
 
     override fun render() {
@@ -46,6 +134,25 @@ open class Button(action: Action) : Button() {
 
         action.onPropertyChanged(actionPropertyChangedHandler)
         onClick(clickHandler)
+
+        onMouseEnter(mouseEnterHandler)
+        onMouseLeave(mouseLeaveHandler)
+        onFocus(focusHandler)
+        onBlur(blurHandler)
+
+        onMouseDown(mouseDownHandler)
+        onMouseUp(mouseUpHandler)
+    }
+
+    override fun willUnMount() {
+        super.willUnMount()
+
+        unMouseEnter(mouseEnterHandler)
+        unMouseLeave(mouseLeaveHandler)
+        unFocus(focusHandler)
+        unBlur(blurHandler)
+        unMouseDown(mouseDownHandler)
+        unMouseUp(mouseUpHandler)
     }
 
     private val clickHandler: (Event) -> Unit = {

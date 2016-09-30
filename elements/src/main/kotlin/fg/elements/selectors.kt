@@ -20,6 +20,21 @@ class AnySelector() : Selector() {
     }
 }
 
+
+class AnimationNameSelector(val value: String) : Selector() {
+
+    override fun toString(): String {
+        return value
+    }
+}
+
+class KeyframeSelector(val value: String) : Selector() {
+
+    override fun toString(): String {
+        return value
+    }
+}
+
 class TypeSelector(val value: String) : Selector() {
 
     override fun toString(): String {
@@ -71,11 +86,12 @@ class DescendantSelector(a: Selector, b: Selector) : CompositeSelector(a, "", b)
     }
 }
 
-class AndSelector(a: Selector, b: Selector) : CompositeSelector(a, "", b){
+class AndSelector(a: Selector, b: Selector) : CompositeSelector(a, "", b) {
     override fun toString(): String {
         return a.toString() + b.toString()
     }
 }
+
 class NotSelector(val selector: Selector) : Selector() {
 
     override fun toString(): String {

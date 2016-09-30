@@ -1,14 +1,29 @@
 package fg.style
 
 import fg.elements.AndSelector
+import fg.elements.AnimationNameSelector
 import fg.elements.ChildSelector
+import fg.elements.ClassSelector
 import fg.elements.DescendantSelector
 import fg.elements.Element
+import fg.elements.KeyframeSelector
 import fg.elements.NotSelector
 import fg.elements.PseudoClassSelector
 import fg.elements.Selector
 import fg.elements.StyledClass
 import fg.elements.toSelector
+
+fun Unit.keyframesRule(selector: AnimationNameSelector, init: KeyframesRule.() -> Unit): KeyframesRule {
+    val style = KeyframesRule(selector)
+    style.init()
+    return style
+}
+
+fun Unit.classRule(selector: ClassSelector, init: Rule<*>.() -> Unit): ClassRule {
+    val style = ClassRule(selector)
+    style.init()
+    return style
+}
 
 
 fun Element.rule(styledClass: StyledClass, init: ClassRule.() -> Unit = styledClass.rule): ClassRule {
@@ -180,6 +195,31 @@ infix fun Rule<*>.link(init: AndRule.() -> Unit): AndRule {
 
 fun Rule<*>.not(selector: Selector, init: AndRule.() -> Unit): AndRule {
     val style = AndRule(AndSelector(this.selector, NotSelector(selector)))
+    style.init()
+    this._childStyles.add(style)
+    return style
+}
+
+fun Unit.keyframesRule(selector: String, init: KeyframesRule.() -> Unit): KeyframesRule {
+    return keyframesRule(AnimationNameSelector(selector), init)
+}
+
+fun KeyframesRule.keyframe(value: String, init: KeyFrameRule.() -> Unit): KeyFrameRule {
+    val style = KeyFrameRule(KeyframeSelector(value))
+    style.init()
+    this._childStyles.add(style)
+    return style
+}
+
+fun KeyframesRule.kfrom(init: KeyFrameRule.() -> Unit): KeyFrameRule {
+    val style = KeyFrameRule(KeyframeSelector("from"))
+    style.init()
+    this._childStyles.add(style)
+    return style
+}
+
+fun KeyframesRule.kto(init: KeyFrameRule.() -> Unit): KeyFrameRule {
+    val style = KeyFrameRule(KeyframeSelector("to"))
     style.init()
     this._childStyles.add(style)
     return style

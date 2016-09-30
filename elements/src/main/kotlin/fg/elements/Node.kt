@@ -36,6 +36,11 @@ open class Node(internal val w3cNode: org.w3c.dom.Node) {
 
         node._parentNode = this
 
+        if (node is Element) {
+            node.render()
+            node.renderChildren()
+        }
+
         val mountFn: (Node) -> Unit = { w3cNode.insertBefore(it.w3cNode, child.w3cNode) }
         if (mounted) {
             mountChild(mountFn, node)
@@ -51,6 +56,11 @@ open class Node(internal val w3cNode: org.w3c.dom.Node) {
     fun appendChild(node: Node): Node {
 
         node._parentNode = this
+
+        if (node is Element) {
+            node.render()
+            node.renderChildren()
+        }
 
         val mountFn: (Node) -> Unit = { w3cNode.appendChild(it.w3cNode) }
         if (mounted) {
@@ -108,11 +118,11 @@ open class Node(internal val w3cNode: org.w3c.dom.Node) {
 
     fun removeChildren() {
         while (_childNodes.isNotEmpty()) {
-            removeChild(_childNodes[_childNodes.lastIndex])
+            removeChild(_childNodes.first())
         }
     }
 
-    protected fun removeChild(node: Node) {
+    fun removeChild(node: Node) {
 
         if (node is Element) {
             node.willUnMount()

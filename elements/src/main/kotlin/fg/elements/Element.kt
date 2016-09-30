@@ -1,5 +1,6 @@
 package fg.elements
 
+import org.w3c.dom.DOMRect
 import org.w3c.dom.HTMLElement
 import org.w3c.dom.css.CSSStyleDeclaration
 import kotlin.browser.document
@@ -9,7 +10,7 @@ open class Element(name: String? = null,
                    internal val w3cElement: HTMLElement = existingElement ?: document.createElement(name!!) as HTMLElement) :
         Node(w3cElement) {
 
-    private val childElements: List<Element>
+    val childElements: List<Element>
         get() {
             return childNodes.filter({ it is Element }) as List<Element>
         }
@@ -22,8 +23,43 @@ open class Element(name: String? = null,
     val hidden: Boolean
         get() = this.style.display == "none"
 
-    protected val style: CSSStyleDeclaration
+    val style: CSSStyleDeclaration
         get() = w3cElement.style
+
+    /**
+     * https://developer.mozilla.org/en-US/docs/Web/API/CSS_Object_Model/Determining_the_dimensions_of_elements
+     */
+
+    /**
+     * Without borders.
+     */
+    val clientWidth: Double
+        get() = w3cElement.clientWidth
+    val clientHeight: Double
+        get() = w3cElement.clientHeight
+
+
+    /**
+     * Including borders, but not margins.
+     */
+    val offsetWidth: Double
+        get() = w3cElement.offsetWidth
+    val offsetHeight: Double
+        get() = w3cElement.offsetHeight
+
+
+    val scrollWidth: Double
+        get() = w3cElement.scrollWidth
+    val scrollHeight: Double
+        get() = w3cElement.scrollHeight
+
+    val offsetTop: Double
+        get() = w3cElement.offsetTop
+    val offsetLeft: Double
+        get() = w3cElement.offsetLeft
+
+    val boundingClientRect: DOMRect
+        get() = w3cElement.getBoundingClientRect()
 
 
     /**

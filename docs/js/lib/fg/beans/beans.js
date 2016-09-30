@@ -130,11 +130,44 @@ var beans = function (Kotlin, $module$elements) {
           }, function Button(action) {
             Button.baseInitializer.call(this);
             this.action = action;
+            this.$hovered_vjdejn$ = false;
+            this.$focused_1wezcv$ = false;
+            this.$pressed_82cw16$ = false;
             this.label$delegate = Kotlin.kotlin.lazy_un3fny$(_.fg.beans.button.Button.label$f);
             this.icon$delegate = Kotlin.kotlin.lazy_un3fny$(_.fg.beans.button.Button.icon$f(this));
+            this.mouseEnterHandler_i2ypnl$ = _.fg.beans.button.Button.mouseEnterHandler_i2ypnl$f(this);
+            this.mouseLeaveHandler_bgliw0$ = _.fg.beans.button.Button.mouseLeaveHandler_bgliw0$f(this);
+            this.focusHandler_67mily$ = _.fg.beans.button.Button.focusHandler_67mily$f(this);
+            this.blurHandler_9tqkmj$ = _.fg.beans.button.Button.blurHandler_9tqkmj$f(this);
+            this.mouseDownHandler_x1gvc5$ = _.fg.beans.button.Button.mouseDownHandler_x1gvc5$f(action, this);
+            this.mouseUpHandler_7c34se$ = _.fg.beans.button.Button.mouseUpHandler_7c34se$f(this);
             this.clickHandler_9cuniy$ = _.fg.beans.button.Button.clickHandler_9cuniy$f(this);
             this.actionPropertyChangedHandler_dzou13$ = _.fg.beans.button.Button.actionPropertyChangedHandler_dzou13$f(this);
           }, /** @lends _.fg.beans.button.Button.prototype */ {
+            hovered: {
+              get: function () {
+                return this.$hovered_vjdejn$;
+              },
+              set: function (hovered) {
+                this.$hovered_vjdejn$ = hovered;
+              }
+            },
+            focused: {
+              get: function () {
+                return this.$focused_1wezcv$;
+              },
+              set: function (focused) {
+                this.$focused_1wezcv$ = focused;
+              }
+            },
+            pressed: {
+              get: function () {
+                return this.$pressed_82cw16$;
+              },
+              set: function (pressed) {
+                this.$pressed_82cw16$ = pressed;
+              }
+            },
             label: {
               get: function () {
                 return Kotlin.kotlin.getValue_em0fd4$(this.label$delegate, this, new Kotlin.PropertyMetadata('label'));
@@ -144,6 +177,18 @@ var beans = function (Kotlin, $module$elements) {
               get: function () {
                 return Kotlin.kotlin.getValue_em0fd4$(this.icon$delegate, this, new Kotlin.PropertyMetadata('icon'));
               }
+            },
+            onHover: function () {
+            },
+            unHover: function () {
+            },
+            onFocus: function () {
+            },
+            unFocus: function () {
+            },
+            onPressed: function () {
+            },
+            unPressed: function () {
             },
             render: function () {
               $module$elements.fg.elements.Button.prototype.render.call(this);
@@ -157,6 +202,21 @@ var beans = function (Kotlin, $module$elements) {
               $module$elements.fg.elements.Button.prototype.didMount.call(this);
               this.action.onPropertyChanged_uamkrm$(this.actionPropertyChangedHandler_dzou13$);
               $module$elements.fg.elements.onClick_m2anqv$(this, this.clickHandler_9cuniy$);
+              $module$elements.fg.elements.onMouseEnter_9cq9y2$(this, this.mouseEnterHandler_i2ypnl$);
+              $module$elements.fg.elements.onMouseLeave_9cq9y2$(this, this.mouseLeaveHandler_bgliw0$);
+              $module$elements.fg.elements.onFocus_m2anqv$(this, this.focusHandler_67mily$);
+              $module$elements.fg.elements.onBlur_m2anqv$(this, this.blurHandler_9tqkmj$);
+              $module$elements.fg.elements.onMouseDown_9cq9y2$(this, this.mouseDownHandler_x1gvc5$);
+              $module$elements.fg.elements.onMouseUp_9cq9y2$(this, this.mouseUpHandler_7c34se$);
+            },
+            willUnMount: function () {
+              $module$elements.fg.elements.Button.prototype.willUnMount.call(this);
+              $module$elements.fg.elements.unMouseEnter_9cq9y2$(this, this.mouseEnterHandler_i2ypnl$);
+              $module$elements.fg.elements.unMouseLeave_9cq9y2$(this, this.mouseLeaveHandler_bgliw0$);
+              $module$elements.fg.elements.unFocus_m2anqv$(this, this.focusHandler_67mily$);
+              $module$elements.fg.elements.unBlur_m2anqv$(this, this.blurHandler_9tqkmj$);
+              $module$elements.fg.elements.unMouseDown_9cq9y2$(this, this.mouseDownHandler_x1gvc5$);
+              $module$elements.fg.elements.unMouseUp_9cq9y2$(this, this.mouseUpHandler_7c34se$);
             },
             renderLabel_61zpoe$: function (labelText) {
               if (labelText != null) {
@@ -211,6 +271,50 @@ var beans = function (Kotlin, $module$elements) {
                 var iconI = new _.fg.beans.icon.IconI(this$Button.action.icon);
                 iconI.hide();
                 return iconI;
+              };
+            },
+            mouseEnterHandler_i2ypnl$f: function (this$Button) {
+              return function (it) {
+                this$Button.hovered = true;
+                this$Button.toggleClass_ivxn3r$('hovered', true);
+                this$Button.onHover();
+              };
+            },
+            mouseLeaveHandler_bgliw0$f: function (this$Button) {
+              return function (it) {
+                this$Button.hovered = false;
+                this$Button.toggleClass_ivxn3r$('hovered');
+                this$Button.unHover();
+              };
+            },
+            focusHandler_67mily$f: function (this$Button) {
+              return function (it) {
+                this$Button.focused = true;
+                this$Button.toggleClass_ivxn3r$('focused', true);
+                this$Button.onFocus();
+              };
+            },
+            blurHandler_9tqkmj$f: function (this$Button) {
+              return function (it) {
+                this$Button.focused = false;
+                this$Button.toggleClass_ivxn3r$('focused');
+                this$Button.unFocus();
+              };
+            },
+            mouseDownHandler_x1gvc5$f: function (closure$action, this$Button) {
+              return function (event) {
+                if (closure$action.enabled) {
+                  this$Button.pressed = true;
+                  this$Button.toggleClass_ivxn3r$('pressed', true);
+                  this$Button.onPressed();
+                }
+              };
+            },
+            mouseUpHandler_7c34se$f: function (this$Button) {
+              return function (event) {
+                this$Button.pressed = false;
+                this$Button.toggleClass_ivxn3r$('pressed');
+                this$Button.unPressed();
               };
             },
             clickHandler_9cuniy$f: function (this$Button) {

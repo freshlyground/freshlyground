@@ -1,0 +1,1541 @@
+<HTML>
+<HEAD>
+<title>KeyFrameRule - elements</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">elements</a>&nbsp;/&nbsp;<a href="../index.html">fg.style</a>&nbsp;/&nbsp;<a href=".">KeyFrameRule</a><br/>
+<br/>
+<h1>KeyFrameRule</h1>
+<code><span class="keyword">class </span><span class="identifier">KeyFrameRule</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="../-rule/index.html"><span class="identifier">Rule</span></a><span class="symbol">&lt;</span><a href="../../fg.elements/-keyframe-selector/index.html"><span class="identifier">KeyframeSelector</span></a><span class="symbol">&gt;</span></code>
+<h3>Constructors</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<a href="-init-.html">&lt;init&gt;</a></td>
+<td>
+<code><span class="identifier">KeyFrameRule</span><span class="symbol">(</span><span class="identifier" id="fg.style.KeyFrameRule$<init>(fg.elements.KeyframeSelector)/selector">selector</span><span class="symbol">:</span>&nbsp;<a href="../../fg.elements/-keyframe-selector/index.html"><span class="identifier">KeyframeSelector</span></a><span class="symbol">)</span></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Inherited Properties</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<a href="../-rule/_camel_cased_attribute.html">_camel_cased_attribute</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">_camel_cased_attribute</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-rule/_dashed_attribute.html">_dashed_attribute</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">_dashed_attribute</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-rule/_map.html">_map</a></td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">_map</span><span class="symbol">: </span><span class="identifier">MutableMap</span><span class="symbol">&lt;</span><span class="identifier">String</span><span class="symbol">,</span>&nbsp;<span class="identifier">String</span><span class="symbol">&gt;</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-rule/align-content.html">alignContent</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">alignContent</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-rule/align-items.html">alignItems</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">alignItems</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-rule/align-self.html">alignSelf</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">alignSelf</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-rule/animation.html">animation</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">animation</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-rule/animation-delay.html">animationDelay</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">animationDelay</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-rule/animation-direction.html">animationDirection</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">animationDirection</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-rule/animation-duration.html">animationDuration</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">animationDuration</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-rule/animation-fill-mode.html">animationFillMode</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">animationFillMode</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-rule/animation-iteration-count.html">animationIterationCount</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">animationIterationCount</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-rule/animation-name.html">animationName</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">animationName</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-rule/animation-play-state.html">animationPlayState</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">animationPlayState</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-rule/animation-timing-function.html">animationTimingFunction</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">animationTimingFunction</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-rule/backface-visibility.html">backfaceVisibility</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">backfaceVisibility</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-rule/background.html">background</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">background</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-rule/background-attachment.html">backgroundAttachment</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">backgroundAttachment</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-rule/background-clip.html">backgroundClip</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">backgroundClip</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-rule/background-color.html">backgroundColor</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">backgroundColor</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-rule/background-image.html">backgroundImage</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">backgroundImage</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-rule/background-origin.html">backgroundOrigin</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">backgroundOrigin</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-rule/background-position.html">backgroundPosition</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">backgroundPosition</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-rule/background-repeat.html">backgroundRepeat</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">backgroundRepeat</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-rule/background-size.html">backgroundSize</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">backgroundSize</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-rule/border.html">border</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">border</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-rule/border-bottom.html">borderBottom</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">borderBottom</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-rule/border-bottom-color.html">borderBottomColor</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">borderBottomColor</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-rule/border-bottom-left-radius.html">borderBottomLeftRadius</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">borderBottomLeftRadius</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-rule/border-bottom-right-radius.html">borderBottomRightRadius</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">borderBottomRightRadius</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-rule/border-bottom-style.html">borderBottomStyle</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">borderBottomStyle</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-rule/border-bottom-width.html">borderBottomWidth</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">borderBottomWidth</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-rule/border-collapse.html">borderCollapse</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">borderCollapse</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-rule/border-color.html">borderColor</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">borderColor</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-rule/border-image.html">borderImage</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">borderImage</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-rule/border-image-outset.html">borderImageOutset</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">borderImageOutset</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-rule/border-image-repeat.html">borderImageRepeat</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">borderImageRepeat</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-rule/border-image-slice.html">borderImageSlice</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">borderImageSlice</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-rule/border-image-source.html">borderImageSource</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">borderImageSource</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-rule/border-image-width.html">borderImageWidth</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">borderImageWidth</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-rule/border-left.html">borderLeft</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">borderLeft</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-rule/border-left-color.html">borderLeftColor</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">borderLeftColor</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-rule/border-left-style.html">borderLeftStyle</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">borderLeftStyle</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-rule/border-left-width.html">borderLeftWidth</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">borderLeftWidth</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-rule/border-radius.html">borderRadius</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">borderRadius</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-rule/border-right.html">borderRight</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">borderRight</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-rule/border-right-color.html">borderRightColor</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">borderRightColor</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-rule/border-right-style.html">borderRightStyle</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">borderRightStyle</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-rule/border-right-width.html">borderRightWidth</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">borderRightWidth</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-rule/border-spacing.html">borderSpacing</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">borderSpacing</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-rule/border-style.html">borderStyle</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">borderStyle</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-rule/border-top.html">borderTop</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">borderTop</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-rule/border-top-color.html">borderTopColor</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">borderTopColor</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-rule/border-top-left-radius.html">borderTopLeftRadius</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">borderTopLeftRadius</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-rule/border-top-right-radius.html">borderTopRightRadius</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">borderTopRightRadius</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-rule/border-top-style.html">borderTopStyle</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">borderTopStyle</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-rule/border-top-width.html">borderTopWidth</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">borderTopWidth</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-rule/border-width.html">borderWidth</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">borderWidth</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-rule/bottom.html">bottom</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">bottom</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-rule/box-decoration-break.html">boxDecorationBreak</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">boxDecorationBreak</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-rule/box-shadow.html">boxShadow</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">boxShadow</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-rule/box-sizing.html">boxSizing</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">boxSizing</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-rule/break-after.html">breakAfter</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">breakAfter</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-rule/break-before.html">breakBefore</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">breakBefore</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-rule/break-inside.html">breakInside</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">breakInside</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-rule/caption-side.html">captionSide</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">captionSide</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-rule/clear.html">clear</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">clear</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-rule/clip.html">clip</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">clip</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-rule/color.html">color</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">color</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-rule/column-count.html">columnCount</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">columnCount</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-rule/column-fill.html">columnFill</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">columnFill</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-rule/column-gap.html">columnGap</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">columnGap</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-rule/column-rule.html">columnRule</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">columnRule</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-rule/column-rule-color.html">columnRuleColor</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">columnRuleColor</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-rule/column-rule-style.html">columnRuleStyle</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">columnRuleStyle</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-rule/column-rule-width.html">columnRuleWidth</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">columnRuleWidth</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-rule/column-span.html">columnSpan</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">columnSpan</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-rule/column-width.html">columnWidth</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">columnWidth</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-rule/columns.html">columns</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">columns</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-rule/content.html">content</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">content</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-rule/counter-increment.html">counterIncrement</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">counterIncrement</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-rule/counter-reset.html">counterReset</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">counterReset</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-rule/css-float.html">cssFloat</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">cssFloat</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-rule/cursor.html">cursor</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">cursor</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-rule/direction.html">direction</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">direction</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-rule/display.html">display</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">display</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-rule/empty-cells.html">emptyCells</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">emptyCells</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-rule/filter.html">filter</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">filter</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-rule/flex.html">flex</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">flex</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-rule/flex-basis.html">flexBasis</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">flexBasis</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-rule/flex-direction.html">flexDirection</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">flexDirection</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-rule/flex-flow.html">flexFlow</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">flexFlow</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-rule/flex-grow.html">flexGrow</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">flexGrow</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-rule/flex-shrink.html">flexShrink</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">flexShrink</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-rule/flex-wrap.html">flexWrap</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">flexWrap</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-rule/font.html">font</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">font</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-rule/font-family.html">fontFamily</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">fontFamily</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-rule/font-feature-settings.html">fontFeatureSettings</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">fontFeatureSettings</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-rule/font-kerning.html">fontKerning</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">fontKerning</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-rule/font-language-override.html">fontLanguageOverride</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">fontLanguageOverride</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-rule/font-size.html">fontSize</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">fontSize</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-rule/font-size-adjust.html">fontSizeAdjust</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">fontSizeAdjust</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-rule/font-stretch.html">fontStretch</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">fontStretch</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-rule/font-style.html">fontStyle</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">fontStyle</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-rule/font-synthesis.html">fontSynthesis</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">fontSynthesis</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-rule/font-variant.html">fontVariant</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">fontVariant</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-rule/font-variant-alternates.html">fontVariantAlternates</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">fontVariantAlternates</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-rule/font-variant-caps.html">fontVariantCaps</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">fontVariantCaps</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-rule/font-variant-east-asian.html">fontVariantEastAsian</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">fontVariantEastAsian</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-rule/font-variant-ligatures.html">fontVariantLigatures</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">fontVariantLigatures</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-rule/font-variant-numeric.html">fontVariantNumeric</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">fontVariantNumeric</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-rule/font-variant-position.html">fontVariantPosition</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">fontVariantPosition</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-rule/font-weight.html">fontWeight</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">fontWeight</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-rule/hanging-punctuation.html">hangingPunctuation</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">hangingPunctuation</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-rule/height.html">height</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">height</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-rule/hyphens.html">hyphens</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">hyphens</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-rule/image-orientation.html">imageOrientation</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">imageOrientation</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-rule/image-rendering.html">imageRendering</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">imageRendering</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-rule/image-resolution.html">imageResolution</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">imageResolution</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-rule/ime-mode.html">imeMode</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">imeMode</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-rule/justify-content.html">justifyContent</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">justifyContent</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-rule/left.html">left</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">left</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-rule/letter-spacing.html">letterSpacing</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">letterSpacing</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-rule/line-break.html">lineBreak</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">lineBreak</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-rule/line-height.html">lineHeight</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">lineHeight</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-rule/list-style.html">listStyle</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">listStyle</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-rule/list-style-image.html">listStyleImage</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">listStyleImage</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-rule/list-style-position.html">listStylePosition</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">listStylePosition</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-rule/list-style-type.html">listStyleType</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">listStyleType</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-rule/margin.html">margin</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">margin</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-rule/margin-bottom.html">marginBottom</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">marginBottom</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-rule/margin-left.html">marginLeft</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">marginLeft</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-rule/margin-right.html">marginRight</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">marginRight</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-rule/margin-top.html">marginTop</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">marginTop</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-rule/mark.html">mark</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">mark</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-rule/mark-after.html">markAfter</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">markAfter</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-rule/mark-before.html">markBefore</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">markBefore</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-rule/marks.html">marks</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">marks</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-rule/marquee-direction.html">marqueeDirection</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">marqueeDirection</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-rule/marquee-play-count.html">marqueePlayCount</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">marqueePlayCount</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-rule/marquee-speed.html">marqueeSpeed</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">marqueeSpeed</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-rule/marquee-style.html">marqueeStyle</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">marqueeStyle</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-rule/mask.html">mask</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">mask</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-rule/mask-type.html">maskType</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">maskType</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-rule/max-height.html">maxHeight</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">maxHeight</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-rule/max-width.html">maxWidth</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">maxWidth</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-rule/min-height.html">minHeight</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">minHeight</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-rule/min-width.html">minWidth</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">minWidth</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-rule/nav-down.html">navDown</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">navDown</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-rule/nav-index.html">navIndex</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">navIndex</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-rule/nav-left.html">navLeft</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">navLeft</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-rule/nav-right.html">navRight</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">navRight</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-rule/nav-up.html">navUp</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">navUp</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-rule/object-fit.html">objectFit</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">objectFit</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-rule/object-position.html">objectPosition</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">objectPosition</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-rule/opacity.html">opacity</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">opacity</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-rule/order.html">order</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">order</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-rule/orphans.html">orphans</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">orphans</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-rule/outline.html">outline</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">outline</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-rule/outline-color.html">outlineColor</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">outlineColor</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-rule/outline-offset.html">outlineOffset</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">outlineOffset</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-rule/outline-style.html">outlineStyle</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">outlineStyle</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-rule/outline-width.html">outlineWidth</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">outlineWidth</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-rule/overflow-wrap.html">overflowWrap</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">overflowWrap</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-rule/overflow-x.html">overflowX</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">overflowX</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-rule/overflow-y.html">overflowY</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">overflowY</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-rule/padding.html">padding</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">padding</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-rule/padding-bottom.html">paddingBottom</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">paddingBottom</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-rule/padding-left.html">paddingLeft</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">paddingLeft</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-rule/padding-right.html">paddingRight</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">paddingRight</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-rule/padding-top.html">paddingTop</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">paddingTop</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-rule/page-break-after.html">pageBreakAfter</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">pageBreakAfter</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-rule/page-break-before.html">pageBreakBefore</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">pageBreakBefore</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-rule/page-break-inside.html">pageBreakInside</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">pageBreakInside</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-rule/perspective.html">perspective</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">perspective</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-rule/perspective-origin.html">perspectiveOrigin</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">perspectiveOrigin</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-rule/phonemes.html">phonemes</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">phonemes</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-rule/position.html">position</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">position</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-rule/quotes.html">quotes</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">quotes</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-rule/resize.html">resize</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">resize</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-rule/rest.html">rest</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">rest</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-rule/rest-after.html">restAfter</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">restAfter</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-rule/rest-before.html">restBefore</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">restBefore</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-rule/right.html">right</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">right</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-rule/selector.html">selector</a></td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">selector</span><span class="symbol">: </span><span class="identifier">SELECTOR</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-rule/tab-size.html">tabSize</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">tabSize</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-rule/table-layout.html">tableLayout</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">tableLayout</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-rule/text-align.html">textAlign</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">textAlign</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-rule/text-align-last.html">textAlignLast</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">textAlignLast</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-rule/text-combine-upright.html">textCombineUpright</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">textCombineUpright</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-rule/text-decoration.html">textDecoration</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">textDecoration</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-rule/text-decoration-color.html">textDecorationColor</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">textDecorationColor</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-rule/text-decoration-line.html">textDecorationLine</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">textDecorationLine</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-rule/text-decoration-style.html">textDecorationStyle</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">textDecorationStyle</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-rule/text-indent.html">textIndent</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">textIndent</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-rule/text-justify.html">textJustify</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">textJustify</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-rule/text-orientation.html">textOrientation</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">textOrientation</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-rule/text-overflow.html">textOverflow</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">textOverflow</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-rule/text-shadow.html">textShadow</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">textShadow</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-rule/text-transform.html">textTransform</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">textTransform</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-rule/text-underline-position.html">textUnderlinePosition</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">textUnderlinePosition</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-rule/top.html">top</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">top</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-rule/transform.html">transform</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">transform</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-rule/transform-origin.html">transformOrigin</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">transformOrigin</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-rule/transform-style.html">transformStyle</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">transformStyle</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-rule/transition.html">transition</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">transition</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-rule/transition-delay.html">transitionDelay</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">transitionDelay</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-rule/transition-duration.html">transitionDuration</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">transitionDuration</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-rule/transition-property.html">transitionProperty</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">transitionProperty</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-rule/transition-timing-function.html">transitionTimingFunction</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">transitionTimingFunction</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-rule/unicode-bidi.html">unicodeBidi</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">unicodeBidi</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-rule/vertical-align.html">verticalAlign</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">verticalAlign</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-rule/visibility.html">visibility</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">visibility</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-rule/voice-balance.html">voiceBalance</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">voiceBalance</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-rule/voice-duration.html">voiceDuration</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">voiceDuration</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-rule/voice-pitch.html">voicePitch</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">voicePitch</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-rule/voice-pitch-range.html">voicePitchRange</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">voicePitchRange</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-rule/voice-rate.html">voiceRate</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">voiceRate</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-rule/voice-stress.html">voiceStress</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">voiceStress</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-rule/voice-volume.html">voiceVolume</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">voiceVolume</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-rule/white-space.html">whiteSpace</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">whiteSpace</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-rule/widows.html">widows</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">widows</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-rule/width.html">width</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">width</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-rule/word-break.html">wordBreak</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">wordBreak</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-rule/word-spacing.html">wordSpacing</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">wordSpacing</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-rule/word-wrap.html">wordWrap</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">wordWrap</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-rule/writing-mode.html">writingMode</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">writingMode</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-rule/z-index.html">zIndex</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">zIndex</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<a href="css-text.html">cssText</a></td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">cssText</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Extension Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<a href="../active.html">active</a></td>
+<td>
+<code><span class="keyword">infix</span> <span class="keyword">fun </span><a href="../-rule/index.html"><span class="identifier">Rule</span></a><span class="symbol">&lt;</span><span class="identifier">*</span><span class="symbol">&gt;</span><span class="symbol">.</span><span class="identifier">active</span><span class="symbol">(</span><span class="identifier" id="fg.style$active(fg.style.Rule((fg.elements.Selector)), kotlin.Function1((fg.style.AndRule, kotlin.Unit)))/init">init</span><span class="symbol">:</span>&nbsp;<a href="../-and-rule/index.html"><span class="identifier">AndRule</span></a><span class="symbol">.</span><span class="symbol">(</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<span class="identifier">Unit</span><span class="symbol">)</span><span class="symbol">: </span><a href="../-and-rule/index.html"><span class="identifier">AndRule</span></a></code></td>
+</tr>
+<tr>
+<td>
+<a href="../and.html">and</a></td>
+<td>
+<code><span class="keyword">fun </span><a href="../-rule/index.html"><span class="identifier">Rule</span></a><span class="symbol">&lt;</span><span class="identifier">*</span><span class="symbol">&gt;</span><span class="symbol">.</span><span class="identifier">and</span><span class="symbol">(</span><span class="identifier" id="fg.style$and(fg.style.Rule((fg.elements.Selector)), kotlin.String, kotlin.Function1((fg.style.AndRule, kotlin.Unit)))/selector">selector</span><span class="symbol">:</span>&nbsp;<span class="identifier">String</span><span class="symbol">, </span><span class="identifier" id="fg.style$and(fg.style.Rule((fg.elements.Selector)), kotlin.String, kotlin.Function1((fg.style.AndRule, kotlin.Unit)))/init">init</span><span class="symbol">:</span>&nbsp;<a href="../-and-rule/index.html"><span class="identifier">AndRule</span></a><span class="symbol">.</span><span class="symbol">(</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<span class="identifier">Unit</span><span class="symbol">)</span><span class="symbol">: </span><a href="../-and-rule/index.html"><span class="identifier">AndRule</span></a></code><br/>
+<code><span class="keyword">fun </span><a href="../-rule/index.html"><span class="identifier">Rule</span></a><span class="symbol">&lt;</span><span class="identifier">*</span><span class="symbol">&gt;</span><span class="symbol">.</span><span class="identifier">and</span><span class="symbol">(</span><span class="identifier" id="fg.style$and(fg.style.Rule((fg.elements.Selector)), fg.elements.Selector, kotlin.Function1((fg.style.AndRule, kotlin.Unit)))/selector">selector</span><span class="symbol">:</span>&nbsp;<a href="../../fg.elements/-selector/index.html"><span class="identifier">Selector</span></a><span class="symbol">, </span><span class="identifier" id="fg.style$and(fg.style.Rule((fg.elements.Selector)), fg.elements.Selector, kotlin.Function1((fg.style.AndRule, kotlin.Unit)))/init">init</span><span class="symbol">:</span>&nbsp;<a href="../-and-rule/index.html"><span class="identifier">AndRule</span></a><span class="symbol">.</span><span class="symbol">(</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<span class="identifier">Unit</span><span class="symbol">)</span><span class="symbol">: </span><a href="../-and-rule/index.html"><span class="identifier">AndRule</span></a></code></td>
+</tr>
+<tr>
+<td>
+<a href="../checked.html">checked</a></td>
+<td>
+<code><span class="keyword">infix</span> <span class="keyword">fun </span><a href="../-rule/index.html"><span class="identifier">Rule</span></a><span class="symbol">&lt;</span><span class="identifier">*</span><span class="symbol">&gt;</span><span class="symbol">.</span><span class="identifier">checked</span><span class="symbol">(</span><span class="identifier" id="fg.style$checked(fg.style.Rule((fg.elements.Selector)), kotlin.Function1((fg.style.AndRule, kotlin.Unit)))/init">init</span><span class="symbol">:</span>&nbsp;<a href="../-and-rule/index.html"><span class="identifier">AndRule</span></a><span class="symbol">.</span><span class="symbol">(</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<span class="identifier">Unit</span><span class="symbol">)</span><span class="symbol">: </span><a href="../-and-rule/index.html"><span class="identifier">AndRule</span></a></code></td>
+</tr>
+<tr>
+<td>
+<a href="../child.html">child</a></td>
+<td>
+<code><span class="keyword">fun </span><a href="../-rule/index.html"><span class="identifier">Rule</span></a><span class="symbol">&lt;</span><span class="identifier">*</span><span class="symbol">&gt;</span><span class="symbol">.</span><span class="identifier">child</span><span class="symbol">(</span><span class="identifier" id="fg.style$child(fg.style.Rule((fg.elements.Selector)), kotlin.String, kotlin.Function1((fg.style.ChildRule, kotlin.Unit)))/selector">selector</span><span class="symbol">:</span>&nbsp;<span class="identifier">String</span><span class="symbol">, </span><span class="identifier" id="fg.style$child(fg.style.Rule((fg.elements.Selector)), kotlin.String, kotlin.Function1((fg.style.ChildRule, kotlin.Unit)))/init">init</span><span class="symbol">:</span>&nbsp;<a href="../-child-rule/index.html"><span class="identifier">ChildRule</span></a><span class="symbol">.</span><span class="symbol">(</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<span class="identifier">Unit</span><span class="symbol">)</span><span class="symbol">: </span><a href="../-child-rule/index.html"><span class="identifier">ChildRule</span></a></code><br/>
+<code><span class="keyword">fun </span><a href="../-rule/index.html"><span class="identifier">Rule</span></a><span class="symbol">&lt;</span><span class="identifier">*</span><span class="symbol">&gt;</span><span class="symbol">.</span><span class="identifier">child</span><span class="symbol">(</span><span class="identifier" id="fg.style$child(fg.style.Rule((fg.elements.Selector)), fg.elements.Selector, kotlin.Function1((fg.style.ChildRule, kotlin.Unit)))/selector">selector</span><span class="symbol">:</span>&nbsp;<a href="../../fg.elements/-selector/index.html"><span class="identifier">Selector</span></a><span class="symbol">, </span><span class="identifier" id="fg.style$child(fg.style.Rule((fg.elements.Selector)), fg.elements.Selector, kotlin.Function1((fg.style.ChildRule, kotlin.Unit)))/init">init</span><span class="symbol">:</span>&nbsp;<a href="../-child-rule/index.html"><span class="identifier">ChildRule</span></a><span class="symbol">.</span><span class="symbol">(</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<span class="identifier">Unit</span><span class="symbol">)</span><span class="symbol">: </span><a href="../-child-rule/index.html"><span class="identifier">ChildRule</span></a></code></td>
+</tr>
+<tr>
+<td>
+<a href="../desc.html">desc</a></td>
+<td>
+<code><span class="keyword">fun </span><a href="../-rule/index.html"><span class="identifier">Rule</span></a><span class="symbol">&lt;</span><span class="identifier">*</span><span class="symbol">&gt;</span><span class="symbol">.</span><span class="identifier">desc</span><span class="symbol">(</span><span class="identifier" id="fg.style$desc(fg.style.Rule((fg.elements.Selector)), kotlin.String, kotlin.Function1((fg.style.DescendantRule, kotlin.Unit)))/selector">selector</span><span class="symbol">:</span>&nbsp;<span class="identifier">String</span><span class="symbol">, </span><span class="identifier" id="fg.style$desc(fg.style.Rule((fg.elements.Selector)), kotlin.String, kotlin.Function1((fg.style.DescendantRule, kotlin.Unit)))/init">init</span><span class="symbol">:</span>&nbsp;<a href="../-descendant-rule/index.html"><span class="identifier">DescendantRule</span></a><span class="symbol">.</span><span class="symbol">(</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<span class="identifier">Unit</span><span class="symbol">)</span><span class="symbol">: </span><a href="../-descendant-rule/index.html"><span class="identifier">DescendantRule</span></a></code><br/>
+<code><span class="keyword">fun </span><a href="../-rule/index.html"><span class="identifier">Rule</span></a><span class="symbol">&lt;</span><span class="identifier">*</span><span class="symbol">&gt;</span><span class="symbol">.</span><span class="identifier">desc</span><span class="symbol">(</span><span class="identifier" id="fg.style$desc(fg.style.Rule((fg.elements.Selector)), fg.elements.Selector, kotlin.Function1((fg.style.DescendantRule, kotlin.Unit)))/selector">selector</span><span class="symbol">:</span>&nbsp;<a href="../../fg.elements/-selector/index.html"><span class="identifier">Selector</span></a><span class="symbol">, </span><span class="identifier" id="fg.style$desc(fg.style.Rule((fg.elements.Selector)), fg.elements.Selector, kotlin.Function1((fg.style.DescendantRule, kotlin.Unit)))/init">init</span><span class="symbol">:</span>&nbsp;<a href="../-descendant-rule/index.html"><span class="identifier">DescendantRule</span></a><span class="symbol">.</span><span class="symbol">(</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<span class="identifier">Unit</span><span class="symbol">)</span><span class="symbol">: </span><a href="../-descendant-rule/index.html"><span class="identifier">DescendantRule</span></a></code></td>
+</tr>
+<tr>
+<td>
+<a href="../empty.html">empty</a></td>
+<td>
+<code><span class="keyword">infix</span> <span class="keyword">fun </span><a href="../-rule/index.html"><span class="identifier">Rule</span></a><span class="symbol">&lt;</span><span class="identifier">*</span><span class="symbol">&gt;</span><span class="symbol">.</span><span class="identifier">empty</span><span class="symbol">(</span><span class="identifier" id="fg.style$empty(fg.style.Rule((fg.elements.Selector)), kotlin.Function1((fg.style.AndRule, kotlin.Unit)))/init">init</span><span class="symbol">:</span>&nbsp;<a href="../-and-rule/index.html"><span class="identifier">AndRule</span></a><span class="symbol">.</span><span class="symbol">(</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<span class="identifier">Unit</span><span class="symbol">)</span><span class="symbol">: </span><a href="../-and-rule/index.html"><span class="identifier">AndRule</span></a></code></td>
+</tr>
+<tr>
+<td>
+<a href="../enabled.html">enabled</a></td>
+<td>
+<code><span class="keyword">infix</span> <span class="keyword">fun </span><a href="../-rule/index.html"><span class="identifier">Rule</span></a><span class="symbol">&lt;</span><span class="identifier">*</span><span class="symbol">&gt;</span><span class="symbol">.</span><span class="identifier">enabled</span><span class="symbol">(</span><span class="identifier" id="fg.style$enabled(fg.style.Rule((fg.elements.Selector)), kotlin.Function1((fg.style.AndRule, kotlin.Unit)))/init">init</span><span class="symbol">:</span>&nbsp;<a href="../-and-rule/index.html"><span class="identifier">AndRule</span></a><span class="symbol">.</span><span class="symbol">(</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<span class="identifier">Unit</span><span class="symbol">)</span><span class="symbol">: </span><a href="../-and-rule/index.html"><span class="identifier">AndRule</span></a></code></td>
+</tr>
+<tr>
+<td>
+<a href="../first.html">first</a></td>
+<td>
+<code><span class="keyword">infix</span> <span class="keyword">fun </span><a href="../-rule/index.html"><span class="identifier">Rule</span></a><span class="symbol">&lt;</span><span class="identifier">*</span><span class="symbol">&gt;</span><span class="symbol">.</span><span class="identifier">first</span><span class="symbol">(</span><span class="identifier" id="fg.style$first(fg.style.Rule((fg.elements.Selector)), kotlin.Function1((fg.style.AndRule, kotlin.Unit)))/init">init</span><span class="symbol">:</span>&nbsp;<a href="../-and-rule/index.html"><span class="identifier">AndRule</span></a><span class="symbol">.</span><span class="symbol">(</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<span class="identifier">Unit</span><span class="symbol">)</span><span class="symbol">: </span><a href="../-and-rule/index.html"><span class="identifier">AndRule</span></a></code></td>
+</tr>
+<tr>
+<td>
+<a href="../first-child.html">firstChild</a></td>
+<td>
+<code><span class="keyword">infix</span> <span class="keyword">fun </span><a href="../-rule/index.html"><span class="identifier">Rule</span></a><span class="symbol">&lt;</span><span class="identifier">*</span><span class="symbol">&gt;</span><span class="symbol">.</span><span class="identifier">firstChild</span><span class="symbol">(</span><span class="identifier" id="fg.style$firstChild(fg.style.Rule((fg.elements.Selector)), kotlin.Function1((fg.style.AndRule, kotlin.Unit)))/init">init</span><span class="symbol">:</span>&nbsp;<a href="../-and-rule/index.html"><span class="identifier">AndRule</span></a><span class="symbol">.</span><span class="symbol">(</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<span class="identifier">Unit</span><span class="symbol">)</span><span class="symbol">: </span><a href="../-and-rule/index.html"><span class="identifier">AndRule</span></a></code></td>
+</tr>
+<tr>
+<td>
+<a href="../first-of-type.html">firstOfType</a></td>
+<td>
+<code><span class="keyword">infix</span> <span class="keyword">fun </span><a href="../-rule/index.html"><span class="identifier">Rule</span></a><span class="symbol">&lt;</span><span class="identifier">*</span><span class="symbol">&gt;</span><span class="symbol">.</span><span class="identifier">firstOfType</span><span class="symbol">(</span><span class="identifier" id="fg.style$firstOfType(fg.style.Rule((fg.elements.Selector)), kotlin.Function1((fg.style.AndRule, kotlin.Unit)))/init">init</span><span class="symbol">:</span>&nbsp;<a href="../-and-rule/index.html"><span class="identifier">AndRule</span></a><span class="symbol">.</span><span class="symbol">(</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<span class="identifier">Unit</span><span class="symbol">)</span><span class="symbol">: </span><a href="../-and-rule/index.html"><span class="identifier">AndRule</span></a></code></td>
+</tr>
+<tr>
+<td>
+<a href="../focus.html">focus</a></td>
+<td>
+<code><span class="keyword">infix</span> <span class="keyword">fun </span><a href="../-rule/index.html"><span class="identifier">Rule</span></a><span class="symbol">&lt;</span><span class="identifier">*</span><span class="symbol">&gt;</span><span class="symbol">.</span><span class="identifier">focus</span><span class="symbol">(</span><span class="identifier" id="fg.style$focus(fg.style.Rule((fg.elements.Selector)), kotlin.Function1((fg.style.AndRule, kotlin.Unit)))/init">init</span><span class="symbol">:</span>&nbsp;<a href="../-and-rule/index.html"><span class="identifier">AndRule</span></a><span class="symbol">.</span><span class="symbol">(</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<span class="identifier">Unit</span><span class="symbol">)</span><span class="symbol">: </span><a href="../-and-rule/index.html"><span class="identifier">AndRule</span></a></code></td>
+</tr>
+<tr>
+<td>
+<a href="../hover.html">hover</a></td>
+<td>
+<code><span class="keyword">infix</span> <span class="keyword">fun </span><a href="../-rule/index.html"><span class="identifier">Rule</span></a><span class="symbol">&lt;</span><span class="identifier">*</span><span class="symbol">&gt;</span><span class="symbol">.</span><span class="identifier">hover</span><span class="symbol">(</span><span class="identifier" id="fg.style$hover(fg.style.Rule((fg.elements.Selector)), kotlin.Function1((fg.style.AndRule, kotlin.Unit)))/init">init</span><span class="symbol">:</span>&nbsp;<a href="../-and-rule/index.html"><span class="identifier">AndRule</span></a><span class="symbol">.</span><span class="symbol">(</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<span class="identifier">Unit</span><span class="symbol">)</span><span class="symbol">: </span><a href="../-and-rule/index.html"><span class="identifier">AndRule</span></a></code></td>
+</tr>
+<tr>
+<td>
+<a href="../in-range.html">inRange</a></td>
+<td>
+<code><span class="keyword">infix</span> <span class="keyword">fun </span><a href="../-rule/index.html"><span class="identifier">Rule</span></a><span class="symbol">&lt;</span><span class="identifier">*</span><span class="symbol">&gt;</span><span class="symbol">.</span><span class="identifier">inRange</span><span class="symbol">(</span><span class="identifier" id="fg.style$inRange(fg.style.Rule((fg.elements.Selector)), kotlin.Function1((fg.style.AndRule, kotlin.Unit)))/init">init</span><span class="symbol">:</span>&nbsp;<a href="../-and-rule/index.html"><span class="identifier">AndRule</span></a><span class="symbol">.</span><span class="symbol">(</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<span class="identifier">Unit</span><span class="symbol">)</span><span class="symbol">: </span><a href="../-and-rule/index.html"><span class="identifier">AndRule</span></a></code></td>
+</tr>
+<tr>
+<td>
+<a href="../indeterminate.html">indeterminate</a></td>
+<td>
+<code><span class="keyword">infix</span> <span class="keyword">fun </span><a href="../-rule/index.html"><span class="identifier">Rule</span></a><span class="symbol">&lt;</span><span class="identifier">*</span><span class="symbol">&gt;</span><span class="symbol">.</span><span class="identifier">indeterminate</span><span class="symbol">(</span><span class="identifier" id="fg.style$indeterminate(fg.style.Rule((fg.elements.Selector)), kotlin.Function1((fg.style.AndRule, kotlin.Unit)))/init">init</span><span class="symbol">:</span>&nbsp;<a href="../-and-rule/index.html"><span class="identifier">AndRule</span></a><span class="symbol">.</span><span class="symbol">(</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<span class="identifier">Unit</span><span class="symbol">)</span><span class="symbol">: </span><a href="../-and-rule/index.html"><span class="identifier">AndRule</span></a></code></td>
+</tr>
+<tr>
+<td>
+<a href="../invalid.html">invalid</a></td>
+<td>
+<code><span class="keyword">infix</span> <span class="keyword">fun </span><a href="../-rule/index.html"><span class="identifier">Rule</span></a><span class="symbol">&lt;</span><span class="identifier">*</span><span class="symbol">&gt;</span><span class="symbol">.</span><span class="identifier">invalid</span><span class="symbol">(</span><span class="identifier" id="fg.style$invalid(fg.style.Rule((fg.elements.Selector)), kotlin.Function1((fg.style.AndRule, kotlin.Unit)))/init">init</span><span class="symbol">:</span>&nbsp;<a href="../-and-rule/index.html"><span class="identifier">AndRule</span></a><span class="symbol">.</span><span class="symbol">(</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<span class="identifier">Unit</span><span class="symbol">)</span><span class="symbol">: </span><a href="../-and-rule/index.html"><span class="identifier">AndRule</span></a></code></td>
+</tr>
+<tr>
+<td>
+<a href="../lang.html">lang</a></td>
+<td>
+<code><span class="keyword">infix</span> <span class="keyword">fun </span><a href="../-rule/index.html"><span class="identifier">Rule</span></a><span class="symbol">&lt;</span><span class="identifier">*</span><span class="symbol">&gt;</span><span class="symbol">.</span><span class="identifier">lang</span><span class="symbol">(</span><span class="identifier" id="fg.style$lang(fg.style.Rule((fg.elements.Selector)), kotlin.Function1((fg.style.AndRule, kotlin.Unit)))/init">init</span><span class="symbol">:</span>&nbsp;<a href="../-and-rule/index.html"><span class="identifier">AndRule</span></a><span class="symbol">.</span><span class="symbol">(</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<span class="identifier">Unit</span><span class="symbol">)</span><span class="symbol">: </span><a href="../-and-rule/index.html"><span class="identifier">AndRule</span></a></code></td>
+</tr>
+<tr>
+<td>
+<a href="../last-child.html">lastChild</a></td>
+<td>
+<code><span class="keyword">infix</span> <span class="keyword">fun </span><a href="../-rule/index.html"><span class="identifier">Rule</span></a><span class="symbol">&lt;</span><span class="identifier">*</span><span class="symbol">&gt;</span><span class="symbol">.</span><span class="identifier">lastChild</span><span class="symbol">(</span><span class="identifier" id="fg.style$lastChild(fg.style.Rule((fg.elements.Selector)), kotlin.Function1((fg.style.AndRule, kotlin.Unit)))/init">init</span><span class="symbol">:</span>&nbsp;<a href="../-and-rule/index.html"><span class="identifier">AndRule</span></a><span class="symbol">.</span><span class="symbol">(</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<span class="identifier">Unit</span><span class="symbol">)</span><span class="symbol">: </span><a href="../-and-rule/index.html"><span class="identifier">AndRule</span></a></code></td>
+</tr>
+<tr>
+<td>
+<a href="../last-of-type.html">lastOfType</a></td>
+<td>
+<code><span class="keyword">infix</span> <span class="keyword">fun </span><a href="../-rule/index.html"><span class="identifier">Rule</span></a><span class="symbol">&lt;</span><span class="identifier">*</span><span class="symbol">&gt;</span><span class="symbol">.</span><span class="identifier">lastOfType</span><span class="symbol">(</span><span class="identifier" id="fg.style$lastOfType(fg.style.Rule((fg.elements.Selector)), kotlin.Function1((fg.style.AndRule, kotlin.Unit)))/init">init</span><span class="symbol">:</span>&nbsp;<a href="../-and-rule/index.html"><span class="identifier">AndRule</span></a><span class="symbol">.</span><span class="symbol">(</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<span class="identifier">Unit</span><span class="symbol">)</span><span class="symbol">: </span><a href="../-and-rule/index.html"><span class="identifier">AndRule</span></a></code></td>
+</tr>
+<tr>
+<td>
+<a href="../left.html">left</a></td>
+<td>
+<code><span class="keyword">infix</span> <span class="keyword">fun </span><a href="../-rule/index.html"><span class="identifier">Rule</span></a><span class="symbol">&lt;</span><span class="identifier">*</span><span class="symbol">&gt;</span><span class="symbol">.</span><span class="identifier">left</span><span class="symbol">(</span><span class="identifier" id="fg.style$left(fg.style.Rule((fg.elements.Selector)), kotlin.Function1((fg.style.AndRule, kotlin.Unit)))/init">init</span><span class="symbol">:</span>&nbsp;<a href="../-and-rule/index.html"><span class="identifier">AndRule</span></a><span class="symbol">.</span><span class="symbol">(</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<span class="identifier">Unit</span><span class="symbol">)</span><span class="symbol">: </span><a href="../-and-rule/index.html"><span class="identifier">AndRule</span></a></code></td>
+</tr>
+<tr>
+<td>
+<a href="../link.html">link</a></td>
+<td>
+<code><span class="keyword">infix</span> <span class="keyword">fun </span><a href="../-rule/index.html"><span class="identifier">Rule</span></a><span class="symbol">&lt;</span><span class="identifier">*</span><span class="symbol">&gt;</span><span class="symbol">.</span><span class="identifier">link</span><span class="symbol">(</span><span class="identifier" id="fg.style$link(fg.style.Rule((fg.elements.Selector)), kotlin.Function1((fg.style.AndRule, kotlin.Unit)))/init">init</span><span class="symbol">:</span>&nbsp;<a href="../-and-rule/index.html"><span class="identifier">AndRule</span></a><span class="symbol">.</span><span class="symbol">(</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<span class="identifier">Unit</span><span class="symbol">)</span><span class="symbol">: </span><a href="../-and-rule/index.html"><span class="identifier">AndRule</span></a></code></td>
+</tr>
+<tr>
+<td>
+<a href="../not.html">not</a></td>
+<td>
+<code><span class="keyword">fun </span><a href="../-rule/index.html"><span class="identifier">Rule</span></a><span class="symbol">&lt;</span><span class="identifier">*</span><span class="symbol">&gt;</span><span class="symbol">.</span><span class="identifier">not</span><span class="symbol">(</span><span class="identifier" id="fg.style$not(fg.style.Rule((fg.elements.Selector)), fg.elements.Selector, kotlin.Function1((fg.style.AndRule, kotlin.Unit)))/selector">selector</span><span class="symbol">:</span>&nbsp;<a href="../../fg.elements/-selector/index.html"><span class="identifier">Selector</span></a><span class="symbol">, </span><span class="identifier" id="fg.style$not(fg.style.Rule((fg.elements.Selector)), fg.elements.Selector, kotlin.Function1((fg.style.AndRule, kotlin.Unit)))/init">init</span><span class="symbol">:</span>&nbsp;<a href="../-and-rule/index.html"><span class="identifier">AndRule</span></a><span class="symbol">.</span><span class="symbol">(</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<span class="identifier">Unit</span><span class="symbol">)</span><span class="symbol">: </span><a href="../-and-rule/index.html"><span class="identifier">AndRule</span></a></code></td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

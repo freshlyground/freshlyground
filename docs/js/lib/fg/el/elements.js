@@ -9,7 +9,91 @@ var elements = function (Kotlin) {
           var char2 = _.fg.base.HEX_CHARS_z2qdg7$[$receiver & 15];
           var char1 = _.fg.base.HEX_CHARS_z2qdg7$[$receiver >> 4 & 15];
           return char1.toString() + char2;
-        }
+        },
+        f: function (closure$timeout, closure$func) {
+          return function () {
+            window.clearTimeout(closure$timeout.v);
+            closure$timeout.v = -1;
+            return closure$func();
+          };
+        },
+        debounce0_4c1mbk$f: function (closure$timeout, closure$func, closure$delay) {
+          return function () {
+            if (closure$timeout.v === -1) {
+              closure$timeout.v = window.setTimeout(_.fg.base.f(closure$timeout, closure$func), closure$delay);
+            }
+          };
+        },
+        debounce0_4c1mbk$: function (func, delay) {
+          var timeout = {v: -1};
+          return _.fg.base.debounce0_4c1mbk$f(timeout, func, delay);
+        },
+        f_0: function (closure$timeout, closure$func, closure$argument1) {
+          return function () {
+            window.clearTimeout(closure$timeout.v);
+            closure$timeout.v = -1;
+            return closure$func(closure$argument1);
+          };
+        },
+        debounce1_w5kaku$f: function (closure$timeout, closure$func, closure$delay) {
+          return function (it) {
+            var arguments_0 = arguments;
+            var argument1 = arguments_0[0];
+            if (closure$timeout.v === -1) {
+              closure$timeout.v = window.setTimeout(_.fg.base.f_0(closure$timeout, closure$func, argument1), closure$delay);
+            }
+          };
+        },
+        debounce1_w5kaku$: function (func, delay) {
+          var timeout = {v: -1};
+          return _.fg.base.debounce1_w5kaku$f(timeout, func, delay);
+        },
+        f_1: function (closure$timeout, closure$func, closure$argument1) {
+          return function () {
+            window.clearTimeout(closure$timeout.v);
+            closure$timeout.v = -1;
+            return closure$func(closure$argument1);
+          };
+        },
+        bounceUntil_w5kaku$f: function (closure$timeout, closure$func, closure$delay) {
+          return function (it) {
+            var arguments_0 = arguments;
+            var argument1 = arguments_0[0];
+            window.clearTimeout(closure$timeout.v);
+            closure$timeout.v = window.setTimeout(_.fg.base.f_1(closure$timeout, closure$func, argument1), closure$delay);
+          };
+        },
+        bounceUntil_w5kaku$: function (func, delay) {
+          var timeout = {v: -1};
+          return _.fg.base.bounceUntil_w5kaku$f(timeout, func, delay);
+        },
+        toCurrency_44694n$: function ($receiver, currency, side, decimals) {
+          var tmp$0, tmp$1;
+          if (side === void 0)
+            side = _.fg.base.Side.LEFT;
+          if (decimals === void 0)
+            decimals = 2;
+          tmp$0 = side;
+          if (Kotlin.equals(tmp$0, _.fg.base.Side.LEFT))
+            tmp$1 = currency + ' ' + Kotlin.kotlin.text.padEnd_b68f8p$($receiver.toString(), decimals, '0');
+          else if (Kotlin.equals(tmp$0, _.fg.base.Side.RIGHT))
+            tmp$1 = Kotlin.kotlin.text.padEnd_b68f8p$($receiver.toString(), decimals, '0') + ' ' + currency;
+          return tmp$1;
+        },
+        Side: Kotlin.createEnumClass(function () {
+          return [Kotlin.Enum];
+        }, function Side() {
+          Side.baseInitializer.call(this);
+        }, function () {
+          return {
+            LEFT: function () {
+              return new _.fg.base.Side();
+            },
+            RIGHT: function () {
+              return new _.fg.base.Side();
+            }
+          };
+        })
       }),
       elements: Kotlin.definePackage(function () {
         this.BODY = new _.fg.elements.Body();
@@ -887,7 +971,7 @@ var elements = function (Kotlin) {
           this.w3cElement = w3cElement;
           this._displayBeforeHiding_ywpibn$ = '';
         }, /** @lends _.fg.elements.Element.prototype */ {
-          childElements_vn4sdz$: {
+          childElements: {
             get: function () {
               var tmp$0;
               var $receiver = this.childNodes;
@@ -917,6 +1001,51 @@ var elements = function (Kotlin) {
           style: {
             get: function () {
               return this.w3cElement.style;
+            }
+          },
+          clientWidth: {
+            get: function () {
+              return this.w3cElement.clientWidth;
+            }
+          },
+          clientHeight: {
+            get: function () {
+              return this.w3cElement.clientHeight;
+            }
+          },
+          offsetWidth: {
+            get: function () {
+              return this.w3cElement.offsetWidth;
+            }
+          },
+          offsetHeight: {
+            get: function () {
+              return this.w3cElement.offsetHeight;
+            }
+          },
+          scrollWidth: {
+            get: function () {
+              return this.w3cElement.scrollWidth;
+            }
+          },
+          scrollHeight: {
+            get: function () {
+              return this.w3cElement.scrollHeight;
+            }
+          },
+          offsetTop: {
+            get: function () {
+              return this.w3cElement.offsetTop;
+            }
+          },
+          offsetLeft: {
+            get: function () {
+              return this.w3cElement.offsetLeft;
+            }
+          },
+          boundingClientRect: {
+            get: function () {
+              return this.w3cElement.getBoundingClientRect();
             }
           },
           render: function () {
@@ -975,6 +1104,7 @@ var elements = function (Kotlin) {
           }
         }, /** @lends _.fg.elements.Element */ {
         }),
+        ElementStateListener: Kotlin.createTrait(null),
         Img: Kotlin.createClass(function () {
           return [_.fg.elements.Element];
         }, function Img(src) {
@@ -1587,11 +1717,13 @@ var elements = function (Kotlin) {
             var ruleText = rule.cssText();
             console.log(ruleText);
             this.stylesheet_ld1o87$.insertRule(ruleText, this.stylesheet_ld1o87$.cssRules.length);
-            var tmp$0;
-            tmp$0 = rule._childStyles.iterator();
-            while (tmp$0.hasNext()) {
-              var element = tmp$0.next();
-              this.registerCSSRule_3cka69$(element);
+            if (!Kotlin.isType(rule, _.fg.style.KeyframesRule)) {
+              var tmp$0;
+              tmp$0 = rule._childStyles.iterator();
+              while (tmp$0.hasNext()) {
+                var element = tmp$0.next();
+                this.registerCSSRule_3cka69$(element);
+              }
             }
           }
         }, /** @lends _.fg.elements.Html */ {
@@ -1660,6 +1792,10 @@ var elements = function (Kotlin) {
               throw new Kotlin.IllegalArgumentException('reference ' + child.w3cNode.nodeName + ' is expected as child');
             }
             node._parentNode = this;
+            if (Kotlin.isType(node, _.fg.elements.Element)) {
+              node.render();
+              node.renderChildren();
+            }
             var mountFn = _.fg.elements.Node.insertBefore_p937mc$f(this, child);
             if (this.mounted) {
               this.mountChild_zh7waj$(mountFn, node);
@@ -1672,6 +1808,10 @@ var elements = function (Kotlin) {
           },
           appendChild_sr04hg$: function (node) {
             node._parentNode = this;
+            if (Kotlin.isType(node, _.fg.elements.Element)) {
+              node.render();
+              node.renderChildren();
+            }
             var mountFn = _.fg.elements.Node.appendChild_sr04hg$f(this);
             if (this.mounted) {
               this.mountChild_zh7waj$(mountFn, node);
@@ -1727,7 +1867,7 @@ var elements = function (Kotlin) {
           },
           removeChildren: function () {
             while (!this._childNodes_d2zqq6$.isEmpty()) {
-              this.removeChild_sr04hg$(this._childNodes_d2zqq6$.get_za3lpa$(Kotlin.kotlin.collections.get_lastIndex_a7ptmv$(this._childNodes_d2zqq6$)));
+              this.removeChild_sr04hg$(Kotlin.kotlin.collections.first_a7ptmv$(this._childNodes_d2zqq6$));
             }
           },
           removeChild_sr04hg$: function (node) {
@@ -1839,6 +1979,26 @@ var elements = function (Kotlin) {
           }),
           object_initializer$: function () {
             _.fg.elements.AnySelector.Statics;
+          }
+        }),
+        AnimationNameSelector: Kotlin.createClass(function () {
+          return [_.fg.elements.Selector];
+        }, function AnimationNameSelector(value) {
+          AnimationNameSelector.baseInitializer.call(this);
+          this.value = value;
+        }, /** @lends _.fg.elements.AnimationNameSelector.prototype */ {
+          toString: function () {
+            return this.value;
+          }
+        }),
+        KeyframeSelector: Kotlin.createClass(function () {
+          return [_.fg.elements.Selector];
+        }, function KeyframeSelector(value) {
+          KeyframeSelector.baseInitializer.call(this);
+          this.value = value;
+        }, /** @lends _.fg.elements.KeyframeSelector.prototype */ {
+          toString: function () {
+            return this.value;
           }
         }),
         TypeSelector: Kotlin.createClass(function () {
@@ -2224,6 +2384,16 @@ var elements = function (Kotlin) {
             return this.cssText_yidtjr$(this.selector);
           }
         }),
+        keyframesRule_wcm6cd$: function ($receiver, selector, init) {
+          var style = new _.fg.style.KeyframesRule(selector);
+          init.call(style);
+          return style;
+        },
+        classRule_l99yr7$: function ($receiver, selector, init) {
+          var style = new _.fg.style.ClassRule(selector);
+          init.call(style);
+          return style;
+        },
         rule_olsuya$: function ($receiver, styledClass, init) {
           if (init === void 0)
             init = styledClass.rule;
@@ -2375,6 +2545,64 @@ var elements = function (Kotlin) {
           $receiver._childStyles.add_za3rmp$(style);
           return style;
         },
+        keyframesRule_ndisjh$: function ($receiver, selector, init) {
+          return _.fg.style.keyframesRule_wcm6cd$($receiver, new _.fg.elements.AnimationNameSelector(selector), init);
+        },
+        keyframe_f6qvey$: function ($receiver, value, init) {
+          var style = new _.fg.style.KeyFrameRule(new _.fg.elements.KeyframeSelector(value));
+          init.call(style);
+          $receiver._childStyles.add_za3rmp$(style);
+          return style;
+        },
+        kfrom_q2xcpo$: function ($receiver, init) {
+          var style = new _.fg.style.KeyFrameRule(new _.fg.elements.KeyframeSelector('from'));
+          init.call(style);
+          $receiver._childStyles.add_za3rmp$(style);
+          return style;
+        },
+        kto_q2xcpo$: function ($receiver, init) {
+          var style = new _.fg.style.KeyFrameRule(new _.fg.elements.KeyframeSelector('to'));
+          init.call(style);
+          $receiver._childStyles.add_za3rmp$(style);
+          return style;
+        },
+        KeyFrameRule: Kotlin.createClass(function () {
+          return [_.fg.style.Rule];
+        }, function KeyFrameRule(selector) {
+          KeyFrameRule.baseInitializer.call(this, selector);
+        }, /** @lends _.fg.style.KeyFrameRule.prototype */ {
+          cssText: function () {
+            return this.cssText_yidtjr$(this.selector);
+          }
+        }),
+        KeyframesRule: Kotlin.createClass(function () {
+          return [_.fg.style.Rule];
+        }, function KeyframesRule(selector) {
+          KeyframesRule.baseInitializer.call(this, selector);
+        }, /** @lends _.fg.style.KeyframesRule.prototype */ {
+          cssText: function () {
+            var tmp$1;
+            var s = {v: '@keyframes '};
+            s.v += this.selector.toString();
+            s.v += ' { ';
+            tmp$1 = Kotlin.kotlin.collections.iterator_efxzmg$(this._map);
+            while (tmp$1.hasNext()) {
+              var tmp$0 = tmp$1.next();
+              var key = tmp$0.key;
+              var value = tmp$0.value;
+              s.v += key + ': ' + value + '; ';
+            }
+            var tmp$2;
+            tmp$2 = this._childStyles.iterator();
+            while (tmp$2.hasNext()) {
+              var element = tmp$2.next();
+              s.v += element.cssText();
+            }
+            s.v += '}';
+            return s.v;
+          }
+        }, /** @lends _.fg.style.KeyframesRule */ {
+        }),
         Rule: Kotlin.createClass(null, function Rule(selector) {
           this.selector = selector;
           this._map = Kotlin.kotlin.collections.mutableMapOf_eoa9s7$([]);

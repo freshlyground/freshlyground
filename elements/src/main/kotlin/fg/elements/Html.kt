@@ -1,7 +1,8 @@
 package fg.elements
 
-import fg.style.Rule
 import fg.style.ClassRule
+import fg.style.KeyframesRule
+import fg.style.Rule
 import org.w3c.dom.Element
 import org.w3c.dom.css.CSSStyleSheet
 import org.w3c.dom.events.Event
@@ -52,7 +53,9 @@ class Html internal constructor(val w3cElement: Element = document.documentEleme
         val ruleText = rule.cssText()
         console.log(ruleText)
         stylesheet.insertRule(ruleText, stylesheet.cssRules.length)
-        rule._childStyles.forEach { registerCSSRule(it) }
+        if (rule !is KeyframesRule) {
+            rule._childStyles.forEach { registerCSSRule(it) }
+        }
     }
 }
 
