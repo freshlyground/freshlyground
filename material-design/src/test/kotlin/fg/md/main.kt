@@ -10,7 +10,6 @@ import fg.elements.div
 import fg.elements.h1
 import fg.elements.hr
 import fg.elements.p
-import fg.elements.px
 import fg.elements.with
 import fg.md.button.MDButton
 import fg.style.AnyRule
@@ -25,6 +24,8 @@ fun main(vararg args: String) {
 
         val leftDrawer = mdDrawer(Drawer.Side.LEFT) {
             hide()
+            style.width = "250px"
+
             p { +"A Drawer" }
             mdCard {
                 header {
@@ -40,11 +41,14 @@ fun main(vararg args: String) {
                         }
                     }
                 }
+                image("safari.jpg") {
+
+                }
                 title {
-                    +"Content title"
+                    +"Lion"
                 }
                 content {
-                    +"Here is some content"
+                    +"Panthera leo"
                 }
             }
             val hideDrawerAction = Action("Hide drawer") {
@@ -55,6 +59,8 @@ fun main(vararg args: String) {
         }
         val rightDrawer = mdDrawer(Drawer.Side.RIGHT) {
             hide()
+            style.width = "250px"
+
             p { +"A Drawer on the right side" }
             mdCard {
                 header {
@@ -71,10 +77,10 @@ fun main(vararg args: String) {
                     }
                 }
                 title {
-                    +"Content title"
+                    +"Lion"
                 }
                 content {
-                    +"Here is some content"
+                    +"The lion (Panthera leo) is one of the big cats in the genus Panthera and a member of the family Felidae."
                 }
             }
             val hideDrawerAction = Action("Hide drawer") {
@@ -130,20 +136,41 @@ fun main(vararg args: String) {
             addClass("card-container")
             mdCard {
                 content {
-                    +"Basic card"
+                    +"The lion (Panthera leo) is one of the big cats in the genus Panthera and a member of the family Felidae."
+                }
+            }
+            mdCard {
+                title {
+                    +"Lion"
+                }
+                content {
+                    +"The lion (Panthera leo) is one of the big cats in the genus Panthera and a member of the family Felidae."
                 }
             }
             mdCard {
                 titleText {
                     subtitle {
-                        +"Subtitle first"
+                        +"Panthera leo"
                     }
                     title {
-                        +"Card with title"
+                        +"Lion"
                     }
                 }
                 content {
-                    +"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+                    +"The lion (Panthera leo) is one of the big cats in the genus Panthera and a member of the family Felidae."
+                }
+            }
+            mdCard {
+                titleText {
+                    title {
+                        +"Lion"
+                    }
+                    subtitle {
+                        +"Panthera leo"
+                    }
+                }
+                content {
+                    +"The lion (Panthera leo) is one of the big cats in the genus Panthera and a member of the family Felidae."
                 }
             }
             mdCard {
@@ -161,32 +188,120 @@ fun main(vararg args: String) {
                     }
                 }
                 image("safari.jpg") {
-                    _width = 100.px
+
                 }
                 titleText {
                     title {
-                        +"Content title"
+                        +"Lion"
                     }
                     subtitle {
-                        +"Subtitle first"
+                        +"Panthera leo"
                     }
                 }
                 content {
-                    +"Here is some content"
+                    +"The lion (Panthera leo) is one of the big cats in the genus Panthera and a member of the family Felidae."
                 }
                 mdActions {
-                    mdButton(Action("BUTTON 1") {}) {}
-                    mdButton(Action("BUTTON 2") {}) {}
+                    mdButton(Action("ACTION 1") {}) {}
+                    mdButton(Action("ACTION 2") {}) {}
                 }
             }
             mdCard {
                 content {
                     image("safari.jpg") {
-                        _width = 100.px
+
                     }
                 }
                 title {
                     +"Header title"
+                }
+            }
+
+            mdCard {
+                header {
+                    avatar("portrait.jpg") {
+
+                    }
+                    text {
+                        title {
+                            +"Header text title"
+                        }
+                        subtitle {
+                            +"Header text subtitle"
+                        }
+                    }
+                }
+                image("safari.jpg") {
+
+                }
+                content {
+                    +"The lion (Panthera leo) is one of the big cats in the genus Panthera and a member of the family Felidae."
+                }
+                mdActions {
+                    mdButton(Action("ACTION 1") {}) {}
+                    mdButton(Action("ACTION 2") {}) {}
+                }
+            }
+
+            mdCard {
+                image("safari.jpg") {
+
+                }
+                titleText {
+                    title {
+                        +"Title goes here"
+                    }
+                    subtitle {
+                        +"Subtitle here"
+                    }
+                }
+                mdActions {
+                    mdButton(Action("ACTION 1") {}) {}
+                    mdButton(Action("ACTION 2") {}) {}
+                }
+            }
+
+            mdCard {
+                image("safari.jpg") {
+
+                }
+                titleText {
+                    title {
+                        +"Lion"
+                    }
+                    subtitle {
+                        +"Panthera leo"
+                    }
+                }
+                mdActions {
+                    mdButton(Action("ACTION 1") {}) {}
+                    mdButton(Action("ACTION 2") {}) {}
+                }
+                content {
+                    p {
+                        +"The lion (Panthera leo) is one of the big cats in the genus Panthera and a member of the family Felidae."
+                    }
+                    p {
+                        +"In the wild, males seldom live longer than 10 to 14 years, as injuries sustained from continual fighting with rival males greatly reduce their longevity. In captivity they can live more than 20 years. They typically inhabit savanna and grassland, although they may take to bush and forest."
+                    }
+                }
+            }
+
+            mdCard {
+                style.backgroundImage = "url(safari.jpg)"
+                style.color = "white"
+
+                titleText {
+                    title {
+                        +"Lion"
+                    }
+                    subtitle {
+                        +"Panthera leo"
+                    }
+                }
+                mdActions {
+                    mdButton(Action("ACTION 1") {}) {}
+                    mdButton(Action("ACTION 2") {}) {}
                 }
             }
         }

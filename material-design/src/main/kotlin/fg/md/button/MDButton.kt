@@ -19,7 +19,7 @@ import kotlin.properties.Delegates
 
 class MDButton(action: Action, type: Type = Type.FLAT,
                color: MDColor = MDColor.DEFAULT,
-               margins: Boolean = true) :
+               margins: Boolean = false) :
         Button(action) {
 
     var type: Type by Delegates.observable(type) { property, old, new ->

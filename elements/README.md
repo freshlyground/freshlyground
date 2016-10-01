@@ -1,4 +1,4 @@
 # Freshlyground - Elements
 
-The Freshlyground element library -
+The Freshlyground Elements library - for building DOM elements programmatically.
 

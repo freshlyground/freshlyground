@@ -44,6 +44,8 @@ open class MDCard : fg.elements.Div() {
             borderRadius = "2px"
             boxShadow = "0 2px 5px 0 rgba(0, 0, 0, 0.26)"
             fontFamily = "Roboto, 'Helvetica Neue', sans-serif"
+
+            backgroundSize = "cover"
         }
 
         init {
