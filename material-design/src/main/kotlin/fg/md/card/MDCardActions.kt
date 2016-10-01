@@ -1,12 +1,12 @@
 package fg.md.card
 
+import fg.elements.Div
 import fg.elements.HTML
-import fg.elements.Img
 import fg.elements.StyledClass
 import fg.elements.toClassSelector
 import fg.style.ClassRule
 
-class MDCardImage(src: String) : Img(src = src) {
+class MDCardActions : Div() {
 
     override fun render() {
         super.render()
@@ -14,13 +14,12 @@ class MDCardImage(src: String) : Img(src = src) {
         addClass(classSelector)
     }
 
-    companion object MDCardImage : StyledClass {
+    companion object MDCardActions : StyledClass {
 
-        override val classSelector = "md-card-image".toClassSelector()
+        override val classSelector = "md-card-actions".toClassSelector()
 
         override val rule: ClassRule.() -> Unit = {
-            height = "100%"
-            width = "100%"
+            padding = "8px"
         }
 
         init {

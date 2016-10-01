@@ -6,7 +6,7 @@ import fg.elements.StyledClass
 import fg.elements.toClassSelector
 import fg.elements.toSelector
 import fg.style.ClassRule
-import fg.style.desc
+import fg.style.child
 import fg.style.not
 
 class MDCardHeader : Div() {
@@ -24,16 +24,19 @@ class MDCardHeader : Div() {
         override val rule: ClassRule.() -> Unit = {
             display = "flex"
             flexDirection = "row"
-            height = "40px"
-            margin = "-8px 0 16px 0"
+            padding = "16px"
 
-            desc(MDCardTitle.classSelector) {
+            child(MDCardTitle.classSelector) {
                 fontSize = "14px"
             }
 
-            desc(MDCardSubtitle.classSelector) {
+            child(MDCardAvatar.classSelector) {
+                marginRight = "12px"
+            }
+
+            child(MDCardSubtitle.classSelector) {
                 not(":first-child".toSelector()) {
-                    marginTop = "-8px"
+                    //marginTop = "-8px"
                 }
             }
         }

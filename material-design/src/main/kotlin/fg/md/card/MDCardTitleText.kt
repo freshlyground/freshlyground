@@ -2,13 +2,14 @@ package fg.md.card
 
 import fg.elements.Div
 import fg.elements.HTML
-import fg.elements.Selector
 import fg.elements.StyledClass
 import fg.elements.toClassSelector
+import fg.elements.toSelector
 import fg.style.ClassRule
 import fg.style.child
+import fg.style.not
 
-class MDCardHeaderText : Div() {
+class MDCardTitleText : Div() {
 
     override fun render() {
         super.render()
@@ -18,21 +19,26 @@ class MDCardHeaderText : Div() {
 
     companion object MDCardHeaderText : StyledClass {
 
-        override val classSelector = "md-card-header-text".toClassSelector()
+        override val classSelector = "md-card-title-text".toClassSelector()
 
         override val rule: ClassRule.() -> Unit = {
-
-            display = "flex"
-            flexDirection = "column"
+            paddingTop = "24px"
+            paddingLeft = "16px"
+            paddingRight = "16px"
+            paddingBottom = "16px"
 
             child(MDCardTitle.classSelector) {
                 padding = "0"
-                fontSize = "14px"
-                fontWeight = "500"
+
+                not(":first-child".toSelector()) {
+                    paddingTop = "12px"
+                }
             }
 
-            child(Selector.ANY) {
-                flex = "1"
+            child(MDCardSubtitle.classSelector) {
+                not(":first-child".toSelector()) {
+                    paddingTop = "12px"
+                }
             }
         }
 

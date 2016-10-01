@@ -21,8 +21,11 @@ class MDCardTitle : Div() {
         override val rule: ClassRule.() -> Unit = {
             fontSize = "24px"
             fontWeight = "400"
-            marginTop = "0"
-            marginBottom = "16px"
+
+            paddingTop = "24px"
+            paddingBottom = "16px"
+            paddingLeft = "16px"
+            paddingRight = "16px"
         }
 
         init {

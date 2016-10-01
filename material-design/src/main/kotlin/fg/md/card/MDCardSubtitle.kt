@@ -22,7 +22,6 @@ class MDCardSubtitle : Div() {
         override val rule: ClassRule.() -> Unit = {
             fontSize = "14px"
             fontWeight = "400"
-            marginBottom = "16px"
 
             color = MDGrayPalette.p600.toHtml()
         }

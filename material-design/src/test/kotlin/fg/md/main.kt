@@ -21,6 +21,8 @@ fun main(vararg args: String) {
 
 
     BODY with {
+        style.backgroundColor = "#ededed"
+
         val leftDrawer = mdDrawer(Drawer.Side.LEFT) {
             hide()
             p { +"A Drawer" }
@@ -38,10 +40,10 @@ fun main(vararg args: String) {
                         }
                     }
                 }
+                title {
+                    +"Content title"
+                }
                 content {
-                    title {
-                        +"Content title"
-                    }
                     +"Here is some content"
                 }
             }
@@ -68,10 +70,10 @@ fun main(vararg args: String) {
                         }
                     }
                 }
+                title {
+                    +"Content title"
+                }
                 content {
-                    title {
-                        +"Content title"
-                    }
                     +"Here is some content"
                 }
             }
@@ -132,11 +134,13 @@ fun main(vararg args: String) {
                 }
             }
             mdCard {
-                subtitle {
-                    +"Subtitle first"
-                }
-                title {
-                    +"Card with title"
+                titleText {
+                    subtitle {
+                        +"Subtitle first"
+                    }
+                    title {
+                        +"Card with title"
+                    }
                 }
                 content {
                     +"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
@@ -156,19 +160,28 @@ fun main(vararg args: String) {
                         }
                     }
                 }
-                image("dino.jpg") {
+                image("safari.jpg") {
                     _width = 100.px
                 }
-                content {
+                titleText {
                     title {
                         +"Content title"
                     }
+                    subtitle {
+                        +"Subtitle first"
+                    }
+                }
+                content {
                     +"Here is some content"
+                }
+                mdActions {
+                    mdButton(Action("BUTTON 1") {}) {}
+                    mdButton(Action("BUTTON 2") {}) {}
                 }
             }
             mdCard {
                 content {
-                    image("dino.jpg") {
+                    image("safari.jpg") {
                         _width = 100.px
                     }
                 }

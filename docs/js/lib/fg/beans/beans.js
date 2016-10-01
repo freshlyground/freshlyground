@@ -37,6 +37,11 @@ var beans = function (Kotlin, $module$elements) {
               this.enabled$delegate.setValue_w32e13$(this, new Kotlin.PropertyMetadata('enabled'), enabled);
             }
           },
+          disabled: {
+            get: function () {
+              return !this.enabled;
+            }
+          },
           icon: {
             get: function () {
               return this.icon$delegate.getValue_dsk1ci$(this, new Kotlin.PropertyMetadata('icon'));
@@ -135,14 +140,14 @@ var beans = function (Kotlin, $module$elements) {
             this.$pressed_82cw16$ = false;
             this.label$delegate = Kotlin.kotlin.lazy_un3fny$(_.fg.beans.button.Button.label$f);
             this.icon$delegate = Kotlin.kotlin.lazy_un3fny$(_.fg.beans.button.Button.icon$f(this));
+            this.clickHandler_9cuniy$ = _.fg.beans.button.Button.clickHandler_9cuniy$f(this);
+            this.actionPropertyChangedHandler_dzou13$ = _.fg.beans.button.Button.actionPropertyChangedHandler_dzou13$f(this);
             this.mouseEnterHandler_i2ypnl$ = _.fg.beans.button.Button.mouseEnterHandler_i2ypnl$f(this);
             this.mouseLeaveHandler_bgliw0$ = _.fg.beans.button.Button.mouseLeaveHandler_bgliw0$f(this);
             this.focusHandler_67mily$ = _.fg.beans.button.Button.focusHandler_67mily$f(this);
             this.blurHandler_9tqkmj$ = _.fg.beans.button.Button.blurHandler_9tqkmj$f(this);
             this.mouseDownHandler_x1gvc5$ = _.fg.beans.button.Button.mouseDownHandler_x1gvc5$f(action, this);
             this.mouseUpHandler_7c34se$ = _.fg.beans.button.Button.mouseUpHandler_7c34se$f(this);
-            this.clickHandler_9cuniy$ = _.fg.beans.button.Button.clickHandler_9cuniy$f(this);
-            this.actionPropertyChangedHandler_dzou13$ = _.fg.beans.button.Button.actionPropertyChangedHandler_dzou13$f(this);
           }, /** @lends _.fg.beans.button.Button.prototype */ {
             hovered: {
               get: function () {
@@ -190,6 +195,10 @@ var beans = function (Kotlin, $module$elements) {
             },
             unPressed: function () {
             },
+            onEnabled: function () {
+            },
+            onDisabled: function () {
+            },
             render: function () {
               $module$elements.fg.elements.Button.prototype.render.call(this);
               this.addClass_bx842b$(_.fg.beans.button.Button.Button.classSelector);
@@ -197,6 +206,7 @@ var beans = function (Kotlin, $module$elements) {
               this.appendChild_sr04hg$(this.label);
               this.renderIcon_41ga0a$(this.action.icon);
               this.renderLabel_61zpoe$(this.action.label);
+              this.renderDisabled_6taknv$(this.action.disabled);
             },
             didMount: function () {
               $module$elements.fg.elements.Button.prototype.didMount.call(this);
@@ -235,13 +245,24 @@ var beans = function (Kotlin, $module$elements) {
                 icon.apply_54c9de$(this.icon);
                 this.icon.show();
               }
+            },
+            renderDisabled_6taknv$: function (disabled) {
+              if (disabled) {
+                this.toggleClass_ivxn3r$(_.fg.beans.button.Button.Button.DISABLED.value, true);
+                this._disabled = true;
+              }
+               else {
+                this.toggleClass_ivxn3r$(_.fg.beans.button.Button.Button.DISABLED.value);
+                this._disabled = false;
+              }
             }
           }, /** @lends _.fg.beans.button.Button */ {
             Button: Kotlin.createObject(function () {
               return [$module$elements.fg.elements.StyledClass];
             }, function Button() {
               _.fg.beans.button.Button.Button.$classSelector_z0uw2b$ = $module$elements.fg.elements.toClassSelector_pdl1w0$('button');
-              _.fg.beans.button.Button.Button.$rule_y180tc$ = _.fg.beans.button.Button.Button.rule$f;
+              _.fg.beans.button.Button.Button.DISABLED = $module$elements.fg.elements.toClassSelector_pdl1w0$('disabled');
+              _.fg.beans.button.Button.Button.$rule_y180tc$ = _.fg.beans.button.Button.Button.rule$f(_.fg.beans.button.Button.Button);
               $module$elements.fg.elements.HTML.registerStyle_78phyd$(_.fg.beans.button.Button.Button);
             }, /** @lends _.fg.beans.button.Button.Button.prototype */ {
               classSelector: {
@@ -255,7 +276,19 @@ var beans = function (Kotlin, $module$elements) {
                 }
               }
             }, /** @lends _.fg.beans.button.Button.Button */ {
-              rule$f: function () {
+              f: function () {
+                this.cursor = 'not-allowed';
+              },
+              f_0: function (this$Button$) {
+                return function () {
+                  this.cursor = 'pointer';
+                  $module$elements.fg.style.and_dbehhi$(this, this$Button$.DISABLED, _.fg.beans.button.Button.Button.f);
+                };
+              },
+              rule$f: function (this$Button$) {
+                return function () {
+                  $module$elements.fg.style.hover_i5tde3$(this, _.fg.beans.button.Button.Button.f_0(this$Button$));
+                };
               }
             }),
             object_initializer$: function () {
@@ -271,6 +304,30 @@ var beans = function (Kotlin, $module$elements) {
                 var iconI = new _.fg.beans.icon.IconI(this$Button.action.icon);
                 iconI.hide();
                 return iconI;
+              };
+            },
+            clickHandler_9cuniy$f: function (this$Button) {
+              return function (it) {
+                this$Button.action.perform();
+              };
+            },
+            actionPropertyChangedHandler_dzou13$f: function (this$Button) {
+              return function (action, property, old, new_0) {
+                var tmp$0;
+                tmp$0 = property.name;
+                if (Kotlin.equals(tmp$0, Kotlin.getCallableRefForMemberProperty('label', true).name))
+                  this$Button.renderLabel_61zpoe$(action.label);
+                else if (Kotlin.equals(tmp$0, Kotlin.getCallableRefForMemberProperty('icon', true).name))
+                  this$Button.renderIcon_41ga0a$(action.icon);
+                else if (Kotlin.equals(tmp$0, Kotlin.getCallableRefForMemberProperty('enabled', true).name)) {
+                  this$Button.renderDisabled_6taknv$(action.disabled);
+                  if (action.enabled) {
+                    this$Button.onEnabled();
+                  }
+                   else {
+                    this$Button.onDisabled();
+                  }
+                }
               };
             },
             mouseEnterHandler_i2ypnl$f: function (this$Button) {
@@ -315,21 +372,6 @@ var beans = function (Kotlin, $module$elements) {
                 this$Button.pressed = false;
                 this$Button.toggleClass_ivxn3r$('pressed');
                 this$Button.unPressed();
-              };
-            },
-            clickHandler_9cuniy$f: function (this$Button) {
-              return function (it) {
-                this$Button.action.perform();
-              };
-            },
-            actionPropertyChangedHandler_dzou13$f: function (this$Button) {
-              return function (action, property, old, new_0) {
-                var tmp$0;
-                tmp$0 = property.name;
-                if (Kotlin.equals(tmp$0, Kotlin.getCallableRefForMemberProperty('label', true).name))
-                  this$Button.renderLabel_61zpoe$(action.label);
-                else if (Kotlin.equals(tmp$0, Kotlin.getCallableRefForMemberProperty('icon', true).name))
-                  this$Button.renderIcon_41ga0a$(action.icon);
               };
             }
           })
