@@ -18,6 +18,7 @@ open class Action(label: String? = null,
     var enabled: Boolean by Delegates.observable(enabled) { prop, old, new ->
         notifyPropertyChanged(prop, old, new)
     }
+    val disabled: Boolean get() = !enabled
 
     var icon: Icon? by Delegates.observable(icon) { prop, old, new ->
         notifyPropertyChanged(prop, old, new)

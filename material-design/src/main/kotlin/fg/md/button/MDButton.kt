@@ -15,9 +15,7 @@ import fg.style.active
 import fg.style.and
 import fg.style.colour.RgbColor
 import fg.style.focus
-import fg.style.hover
 import kotlin.properties.Delegates
-import kotlin.reflect.KProperty
 
 class MDButton(action: Action, type: Type = Type.FLAT,
                color: MDColor = MDColor.DEFAULT,
@@ -25,11 +23,12 @@ class MDButton(action: Action, type: Type = Type.FLAT,
         Button(action) {
 
     var type: Type by Delegates.observable(type) { property, old, new ->
-        renderState(new, this.action, this.color)
+        renderType(new)
+        renderColor(color)
     }
 
     var color: MDColor by Delegates.observable(color) { property, old, new ->
-        renderState(this.type, this.action, new)
+        renderColor(new)
     }
 
     var margins: Boolean by Delegates.observable(margins) { property, old, new ->
@@ -49,25 +48,29 @@ class MDButton(action: Action, type: Type = Type.FLAT,
                 })
     }
 
-    private val actionChangedHandler: (action: Action, property: KProperty<*>, old: Any?, new: Any?) -> Unit = {
-        action, property, old, new ->
-
-        renderState(this.type, action, this.color)
-    }
-
     override fun render() {
         super.render()
 
         addClass(MDButton.classSelector)
-        renderState(type, action, color)
+        renderType(type)
+        renderColor(color)
         renderMargins(margins)
     }
 
     override fun didMount() {
         super.didMount()
 
-        action.onPropertyChanged(actionChangedHandler)
         ripple.init()
+    }
+
+    override fun onEnabled() {
+        renderColor()
+        removeClass(DISABLED)
+    }
+
+    override fun onDisabled() {
+        renderColor()
+        addClass(DISABLED)
     }
 
     override fun onHover() {
@@ -94,7 +97,7 @@ class MDButton(action: Action, type: Type = Type.FLAT,
         renderColor()
     }
 
-    private fun renderState(type: Type, action: Action, color: MDColor) {
+    private fun renderType(type: Type) {
 
         for (c in Type.values()) {
             if (c != type) {
@@ -122,16 +125,6 @@ class MDButton(action: Action, type: Type = Type.FLAT,
                 icon.show()
                 icon.icon = MDButton.plusIcon
             }
-        }
-
-        renderColor(color)
-
-        if (!action.enabled) {
-            addClass(DISABLED)
-            _disabled = true
-        } else {
-            removeClass(DISABLED)
-            _disabled = false
         }
     }
 
@@ -171,10 +164,11 @@ class MDButton(action: Action, type: Type = Type.FLAT,
                         this.style.backgroundColor = RgbColor.TRANSPARENT.toString()
                     }
 
-                    //this.style.backgroundColor = Context.theme.color(color, RgbColor.WHITE).toString()
                     this.style.color = RgbColor.BLACK.toString()
-                } else {
 
+                } else {
+                    this.style.color = RgbColor(0, 0, 0, 0.26).toString()
+                    this.style.backgroundColor = RgbColor(0, 0, 0, 0.12).toString()
                 }
             }
             Type.FLOATING -> {
@@ -207,8 +201,6 @@ class MDButton(action: Action, type: Type = Type.FLAT,
         private val TYPE_FLAT = "md-button-flat".toClassSelector()
         private val TYPE_RAISED = "md-button-raised".toClassSelector()
         private val TYPE_FLOATING = "md-button-floating".toClassSelector()
-        private val DISABLED = "md-button-disabled".toClassSelector()
-
         private val plusIcon = FontAwesomeIcons.plus()
 
         override val classSelector = "md-button".toClassSelector()
@@ -219,20 +211,11 @@ class MDButton(action: Action, type: Type = Type.FLAT,
             marginLeft = "8px"
             marginRight = "8px"
             fontFamily = Context.theme.font
-
-            hover {
-                cursor = "pointer"
-                and(DISABLED) {
-                    cursor = "not-allowed"
-                }
-            }
+            fontSize = "14px"
+            fontWeight = "500"
 
             focus {
                 outline = "none"
-            }
-
-            active {
-                //backgroundColor = RgbColor.from("#999999").withAlfa(0.4).toString()
             }
 
             and(TYPE_FLAT) {
@@ -240,29 +223,13 @@ class MDButton(action: Action, type: Type = Type.FLAT,
                 width = ""
                 height = "36px"
                 boxShadow = "none"
-                //backgroundColor = "white"
                 border = "none"
-
-                /*hover {
-                    not(DISABLED) {
-                        backgroundColor = RgbColor(153, 153, 153, 0.2).toString()
-                    }
-                }*/
-
-                focus {
-                    //backgroundColor = "#f2f2f2"
-                }
-
-                and(DISABLED) {
-                    backgroundColor = RgbColor.TRANSPARENT.toString()
-                }
             }
 
             and(TYPE_RAISED) {
                 minWidth = "88px"
                 width = ""
                 height = "36px"
-                //backgroundColor = "white"
                 border = "none"
                 boxShadow = "rgba(0, 0, 0, 0.117647) 0px 1px 6px, rgba(0, 0, 0, 0.117647) 0px 1px 4px"
 
@@ -270,13 +237,8 @@ class MDButton(action: Action, type: Type = Type.FLAT,
                     boxShadow = "0 4px 8px 0 rgba(0,0,0,.4)"
                 }
 
-                /*focus {
-                    backgroundColor = "#f2f2f2"
-                }*/
-
                 and(DISABLED) {
                     boxShadow = "none"
-                    //backgroundColor = RgbColor.BLACK.withAlfa(0.12).toString()
                 }
             }
 
@@ -288,8 +250,12 @@ class MDButton(action: Action, type: Type = Type.FLAT,
                 boxShadow = "rgba(0, 0, 0, 0.117647) 0px 1px 6px, rgba(0, 0, 0, 0.117647) 0px 1px 4px"
                 borderRadius = "50%"
 
+                active {
+                    boxShadow = "0 4px 8px 0 rgba(0,0,0,.4)"
+                }
+
                 and(DISABLED) {
-                    //backgroundColor = RgbColor.TRANSPARENT.toString()
+                    boxShadow = "none"
                 }
             }
 

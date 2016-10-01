@@ -22,6 +22,8 @@ import fg.elements.unMouseEnter
 import fg.elements.unMouseLeave
 import fg.elements.unMouseUp
 import fg.style.ClassRule
+import fg.style.and
+import fg.style.hover
 import org.w3c.dom.events.Event
 import org.w3c.dom.events.MouseEvent
 import kotlin.reflect.KProperty
@@ -47,6 +49,33 @@ open class Button(action: Action) : Button() {
         val iconI = IconI(this.action.icon)
         iconI.hide()
         iconI
+    }
+
+    private val clickHandler: (Event) -> Unit = {
+
+        this.action.perform()
+    }
+
+    private val actionPropertyChangedHandler: (action: Action, property: KProperty<*>, old: Any?, new: Any?) -> Unit = {
+        action: Action, property: KProperty<*>, old: Any?, new: Any? ->
+
+        when (property.name) {
+            Action::label.name -> {
+                renderLabel(action.label)
+            }
+            Action::icon.name -> {
+                renderIcon(action.icon)
+            }
+            Action::enabled.name -> {
+
+                renderDisabled(action.disabled)
+                if (action.enabled) {
+                    onEnabled()
+                } else {
+                    onDisabled()
+                }
+            }
+        }
     }
 
     private val mouseEnterHandler: (event: MouseEvent) -> Unit = {
@@ -117,6 +146,14 @@ open class Button(action: Action) : Button() {
 
     }
 
+    open protected fun onEnabled() {
+
+    }
+
+    open protected fun onDisabled() {
+
+    }
+
     override fun render() {
         super.render()
 
@@ -127,6 +164,7 @@ open class Button(action: Action) : Button() {
 
         renderIcon(action.icon)
         renderLabel(action.label)
+        renderDisabled(action.disabled)
     }
 
     override fun didMount() {
@@ -155,24 +193,6 @@ open class Button(action: Action) : Button() {
         unMouseUp(mouseUpHandler)
     }
 
-    private val clickHandler: (Event) -> Unit = {
-
-        this.action.perform()
-    }
-
-    private val actionPropertyChangedHandler: (action: Action, property: KProperty<*>, old: Any?, new: Any?) -> Unit = {
-        action: Action, property: KProperty<*>, old: Any?, new: Any? ->
-
-        when (property.name) {
-            Action::label.name -> {
-                renderLabel(action.label)
-            }
-            Action::icon.name -> {
-                renderIcon(action.icon)
-            }
-        }
-    }
-
     private fun renderLabel(labelText: String?) {
         if (labelText != null) {
             this.label.textContent = labelText
@@ -191,11 +211,29 @@ open class Button(action: Action) : Button() {
         }
     }
 
+    private fun renderDisabled(disabled: Boolean) {
+        if (disabled) {
+            toggleClass(DISABLED.value, true)
+            _disabled = true
+        } else {
+            toggleClass(DISABLED.value)
+            _disabled = false
+        }
+    }
+
     companion object Button : StyledClass {
 
         override val classSelector = "button".toClassSelector()
+        val DISABLED = "disabled".toClassSelector()
+
         override val rule: ClassRule.() -> Unit = {
 
+            hover {
+                cursor = "pointer"
+                and(DISABLED) {
+                    cursor = "not-allowed"
+                }
+            }
         }
 
         init {
