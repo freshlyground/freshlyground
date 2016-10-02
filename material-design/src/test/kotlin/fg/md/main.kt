@@ -6,8 +6,8 @@ import fg.beans.drawer.Drawer
 import fg.elements.BODY
 import fg.elements.ClassSelector
 import fg.elements.HTML
-import fg.elements.div
 import fg.elements.h1
+import fg.elements.h2
 import fg.elements.hr
 import fg.elements.p
 import fg.elements.with
@@ -90,7 +90,7 @@ fun main(vararg args: String) {
             button(hideDrawerAction) {}
         }
 
-        h1 {
+        h2 {
             +"Drawer"
         }
         p {
@@ -105,10 +105,10 @@ fun main(vararg args: String) {
 
         hr {}
 
-        h1 {
+        h2 {
             +"Button"
         }
-        div {
+        p {
             addClass("flex-row")
             p() {
                 addClass("flex-column")
@@ -128,11 +128,24 @@ fun main(vararg args: String) {
         }
         hr {}
 
+        h2 {
+            +"Radio Button"
+        }
+        p {
+            mdRadioButton("Some choice") {
+
+            }
+            mdRadioButton() {
+                labelText = "Some other choice"
+            }
+        }
+        hr {}
+
         h1 {
             +"Card"
         }
         hr {}
-        div() {
+        p() {
             addClass("card-container")
             mdCard {
                 content {

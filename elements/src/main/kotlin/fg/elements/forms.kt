@@ -65,11 +65,13 @@ abstract class Input(type: Type) : Element(name = "input") {
     enum class Type {
         hidden,
         text,
-        number
+        number,
+        radio
     }
 }
 
 open class InputText() : Input(Input.Type.text)
+open class InputRadio() : Input(Input.Type.radio)
 
 open class InputNumber() : Input(Input.Type.number) {
 
@@ -96,4 +98,18 @@ open class InputNumber() : Input(Input.Type.number) {
         set(value) {
             super.value = value.toString()
         }
+}
+
+open class Label(labelFor: String? = null) : Element(name = "label") {
+
+    var _for: String? by W3cDelegates.nullableAttribute("for")
+
+    init {
+        _for = labelFor
+    }
+
+    override fun render() {
+        super.render()
+
+    }
 }

@@ -1083,6 +1083,20 @@ var elements = function (Kotlin) {
               this.w3cElement.classList.remove((tmp$0 = this.w3cElement.classList[0]) != null ? tmp$0 : Kotlin.throwNPE());
             }
           },
+          removeClasses_ic64ld$: function (predicate) {
+            var tmp$0, tmp$1;
+            if (this.w3cElement.classList.length === 0) {
+              return;
+            }
+            tmp$0 = Kotlin.kotlin.ranges.downTo_rksjo2$(Math.max(0, this.w3cElement.classList.length - 1), 0).iterator();
+            while (tmp$0.hasNext()) {
+              var i = tmp$0.next();
+              var currClass = (tmp$1 = this.w3cElement.classList[i]) != null ? tmp$1 : Kotlin.throwNPE();
+              if (predicate(currClass)) {
+                this.w3cElement.classList.remove(currClass);
+              }
+            }
+          },
           toggleClass_ivxn3r$: function (name, force) {
             if (force === void 0)
               force = false;
@@ -1572,6 +1586,9 @@ var elements = function (Kotlin) {
               },
               number: function () {
                 return new _.fg.elements.Input.Type();
+              },
+              radio: function () {
+                return new _.fg.elements.Input.Type();
               }
             };
           })
@@ -1580,6 +1597,11 @@ var elements = function (Kotlin) {
           return [_.fg.elements.Input];
         }, function InputText() {
           InputText.baseInitializer.call(this, _.fg.elements.Input.Type.text);
+        }),
+        InputRadio: Kotlin.createClass(function () {
+          return [_.fg.elements.Input];
+        }, function InputRadio() {
+          InputRadio.baseInitializer.call(this, _.fg.elements.Input.Type.radio);
         }),
         InputNumber: Kotlin.createClass(function () {
           return [_.fg.elements.Input];
@@ -1613,6 +1635,27 @@ var elements = function (Kotlin) {
             set: function (value) {
               Kotlin.callSetter(this, _.fg.elements.Input, 'value', Kotlin.toString(value));
             }
+          }
+        }),
+        Label: Kotlin.createClass(function () {
+          return [_.fg.elements.Element];
+        }, function Label(labelFor) {
+          if (labelFor === void 0)
+            labelFor = null;
+          Label.baseInitializer.call(this, 'label');
+          this._for$delegate = _.fg.elements.W3cDelegates.nullableAttribute_61zpoe$('for');
+          this._for = labelFor;
+        }, /** @lends _.fg.elements.Label.prototype */ {
+          _for: {
+            get: function () {
+              return this._for$delegate.getValue_dsk1ci$(this, new Kotlin.PropertyMetadata('_for'));
+            },
+            set: function (_for) {
+              this._for$delegate.setValue_w32e13$(this, new Kotlin.PropertyMetadata('_for'), _for);
+            }
+          },
+          render: function () {
+            _.fg.elements.Element.prototype.render.call(this);
           }
         }),
         P: Kotlin.createClass(function () {
@@ -1783,8 +1826,14 @@ var elements = function (Kotlin) {
             }
           },
           prependChild_sr04hg$: function (node) {
-            this.insertBefore_p937mc$(node, Kotlin.kotlin.collections.first_a7ptmv$(this._childNodes_d2zqq6$));
-            return node;
+            if (this._childNodes_d2zqq6$.isEmpty()) {
+              this.appendChild_sr04hg$(node);
+              return node;
+            }
+             else {
+              this.insertBefore_p937mc$(node, Kotlin.kotlin.collections.first_a7ptmv$(this._childNodes_d2zqq6$));
+              return node;
+            }
           },
           insertBefore_p937mc$: function (node, child) {
             var childIndex = this._childNodes_d2zqq6$.indexOf_za3rmp$(child);

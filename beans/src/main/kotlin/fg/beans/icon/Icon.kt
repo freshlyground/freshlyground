@@ -10,9 +10,9 @@ interface Icon {
 
 fun Icon?.apply(element: Element) {
 
+    element.removeClasses({ it.startsWith("fa") })
+
     if (this != null) {
         this.apply(element)
-    } else {
-        element.removeClasses()
     }
 }

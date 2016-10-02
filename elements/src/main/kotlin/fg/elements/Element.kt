@@ -117,6 +117,20 @@ open class Element(name: String? = null,
         }
     }
 
+    fun removeClasses(predicate: (String) -> Boolean) {
+
+        if (w3cElement.classList.length == 0) {
+            return
+        }
+
+        for (i in Math.max(0, w3cElement.classList.length - 1) downTo 0) {
+            val currClass = w3cElement.classList[i]!!
+            if (predicate(currClass)) {
+                w3cElement.classList.remove(currClass)
+            }
+        }
+    }
+
     fun toggleClass(name: String, force: Boolean = false) {
         w3cElement.classList.toggle(name, force)
     }

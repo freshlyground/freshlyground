@@ -23,8 +23,13 @@ open class Node(internal val w3cNode: org.w3c.dom.Node) {
         }
 
     fun prependChild(node: Node): Node {
-        insertBefore(node, _childNodes.first())
-        return node
+        if (_childNodes.isEmpty()) {
+            appendChild(node)
+            return node
+        } else {
+            insertBefore(node, _childNodes.first())
+            return node
+        }
     }
 
     fun insertBefore(node: Node, child: Node): Node {
