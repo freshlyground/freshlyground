@@ -55,35 +55,35 @@ this['docs-source'] = function (Kotlin, $module$elements, $module$beans) {
         f_10: function () {
           this.unaryPlus_pdl1w0$('Menu');
         },
-        f_11: function () {
+        f_11: function (it) {
         },
         f_12: function () {
         },
-        f_13: function () {
+        f_13: function (it) {
         },
         f_14: function () {
         },
         f_15: function () {
-          $module$beans.fg.beans.menuItem_mt53wc$(this, new $module$beans.fg.beans.SelectableAction('Menu Item 1', void 0, void 0, void 0, _.fg.docs.f_11), _.fg.docs.f_12);
-          $module$beans.fg.beans.menuItem_mt53wc$(this, new $module$beans.fg.beans.SelectableAction('Menu Item 2', void 0, void 0, void 0, _.fg.docs.f_13), _.fg.docs.f_14);
+          $module$beans.fg.beans.menuItem_mt53wc$(this, new $module$beans.fg.beans.SelectableAction('Menu Item 1', void 0, void 0, void 0, void 0, _.fg.docs.f_11), _.fg.docs.f_12);
+          $module$beans.fg.beans.menuItem_mt53wc$(this, new $module$beans.fg.beans.SelectableAction('Menu Item 2', void 0, void 0, void 0, void 0, _.fg.docs.f_13), _.fg.docs.f_14);
         },
         f_16: function () {
-          $module$beans.fg.beans.menu_u9dlqt$(this, _.fg.docs.f_15);
+          $module$beans.fg.beans.menu_wo0x8d$(this, void 0, _.fg.docs.f_15);
         },
         f_17: function () {
           this.unaryPlus_pdl1w0$('Button');
         },
-        f_18: function () {
+        f_18: function (it) {
         },
         f_19: function () {
         },
-        f_20: function () {
+        f_20: function (it) {
         },
         f_21: function () {
         },
         f_22: function () {
-          $module$beans.fg.beans.button_umrm8d$(this, new $module$beans.fg.beans.Action('Button 1', void 0, void 0, _.fg.docs.f_18), _.fg.docs.f_19);
-          $module$beans.fg.beans.button_umrm8d$(this, new $module$beans.fg.beans.Action(void 0, void 0, $module$beans.fg.beans.icon.FontAwesomeIcons.camera_retro_629h0h$(), _.fg.docs.f_20), _.fg.docs.f_21);
+          $module$beans.fg.beans.button_umrm8d$(this, new $module$beans.fg.beans.Action('Button 1', void 0, void 0, void 0, _.fg.docs.f_18), _.fg.docs.f_19);
+          $module$beans.fg.beans.button_umrm8d$(this, new $module$beans.fg.beans.Action(void 0, void 0, $module$beans.fg.beans.icon.FontAwesomeIcons.camera_retro_629h0h$(), void 0, _.fg.docs.f_20), _.fg.docs.f_21);
         },
         f_23: function () {
           this.unaryPlus_pdl1w0$('Resources');

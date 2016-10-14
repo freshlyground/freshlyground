@@ -1,0 +1,133 @@
+<HTML>
+<HEAD>
+<title>URL - elements</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">elements</a>&nbsp;/&nbsp;<a href="../index.html">fg.base</a>&nbsp;/&nbsp;<a href=".">URL</a><br/>
+<br/>
+<h1>URL</h1>
+<code><span class="keyword">class </span><span class="identifier">URL</span>&nbsp;<span class="symbol">:</span>&nbsp;<span class="identifier">Comparable</span><span class="symbol">&lt;</span><span class="identifier">URL</span><span class="symbol">&gt;</span></code>
+<h3>Types</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<a href="-query/index.html">Query</a></td>
+<td>
+<code><span class="keyword">data</span> <span class="keyword">class </span><span class="identifier">Query</span></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Constructors</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<a href="-init-.html">&lt;init&gt;</a></td>
+<td>
+<code><span class="identifier">URL</span><span class="symbol">(</span><span class="identifier" id="fg.base.URL$<init>(kotlin.String, kotlin.String, kotlin.String, fg.base.Path, fg.base.URL.Query, kotlin.String)/scheme">scheme</span><span class="symbol">:</span>&nbsp;<span class="identifier">String</span><span class="symbol">, </span><span class="identifier" id="fg.base.URL$<init>(kotlin.String, kotlin.String, kotlin.String, fg.base.Path, fg.base.URL.Query, kotlin.String)/host">host</span><span class="symbol">:</span>&nbsp;<span class="identifier">String</span><span class="symbol">, </span><span class="identifier" id="fg.base.URL$<init>(kotlin.String, kotlin.String, kotlin.String, fg.base.Path, fg.base.URL.Query, kotlin.String)/port">port</span><span class="symbol">:</span>&nbsp;<span class="identifier">String</span><span class="symbol">, </span><span class="identifier" id="fg.base.URL$<init>(kotlin.String, kotlin.String, kotlin.String, fg.base.Path, fg.base.URL.Query, kotlin.String)/path">path</span><span class="symbol">:</span>&nbsp;<a href="../-path/index.html"><span class="identifier">Path</span></a>&nbsp;<span class="symbol">=</span>&nbsp;Path.ROOT<span class="symbol">, </span><span class="identifier" id="fg.base.URL$<init>(kotlin.String, kotlin.String, kotlin.String, fg.base.Path, fg.base.URL.Query, kotlin.String)/query">query</span><span class="symbol">:</span>&nbsp;<a href="-query/index.html"><span class="identifier">Query</span></a>&nbsp;<span class="symbol">=</span>&nbsp;Query.NONE<span class="symbol">, </span><span class="identifier" id="fg.base.URL$<init>(kotlin.String, kotlin.String, kotlin.String, fg.base.Path, fg.base.URL.Query, kotlin.String)/fragment">fragment</span><span class="symbol">:</span>&nbsp;<span class="identifier">String</span>&nbsp;<span class="symbol">=</span>&nbsp;""<span class="symbol">)</span></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Properties</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<a href="fragment.html">fragment</a></td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">fragment</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="has-parent.html">hasParent</a></td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">hasParent</span><span class="symbol">: </span><span class="identifier">Boolean</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="host.html">host</a></td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">host</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="parent.html">parent</a></td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">parent</span><span class="symbol">: </span><span class="identifier">URL</span><span class="symbol">?</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="parents.html">parents</a></td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">parents</span><span class="symbol">: </span><span class="identifier">List</span><span class="symbol">&lt;</span><span class="identifier">URL</span><span class="symbol">&gt;</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="path.html">path</a></td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">path</span><span class="symbol">: </span><a href="../-path/index.html"><span class="identifier">Path</span></a></code></td>
+</tr>
+<tr>
+<td>
+<a href="port.html">port</a></td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">port</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="query.html">query</a></td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">query</span><span class="symbol">: </span><a href="-query/index.html"><span class="identifier">Query</span></a></code></td>
+</tr>
+<tr>
+<td>
+<a href="scheme.html">scheme</a></td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">scheme</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<a href="append.html">append</a></td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">append</span><span class="symbol">(</span><span class="identifier" id="fg.base.URL$append(fg.base.Path)/path">path</span><span class="symbol">:</span>&nbsp;<a href="../-path/index.html"><span class="identifier">Path</span></a><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">URL</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="compare-to.html">compareTo</a></td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">compareTo</span><span class="symbol">(</span><span class="identifier" id="fg.base.URL$compareTo(fg.base.URL)/other">other</span><span class="symbol">:</span>&nbsp;<span class="identifier">URL</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">Int</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="replace-param.html">replaceParam</a></td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">replaceParam</span><span class="symbol">(</span><span class="identifier" id="fg.base.URL$replaceParam(kotlin.String, kotlin.String)/name">name</span><span class="symbol">:</span>&nbsp;<span class="identifier">String</span><span class="symbol">, </span><span class="identifier" id="fg.base.URL$replaceParam(kotlin.String, kotlin.String)/value">value</span><span class="symbol">:</span>&nbsp;<span class="identifier">String</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">URL</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="to-string.html">toString</a></td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">toString</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">String</span></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Companion Object Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<a href="from.html">from</a></td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">from</span><span class="symbol">(</span><span class="identifier" id="fg.base.URL.Factory$from(kotlin.String)/asString">asString</span><span class="symbol">:</span>&nbsp;<span class="identifier">String</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">URL</span></code></td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

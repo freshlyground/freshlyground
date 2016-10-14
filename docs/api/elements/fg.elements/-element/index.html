@@ -24,9 +24,21 @@
 <tbody>
 <tr>
 <td>
+<a href="_id.html">_id</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">_id</span><span class="symbol">: </span><span class="identifier">String</span><span class="symbol">?</span></code></td>
+</tr>
+<tr>
+<td>
 <a href="_parent-element.html">_parentElement</a></td>
 <td>
 <code><span class="keyword">val </span><span class="identifier">_parentElement</span><span class="symbol">: </span><span class="identifier">Element</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="_tabindex.html">_tabindex</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">_tabindex</span><span class="symbol">: </span><span class="identifier">String</span><span class="symbol">?</span></code></td>
 </tr>
 <tr>
 <td>
@@ -129,6 +141,12 @@
 </tr>
 <tr>
 <td>
+<a href="../-node/rendered.html">rendered</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">rendered</span><span class="symbol">: </span><span class="identifier">Boolean</span></code></td>
+</tr>
+<tr>
+<td>
 <a href="../-node/text-content.html">textContent</a></td>
 <td>
 <code><span class="keyword">var </span><span class="identifier">textContent</span><span class="symbol">: </span><span class="identifier">String</span><span class="symbol">?</span></code></td>
@@ -171,7 +189,8 @@ Override when needed, but remember to call super.didMount().</p>
 <td>
 <a href="remove-classes.html">removeClasses</a></td>
 <td>
-<code><span class="keyword">fun </span><span class="identifier">removeClasses</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">Unit</span></code></td>
+<code><span class="keyword">fun </span><span class="identifier">removeClasses</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">Unit</span></code><br/>
+<code><span class="keyword">fun </span><span class="identifier">removeClasses</span><span class="symbol">(</span><span class="identifier" id="fg.elements.Element$removeClasses(kotlin.Function1((kotlin.String, kotlin.Boolean)))/predicate">predicate</span><span class="symbol">:</span>&nbsp;<span class="symbol">(</span><span class="identifier">String</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<span class="identifier">Boolean</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">Unit</span></code></td>
 </tr>
 <tr>
 <td>
@@ -193,6 +212,12 @@ Override when needed, but remember to call super.render().</p>
 <a href="toggle-class.html">toggleClass</a></td>
 <td>
 <code><span class="keyword">fun </span><span class="identifier">toggleClass</span><span class="symbol">(</span><span class="identifier" id="fg.elements.Element$toggleClass(kotlin.String, kotlin.Boolean)/name">name</span><span class="symbol">:</span>&nbsp;<span class="identifier">String</span><span class="symbol">, </span><span class="identifier" id="fg.elements.Element$toggleClass(kotlin.String, kotlin.Boolean)/force">force</span><span class="symbol">:</span>&nbsp;<span class="identifier">Boolean</span>&nbsp;<span class="symbol">=</span>&nbsp;false<span class="symbol">)</span><span class="symbol">: </span><span class="identifier">Unit</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="traverse-elements.html">traverseElements</a></td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">traverseElements</span><span class="symbol">(</span><span class="identifier" id="fg.elements.Element$traverseElements(kotlin.Function1((fg.elements.Element, kotlin.Boolean)))/each">each</span><span class="symbol">:</span>&nbsp;<span class="symbol">(</span><span class="identifier">Element</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<span class="identifier">Boolean</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">Unit</span></code></td>
 </tr>
 <tr>
 <td>
@@ -221,6 +246,21 @@ Override when needed, but remember to call super.render().</p>
 </tr>
 <tr>
 <td>
+<a href="../-node/child-added.html">childAdded</a></td>
+<td>
+<code><span class="keyword">open</span> <span class="keyword">fun </span><span class="identifier">childAdded</span><span class="symbol">(</span><span class="identifier" id="fg.elements.Node$childAdded(fg.elements.Node)/child">child</span><span class="symbol">:</span>&nbsp;<a href="../-node/index.html"><span class="identifier">Node</span></a><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">Unit</span></code>
+<p>This function will be called after given child has been added to this element.
+Override this function when needed.</p>
+</td>
+</tr>
+<tr>
+<td>
+<a href="../-node/has-child.html">hasChild</a></td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">hasChild</span><span class="symbol">(</span><span class="identifier" id="fg.elements.Node$hasChild(fg.elements.Node)/child">child</span><span class="symbol">:</span>&nbsp;<a href="../-node/index.html"><span class="identifier">Node</span></a><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">Boolean</span></code></td>
+</tr>
+<tr>
+<td>
 <a href="../-node/insert-before.html">insertBefore</a></td>
 <td>
 <code><span class="keyword">fun </span><span class="identifier">insertBefore</span><span class="symbol">(</span><span class="identifier" id="fg.elements.Node$insertBefore(fg.elements.Node, fg.elements.Node)/node">node</span><span class="symbol">:</span>&nbsp;<a href="../-node/index.html"><span class="identifier">Node</span></a><span class="symbol">, </span><span class="identifier" id="fg.elements.Node$insertBefore(fg.elements.Node, fg.elements.Node)/child">child</span><span class="symbol">:</span>&nbsp;<a href="../-node/index.html"><span class="identifier">Node</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="../-node/index.html"><span class="identifier">Node</span></a></code></td>
@@ -242,6 +282,23 @@ Override when needed, but remember to call super.render().</p>
 <a href="../-node/remove-children.html">removeChildren</a></td>
 <td>
 <code><span class="keyword">fun </span><span class="identifier">removeChildren</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">Unit</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="../-node/remove-self.html">removeSelf</a></td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">removeSelf</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">Unit</span></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Extension Properties</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<a href="../computed-style.html">computedStyle</a></td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">Element</span><span class="symbol">.</span><span class="identifier">computedStyle</span><span class="symbol">: </span><span class="identifier">CSSStyleDeclaration</span></code></td>
 </tr>
 </tbody>
 </table>
@@ -420,19 +477,19 @@ Override when needed, but remember to call super.render().</p>
 <td>
 <a href="../on-key-down.html">onKeyDown</a></td>
 <td>
-<code><span class="keyword">fun </span><span class="identifier">Element</span><span class="symbol">.</span><span class="identifier">onKeyDown</span><span class="symbol">(</span><span class="identifier" id="fg.elements$onKeyDown(fg.elements.Element, kotlin.Function1((org.w3c.dom.events.Event, kotlin.Unit)))/listener">listener</span><span class="symbol">:</span>&nbsp;<span class="symbol">(</span><span class="identifier">Event</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<span class="identifier">Unit</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">Unit</span></code></td>
+<code><span class="keyword">fun </span><span class="identifier">Element</span><span class="symbol">.</span><span class="identifier">onKeyDown</span><span class="symbol">(</span><span class="identifier" id="fg.elements$onKeyDown(fg.elements.Element, kotlin.Function1((, kotlin.Unit)))/listener">listener</span><span class="symbol">:</span>&nbsp;<span class="symbol">(</span><span class="identifier">&lt;ERROR CLASS&gt;</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<span class="identifier">Unit</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">Unit</span></code></td>
 </tr>
 <tr>
 <td>
 <a href="../on-key-press.html">onKeyPress</a></td>
 <td>
-<code><span class="keyword">fun </span><span class="identifier">Element</span><span class="symbol">.</span><span class="identifier">onKeyPress</span><span class="symbol">(</span><span class="identifier" id="fg.elements$onKeyPress(fg.elements.Element, kotlin.Function1((org.w3c.dom.events.Event, kotlin.Unit)))/listener">listener</span><span class="symbol">:</span>&nbsp;<span class="symbol">(</span><span class="identifier">Event</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<span class="identifier">Unit</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">Unit</span></code></td>
+<code><span class="keyword">fun </span><span class="identifier">Element</span><span class="symbol">.</span><span class="identifier">onKeyPress</span><span class="symbol">(</span><span class="identifier" id="fg.elements$onKeyPress(fg.elements.Element, kotlin.Function1((, kotlin.Unit)))/listener">listener</span><span class="symbol">:</span>&nbsp;<span class="symbol">(</span><span class="identifier">&lt;ERROR CLASS&gt;</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<span class="identifier">Unit</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">Unit</span></code></td>
 </tr>
 <tr>
 <td>
 <a href="../on-key-up.html">onKeyUp</a></td>
 <td>
-<code><span class="keyword">fun </span><span class="identifier">Element</span><span class="symbol">.</span><span class="identifier">onKeyUp</span><span class="symbol">(</span><span class="identifier" id="fg.elements$onKeyUp(fg.elements.Element, kotlin.Function1((org.w3c.dom.events.Event, kotlin.Unit)))/listener">listener</span><span class="symbol">:</span>&nbsp;<span class="symbol">(</span><span class="identifier">Event</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<span class="identifier">Unit</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">Unit</span></code></td>
+<code><span class="keyword">fun </span><span class="identifier">Element</span><span class="symbol">.</span><span class="identifier">onKeyUp</span><span class="symbol">(</span><span class="identifier" id="fg.elements$onKeyUp(fg.elements.Element, kotlin.Function1((, kotlin.Unit)))/listener">listener</span><span class="symbol">:</span>&nbsp;<span class="symbol">(</span><span class="identifier">&lt;ERROR CLASS&gt;</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<span class="identifier">Unit</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">Unit</span></code></td>
 </tr>
 <tr>
 <td>
@@ -588,19 +645,19 @@ Override when needed, but remember to call super.render().</p>
 <td>
 <a href="../un-key-down.html">unKeyDown</a></td>
 <td>
-<code><span class="keyword">fun </span><span class="identifier">Element</span><span class="symbol">.</span><span class="identifier">unKeyDown</span><span class="symbol">(</span><span class="identifier" id="fg.elements$unKeyDown(fg.elements.Element, kotlin.Function1((org.w3c.dom.events.Event, kotlin.Unit)))/listener">listener</span><span class="symbol">:</span>&nbsp;<span class="symbol">(</span><span class="identifier">Event</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<span class="identifier">Unit</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">Unit</span></code></td>
+<code><span class="keyword">fun </span><span class="identifier">Element</span><span class="symbol">.</span><span class="identifier">unKeyDown</span><span class="symbol">(</span><span class="identifier" id="fg.elements$unKeyDown(fg.elements.Element, kotlin.Function1((, kotlin.Unit)))/listener">listener</span><span class="symbol">:</span>&nbsp;<span class="symbol">(</span><span class="identifier">&lt;ERROR CLASS&gt;</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<span class="identifier">Unit</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">Unit</span></code></td>
 </tr>
 <tr>
 <td>
 <a href="../un-key-press.html">unKeyPress</a></td>
 <td>
-<code><span class="keyword">fun </span><span class="identifier">Element</span><span class="symbol">.</span><span class="identifier">unKeyPress</span><span class="symbol">(</span><span class="identifier" id="fg.elements$unKeyPress(fg.elements.Element, kotlin.Function1((org.w3c.dom.events.Event, kotlin.Unit)))/listener">listener</span><span class="symbol">:</span>&nbsp;<span class="symbol">(</span><span class="identifier">Event</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<span class="identifier">Unit</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">Unit</span></code></td>
+<code><span class="keyword">fun </span><span class="identifier">Element</span><span class="symbol">.</span><span class="identifier">unKeyPress</span><span class="symbol">(</span><span class="identifier" id="fg.elements$unKeyPress(fg.elements.Element, kotlin.Function1((, kotlin.Unit)))/listener">listener</span><span class="symbol">:</span>&nbsp;<span class="symbol">(</span><span class="identifier">&lt;ERROR CLASS&gt;</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<span class="identifier">Unit</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">Unit</span></code></td>
 </tr>
 <tr>
 <td>
 <a href="../un-key-up.html">unKeyUp</a></td>
 <td>
-<code><span class="keyword">fun </span><span class="identifier">Element</span><span class="symbol">.</span><span class="identifier">unKeyUp</span><span class="symbol">(</span><span class="identifier" id="fg.elements$unKeyUp(fg.elements.Element, kotlin.Function1((org.w3c.dom.events.Event, kotlin.Unit)))/listener">listener</span><span class="symbol">:</span>&nbsp;<span class="symbol">(</span><span class="identifier">Event</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<span class="identifier">Unit</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">Unit</span></code></td>
+<code><span class="keyword">fun </span><span class="identifier">Element</span><span class="symbol">.</span><span class="identifier">unKeyUp</span><span class="symbol">(</span><span class="identifier" id="fg.elements$unKeyUp(fg.elements.Element, kotlin.Function1((, kotlin.Unit)))/listener">listener</span><span class="symbol">:</span>&nbsp;<span class="symbol">(</span><span class="identifier">&lt;ERROR CLASS&gt;</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<span class="identifier">Unit</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">Unit</span></code></td>
 </tr>
 <tr>
 <td>
@@ -812,6 +869,12 @@ Override when needed, but remember to call super.render().</p>
 <code><span class="keyword">abstract</span> <span class="keyword">class </span><span class="identifier">Input</span>&nbsp;<span class="symbol">:</span>&nbsp;<span class="identifier">Element</span></code>
 <p>https://www.w3.org/TR/html5/forms.html#the-input-element</p>
 </td>
+</tr>
+<tr>
+<td>
+<a href="../-label/index.html">Label</a></td>
+<td>
+<code><span class="keyword">open</span> <span class="keyword">class </span><span class="identifier">Label</span>&nbsp;<span class="symbol">:</span>&nbsp;<span class="identifier">Element</span></code></td>
 </tr>
 <tr>
 <td>

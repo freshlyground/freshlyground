@@ -1,8 +1,8 @@
 package fg.md
 
+import fg.base.Side
 import fg.beans.Action
 import fg.beans.button
-import fg.beans.drawer.Drawer
 import fg.elements.BODY
 import fg.elements.ClassSelector
 import fg.elements.HTML
@@ -22,7 +22,7 @@ fun main(vararg args: String) {
     BODY with {
         style.backgroundColor = "#ededed"
 
-        val leftDrawer = mdDrawer(Drawer.Side.LEFT) {
+        val leftDrawer = mdDrawer(Side.LEFT) {
             hide()
             style.width = "250px"
 
@@ -57,7 +57,7 @@ fun main(vararg args: String) {
             hr {}
             button(hideDrawerAction) {}
         }
-        val rightDrawer = mdDrawer(Drawer.Side.RIGHT) {
+        val rightDrawer = mdDrawer(Side.RIGHT) {
             hide()
             style.width = "250px"
 

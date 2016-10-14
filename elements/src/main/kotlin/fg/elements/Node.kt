@@ -7,6 +7,9 @@ open class Node(internal val w3cNode: org.w3c.dom.Node) {
     private val _childNodes: MutableList<Node> = arrayListOf()
     private val _childrenMountInstructions: MutableList<Pair<(Node) -> Unit, Node>> = arrayListOf()
 
+    var rendered: Boolean = false
+        private set
+
     internal var _parentNode: Node? = null
     val _nodeName: String get() = w3cNode.nodeName
 
@@ -18,9 +21,15 @@ open class Node(internal val w3cNode: org.w3c.dom.Node) {
         get() = w3cNode.textContent
         set(value) {
             removeChildren()
-            w3cNode.textContent = value
-            _childNodes.addAll(parseChildrenFromDOM())
+            if (value != null) {
+                w3cNode.textContent = value
+                _childNodes.addAll(parseChildrenFromDOM())
+            }
         }
+
+    fun hasChild(child: Node): Boolean {
+        return _childNodes.contains(child)
+    }
 
     fun prependChild(node: Node): Node {
         if (_childNodes.isEmpty()) {
@@ -34,6 +43,10 @@ open class Node(internal val w3cNode: org.w3c.dom.Node) {
 
     fun insertBefore(node: Node, child: Node): Node {
 
+        if (node._parentNode != null) {
+            throw IllegalStateException("Node cannot be added. It's already added. Please remove it first.")
+        }
+
         val childIndex = _childNodes.indexOf(child)
         if (childIndex == -1) {
             throw IllegalArgumentException("reference ${child.w3cNode.nodeName} is expected as child")
@@ -41,8 +54,9 @@ open class Node(internal val w3cNode: org.w3c.dom.Node) {
 
         node._parentNode = this
 
-        if (node is Element) {
+        if (node is Element && !rendered) {
             node.render()
+            node.rendered = true
             node.renderChildren()
         }
 
@@ -54,16 +68,22 @@ open class Node(internal val w3cNode: org.w3c.dom.Node) {
         }
 
         _childNodes.add(childIndex, node)
+        childAdded(node)
 
         return node
     }
 
     fun appendChild(node: Node): Node {
 
+        if (node._parentNode != null) {
+            throw IllegalStateException("Node cannot be added. It's already added. Please remove it first.")
+        }
+
         node._parentNode = this
 
-        if (node is Element) {
+        if (node is Element && !rendered) {
             node.render()
+            node.rendered = true
             node.renderChildren()
         }
 
@@ -75,6 +95,7 @@ open class Node(internal val w3cNode: org.w3c.dom.Node) {
         }
 
         _childNodes.add(node)
+        childAdded(node)
 
         return node
     }
@@ -96,8 +117,9 @@ open class Node(internal val w3cNode: org.w3c.dom.Node) {
     internal fun renderChildren() {
 
         for (child in _childNodes) {
-            if (child is Element) {
+            if (child is Element && !rendered) {
                 child.render()
+                child.rendered = true
             }
             child.renderChildren()
         }
@@ -137,5 +159,19 @@ open class Node(internal val w3cNode: org.w3c.dom.Node) {
             this.w3cNode.removeChild(node.w3cNode)
         }
         _childNodes.remove(node)
+        node._parentNode = null
     }
+
+    fun removeSelf() {
+        _parentNode?.removeChild(this)
+    }
+
+    /**
+     * This function will be called after given child has been added to this element.
+     * Override this function when needed.
+     */
+    open fun childAdded(child: Node) {
+
+    }
+
 }

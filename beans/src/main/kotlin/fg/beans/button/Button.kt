@@ -1,238 +1,87 @@
 package fg.beans.button
 
 import fg.beans.Action
-import fg.beans.icon.Icon
-import fg.beans.icon.IconI
-import fg.elements.Button
+import fg.beans.ElementStyle
+import fg.beans.pkg
+import fg.elements.Dimension
 import fg.elements.HTML
-import fg.elements.Span
+import fg.elements.Pixels
 import fg.elements.StyledClass
-import fg.elements.onBlur
-import fg.elements.onClick
-import fg.elements.onFocus
-import fg.elements.onMouseDown
-import fg.elements.onMouseEnter
-import fg.elements.onMouseLeave
-import fg.elements.onMouseUp
 import fg.elements.toClassSelector
-import fg.elements.unBlur
-import fg.elements.unFocus
-import fg.elements.unMouseDown
-import fg.elements.unMouseEnter
-import fg.elements.unMouseLeave
-import fg.elements.unMouseUp
 import fg.style.ClassRule
 import fg.style.and
+import fg.style.colour.RgbColor
+import fg.style.focus
 import fg.style.hover
-import org.w3c.dom.events.Event
-import org.w3c.dom.events.MouseEvent
-import kotlin.reflect.KProperty
 
-open class Button(action: Action) : Button() {
-
-    val action: Action = action
-
-    var hovered: Boolean = false
-        private set
-    var focused: Boolean = false
-        private set
-    var pressed: Boolean = false
-        private set
-
-    protected val label: Span by lazy {
-        val span = Span()
-        span.hide()
-        span
-    }
-
-    protected val icon: IconI by lazy {
-        val iconI = IconI(this.action.icon)
-        iconI.hide()
-        iconI
-    }
-
-    private val clickHandler: (Event) -> Unit = {
-
-        this.action.perform()
-    }
-
-    private val actionPropertyChangedHandler: (action: Action, property: KProperty<*>, old: Any?, new: Any?) -> Unit = {
-        action: Action, property: KProperty<*>, old: Any?, new: Any? ->
-
-        when (property.name) {
-            Action::label.name -> {
-                renderLabel(action.label)
-            }
-            Action::icon.name -> {
-                renderIcon(action.icon)
-            }
-            Action::enabled.name -> {
-
-                renderDisabled(action.disabled)
-                if (action.enabled) {
-                    onEnabled()
-                } else {
-                    onDisabled()
-                }
-            }
-        }
-    }
-
-    private val mouseEnterHandler: (event: MouseEvent) -> Unit = {
-
-        hovered = true
-        toggleClass("hovered", true)
-        onHover()
-    }
-
-    private val mouseLeaveHandler: (event: MouseEvent) -> Unit = {
-
-        hovered = false
-        toggleClass("hovered")
-        unHover()
-    }
-
-    private val focusHandler: (event: Event) -> Unit = {
-
-        focused = true
-        toggleClass("focused", true)
-        onFocus()
-    }
-
-    private val blurHandler: (event: Event) -> Unit = {
-
-        focused = false
-        toggleClass("focused")
-        unFocus()
-    }
-
-    private val mouseDownHandler: (MouseEvent) -> Unit = { event ->
-
-        if (action.enabled) {
-            pressed = true
-            toggleClass("pressed", true)
-            onPressed()
-        }
-    }
-
-    private val mouseUpHandler: (Event) -> Unit = { event ->
-
-        pressed = false
-        toggleClass("pressed")
-        unPressed()
-    }
-
-    open protected fun onHover() {
-
-    }
-
-    open protected fun unHover() {
-
-    }
-
-    open protected fun onFocus() {
-
-    }
-
-    open protected fun unFocus() {
-
-    }
-
-    open protected fun onPressed() {
-
-    }
-
-    open protected fun unPressed() {
-
-    }
-
-    open protected fun onEnabled() {
-
-    }
-
-    open protected fun onDisabled() {
-
-    }
+open class Button(action: Action) : AbstractButton(action) {
 
     override fun render() {
         super.render()
 
         addClass(classSelector)
-
-        appendChild(icon)
-        appendChild(label)
-
-        renderIcon(action.icon)
-        renderLabel(action.label)
-        renderDisabled(action.disabled)
     }
 
-    override fun didMount() {
-        super.didMount()
+    object ButtonStyle : ElementStyle() {
 
-        action.onPropertyChanged(actionPropertyChangedHandler)
-        onClick(clickHandler)
+        override var margin: String? = "0"
 
-        onMouseEnter(mouseEnterHandler)
-        onMouseLeave(mouseLeaveHandler)
-        onFocus(focusHandler)
-        onBlur(blurHandler)
+        override var backgroundColor: RgbColor? = RgbColor.WHITE
 
-        onMouseDown(mouseDownHandler)
-        onMouseUp(mouseUpHandler)
-    }
+        override var borderStyle: String? = "outset"
+        override var borderWidth: Dimension? = Pixels(1.0)
+        override var borderColor: RgbColor? = RgbColor.from("#e4e4e4")
+        override var borderRadius: Dimension? = Pixels(4.0)
 
-    override fun willUnMount() {
-        super.willUnMount()
+        override var boxShadow: String? = "none"
 
-        unMouseEnter(mouseEnterHandler)
-        unMouseLeave(mouseLeaveHandler)
-        unFocus(focusHandler)
-        unBlur(blurHandler)
-        unMouseDown(mouseDownHandler)
-        unMouseUp(mouseUpHandler)
-    }
-
-    private fun renderLabel(labelText: String?) {
-        if (labelText != null) {
-            this.label.textContent = labelText
-            this.label.show()
-        } else {
-            this.label.hide()
+        var hovered: ElementStyle? = object : ElementStyle() {
+            override var cursor: String? = "pointer"
         }
-    }
 
-    private fun renderIcon(icon: Icon?) {
-        if (icon == null) {
-            this.icon.hide()
-        } else {
-            icon.apply(this.icon)
-            this.icon.show()
+        var disabled: ElementStyle? = object : ElementStyle() {
+            override var cursor: String? = "not-allowed"
         }
-    }
 
-    private fun renderDisabled(disabled: Boolean) {
-        if (disabled) {
-            toggleClass(DISABLED.value, true)
-            _disabled = true
-        } else {
-            toggleClass(DISABLED.value)
-            _disabled = false
+        var pressed: ElementStyle? = object : ElementStyle() {
+            override var backgroundColor: RgbColor? = RgbColor(118, 178, 240)
+        }
+
+        var focused: ElementStyle? = object : ElementStyle() {
+            override var outline: String? = "none"
+            override var borderColor: RgbColor? = RgbColor(144, 191, 240)
         }
     }
 
     companion object Button : StyledClass {
 
-        override val classSelector = "button".toClassSelector()
-        val DISABLED = "disabled".toClassSelector()
+        override val classSelector = "$pkg-button".toClassSelector()
 
         override val rule: ClassRule.() -> Unit = {
 
+            margin = ButtonStyle.margin
+
+            borderStyle = ButtonStyle.borderStyle
+            borderWidth = ButtonStyle.borderWidth?.toString()
+            borderColor = ButtonStyle.borderColor?.toString()
+            borderRadius = ButtonStyle.borderRadius?.toString()
+            backgroundColor = ButtonStyle.backgroundColor?.toString()
+            boxShadow = ButtonStyle.boxShadow
+
             hover {
-                cursor = "pointer"
+                cursor = ButtonStyle.hovered?.cursor
                 and(DISABLED) {
-                    cursor = "not-allowed"
+                    cursor = ButtonStyle.disabled?.cursor
                 }
+            }
+
+            focus {
+                borderColor = ButtonStyle.focused?.borderColor?.toString()
+                outline = ButtonStyle.focused?.outline
+            }
+
+            and(".pressed") {
+                backgroundColor = ButtonStyle.pressed?.backgroundColor?.toString()
             }
         }
 

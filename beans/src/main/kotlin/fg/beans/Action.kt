@@ -1,15 +1,18 @@
 package fg.beans
 
 import fg.beans.icon.Icon
+import fg.elements.Element
+import fg.keyboard.Key
 import kotlin.properties.Delegates
 import kotlin.reflect.KProperty
 
 open class Action(label: String? = null,
                   enabled: Boolean = true,
                   icon: Icon? = null,
-                  perform: () -> Unit) {
+                  shortcut: Key? = null,
+                  perform: (ActionPerform) -> Unit) {
 
-    private val perform: () -> Unit = perform
+    private val _perform: (ActionPerform) -> Unit = perform
 
     var label: String? by Delegates.observable(label) { prop, old, new ->
         notifyPropertyChanged(prop, old, new)
@@ -24,7 +27,11 @@ open class Action(label: String? = null,
         notifyPropertyChanged(prop, old, new)
     }
 
-    private val propertyChangedListeners: MutableList<(action: Action,
+    var shortcut: Key? by Delegates.observable(shortcut) { prop, old, new ->
+        notifyPropertyChanged(prop, old, new)
+    }
+
+    protected val propertyChangedListeners: MutableList<(action: Action,
                                                        property: KProperty<*>,
                                                        old: Any?, new: Any?) -> Unit> = arrayListOf()
 
@@ -32,17 +39,17 @@ open class Action(label: String? = null,
         for (listener in propertyChangedListeners) listener(this, property, old, new)
     }
 
-    fun onPropertyChanged(listener: (action: Action, property: KProperty<*>, old: Any?, new: Any?) -> Unit) {
+    open fun onPropertyChanged(listener: (action: Action, property: KProperty<*>, old: Any?, new: Any?) -> Unit) {
         propertyChangedListeners.add(listener)
     }
 
-    fun unPropertyChanged(listener: (action: Action, property: KProperty<*>, old: Any?, new: Any?) -> Unit) {
+    open fun unPropertyChanged(listener: (action: Action, property: KProperty<*>, old: Any?, new: Any?) -> Unit) {
         propertyChangedListeners.remove(listener)
     }
 
-    fun perform() {
+    fun perform(source: Element) {
         if (enabled) {
-            this.perform.invoke()
+            this._perform.invoke(ActionPerform(this, source))
         }
     }
 }

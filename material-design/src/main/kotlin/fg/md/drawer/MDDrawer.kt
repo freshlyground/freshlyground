@@ -1,5 +1,6 @@
 package fg.md.drawer
 
+import fg.base.Side
 import fg.beans.drawer.Drawer
 import fg.elements.HTML
 import fg.elements.StyledClass

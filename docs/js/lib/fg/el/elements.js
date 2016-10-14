@@ -5,6 +5,451 @@ var elements = function (Kotlin) {
       base: Kotlin.definePackage(function () {
         this.HEX_CHARS_z2qdg7$ = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f'];
       }, /** @lends _.fg.base */ {
+        CompareTo: Kotlin.createObject(null, function CompareTo() {
+        }, /** @lends _.fg.base.CompareTo.prototype */ {
+          nullSafe_wn2jw4$: function (obj1, obj2) {
+            var tmp$0;
+            if (obj1 != null && obj2 != null) {
+              if (Kotlin.isComparable(obj1) && Kotlin.isComparable(obj2)) {
+                Kotlin.isComparable(tmp$0 = obj1) ? tmp$0 : Kotlin.throwCCE();
+                return Kotlin.compareTo(obj1, obj2);
+              }
+               else {
+                return Kotlin.compareTo(obj1.toString(), obj2.toString());
+              }
+            }
+             else if (obj1 == null && obj2 != null) {
+              return -1;
+            }
+             else {
+              return 1;
+            }
+          },
+          nullSafe_puj7f4$: function (obj1, obj2) {
+            if (obj1 != null && obj2 != null) {
+              return Kotlin.compareTo(obj1, obj2);
+            }
+             else if (obj1 == null && obj2 != null) {
+              return -1;
+            }
+             else {
+              return 1;
+            }
+          },
+          nullSafe_vux9f0$: function (obj1, obj2) {
+            if (obj1 != null && obj2 != null) {
+              return Kotlin.primitiveCompareTo(obj1, obj2);
+            }
+             else if (obj1 == null && obj2 != null) {
+              return -1;
+            }
+             else {
+              return 1;
+            }
+          },
+          nullSafe_lu1900$: function (obj1, obj2) {
+            if (obj1 != null && obj2 != null) {
+              return Kotlin.primitiveCompareTo(obj1, obj2);
+            }
+             else if (obj1 == null && obj2 != null) {
+              return -1;
+            }
+             else {
+              return 1;
+            }
+          }
+        }),
+        OS: Kotlin.createEnumClass(function () {
+          return [Kotlin.Enum];
+        }, function OS() {
+          OS.baseInitializer.call(this);
+        }, function () {
+          return {
+            WINDOWS: function () {
+              return new _.fg.base.OS();
+            },
+            MAC: function () {
+              return new _.fg.base.OS();
+            },
+            LINUX: function () {
+              return new _.fg.base.OS();
+            },
+            UNIX: function () {
+              return new _.fg.base.OS();
+            },
+            UNKNOWN: function () {
+              return new _.fg.base.OS();
+            }
+          };
+        }),
+        OSDetector: Kotlin.createObject(null, function OSDetector() {
+          this.detected$delegate = Kotlin.kotlin.lazy_un3fny$(_.fg.base.OSDetector.detected$f(this));
+        }, /** @lends _.fg.base.OSDetector.prototype */ {
+          detected: {
+            get: function () {
+              return Kotlin.kotlin.getValue_em0fd4$(this.detected$delegate, this, new Kotlin.PropertyMetadata('detected'));
+            }
+          },
+          detect: function () {
+            var navigator = window.navigator;
+            if (Kotlin.kotlin.text.contains_kzp0od$(navigator.appVersion, 'Win')) {
+              return _.fg.base.OS.WINDOWS;
+            }
+             else if (Kotlin.kotlin.text.contains_kzp0od$(navigator.appVersion, 'Mac')) {
+              return _.fg.base.OS.MAC;
+            }
+             else if (Kotlin.kotlin.text.contains_kzp0od$(navigator.appVersion, 'X11')) {
+              return _.fg.base.OS.UNIX;
+            }
+             else if (Kotlin.kotlin.text.contains_kzp0od$(navigator.appVersion, 'Linux')) {
+              return _.fg.base.OS.LINUX;
+            }
+             else {
+              return _.fg.base.OS.UNKNOWN;
+            }
+          }
+        }, /** @lends _.fg.base.OSDetector */ {
+          detected$f: function (this$OSDetector) {
+            return function () {
+              return this$OSDetector.detect();
+            };
+          }
+        }),
+        Path: Kotlin.createClass(function () {
+          return [Kotlin.Comparable];
+        }, function Path(absolute, trailingSlash, elements) {
+          this.absolute = absolute;
+          this.trailingSlash = trailingSlash;
+          this.elements = elements;
+          var string = Kotlin.kotlin.collections.joinToString_ld60a2$(this.elements, '/', void 0, void 0, void 0, void 0, _.fg.base.Path.Path$f);
+          if (this.absolute) {
+            string = '/' + string;
+          }
+          if (this.trailingSlash) {
+            string += '/';
+          }
+          this.asString_abe3dw$ = string;
+        }, /** @lends _.fg.base.Path.prototype */ {
+          append_usdzdh$: function (other) {
+            var elements = Kotlin.kotlin.collections.toMutableList_mwto7b$(this.elements);
+            elements.addAll_wtfk93$(other.elements);
+            return new _.fg.base.Path(this.absolute, other.trailingSlash, elements);
+          },
+          subPathAfter_usdzdh$: function (other) {
+            var tmp$0;
+            var fromIndex = 0;
+            tmp$0 = Kotlin.kotlin.collections.get_lastIndex_a7ptmv$(this.elements);
+            for (var i = 0; i <= tmp$0; i++) {
+              if (i >= other.size) {
+                fromIndex = i;
+                break;
+              }
+              if (!this.elements.get_za3lpa$(i).equals_za3rmp$(other.getElement_za3lpa$(i))) {
+                fromIndex = i + 1;
+              }
+            }
+            var elementsAfter = this.elements.subList_vux9f0$(fromIndex, this.elements.size);
+            return new _.fg.base.Path(this.absolute, this.trailingSlash, elementsAfter);
+          },
+          size: {
+            get: function () {
+              return this.elements.size;
+            }
+          },
+          hasParent: {
+            get: function () {
+              return this.elements.size > 1;
+            }
+          },
+          parent: {
+            get: function () {
+              if (this.elements.size === 1) {
+                throw new Kotlin.IllegalArgumentException('Path as not parent');
+              }
+              return new _.fg.base.Path(this.absolute, this.trailingSlash, this.elements.subList_vux9f0$(0, Kotlin.kotlin.collections.get_lastIndex_a7ptmv$(this.elements) - 1));
+            }
+          },
+          parents: {
+            get: function () {
+              var parents = Kotlin.kotlin.collections.arrayListOf_9mqe4v$([]);
+              var parent = this.hasParent ? this.parent : null;
+              while (parent != null) {
+                parents.add_za3rmp$(parent);
+                parent = parent.hasParent ? parent.parent : null;
+              }
+              return Kotlin.kotlin.collections.reversed_q5oq31$(parents);
+            }
+          },
+          getElement_za3lpa$: function (index) {
+            return this.elements.get_za3lpa$(index);
+          },
+          compareTo_za3rmp$: function (other) {
+            return Kotlin.compareTo(this.asString_abe3dw$, other.asString_abe3dw$);
+          },
+          toString: function () {
+            return this.asString_abe3dw$;
+          },
+          equals_za3rmp$: function (other) {
+            if (this === other)
+              return true;
+            if (!Kotlin.isType(other, _.fg.base.Path))
+              return false;
+            if (!Kotlin.equals(this.absolute, other.absolute))
+              return false;
+            if (!Kotlin.equals(this.trailingSlash, other.trailingSlash))
+              return false;
+            if (!Kotlin.equals(this.elements, other.elements))
+              return false;
+            return true;
+          },
+          hashCode: function () {
+            var result = Kotlin.hashCode(this.absolute);
+            result += 31 * result + Kotlin.hashCode(this.trailingSlash);
+            result += 31 * result + Kotlin.hashCode(this.elements);
+            return result;
+          }
+        }, /** @lends _.fg.base.Path */ {
+          Factory: Kotlin.createObject(null, function Factory() {
+            _.fg.base.Path.Factory.ROOT = new _.fg.base.Path(true, false, Kotlin.kotlin.collections.emptyList());
+          }, /** @lends _.fg.base.Path.Factory.prototype */ {
+            from_61zpoe$: function (string) {
+              var tmp$0;
+              var absolute = Kotlin.kotlin.text.startsWith_41xvrb$(string, '/');
+              var trailingSlash = Kotlin.kotlin.text.endsWith_41xvrb$(string, '/');
+              var elementsAsString = Kotlin.kotlin.text.split_l2gz7$(string, ['/']);
+              var elements = Kotlin.kotlin.collections.arrayListOf_9mqe4v$([]);
+              tmp$0 = elementsAsString.iterator();
+              while (tmp$0.hasNext()) {
+                var elementAsString = tmp$0.next();
+                if (!Kotlin.kotlin.text.isBlank_gw00vq$(elementAsString)) {
+                  elements.add_za3rmp$(new _.fg.base.Path.Element(elementAsString));
+                }
+              }
+              return new _.fg.base.Path(absolute, trailingSlash, elements);
+            }
+          }),
+          object_initializer$: function () {
+            _.fg.base.Path.Factory;
+          },
+          Element: Kotlin.createClass(null, function Element(value) {
+            this.value = value;
+            if (Kotlin.kotlin.text.isBlank_gw00vq$(this.value)) {
+              throw new Kotlin.IllegalArgumentException('An Element cannot be blank');
+            }
+          }, /** @lends _.fg.base.Path.Element.prototype */ {
+            matches_wgf8sj$: function (other) {
+              return Kotlin.kotlin.text.equals_41xvrb$(other.value, other.value, true);
+            },
+            equals_za3rmp$: function (other) {
+              if (this === other)
+                return true;
+              if (!Kotlin.isType(other, _.fg.base.Path.Element))
+                return false;
+              if (!Kotlin.equals(this.value, other.value))
+                return false;
+              return true;
+            },
+            hashCode: function () {
+              return Kotlin.hashCode(this.value);
+            },
+            toString: function () {
+              return this.value;
+            }
+          }),
+          Path$f: function (it) {
+            return it.toString();
+          }
+        }),
+        URL: Kotlin.createClass(function () {
+          return [Kotlin.Comparable];
+        }, function URL(scheme, host, port, path, query, fragment) {
+          if (path === void 0)
+            path = _.fg.base.Path.Factory.ROOT;
+          if (query === void 0)
+            query = _.fg.base.URL.Query.Factory.NONE;
+          if (fragment === void 0)
+            fragment = '';
+          this.scheme = scheme;
+          this.host = host;
+          this.port = port;
+          this.path = path;
+          this.query = query;
+          this.fragment = fragment;
+        }, /** @lends _.fg.base.URL.prototype */ {
+          parents: {
+            get: function () {
+              var parents = Kotlin.kotlin.collections.arrayListOf_9mqe4v$([]);
+              var parent = this.parent;
+              while (parent != null) {
+                parents.add_za3rmp$(parent);
+                parent = parent.parent;
+              }
+              return Kotlin.kotlin.collections.reversed_q5oq31$(parents);
+            }
+          },
+          parent: {
+            get: function () {
+              if (!this.hasParent) {
+                return null;
+              }
+              var parentPath = this.path.parent;
+              return new _.fg.base.URL(this.scheme, this.host, this.port, parentPath, this.query, this.fragment);
+            }
+          },
+          hasParent: {
+            get: function () {
+              return this.path.hasParent;
+            }
+          },
+          append_usdzdh$: function (path) {
+            return new _.fg.base.URL(this.scheme, this.host, this.port, this.path.append_usdzdh$(path), this.query, this.fragment);
+          },
+          replaceParam_puj7f4$: function (name, value) {
+            var mutableMap = Kotlin.kotlin.collections.mutableMapOf_eoa9s7$([]);
+            if (this.query != null) {
+              mutableMap.putAll_r12sna$(this.query.map);
+            }
+            mutableMap.put_wn2jw4$(name, value);
+            return new _.fg.base.URL(this.scheme, this.host, this.port, this.path, new _.fg.base.URL.Query(mutableMap), this.fragment);
+          },
+          compareTo_za3rmp$: function (other) {
+            var compare;
+            compare = this.path.compareTo_za3rmp$(other.path);
+            if (compare !== 0) {
+              return compare;
+            }
+            compare = Kotlin.compareTo(this.host, other.host);
+            if (compare !== 0) {
+              return compare;
+            }
+            compare = Kotlin.compareTo(this.port, other.port);
+            if (compare !== 0) {
+              return compare;
+            }
+            compare = _.fg.base.CompareTo.nullSafe_wn2jw4$(this.query, other.query);
+            if (compare !== 0) {
+              return compare;
+            }
+            compare = Kotlin.compareTo(this.fragment, other.fragment);
+            if (compare !== 0) {
+              return compare;
+            }
+            compare = Kotlin.compareTo(this.scheme, other.scheme);
+            if (compare !== 0) {
+              return compare;
+            }
+            return compare;
+          },
+          toString: function () {
+            var str = '';
+            var $receiver = this.scheme;
+            var tmp$0 = !Kotlin.kotlin.text.isBlank_gw00vq$($receiver);
+            if (tmp$0) {
+              var $receiver_0 = this.host;
+              tmp$0 = !Kotlin.kotlin.text.isBlank_gw00vq$($receiver_0);
+            }
+            if (tmp$0) {
+              str = this.scheme + '://' + this.host;
+            }
+            var $receiver_1 = this.port;
+            if (!Kotlin.kotlin.text.isBlank_gw00vq$($receiver_1))
+              str += ':' + this.port;
+            str += this.path.toString();
+            if (this.query != null)
+              str += this.query;
+            var $receiver_2 = this.fragment;
+            if (!Kotlin.kotlin.text.isBlank_gw00vq$($receiver_2))
+              str += '#' + this.fragment;
+            return str;
+          }
+        }, /** @lends _.fg.base.URL */ {
+          Factory: Kotlin.createObject(null, function Factory() {
+          }, /** @lends _.fg.base.URL.Factory.prototype */ {
+            from_61zpoe$: function (asString) {
+              var remaining = asString;
+              var scheme = Kotlin.kotlin.text.substringBefore_ex0kps$(remaining, '://', '');
+              remaining = Kotlin.kotlin.text.substringAfter_ex0kps$(remaining, '://');
+              var fragment = Kotlin.kotlin.text.substringAfter_ex0kps$(remaining, '#', '');
+              remaining = Kotlin.kotlin.text.substringBefore_ex0kps$(remaining, '#');
+              var query = Kotlin.kotlin.text.substringAfter_ex0kps$(remaining, '?', '');
+              remaining = Kotlin.kotlin.text.substringBefore_ex0kps$(remaining, '?');
+              var path = '/' + Kotlin.kotlin.text.substringAfter_ex0kps$(remaining, '/', '');
+              remaining = Kotlin.kotlin.text.substringBefore_ex0kps$(remaining, '/');
+              var port = Kotlin.kotlin.text.substringAfter_ex0kps$(remaining, ':', '');
+              remaining = Kotlin.kotlin.text.substringBefore_ex0kps$(remaining, ':');
+              var host = remaining;
+              return new _.fg.base.URL(scheme, host, port, _.fg.base.Path.Factory.from_61zpoe$(path), _.fg.base.URL.Query.Factory.from_61zpoe$(query), fragment);
+            }
+          }),
+          object_initializer$: function () {
+            _.fg.base.URL.Factory;
+          },
+          Query: Kotlin.createClass(null, function Query(map) {
+            this.map = map;
+          }, /** @lends _.fg.base.URL.Query.prototype */ {
+            toString: function () {
+              var tmp$1;
+              if (this.map.isEmpty()) {
+                return '';
+              }
+              var s = '?';
+              tmp$1 = Kotlin.kotlin.collections.iterator_efxzmg$(this.map);
+              while (tmp$1.hasNext()) {
+                var tmp$0 = tmp$1.next();
+                var key = tmp$0.key;
+                var value = tmp$0.value;
+                if (s.length > 1) {
+                  s += '&';
+                }
+                s += key + '=' + value;
+              }
+              return s;
+            },
+            component1: function () {
+              return this.map;
+            },
+            copy_o5obbo$: function (map) {
+              return new _.fg.base.URL.Query(map === void 0 ? this.map : map);
+            },
+            hashCode: function () {
+              var result = 0;
+              result = result * 31 + Kotlin.hashCode(this.map) | 0;
+              return result;
+            },
+            equals_za3rmp$: function (other) {
+              return this === other || (other !== null && (typeof other === 'object' && (Object.getPrototypeOf(this) === Object.getPrototypeOf(other) && Kotlin.equals(this.map, other.map))));
+            }
+          }, /** @lends _.fg.base.URL.Query */ {
+            Factory: Kotlin.createObject(null, function Factory() {
+              _.fg.base.URL.Query.Factory.NONE = new _.fg.base.URL.Query(Kotlin.kotlin.collections.emptyMap());
+            }, /** @lends _.fg.base.URL.Query.Factory.prototype */ {
+              from_eoa9s7$: function (pairs) {
+                return new _.fg.base.URL.Query(Kotlin.kotlin.collections.linkedMapOf_eoa9s7$(pairs.slice()));
+              },
+              from_61zpoe$: function (string) {
+                var tmp$0;
+                var withoutQuestion = Kotlin.kotlin.text.startsWith_41xvrb$(string, '?') ? Kotlin.kotlin.text.substringAfter_ex0kps$(string, '?') : string;
+                if (string.length === 0) {
+                  return _.fg.base.URL.Query.Factory.NONE;
+                }
+                var splitted = Kotlin.kotlin.text.split_l2gz7$(withoutQuestion, ['&']);
+                var map = Kotlin.kotlin.collections.mutableMapOf_eoa9s7$([]);
+                tmp$0 = Kotlin.kotlin.collections.get_lastIndex_a7ptmv$(splitted);
+                for (var i = 0; i <= tmp$0; i++) {
+                  var name = Kotlin.kotlin.text.substringBefore_ex0kps$(splitted.get_za3lpa$(i), '=');
+                  var value = Kotlin.kotlin.text.substringAfter_ex0kps$(splitted.get_za3lpa$(i), '=');
+                  if (!Kotlin.kotlin.text.isBlank_gw00vq$(name)) {
+                    map.put_wn2jw4$(name, value);
+                  }
+                }
+                return new _.fg.base.URL.Query(map);
+              }
+            }),
+            object_initializer$: function () {
+              _.fg.base.URL.Query.Factory;
+            }
+          })
+        }),
         toHexString_s8ev3o$: function ($receiver) {
           var char2 = _.fg.base.HEX_CHARS_z2qdg7$[$receiver & 15];
           var char1 = _.fg.base.HEX_CHARS_z2qdg7$[$receiver >> 4 & 15];
@@ -246,14 +691,14 @@ var elements = function (Kotlin) {
               return this.$type_ymc86r$;
             }
           },
+          toString: function () {
+            return this.toHtml();
+          },
           component1: function () {
             return this.value;
           },
           copy_14dthe$: function (value) {
             return new _.fg.elements.Percent(value === void 0 ? this.value : value);
-          },
-          toString: function () {
-            return 'Percent(value=' + Kotlin.toString(this.value) + ')';
           },
           hashCode: function () {
             var result = 0;
@@ -264,12 +709,12 @@ var elements = function (Kotlin) {
             return this === other || (other !== null && (typeof other === 'object' && (Object.getPrototypeOf(this) === Object.getPrototypeOf(other) && Kotlin.equals(this.value, other.value))));
           }
         }),
-        pct_s8ev3o$: function ($receiver) {
+        get_pct_s8ev3o$: {value: function ($receiver) {
           return new _.fg.elements.Percent($receiver);
-        },
-        pct_yrwdxs$: function ($receiver) {
+        }},
+        get_pct_yrwdxs$: {value: function ($receiver) {
           return new _.fg.elements.Percent($receiver);
-        },
+        }},
         Pixels: Kotlin.createClass(function () {
           return [_.fg.elements.Dimension];
         }, function Pixels(value) {
@@ -286,14 +731,14 @@ var elements = function (Kotlin) {
               return this.$type_fpg9m7$;
             }
           },
+          toString: function () {
+            return this.toHtml();
+          },
           component1: function () {
             return this.value;
           },
           copy_14dthe$: function (value) {
             return new _.fg.elements.Pixels(value === void 0 ? this.value : value);
-          },
-          toString: function () {
-            return 'Pixels(value=' + Kotlin.toString(this.value) + ')';
           },
           hashCode: function () {
             var result = 0;
@@ -309,6 +754,14 @@ var elements = function (Kotlin) {
         }},
         get_px_s8ev3o$: {value: function ($receiver) {
           return new _.fg.elements.Pixels($receiver);
+        }},
+        get_px_pdl1w0$: {value: function ($receiver) {
+          var tmp$0;
+          tmp$0 = Kotlin.safeParseDouble(Kotlin.kotlin.text.substringBefore_ex0kps$($receiver, 'px'));
+          if (tmp$0 == null) {
+            throw new Kotlin.IllegalArgumentException("'" + $receiver + "' is not parse-able as Pixels");
+          }
+          return new _.fg.elements.Pixels(tmp$0);
         }},
         Mm: Kotlin.createClass(function () {
           return [_.fg.elements.Dimension];
@@ -326,14 +779,14 @@ var elements = function (Kotlin) {
               return this.$type_jvrr9e$;
             }
           },
+          toString: function () {
+            return this.toHtml();
+          },
           component1: function () {
             return this.value;
           },
           copy_za3lpa$: function (value) {
             return new _.fg.elements.Mm(value === void 0 ? this.value : value);
-          },
-          toString: function () {
-            return 'Mm(value=' + Kotlin.toString(this.value) + ')';
           },
           hashCode: function () {
             var result = 0;
@@ -344,9 +797,9 @@ var elements = function (Kotlin) {
             return this === other || (other !== null && (typeof other === 'object' && (Object.getPrototypeOf(this) === Object.getPrototypeOf(other) && Kotlin.equals(this.value, other.value))));
           }
         }),
-        mm_s8ev3o$: function ($receiver) {
+        get_mm_s8ev3o$: {value: function ($receiver) {
           return new _.fg.elements.Mm($receiver);
-        },
+        }},
         Cm: Kotlin.createClass(function () {
           return [_.fg.elements.Dimension];
         }, function Cm(value) {
@@ -363,14 +816,14 @@ var elements = function (Kotlin) {
               return this.$type_olihjg$;
             }
           },
+          toString: function () {
+            return this.toHtml();
+          },
           component1: function () {
             return this.value;
           },
           copy_14dthe$: function (value) {
             return new _.fg.elements.Cm(value === void 0 ? this.value : value);
-          },
-          toString: function () {
-            return 'Cm(value=' + Kotlin.toString(this.value) + ')';
           },
           hashCode: function () {
             var result = 0;
@@ -381,12 +834,12 @@ var elements = function (Kotlin) {
             return this === other || (other !== null && (typeof other === 'object' && (Object.getPrototypeOf(this) === Object.getPrototypeOf(other) && Kotlin.equals(this.value, other.value))));
           }
         }),
-        cm_yrwdxs$: function ($receiver) {
+        get_cm_yrwdxs$: {value: function ($receiver) {
           return new _.fg.elements.Cm($receiver);
-        },
-        cm_s8ev3o$: function ($receiver) {
+        }},
+        get_cm_s8ev3o$: {value: function ($receiver) {
           return new _.fg.elements.Cm($receiver);
-        },
+        }},
         In: Kotlin.createClass(function () {
           return [_.fg.elements.Dimension];
         }, function In(value) {
@@ -403,14 +856,14 @@ var elements = function (Kotlin) {
               return this.$type_7377s7$;
             }
           },
+          toString: function () {
+            return this.toHtml();
+          },
           component1: function () {
             return this.value;
           },
           copy_14dthe$: function (value) {
             return new _.fg.elements.In(value === void 0 ? this.value : value);
-          },
-          toString: function () {
-            return 'In(value=' + Kotlin.toString(this.value) + ')';
           },
           hashCode: function () {
             var result = 0;
@@ -443,14 +896,14 @@ var elements = function (Kotlin) {
               return this.$type_rgqg62$;
             }
           },
+          toString: function () {
+            return this.toHtml();
+          },
           component1: function () {
             return this.value;
           },
           copy_za3lpa$: function (value) {
             return new _.fg.elements.Pt(value === void 0 ? this.value : value);
-          },
-          toString: function () {
-            return 'Pt(value=' + Kotlin.toString(this.value) + ')';
           },
           hashCode: function () {
             var result = 0;
@@ -461,9 +914,9 @@ var elements = function (Kotlin) {
             return this === other || (other !== null && (typeof other === 'object' && (Object.getPrototypeOf(this) === Object.getPrototypeOf(other) && Kotlin.equals(this.value, other.value))));
           }
         }),
-        pt_s8ev3o$: function ($receiver) {
+        get_pt_s8ev3o$: {value: function ($receiver) {
           return new _.fg.elements.Pt($receiver);
-        },
+        }},
         Pc: Kotlin.createClass(function () {
           return [_.fg.elements.Dimension];
         }, function Pc(value) {
@@ -480,14 +933,14 @@ var elements = function (Kotlin) {
               return this.$type_jeyvgr$;
             }
           },
+          toString: function () {
+            return this.toHtml();
+          },
           component1: function () {
             return this.value;
           },
           copy_za3lpa$: function (value) {
             return new _.fg.elements.Pc(value === void 0 ? this.value : value);
-          },
-          toString: function () {
-            return 'Pc(value=' + Kotlin.toString(this.value) + ')';
           },
           hashCode: function () {
             var result = 0;
@@ -498,9 +951,9 @@ var elements = function (Kotlin) {
             return this === other || (other !== null && (typeof other === 'object' && (Object.getPrototypeOf(this) === Object.getPrototypeOf(other) && Kotlin.equals(this.value, other.value))));
           }
         }),
-        pc_s8ev3o$: function ($receiver) {
+        get_pc_s8ev3o$: {value: function ($receiver) {
           return new _.fg.elements.Pc($receiver);
-        },
+        }},
         Em: Kotlin.createClass(function () {
           return [_.fg.elements.Dimension];
         }, function Em(value) {
@@ -517,14 +970,14 @@ var elements = function (Kotlin) {
               return this.$type_4ra2wm$;
             }
           },
+          toString: function () {
+            return this.toHtml();
+          },
           component1: function () {
             return this.value;
           },
           copy_14dthe$: function (value) {
             return new _.fg.elements.Em(value === void 0 ? this.value : value);
-          },
-          toString: function () {
-            return 'Em(value=' + Kotlin.toString(this.value) + ')';
           },
           hashCode: function () {
             var result = 0;
@@ -557,14 +1010,14 @@ var elements = function (Kotlin) {
               return this.$type_7c7nmg$;
             }
           },
+          toString: function () {
+            return this.toHtml();
+          },
           component1: function () {
             return this.value;
           },
           copy_14dthe$: function (value) {
             return new _.fg.elements.Rem(value === void 0 ? this.value : value);
-          },
-          toString: function () {
-            return 'Rem(value=' + Kotlin.toString(this.value) + ')';
           },
           hashCode: function () {
             var result = 0;
@@ -575,12 +1028,12 @@ var elements = function (Kotlin) {
             return this === other || (other !== null && (typeof other === 'object' && (Object.getPrototypeOf(this) === Object.getPrototypeOf(other) && Kotlin.equals(this.value, other.value))));
           }
         }),
-        rem_s8ev3o$: function ($receiver) {
+        get_rem_s8ev3o$: {value: function ($receiver) {
           return new _.fg.elements.Percent($receiver);
-        },
-        rem_yrwdxs$: function ($receiver) {
+        }},
+        get_rem_yrwdxs$: {value: function ($receiver) {
           return new _.fg.elements.Percent($receiver);
-        },
+        }},
         Vh: Kotlin.createClass(function () {
           return [_.fg.elements.Dimension];
         }, function Vh(value) {
@@ -597,14 +1050,14 @@ var elements = function (Kotlin) {
               return this.$type_w7nf6c$;
             }
           },
+          toString: function () {
+            return this.toHtml();
+          },
           component1: function () {
             return this.value;
           },
           copy_za3lpa$: function (value) {
             return new _.fg.elements.Vh(value === void 0 ? this.value : value);
-          },
-          toString: function () {
-            return 'Vh(value=' + Kotlin.toString(this.value) + ')';
           },
           hashCode: function () {
             var result = 0;
@@ -615,9 +1068,9 @@ var elements = function (Kotlin) {
             return this === other || (other !== null && (typeof other === 'object' && (Object.getPrototypeOf(this) === Object.getPrototypeOf(other) && Kotlin.equals(this.value, other.value))));
           }
         }),
-        vh_s8ev3o$: function ($receiver) {
+        get_vh_s8ev3o$: {value: function ($receiver) {
           return new _.fg.elements.Vh($receiver);
-        },
+        }},
         Vw: Kotlin.createClass(function () {
           return [_.fg.elements.Dimension];
         }, function Vw(value) {
@@ -634,14 +1087,14 @@ var elements = function (Kotlin) {
               return this.$type_p3z39f$;
             }
           },
+          toString: function () {
+            return this.toHtml();
+          },
           component1: function () {
             return this.value;
           },
           copy_za3lpa$: function (value) {
             return new _.fg.elements.Vw(value === void 0 ? this.value : value);
-          },
-          toString: function () {
-            return 'Vw(value=' + Kotlin.toString(this.value) + ')';
           },
           hashCode: function () {
             var result = 0;
@@ -652,9 +1105,9 @@ var elements = function (Kotlin) {
             return this === other || (other !== null && (typeof other === 'object' && (Object.getPrototypeOf(this) === Object.getPrototypeOf(other) && Kotlin.equals(this.value, other.value))));
           }
         }),
-        vw_s8ev3o$: function ($receiver) {
+        get_vw_s8ev3o$: {value: function ($receiver) {
           return new _.fg.elements.Vw($receiver);
-        },
+        }},
         VMin: Kotlin.createClass(function () {
           return [_.fg.elements.Dimension];
         }, function VMin(value) {
@@ -671,14 +1124,14 @@ var elements = function (Kotlin) {
               return this.$type_pzwgde$;
             }
           },
+          toString: function () {
+            return this.toHtml();
+          },
           component1: function () {
             return this.value;
           },
           copy_za3lpa$: function (value) {
             return new _.fg.elements.VMin(value === void 0 ? this.value : value);
-          },
-          toString: function () {
-            return 'VMin(value=' + Kotlin.toString(this.value) + ')';
           },
           hashCode: function () {
             var result = 0;
@@ -689,9 +1142,9 @@ var elements = function (Kotlin) {
             return this === other || (other !== null && (typeof other === 'object' && (Object.getPrototypeOf(this) === Object.getPrototypeOf(other) && Kotlin.equals(this.value, other.value))));
           }
         }),
-        vmin_s8ev3o$: function ($receiver) {
+        get_vmin_s8ev3o$: {value: function ($receiver) {
           return new _.fg.elements.VMin($receiver);
-        },
+        }},
         VMax: Kotlin.createClass(function () {
           return [_.fg.elements.Dimension];
         }, function VMax(value) {
@@ -708,14 +1161,14 @@ var elements = function (Kotlin) {
               return this.$type_fnpjhs$;
             }
           },
+          toString: function () {
+            return this.toHtml();
+          },
           component1: function () {
             return this.value;
           },
           copy_za3lpa$: function (value) {
             return new _.fg.elements.VMax(value === void 0 ? this.value : value);
-          },
-          toString: function () {
-            return 'VMax(value=' + Kotlin.toString(this.value) + ')';
           },
           hashCode: function () {
             var result = 0;
@@ -726,9 +1179,9 @@ var elements = function (Kotlin) {
             return this === other || (other !== null && (typeof other === 'object' && (Object.getPrototypeOf(this) === Object.getPrototypeOf(other) && Kotlin.equals(this.value, other.value))));
           }
         }),
-        vmax_s8ev3o$: function ($receiver) {
+        get_vmax_s8ev3o$: {value: function ($receiver) {
           return new _.fg.elements.VMax($receiver);
-        },
+        }},
         header_4tl54c$: function ($receiver, init) {
           return _.fg.elements.initAndAppendNode_i6bvtr$($receiver, new _.fg.elements.Header(), init);
         },
@@ -897,23 +1350,29 @@ var elements = function (Kotlin) {
         unScroll_m2anqv$: function ($receiver, listener) {
           $receiver.w3cElement.removeEventListener('scroll', listener);
         },
-        onKeyUp_m2anqv$: function ($receiver, listener) {
-          $receiver.w3cElement.addEventListener('keyup', listener);
+        onKeyUp_da4jf4$: function ($receiver, listener) {
+          var tmp$0;
+          $receiver.w3cElement.addEventListener('keyup', typeof (tmp$0 = listener) === 'function' ? tmp$0 : Kotlin.throwCCE());
         },
-        unKeyUp_m2anqv$: function ($receiver, listener) {
-          $receiver.w3cElement.removeEventListener('keyup', listener);
+        unKeyUp_da4jf4$: function ($receiver, listener) {
+          var tmp$0;
+          $receiver.w3cElement.removeEventListener('keyup', typeof (tmp$0 = listener) === 'function' ? tmp$0 : Kotlin.throwCCE());
         },
-        onKeyPress_m2anqv$: function ($receiver, listener) {
-          $receiver.w3cElement.addEventListener('keypress', listener);
+        onKeyPress_da4jf4$: function ($receiver, listener) {
+          var tmp$0;
+          $receiver.w3cElement.addEventListener('keypress', typeof (tmp$0 = listener) === 'function' ? tmp$0 : Kotlin.throwCCE());
         },
-        unKeyPress_m2anqv$: function ($receiver, listener) {
-          $receiver.w3cElement.removeEventListener('keypress', listener);
+        unKeyPress_da4jf4$: function ($receiver, listener) {
+          var tmp$0;
+          $receiver.w3cElement.removeEventListener('keypress', typeof (tmp$0 = listener) === 'function' ? tmp$0 : Kotlin.throwCCE());
         },
-        onKeyDown_m2anqv$: function ($receiver, listener) {
-          $receiver.w3cElement.addEventListener('keydown', listener);
+        onKeyDown_da4jf4$: function ($receiver, listener) {
+          var tmp$0;
+          $receiver.w3cElement.addEventListener('keydown', typeof (tmp$0 = listener) === 'function' ? tmp$0 : Kotlin.throwCCE());
         },
-        unKeyDown_m2anqv$: function ($receiver, listener) {
-          $receiver.w3cElement.removeEventListener('keydown', listener);
+        unKeyDown_da4jf4$: function ($receiver, listener) {
+          var tmp$0;
+          $receiver.w3cElement.removeEventListener('keydown', typeof (tmp$0 = listener) === 'function' ? tmp$0 : Kotlin.throwCCE());
         },
         onDrag_m2anqv$: function ($receiver, listener) {
           $receiver.w3cElement.addEventListener('drag', listener);
@@ -957,6 +1416,9 @@ var elements = function (Kotlin) {
         unDrop_m2anqv$: function ($receiver, listener) {
           $receiver.w3cElement.removeEventListener('drop', listener);
         },
+        get_computedStyle_gobym4$: {value: function ($receiver) {
+          return window.getComputedStyle($receiver.w3cElement);
+        }},
         Element: Kotlin.createClass(function () {
           return [_.fg.elements.Node];
         }, function Element(name, existingElement, w3cElement) {
@@ -969,6 +1431,8 @@ var elements = function (Kotlin) {
             w3cElement = existingElement != null ? existingElement : Kotlin.isType(tmp$0 = document.createElement(name != null ? name : Kotlin.throwNPE()), HTMLElement) ? tmp$0 : Kotlin.throwCCE();
           Element.baseInitializer.call(this, w3cElement);
           this.w3cElement = w3cElement;
+          this._id$delegate = _.fg.elements.W3cDelegates.nullableAttribute_61zpoe$('id');
+          this._tabindex$delegate = _.fg.elements.W3cDelegates.nullableAttribute_61zpoe$('tabindex');
           this._displayBeforeHiding_ywpibn$ = '';
         }, /** @lends _.fg.elements.Element.prototype */ {
           childElements: {
@@ -991,6 +1455,22 @@ var elements = function (Kotlin) {
             get: function () {
               var tmp$0, tmp$1;
               return Kotlin.isType(tmp$1 = (tmp$0 = this._parentNode) != null ? tmp$0 : Kotlin.throwNPE(), _.fg.elements.Element) ? tmp$1 : Kotlin.throwCCE();
+            }
+          },
+          _id: {
+            get: function () {
+              return this._id$delegate.getValue_dsk1ci$(this, new Kotlin.PropertyMetadata('_id'));
+            },
+            set: function (_id) {
+              this._id$delegate.setValue_w32e13$(this, new Kotlin.PropertyMetadata('_id'), _id);
+            }
+          },
+          _tabindex: {
+            get: function () {
+              return this._tabindex$delegate.getValue_dsk1ci$(this, new Kotlin.PropertyMetadata('_tabindex'));
+            },
+            set: function (_tabindex) {
+              this._tabindex$delegate.setValue_w32e13$(this, new Kotlin.PropertyMetadata('_tabindex'), _tabindex);
             }
           },
           hidden: {
@@ -1114,6 +1594,18 @@ var elements = function (Kotlin) {
             if (!this.hidden) {
               this._displayBeforeHiding_ywpibn$ = this.style.display;
               this.style.display = 'none';
+            }
+          },
+          traverseElements_su6ycz$: function (each) {
+            var tmp$0;
+            tmp$0 = this.childElements.iterator();
+            while (tmp$0.hasNext()) {
+              var child = tmp$0.next();
+              var continueTraversing = each(child);
+              if (!continueTraversing) {
+                break;
+              }
+              child.traverseElements_su6ycz$(each);
             }
           }
         }, /** @lends _.fg.elements.Element */ {
@@ -1744,6 +2236,7 @@ var elements = function (Kotlin) {
           init: function () {
             _.fg.elements.BODY.init();
             window.setTimeout(_.fg.elements.Html.init$f, 10);
+            this.addCSSRule_3cka69$(_.fg.elements.with_ji1yox$(new _.fg.style.AnyRule(), _.fg.elements.Html.init$f_0));
           },
           registerStyle_78phyd$: function (styledClass) {
             var rule = _.fg.elements.Html.registerStyle_78phyd$rule(styledClass);
@@ -1773,6 +2266,9 @@ var elements = function (Kotlin) {
           init$f: function () {
             _.fg.elements.BODY.callDidMount();
           },
+          init$f_0: function () {
+            this.boxSizing = 'border-box';
+          },
           registerStyle_78phyd$rule: function (closure$styledClass) {
             return function (styledClass, init) {
               if (init === void 0)
@@ -1781,6 +2277,11 @@ var elements = function (Kotlin) {
               init.call(style);
               return style;
             };
+          },
+          Html: Kotlin.createObject(null, function Html() {
+          }),
+          object_initializer$: function () {
+            _.fg.elements.Html.Html;
           },
           stylesheet_ld1o87$f: function () {
             var tmp$0;
@@ -1797,11 +2298,20 @@ var elements = function (Kotlin) {
           this.w3cNode = w3cNode;
           this._childNodes_d2zqq6$ = Kotlin.kotlin.collections.arrayListOf_9mqe4v$([]);
           this._childrenMountInstructions_6rpoce$ = Kotlin.kotlin.collections.arrayListOf_9mqe4v$([]);
+          this.$rendered_d7cdg7$ = false;
           this._parentNode = null;
         }, /** @lends _.fg.elements.Node.prototype */ {
           childNodes: {
             get: function () {
               return this._childNodes_d2zqq6$;
+            }
+          },
+          rendered: {
+            get: function () {
+              return this.$rendered_d7cdg7$;
+            },
+            set: function (rendered) {
+              this.$rendered_d7cdg7$ = rendered;
             }
           },
           _nodeName: {
@@ -1821,9 +2331,14 @@ var elements = function (Kotlin) {
             },
             set: function (value) {
               this.removeChildren();
-              this.w3cNode.textContent = value;
-              this._childNodes_d2zqq6$.addAll_wtfk93$(this.parseChildrenFromDOM());
+              if (value != null) {
+                this.w3cNode.textContent = value;
+                this._childNodes_d2zqq6$.addAll_wtfk93$(this.parseChildrenFromDOM());
+              }
             }
+          },
+          hasChild_sr04hg$: function (child) {
+            return this._childNodes_d2zqq6$.contains_za3rmp$(child);
           },
           prependChild_sr04hg$: function (node) {
             if (this._childNodes_d2zqq6$.isEmpty()) {
@@ -1836,13 +2351,17 @@ var elements = function (Kotlin) {
             }
           },
           insertBefore_p937mc$: function (node, child) {
+            if (node._parentNode != null) {
+              throw new Kotlin.IllegalStateException("Node cannot be added. It's already added. Please remove it first.");
+            }
             var childIndex = this._childNodes_d2zqq6$.indexOf_za3rmp$(child);
             if (childIndex === -1) {
               throw new Kotlin.IllegalArgumentException('reference ' + child.w3cNode.nodeName + ' is expected as child');
             }
             node._parentNode = this;
-            if (Kotlin.isType(node, _.fg.elements.Element)) {
+            if (Kotlin.isType(node, _.fg.elements.Element) && !this.rendered) {
               node.render();
+              node.rendered = true;
               node.renderChildren();
             }
             var mountFn = _.fg.elements.Node.insertBefore_p937mc$f(this, child);
@@ -1853,12 +2372,17 @@ var elements = function (Kotlin) {
               this._childrenMountInstructions_6rpoce$.add_za3rmp$(new Kotlin.kotlin.Pair(mountFn, node));
             }
             this._childNodes_d2zqq6$.add_vux3hl$(childIndex, node);
+            this.childAdded_sr04hg$(node);
             return node;
           },
           appendChild_sr04hg$: function (node) {
+            if (node._parentNode != null) {
+              throw new Kotlin.IllegalStateException("Node cannot be added. It's already added. Please remove it first.");
+            }
             node._parentNode = this;
-            if (Kotlin.isType(node, _.fg.elements.Element)) {
+            if (Kotlin.isType(node, _.fg.elements.Element) && !this.rendered) {
               node.render();
+              node.rendered = true;
               node.renderChildren();
             }
             var mountFn = _.fg.elements.Node.appendChild_sr04hg$f(this);
@@ -1869,6 +2393,7 @@ var elements = function (Kotlin) {
               this._childrenMountInstructions_6rpoce$.add_za3rmp$(new Kotlin.kotlin.Pair(mountFn, node));
             }
             this._childNodes_d2zqq6$.add_za3rmp$(node);
+            this.childAdded_sr04hg$(node);
             return node;
           },
           parseChildrenFromDOM: function () {
@@ -1890,8 +2415,9 @@ var elements = function (Kotlin) {
             tmp$0 = this._childNodes_d2zqq6$.iterator();
             while (tmp$0.hasNext()) {
               var child = tmp$0.next();
-              if (Kotlin.isType(child, _.fg.elements.Element)) {
+              if (Kotlin.isType(child, _.fg.elements.Element) && !this.rendered) {
                 child.render();
+                child.rendered = true;
               }
               child.renderChildren();
             }
@@ -1927,6 +2453,13 @@ var elements = function (Kotlin) {
               this.w3cNode.removeChild(node.w3cNode);
             }
             this._childNodes_d2zqq6$.remove_za3rmp$(node);
+            node._parentNode = null;
+          },
+          removeSelf: function () {
+            var tmp$0;
+            (tmp$0 = this._parentNode) != null ? tmp$0.removeChild_sr04hg$(this) : null;
+          },
+          childAdded_sr04hg$: function (child) {
           }
         }, /** @lends _.fg.elements.Node */ {
           insertBefore_p937mc$f: function (this$Node, closure$child) {
@@ -2382,6 +2915,302 @@ var elements = function (Kotlin) {
           })
         })
       }),
+      keyboard: Kotlin.definePackage(null, /** @lends _.fg.keyboard */ {
+        Key: Kotlin.createClass(null, function Key(key, modifiers) {
+          this.key = key;
+          this.modifiers = modifiers;
+        }, /** @lends _.fg.keyboard.Key.prototype */ {
+          equals_za3rmp$: function (other) {
+            var tmp$0;
+            if (this === other)
+              return true;
+            if (!Kotlin.isType(other, _.fg.keyboard.Key))
+              return false;
+            if (!Kotlin.equals(this.key, other.key))
+              return false;
+            if (!((tmp$0 = this.modifiers) != null ? tmp$0.equals_za3rmp$(other.modifiers) : null))
+              return false;
+            return true;
+          },
+          hashCode: function () {
+            var result = Kotlin.hashCode(this.key);
+            result = 31 * result + this.modifiers.hashCode();
+            return result;
+          },
+          toString: function () {
+            if (this.modifiers.isNotEmpty()) {
+              return this.modifiers + '+' + this.key;
+            }
+             else {
+              return this.key;
+            }
+          }
+        }, /** @lends _.fg.keyboard.Key */ {
+          Factory: Kotlin.createObject(null, function Factory() {
+          }, /** @lends _.fg.keyboard.Key.Factory.prototype */ {
+            from_61zpoe$: function (str) {
+              var tmp$0;
+              var splitted = Kotlin.kotlin.text.split_l2gz7$(str, ['+']);
+              var key = Kotlin.kotlin.collections.last_a7ptmv$(splitted);
+              var modifiers = Kotlin.kotlin.collections.arrayListOf_9mqe4v$([]);
+              if (splitted.size > 1) {
+                tmp$0 = Kotlin.kotlin.collections.get_lastIndex_a7ptmv$(splitted) - 1;
+                for (var i = 0; i <= tmp$0; i++) {
+                  var modifierAsString = splitted.get_za3lpa$(i);
+                  modifiers.add_za3rmp$(_.fg.keyboard.Modifier.valueOf_61zpoe$(modifierAsString));
+                }
+              }
+              return new _.fg.keyboard.Key(key, new _.fg.keyboard.Modifiers(modifiers));
+            },
+            from_tat4wc$: function (key, modifiers) {
+              return new _.fg.keyboard.Key(key, modifiers);
+            }
+          }),
+          object_initializer$: function () {
+            _.fg.keyboard.Key.Factory;
+          }
+        }),
+        KeyBinding: Kotlin.createClass(null, function KeyBinding(keys, type, callback) {
+          if (type === void 0)
+            type = _.fg.keyboard.Type.keypress;
+          this.keys = keys;
+          this.type = type;
+          this.callback = callback;
+        }, /** @lends _.fg.keyboard.KeyBinding.prototype */ {
+          component1: function () {
+            return this.keys;
+          },
+          component2: function () {
+            return this.type;
+          },
+          component3: function () {
+            return this.callback;
+          },
+          copy_dxzmv0$: function (keys, type, callback) {
+            return new _.fg.keyboard.KeyBinding(keys === void 0 ? this.keys : keys, type === void 0 ? this.type : type, callback === void 0 ? this.callback : callback);
+          },
+          toString: function () {
+            return 'KeyBinding(keys=' + Kotlin.toString(this.keys) + (', type=' + Kotlin.toString(this.type)) + (', callback=' + Kotlin.toString(this.callback)) + ')';
+          },
+          hashCode: function () {
+            var result = 0;
+            result = result * 31 + Kotlin.hashCode(this.keys) | 0;
+            result = result * 31 + Kotlin.hashCode(this.type) | 0;
+            result = result * 31 + Kotlin.hashCode(this.callback) | 0;
+            return result;
+          },
+          equals_za3rmp$: function (other) {
+            return this === other || (other !== null && (typeof other === 'object' && (Object.getPrototypeOf(this) === Object.getPrototypeOf(other) && (Kotlin.equals(this.keys, other.keys) && Kotlin.equals(this.type, other.type) && Kotlin.equals(this.callback, other.callback)))));
+          }
+        }),
+        Keyboard: Kotlin.createClass(null, function Keyboard(element) {
+          if (element === void 0)
+            element = null;
+          var tmp$0;
+          this.element = element;
+          this.shelves_8wamv9$ = Kotlin.kotlin.collections.arrayListOf_9mqe4v$([]);
+          this.keyBindings_g687hc$ = Kotlin.kotlin.collections.arrayListOf_9mqe4v$([]);
+          this.keyboardEventHandler_ry37fo$ = _.fg.keyboard.Keyboard.keyboardEventHandler_ry37fo$f(this);
+          if (this.element != null) {
+            _.fg.elements.onKeyDown_da4jf4$(this.element, this.keyboardEventHandler_ry37fo$);
+            _.fg.elements.onKeyPress_da4jf4$(this.element, this.keyboardEventHandler_ry37fo$);
+            _.fg.elements.onKeyUp_da4jf4$(this.element, this.keyboardEventHandler_ry37fo$);
+          }
+           else {
+            document.addEventListener('keydown', typeof (tmp$0 = this.keyboardEventHandler_ry37fo$) === 'function' ? tmp$0 : Kotlin.throwCCE());
+            document.addEventListener('keypress', this.keyboardEventHandler_ry37fo$);
+            document.addEventListener('keyup', this.keyboardEventHandler_ry37fo$);
+          }
+          this.pause = false;
+        }, /** @lends _.fg.keyboard.Keyboard.prototype */ {
+          character: function (event, resolvedCharCode) {
+            var tmp$0;
+            if (Kotlin.equals(event.type, 'keypress')) {
+              var character = String.fromCharCode(event.which);
+              if (!event.shiftKey) {
+                character = character.toLowerCase();
+              }
+              return character;
+            }
+            if (_.fg.keyboard.Keyboard.Factory._MAP_1w2stu$.containsKey_za3rmp$(resolvedCharCode)) {
+              return _.fg.keyboard.Keyboard.Factory._MAP_1w2stu$.get_za3rmp$(event.which);
+            }
+            if (_.fg.keyboard.Keyboard.Factory._KEYCODE_MAP_hxs4g5$.containsKey_za3rmp$(resolvedCharCode)) {
+              return (tmp$0 = _.fg.keyboard.Keyboard.Factory._KEYCODE_MAP_hxs4g5$.get_za3rmp$(resolvedCharCode)) != null ? tmp$0.toString() : null;
+            }
+            var character_0 = String.fromCharCode(event.which);
+            return character_0.toLowerCase().toString();
+          },
+          resolveEventModifiers: function (e) {
+            var modifiers = Kotlin.kotlin.collections.arrayListOf_9mqe4v$([]);
+            if (e.shiftKey) {
+              modifiers.add_za3rmp$(_.fg.keyboard.Modifier.shift);
+            }
+            if (e.altKey) {
+              modifiers.add_za3rmp$(_.fg.keyboard.Modifier.alt);
+            }
+            if (e.ctrlKey) {
+              modifiers.add_za3rmp$(_.fg.keyboard.Modifier.ctrl);
+            }
+            if (e.metaKey) {
+              modifiers.add_za3rmp$(_.fg.keyboard.Modifier.meta);
+            }
+            return new _.fg.keyboard.Modifiers(modifiers);
+          },
+          handleKey: function (key, type, event) {
+            var tmp$0;
+            console.info('Keyboard key: ' + key + ' @' + type);
+            tmp$0 = this.keyBindings_g687hc$.iterator();
+            while (tmp$0.hasNext()) {
+              var keyBinding = tmp$0.next();
+              if (keyBinding.keys.list.contains_za3rmp$(key)) {
+                keyBinding.callback();
+                event.preventDefault();
+              }
+            }
+          },
+          add_mwcglc$: function (keyBinding) {
+            console.info('Adding KeyBinding: ' + keyBinding.toString());
+            this.keyBindings_g687hc$.add_za3rmp$(keyBinding);
+          },
+          clear: function () {
+            this.keyBindings_g687hc$.clear();
+          },
+          shelve: function () {
+            this.shelves_8wamv9$.add_za3rmp$(this.keyBindings_g687hc$);
+            this.keyBindings_g687hc$.clear();
+          },
+          unshelve: function () {
+            this.keyBindings_g687hc$.clear();
+            this.keyBindings_g687hc$.addAll_wtfk93$(Kotlin.kotlin.collections.last_a7ptmv$(this.shelves_8wamv9$));
+            this.shelves_8wamv9$.removeAt_za3lpa$(Kotlin.kotlin.collections.get_lastIndex_a7ptmv$(this.shelves_8wamv9$));
+          }
+        }, /** @lends _.fg.keyboard.Keyboard */ {
+          Factory: Kotlin.createObject(null, function Factory() {
+            _.fg.keyboard.Keyboard.Factory._MAP_1w2stu$ = Kotlin.kotlin.collections.mapOf_eoa9s7$([new Kotlin.kotlin.Pair(8, 'backspace'), new Kotlin.kotlin.Pair(9, 'tab'), new Kotlin.kotlin.Pair(13, 'enter'), new Kotlin.kotlin.Pair(16, 'shift'), new Kotlin.kotlin.Pair(17, 'ctrl'), new Kotlin.kotlin.Pair(18, 'alt'), new Kotlin.kotlin.Pair(20, 'capslock'), new Kotlin.kotlin.Pair(27, 'esc'), new Kotlin.kotlin.Pair(32, 'space'), new Kotlin.kotlin.Pair(33, 'pageup'), new Kotlin.kotlin.Pair(34, 'pagedown'), new Kotlin.kotlin.Pair(35, 'end'), new Kotlin.kotlin.Pair(36, 'home'), new Kotlin.kotlin.Pair(37, 'left'), new Kotlin.kotlin.Pair(38, 'up'), new Kotlin.kotlin.Pair(39, 'right'), new Kotlin.kotlin.Pair(40, 'down'), new Kotlin.kotlin.Pair(45, 'ins'), new Kotlin.kotlin.Pair(46, 'del'), new Kotlin.kotlin.Pair(91, 'meta'), new Kotlin.kotlin.Pair(93, 'meta'), new Kotlin.kotlin.Pair(96, '0'), new Kotlin.kotlin.Pair(97, '1'), new Kotlin.kotlin.Pair(98, '2'), new Kotlin.kotlin.Pair(99, '4'), new Kotlin.kotlin.Pair(100, '5'), new Kotlin.kotlin.Pair(101, '6'), new Kotlin.kotlin.Pair(102, '7'), new Kotlin.kotlin.Pair(103, '8'), new Kotlin.kotlin.Pair(104, '9'), new Kotlin.kotlin.Pair(112, 'f1'), new Kotlin.kotlin.Pair(113, 'f2'), new Kotlin.kotlin.Pair(114, 'f3'), new Kotlin.kotlin.Pair(115, 'f4'), new Kotlin.kotlin.Pair(116, 'f5'), new Kotlin.kotlin.Pair(117, 'f6'), new Kotlin.kotlin.Pair(118, 'f7'), new Kotlin.kotlin.Pair(119, 'f8'), new Kotlin.kotlin.Pair(120, 'f8'), new Kotlin.kotlin.Pair(121, 'f9'), new Kotlin.kotlin.Pair(122, 'f10'), new Kotlin.kotlin.Pair(123, 'f11'), new Kotlin.kotlin.Pair(124, 'f12'), new Kotlin.kotlin.Pair(125, 'f13'), new Kotlin.kotlin.Pair(126, 'f14'), new Kotlin.kotlin.Pair(127, 'f15'), new Kotlin.kotlin.Pair(128, 'f16'), new Kotlin.kotlin.Pair(129, 'f17'), new Kotlin.kotlin.Pair(130, 'f18'), new Kotlin.kotlin.Pair(131, 'f19'), new Kotlin.kotlin.Pair(224, 'meta')]);
+            _.fg.keyboard.Keyboard.Factory._KEYCODE_MAP_hxs4g5$ = Kotlin.kotlin.collections.mapOf_eoa9s7$([new Kotlin.kotlin.Pair(106, '*'), new Kotlin.kotlin.Pair(107, '+'), new Kotlin.kotlin.Pair(109, '-'), new Kotlin.kotlin.Pair(110, '.'), new Kotlin.kotlin.Pair(111, '/'), new Kotlin.kotlin.Pair(186, ';'), new Kotlin.kotlin.Pair(187, '='), new Kotlin.kotlin.Pair(188, ','), new Kotlin.kotlin.Pair(189, '-'), new Kotlin.kotlin.Pair(190, '.'), new Kotlin.kotlin.Pair(191, '/'), new Kotlin.kotlin.Pair(192, '`'), new Kotlin.kotlin.Pair(219, '['), new Kotlin.kotlin.Pair(220, '\\'), new Kotlin.kotlin.Pair(221, ']'), new Kotlin.kotlin.Pair(222, "'")]);
+            _.fg.keyboard.Keyboard.Factory.DOCUMENT = new _.fg.keyboard.Keyboard();
+          }),
+          object_initializer$: function () {
+            _.fg.keyboard.Keyboard.Factory;
+          },
+          keyboardEventHandler_ry37fo$f: function (this$Keyboard) {
+            return function (event) {
+              var type = _.fg.keyboard.Type.valueOf_61zpoe$(event.type);
+              var resolvedCharCode = true ? event.which : event.keyCode;
+              var character = this$Keyboard.character(event, resolvedCharCode);
+              if (character != null) {
+                var modifiers = this$Keyboard.resolveEventModifiers(event);
+                var key = _.fg.keyboard.Key.Factory.from_tat4wc$(character, modifiers);
+                if (!this$Keyboard.pause) {
+                  this$Keyboard.handleKey(key, type, event);
+                }
+              }
+            };
+          }
+        }),
+        Keys: Kotlin.createClass(null, function Keys(list) {
+          this.list = list;
+        }, /** @lends _.fg.keyboard.Keys.prototype */ {
+          component1: function () {
+            return this.list;
+          },
+          copy_8afaxd$: function (list) {
+            return new _.fg.keyboard.Keys(list === void 0 ? this.list : list);
+          },
+          toString: function () {
+            return 'Keys(list=' + Kotlin.toString(this.list) + ')';
+          },
+          hashCode: function () {
+            var result = 0;
+            result = result * 31 + Kotlin.hashCode(this.list) | 0;
+            return result;
+          },
+          equals_za3rmp$: function (other) {
+            return this === other || (other !== null && (typeof other === 'object' && (Object.getPrototypeOf(this) === Object.getPrototypeOf(other) && Kotlin.equals(this.list, other.list))));
+          }
+        }, /** @lends _.fg.keyboard.Keys */ {
+          Factory: Kotlin.createObject(null, function Factory() {
+          }, /** @lends _.fg.keyboard.Keys.Factory.prototype */ {
+            from_tiy2pn$: function (key) {
+              return new _.fg.keyboard.Keys(Kotlin.kotlin.collections.listOf_za3rmp$(key));
+            },
+            from_61zpoe$: function (str) {
+              var tmp$0;
+              var keysList = Kotlin.kotlin.collections.arrayListOf_9mqe4v$([]);
+              var splitted = Kotlin.kotlin.text.split_l2gz7$(str, [' ']);
+              tmp$0 = splitted.iterator();
+              while (tmp$0.hasNext()) {
+                var keyAsString = tmp$0.next();
+                keysList.add_za3rmp$(_.fg.keyboard.Key.Factory.from_61zpoe$(keyAsString));
+              }
+              return new _.fg.keyboard.Keys(keysList);
+            }
+          }),
+          object_initializer$: function () {
+            _.fg.keyboard.Keys.Factory;
+          }
+        }),
+        Modifier: Kotlin.createEnumClass(function () {
+          return [Kotlin.Enum];
+        }, function Modifier() {
+          Modifier.baseInitializer.call(this);
+        }, function () {
+          return {
+            shift: function () {
+              return new _.fg.keyboard.Modifier();
+            },
+            alt: function () {
+              return new _.fg.keyboard.Modifier();
+            },
+            ctrl: function () {
+              return new _.fg.keyboard.Modifier();
+            },
+            meta: function () {
+              return new _.fg.keyboard.Modifier();
+            }
+          };
+        }),
+        Modifiers: Kotlin.createClass(null, function Modifiers(list) {
+          this.list = Kotlin.kotlin.collections.sorted_349qs3$(list);
+        }, /** @lends _.fg.keyboard.Modifiers.prototype */ {
+          isNotEmpty: function () {
+            return !this.list.isEmpty();
+          },
+          equals_za3rmp$: function (other) {
+            if (this === other)
+              return true;
+            if (!Kotlin.isType(other, _.fg.keyboard.Modifiers))
+              return false;
+            if (!Kotlin.equals(this.list, other.list))
+              return false;
+            return true;
+          },
+          hashCode: function () {
+            return Kotlin.hashCode(this.list);
+          },
+          toString: function () {
+            return Kotlin.kotlin.collections.joinToString_ld60a2$(this.list, '+');
+          }
+        }),
+        Type: Kotlin.createEnumClass(function () {
+          return [Kotlin.Enum];
+        }, function Type() {
+          Type.baseInitializer.call(this);
+        }, function () {
+          return {
+            keydown: function () {
+              return new _.fg.keyboard.Type();
+            },
+            keypress: function () {
+              return new _.fg.keyboard.Type();
+            },
+            keyup: function () {
+              return new _.fg.keyboard.Type();
+            }
+          };
+        })
+      }),
       style: Kotlin.definePackage(null, /** @lends _.fg.style */ {
         AndRule: Kotlin.createClass(function () {
           return [_.fg.style.Rule];
@@ -2675,7 +3504,7 @@ var elements = function (Kotlin) {
           this.background$delegate = new _.fg.style.Rule.Property(this);
           this.backgroundAttachment$delegate = new _.fg.style.Rule.Property(this);
           this.backgroundClip$delegate = new _.fg.style.Rule.Property(this);
-          this.backgroundColor$delegate = new _.fg.style.Rule.Property(this);
+          this.backgroundColor$delegate = new _.fg.style.Rule.NullableProperty(this);
           this.backgroundImage$delegate = new _.fg.style.Rule.Property(this);
           this.backgroundOrigin$delegate = new _.fg.style.Rule.Property(this);
           this.backgroundPosition$delegate = new _.fg.style.Rule.Property(this);
@@ -2689,7 +3518,7 @@ var elements = function (Kotlin) {
           this.borderBottomStyle$delegate = new _.fg.style.Rule.Property(this);
           this.borderBottomWidth$delegate = new _.fg.style.Rule.Property(this);
           this.borderCollapse$delegate = new _.fg.style.Rule.Property(this);
-          this.borderColor$delegate = new _.fg.style.Rule.Property(this);
+          this.borderColor$delegate = new _.fg.style.Rule.NullableProperty(this);
           this.borderImage$delegate = new _.fg.style.Rule.Property(this);
           this.borderImageOutset$delegate = new _.fg.style.Rule.Property(this);
           this.borderImageRepeat$delegate = new _.fg.style.Rule.Property(this);
@@ -2700,23 +3529,23 @@ var elements = function (Kotlin) {
           this.borderLeftColor$delegate = new _.fg.style.Rule.Property(this);
           this.borderLeftStyle$delegate = new _.fg.style.Rule.Property(this);
           this.borderLeftWidth$delegate = new _.fg.style.Rule.Property(this);
-          this.borderRadius$delegate = new _.fg.style.Rule.Property(this);
+          this.borderRadius$delegate = new _.fg.style.Rule.NullableProperty(this);
           this.borderRight$delegate = new _.fg.style.Rule.Property(this);
           this.borderRightColor$delegate = new _.fg.style.Rule.Property(this);
           this.borderRightStyle$delegate = new _.fg.style.Rule.Property(this);
           this.borderRightWidth$delegate = new _.fg.style.Rule.Property(this);
           this.borderSpacing$delegate = new _.fg.style.Rule.Property(this);
-          this.borderStyle$delegate = new _.fg.style.Rule.Property(this);
+          this.borderStyle$delegate = new _.fg.style.Rule.NullableProperty(this);
           this.borderTop$delegate = new _.fg.style.Rule.Property(this);
           this.borderTopColor$delegate = new _.fg.style.Rule.Property(this);
           this.borderTopLeftRadius$delegate = new _.fg.style.Rule.Property(this);
           this.borderTopRightRadius$delegate = new _.fg.style.Rule.Property(this);
           this.borderTopStyle$delegate = new _.fg.style.Rule.Property(this);
           this.borderTopWidth$delegate = new _.fg.style.Rule.Property(this);
-          this.borderWidth$delegate = new _.fg.style.Rule.Property(this);
+          this.borderWidth$delegate = new _.fg.style.Rule.NullableProperty(this);
           this.bottom$delegate = new _.fg.style.Rule.Property(this);
           this.boxDecorationBreak$delegate = new _.fg.style.Rule.Property(this);
-          this.boxShadow$delegate = new _.fg.style.Rule.Property(this);
+          this.boxShadow$delegate = new _.fg.style.Rule.NullableProperty(this);
           this.boxSizing$delegate = new _.fg.style.Rule.Property(this);
           this.breakAfter$delegate = new _.fg.style.Rule.Property(this);
           this.breakBefore$delegate = new _.fg.style.Rule.Property(this);
@@ -2738,7 +3567,7 @@ var elements = function (Kotlin) {
           this.content$delegate = new _.fg.style.Rule.Property(this);
           this.counterIncrement$delegate = new _.fg.style.Rule.Property(this);
           this.counterReset$delegate = new _.fg.style.Rule.Property(this);
-          this.cursor$delegate = new _.fg.style.Rule.Property(this);
+          this.cursor$delegate = new _.fg.style.Rule.NullableProperty(this);
           this.direction$delegate = new _.fg.style.Rule.Property(this);
           this.display$delegate = new _.fg.style.Rule.Property(this);
           this.emptyCells$delegate = new _.fg.style.Rule.Property(this);
@@ -2784,7 +3613,7 @@ var elements = function (Kotlin) {
           this.listStyleImage$delegate = new _.fg.style.Rule.Property(this);
           this.listStylePosition$delegate = new _.fg.style.Rule.Property(this);
           this.listStyleType$delegate = new _.fg.style.Rule.Property(this);
-          this.margin$delegate = new _.fg.style.Rule.Property(this);
+          this.margin$delegate = new _.fg.style.Rule.NullableProperty(this);
           this.marginBottom$delegate = new _.fg.style.Rule.Property(this);
           this.marginLeft$delegate = new _.fg.style.Rule.Property(this);
           this.marginRight$delegate = new _.fg.style.Rule.Property(this);
@@ -2813,7 +3642,7 @@ var elements = function (Kotlin) {
           this.opacity$delegate = new _.fg.style.Rule.Property(this);
           this.order$delegate = new _.fg.style.Rule.Property(this);
           this.orphans$delegate = new _.fg.style.Rule.Property(this);
-          this.outline$delegate = new _.fg.style.Rule.Property(this);
+          this.outline$delegate = new _.fg.style.Rule.NullableProperty(this);
           this.outlineColor$delegate = new _.fg.style.Rule.Property(this);
           this.outlineOffset$delegate = new _.fg.style.Rule.Property(this);
           this.outlineStyle$delegate = new _.fg.style.Rule.Property(this);
@@ -4737,6 +5566,32 @@ var elements = function (Kotlin) {
               var tmp$0;
               var styleName = (tmp$0 = this.name) != null ? tmp$0 : this.$outer.resolveRuleName_2a5go5$(prop);
               if (value.length > 0) {
+                this.$outer._map.put_wn2jw4$(styleName, value);
+              }
+               else {
+                this.$outer._map.remove_za3rmp$(styleName);
+              }
+            }
+          }),
+          NullableProperty: Kotlin.createClass(null, function NullableProperty($outer, name) {
+            this.$outer = $outer;
+            if (name === void 0)
+              name = null;
+            this.name = name;
+          }, /** @lends _.fg.style.Rule.NullableProperty.prototype */ {
+            getValue_ozjeq6$: function (rule, prop) {
+              var tmp$0;
+              var styleName = (tmp$0 = this.name) != null ? tmp$0 : this.$outer.resolveRuleName_2a5go5$(prop);
+              return this.$outer._map.get_za3rmp$(styleName);
+            },
+            setValue_l2o8xw$: function (rule, prop, value) {
+              var tmp$0;
+              var styleName = (tmp$0 = this.name) != null ? tmp$0 : this.$outer.resolveRuleName_2a5go5$(prop);
+              var tmp$1 = value != null;
+              if (tmp$1) {
+                tmp$1 = value.length > 0;
+              }
+              if (tmp$1) {
                 this.$outer._map.put_wn2jw4$(styleName, value);
               }
                else {

@@ -18,6 +18,9 @@ open class Element(name: String? = null,
     val _parentElement: Element
         get() = _parentNode!! as Element
 
+    var _id: String? by W3cDelegates.nullableAttribute("id")
+    var _tabindex: String? by W3cDelegates.nullableAttribute("tabindex")
+
     private var _displayBeforeHiding: String = ""
 
     val hidden: Boolean
@@ -149,6 +152,16 @@ open class Element(name: String? = null,
         if (!hidden) {
             _displayBeforeHiding = this.style.display
             this.style.display = "none"
+        }
+    }
+
+    fun traverseElements(each: (Element) -> Boolean) {
+        for (child in childElements) {
+            val continueTraversing = each(child)
+            if (!continueTraversing) {
+                break
+            }
+            child.traverseElements(each)
         }
     }
 }

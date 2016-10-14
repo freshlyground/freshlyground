@@ -1,5 +1,6 @@
 package fg.beans.drawer
 
+import fg.base.Side
 import fg.elements.Div
 import fg.elements.HTML
 import fg.elements.StyledClass
@@ -22,7 +23,7 @@ open class Drawer(side: Side) : Div() {
     }
 
     private fun renderSide(side: Side) {
-        when(side) {
+        when (side) {
             Side.LEFT -> {
                 style.left = "0"
             }
@@ -30,11 +31,6 @@ open class Drawer(side: Side) : Div() {
                 style.right = "0"
             }
         }
-    }
-
-    enum class Side {
-        LEFT,
-        RIGHT
     }
 
     companion object Drawer : StyledClass {

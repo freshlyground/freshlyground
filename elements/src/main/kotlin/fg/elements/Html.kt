@@ -1,5 +1,6 @@
 package fg.elements
 
+import fg.style.AnyRule
 import fg.style.ClassRule
 import fg.style.KeyframesRule
 import fg.style.Rule
@@ -26,6 +27,12 @@ class Html internal constructor(val w3cElement: Element = document.documentEleme
 
         BODY.init()
         window.setTimeout({ BODY.callDidMount() }, 10)
+
+
+        addCSSRule(AnyRule() with {
+            boxSizing = "border-box"
+        })
+
     }
 
     fun registerStyle(styledClass: StyledClass) {
@@ -56,6 +63,11 @@ class Html internal constructor(val w3cElement: Element = document.documentEleme
         if (rule !is KeyframesRule) {
             rule._childStyles.forEach { registerCSSRule(it) }
         }
+    }
+
+    companion object Html {
+
+
     }
 }
 

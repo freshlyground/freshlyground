@@ -1,7 +1,7 @@
 package fg.md
 
+import fg.base.Side
 import fg.beans.Action
-import fg.beans.drawer.Drawer
 import fg.elements.Element
 import fg.elements.initAndAppendNode
 import fg.md.button.MDButton
@@ -20,7 +20,7 @@ import fg.md.radio.MDRadioButton
 
 fun Element.mdButton(action: Action, type: MDButton.Type, init: MDButton.() -> Unit) = initAndAppendNode(MDButton(action, type), init)
 fun Element.mdRadioButton(labelText: String? = null, init: MDRadioButton.() -> Unit) = initAndAppendNode(MDRadioButton(labelText = labelText), init)
-fun Element.mdDrawer(side: Drawer.Side, init: MDDrawer.() -> Unit) = initAndAppendNode(MDDrawer(side), init)
+fun Element.mdDrawer(side: Side, init: MDDrawer.() -> Unit) = initAndAppendNode(MDDrawer(side), init)
 fun Element.mdCard(init: MDCard.() -> Unit) = initAndAppendNode(MDCard(), init)
 fun MDCard.title(init: MDCardTitle.() -> Unit) = initAndAppendNode(MDCardTitle(), init)
 fun MDCard.subtitle(init: MDCardSubtitle.() -> Unit) = initAndAppendNode(MDCardSubtitle(), init)

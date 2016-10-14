@@ -1,7 +1,10 @@
 package fg.elements
 
+import org.w3c.dom.css.CSSStyleDeclaration
 import org.w3c.dom.events.Event
+import org.w3c.dom.events.KeyboardEvent
 import org.w3c.dom.events.MouseEvent
+import kotlin.browser.window
 
 
 infix fun <T> T.with(init: T.() -> Unit): T {
@@ -122,28 +125,34 @@ fun Element.unScroll(listener: (event: Event) -> Unit) {
     this.w3cElement.removeEventListener("scroll", listener)
 }
 
-fun Element.onKeyUp(listener: (keyboardEvent: Event) -> Unit) {
-    this.w3cElement.addEventListener("keyup", listener)
+fun Element.onKeyUp(listener: (keyboardEvent: KeyboardEvent) -> Unit) {
+    @Suppress("UNCHECKED_CAST")
+    this.w3cElement.addEventListener("keyup", listener as ((Event) -> Unit))
 }
 
-fun Element.unKeyUp(listener: (keyboardEvent: Event) -> Unit) {
-    this.w3cElement.removeEventListener("keyup", listener)
+fun Element.unKeyUp(listener: (keyboardEvent: KeyboardEvent) -> Unit) {
+    @Suppress("UNCHECKED_CAST")
+    this.w3cElement.removeEventListener("keyup", listener as ((Event) -> Unit))
 }
 
-fun Element.onKeyPress(listener: (keyboardEvent: Event) -> Unit) {
-    this.w3cElement.addEventListener("keypress", listener)
+fun Element.onKeyPress(listener: (keyboardEvent: KeyboardEvent) -> Unit) {
+    @Suppress("UNCHECKED_CAST")
+    this.w3cElement.addEventListener("keypress", listener as ((Event) -> Unit))
 }
 
-fun Element.unKeyPress(listener: (keyboardEvent: Event) -> Unit) {
-    this.w3cElement.removeEventListener("keypress", listener)
+fun Element.unKeyPress(listener: (keyboardEvent: KeyboardEvent) -> Unit) {
+    @Suppress("UNCHECKED_CAST")
+    this.w3cElement.removeEventListener("keypress", listener as ((Event) -> Unit))
 }
 
-fun Element.onKeyDown(listener: (keyboardEvent: Event) -> Unit) {
-    this.w3cElement.addEventListener("keydown", listener)
+fun Element.onKeyDown(listener: (keyboardEvent: KeyboardEvent) -> Unit) {
+    @Suppress("UNCHECKED_CAST")
+    this.w3cElement.addEventListener("keydown", listener as ((Event) -> Unit))
 }
 
-fun Element.unKeyDown(listener: (keyboardEvent: Event) -> Unit) {
-    this.w3cElement.removeEventListener("keydown", listener)
+fun Element.unKeyDown(listener: (keyboardEvent: KeyboardEvent) -> Unit) {
+    @Suppress("UNCHECKED_CAST")
+    this.w3cElement.removeEventListener("keydown", listener as ((Event) -> Unit))
 }
 
 fun Element.onDrag(listener: (dragEvent: Event) -> Unit) {
@@ -201,3 +210,6 @@ fun Element.onDrop(listener: (dragEvent: Event) -> Unit) {
 fun Element.unDrop(listener: (dragEvent: Event) -> Unit) {
     this.w3cElement.removeEventListener("drop", listener)
 }
+
+val Element.computedStyle: CSSStyleDeclaration
+    get() = window.getComputedStyle(this.w3cElement)

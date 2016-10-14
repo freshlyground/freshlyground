@@ -2,6 +2,7 @@ package fg.beans.icon
 
 import fg.elements.ClassSelector
 import fg.elements.Element
+import fg.elements.I
 
 class FontAwesomeIcon(val name: String, val size: Size? = null) : Icon {
 
@@ -13,6 +14,12 @@ class FontAwesomeIcon(val name: String, val size: Size? = null) : Icon {
         if (size != null && size != Size.NORMAL) {
             element.addClass(size.selector.toString())
         }
+    }
+
+    fun toI(): I {
+        val i = I()
+        this.apply(i)
+        return i
     }
 
     enum class Size(val selector: ClassSelector?) {

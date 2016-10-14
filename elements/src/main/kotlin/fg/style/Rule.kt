@@ -62,7 +62,7 @@ abstract class Rule<out SELECTOR : Selector>(val selector: SELECTOR) {
 
     var backgroundClip: String by Property()
 
-    var backgroundColor: String by Property()
+    var backgroundColor: String? by NullableProperty()
 
     var backgroundImage: String by Property()
 
@@ -90,7 +90,7 @@ abstract class Rule<out SELECTOR : Selector>(val selector: SELECTOR) {
 
     var borderCollapse: String by Property()
 
-    var borderColor: String by Property()
+    var borderColor: String? by NullableProperty()
 
     var borderImage: String by Property()
 
@@ -112,7 +112,7 @@ abstract class Rule<out SELECTOR : Selector>(val selector: SELECTOR) {
 
     var borderLeftWidth: String by Property()
 
-    var borderRadius: String by Property()
+    var borderRadius: String? by NullableProperty()
 
     var borderRight: String by Property()
 
@@ -124,7 +124,7 @@ abstract class Rule<out SELECTOR : Selector>(val selector: SELECTOR) {
 
     var borderSpacing: String by Property()
 
-    var borderStyle: String by Property()
+    var borderStyle: String? by NullableProperty()
 
     var borderTop: String by Property()
 
@@ -138,13 +138,13 @@ abstract class Rule<out SELECTOR : Selector>(val selector: SELECTOR) {
 
     var borderTopWidth: String by Property()
 
-    var borderWidth: String by Property()
+    var borderWidth: String? by NullableProperty()
 
     var bottom: String by Property()
 
     var boxDecorationBreak: String by Property()
 
-    var boxShadow: String by Property()
+    var boxShadow: String? by NullableProperty()
 
     var boxSizing: String by Property()
 
@@ -188,7 +188,7 @@ abstract class Rule<out SELECTOR : Selector>(val selector: SELECTOR) {
 
     var counterReset: String by Property()
 
-    var cursor: String by Property()
+    var cursor: String? by NullableProperty()
 
     var direction: String by Property()
 
@@ -280,7 +280,7 @@ abstract class Rule<out SELECTOR : Selector>(val selector: SELECTOR) {
 
     var listStyleType: String by Property()
 
-    var margin: String by Property()
+    var margin: String? by NullableProperty()
 
     var marginBottom: String by Property()
 
@@ -338,7 +338,7 @@ abstract class Rule<out SELECTOR : Selector>(val selector: SELECTOR) {
 
     var orphans: String by Property()
 
-    var outline: String by Property()
+    var outline: String? by NullableProperty()
 
     var outlineColor: String by Property()
 
@@ -486,6 +486,23 @@ abstract class Rule<out SELECTOR : Selector>(val selector: SELECTOR) {
         operator fun setValue(rule: Rule<*>?, prop: KProperty<*>, value: String) {
             val styleName = name ?: resolveRuleName(prop)
             if (value.isNotEmpty()) {
+                _map[styleName] = value
+            } else {
+                _map.remove(styleName)
+            }
+        }
+    }
+
+    inner class NullableProperty(val name: String? = null) {
+
+        operator fun getValue(rule: Rule<*>?, prop: KProperty<*>): String? {
+            val styleName = name ?: resolveRuleName(prop)
+            return _map[styleName]
+        }
+
+        operator fun setValue(rule: Rule<*>?, prop: KProperty<*>, value: String?) {
+            val styleName = name ?: resolveRuleName(prop)
+            if (value != null && value.isNotEmpty()) {
                 _map[styleName] = value
             } else {
                 _map.remove(styleName)

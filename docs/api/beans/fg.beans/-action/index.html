@@ -15,7 +15,7 @@
 <td>
 <a href="-init-.html">&lt;init&gt;</a></td>
 <td>
-<code><span class="identifier">Action</span><span class="symbol">(</span><span class="identifier" id="fg.beans.Action$<init>(kotlin.String, kotlin.Boolean, fg.beans.icon.Icon, kotlin.Function0((kotlin.Unit)))/label">label</span><span class="symbol">:</span>&nbsp;<span class="identifier">String</span><span class="symbol">?</span>&nbsp;<span class="symbol">=</span>&nbsp;null<span class="symbol">, </span><span class="identifier" id="fg.beans.Action$<init>(kotlin.String, kotlin.Boolean, fg.beans.icon.Icon, kotlin.Function0((kotlin.Unit)))/enabled">enabled</span><span class="symbol">:</span>&nbsp;<span class="identifier">Boolean</span>&nbsp;<span class="symbol">=</span>&nbsp;true<span class="symbol">, </span><span class="identifier" id="fg.beans.Action$<init>(kotlin.String, kotlin.Boolean, fg.beans.icon.Icon, kotlin.Function0((kotlin.Unit)))/icon">icon</span><span class="symbol">:</span>&nbsp;<a href="../../fg.beans.icon/-icon/index.html"><span class="identifier">Icon</span></a><span class="symbol">?</span>&nbsp;<span class="symbol">=</span>&nbsp;null<span class="symbol">, </span><span class="identifier" id="fg.beans.Action$<init>(kotlin.String, kotlin.Boolean, fg.beans.icon.Icon, kotlin.Function0((kotlin.Unit)))/perform">perform</span><span class="symbol">:</span>&nbsp;<span class="symbol">(</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<span class="identifier">Unit</span><span class="symbol">)</span></code></td>
+<code><span class="identifier">Action</span><span class="symbol">(</span><span class="identifier" id="fg.beans.Action$<init>(kotlin.String, kotlin.Boolean, fg.beans.icon.Icon, , kotlin.Function1((fg.beans.ActionPerform, kotlin.Unit)))/label">label</span><span class="symbol">:</span>&nbsp;<span class="identifier">String</span><span class="symbol">?</span>&nbsp;<span class="symbol">=</span>&nbsp;null<span class="symbol">, </span><span class="identifier" id="fg.beans.Action$<init>(kotlin.String, kotlin.Boolean, fg.beans.icon.Icon, , kotlin.Function1((fg.beans.ActionPerform, kotlin.Unit)))/enabled">enabled</span><span class="symbol">:</span>&nbsp;<span class="identifier">Boolean</span>&nbsp;<span class="symbol">=</span>&nbsp;true<span class="symbol">, </span><span class="identifier" id="fg.beans.Action$<init>(kotlin.String, kotlin.Boolean, fg.beans.icon.Icon, , kotlin.Function1((fg.beans.ActionPerform, kotlin.Unit)))/icon">icon</span><span class="symbol">:</span>&nbsp;<a href="../../fg.beans.icon/-icon/index.html"><span class="identifier">Icon</span></a><span class="symbol">?</span>&nbsp;<span class="symbol">=</span>&nbsp;null<span class="symbol">, </span><span class="identifier" id="fg.beans.Action$<init>(kotlin.String, kotlin.Boolean, fg.beans.icon.Icon, , kotlin.Function1((fg.beans.ActionPerform, kotlin.Unit)))/shortcut">shortcut</span><span class="symbol">:</span>&nbsp;<span class="identifier">&lt;ERROR CLASS&gt;</span><span class="symbol">?</span>&nbsp;<span class="symbol">=</span>&nbsp;null<span class="symbol">, </span><span class="identifier" id="fg.beans.Action$<init>(kotlin.String, kotlin.Boolean, fg.beans.icon.Icon, , kotlin.Function1((fg.beans.ActionPerform, kotlin.Unit)))/perform">perform</span><span class="symbol">:</span>&nbsp;<span class="symbol">(</span><a href="../-action-perform/index.html"><span class="identifier">ActionPerform</span></a><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<span class="identifier">Unit</span><span class="symbol">)</span></code></td>
 </tr>
 </tbody>
 </table>
@@ -46,6 +46,18 @@
 <td>
 <code><span class="keyword">var </span><span class="identifier">label</span><span class="symbol">: </span><span class="identifier">String</span><span class="symbol">?</span></code></td>
 </tr>
+<tr>
+<td>
+<a href="property-changed-listeners.html">propertyChangedListeners</a></td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">propertyChangedListeners</span><span class="symbol">: </span><span class="identifier">MutableList</span><span class="symbol">&lt;</span><span class="symbol">(</span><span class="identifier">Action</span><span class="symbol">,</span>&nbsp;<span class="identifier">KProperty</span><span class="symbol">&lt;</span><span class="identifier">*</span><span class="symbol">&gt;</span><span class="symbol">,</span>&nbsp;<span class="identifier">Any</span><span class="symbol">?</span><span class="symbol">,</span>&nbsp;<span class="identifier">Any</span><span class="symbol">?</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<span class="identifier">Unit</span><span class="symbol">&gt;</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="shortcut.html">shortcut</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">shortcut</span><span class="symbol">: </span><span class="identifier">&lt;ERROR CLASS&gt;</span><span class="symbol">?</span></code></td>
+</tr>
 </tbody>
 </table>
 <h3>Functions</h3>
@@ -55,19 +67,19 @@
 <td>
 <a href="on-property-changed.html">onPropertyChanged</a></td>
 <td>
-<code><span class="keyword">fun </span><span class="identifier">onPropertyChanged</span><span class="symbol">(</span><span class="identifier" id="fg.beans.Action$onPropertyChanged(kotlin.Function4((fg.beans.Action, kotlin.reflect.KProperty((kotlin.Any)), , , kotlin.Unit)))/listener">listener</span><span class="symbol">:</span>&nbsp;<span class="symbol">(</span><span class="identifier">Action</span><span class="symbol">,</span>&nbsp;<span class="identifier">KProperty</span><span class="symbol">&lt;</span><span class="identifier">*</span><span class="symbol">&gt;</span><span class="symbol">,</span>&nbsp;<span class="identifier">Any</span><span class="symbol">?</span><span class="symbol">,</span>&nbsp;<span class="identifier">Any</span><span class="symbol">?</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<span class="identifier">Unit</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">Unit</span></code></td>
+<code><span class="keyword">open</span> <span class="keyword">fun </span><span class="identifier">onPropertyChanged</span><span class="symbol">(</span><span class="identifier" id="fg.beans.Action$onPropertyChanged(kotlin.Function4((fg.beans.Action, kotlin.reflect.KProperty((kotlin.Any)), , , kotlin.Unit)))/listener">listener</span><span class="symbol">:</span>&nbsp;<span class="symbol">(</span><span class="identifier">Action</span><span class="symbol">,</span>&nbsp;<span class="identifier">KProperty</span><span class="symbol">&lt;</span><span class="identifier">*</span><span class="symbol">&gt;</span><span class="symbol">,</span>&nbsp;<span class="identifier">Any</span><span class="symbol">?</span><span class="symbol">,</span>&nbsp;<span class="identifier">Any</span><span class="symbol">?</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<span class="identifier">Unit</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">Unit</span></code></td>
 </tr>
 <tr>
 <td>
 <a href="perform.html">perform</a></td>
 <td>
-<code><span class="keyword">fun </span><span class="identifier">perform</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">Unit</span></code></td>
+<code><span class="keyword">fun </span><span class="identifier">perform</span><span class="symbol">(</span><span class="identifier" id="fg.beans.Action$perform()/source">source</span><span class="symbol">:</span>&nbsp;<span class="identifier">&lt;ERROR CLASS&gt;</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">Unit</span></code></td>
 </tr>
 <tr>
 <td>
 <a href="un-property-changed.html">unPropertyChanged</a></td>
 <td>
-<code><span class="keyword">fun </span><span class="identifier">unPropertyChanged</span><span class="symbol">(</span><span class="identifier" id="fg.beans.Action$unPropertyChanged(kotlin.Function4((fg.beans.Action, kotlin.reflect.KProperty((kotlin.Any)), , , kotlin.Unit)))/listener">listener</span><span class="symbol">:</span>&nbsp;<span class="symbol">(</span><span class="identifier">Action</span><span class="symbol">,</span>&nbsp;<span class="identifier">KProperty</span><span class="symbol">&lt;</span><span class="identifier">*</span><span class="symbol">&gt;</span><span class="symbol">,</span>&nbsp;<span class="identifier">Any</span><span class="symbol">?</span><span class="symbol">,</span>&nbsp;<span class="identifier">Any</span><span class="symbol">?</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<span class="identifier">Unit</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">Unit</span></code></td>
+<code><span class="keyword">open</span> <span class="keyword">fun </span><span class="identifier">unPropertyChanged</span><span class="symbol">(</span><span class="identifier" id="fg.beans.Action$unPropertyChanged(kotlin.Function4((fg.beans.Action, kotlin.reflect.KProperty((kotlin.Any)), , , kotlin.Unit)))/listener">listener</span><span class="symbol">:</span>&nbsp;<span class="symbol">(</span><span class="identifier">Action</span><span class="symbol">,</span>&nbsp;<span class="identifier">KProperty</span><span class="symbol">&lt;</span><span class="identifier">*</span><span class="symbol">&gt;</span><span class="symbol">,</span>&nbsp;<span class="identifier">Any</span><span class="symbol">?</span><span class="symbol">,</span>&nbsp;<span class="identifier">Any</span><span class="symbol">?</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<span class="identifier">Unit</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">Unit</span></code></td>
 </tr>
 </tbody>
 </table>
