@@ -154,7 +154,7 @@ this['docs-source'] = function (Kotlin, $module$elements, $module$beans) {
         main_kand9s$: function (args) {
           $module$elements.fg.elements.with_ji1yox$($module$elements.fg.elements.BODY, _.fg.docs.main_kand9s$f);
           $module$elements.fg.elements.HTML.addCSSRule_3cka69$($module$elements.fg.elements.with_ji1yox$(new $module$elements.fg.style.AnyRule(), _.fg.docs.main_kand9s$f_0));
-          $module$elements.fg.elements.HTML.addCSSRule_3cka69$($module$elements.fg.elements.with_ji1yox$(new $module$elements.fg.style.ClassRule($module$beans.fg.beans.menu.Menu.Menu.classSelector), _.fg.docs.main_kand9s$f_1));
+          $module$elements.fg.elements.HTML.addCSSRule_3cka69$($module$elements.fg.elements.with_ji1yox$(new $module$elements.fg.style.ClassRule($module$beans.fg.beans.menu.Menu.Statics.classSelector), _.fg.docs.main_kand9s$f_1));
           $module$elements.fg.elements.HTML.addCSSRule_3cka69$($module$elements.fg.elements.with_ji1yox$(new $module$elements.fg.style.ClassRule($module$beans.fg.beans.menu.MenuItem.MenuItem.classSelector), _.fg.docs.main_kand9s$f_2));
           $module$elements.fg.elements.HTML.init();
         }

@@ -160,6 +160,7 @@ open class Node(internal val w3cNode: org.w3c.dom.Node) {
         }
         _childNodes.remove(node)
         node._parentNode = null
+        childRemoved(this)
     }
 
     fun removeSelf() {
@@ -171,6 +172,14 @@ open class Node(internal val w3cNode: org.w3c.dom.Node) {
      * Override this function when needed.
      */
     open fun childAdded(child: Node) {
+
+    }
+
+    /**
+     * This function will be called after given child has been removed from this element.
+     * Override this function when needed.
+     */
+    open fun childRemoved(child: Node) {
 
     }
 

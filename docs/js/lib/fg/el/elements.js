@@ -2454,12 +2454,15 @@ var elements = function (Kotlin) {
             }
             this._childNodes_d2zqq6$.remove_za3rmp$(node);
             node._parentNode = null;
+            this.childRemoved_sr04hg$(this);
           },
           removeSelf: function () {
             var tmp$0;
             (tmp$0 = this._parentNode) != null ? tmp$0.removeChild_sr04hg$(this) : null;
           },
           childAdded_sr04hg$: function (child) {
+          },
+          childRemoved_sr04hg$: function (child) {
           }
         }, /** @lends _.fg.elements.Node */ {
           insertBefore_p937mc$f: function (this$Node, closure$child) {

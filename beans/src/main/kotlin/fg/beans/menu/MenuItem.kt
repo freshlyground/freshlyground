@@ -28,6 +28,9 @@ class MenuItem(action: Action) : Div(), ActionBean {
 
     override val action: Action = action
 
+    private val beforePerformingActionListeners: MutableList<(action: Action) -> Unit> = arrayListOf()
+    private val afterPerformingActionListeners: MutableList<(action: Action) -> Unit> = arrayListOf()
+
     private val selectedIcon: IconI by lazy {
         val iconI = IconI()
         iconI.icon = FontAwesomeIcons.check()
@@ -72,11 +75,16 @@ class MenuItem(action: Action) : Div(), ActionBean {
 
     private val clickHandler: (Event) -> Unit = {
 
+        beforePerformingActionListeners.forEach { it(action) }
+
         if (action is SelectableAction) {
             action.selected = !action.selected
+            action.perform(this)
         } else {
             action.perform(this)
         }
+
+        afterPerformingActionListeners.forEach { it(action) }
     }
 
 
@@ -144,6 +152,22 @@ class MenuItem(action: Action) : Div(), ActionBean {
         }
     }
 
+    fun onBeforePerformingAction(listener: (action: Action) -> Unit) {
+        beforePerformingActionListeners.add(listener)
+    }
+
+    fun unBeforePerformingAction(listener: (action: Action) -> Unit) {
+        beforePerformingActionListeners.remove(listener)
+    }
+
+    fun onAfterPerformingAction(listener: (action: Action) -> Unit) {
+        afterPerformingActionListeners.add(listener)
+    }
+
+    fun unAfterPerformingAction(listener: (action: Action) -> Unit) {
+        afterPerformingActionListeners.remove(listener)
+    }
+
     companion object MenuItem : StyledClass {
 
         override val classSelector = ClassSelector("$pkg-menu-item")
@@ -156,6 +180,7 @@ class MenuItem(action: Action) : Div(), ActionBean {
             textAlign = "left"
 
             display = "flex"
+            flexWrap = "nowrap"
 
             child(".selected-icon") {
                 marginRight = "2px"

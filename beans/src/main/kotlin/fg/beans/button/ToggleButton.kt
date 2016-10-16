@@ -41,10 +41,8 @@ open class ToggleButton(action: SelectableAction) : AbstractButton(action) {
     private fun renderSelected(selected: Boolean) {
         if (selected) {
             previousBackgroundColor = style.backgroundColor
-            //style.backgroundColor = "#ccc"
             addClass("selected")
         } else {
-            //style.backgroundColor = previousBackgroundColor
             removeClass("selected")
         }
     }

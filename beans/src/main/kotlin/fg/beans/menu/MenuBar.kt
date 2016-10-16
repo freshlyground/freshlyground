@@ -1,6 +1,6 @@
 package fg.beans.menu
 
-import fg.beans.ActionPerform
+import fg.beans.Action
 import fg.beans.SelectableAction
 import fg.beans.button.ToggleButton
 import fg.beans.pkg
@@ -10,6 +10,7 @@ import fg.elements.HTML
 import fg.elements.Node
 import fg.elements.StyledClass
 import fg.elements.computedStyle
+import fg.elements.onMouseEnter
 import fg.elements.px
 import fg.elements.toClassSelector
 import fg.style.ClassRule
@@ -17,10 +18,13 @@ import fg.style.child
 
 class MenuBar : Div() {
 
-    private val toggleButtonByMenu: MutableMap<Menu, ToggleButton> = linkedMapOf()
+    private val menuButtonByMenu: MutableMap<Menu, ToggleButton> = linkedMapOf()
 
-    private val menuButtonActionPerformed: (ActionPerform) -> Unit = {
-
+    private val beforePerformingMenuItemActionHandler: (Action, Menu) -> Unit = { action, menu ->
+        //closeMenu(menu)
+    }
+    private val afterPerformingMenuItemActionHandler: (Action, Menu) -> Unit = { action, menu ->
+        closeMenu(menu)
     }
 
     override fun render() {
@@ -39,32 +43,75 @@ class MenuBar : Div() {
         if (child is Menu) {
 
             child.hide()
-            val toggleButton = MenuButton(SelectableAction(child.label) { actionPerform ->
+            val menuButton = MenuButton(SelectableAction(child.label) { actionPerform ->
                 actionPerform.action as SelectableAction
                 if (actionPerform.action.selected) {
-                    hideOthers(child)
-                    child.show()
+                    openMenu(child)
 
-                    val left = actionPerform.source.boundingClientRect.left - BODY.computedStyle.marginLeft.px.value
 
-                    child.style.top = "${actionPerform.source.boundingClientRect.height}px"
-                    child.style.left = "${left}px"
                 } else {
                     child.hide()
                 }
             })
-            super.appendChild(toggleButton)
-            toggleButtonByMenu.put(child, toggleButton)
+            super.appendChild(menuButton)
+
+            menuButtonByMenu.put(child, menuButton)
+            child.onBeforePerformingMenuItemAction(beforePerformingMenuItemActionHandler)
+            child.onAfterPerformingMenuItemAction(afterPerformingMenuItemActionHandler)
+
+            menuButton.onMouseEnter {
+
+                console.log("MenuButton[${menuButton.action.label}].onMouseEnter")
+                var anyMenuOpen = anyMenuOpen()
+                console.log("MenuButton[${menuButton.action.label}] anyMenuOpen = " + anyMenuOpen)
+
+                if (anyMenuOpen) {
+                    openMenu(child)
+                    menuButton.action.selected = true
+                }
+            }
         }
     }
 
-    private fun hideOthers(exception: Menu) {
-        for (child in childElements) {
-            if (child != exception && child is Menu) {
-                child.hide()
-                toggleButtonByMenu[child]?.action?.selected = false
+    private fun anyMenuOpen(): Boolean {
+        for (mb in menuButtonByMenu.values) {
+            if (mb.action.selected) {
+                return true
             }
         }
+        return false
+    }
+
+    override fun childRemoved(child: Node) {
+        super.childRemoved(child)
+
+        if (child is Menu) {
+            menuButtonByMenu.remove(child)
+        }
+    }
+
+    private fun closeOthers(exception: Menu) {
+        for (child in childElements) {
+            if (child != exception && child is Menu) {
+                closeMenu(child)
+            }
+        }
+    }
+
+    private fun openMenu(menu: Menu) {
+        closeOthers(menu)
+        menu.show()
+
+        val menuButton = menuButtonByMenu[menu]!!
+        val left = menuButton.boundingClientRect.left - BODY.computedStyle.marginLeft.px.value
+
+        menu.style.top = "${menuButton.boundingClientRect.height}px"
+        menu.style.left = "${left}px"
+    }
+
+    private fun closeMenu(menu: Menu) {
+        menu.hide()
+        menuButtonByMenu[menu]?.action?.selected = false
     }
 
     companion object MenuBar : StyledClass {
