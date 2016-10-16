@@ -26,6 +26,27 @@ object mainDrawer {
             val leftDrawer = drawer(Side.LEFT) {
 
                 hide()
+                style.borderRight = "1px solid black"
+
+                menu {
+                    menuItem(SelectableAction("Menu Item 1", shortcut = Key.from("meta+alt+z"), perform = handleMenuItemAction)) {
+
+                    }
+                    menuItem(Action("Menu Item 2", shortcut = Key.from("meta+1"), perform = handleMenuItemAction)) {
+
+                    }
+                    menuItem(Action("Menu Item 3", shortcut = Key.from("meta+2"), perform = handleMenuItemAction)) {
+
+                    }
+                    menuItem(SelectableAction("Menu Item 4", shortcut = Key.from("meta+s"), perform = handleMenuItemAction)) {
+
+                    }
+                }
+            }
+            val rightDrawer = drawer(Side.RIGHT) {
+
+                hide()
+                style.borderLeft = "1px solid black"
 
                 menu {
                     menuItem(SelectableAction("Menu Item 1", shortcut = Key.from("meta+alt+z"), perform = handleMenuItemAction)) {
@@ -48,16 +69,22 @@ object mainDrawer {
             p {
                 style.textAlign = "center"
 
-                button(Action("Dock drawer") { BODY.dock(leftDrawer) }) {
+                button(Action("Dock drawer") { BODY.dock(leftDrawer); BODY.dock(rightDrawer) }) {
 
                 }
-                button(Action("UnDock drawer") { leftDrawer.undock() }) {
+                button(Action("UnDock drawer") { leftDrawer.undock(); rightDrawer.undock() }) {
 
                 }
-                button(Action("Show drawer") { leftDrawer.show() }) {
+                button(Action("Show drawer") {
+                    leftDrawer.show()
+                    rightDrawer.show()
+                }) {
 
                 }
-                button(Action("Hide drawer") { leftDrawer.hide() }) {
+                button(Action("Hide drawer") {
+                    leftDrawer.hide()
+                    rightDrawer.hide()
+                }) {
 
                 }
             }

@@ -1225,6 +1225,115 @@ var beans = function (Kotlin, $module$elements) {
           })
         }),
         menu: Kotlin.definePackage(null, /** @lends _.fg.beans.menu */ {
+          Menu: Kotlin.createClass(function () {
+            return [$module$elements.fg.elements.Div];
+          }, function Menu(label, shortcut) {
+            if (label === void 0)
+              label = null;
+            if (shortcut === void 0)
+              shortcut = null;
+            Menu.baseInitializer.call(this);
+            this.beforePerformingMenuItemActionListeners_ri78n3$ = Kotlin.kotlin.collections.arrayListOf_9mqe4v$([]);
+            this.afterPerformingMenuItemActionListeners_jy470u$ = Kotlin.kotlin.collections.arrayListOf_9mqe4v$([]);
+            this.beforePerformingMenuItemActionHandler_23c9di$ = _.fg.beans.menu.Menu.beforePerformingMenuItemActionHandler_23c9di$f(this);
+            this.afterPerformingMenuItemActionHandler_hqnry5$ = _.fg.beans.menu.Menu.afterPerformingMenuItemActionHandler_hqnry5$f(this);
+            var initialValue = label;
+            this.label$delegate = new Kotlin.kotlin.properties.Delegates.observable$f(_.fg.beans.menu.Menu.label$f, initialValue);
+            var initialValue_0 = shortcut;
+            this.shortcut$delegate = new Kotlin.kotlin.properties.Delegates.observable$f(_.fg.beans.menu.Menu.shortcut$f, initialValue_0);
+          }, /** @lends _.fg.beans.menu.Menu.prototype */ {
+            label: {
+              get: function () {
+                return this.label$delegate.getValue_dsk1ci$(this, new Kotlin.PropertyMetadata('label'));
+              },
+              set: function (label) {
+                this.label$delegate.setValue_w32e13$(this, new Kotlin.PropertyMetadata('label'), label);
+              }
+            },
+            shortcut: {
+              get: function () {
+                return this.shortcut$delegate.getValue_dsk1ci$(this, new Kotlin.PropertyMetadata('shortcut'));
+              },
+              set: function (shortcut) {
+                this.shortcut$delegate.setValue_w32e13$(this, new Kotlin.PropertyMetadata('shortcut'), shortcut);
+              }
+            },
+            onBeforePerformingMenuItemAction_bakdqu$: function (listener) {
+              this.beforePerformingMenuItemActionListeners_ri78n3$.add_za3rmp$(listener);
+            },
+            unBeforePerformingMenuItemAction_bakdqu$: function (listener) {
+              this.beforePerformingMenuItemActionListeners_ri78n3$.remove_za3rmp$(listener);
+            },
+            onAfterPerformingMenuItemAction_bakdqu$: function (listener) {
+              this.afterPerformingMenuItemActionListeners_jy470u$.add_za3rmp$(listener);
+            },
+            unAfterPerformingMenuItemAction_bakdqu$: function (listener) {
+              this.afterPerformingMenuItemActionListeners_jy470u$.remove_za3rmp$(listener);
+            },
+            render: function () {
+              $module$elements.fg.elements.Div.prototype.render.call(this);
+              this.addClass_bx842b$(_.fg.beans.menu.Menu.Statics.classSelector);
+            },
+            childAdded_sr04hg$: function (child) {
+              $module$elements.fg.elements.Div.prototype.childAdded_sr04hg$.call(this, child);
+              if (Kotlin.isType(child, _.fg.beans.menu.MenuItem)) {
+                child.onBeforePerformingAction_k3q9i7$(this.beforePerformingMenuItemActionHandler_23c9di$);
+                child.onAfterPerformingAction_k3q9i7$(this.afterPerformingMenuItemActionHandler_hqnry5$);
+              }
+            }
+          }, /** @lends _.fg.beans.menu.Menu */ {
+            Statics: Kotlin.createObject(function () {
+              return [$module$elements.fg.elements.StyledClass];
+            }, function Statics() {
+              _.fg.beans.menu.Menu.Statics.$classSelector_7qddre$ = new $module$elements.fg.elements.ClassSelector('fg-bn-menu');
+              _.fg.beans.menu.Menu.Statics.$rule_wlbgql$ = _.fg.beans.menu.Menu.Statics.rule$f;
+              $module$elements.fg.elements.HTML.registerStyle_78phyd$(_.fg.beans.menu.Menu.Statics);
+            }, /** @lends _.fg.beans.menu.Menu.Statics.prototype */ {
+              classSelector: {
+                get: function () {
+                  return _.fg.beans.menu.Menu.Statics.$classSelector_7qddre$;
+                }
+              },
+              rule: {
+                get: function () {
+                  return _.fg.beans.menu.Menu.Statics.$rule_wlbgql$;
+                }
+              }
+            }, /** @lends _.fg.beans.menu.Menu.Statics */ {
+              rule$f: function () {
+                this.paddingTop = '4px';
+                this.paddingBottom = '4px';
+                this.backgroundColor = $module$elements.fg.style.colour.RgbColor.Factory.WHITE.toString();
+              }
+            }),
+            object_initializer$: function () {
+              _.fg.beans.menu.Menu.Statics;
+            },
+            beforePerformingMenuItemActionHandler_23c9di$f: function (this$Menu) {
+              return function (action) {
+                var tmp$0;
+                tmp$0 = this$Menu.beforePerformingMenuItemActionListeners_ri78n3$.iterator();
+                while (tmp$0.hasNext()) {
+                  var element = tmp$0.next();
+                  element(action, this$Menu);
+                }
+              };
+            },
+            afterPerformingMenuItemActionHandler_hqnry5$f: function (this$Menu) {
+              return function (action) {
+                var tmp$0;
+                tmp$0 = this$Menu.afterPerformingMenuItemActionListeners_jy470u$.iterator();
+                while (tmp$0.hasNext()) {
+                  var element = tmp$0.next();
+                  element(action, this$Menu);
+                }
+              };
+            },
+            label$f: function (property, old, new_0) {
+            },
+            shortcut$f: function (property, old, new_0) {
+            }
+          }),
           MenuBar: Kotlin.createClass(function () {
             return [$module$elements.fg.elements.Div];
           }, function MenuBar() {
@@ -1232,7 +1341,6 @@ var beans = function (Kotlin, $module$elements) {
             this.menuButtonByMenu_rxktgo$ = Kotlin.kotlin.collections.linkedMapOf_eoa9s7$([]);
             this.beforePerformingMenuItemActionHandler_mcx2z5$ = _.fg.beans.menu.MenuBar.beforePerformingMenuItemActionHandler_mcx2z5$f;
             this.afterPerformingMenuItemActionHandler_raozmy$ = _.fg.beans.menu.MenuBar.afterPerformingMenuItemActionHandler_raozmy$f(this);
-            this.menuButtonHoverHandler_lp5tao$ = _.fg.beans.menu.MenuBar.menuButtonHoverHandler_lp5tao$f;
           }, /** @lends _.fg.beans.menu.MenuBar.prototype */ {
             render: function () {
               $module$elements.fg.elements.Div.prototype.render.call(this);
@@ -1354,8 +1462,6 @@ var beans = function (Kotlin, $module$elements) {
               return function (action, menu) {
                 this$MenuBar.closeMenu(menu);
               };
-            },
-            menuButtonHoverHandler_lp5tao$f: function (event) {
             }
           }),
           MenuButton: Kotlin.createClass(function () {
@@ -1634,115 +1740,6 @@ var beans = function (Kotlin, $module$elements) {
                   element_0(closure$action);
                 }
               };
-            }
-          }),
-          Menu: Kotlin.createClass(function () {
-            return [$module$elements.fg.elements.Div];
-          }, function Menu(label, shortcut) {
-            if (label === void 0)
-              label = null;
-            if (shortcut === void 0)
-              shortcut = null;
-            Menu.baseInitializer.call(this);
-            this.beforePerformingMenuItemActionListeners_ri78n3$ = Kotlin.kotlin.collections.arrayListOf_9mqe4v$([]);
-            this.afterPerformingMenuItemActionListeners_jy470u$ = Kotlin.kotlin.collections.arrayListOf_9mqe4v$([]);
-            this.beforePerformingMenuItemActionHandler_23c9di$ = _.fg.beans.menu.Menu.beforePerformingMenuItemActionHandler_23c9di$f(this);
-            this.afterPerformingMenuItemActionHandler_hqnry5$ = _.fg.beans.menu.Menu.afterPerformingMenuItemActionHandler_hqnry5$f(this);
-            var initialValue = label;
-            this.label$delegate = new Kotlin.kotlin.properties.Delegates.observable$f(_.fg.beans.menu.Menu.label$f, initialValue);
-            var initialValue_0 = shortcut;
-            this.shortcut$delegate = new Kotlin.kotlin.properties.Delegates.observable$f(_.fg.beans.menu.Menu.shortcut$f, initialValue_0);
-          }, /** @lends _.fg.beans.menu.Menu.prototype */ {
-            label: {
-              get: function () {
-                return this.label$delegate.getValue_dsk1ci$(this, new Kotlin.PropertyMetadata('label'));
-              },
-              set: function (label) {
-                this.label$delegate.setValue_w32e13$(this, new Kotlin.PropertyMetadata('label'), label);
-              }
-            },
-            shortcut: {
-              get: function () {
-                return this.shortcut$delegate.getValue_dsk1ci$(this, new Kotlin.PropertyMetadata('shortcut'));
-              },
-              set: function (shortcut) {
-                this.shortcut$delegate.setValue_w32e13$(this, new Kotlin.PropertyMetadata('shortcut'), shortcut);
-              }
-            },
-            onBeforePerformingMenuItemAction_bakdqu$: function (listener) {
-              this.beforePerformingMenuItemActionListeners_ri78n3$.add_za3rmp$(listener);
-            },
-            unBeforePerformingMenuItemAction_bakdqu$: function (listener) {
-              this.beforePerformingMenuItemActionListeners_ri78n3$.remove_za3rmp$(listener);
-            },
-            onAfterPerformingMenuItemAction_bakdqu$: function (listener) {
-              this.afterPerformingMenuItemActionListeners_jy470u$.add_za3rmp$(listener);
-            },
-            unAfterPerformingMenuItemAction_bakdqu$: function (listener) {
-              this.afterPerformingMenuItemActionListeners_jy470u$.remove_za3rmp$(listener);
-            },
-            render: function () {
-              $module$elements.fg.elements.Div.prototype.render.call(this);
-              this.addClass_bx842b$(_.fg.beans.menu.Menu.Statics.classSelector);
-            },
-            childAdded_sr04hg$: function (child) {
-              $module$elements.fg.elements.Div.prototype.childAdded_sr04hg$.call(this, child);
-              if (Kotlin.isType(child, _.fg.beans.menu.MenuItem)) {
-                child.onBeforePerformingAction_k3q9i7$(this.beforePerformingMenuItemActionHandler_23c9di$);
-                child.onAfterPerformingAction_k3q9i7$(this.afterPerformingMenuItemActionHandler_hqnry5$);
-              }
-            }
-          }, /** @lends _.fg.beans.menu.Menu */ {
-            Statics: Kotlin.createObject(function () {
-              return [$module$elements.fg.elements.StyledClass];
-            }, function Statics() {
-              _.fg.beans.menu.Menu.Statics.$classSelector_7qddre$ = new $module$elements.fg.elements.ClassSelector('fg-bn-menu');
-              _.fg.beans.menu.Menu.Statics.$rule_wlbgql$ = _.fg.beans.menu.Menu.Statics.rule$f;
-              $module$elements.fg.elements.HTML.registerStyle_78phyd$(_.fg.beans.menu.Menu.Statics);
-            }, /** @lends _.fg.beans.menu.Menu.Statics.prototype */ {
-              classSelector: {
-                get: function () {
-                  return _.fg.beans.menu.Menu.Statics.$classSelector_7qddre$;
-                }
-              },
-              rule: {
-                get: function () {
-                  return _.fg.beans.menu.Menu.Statics.$rule_wlbgql$;
-                }
-              }
-            }, /** @lends _.fg.beans.menu.Menu.Statics */ {
-              rule$f: function () {
-                this.paddingTop = '4px';
-                this.paddingBottom = '4px';
-                this.backgroundColor = $module$elements.fg.style.colour.RgbColor.Factory.WHITE.toString();
-              }
-            }),
-            object_initializer$: function () {
-              _.fg.beans.menu.Menu.Statics;
-            },
-            beforePerformingMenuItemActionHandler_23c9di$f: function (this$Menu) {
-              return function (action) {
-                var tmp$0;
-                tmp$0 = this$Menu.beforePerformingMenuItemActionListeners_ri78n3$.iterator();
-                while (tmp$0.hasNext()) {
-                  var element = tmp$0.next();
-                  element(action, this$Menu);
-                }
-              };
-            },
-            afterPerformingMenuItemActionHandler_hqnry5$f: function (this$Menu) {
-              return function (action) {
-                var tmp$0;
-                tmp$0 = this$Menu.afterPerformingMenuItemActionListeners_jy470u$.iterator();
-                while (tmp$0.hasNext()) {
-                  var element = tmp$0.next();
-                  element(action, this$Menu);
-                }
-              };
-            },
-            label$f: function (property, old, new_0) {
-            },
-            shortcut$f: function (property, old, new_0) {
             }
           })
         }),
