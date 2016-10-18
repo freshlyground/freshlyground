@@ -12,10 +12,10 @@ import fg.style.ClassRule
 import fg.style.colour.RgbColor
 import kotlin.properties.Delegates
 
-class Menu(label: String? = null, shortcut: Key? = null) : Div() {
+open class Menu(label: String? = null, shortcut: Key? = null) : Div() {
 
-    private val beforePerformingMenuItemActionListeners: MutableList<(action: Action, Menu) -> Unit> = arrayListOf()
-    private val afterPerformingMenuItemActionListeners: MutableList<(action: Action, Menu) -> Unit> = arrayListOf()
+    private val beforePerformingMenuItemActionListeners: MutableList<(action: Action, fg.beans.menu.Menu) -> Unit> = arrayListOf()
+    private val afterPerformingMenuItemActionListeners: MutableList<(action: Action, fg.beans.menu.Menu) -> Unit> = arrayListOf()
 
     private val beforePerformingMenuItemActionHandler: (Action) -> Unit = { action ->
         beforePerformingMenuItemActionListeners.forEach { it(action, this) }
@@ -32,19 +32,19 @@ class Menu(label: String? = null, shortcut: Key? = null) : Div() {
 
     }
 
-    fun onBeforePerformingMenuItemAction(listener: (Action, Menu) -> Unit) {
+    fun onBeforePerformingMenuItemAction(listener: (Action, fg.beans.menu.Menu) -> Unit) {
         beforePerformingMenuItemActionListeners.add(listener)
     }
 
-    fun unBeforePerformingMenuItemAction(listener: (Action, Menu) -> Unit) {
+    fun unBeforePerformingMenuItemAction(listener: (Action, fg.beans.menu.Menu) -> Unit) {
         beforePerformingMenuItemActionListeners.remove(listener)
     }
 
-    fun onAfterPerformingMenuItemAction(listener: (Action, Menu) -> Unit) {
+    fun onAfterPerformingMenuItemAction(listener: (Action, fg.beans.menu.Menu) -> Unit) {
         afterPerformingMenuItemActionListeners.add(listener)
     }
 
-    fun unAfterPerformingMenuItemAction(listener: (Action, Menu) -> Unit) {
+    fun unAfterPerformingMenuItemAction(listener: (Action, fg.beans.menu.Menu) -> Unit) {
         afterPerformingMenuItemActionListeners.remove(listener)
     }
 
@@ -63,10 +63,11 @@ class Menu(label: String? = null, shortcut: Key? = null) : Div() {
         }
     }
 
-    companion object Statics : StyledClass {
+    companion object Menu : StyledClass {
 
         override val classSelector: ClassSelector = ClassSelector("$pkg-menu")
         override val rule: ClassRule.() -> Unit = {
+            display = "inline-block"
             paddingTop = "4px"
             paddingBottom = "4px"
             backgroundColor = RgbColor.WHITE.toString()

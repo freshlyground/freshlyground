@@ -10,6 +10,7 @@ open class ElementStyle {
     open var margin: String? = null
 
     open var backgroundColor: RgbColor? = null
+    open var color: RgbColor? = null
 
     open var borderStyle: String? = null
     open var borderWidth: Dimension? = null

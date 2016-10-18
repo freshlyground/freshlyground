@@ -1,6 +1,7 @@
 package fg.md.button
 
 import fg.beans.Action
+import fg.beans.ElementStyle
 import fg.beans.button.Button
 import fg.beans.icon.FontAwesomeIcons
 import fg.elements.ClassSelector
@@ -135,40 +136,40 @@ class MDButton(action: Action, type: Type = Type.FLAT,
                 if (action.enabled) {
 
                     if (pressed) {
-                        this.style.backgroundColor = RgbColor(204, 204, 204).toString()
+                        this.style.backgroundColor = flatStyle.pressed.backgroundColor?.toString() ?: ""
                     } else if (focused) {
-                        this.style.backgroundColor = RgbColor(221, 221, 221).toString()
+                        this.style.backgroundColor = flatStyle.focused.backgroundColor?.toString() ?: ""
                     } else if (hovered) {
-                        this.style.backgroundColor = RgbColor(153, 153, 153, 0.2).toString()
+                        this.style.backgroundColor = flatStyle.hovered.backgroundColor?.toString() ?: ""
                     } else {
-                        this.style.backgroundColor = RgbColor.TRANSPARENT.toString()
+                        this.style.backgroundColor = flatStyle.backgroundColor?.toString() ?: ""
                     }
 
                     this.style.color = Context.theme.color(color, RgbColor.BLACK).toString()
 
                 } else {
-                    this.style.backgroundColor = RgbColor.TRANSPARENT.toString()
-                    this.style.color = RgbColor.BLACK.withAlfa(0.26).toString()
+                    this.style.backgroundColor = flatStyle.disabled.backgroundColor?.toString() ?: ""
+                    this.style.color = flatStyle.disabled.color?.toString() ?: ""
                 }
             }
             Type.RAISED -> {
                 if (action.enabled) {
 
                     if (pressed) {
-                        this.style.backgroundColor = RgbColor(204, 204, 204).toString()
+                        this.style.backgroundColor = raisedStyle.pressed.backgroundColor?.toString() ?: ""
                     } else if (focused) {
-                        this.style.backgroundColor = RgbColor(221, 221, 221).toString()
+                        this.style.backgroundColor = raisedStyle.focused.backgroundColor?.toString() ?: ""
                     } else if (hovered) {
-                        this.style.backgroundColor = RgbColor(153, 153, 153, 0.2).toString()
+                        this.style.backgroundColor = raisedStyle.hovered.backgroundColor?.toString() ?: ""
                     } else {
-                        this.style.backgroundColor = RgbColor.TRANSPARENT.toString()
+                        this.style.backgroundColor = Context.theme.color(color, RgbColor.TRANSPARENT).toString()
                     }
 
-                    this.style.color = RgbColor.BLACK.toString()
+                    this.style.color = raisedStyle.color?.toString() ?: ""
 
                 } else {
-                    this.style.color = RgbColor(0, 0, 0, 0.26).toString()
-                    this.style.backgroundColor = RgbColor(0, 0, 0, 0.12).toString()
+                    this.style.color = raisedStyle.disabled.color?.toString() ?: ""
+                    this.style.backgroundColor = raisedStyle.disabled.backgroundColor?.toString() ?: ""
                 }
             }
             Type.FLOATING -> {
@@ -194,6 +195,63 @@ class MDButton(action: Action, type: Type = Type.FLAT,
         FLAT(TYPE_FLAT),
         RAISED(TYPE_RAISED),
         FLOATING(TYPE_FLOATING)
+    }
+
+    val flatStyle: FlatStyle = FlatStyle()
+    val raisedStyle: RaisedStyle = RaisedStyle()
+    val floatingStyle: FloatingStyle = FloatingStyle()
+
+    class FlatStyle : ElementStyle() {
+
+        override var color: RgbColor? = RgbColor.BLACK
+        override var backgroundColor: RgbColor? = RgbColor.TRANSPARENT
+
+        var hovered: ElementStyle = object : ElementStyle() {
+            override var backgroundColor: RgbColor? = RgbColor(153, 153, 153, 0.2)
+        }
+
+        var pressed: ElementStyle = object : ElementStyle() {
+            override var backgroundColor: RgbColor? = RgbColor(204, 204, 204)
+        }
+
+        var focused: ElementStyle = object : ElementStyle() {
+            override var backgroundColor: RgbColor? = RgbColor(221, 221, 221)
+        }
+
+        var disabled: ElementStyle = object : ElementStyle() {
+            override var color: RgbColor? = RgbColor.BLACK.withAlfa(0.26)
+            override var backgroundColor: RgbColor? = RgbColor.TRANSPARENT
+        }
+    }
+
+    class RaisedStyle : ElementStyle() {
+
+        override var color: RgbColor? = RgbColor.BLACK
+        override var backgroundColor: RgbColor? = RgbColor.TRANSPARENT
+
+        var hovered: ElementStyle = object : ElementStyle() {
+            override var backgroundColor: RgbColor? = RgbColor(153, 153, 153, 0.2)
+        }
+
+        var pressed: ElementStyle = object : ElementStyle() {
+            override var backgroundColor: RgbColor? = RgbColor(204, 204, 204)
+        }
+
+        var focused: ElementStyle = object : ElementStyle() {
+            override var backgroundColor: RgbColor? = RgbColor(221, 221, 221)
+        }
+
+        var disabled: ElementStyle = object : ElementStyle() {
+            override var color: RgbColor? = RgbColor.BLACK.withAlfa(0.26)
+            override var backgroundColor: RgbColor? = RgbColor(0, 0, 0, 0.12)
+        }
+    }
+
+    class FloatingStyle : ElementStyle() {
+
+        override var color: RgbColor? = RgbColor.BLACK
+        override var backgroundColor: RgbColor? = RgbColor.WHITE
+
     }
 
     companion object MDButton : StyledClass {

@@ -4,6 +4,7 @@ import fg.base.URL
 import fg.beans.button.Button
 import fg.beans.button.ToggleButton
 import fg.beans.drawer.Drawer
+import fg.beans.menu.Menu
 import fg.beans.menu.MenuBar
 import fg.elements.BODY
 import fg.elements.HTML
@@ -28,6 +29,7 @@ fun main(vararg args: String) {
             menu("Components") {
                 menuItem(Action("Button", shortcut = Key.from("meta+b")) { window.location.href = currUrl.replaceParam("page", "Button").toString() }) {}
                 menuItem(Action("ToggleButton", shortcut = Key.from("meta+t")) { window.location.href = currUrl.replaceParam("page", "ToggleButton").toString() }) {}
+                menuItem(Action("Menu") { window.location.href = currUrl.replaceParam("page", "Menu").toString() }) {}
                 menuItem(Action("MenuBar", shortcut = Key.from("meta+m")) { window.location.href = currUrl.replaceParam("page", "MenuBar").toString() }) {}
             }
             menu("Layout") {
@@ -56,6 +58,9 @@ fun main(vararg args: String) {
         }
         MenuBar.jsClass.name -> {
             mainMenuBar.start()
+        }
+        Menu.jsClass.name -> {
+            mainMenu.start()
         }
         Drawer.jsClass.name -> {
             mainDrawer.start()

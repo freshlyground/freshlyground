@@ -163,6 +163,7 @@ var beans = function (Kotlin, $module$elements) {
           this.$cursor_xp9svd$ = null;
           this.$margin_t9tpu9$ = null;
           this.$backgroundColor_pi91e4$ = null;
+          this.$color_7ypkhq$ = null;
           this.$borderStyle_1s1r5o$ = null;
           this.$borderWidth_1q210n$ = null;
           this.$borderColor_20xx56$ = null;
@@ -192,6 +193,14 @@ var beans = function (Kotlin, $module$elements) {
             },
             set: function (backgroundColor) {
               this.$backgroundColor_pi91e4$ = backgroundColor;
+            }
+          },
+          color: {
+            get: function () {
+              return this.$color_7ypkhq$;
+            },
+            set: function (color) {
+              this.$color_7ypkhq$ = color;
             }
           },
           borderStyle: {
@@ -868,7 +877,7 @@ var beans = function (Kotlin, $module$elements) {
             element.removeSelf();
             $receiver.prependChild_sr04hg$(element);
             element.style.position = 'static';
-            element.style.cssFloat = 'left';
+            element.style.cssFloat = element.side === $module$elements.fg.base.Side.LEFT ? 'left' : 'right';
           },
           undock_ahjj8o$: function ($receiver) {
             $receiver.style.position = '';
@@ -1272,7 +1281,7 @@ var beans = function (Kotlin, $module$elements) {
             },
             render: function () {
               $module$elements.fg.elements.Div.prototype.render.call(this);
-              this.addClass_bx842b$(_.fg.beans.menu.Menu.Statics.classSelector);
+              this.addClass_bx842b$(_.fg.beans.menu.Menu.Menu.classSelector);
             },
             childAdded_sr04hg$: function (child) {
               $module$elements.fg.elements.Div.prototype.childAdded_sr04hg$.call(this, child);
@@ -1282,32 +1291,33 @@ var beans = function (Kotlin, $module$elements) {
               }
             }
           }, /** @lends _.fg.beans.menu.Menu */ {
-            Statics: Kotlin.createObject(function () {
+            Menu: Kotlin.createObject(function () {
               return [$module$elements.fg.elements.StyledClass];
-            }, function Statics() {
-              _.fg.beans.menu.Menu.Statics.$classSelector_7qddre$ = new $module$elements.fg.elements.ClassSelector('fg-bn-menu');
-              _.fg.beans.menu.Menu.Statics.$rule_wlbgql$ = _.fg.beans.menu.Menu.Statics.rule$f;
-              $module$elements.fg.elements.HTML.registerStyle_78phyd$(_.fg.beans.menu.Menu.Statics);
-            }, /** @lends _.fg.beans.menu.Menu.Statics.prototype */ {
+            }, function Menu() {
+              _.fg.beans.menu.Menu.Menu.$classSelector_gmwbfk$ = new $module$elements.fg.elements.ClassSelector('fg-bn-menu');
+              _.fg.beans.menu.Menu.Menu.$rule_1t34ct$ = _.fg.beans.menu.Menu.Menu.rule$f;
+              $module$elements.fg.elements.HTML.registerStyle_78phyd$(_.fg.beans.menu.Menu.Menu);
+            }, /** @lends _.fg.beans.menu.Menu.Menu.prototype */ {
               classSelector: {
                 get: function () {
-                  return _.fg.beans.menu.Menu.Statics.$classSelector_7qddre$;
+                  return _.fg.beans.menu.Menu.Menu.$classSelector_gmwbfk$;
                 }
               },
               rule: {
                 get: function () {
-                  return _.fg.beans.menu.Menu.Statics.$rule_wlbgql$;
+                  return _.fg.beans.menu.Menu.Menu.$rule_1t34ct$;
                 }
               }
-            }, /** @lends _.fg.beans.menu.Menu.Statics */ {
+            }, /** @lends _.fg.beans.menu.Menu.Menu */ {
               rule$f: function () {
+                this.display = 'inline-block';
                 this.paddingTop = '4px';
                 this.paddingBottom = '4px';
                 this.backgroundColor = $module$elements.fg.style.colour.RgbColor.Factory.WHITE.toString();
               }
             }),
             object_initializer$: function () {
-              _.fg.beans.menu.Menu.Statics;
+              _.fg.beans.menu.Menu.Menu;
             },
             beforePerformingMenuItemActionHandler_23c9di$f: function (this$Menu) {
               return function (action) {
@@ -1450,7 +1460,7 @@ var beans = function (Kotlin, $module$elements) {
               },
               rule$f: function () {
                 this.position = 'relative';
-                $module$elements.fg.style.child_lij791$(this, _.fg.beans.menu.Menu.Statics.classSelector, _.fg.beans.menu.MenuBar.MenuBar.f);
+                $module$elements.fg.style.child_lij791$(this, _.fg.beans.menu.Menu.Menu.classSelector, _.fg.beans.menu.MenuBar.MenuBar.f);
               }
             }),
             object_initializer$: function () {
@@ -1555,13 +1565,16 @@ var beans = function (Kotlin, $module$elements) {
               $module$elements.fg.elements.Div.prototype.render.call(this);
               this.addClass_bx842b$(_.fg.beans.menu.MenuItem.MenuItem.classSelector);
               this._tabindex = '0';
-              this.appendChild_sr04hg$(this.selectedIcon_1u3tq1$);
+              if (Kotlin.isType(this.action, _.fg.beans.SelectableAction)) {
+                this.appendChild_sr04hg$(this.selectedIcon_1u3tq1$);
+              }
               this.appendChild_sr04hg$(this.primaryText_l0masq$);
               this.appendChild_sr04hg$(this.secondaryText_isvlr0$);
               this.primaryText_l0masq$.textContent = this.action.label;
-              this.renderShortcut(this.action.shortcut);
+              this.renderShortcut_tiy2pn$(this.action.shortcut);
+              this.renderDisabled_6taknv$(this.action.disabled);
             },
-            renderShortcut: function (key) {
+            renderShortcut_tiy2pn$: function (key) {
               var tmp$0;
               this.secondaryTextSpan_mc6gu2$.removeChildren();
               if (key != null) {
@@ -1604,7 +1617,7 @@ var beans = function (Kotlin, $module$elements) {
               this.action.onPropertyChanged_uamkrm$(this.actionPropertyChangedHandler_xq9c3e$);
               $module$elements.fg.elements.onClick_m2anqv$(this, this.clickHandler_jj300p$);
             },
-            renderSelected: function (selected) {
+            renderSelected_6taknv$: function (selected) {
               if (selected) {
                 this.addClass_bx842b$(_.fg.beans.SelectableAction.Statics.selectedSelector);
                 this.selectedIcon_1u3tq1$.style.opacity = '1';
@@ -1612,6 +1625,14 @@ var beans = function (Kotlin, $module$elements) {
                else {
                 this.removeClass_bx842b$(_.fg.beans.SelectableAction.Statics.selectedSelector);
                 this.selectedIcon_1u3tq1$.style.opacity = '0';
+              }
+            },
+            renderDisabled_6taknv$: function (disabled) {
+              if (disabled) {
+                this.toggleClass_ivxn3r$(_.fg.beans.menu.MenuItem.MenuItem.DISABLED.value, true);
+              }
+               else {
+                this.toggleClass_ivxn3r$(_.fg.beans.menu.MenuItem.MenuItem.DISABLED.value);
               }
             },
             onBeforePerformingAction_k3q9i7$: function (listener) {
@@ -1630,8 +1651,9 @@ var beans = function (Kotlin, $module$elements) {
             MenuItem: Kotlin.createObject(function () {
               return [$module$elements.fg.elements.StyledClass];
             }, function MenuItem() {
+              _.fg.beans.menu.MenuItem.MenuItem.DISABLED = $module$elements.fg.elements.toClassSelector_pdl1w0$('disabled');
               _.fg.beans.menu.MenuItem.MenuItem.$classSelector_h04jcw$ = new $module$elements.fg.elements.ClassSelector('fg-bn-menu-item');
-              _.fg.beans.menu.MenuItem.MenuItem.$rule_ch4gq5$ = _.fg.beans.menu.MenuItem.MenuItem.rule$f;
+              _.fg.beans.menu.MenuItem.MenuItem.$rule_ch4gq5$ = _.fg.beans.menu.MenuItem.MenuItem.rule$f(_.fg.beans.menu.MenuItem.MenuItem);
               $module$elements.fg.elements.HTML.registerStyle_78phyd$(_.fg.beans.menu.MenuItem.MenuItem);
             }, /** @lends _.fg.beans.menu.MenuItem.MenuItem.prototype */ {
               classSelector: {
@@ -1646,7 +1668,8 @@ var beans = function (Kotlin, $module$elements) {
               }
             }, /** @lends _.fg.beans.menu.MenuItem.MenuItem */ {
               f: function () {
-                this.marginRight = '2px';
+                this.marginRight = '24px';
+                this.marginLeft = '0px';
                 this.flex = 'initial';
               },
               f_0: function () {
@@ -1659,21 +1682,36 @@ var beans = function (Kotlin, $module$elements) {
               f_2: function () {
                 this.backgroundColor = '#ccc';
               },
-              f_3: function () {
+              f_3: function (this$MenuItem$) {
+                return function () {
+                  $module$elements.fg.style.not_dbehhi$(this, this$MenuItem$.DISABLED, _.fg.beans.menu.MenuItem.MenuItem.f_2);
+                };
+              },
+              f_4: function () {
                 this.outline = 'none';
               },
-              rule$f: function () {
-                this.cursor = 'pointer';
-                this.paddingLeft = '8px';
-                this.paddingRight = '24px';
-                this.textAlign = 'left';
-                this.display = 'flex';
-                this.flexWrap = 'nowrap';
-                $module$elements.fg.style.child_l73siq$(this, '.selected-icon', _.fg.beans.menu.MenuItem.MenuItem.f);
-                $module$elements.fg.style.child_l73siq$(this, '.primary-text', _.fg.beans.menu.MenuItem.MenuItem.f_0);
-                $module$elements.fg.style.child_l73siq$(this, '.secondary-text', _.fg.beans.menu.MenuItem.MenuItem.f_1);
-                $module$elements.fg.style.hover_i5tde3$(this, _.fg.beans.menu.MenuItem.MenuItem.f_2);
-                $module$elements.fg.style.focus_i5tde3$(this, _.fg.beans.menu.MenuItem.MenuItem.f_3);
+              f_5: function () {
+                this.cursor = 'not-allowed';
+                this.color = '#909090';
+              },
+              rule$f: function (this$MenuItem$) {
+                return function () {
+                  this.cursor = 'pointer';
+                  this.paddingLeft = '8px';
+                  this.paddingRight = '24px';
+                  this.textAlign = 'left';
+                  this.display = 'flex';
+                  this.flexWrap = 'nowrap';
+                  this.flexDirection = 'row';
+                  this.alignItems = 'center';
+                  this.fontSize = '15px';
+                  $module$elements.fg.style.child_l73siq$(this, '.selected-icon', _.fg.beans.menu.MenuItem.MenuItem.f);
+                  $module$elements.fg.style.child_l73siq$(this, '.primary-text', _.fg.beans.menu.MenuItem.MenuItem.f_0);
+                  $module$elements.fg.style.child_l73siq$(this, '.secondary-text', _.fg.beans.menu.MenuItem.MenuItem.f_1);
+                  $module$elements.fg.style.hover_i5tde3$(this, _.fg.beans.menu.MenuItem.MenuItem.f_3(this$MenuItem$));
+                  $module$elements.fg.style.focus_i5tde3$(this, _.fg.beans.menu.MenuItem.MenuItem.f_4);
+                  $module$elements.fg.style.and_dbehhi$(this, this$MenuItem$.DISABLED, _.fg.beans.menu.MenuItem.MenuItem.f_5);
+                };
               }
             }),
             object_initializer$: function () {
@@ -1683,7 +1721,6 @@ var beans = function (Kotlin, $module$elements) {
               var iconI = new _.fg.beans.icon.IconI();
               iconI.icon = _.fg.beans.icon.FontAwesomeIcons.check_629h0h$();
               iconI.addClass_61zpoe$('selected-icon');
-              iconI.style.opacity = '0';
               return iconI;
             },
             primaryText_l0masq$f: function () {
@@ -1709,11 +1746,14 @@ var beans = function (Kotlin, $module$elements) {
                   this$MenuItem.primaryText_l0masq$.textContent = action.label;
                 }
                  else if (Kotlin.equals(property.name, Kotlin.getCallableRefForMemberProperty('shortcut', true).name)) {
-                  this$MenuItem.renderShortcut(action.shortcut);
+                  this$MenuItem.renderShortcut_tiy2pn$(action.shortcut);
+                }
+                 else if (Kotlin.equals(property.name, Kotlin.getCallableRefForMemberProperty('enabled', true).name)) {
+                  this$MenuItem.renderDisabled_6taknv$(action.disabled);
                 }
                 if (Kotlin.isType(action, _.fg.beans.SelectableAction)) {
                   if (Kotlin.equals(property.name, Kotlin.getCallableRefForMemberProperty('selected', true).name)) {
-                    this$MenuItem.renderSelected(action.selected);
+                    this$MenuItem.renderSelected_6taknv$(action.selected);
                   }
                 }
               };

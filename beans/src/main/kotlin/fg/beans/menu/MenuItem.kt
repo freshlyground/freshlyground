@@ -15,16 +15,19 @@ import fg.elements.Span
 import fg.elements.StyledClass
 import fg.elements.Text
 import fg.elements.onClick
+import fg.elements.toClassSelector
 import fg.keyboard.Key
 import fg.keyboard.Modifier
 import fg.style.ClassRule
+import fg.style.and
 import fg.style.child
 import fg.style.focus
 import fg.style.hover
+import fg.style.not
 import org.w3c.dom.events.Event
 import kotlin.reflect.KProperty
 
-class MenuItem(action: Action) : Div(), ActionBean {
+open class MenuItem(action: Action) : Div(), ActionBean {
 
     override val action: Action = action
 
@@ -35,8 +38,6 @@ class MenuItem(action: Action) : Div(), ActionBean {
         val iconI = IconI()
         iconI.icon = FontAwesomeIcons.check()
         iconI.addClass("selected-icon")
-        iconI.style.opacity = "0"
-        //iconI.style.display = "inline"
         iconI
     }
 
@@ -64,6 +65,8 @@ class MenuItem(action: Action) : Div(), ActionBean {
             primaryText.textContent = action.label
         } else if (property.name == Action::shortcut.name) {
             renderShortcut(action.shortcut)
+        } else if (property.name == Action::enabled.name) {
+            renderDisabled(action.disabled)
         }
 
         if (action is SelectableAction) {
@@ -94,12 +97,15 @@ class MenuItem(action: Action) : Div(), ActionBean {
         addClass(classSelector)
         _tabindex = "0"
 
-        appendChild(selectedIcon)
+        if (action is SelectableAction) {
+            appendChild(selectedIcon)
+        }
         appendChild(primaryText)
         appendChild(secondaryText)
 
         primaryText.textContent = action.label
         renderShortcut(action.shortcut)
+        renderDisabled(action.disabled)
     }
 
     private fun renderShortcut(key: Key?) {
@@ -152,6 +158,14 @@ class MenuItem(action: Action) : Div(), ActionBean {
         }
     }
 
+    private fun renderDisabled(disabled: Boolean) {
+        if (disabled) {
+            toggleClass(DISABLED.value, true)
+        } else {
+            toggleClass(DISABLED.value)
+        }
+    }
+
     fun onBeforePerformingAction(listener: (action: Action) -> Unit) {
         beforePerformingActionListeners.add(listener)
     }
@@ -170,6 +184,8 @@ class MenuItem(action: Action) : Div(), ActionBean {
 
     companion object MenuItem : StyledClass {
 
+        val DISABLED = "disabled".toClassSelector()
+
         override val classSelector = ClassSelector("$pkg-menu-item")
 
         override val rule: ClassRule.() -> Unit = {
@@ -181,9 +197,15 @@ class MenuItem(action: Action) : Div(), ActionBean {
 
             display = "flex"
             flexWrap = "nowrap"
+            flexDirection = "row"
+            alignItems = "center"
+
+            fontSize = "15px"
 
             child(".selected-icon") {
-                marginRight = "2px"
+                marginRight = "24px"
+                marginLeft = "0px"
+
                 flex = "initial"
             }
 
@@ -198,11 +220,18 @@ class MenuItem(action: Action) : Div(), ActionBean {
             }
 
             hover {
-                backgroundColor = "#ccc"
+                not(DISABLED) {
+                    backgroundColor = "#ccc"
+                }
             }
 
             focus {
                 outline = "none"
+            }
+
+            and(DISABLED) {
+                cursor = "not-allowed"
+                color = "#909090"
             }
         }
 

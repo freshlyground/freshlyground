@@ -2,6 +2,7 @@ package fg.md
 
 import fg.base.Side
 import fg.beans.Action
+import fg.beans.SelectableAction
 import fg.beans.button
 import fg.elements.BODY
 import fg.elements.ClassSelector
@@ -11,9 +12,12 @@ import fg.elements.h2
 import fg.elements.hr
 import fg.elements.p
 import fg.elements.with
+import fg.keyboard.Key
 import fg.md.button.MDButton
+import fg.md.colour.MDColor
 import fg.style.AnyRule
 import fg.style.ClassRule
+import fg.style.colour.RgbColor
 import fg.style.desc
 
 fun main(vararg args: String) {
@@ -113,6 +117,9 @@ fun main(vararg args: String) {
             p() {
                 addClass("flex-column")
                 mdButton(Action(label = "FLAT", perform = {}), MDButton.Type.FLAT) {}
+                mdButton(Action(label = "CUSTOM STYLE", perform = {}), MDButton.Type.FLAT) {
+                    flatStyle.backgroundColor = RgbColor(200, 200, 255)
+                }
                 mdButton(Action(label = "FLAT", enabled = false, perform = {}), MDButton.Type.FLAT) {}
             }
             p {
@@ -122,11 +129,45 @@ fun main(vararg args: String) {
             }
             p {
                 addClass("flex-column")
-                mdButton(Action(label = "FLOATING", perform = {}), MDButton.Type.FLOATING) {}
-                mdButton(Action(label = "FLOATING", enabled = false, perform = {}), MDButton.Type.FLOATING) {}
+                mdButton(Action(label = "ACCENT", perform = {}), MDButton.Type.FLOATING) {
+                    color = MDColor.ACCENT
+                }
+                mdButton(Action(label = "ACCENT", enabled = false, perform = {}), MDButton.Type.FLOATING) {
+                    color = MDColor.ACCENT
+                }
+                mdButton(Action(label = "PRIMARY", perform = {}), MDButton.Type.FLOATING) {
+                    color = MDColor.PRIMARY
+                }
+                mdButton(Action(label = "PRIMARY", enabled = false, perform = {}), MDButton.Type.FLOATING) {
+                    color = MDColor.PRIMARY
+                }
             }
         }
         hr {}
+
+
+        h2 {
+            +"Menu"
+        }
+        p {
+            mdMenu() {
+                mdMenuItem(Action("Home") {}) {}
+                mdMenuItem(Action("Back") {}) {}
+                mdMenuItem(Action("Forward", enabled = false) {}) {}
+                mdMenuItem(Action("Recently closed") {}) {}
+                mdMenuItem(Action("Google") {}) {}
+                mdMenuItem(Action("Youtube") {}) {}
+            }
+        }
+        p {
+            mdMenu() {
+                mdMenuItem(Action("Undo", shortcut = Key.from("meta+z")) {}) {}
+                mdMenuItem(Action("Redo", shortcut = Key.from("shift+meta+z")) {}) {}
+                mdMenuItem(SelectableAction("Column Mode", shortcut = Key.from("shift+meta+8")) {}) {}
+                mdMenuItem(SelectableAction("Some Mode", shortcut = Key.from("shift+meta+1")) {}) {}
+                mdMenuItem(SelectableAction("Other Mode", shortcut = Key.from("shift+meta+2")) {}) {}
+            }
+        }
 
         h2 {
             +"Radio Button"
