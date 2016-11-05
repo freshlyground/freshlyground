@@ -48,10 +48,10 @@ class Anchor(link: Link<*>? = null,
     private fun renderLink(link: Link<*>?) {
 
         if (link == null) {
-            style.cursor = "auto"
+            _style.cursor = "auto"
             //this.tooltip = null
         } else {
-            style.cursor = "pointer"
+            _style.cursor = "pointer"
             when (link) {
                 is ExternalLink -> {
                     this._href = link.url?.toString() ?: null

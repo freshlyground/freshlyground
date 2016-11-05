@@ -4,6 +4,7 @@ import fg.base.OS
 import fg.base.OSDetector
 import fg.beans.Action
 import fg.beans.ActionBean
+import fg.beans.ElementStyle
 import fg.beans.SelectableAction
 import fg.beans.icon.FontAwesomeIcons
 import fg.beans.icon.IconI
@@ -14,22 +15,35 @@ import fg.elements.HTML
 import fg.elements.Span
 import fg.elements.StyledClass
 import fg.elements.Text
+import fg.elements.onBlur
 import fg.elements.onClick
+import fg.elements.onFocus
+import fg.elements.onMouseDown
+import fg.elements.onMouseEnter
+import fg.elements.onMouseLeave
+import fg.elements.onMouseUp
 import fg.elements.toClassSelector
 import fg.keyboard.Key
 import fg.keyboard.Modifier
 import fg.style.ClassRule
 import fg.style.and
 import fg.style.child
+import fg.style.colour.RgbColor
 import fg.style.focus
-import fg.style.hover
-import fg.style.not
 import org.w3c.dom.events.Event
+import org.w3c.dom.events.MouseEvent
 import kotlin.reflect.KProperty
 
 open class MenuItem(action: Action) : Div(), ActionBean {
 
     override val action: Action = action
+
+    var hovered: Boolean = false
+        private set
+    var focused: Boolean = false
+        private set
+    var pressed: Boolean = false
+        private set
 
     private val beforePerformingActionListeners: MutableList<(action: Action) -> Unit> = arrayListOf()
     private val afterPerformingActionListeners: MutableList<(action: Action) -> Unit> = arrayListOf()
@@ -67,6 +81,11 @@ open class MenuItem(action: Action) : Div(), ActionBean {
             renderShortcut(action.shortcut)
         } else if (property.name == Action::enabled.name) {
             renderDisabled(action.disabled)
+            if (action.enabled) {
+                onEnabled()
+            } else {
+                onDisabled()
+            }
         }
 
         if (action is SelectableAction) {
@@ -90,6 +109,81 @@ open class MenuItem(action: Action) : Div(), ActionBean {
         afterPerformingActionListeners.forEach { it(action) }
     }
 
+    private val mouseEnterHandler: (event: MouseEvent) -> Unit = {
+
+        hovered = true
+        toggleClass("hovered", true)
+        onHover()
+    }
+
+    private val mouseLeaveHandler: (event: MouseEvent) -> Unit = {
+
+        hovered = false
+        toggleClass("hovered")
+        unHover()
+    }
+
+    private val focusHandler: (event: Event) -> Unit = {
+
+        focused = true
+        toggleClass("focused", true)
+        onFocus()
+    }
+
+    private val blurHandler: (event: Event) -> Unit = {
+
+        focused = false
+        toggleClass("focused")
+        unFocus()
+    }
+
+    private val mouseDownHandler: (MouseEvent) -> Unit = { event ->
+
+        if (action.enabled) {
+            pressed = true
+            toggleClass("pressed", true)
+            onPressed()
+        }
+    }
+
+    private val mouseUpHandler: (Event) -> Unit = { event ->
+
+        pressed = false
+        toggleClass("pressed")
+        unPressed()
+    }
+
+    open protected fun onHover() {
+        renderColor()
+    }
+
+    open protected fun unHover() {
+        renderColor()
+    }
+
+    open protected fun onFocus() {
+        renderColor()
+    }
+
+    open protected fun unFocus() {
+        renderColor()
+    }
+
+    open protected fun onPressed() {
+        renderColor()
+    }
+
+    open protected fun unPressed() {
+        renderColor()
+    }
+
+    open protected fun onEnabled() {
+        renderColor()
+    }
+
+    open protected fun onDisabled() {
+        renderColor()
+    }
 
     override fun render() {
         super.render()
@@ -97,8 +191,10 @@ open class MenuItem(action: Action) : Div(), ActionBean {
         addClass(classSelector)
         _tabindex = "0"
 
-        if (action is SelectableAction) {
+        if (this.action is SelectableAction) {
+            val action = this.action as SelectableAction
             appendChild(selectedIcon)
+            renderSelected(action.selected)
         }
         appendChild(primaryText)
         appendChild(secondaryText)
@@ -145,16 +241,22 @@ open class MenuItem(action: Action) : Div(), ActionBean {
         action.onPropertyChanged(actionPropertyChangedHandler)
 
         onClick(clickHandler)
+        onMouseEnter(mouseEnterHandler)
+        onMouseLeave(mouseLeaveHandler)
+        onFocus(focusHandler)
+        onBlur(blurHandler)
+        onMouseDown(mouseDownHandler)
+        onMouseUp(mouseUpHandler)
     }
 
     private fun renderSelected(selected: Boolean) {
 
         if (selected) {
             addClass(SelectableAction.selectedSelector)
-            selectedIcon.style.opacity = "1"
+            selectedIcon._style.opacity = "1"
         } else {
             removeClass(SelectableAction.selectedSelector)
-            selectedIcon.style.opacity = "0"
+            selectedIcon._style.opacity = "0"
         }
     }
 
@@ -180,6 +282,60 @@ open class MenuItem(action: Action) : Div(), ActionBean {
 
     fun unAfterPerformingAction(listener: (action: Action) -> Unit) {
         afterPerformingActionListeners.remove(listener)
+    }
+
+    val menuItemStyle: Style = Style()
+
+    private fun renderColor() {
+
+        if (action.enabled) {
+            if (pressed) {
+
+                this.style.color = menuItemStyle.pressed.color
+                this.style.backgroundColor = menuItemStyle.pressed.backgroundColor
+
+            } else if (focused) {
+
+                this.style.color = menuItemStyle.focused.color
+                this.style.backgroundColor = menuItemStyle.focused.backgroundColor
+
+            } else if (hovered) {
+                this.style.color = menuItemStyle.hovered.color
+                this.style.backgroundColor = menuItemStyle.hovered.backgroundColor
+            } else {
+                this.style.color = menuItemStyle.color
+                this.style.backgroundColor = menuItemStyle.backgroundColor
+            }
+        } else {
+            this.style.color = menuItemStyle.disabled.color
+            this.style.backgroundColor = menuItemStyle.disabled.backgroundColor
+        }
+    }
+
+    class Style : ElementStyle() {
+
+        override var color: RgbColor? = RgbColor.BLACK
+        override var backgroundColor: RgbColor? = RgbColor.WHITE
+
+        var pressed: ElementStyle = object : ElementStyle() {
+            override var color: RgbColor? = RgbColor.BLACK
+            override var backgroundColor: RgbColor? = RgbColor(153, 153, 153, 0.2)
+        }
+
+        var hovered: ElementStyle = object : ElementStyle() {
+            override var color: RgbColor? = RgbColor.BLACK
+            override var backgroundColor: RgbColor? = RgbColor(153, 153, 153, 0.2)
+        }
+
+        var focused: ElementStyle = object : ElementStyle() {
+            override var color: RgbColor? = RgbColor.BLACK
+            override var backgroundColor: RgbColor? = RgbColor.WHITE
+        }
+
+        var disabled: ElementStyle = object : ElementStyle() {
+            override var color: RgbColor? = RgbColor.from("#909090")
+            override var backgroundColor: RgbColor? = RgbColor.WHITE
+        }
     }
 
     companion object MenuItem : StyledClass {
@@ -210,7 +366,6 @@ open class MenuItem(action: Action) : Div(), ActionBean {
             }
 
             child(".primary-text") {
-                //marginLeft = "8px"
                 flex = "1"
             }
 
@@ -219,19 +374,12 @@ open class MenuItem(action: Action) : Div(), ActionBean {
                 flex = "initial"
             }
 
-            hover {
-                not(DISABLED) {
-                    backgroundColor = "#ccc"
-                }
-            }
-
             focus {
                 outline = "none"
             }
 
             and(DISABLED) {
                 cursor = "not-allowed"
-                color = "#909090"
             }
         }
 

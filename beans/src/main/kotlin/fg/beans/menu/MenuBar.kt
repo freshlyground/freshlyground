@@ -105,8 +105,8 @@ class MenuBar : Div() {
         val menuButton = menuButtonByMenu[menu]!!
         val left = menuButton.boundingClientRect.left - BODY.computedStyle.marginLeft.px.value
 
-        menu.style.top = "${menuButton.boundingClientRect.height}px"
-        menu.style.left = "${left}px"
+        menu._style.top = "${menuButton.boundingClientRect.height}px"
+        menu._style.left = "${left}px"
     }
 
     private fun closeMenu(menu: Menu) {

@@ -176,7 +176,6 @@ abstract class AbstractButton(action: Action) : Button(), ActionBean {
         onMouseLeave(mouseLeaveHandler)
         onFocus(focusHandler)
         onBlur(blurHandler)
-
         onMouseDown(mouseDownHandler)
         onMouseUp(mouseUpHandler)
     }

@@ -7,6 +7,7 @@ import fg.elements.StyledClass
 import fg.elements.toClassSelector
 import fg.md.pkg
 import fg.style.ClassRule
+import fg.style.colour.RgbColor
 
 class MDMenuItem(action: Action) : MenuItem(action) {
 
@@ -14,6 +15,8 @@ class MDMenuItem(action: Action) : MenuItem(action) {
         super.render()
 
         addClass(MDMenuItem.classSelector)
+
+        menuItemStyle.hovered.backgroundColor = RgbColor(153, 153, 153, 0.2)
     }
 
     companion object MDMenuItem : StyledClass {

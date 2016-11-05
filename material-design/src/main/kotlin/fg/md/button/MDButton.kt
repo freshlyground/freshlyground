@@ -136,46 +136,46 @@ class MDButton(action: Action, type: Type = Type.FLAT,
                 if (action.enabled) {
 
                     if (pressed) {
-                        this.style.backgroundColor = flatStyle.pressed.backgroundColor?.toString() ?: ""
+                        this.style.backgroundColor = flatStyle.pressed.backgroundColor
                     } else if (focused) {
-                        this.style.backgroundColor = flatStyle.focused.backgroundColor?.toString() ?: ""
+                        this.style.backgroundColor = flatStyle.focused.backgroundColor
                     } else if (hovered) {
-                        this.style.backgroundColor = flatStyle.hovered.backgroundColor?.toString() ?: ""
+                        this.style.backgroundColor = flatStyle.hovered.backgroundColor
                     } else {
-                        this.style.backgroundColor = flatStyle.backgroundColor?.toString() ?: ""
+                        this.style.backgroundColor = flatStyle.backgroundColor
                     }
 
-                    this.style.color = Context.theme.color(color, RgbColor.BLACK).toString()
+                    this.style.color = Context.theme.color(color, RgbColor.BLACK)
 
                 } else {
-                    this.style.backgroundColor = flatStyle.disabled.backgroundColor?.toString() ?: ""
-                    this.style.color = flatStyle.disabled.color?.toString() ?: ""
+                    this.style.backgroundColor = flatStyle.disabled.backgroundColor
+                    this.style.color = flatStyle.disabled.color
                 }
             }
             Type.RAISED -> {
                 if (action.enabled) {
 
                     if (pressed) {
-                        this.style.backgroundColor = raisedStyle.pressed.backgroundColor?.toString() ?: ""
+                        this.style.backgroundColor = raisedStyle.pressed.backgroundColor
                     } else if (focused) {
-                        this.style.backgroundColor = raisedStyle.focused.backgroundColor?.toString() ?: ""
+                        this.style.backgroundColor = raisedStyle.focused.backgroundColor
                     } else if (hovered) {
-                        this.style.backgroundColor = raisedStyle.hovered.backgroundColor?.toString() ?: ""
+                        this.style.backgroundColor = raisedStyle.hovered.backgroundColor
                     } else {
-                        this.style.backgroundColor = Context.theme.color(color, RgbColor.TRANSPARENT).toString()
+                        this.style.backgroundColor = Context.theme.color(color, RgbColor.TRANSPARENT)
                     }
 
-                    this.style.color = raisedStyle.color?.toString() ?: ""
+                    this.style.color = raisedStyle.color
 
                 } else {
-                    this.style.color = raisedStyle.disabled.color?.toString() ?: ""
-                    this.style.backgroundColor = raisedStyle.disabled.backgroundColor?.toString() ?: ""
+                    this.style.color = raisedStyle.disabled.color
+                    this.style.backgroundColor = raisedStyle.disabled.backgroundColor
                 }
             }
             Type.FLOATING -> {
                 if (action.enabled) {
-                    this.style.backgroundColor = Context.theme.color(color, RgbColor.WHITE).toString()
-                    this.style.color = RgbColor.BLACK.toString()
+                    this.style.backgroundColor = Context.theme.color(color, RgbColor.WHITE)
+                    this.style.color = RgbColor.BLACK
                 } else {
 
                 }
@@ -185,9 +185,9 @@ class MDButton(action: Action, type: Type = Type.FLAT,
 
     private fun renderMargins(enabled: Boolean) {
         if (enabled) {
-            style.margin = "8px"
+            _style.margin = "8px"
         } else {
-            style.margin = "0"
+            _style.margin = "0"
         }
     }
 

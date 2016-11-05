@@ -33,8 +33,8 @@ open class LabelledRadioButton(checked: Boolean,
 
     protected val iconI: IconI by lazy {
         val el = IconI(unCheckedIcon)
-        el.style.left = "-1em"
-        el.style.position = "relative"
+        el._style.left = "-1em"
+        el._style.position = "relative"
         el
     }
 
@@ -88,7 +88,7 @@ open class LabelledRadioButton(checked: Boolean,
     private fun renderChecked(checked: Boolean) {
 
         if (this.checkedIcon != null && this.unCheckedIcon != null) {
-            radioButton.style.opacity = "0"
+            radioButton._style.opacity = "0"
             iconI.show()
 
             iconI.icon = if (checked)
@@ -96,7 +96,7 @@ open class LabelledRadioButton(checked: Boolean,
             else
                 this.unCheckedIcon
         } else {
-            radioButton.style.opacity = ""
+            radioButton._style.opacity = ""
             iconI.hide()
         }
     }

@@ -9,8 +9,6 @@ fun main(vararg args: String) {
 
     console.log(page)
 
-    HTML.init()
-
     when (page) {
         "Keyboard" -> {
             mainKeyboard.start()
@@ -18,8 +16,12 @@ fun main(vararg args: String) {
         "Selector" -> {
             mainSelector.start()
         }
+        "FlexLayout" -> {
+            mainFlexLayout.start()
+        }
     }
 
+    HTML.init()
 
 }
 

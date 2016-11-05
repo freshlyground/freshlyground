@@ -1,5 +1,6 @@
 package fg.elements
 
+import fg.elements.style.typed.TypedStyle
 import org.w3c.dom.DOMRect
 import org.w3c.dom.HTMLElement
 import org.w3c.dom.css.CSSStyleDeclaration
@@ -24,10 +25,12 @@ open class Element(name: String? = null,
     private var _displayBeforeHiding: String = ""
 
     val hidden: Boolean
-        get() = this.style.display == "none"
+        get() = this._style.display == "none"
 
-    val style: CSSStyleDeclaration
+    val _style: CSSStyleDeclaration
         get() = w3cElement.style
+
+    val style: TypedStyle by lazy { TypedStyle(this) }
 
     /**
      * https://developer.mozilla.org/en-US/docs/Web/API/CSS_Object_Model/Determining_the_dimensions_of_elements
@@ -144,14 +147,14 @@ open class Element(name: String? = null,
 
     fun show() {
         if (hidden) {
-            this.style.display = _displayBeforeHiding
+            this._style.display = _displayBeforeHiding
         }
     }
 
     fun hide() {
         if (!hidden) {
-            _displayBeforeHiding = this.style.display
-            this.style.display = "none"
+            _displayBeforeHiding = this._style.display
+            this._style.display = "none"
         }
     }
 

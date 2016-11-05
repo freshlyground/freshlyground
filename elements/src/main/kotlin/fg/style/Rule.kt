@@ -515,14 +515,6 @@ abstract class Rule<out SELECTOR : Selector>(val selector: SELECTOR) {
      */
     private fun resolveRuleName(prop: KProperty<*>): String {
 
-        var s = ""
-        for (c in prop.name) {
-            if (c.toUpperCase() == c) {
-                s += "-" + c.toLowerCase()
-            } else {
-                s += c
-            }
-        }
-        return s
+        return prop.name.camelsToDashes()
     }
 }

@@ -4,6 +4,7 @@ import fg.style.AnyRule
 import fg.style.ClassRule
 import fg.style.KeyframesRule
 import fg.style.Rule
+import fg.style.TypeRule
 import org.w3c.dom.Element
 import org.w3c.dom.css.CSSStyleSheet
 import org.w3c.dom.events.Event
@@ -17,22 +18,22 @@ class Html internal constructor(val w3cElement: Element = document.documentEleme
     private val stylesheet: CSSStyleSheet by lazy { document.styleSheets[0] as CSSStyleSheet }
     private val registeredClassStyles: MutableMap<String, Rule<*>> = hashMapOf()
 
-
     fun init() {
-
-        //val style = document.createElement("style").asDynamic()
-        // WebKit hack :(
-        //style.appendChild(document.createTextNode(""))
-        //document.head!!.appendChild(style as org.w3c.dom.Node)
-
-        BODY.init()
-        window.setTimeout({ BODY.callDidMount() }, 10)
-
 
         addCSSRule(AnyRule() with {
             boxSizing = "border-box"
         })
 
+        addCSSRule(TypeRule(TypeSelector("html")) with {
+            height = "100%"
+        })
+        addCSSRule(TypeRule(TypeSelector("body")) with {
+            height = "100%"
+        })
+
+        BODY.init()
+
+        window.setTimeout({ BODY.callDidMount() }, 10)
     }
 
     fun registerStyle(styledClass: StyledClass) {

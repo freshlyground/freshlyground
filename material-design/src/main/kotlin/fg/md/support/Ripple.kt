@@ -14,6 +14,7 @@ import fg.style.classRule
 import fg.style.colour.RgbColor
 import org.w3c.dom.events.Event
 import org.w3c.dom.events.MouseEvent
+import kotlin.browser.window
 
 /**
  * https://medium.com/@_jh3y/how-to-create-the-ripple-effect-from-google-material-design-c6f993e1d39#.l08nnzgfo
@@ -52,8 +53,10 @@ class Ripple(val element: Element,
         // - parent's position relative to page -
         // half of self height/width to make it controllable from the center;
         val halfSize = size / 2
-        val x = pageX - pos.left - halfSize
-        val y = pageY - pos.top - halfSize
+        val x = pageX - pos.left - halfSize - window.scrollX
+        val y = pageY - pos.top - halfSize - window.scrollY
+        console.log("scrollX" + window.scrollX)
+        console.log("scrollY" + window.scrollY)
 
         val rippleInk = RippleInk(inkColor)
         this.rippleContainer.appendChild(rippleInk)

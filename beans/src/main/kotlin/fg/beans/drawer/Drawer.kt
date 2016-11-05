@@ -25,10 +25,10 @@ open class Drawer(side: Side) : Div() {
     private fun renderSide(side: Side) {
         when (side) {
             Side.LEFT -> {
-                style.left = "0"
+                _style.left = "0"
             }
             Side.RIGHT -> {
-                style.right = "0"
+                _style.right = "0"
             }
         }
     }

@@ -15,7 +15,7 @@ object mainDrawer {
     fun start() {
 
         val lastShortDisplay = P() with {
-            style.textAlign = "right"
+            _style.textAlign = "right"
         }
 
         val handleMenuItemAction: (ActionPerform) -> Unit = { actionPerform ->
@@ -26,7 +26,7 @@ object mainDrawer {
             val leftDrawer = drawer(Side.LEFT) {
 
                 hide()
-                style.borderRight = "1px solid black"
+                _style.borderRight = "1px solid black"
 
                 menu {
                     menuItem(SelectableAction("Menu Item 1", shortcut = Key.from("meta+alt+z"), perform = handleMenuItemAction)) {
@@ -46,7 +46,7 @@ object mainDrawer {
             val rightDrawer = drawer(Side.RIGHT) {
 
                 hide()
-                style.borderLeft = "1px solid black"
+                _style.borderLeft = "1px solid black"
 
                 menu {
                     menuItem(SelectableAction("Menu Item 1", shortcut = Key.from("meta+alt+z"), perform = handleMenuItemAction)) {
@@ -67,7 +67,7 @@ object mainDrawer {
                 +"Drawer"
             }
             p {
-                style.textAlign = "center"
+                _style.textAlign = "center"
 
                 button(Action("Dock drawer") { BODY.dock(leftDrawer); BODY.dock(rightDrawer) }) {
 

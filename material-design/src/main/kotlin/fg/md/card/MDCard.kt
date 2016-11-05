@@ -15,7 +15,7 @@ open class MDCard : fg.elements.Div() {
 
         addClass(classSelector)
 
-        style.backgroundColor = Context.theme.cardsNdialogs.toString()
+        style.backgroundColor = Context.theme.cardsNdialogs
     }
 
     override fun didMount() {
@@ -29,7 +29,7 @@ open class MDCard : fg.elements.Div() {
 
         when (property.name) {
             Theme::cardsNdialogs.name -> {
-                style.backgroundColor = Context.theme.background.toString()
+                style.backgroundColor = Context.theme.background
             }
         }
     }

@@ -24,7 +24,7 @@ fun main(vararg args: String) {
     BODY with {
 
         menuBar {
-            style.textAlign = "center"
+            _style.textAlign = "center"
 
             menu("Components") {
                 menuItem(Action("Button", shortcut = Key.from("meta+b")) { window.location.href = currUrl.replaceParam("page", "Button").toString() }) {}

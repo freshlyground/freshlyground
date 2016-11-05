@@ -8,6 +8,17 @@
 <br/>
 <h1>MenuItem</h1>
 <code><span class="keyword">open</span> <span class="keyword">class </span><span class="identifier">MenuItem</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="../../fg.beans/-action-bean/index.html"><span class="identifier">ActionBean</span></a></code>
+<h3>Types</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<a href="-style/index.html">Style</a></td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">Style</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="../../fg.beans/-element-style/index.html"><span class="identifier">ElementStyle</span></a></code></td>
+</tr>
+</tbody>
+</table>
 <h3>Constructors</h3>
 <table>
 <tbody>
@@ -27,6 +38,30 @@
 <a href="action.html">action</a></td>
 <td>
 <code><span class="keyword">open</span> <span class="keyword">val </span><span class="identifier">action</span><span class="symbol">: </span><a href="../../fg.beans/-action/index.html"><span class="identifier">Action</span></a></code></td>
+</tr>
+<tr>
+<td>
+<a href="focused.html">focused</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">focused</span><span class="symbol">: </span><span class="identifier">Boolean</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="hovered.html">hovered</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">hovered</span><span class="symbol">: </span><span class="identifier">Boolean</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="menu-item-style.html">menuItemStyle</a></td>
+<td>
+<code><span class="keyword">val </span><span class="identifier">menuItemStyle</span><span class="symbol">: </span><a href="-style/index.html"><span class="identifier">Style</span></a></code></td>
+</tr>
+<tr>
+<td>
+<a href="pressed.html">pressed</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">pressed</span><span class="symbol">: </span><span class="identifier">Boolean</span></code></td>
 </tr>
 </tbody>
 </table>
@@ -53,6 +88,36 @@
 </tr>
 <tr>
 <td>
+<a href="on-disabled.html">onDisabled</a></td>
+<td>
+<code><span class="keyword">open</span> <span class="keyword">fun </span><span class="identifier">onDisabled</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">Unit</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="on-enabled.html">onEnabled</a></td>
+<td>
+<code><span class="keyword">open</span> <span class="keyword">fun </span><span class="identifier">onEnabled</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">Unit</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="on-focus.html">onFocus</a></td>
+<td>
+<code><span class="keyword">open</span> <span class="keyword">fun </span><span class="identifier">onFocus</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">Unit</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="on-hover.html">onHover</a></td>
+<td>
+<code><span class="keyword">open</span> <span class="keyword">fun </span><span class="identifier">onHover</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">Unit</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="on-pressed.html">onPressed</a></td>
+<td>
+<code><span class="keyword">open</span> <span class="keyword">fun </span><span class="identifier">onPressed</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">Unit</span></code></td>
+</tr>
+<tr>
+<td>
 <a href="render.html">render</a></td>
 <td>
 <code><span class="keyword">open</span> <span class="keyword">fun </span><span class="identifier">render</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">Unit</span></code></td>
@@ -68,6 +133,24 @@
 <a href="un-before-performing-action.html">unBeforePerformingAction</a></td>
 <td>
 <code><span class="keyword">fun </span><span class="identifier">unBeforePerformingAction</span><span class="symbol">(</span><span class="identifier" id="fg.beans.menu.MenuItem$unBeforePerformingAction(kotlin.Function1((fg.beans.Action, kotlin.Unit)))/listener">listener</span><span class="symbol">:</span>&nbsp;<span class="symbol">(</span><a href="../../fg.beans/-action/index.html"><span class="identifier">Action</span></a><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<span class="identifier">Unit</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">Unit</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="un-focus.html">unFocus</a></td>
+<td>
+<code><span class="keyword">open</span> <span class="keyword">fun </span><span class="identifier">unFocus</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">Unit</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="un-hover.html">unHover</a></td>
+<td>
+<code><span class="keyword">open</span> <span class="keyword">fun </span><span class="identifier">unHover</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">Unit</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="un-pressed.html">unPressed</a></td>
+<td>
+<code><span class="keyword">open</span> <span class="keyword">fun </span><span class="identifier">unPressed</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">Unit</span></code></td>
 </tr>
 </tbody>
 </table>

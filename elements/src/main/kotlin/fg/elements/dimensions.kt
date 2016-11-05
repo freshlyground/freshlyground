@@ -134,8 +134,8 @@ data class Em(override val value: Double) : Dimension {
     }
 }
 
-val Int.percent: Percent get() = Percent(this.toDouble())
-val Double.percent: Percent get() = Percent(this)
+val Int.em: Em get() = Em(this.toDouble())
+val Double.em: Em get() = Em(this)
 
 data class Rem(override val value: Double) : Dimension {
 

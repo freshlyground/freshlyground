@@ -21,15 +21,3 @@ open class ElementStyle {
 
     open var outline: String? = null
 }
-
-/*fun Unit.style(init: ElementStyle.() -> Unit): ElementStyle {
-    val new: ElementStyle = ElementStyle()
-    new.init()
-    return new
-}
-
-infix fun ElementStyle.style(init: ElementStyle.() -> Unit): ElementStyle {
-    val new: ElementStyle = ElementStyle()
-    new.init()
-    return new
-}*/

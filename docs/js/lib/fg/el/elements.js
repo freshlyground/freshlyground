@@ -988,11 +988,11 @@ var elements = function (Kotlin) {
             return this === other || (other !== null && (typeof other === 'object' && (Object.getPrototypeOf(this) === Object.getPrototypeOf(other) && Kotlin.equals(this.value, other.value))));
           }
         }),
-        get_percent_s8ev3o$: {value: function ($receiver) {
-          return new _.fg.elements.Percent($receiver);
+        get_em_s8ev3o$: {value: function ($receiver) {
+          return new _.fg.elements.Em($receiver);
         }},
-        get_percent_yrwdxs$: {value: function ($receiver) {
-          return new _.fg.elements.Percent($receiver);
+        get_em_yrwdxs$: {value: function ($receiver) {
+          return new _.fg.elements.Em($receiver);
         }},
         Rem: Kotlin.createClass(function () {
           return [_.fg.elements.Dimension];
@@ -1182,8 +1182,17 @@ var elements = function (Kotlin) {
         get_vmax_s8ev3o$: {value: function ($receiver) {
           return new _.fg.elements.VMax($receiver);
         }},
+        br_8zczhr$: function ($receiver, init) {
+          return _.fg.elements.initAndAppendNode_i6bvtr$($receiver, new _.fg.elements.Br(), init);
+        },
         header_4tl54c$: function ($receiver, init) {
           return _.fg.elements.initAndAppendNode_i6bvtr$($receiver, new _.fg.elements.Header(), init);
+        },
+        main_2zek0o$: function ($receiver, init) {
+          return _.fg.elements.initAndAppendNode_i6bvtr$($receiver, new _.fg.elements.Main(), init);
+        },
+        footer_5xefui$: function ($receiver, init) {
+          return _.fg.elements.initAndAppendNode_i6bvtr$($receiver, new _.fg.elements.Footer(), init);
         },
         h1_sk18k8$: function ($receiver, init) {
           return _.fg.elements.initAndAppendNode_i6bvtr$($receiver, new _.fg.elements.H1(), init);
@@ -1434,6 +1443,7 @@ var elements = function (Kotlin) {
           this._id$delegate = _.fg.elements.W3cDelegates.nullableAttribute_61zpoe$('id');
           this._tabindex$delegate = _.fg.elements.W3cDelegates.nullableAttribute_61zpoe$('tabindex');
           this._displayBeforeHiding_ywpibn$ = '';
+          this.style$delegate = Kotlin.kotlin.lazy_un3fny$(_.fg.elements.Element.style$f(this));
         }, /** @lends _.fg.elements.Element.prototype */ {
           childElements: {
             get: function () {
@@ -1475,12 +1485,17 @@ var elements = function (Kotlin) {
           },
           hidden: {
             get: function () {
-              return Kotlin.equals(this.style.display, 'none');
+              return Kotlin.equals(this._style.display, 'none');
+            }
+          },
+          _style: {
+            get: function () {
+              return this.w3cElement.style;
             }
           },
           style: {
             get: function () {
-              return this.w3cElement.style;
+              return Kotlin.kotlin.getValue_em0fd4$(this.style$delegate, this, new Kotlin.PropertyMetadata('style'));
             }
           },
           clientWidth: {
@@ -1587,13 +1602,13 @@ var elements = function (Kotlin) {
           },
           show: function () {
             if (this.hidden) {
-              this.style.display = this._displayBeforeHiding_ywpibn$;
+              this._style.display = this._displayBeforeHiding_ywpibn$;
             }
           },
           hide: function () {
             if (!this.hidden) {
-              this._displayBeforeHiding_ywpibn$ = this.style.display;
-              this.style.display = 'none';
+              this._displayBeforeHiding_ywpibn$ = this._style.display;
+              this._style.display = 'none';
             }
           },
           traverseElements_su6ycz$: function (each) {
@@ -1609,8 +1624,12 @@ var elements = function (Kotlin) {
             }
           }
         }, /** @lends _.fg.elements.Element */ {
+          style$f: function (this$Element) {
+            return function () {
+              return new _.fg.elements.style.typed.TypedStyle(this$Element);
+            };
+          }
         }),
-        ElementStateListener: Kotlin.createTrait(null),
         Img: Kotlin.createClass(function () {
           return [_.fg.elements.Element];
         }, function Img(src) {
@@ -2234,9 +2253,11 @@ var elements = function (Kotlin) {
             }
           },
           init: function () {
+            this.addCSSRule_3cka69$(_.fg.elements.with_ji1yox$(new _.fg.style.AnyRule(), _.fg.elements.Html.init$f));
+            this.addCSSRule_3cka69$(_.fg.elements.with_ji1yox$(new _.fg.style.TypeRule(new _.fg.elements.TypeSelector('html')), _.fg.elements.Html.init$f_0));
+            this.addCSSRule_3cka69$(_.fg.elements.with_ji1yox$(new _.fg.style.TypeRule(new _.fg.elements.TypeSelector('body')), _.fg.elements.Html.init$f_1));
             _.fg.elements.BODY.init();
-            window.setTimeout(_.fg.elements.Html.init$f, 10);
-            this.addCSSRule_3cka69$(_.fg.elements.with_ji1yox$(new _.fg.style.AnyRule(), _.fg.elements.Html.init$f_0));
+            window.setTimeout(_.fg.elements.Html.init$f_2, 10);
           },
           registerStyle_78phyd$: function (styledClass) {
             var rule = _.fg.elements.Html.registerStyle_78phyd$rule(styledClass);
@@ -2264,10 +2285,16 @@ var elements = function (Kotlin) {
           }
         }, /** @lends _.fg.elements.Html */ {
           init$f: function () {
-            _.fg.elements.BODY.callDidMount();
+            this.boxSizing = 'border-box';
           },
           init$f_0: function () {
-            this.boxSizing = 'border-box';
+            this.height = '100%';
+          },
+          init$f_1: function () {
+            this.height = '100%';
+          },
+          init$f_2: function () {
+            _.fg.elements.BODY.callDidMount();
           },
           registerStyle_78phyd$rule: function (closure$styledClass) {
             return function (styledClass, init) {
@@ -2915,6 +2942,297 @@ var elements = function (Kotlin) {
                 }
               }
             }
+          })
+        }),
+        style: Kotlin.definePackage(null, /** @lends _.fg.elements.style */ {
+          typed: Kotlin.definePackage(null, /** @lends _.fg.elements.style.typed */ {
+            Display: Kotlin.createEnumClass(function () {
+              return [Kotlin.Enum];
+            }, function Display(asString) {
+              Display.baseInitializer.call(this);
+              this.asString = asString;
+            }, function () {
+              return {
+                none: function () {
+                  return new _.fg.elements.style.typed.Display('none');
+                },
+                iinline: function () {
+                  return new _.fg.elements.style.typed.Display('inline');
+                },
+                block: function () {
+                  return new _.fg.elements.style.typed.Display('block');
+                },
+                flex: function () {
+                  return new _.fg.elements.style.typed.Display('flex');
+                },
+                inlineBlock: function () {
+                  return new _.fg.elements.style.typed.Display('inline-block');
+                },
+                contents: function () {
+                  return new _.fg.elements.style.typed.Display('contents');
+                },
+                listItem: function () {
+                  return new _.fg.elements.style.typed.Display('list-item');
+                }
+              };
+            }, /** @lends _.fg.elements.style.typed.Display.prototype */ {
+              toString: function () {
+                return this.asString;
+              }
+            }),
+            toDisplay_pdl1w0$: function ($receiver) {
+              var tmp$0, tmp$2;
+              tmp$0 = _.fg.elements.style.typed.Display.values();
+              for (tmp$2 = 0; tmp$2 !== tmp$0.length; ++tmp$2) {
+                var one = tmp$0[tmp$2];
+                if (Kotlin.equals(one.asString, $receiver)) {
+                  return one;
+                }
+              }
+              throw new Kotlin.IllegalArgumentException('Unknown display: ' + $receiver);
+            },
+            FlexDirection: Kotlin.createEnumClass(function () {
+              return [Kotlin.Enum];
+            }, function FlexDirection(asString) {
+              FlexDirection.baseInitializer.call(this);
+              this.asString = asString;
+            }, function () {
+              return {
+                row: function () {
+                  return new _.fg.elements.style.typed.FlexDirection('row');
+                },
+                rowReverse: function () {
+                  return new _.fg.elements.style.typed.FlexDirection('row-reverse');
+                },
+                column: function () {
+                  return new _.fg.elements.style.typed.FlexDirection('column');
+                },
+                columnReverse: function () {
+                  return new _.fg.elements.style.typed.FlexDirection('column-reverse');
+                }
+              };
+            }),
+            toFlexDirection_pdl1w0$: function ($receiver) {
+              var tmp$0, tmp$2;
+              tmp$0 = _.fg.elements.style.typed.FlexDirection.values();
+              for (tmp$2 = 0; tmp$2 !== tmp$0.length; ++tmp$2) {
+                var one = tmp$0[tmp$2];
+                if (Kotlin.equals(one.asString, $receiver)) {
+                  return one;
+                }
+              }
+              throw new Kotlin.IllegalArgumentException('Unknown flex-direction: ' + $receiver);
+            },
+            TypedStyle: Kotlin.createClass(null, function TypedStyle(element) {
+              this.element_pxm2hs$ = element;
+              this.display$delegate = new _.fg.elements.style.typed.TypedStyle.DisplayDelegate();
+              this.color$delegate = new _.fg.elements.style.typed.TypedStyle.RgbColorDelegate();
+              this.backgroundColor$delegate = new _.fg.elements.style.typed.TypedStyle.RgbColorDelegate();
+              this.left$delegate = new _.fg.elements.style.typed.TypedStyle.DimensionDelegate();
+              this.right$delegate = new _.fg.elements.style.typed.TypedStyle.DimensionDelegate();
+              this.top$delegate = new _.fg.elements.style.typed.TypedStyle.DimensionDelegate();
+              this.bottom$delegate = new _.fg.elements.style.typed.TypedStyle.DimensionDelegate();
+              this.width$delegate = new _.fg.elements.style.typed.TypedStyle.DimensionDelegate();
+              this.height$delegate = new _.fg.elements.style.typed.TypedStyle.DimensionDelegate();
+              this.minWidth$delegate = new _.fg.elements.style.typed.TypedStyle.DimensionDelegate('min-width');
+              this.minHeight$delegate = new _.fg.elements.style.typed.TypedStyle.DimensionDelegate('min-height');
+              this.maxWidth$delegate = new _.fg.elements.style.typed.TypedStyle.DimensionDelegate('max-width');
+              this.maxHeight$delegate = new _.fg.elements.style.typed.TypedStyle.DimensionDelegate('max-height');
+              this.flexDirection$delegate = new _.fg.elements.style.typed.TypedStyle.FlexDirectionDelegate();
+              this.order$delegate = new _.fg.elements.style.typed.TypedStyle.IntDelegate();
+            }, /** @lends _.fg.elements.style.typed.TypedStyle.prototype */ {
+              display: {
+                get: function () {
+                  return this.display$delegate.getValue_dsk1ci$(this, new Kotlin.PropertyMetadata('display'));
+                },
+                set: function (display) {
+                  this.display$delegate.setValue_w32e13$(this, new Kotlin.PropertyMetadata('display'), display);
+                }
+              },
+              color: {
+                get: function () {
+                  return this.color$delegate.getValue_dsk1ci$(this, new Kotlin.PropertyMetadata('color'));
+                },
+                set: function (color) {
+                  this.color$delegate.setValue_w32e13$(this, new Kotlin.PropertyMetadata('color'), color);
+                }
+              },
+              backgroundColor: {
+                get: function () {
+                  return this.backgroundColor$delegate.getValue_dsk1ci$(this, new Kotlin.PropertyMetadata('backgroundColor'));
+                },
+                set: function (backgroundColor) {
+                  this.backgroundColor$delegate.setValue_w32e13$(this, new Kotlin.PropertyMetadata('backgroundColor'), backgroundColor);
+                }
+              },
+              left: {
+                get: function () {
+                  return this.left$delegate.getValue_dsk1ci$(this, new Kotlin.PropertyMetadata('left'));
+                },
+                set: function (left) {
+                  this.left$delegate.setValue_w32e13$(this, new Kotlin.PropertyMetadata('left'), left);
+                }
+              },
+              right: {
+                get: function () {
+                  return this.right$delegate.getValue_dsk1ci$(this, new Kotlin.PropertyMetadata('right'));
+                },
+                set: function (right) {
+                  this.right$delegate.setValue_w32e13$(this, new Kotlin.PropertyMetadata('right'), right);
+                }
+              },
+              top: {
+                get: function () {
+                  return this.top$delegate.getValue_dsk1ci$(this, new Kotlin.PropertyMetadata('top'));
+                },
+                set: function (top) {
+                  this.top$delegate.setValue_w32e13$(this, new Kotlin.PropertyMetadata('top'), top);
+                }
+              },
+              bottom: {
+                get: function () {
+                  return this.bottom$delegate.getValue_dsk1ci$(this, new Kotlin.PropertyMetadata('bottom'));
+                },
+                set: function (bottom) {
+                  this.bottom$delegate.setValue_w32e13$(this, new Kotlin.PropertyMetadata('bottom'), bottom);
+                }
+              },
+              width: {
+                get: function () {
+                  return this.width$delegate.getValue_dsk1ci$(this, new Kotlin.PropertyMetadata('width'));
+                },
+                set: function (width) {
+                  this.width$delegate.setValue_w32e13$(this, new Kotlin.PropertyMetadata('width'), width);
+                }
+              },
+              height: {
+                get: function () {
+                  return this.height$delegate.getValue_dsk1ci$(this, new Kotlin.PropertyMetadata('height'));
+                },
+                set: function (height) {
+                  this.height$delegate.setValue_w32e13$(this, new Kotlin.PropertyMetadata('height'), height);
+                }
+              },
+              minWidth: {
+                get: function () {
+                  return this.minWidth$delegate.getValue_dsk1ci$(this, new Kotlin.PropertyMetadata('minWidth'));
+                },
+                set: function (minWidth) {
+                  this.minWidth$delegate.setValue_w32e13$(this, new Kotlin.PropertyMetadata('minWidth'), minWidth);
+                }
+              },
+              minHeight: {
+                get: function () {
+                  return this.minHeight$delegate.getValue_dsk1ci$(this, new Kotlin.PropertyMetadata('minHeight'));
+                },
+                set: function (minHeight) {
+                  this.minHeight$delegate.setValue_w32e13$(this, new Kotlin.PropertyMetadata('minHeight'), minHeight);
+                }
+              },
+              maxWidth: {
+                get: function () {
+                  return this.maxWidth$delegate.getValue_dsk1ci$(this, new Kotlin.PropertyMetadata('maxWidth'));
+                },
+                set: function (maxWidth) {
+                  this.maxWidth$delegate.setValue_w32e13$(this, new Kotlin.PropertyMetadata('maxWidth'), maxWidth);
+                }
+              },
+              maxHeight: {
+                get: function () {
+                  return this.maxHeight$delegate.getValue_dsk1ci$(this, new Kotlin.PropertyMetadata('maxHeight'));
+                },
+                set: function (maxHeight) {
+                  this.maxHeight$delegate.setValue_w32e13$(this, new Kotlin.PropertyMetadata('maxHeight'), maxHeight);
+                }
+              },
+              flexDirection: {
+                get: function () {
+                  return this.flexDirection$delegate.getValue_dsk1ci$(this, new Kotlin.PropertyMetadata('flexDirection'));
+                },
+                set: function (flexDirection) {
+                  this.flexDirection$delegate.setValue_w32e13$(this, new Kotlin.PropertyMetadata('flexDirection'), flexDirection);
+                }
+              },
+              order: {
+                get: function () {
+                  return this.order$delegate.getValue_dsk1ci$(this, new Kotlin.PropertyMetadata('order'));
+                },
+                set: function (order) {
+                  this.order$delegate.setValue_w32e13$(this, new Kotlin.PropertyMetadata('order'), order);
+                }
+              }
+            }, /** @lends _.fg.elements.style.typed.TypedStyle */ {
+              DisplayDelegate: Kotlin.createClass(function () {
+                return [_.fg.elements.style.typed.TypedStyle.TypedPropertyDelegate];
+              }, function DisplayDelegate() {
+                DisplayDelegate.baseInitializer.call(this, void 0, Kotlin.getCallableRefForExtensionFunction(_.fg.elements.style.typed.toDisplay_pdl1w0$));
+              }),
+              RgbColorDelegate: Kotlin.createClass(function () {
+                return [_.fg.elements.style.typed.TypedStyle.TypedPropertyDelegate];
+              }, function RgbColorDelegate(attributeName) {
+                if (attributeName === void 0)
+                  attributeName = null;
+                RgbColorDelegate.baseInitializer.call(this, attributeName, _.fg.elements.style.typed.TypedStyle.RgbColorDelegate.RgbColorDelegate$f);
+              }, null, /** @lends _.fg.elements.style.typed.TypedStyle.RgbColorDelegate */ {
+                RgbColorDelegate$f: function (it) {
+                  return _.fg.style.colour.RgbColor.Factory.from_61zpoe$(it);
+                }
+              }),
+              IntDelegate: Kotlin.createClass(function () {
+                return [_.fg.elements.style.typed.TypedStyle.TypedPropertyDelegate];
+              }, function IntDelegate(attributeName) {
+                if (attributeName === void 0)
+                  attributeName = null;
+                IntDelegate.baseInitializer.call(this, attributeName, _.fg.elements.style.typed.TypedStyle.IntDelegate.IntDelegate$f);
+              }, null, /** @lends _.fg.elements.style.typed.TypedStyle.IntDelegate */ {
+                IntDelegate$f: function (it) {
+                  return parseInt(it);
+                }
+              }),
+              DimensionDelegate: Kotlin.createClass(function () {
+                return [_.fg.elements.style.typed.TypedStyle.TypedPropertyDelegate];
+              }, function DimensionDelegate(attributeName) {
+                if (attributeName === void 0)
+                  attributeName = null;
+                DimensionDelegate.baseInitializer.call(this, attributeName, _.fg.elements.style.typed.TypedStyle.DimensionDelegate.DimensionDelegate$f);
+              }, null, /** @lends _.fg.elements.style.typed.TypedStyle.DimensionDelegate */ {
+                DimensionDelegate$f: function (it) {
+                  var tmp$0;
+                  return (tmp$0 = _.fg.elements.toDimension_pdl1w0$(it)) != null ? tmp$0 : Kotlin.throwNPE();
+                }
+              }),
+              FlexDirectionDelegate: Kotlin.createClass(function () {
+                return [_.fg.elements.style.typed.TypedStyle.TypedPropertyDelegate];
+              }, function FlexDirectionDelegate() {
+                FlexDirectionDelegate.baseInitializer.call(this, void 0, Kotlin.getCallableRefForExtensionFunction(_.fg.elements.style.typed.toFlexDirection_pdl1w0$));
+              }),
+              TypedPropertyDelegate: Kotlin.createClass(function () {
+                return [Kotlin.kotlin.properties.ReadWriteProperty];
+              }, function TypedPropertyDelegate(attributeName, getFn) {
+                if (attributeName === void 0)
+                  attributeName = null;
+                this.attributeName = attributeName;
+                this.getFn = getFn;
+              }, /** @lends _.fg.elements.style.typed.TypedStyle.TypedPropertyDelegate.prototype */ {
+                getValue_dsk1ci$: function (thisRef, property) {
+                  var tmp$0;
+                  var attributeName = (tmp$0 = this.attributeName) != null ? tmp$0 : _.fg.style.camelsToDashes_pdl1w0$(property.name);
+                  var stringValue = thisRef.element_pxm2hs$.w3cElement.style.getPropertyValue(attributeName);
+                  return stringValue.length > 0 ? this.getFn(stringValue) : null;
+                },
+                setValue_w32e13$: function (thisRef, property, value) {
+                  var tmp$0;
+                  var attributeName = (tmp$0 = this.attributeName) != null ? tmp$0 : _.fg.style.camelsToDashes_pdl1w0$(property.name);
+                  if (value != null) {
+                    var valueAsString = value.toString();
+                    thisRef.element_pxm2hs$.w3cElement.style.setProperty(attributeName, valueAsString);
+                  }
+                   else {
+                    thisRef.element_pxm2hs$.w3cElement.style.removeProperty(attributeName);
+                  }
+                }
+              })
+            })
           })
         })
       }),
@@ -5539,19 +5857,7 @@ var elements = function (Kotlin) {
             }
           },
           resolveRuleName_2a5go5$: function (prop) {
-            var tmp$0;
-            var s = '';
-            tmp$0 = Kotlin.kotlin.text.iterator_gw00vq$(prop.name);
-            while (tmp$0.hasNext()) {
-              var c = tmp$0.next();
-              if (c.toUpperCase() === c) {
-                s += '-' + c.toLowerCase();
-              }
-               else {
-                s += c;
-              }
-            }
-            return s;
+            return _.fg.style.camelsToDashes_pdl1w0$(prop.name);
           }
         }, /** @lends _.fg.style.Rule */ {
           Property: Kotlin.createClass(null, function Property($outer, name) {
@@ -5603,6 +5909,30 @@ var elements = function (Kotlin) {
             }
           })
         }),
+        TypeRule: Kotlin.createClass(function () {
+          return [_.fg.style.Rule];
+        }, function TypeRule(selector) {
+          TypeRule.baseInitializer.call(this, selector);
+        }, /** @lends _.fg.style.TypeRule.prototype */ {
+          cssText: function () {
+            return _.fg.style.Rule.prototype.cssText_yidtjr$.call(this, this.selector);
+          }
+        }),
+        camelsToDashes_pdl1w0$: function ($receiver) {
+          var tmp$0;
+          var s = '';
+          tmp$0 = Kotlin.kotlin.text.iterator_gw00vq$($receiver);
+          while (tmp$0.hasNext()) {
+            var c = tmp$0.next();
+            if (c.toUpperCase() === c) {
+              s += '-' + c.toLowerCase();
+            }
+             else {
+              s += c;
+            }
+          }
+          return s;
+        },
         colour: Kotlin.definePackage(null, /** @lends _.fg.style.colour */ {
           Colour: Kotlin.createTrait(null),
           Hsl: Kotlin.createClass(function () {

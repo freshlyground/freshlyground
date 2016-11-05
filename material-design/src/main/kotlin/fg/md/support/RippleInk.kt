@@ -19,17 +19,17 @@ class RippleInk(color: RgbColor) : Span() {
     }
 
     internal fun setSize(size: Pixels) {
-        this.style.width = size.toHtml()
-        this.style.height = size.toHtml()
+        this.style.width = size
+        this.style.height = size
     }
 
     internal fun setPosition(position: Pair<Double, Double>) {
-        this.style.left = position.first.px.toHtml()
-        this.style.top = position.second.px.toHtml()
+        this.style.left = position.first.px
+        this.style.top = position.second.px
     }
 
     private fun renderColor(color: RgbColor) {
-        style.backgroundColor = color.toString()
+        style.backgroundColor = color
     }
 
     override fun render() {

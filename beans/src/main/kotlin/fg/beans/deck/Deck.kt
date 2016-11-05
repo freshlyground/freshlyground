@@ -34,6 +34,17 @@ class Deck : Div() {
         addClass(classSelector)
     }
 
+    fun show(child: Element) {
+
+        childElements.forEach { it ->
+            if (child === it) {
+                it.show()
+            } else {
+                it.hide()
+            }
+        }
+    }
+
     companion object Deck : StyledClass {
 
         override val classSelector = "$pkg-deck".toClassSelector()

@@ -1,6 +1,9 @@
 package fg.elements
 
+fun Element.br(init: Br.() -> Unit) = initAndAppendNode(Br(), init)
 fun Element.header(init: Header.() -> Unit) = initAndAppendNode(Header(), init)
+fun Element.main(init: Main.() -> Unit) = initAndAppendNode(Main(), init)
+fun Element.footer(init: Footer.() -> Unit) = initAndAppendNode(Footer(), init)
 fun Element.h1(init: H1.() -> Unit) = initAndAppendNode(H1(), init)
 fun Element.h2(init: H2.() -> Unit) = initAndAppendNode(H2(), init)
 fun Element.h3(init: H3.() -> Unit) = initAndAppendNode(H3(), init)

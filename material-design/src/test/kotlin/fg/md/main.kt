@@ -4,8 +4,11 @@ import fg.base.Side
 import fg.beans.Action
 import fg.beans.SelectableAction
 import fg.beans.button
+import fg.beans.deck.Deck
+import fg.beans.drawer.dock
 import fg.elements.BODY
 import fg.elements.ClassSelector
+import fg.elements.Div
 import fg.elements.HTML
 import fg.elements.h1
 import fg.elements.h2
@@ -15,55 +18,31 @@ import fg.elements.with
 import fg.keyboard.Key
 import fg.md.button.MDButton
 import fg.md.colour.MDColor
+import fg.md.drawer.MDDrawer
 import fg.style.AnyRule
 import fg.style.ClassRule
 import fg.style.colour.RgbColor
 import fg.style.desc
 
-fun main(vararg args: String) {
+class Main() {
 
-
-    BODY with {
-        style.backgroundColor = "#ededed"
-
-        val leftDrawer = mdDrawer(Side.LEFT) {
-            hide()
-            style.width = "250px"
-
-            p { +"A Drawer" }
+    val leftDrawer: MDDrawer by lazy {
+        MDDrawer(Side.LEFT) with {
             mdCard {
-                header {
-                    avatar("portrait.jpg") {
-
-                    }
-                    text {
-                        title {
-                            +"Header title"
-                        }
-                        subtitle {
-                            +"Header subtitle"
-                        }
-                    }
-                }
-                image("safari.jpg") {
-
-                }
-                title {
-                    +"Lion"
-                }
-                content {
-                    +"Panthera leo"
+                mdMenu {
+                    mdMenuItem(Action("Drawer") { deck.show(drawer) }) {}
+                    mdMenuItem(Action("Button") { deck.show(button) }) {}
+                    mdMenuItem(Action("Menu") { deck.show(menu) }) {}
+                    mdMenuItem(Action("Card") { deck.show(card) }) {}
                 }
             }
-            val hideDrawerAction = Action("Hide drawer") {
-                hide()
-            }
-            hr {}
-            button(hideDrawerAction) {}
         }
-        val rightDrawer = mdDrawer(Side.RIGHT) {
+    }
+
+    val rightDrawer: MDDrawer by lazy {
+        MDDrawer(Side.RIGHT) with {
             hide()
-            style.width = "250px"
+            _style.width = "250px"
 
             p { +"A Drawer on the right side" }
             mdCard {
@@ -93,21 +72,9 @@ fun main(vararg args: String) {
             hr {}
             button(hideDrawerAction) {}
         }
+    }
 
-        h2 {
-            +"Drawer"
-        }
-        p {
-            button(Action("Show left drawer") {
-                leftDrawer.show()
-            }) { }
-
-            button(Action("Show right drawer") {
-                rightDrawer.show()
-            }) { }
-        }
-
-        hr {}
+    val button: Div = Div() with {
 
         h2 {
             +"Button"
@@ -143,9 +110,9 @@ fun main(vararg args: String) {
                 }
             }
         }
-        hr {}
+    }
 
-
+    val menu = Div() with {
         h2 {
             +"Menu"
         }
@@ -164,11 +131,13 @@ fun main(vararg args: String) {
                 mdMenuItem(Action("Undo", shortcut = Key.from("meta+z")) {}) {}
                 mdMenuItem(Action("Redo", shortcut = Key.from("shift+meta+z")) {}) {}
                 mdMenuItem(SelectableAction("Column Mode", shortcut = Key.from("shift+meta+8")) {}) {}
-                mdMenuItem(SelectableAction("Some Mode", shortcut = Key.from("shift+meta+1")) {}) {}
-                mdMenuItem(SelectableAction("Other Mode", shortcut = Key.from("shift+meta+2")) {}) {}
+                mdMenuItem(SelectableAction("Some Mode", selected = true, shortcut = Key.from("shift+meta+1")) {}) {}
+                mdMenuItem(SelectableAction("Other Mode", selected = true, shortcut = Key.from("shift+meta+2")) {}) {}
             }
         }
+    }
 
+    val radioButton = Div() with {
         h2 {
             +"Radio Button"
         }
@@ -180,8 +149,9 @@ fun main(vararg args: String) {
                 labelText = "Some other choice"
             }
         }
-        hr {}
+    }
 
+    val card = Div() with {
         h1 {
             +"Card"
         }
@@ -342,8 +312,8 @@ fun main(vararg args: String) {
             }
 
             mdCard {
-                style.backgroundImage = "url(safari.jpg)"
-                style.color = "white"
+                _style.backgroundImage = "url(safari.jpg)"
+                _style.color = "white"
 
                 titleText {
                     title {
@@ -361,36 +331,78 @@ fun main(vararg args: String) {
         }
     }
 
-    HTML.addCSSRule(AnyRule() with {
-        boxSizing = "border-box"
-    })
-    HTML.addCSSRule(ClassRule(ClassSelector("card-container")) with {
+    val drawer = Div() with {
+        h2 {
+            +"Drawer"
+        }
+        p {
+            button(Action("Show left drawer") {
+                leftDrawer.show()
+            }) { }
 
-        desc(".md-card") {
-            marginBottom = "1em"
+            button(Action("Show right drawer") {
+                rightDrawer.show()
+            }) { }
+        }
+    }
 
+    val deck = Deck() with {
 
-            desc("test") {
+        appendChild(drawer)
+        appendChild(button)
+        appendChild(menu)
+        appendChild(radioButton)
+        appendChild(card)
+    }
 
-            }
+    init {
+
+        BODY with {
+            _style.backgroundColor = "#ededed"
+
+            BODY.dock(leftDrawer)
+            appendChild(deck)
         }
 
+        HTML.addCSSRule(AnyRule() with {
+            boxSizing = "border-box"
+        })
+        HTML.addCSSRule(ClassRule(ClassSelector("card-container")) with {
 
-    })
+            desc(".md-card") {
+                marginBottom = "1em"
 
-    HTML.addCSSRule(ClassRule(ClassSelector("flex-row")) with {
 
-        display = "flex"
-        flexDirection = "row"
+                desc("test") {
 
-    })
+                }
+            }
 
-    HTML.addCSSRule(ClassRule(ClassSelector("flex-column")) with {
 
-        display = "flex"
-        flexDirection = "column"
+        })
 
-    })
+        HTML.addCSSRule(ClassRule(ClassSelector("flex-row")) with {
 
-    HTML.init()
+            display = "flex"
+            flexDirection = "row"
+
+        })
+
+        HTML.addCSSRule(ClassRule(ClassSelector("flex-column")) with {
+
+            display = "flex"
+            flexDirection = "column"
+
+        })
+
+        HTML.init()
+    }
+}
+
+fun main(vararg args: String) {
+
+    Main()
+
+
+
 }
