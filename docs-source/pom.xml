@@ -33,7 +33,7 @@
         </dependency>
         <dependency>
             <groupId>freshlyground</groupId>
-            <artifactId>md</artifactId>
+            <artifactId>material-design</artifactId>
             <version>${project.version}</version>
         </dependency>
     </dependencies>
@@ -139,7 +139,7 @@
                                 </artifactItem>
                                 <artifactItem>
                                     <groupId>freshlyground</groupId>
-                                    <artifactId>md</artifactId>
+                                    <artifactId>material-design</artifactId>
                                     <version>${project.version}</version>
                                     <outputDirectory>../docs/js/lib/fg/md</outputDirectory>
                                     <includes>*.js</includes>

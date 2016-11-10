@@ -2269,12 +2269,6 @@ var beans = function (Kotlin, $module$elements) {
               var newState = !this.checked;
               this.checked = newState;
             },
-            checked_0: function () {
-              this.checked = true;
-            },
-            unchecked: function () {
-              this.checked = false;
-            },
             render: function () {
               $module$elements.fg.elements.InputRadio.prototype.render.call(this);
               this.addClass_bx842b$(_.fg.beans.radio.RadioButton.RadioButton.classSelector);
