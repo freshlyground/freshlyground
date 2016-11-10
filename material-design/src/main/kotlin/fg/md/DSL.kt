@@ -19,11 +19,15 @@ import fg.md.card.MDCardTitleText
 import fg.md.drawer.MDDrawer
 import fg.md.menu.MDMenu
 import fg.md.menu.MDMenuItem
+import fg.md.panel.MDCollapsedPanel
+import fg.md.panel.MDExpandedPanel
+import fg.md.panel.MDExpansionPanel
 import fg.md.radio.MDRadioButton
 
 fun Element.mdButton(action: Action, type: MDButton.Type, init: MDButton.() -> Unit) = initAndAppendNode(MDButton(action, type), init)
 fun Element.mdCard(init: MDCard.() -> Unit) = initAndAppendNode(MDCard(), init)
 fun Element.mdDrawer(side: Side, init: MDDrawer.() -> Unit) = initAndAppendNode(MDDrawer(side), init)
+fun Element.mdExpansionPanel(init: MDExpansionPanel.() -> Unit) = initAndAppendNode(MDExpansionPanel(), init)
 fun Element.mdMenu(label: String? = null, shortcut: Key? = null, init: MDMenu.() -> Unit) = initAndAppendNode(MDMenu(label, shortcut), init)
 fun Element.mdRadioButton(labelText: String? = null, init: MDRadioButton.() -> Unit) = initAndAppendNode(MDRadioButton(labelText = labelText), init)
 fun MDCard.title(init: MDCardTitle.() -> Unit) = initAndAppendNode(MDCardTitle(), init)
@@ -44,4 +48,10 @@ fun MDCardTitleText.subtitle(init: MDCardSubtitle.() -> Unit) = initAndAppendNod
 fun MDCardActions.mdButton(action: Action, init: MDButton.() -> Unit) = initAndAppendNode(MDButton(action, MDButton.Type.FLAT), init)
 fun MDCardActions.mdButton(action: Action, type: MDButton.Type, init: MDButton.() -> Unit) = initAndAppendNode(MDButton(action, type), init)
 fun MDMenu.mdMenuItem(action: Action, init: MDMenuItem.() -> Unit) = initAndAppendNode(MDMenuItem(action), init)
+fun MDExpansionPanel.mdCollapsedPanel(init: MDCollapsedPanel.() -> Unit) {
+    this.collapsedPanel = initAndAppendNode(MDCollapsedPanel(), init)
+}
 
+fun MDExpansionPanel.mdExpandedPanel(init: MDExpandedPanel.() -> Unit) {
+    this.expandedPanel = initAndAppendNode(MDExpandedPanel(), init)
+}

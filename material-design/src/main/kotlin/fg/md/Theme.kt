@@ -26,7 +26,7 @@ class Theme(primaryColor: RgbColor,
         for (listener in propertyChangedListeners) listener(this, property, old, new)
     }
 
-    fun <T : Any?> onPropertyChanged(listener: (theme: Theme, property: KProperty<*>, old: T?, new: T?) -> Unit) {
+    fun <T : Any> onPropertyChanged(listener: (theme: Theme, property: KProperty<*>, old: T?, new: T?) -> Unit) {
         propertyChangedListeners.add(listener as (Theme, KProperty<*>, Any?, Any?) -> Unit)
     }
 

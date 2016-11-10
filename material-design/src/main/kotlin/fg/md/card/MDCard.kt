@@ -1,5 +1,6 @@
 package fg.md.card
 
+import fg.elements.Div
 import fg.elements.HTML
 import fg.elements.StyledClass
 import fg.elements.toClassSelector
@@ -8,7 +9,7 @@ import fg.md.Theme
 import fg.style.ClassRule
 import kotlin.reflect.KProperty
 
-open class MDCard : fg.elements.Div() {
+open class MDCard : Div() {
 
     override fun render() {
         super.render()

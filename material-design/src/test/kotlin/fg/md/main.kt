@@ -34,6 +34,7 @@ class Main() {
                     mdMenuItem(Action("Button") { deck.show(button) }) {}
                     mdMenuItem(Action("Menu") { deck.show(menu) }) {}
                     mdMenuItem(Action("Card") { deck.show(card) }) {}
+                    mdMenuItem(Action("ExpansionPanel") { deck.show(expansionPanel) }) {}
                 }
             }
         }
@@ -346,6 +347,14 @@ class Main() {
         }
     }
 
+    val expansionPanel = Div() with {
+        mdExpansionPanel {
+            mdCollapsedPanel { +"Collapsed" }
+            mdExpandedPanel { +"Expanded" }
+        }
+
+    }
+
     val deck = Deck() with {
 
         appendChild(drawer)
@@ -353,6 +362,7 @@ class Main() {
         appendChild(menu)
         appendChild(radioButton)
         appendChild(card)
+        appendChild(expansionPanel)
     }
 
     init {
@@ -402,7 +412,5 @@ class Main() {
 fun main(vararg args: String) {
 
     Main()
-
-
 
 }
