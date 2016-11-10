@@ -37,14 +37,6 @@ open class RadioButton(checked: Boolean = false) : InputRadio() {
         this.checked = newState
     }
 
-    fun checked() {
-        this.checked = true
-    }
-
-    fun unchecked() {
-        this.checked = false
-    }
-
     override fun render() {
         super.render()
 
