@@ -11,7 +11,7 @@
     <packaging>pom</packaging>
 
     <properties>
-        <kotlin.version>1.0.4</kotlin.version>
+        <kotlin.version>1.0.5</kotlin.version>
         <dokka.version>0.9.9</dokka.version>
         <maven.jar.plugin>2.6</maven.jar.plugin>
     </properties>
