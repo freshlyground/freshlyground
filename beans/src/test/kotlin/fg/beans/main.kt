@@ -34,6 +34,7 @@ fun main(vararg args: String) {
             }
             menu("Layout") {
                 menuItem(Action("Drawer", shortcut = Key.from("meta+d"), perform = { window.location.href = currUrl.replaceParam("page", "Drawer").toString() })) {}
+                menuItem(Action("Layout", shortcut = Key.from("meta+l"), perform = { window.location.href = currUrl.replaceParam("page", "Layout").toString() })) {}
             }
         }
 
@@ -51,19 +52,22 @@ fun main(vararg args: String) {
     val page = currUrl.query.map["page"]
     when (page) {
         Button.jsClass.name -> {
-            mainButton.start()
+            buttonPage.start()
         }
         ToggleButton.jsClass.name -> {
-            mainToggleButton.start()
+            toggeButtonPage.start()
         }
         MenuBar.jsClass.name -> {
-            mainMenuBar.start()
+            menuBarPage.start()
         }
         Menu.jsClass.name -> {
-            mainMenu.start()
+            menuPage.start()
         }
         Drawer.jsClass.name -> {
-            mainDrawer.start()
+            drawerPage.start()
+        }
+        layoutPage.name -> {
+            layoutPage.start()
         }
     }
 

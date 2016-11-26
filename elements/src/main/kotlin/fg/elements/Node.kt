@@ -7,6 +7,9 @@ open class Node(internal val w3cNode: org.w3c.dom.Node) {
     private val _childNodes: MutableList<Node> = arrayListOf()
     private val _childrenMountInstructions: MutableList<Pair<(Node) -> Unit, Node>> = arrayListOf()
 
+    var rendering: Boolean = false
+        private set
+
     var rendered: Boolean = false
         private set
 
@@ -54,15 +57,18 @@ open class Node(internal val w3cNode: org.w3c.dom.Node) {
 
         node._parentNode = this
 
-        if (node is Element && !rendered) {
+        if (node is Element && (rendering || rendered) && !child.rendered) {
+            node.rendering = true
             node.render()
             node.rendered = true
+            node.rendering = false
             node.renderChildren()
         }
 
         val mountFn: (Node) -> Unit = { w3cNode.insertBefore(it.w3cNode, child.w3cNode) }
         if (mounted) {
             mountChild(mountFn, node)
+            mountChildren()
         } else {
             _childrenMountInstructions.add(Pair(mountFn, node))
         }
@@ -81,15 +87,18 @@ open class Node(internal val w3cNode: org.w3c.dom.Node) {
 
         node._parentNode = this
 
-        if (node is Element && !rendered) {
+        if (node is Element && (rendering || rendered) && !node.rendered) {
+            node.rendering = true
             node.render()
             node.rendered = true
+            node.rendering = false
             node.renderChildren()
         }
 
         val mountFn: (Node) -> Unit = { w3cNode.appendChild(it.w3cNode) }
         if (mounted) {
             mountChild(mountFn, node)
+            node.mountChildren()
         } else {
             _childrenMountInstructions.add(Pair(mountFn, node))
         }
@@ -117,7 +126,7 @@ open class Node(internal val w3cNode: org.w3c.dom.Node) {
     internal fun renderChildren() {
 
         for (child in _childNodes) {
-            if (child is Element && !rendered) {
+            if (child is Element && !child.rendered) {
                 child.render()
                 child.rendered = true
             }
@@ -128,6 +137,10 @@ open class Node(internal val w3cNode: org.w3c.dom.Node) {
     private fun mountChild(mountFn: (Node) -> Unit, child: Node) {
         console.info("${jsClass.name}.mountChild(${child.jsClass.name}) ")
         mountFn(child)
+
+        if (child is Element) {
+            child.didMount()
+        }
     }
 
     internal fun mountChildren() {

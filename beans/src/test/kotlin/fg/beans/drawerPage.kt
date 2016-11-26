@@ -10,7 +10,7 @@ import fg.elements.p
 import fg.elements.with
 import fg.keyboard.Key
 
-object mainDrawer {
+object drawerPage {
 
     fun start() {
 

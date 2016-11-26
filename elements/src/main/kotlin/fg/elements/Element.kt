@@ -1,15 +1,25 @@
 package fg.elements
 
+import fg.elements.layout.Layout
+import fg.elements.layout.LayoutDelegate
+import fg.elements.style.typed.Position
 import fg.elements.style.typed.TypedStyle
 import org.w3c.dom.DOMRect
 import org.w3c.dom.HTMLElement
 import org.w3c.dom.css.CSSStyleDeclaration
+import org.w3c.dom.events.Event
 import kotlin.browser.document
+import kotlin.browser.window
 
 open class Element(name: String? = null,
                    existingElement: HTMLElement? = null,
                    internal val w3cElement: HTMLElement = existingElement ?: document.createElement(name!!) as HTMLElement) :
         Node(w3cElement) {
+
+    private val resizedListeners: MutableList<(ResizedEvent) -> Unit> by lazy {
+        arrayListOf<(ResizedEvent) -> Unit>()
+    }
+    private var resizeSensor: ResizeSensor? = null
 
     val childElements: List<Element>
         get() {
@@ -31,6 +41,8 @@ open class Element(name: String? = null,
         get() = w3cElement.style
 
     val style: TypedStyle by lazy { TypedStyle(this) }
+
+    var layout: Layout? by LayoutDelegate()
 
     /**
      * https://developer.mozilla.org/en-US/docs/Web/API/CSS_Object_Model/Determining_the_dimensions_of_elements
@@ -167,4 +179,220 @@ open class Element(name: String? = null,
             child.traverseElements(each)
         }
     }
+
+    fun getComputedStyle(property: String): String {
+        val htmlElementDynamic: dynamic = this.w3cElement
+        if (htmlElementDynamic.currentStyle) {
+            return htmlElementDynamic.currentStyle[property]
+        } else if (js("window.getComputedStyle")) {
+            return window.getComputedStyle(this.w3cElement).getPropertyValue(property)
+        } else {
+            return htmlElementDynamic.style[property]
+        }
+    }
+
+    fun onResized(listener: (ResizedEvent) -> Unit) {
+        console.log("Element.onResized")
+        resizedListeners.add(listener)
+
+        if (resizedListeners.size == 1 && resizeSensor == null) {
+            val sensor = ResizeSensor(this, resizedListeners)
+            resizeSensor = sensor
+            sensor.init()
+        }
+    }
+
+    fun unResized(listener: (ResizedEvent) -> Unit) {
+        console.log("Element.unResized")
+        resizedListeners.remove(listener)
+        if (resizedListeners.isEmpty()) {
+            resizeSensor?.destroy()
+        }
+    }
+
+    /**
+     * A rewrite of Marc J. Schmidt's ResizeSensor to Kotlin.
+     * https://github.com/marcj/css-element-queries/
+     *
+     * Copyright Marc J. Schmidt
+     * https://github.com/marcj/css-element-queries/blob/master/LICENSE.
+     */
+    private inner class ResizeSensor(val element: Element, val resizedListeners: List<(ResizedEvent) -> Unit>) {
+
+        private val sensorStyle: String = "position: absolute; left: 0; top: 0; right: 0; bottom: 0; overflow: hidden; z-index: -1; visibility: hidden;"
+
+        private var initialized = false
+
+        private val sensor: Sensor by lazy {
+            Sensor()
+        }
+
+        private var dirtyHeight: Boolean = false
+        private var dirtyWidth: Boolean = false
+
+        private var cachedWidth: Double = -1.0
+        private var cachedHeight: Double = -1.0
+        private var lastWidth: Double = -1.0
+        private var lastHeight: Double = -1.0
+
+        private val scrollHandler: (Event) -> Unit = {
+
+            this.cachedWidth = element.w3cElement.offsetWidth
+            this.cachedHeight = element.w3cElement.offsetHeight
+
+            if (this.cachedWidth != this.lastWidth) {
+                this.dirtyWidth = true
+                this.lastWidth = this.cachedWidth
+            }
+            if (this.cachedHeight != this.lastHeight) {
+                this.dirtyHeight = true
+                this.lastHeight = this.cachedHeight
+            }
+            this.sensor.reset()
+        }
+        private val dirtyChecking: (Double) -> Unit = {
+
+            if (!this.resizedListeners.isEmpty()) {
+                if (this.dirtyWidth || this.dirtyHeight) {
+
+                    this.notifyResizeListeners(ResizedEvent(
+                            widthChanged = this.dirtyWidth,
+                            width = this.lastWidth,
+                            heightChanged = this.dirtyHeight,
+                            height = this.lastHeight))
+
+
+                    this.dirtyHeight = false
+                    this.dirtyWidth = false
+                }
+                this.runDirtyChecking()
+            }
+        }
+
+        fun init() {
+
+            if (!this.initialized) {
+                this.initialized = true
+                console.log("ResizeSensor.init: sensor not initialized, initializing...")
+
+                // Need to delay call to initializeSensor (give the browser some time) otherwise scroll events will not fire
+                window.requestAnimationFrame { this.initializeSensor() }
+
+            } else {
+                console.log("ResizeSensor.init: sensor already initialized")
+            }
+        }
+
+        fun destroy() {
+            console.log("ResizeSensor.destroy")
+            sensor.removeSelf()
+        }
+
+        private fun notifyResizeListeners(event: ResizedEvent) = this.resizedListeners.forEach { it(event) }
+
+        private fun runDirtyChecking() {
+            window.requestAnimationFrame(dirtyChecking)
+        }
+
+
+        private fun initializeSensor() {
+
+            this.element.appendChild(sensor)
+
+            if (this.getComputedPosition() == "static") {
+                this.element.style.position = Position.relative
+            }
+
+            this.sensor.reset()
+            this.runDirtyChecking()
+
+            this.sensor.expandSensor.onScroll(scrollHandler)
+            this.sensor.shrinkSensor.onScroll(scrollHandler)
+        }
+
+        private fun getComputedPosition(): String {
+            return this.element.getComputedStyle("position")
+        }
+
+        inner class Sensor : Div() {
+
+            val expandSensor: SensorExpand by lazy { SensorExpand() }
+            val shrinkSensor: SensorShrink by lazy { SensorShrink() }
+
+            override fun render() {
+                super.render()
+
+                this.addClass("resize-sensor")
+                this._style.cssText = sensorStyle
+
+                this.appendChild(expandSensor)
+                this.appendChild(shrinkSensor)
+            }
+
+            fun reset() {
+                this.expandSensor.reset()
+                this.shrinkSensor.reset()
+            }
+        }
+
+        inner class SensorExpand() : Div() {
+
+            private val sensorExpandChildSensorStyle: String = "position: absolute; left: 0px; top: 0px; transition: 0s; -webkit-transition: 0"
+
+            val child: Div by lazy {
+                val child = Div()
+                child._style.cssText = sensorExpandChildSensorStyle
+                child
+            }
+
+            override fun render() {
+                super.render()
+
+                this.addClass("resize-sensor-expand")
+                this._style.cssText = sensorStyle
+
+                this.appendChild(child)
+            }
+
+            fun reset() {
+                this.child.style.width = 100000.px
+                this.child.style.height = 100000.px
+
+                this.w3cElement.scrollLeft = 100000
+                this.w3cElement.scrollTop = 100000
+            }
+        }
+
+        inner class SensorShrink() : Div() {
+
+            private val sensorShrinkChildSensorStyle: String = "position: absolute; left: 0; top: 0; transition: 0s;"
+
+            val child: Div by lazy {
+                val child = Div()
+                child._style.cssText = sensorShrinkChildSensorStyle + " width: 200%; height: 200%"
+                child
+            }
+
+            override fun render() {
+                super.render()
+
+                this.addClass("resize-sensor-shrink")
+                this._style.cssText = sensorStyle
+
+                this.appendChild(child)
+            }
+
+            fun reset() {
+                this.w3cElement.scrollLeft = 100000
+                this.w3cElement.scrollTop = 100000
+            }
+        }
+
+
+    }
+
+    data class ResizedEvent(val widthChanged: Boolean,
+                            val width: Double,
+                            val heightChanged: Boolean,
+                            val height: Double)
 }

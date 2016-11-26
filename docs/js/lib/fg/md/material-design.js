@@ -23,8 +23,8 @@ this['material-design'] = function (Kotlin, $module$beans, $module$elements) {
             this.color$delegate = new Kotlin.kotlin.properties.Delegates.observable$f(_.fg.md.button.MDButton.color$f(this), initialValue_0);
             var initialValue_1 = margins;
             this.margins$delegate = new Kotlin.kotlin.properties.Delegates.observable$f(_.fg.md.button.MDButton.margins$f(this), initialValue_1);
-            this.ripples_xt9s5s$ = false;
-            this.ripple$delegate = Kotlin.kotlin.lazy_un3fny$(_.fg.md.button.MDButton.ripple_qamnod$f(this));
+            this.ripples_0 = false;
+            this.ripple$delegate = Kotlin.kotlin.lazy_un3fny$(_.fg.md.button.MDButton.ripple_0$f(this));
             this.flatStyle = new _.fg.md.button.MDButton.FlatStyle();
             this.raisedStyle = new _.fg.md.button.MDButton.RaisedStyle();
             this.floatingStyle = new _.fg.md.button.MDButton.FloatingStyle();
@@ -33,27 +33,27 @@ this['material-design'] = function (Kotlin, $module$beans, $module$elements) {
               get: function () {
                 return this.type$delegate.getValue_dsk1ci$(this, new Kotlin.PropertyMetadata('type'));
               },
-              set: function (type) {
-                this.type$delegate.setValue_w32e13$(this, new Kotlin.PropertyMetadata('type'), type);
+              set: function (type_0) {
+                this.type$delegate.setValue_w32e13$(this, new Kotlin.PropertyMetadata('type'), type_0);
               }
             },
             color: {
               get: function () {
                 return this.color$delegate.getValue_dsk1ci$(this, new Kotlin.PropertyMetadata('color'));
               },
-              set: function (color) {
-                this.color$delegate.setValue_w32e13$(this, new Kotlin.PropertyMetadata('color'), color);
+              set: function (color_0) {
+                this.color$delegate.setValue_w32e13$(this, new Kotlin.PropertyMetadata('color'), color_0);
               }
             },
             margins: {
               get: function () {
                 return this.margins$delegate.getValue_dsk1ci$(this, new Kotlin.PropertyMetadata('margins'));
               },
-              set: function (margins) {
-                this.margins$delegate.setValue_w32e13$(this, new Kotlin.PropertyMetadata('margins'), margins);
+              set: function (margins_0) {
+                this.margins$delegate.setValue_w32e13$(this, new Kotlin.PropertyMetadata('margins'), margins_0);
               }
             },
-            ripple_qamnod$: {
+            ripple_0: {
               get: function () {
                 return Kotlin.kotlin.getValue_em0fd4$(this.ripple$delegate, this, new Kotlin.PropertyMetadata('ripple'));
               }
@@ -61,41 +61,41 @@ this['material-design'] = function (Kotlin, $module$beans, $module$elements) {
             render: function () {
               $module$beans.fg.beans.button.Button.prototype.render.call(this);
               this.addClass_bx842b$(_.fg.md.button.MDButton.MDButton.classSelector);
-              this.renderType(this.type);
-              this.renderColor(this.color);
-              this.renderMargins(this.margins);
+              this.renderType_0(this.type);
+              this.renderColor_0(this.color);
+              this.renderMargins_0(this.margins);
             },
             didMount: function () {
               $module$beans.fg.beans.button.Button.prototype.didMount.call(this);
-              this.ripple_qamnod$.init();
+              this.ripple_0.init();
             },
             onEnabled: function () {
-              this.renderColor();
+              this.renderColor_0();
               this.removeClass_bx842b$($module$beans.fg.beans.button.AbstractButton.AbstractButton.DISABLED);
             },
             onDisabled: function () {
-              this.renderColor();
+              this.renderColor_0();
               this.addClass_bx842b$($module$beans.fg.beans.button.AbstractButton.AbstractButton.DISABLED);
             },
             onHover: function () {
-              this.renderColor();
+              this.renderColor_0();
             },
             unHover: function () {
-              this.renderColor();
+              this.renderColor_0();
             },
             onFocus: function () {
-              this.renderColor();
+              this.renderColor_0();
             },
             unFocus: function () {
-              this.renderColor();
+              this.renderColor_0();
             },
             onPressed: function () {
-              this.renderColor();
+              this.renderColor_0();
             },
             unPressed: function () {
-              this.renderColor();
+              this.renderColor_0();
             },
-            renderType: function (type) {
+            renderType_0: function (type) {
               var tmp$0, tmp$2;
               tmp$0 = _.fg.md.button.MDButton.Type.values();
               for (tmp$2 = 0; tmp$2 !== tmp$0.length; ++tmp$2) {
@@ -119,10 +119,10 @@ this['material-design'] = function (Kotlin, $module$beans, $module$elements) {
                 this.label.hide();
                 this.label.textContent = null;
                 this.icon.show();
-                this.icon.icon = _.fg.md.button.MDButton.MDButton.plusIcon_xo8y2j$;
+                this.icon.icon = _.fg.md.button.MDButton.MDButton.plusIcon_0;
               }
             },
-            renderColor: function (color) {
+            renderColor_0: function (color) {
               var tmp$0;
               if (color === void 0)
                 color = this.color;
@@ -175,7 +175,7 @@ this['material-design'] = function (Kotlin, $module$beans, $module$elements) {
                  else {
                 }
             },
-            renderMargins: function (enabled) {
+            renderMargins_0: function (enabled) {
               if (enabled) {
                 this._style.margin = '8px';
               }
@@ -192,13 +192,13 @@ this['material-design'] = function (Kotlin, $module$beans, $module$elements) {
             }, function () {
               return {
                 FLAT: function () {
-                  return new _.fg.md.button.MDButton.Type(_.fg.md.button.MDButton.MDButton.TYPE_FLAT_uiiedo$);
+                  return new _.fg.md.button.MDButton.Type(_.fg.md.button.MDButton.MDButton.TYPE_FLAT_0);
                 },
                 RAISED: function () {
-                  return new _.fg.md.button.MDButton.Type(_.fg.md.button.MDButton.MDButton.TYPE_RAISED_63pxx1$);
+                  return new _.fg.md.button.MDButton.Type(_.fg.md.button.MDButton.MDButton.TYPE_RAISED_0);
                 },
                 FLOATING: function () {
-                  return new _.fg.md.button.MDButton.Type(_.fg.md.button.MDButton.MDButton.TYPE_FLOATING_9jf4x3$);
+                  return new _.fg.md.button.MDButton.Type(_.fg.md.button.MDButton.MDButton.TYPE_FLOATING_0);
                 }
               };
             }),
@@ -206,249 +206,249 @@ this['material-design'] = function (Kotlin, $module$beans, $module$elements) {
               return [$module$beans.fg.beans.ElementStyle];
             }, function FlatStyle() {
               FlatStyle.baseInitializer.call(this);
-              this.$color_srct52$ = $module$elements.fg.style.colour.RgbColor.Factory.BLACK;
-              this.$backgroundColor_889ooc$ = $module$elements.fg.style.colour.RgbColor.Factory.TRANSPARENT;
-              this.hovered = new _.fg.md.button.MDButton.FlatStyle.hovered$f();
-              this.pressed = new _.fg.md.button.MDButton.FlatStyle.pressed$f();
-              this.focused = new _.fg.md.button.MDButton.FlatStyle.focused$f();
-              this.disabled = new _.fg.md.button.MDButton.FlatStyle.disabled$f();
+              this.color_dn38mj$_0 = $module$elements.fg.style.colour.RgbColor.Factory.BLACK;
+              this.backgroundColor_dn38mj$_0 = $module$elements.fg.style.colour.RgbColor.Factory.TRANSPARENT;
+              this.hovered = new _.fg.md.button.MDButton.FlatStyle.f();
+              this.pressed = new _.fg.md.button.MDButton.FlatStyle.f_0();
+              this.focused = new _.fg.md.button.MDButton.FlatStyle.f_1();
+              this.disabled = new _.fg.md.button.MDButton.FlatStyle.f_2();
             }, /** @lends _.fg.md.button.MDButton.FlatStyle.prototype */ {
               color: {
                 get: function () {
-                  return this.$color_srct52$;
+                  return this.color_dn38mj$_0;
                 },
-                set: function (color) {
-                  this.$color_srct52$ = color;
+                set: function (color_0) {
+                  this.color_dn38mj$_0 = color_0;
                 }
               },
               backgroundColor: {
                 get: function () {
-                  return this.$backgroundColor_889ooc$;
+                  return this.backgroundColor_dn38mj$_0;
                 },
-                set: function (backgroundColor) {
-                  this.$backgroundColor_889ooc$ = backgroundColor;
+                set: function (backgroundColor_0) {
+                  this.backgroundColor_dn38mj$_0 = backgroundColor_0;
                 }
               }
             }, /** @lends _.fg.md.button.MDButton.FlatStyle */ {
-              hovered$f: Kotlin.createClass(function () {
+              f: Kotlin.createClass(function () {
                 return [$module$beans.fg.beans.ElementStyle];
               }, function $fun() {
                 $fun.baseInitializer.call(this);
-                this.$backgroundColor_6j0lbo$ = new $module$elements.fg.style.colour.RgbColor(153, 153, 153, 0.2);
-              }, /** @lends _.fg.md.button.MDButton.FlatStyle.hovered$f.prototype */ {
+                this.backgroundColor_qfcnkb$_0 = new $module$elements.fg.style.colour.RgbColor(153, 153, 153, 0.2);
+              }, /** @lends _.fg.md.button.MDButton.FlatStyle.f.prototype */ {
                 backgroundColor: {
                   get: function () {
-                    return this.$backgroundColor_6j0lbo$;
+                    return this.backgroundColor_qfcnkb$_0;
                   },
-                  set: function (backgroundColor) {
-                    this.$backgroundColor_6j0lbo$ = backgroundColor;
+                  set: function (backgroundColor_0) {
+                    this.backgroundColor_qfcnkb$_0 = backgroundColor_0;
                   }
                 }
-              }, /** @lends _.fg.md.button.MDButton.FlatStyle.hovered$f */ {
+              }, /** @lends _.fg.md.button.MDButton.FlatStyle.f */ {
               }),
-              pressed$f: Kotlin.createClass(function () {
+              f_0: Kotlin.createClass(function () {
                 return [$module$beans.fg.beans.ElementStyle];
               }, function $fun() {
                 $fun.baseInitializer.call(this);
-                this.$backgroundColor_qlwmed$ = new $module$elements.fg.style.colour.RgbColor(204, 204, 204);
-              }, /** @lends _.fg.md.button.MDButton.FlatStyle.pressed$f.prototype */ {
+                this.backgroundColor_iw54ec$_0 = new $module$elements.fg.style.colour.RgbColor(204, 204, 204);
+              }, /** @lends _.fg.md.button.MDButton.FlatStyle.f_0.prototype */ {
                 backgroundColor: {
                   get: function () {
-                    return this.$backgroundColor_qlwmed$;
+                    return this.backgroundColor_iw54ec$_0;
                   },
-                  set: function (backgroundColor) {
-                    this.$backgroundColor_qlwmed$ = backgroundColor;
+                  set: function (backgroundColor_0) {
+                    this.backgroundColor_iw54ec$_0 = backgroundColor_0;
                   }
                 }
-              }, /** @lends _.fg.md.button.MDButton.FlatStyle.pressed$f */ {
+              }, /** @lends _.fg.md.button.MDButton.FlatStyle.f_0 */ {
               }),
-              focused$f: Kotlin.createClass(function () {
+              f_1: Kotlin.createClass(function () {
                 return [$module$beans.fg.beans.ElementStyle];
               }, function $fun() {
                 $fun.baseInitializer.call(this);
-                this.$backgroundColor_n9h33k$ = new $module$elements.fg.style.colour.RgbColor(221, 221, 221);
-              }, /** @lends _.fg.md.button.MDButton.FlatStyle.focused$f.prototype */ {
+                this.backgroundColor_t34dox$_0 = new $module$elements.fg.style.colour.RgbColor(221, 221, 221);
+              }, /** @lends _.fg.md.button.MDButton.FlatStyle.f_1.prototype */ {
                 backgroundColor: {
                   get: function () {
-                    return this.$backgroundColor_n9h33k$;
+                    return this.backgroundColor_t34dox$_0;
                   },
-                  set: function (backgroundColor) {
-                    this.$backgroundColor_n9h33k$ = backgroundColor;
+                  set: function (backgroundColor_0) {
+                    this.backgroundColor_t34dox$_0 = backgroundColor_0;
                   }
                 }
-              }, /** @lends _.fg.md.button.MDButton.FlatStyle.focused$f */ {
+              }, /** @lends _.fg.md.button.MDButton.FlatStyle.f_1 */ {
               }),
-              disabled$f: Kotlin.createClass(function () {
+              f_2: Kotlin.createClass(function () {
                 return [$module$beans.fg.beans.ElementStyle];
               }, function $fun() {
                 $fun.baseInitializer.call(this);
-                this.$color_8py8rr$ = $module$elements.fg.style.colour.RgbColor.Factory.BLACK.withAlfa_14dthe$(0.26);
-                this.$backgroundColor_doxktj$ = $module$elements.fg.style.colour.RgbColor.Factory.TRANSPARENT;
-              }, /** @lends _.fg.md.button.MDButton.FlatStyle.disabled$f.prototype */ {
+                this.color_1plbzs$_0 = $module$elements.fg.style.colour.RgbColor.Factory.BLACK.withAlfa_14dthe$(0.26);
+                this.backgroundColor_1plbzs$_0 = $module$elements.fg.style.colour.RgbColor.Factory.TRANSPARENT;
+              }, /** @lends _.fg.md.button.MDButton.FlatStyle.f_2.prototype */ {
                 color: {
                   get: function () {
-                    return this.$color_8py8rr$;
+                    return this.color_1plbzs$_0;
                   },
-                  set: function (color) {
-                    this.$color_8py8rr$ = color;
+                  set: function (color_0) {
+                    this.color_1plbzs$_0 = color_0;
                   }
                 },
                 backgroundColor: {
                   get: function () {
-                    return this.$backgroundColor_doxktj$;
+                    return this.backgroundColor_1plbzs$_0;
                   },
-                  set: function (backgroundColor) {
-                    this.$backgroundColor_doxktj$ = backgroundColor;
+                  set: function (backgroundColor_0) {
+                    this.backgroundColor_1plbzs$_0 = backgroundColor_0;
                   }
                 }
-              }, /** @lends _.fg.md.button.MDButton.FlatStyle.disabled$f */ {
+              }, /** @lends _.fg.md.button.MDButton.FlatStyle.f_2 */ {
               })
             }),
             RaisedStyle: Kotlin.createClass(function () {
               return [$module$beans.fg.beans.ElementStyle];
             }, function RaisedStyle() {
               RaisedStyle.baseInitializer.call(this);
-              this.$color_wactp7$ = $module$elements.fg.style.colour.RgbColor.Factory.BLACK;
-              this.$backgroundColor_rqbkmr$ = $module$elements.fg.style.colour.RgbColor.Factory.TRANSPARENT;
-              this.hovered = new _.fg.md.button.MDButton.RaisedStyle.hovered$f();
-              this.pressed = new _.fg.md.button.MDButton.RaisedStyle.pressed$f();
-              this.focused = new _.fg.md.button.MDButton.RaisedStyle.focused$f();
-              this.disabled = new _.fg.md.button.MDButton.RaisedStyle.disabled$f();
+              this.color_el3hn8$_0 = $module$elements.fg.style.colour.RgbColor.Factory.BLACK;
+              this.backgroundColor_el3hn8$_0 = $module$elements.fg.style.colour.RgbColor.Factory.TRANSPARENT;
+              this.hovered = new _.fg.md.button.MDButton.RaisedStyle.f();
+              this.pressed = new _.fg.md.button.MDButton.RaisedStyle.f_0();
+              this.focused = new _.fg.md.button.MDButton.RaisedStyle.f_1();
+              this.disabled = new _.fg.md.button.MDButton.RaisedStyle.f_2();
             }, /** @lends _.fg.md.button.MDButton.RaisedStyle.prototype */ {
               color: {
                 get: function () {
-                  return this.$color_wactp7$;
+                  return this.color_el3hn8$_0;
                 },
-                set: function (color) {
-                  this.$color_wactp7$ = color;
+                set: function (color_0) {
+                  this.color_el3hn8$_0 = color_0;
                 }
               },
               backgroundColor: {
                 get: function () {
-                  return this.$backgroundColor_rqbkmr$;
+                  return this.backgroundColor_el3hn8$_0;
                 },
-                set: function (backgroundColor) {
-                  this.$backgroundColor_rqbkmr$ = backgroundColor;
+                set: function (backgroundColor_0) {
+                  this.backgroundColor_el3hn8$_0 = backgroundColor_0;
                 }
               }
             }, /** @lends _.fg.md.button.MDButton.RaisedStyle */ {
-              hovered$f: Kotlin.createClass(function () {
+              f: Kotlin.createClass(function () {
                 return [$module$beans.fg.beans.ElementStyle];
               }, function $fun() {
                 $fun.baseInitializer.call(this);
-                this.$backgroundColor_jdndfv$ = new $module$elements.fg.style.colour.RgbColor(153, 153, 153, 0.2);
-              }, /** @lends _.fg.md.button.MDButton.RaisedStyle.hovered$f.prototype */ {
+                this.backgroundColor_pxaxg6$_0 = new $module$elements.fg.style.colour.RgbColor(153, 153, 153, 0.2);
+              }, /** @lends _.fg.md.button.MDButton.RaisedStyle.f.prototype */ {
                 backgroundColor: {
                   get: function () {
-                    return this.$backgroundColor_jdndfv$;
+                    return this.backgroundColor_pxaxg6$_0;
                   },
-                  set: function (backgroundColor) {
-                    this.$backgroundColor_jdndfv$ = backgroundColor;
+                  set: function (backgroundColor_0) {
+                    this.backgroundColor_pxaxg6$_0 = backgroundColor_0;
                   }
                 }
-              }, /** @lends _.fg.md.button.MDButton.RaisedStyle.hovered$f */ {
+              }, /** @lends _.fg.md.button.MDButton.RaisedStyle.f */ {
               }),
-              pressed$f: Kotlin.createClass(function () {
+              f_0: Kotlin.createClass(function () {
                 return [$module$beans.fg.beans.ElementStyle];
               }, function $fun() {
                 $fun.baseInitializer.call(this);
-                this.$backgroundColor_iijgt8$ = new $module$elements.fg.style.colour.RgbColor(204, 204, 204);
-              }, /** @lends _.fg.md.button.MDButton.RaisedStyle.pressed$f.prototype */ {
+                this.backgroundColor_xgigm5$_0 = new $module$elements.fg.style.colour.RgbColor(204, 204, 204);
+              }, /** @lends _.fg.md.button.MDButton.RaisedStyle.f_0.prototype */ {
                 backgroundColor: {
                   get: function () {
-                    return this.$backgroundColor_iijgt8$;
+                    return this.backgroundColor_xgigm5$_0;
                   },
-                  set: function (backgroundColor) {
-                    this.$backgroundColor_iijgt8$ = backgroundColor;
+                  set: function (backgroundColor_0) {
+                    this.backgroundColor_xgigm5$_0 = backgroundColor_0;
                   }
                 }
-              }, /** @lends _.fg.md.button.MDButton.RaisedStyle.pressed$f */ {
+              }, /** @lends _.fg.md.button.MDButton.RaisedStyle.f_0 */ {
               }),
-              focused$f: Kotlin.createClass(function () {
+              f_1: Kotlin.createClass(function () {
                 return [$module$beans.fg.beans.ElementStyle];
               }, function $fun() {
                 $fun.baseInitializer.call(this);
-                this.$backgroundColor_luz041$ = new $module$elements.fg.style.colour.RgbColor(221, 221, 221);
-              }, /** @lends _.fg.md.button.MDButton.RaisedStyle.focused$f.prototype */ {
+                this.backgroundColor_aenwqa$_0 = new $module$elements.fg.style.colour.RgbColor(221, 221, 221);
+              }, /** @lends _.fg.md.button.MDButton.RaisedStyle.f_1.prototype */ {
                 backgroundColor: {
                   get: function () {
-                    return this.$backgroundColor_luz041$;
+                    return this.backgroundColor_aenwqa$_0;
                   },
-                  set: function (backgroundColor) {
-                    this.$backgroundColor_luz041$ = backgroundColor;
+                  set: function (backgroundColor_0) {
+                    this.backgroundColor_aenwqa$_0 = backgroundColor_0;
                   }
                 }
-              }, /** @lends _.fg.md.button.MDButton.RaisedStyle.focused$f */ {
+              }, /** @lends _.fg.md.button.MDButton.RaisedStyle.f_1 */ {
               }),
-              disabled$f: Kotlin.createClass(function () {
+              f_2: Kotlin.createClass(function () {
                 return [$module$beans.fg.beans.ElementStyle];
               }, function $fun() {
                 $fun.baseInitializer.call(this);
-                this.$color_ojjuw$ = $module$elements.fg.style.colour.RgbColor.Factory.BLACK.withAlfa_14dthe$(0.26);
-                this.$backgroundColor_83gr5m$ = new $module$elements.fg.style.colour.RgbColor(0, 0, 0, 0.12);
-              }, /** @lends _.fg.md.button.MDButton.RaisedStyle.disabled$f.prototype */ {
+                this.color_civi0p$_0 = $module$elements.fg.style.colour.RgbColor.Factory.BLACK.withAlfa_14dthe$(0.26);
+                this.backgroundColor_civi0p$_0 = new $module$elements.fg.style.colour.RgbColor(0, 0, 0, 0.12);
+              }, /** @lends _.fg.md.button.MDButton.RaisedStyle.f_2.prototype */ {
                 color: {
                   get: function () {
-                    return this.$color_ojjuw$;
+                    return this.color_civi0p$_0;
                   },
-                  set: function (color) {
-                    this.$color_ojjuw$ = color;
+                  set: function (color_0) {
+                    this.color_civi0p$_0 = color_0;
                   }
                 },
                 backgroundColor: {
                   get: function () {
-                    return this.$backgroundColor_83gr5m$;
+                    return this.backgroundColor_civi0p$_0;
                   },
-                  set: function (backgroundColor) {
-                    this.$backgroundColor_83gr5m$ = backgroundColor;
+                  set: function (backgroundColor_0) {
+                    this.backgroundColor_civi0p$_0 = backgroundColor_0;
                   }
                 }
-              }, /** @lends _.fg.md.button.MDButton.RaisedStyle.disabled$f */ {
+              }, /** @lends _.fg.md.button.MDButton.RaisedStyle.f_2 */ {
               })
             }),
             FloatingStyle: Kotlin.createClass(function () {
               return [$module$beans.fg.beans.ElementStyle];
             }, function FloatingStyle() {
               FloatingStyle.baseInitializer.call(this);
-              this.$color_pko7rh$ = $module$elements.fg.style.colour.RgbColor.Factory.BLACK;
-              this.$backgroundColor_dqj269$ = $module$elements.fg.style.colour.RgbColor.Factory.WHITE;
+              this.color_4bdmvy$_0 = $module$elements.fg.style.colour.RgbColor.Factory.BLACK;
+              this.backgroundColor_4bdmvy$_0 = $module$elements.fg.style.colour.RgbColor.Factory.WHITE;
             }, /** @lends _.fg.md.button.MDButton.FloatingStyle.prototype */ {
               color: {
                 get: function () {
-                  return this.$color_pko7rh$;
+                  return this.color_4bdmvy$_0;
                 },
-                set: function (color) {
-                  this.$color_pko7rh$ = color;
+                set: function (color_0) {
+                  this.color_4bdmvy$_0 = color_0;
                 }
               },
               backgroundColor: {
                 get: function () {
-                  return this.$backgroundColor_dqj269$;
+                  return this.backgroundColor_4bdmvy$_0;
                 },
-                set: function (backgroundColor) {
-                  this.$backgroundColor_dqj269$ = backgroundColor;
+                set: function (backgroundColor_0) {
+                  this.backgroundColor_4bdmvy$_0 = backgroundColor_0;
                 }
               }
             }),
             MDButton: Kotlin.createObject(function () {
               return [$module$elements.fg.elements.StyledClass];
             }, function MDButton() {
-              _.fg.md.button.MDButton.MDButton.TYPE_FLAT_uiiedo$ = $module$elements.fg.elements.toClassSelector_pdl1w0$('md-button-flat');
-              _.fg.md.button.MDButton.MDButton.TYPE_RAISED_63pxx1$ = $module$elements.fg.elements.toClassSelector_pdl1w0$('md-button-raised');
-              _.fg.md.button.MDButton.MDButton.TYPE_FLOATING_9jf4x3$ = $module$elements.fg.elements.toClassSelector_pdl1w0$('md-button-floating');
-              _.fg.md.button.MDButton.MDButton.plusIcon_xo8y2j$ = $module$beans.fg.beans.icon.FontAwesomeIcons.plus_629h0h$();
-              _.fg.md.button.MDButton.MDButton.$classSelector_tv1vfp$ = $module$elements.fg.elements.toClassSelector_pdl1w0$('md-button');
-              _.fg.md.button.MDButton.MDButton.$rule_21xq5u$ = _.fg.md.button.MDButton.MDButton.rule$f(_.fg.md.button.MDButton.MDButton);
+              _.fg.md.button.MDButton.MDButton.TYPE_FLAT_0 = $module$elements.fg.elements.toClassSelector_pdl1w0$('md-button-flat');
+              _.fg.md.button.MDButton.MDButton.TYPE_RAISED_0 = $module$elements.fg.elements.toClassSelector_pdl1w0$('md-button-raised');
+              _.fg.md.button.MDButton.MDButton.TYPE_FLOATING_0 = $module$elements.fg.elements.toClassSelector_pdl1w0$('md-button-floating');
+              _.fg.md.button.MDButton.MDButton.plusIcon_0 = $module$beans.fg.beans.icon.FontAwesomeIcons.plus_629h0h$();
+              _.fg.md.button.MDButton.MDButton.classSelector_r3ywte$_0 = $module$elements.fg.elements.toClassSelector_pdl1w0$('md-button');
+              _.fg.md.button.MDButton.MDButton.rule_r3ywte$_0 = _.fg.md.button.MDButton.MDButton.rule$f(_.fg.md.button.MDButton.MDButton);
               $module$elements.fg.elements.HTML.registerStyle_78phyd$(_.fg.md.button.MDButton.MDButton);
             }, /** @lends _.fg.md.button.MDButton.MDButton.prototype */ {
               classSelector: {
                 get: function () {
-                  return _.fg.md.button.MDButton.MDButton.$classSelector_tv1vfp$;
+                  return _.fg.md.button.MDButton.MDButton.classSelector_r3ywte$_0;
                 }
               },
               rule: {
                 get: function () {
-                  return _.fg.md.button.MDButton.MDButton.$rule_21xq5u$;
+                  return _.fg.md.button.MDButton.MDButton.rule_r3ywte$_0;
                 }
               }
             }, /** @lends _.fg.md.button.MDButton.MDButton */ {
@@ -501,9 +501,9 @@ this['material-design'] = function (Kotlin, $module$beans, $module$elements) {
                   this.fontSize = '14px';
                   this.fontWeight = '500';
                   $module$elements.fg.style.focus_i5tde3$(this, _.fg.md.button.MDButton.MDButton.f);
-                  $module$elements.fg.style.and_dbehhi$(this, this$MDButton$.TYPE_FLAT_uiiedo$, _.fg.md.button.MDButton.MDButton.f_0);
-                  $module$elements.fg.style.and_dbehhi$(this, this$MDButton$.TYPE_RAISED_63pxx1$, _.fg.md.button.MDButton.MDButton.f_3);
-                  $module$elements.fg.style.and_dbehhi$(this, this$MDButton$.TYPE_FLOATING_9jf4x3$, _.fg.md.button.MDButton.MDButton.f_6);
+                  $module$elements.fg.style.and_dbehhi$(this, this$MDButton$.TYPE_FLAT_0, _.fg.md.button.MDButton.MDButton.f_0);
+                  $module$elements.fg.style.and_dbehhi$(this, this$MDButton$.TYPE_RAISED_0, _.fg.md.button.MDButton.MDButton.f_3);
+                  $module$elements.fg.style.and_dbehhi$(this, this$MDButton$.TYPE_FLOATING_0, _.fg.md.button.MDButton.MDButton.f_6);
                 };
               }
             }),
@@ -512,32 +512,32 @@ this['material-design'] = function (Kotlin, $module$beans, $module$elements) {
             },
             type$f: function (this$MDButton, closure$color) {
               return function (property, old, new_0) {
-                this$MDButton.renderType(new_0);
-                this$MDButton.renderColor(closure$color);
+                this$MDButton.renderType_0(new_0);
+                this$MDButton.renderColor_0(closure$color);
               };
             },
             color$f: function (this$MDButton) {
               return function (property, old, new_0) {
-                this$MDButton.renderColor(new_0);
+                this$MDButton.renderColor_0(new_0);
               };
             },
             margins$f: function (this$MDButton) {
               return function (property, old, new_0) {
-                this$MDButton.renderMargins(new_0);
+                this$MDButton.renderMargins_0(new_0);
               };
             },
             f: function (this$MDButton) {
               return function () {
-                this$MDButton.ripples_xt9s5s$ = true;
+                this$MDButton.ripples_0 = true;
               };
             },
             f_0: function (this$MDButton) {
               return function () {
-                this$MDButton.ripples_xt9s5s$ = false;
-                this$MDButton.renderColor();
+                this$MDButton.ripples_0 = false;
+                this$MDButton.renderColor_0();
               };
             },
-            ripple_qamnod$f: function (this$MDButton) {
+            ripple_0$f: function (this$MDButton) {
               return function () {
                 return new _.fg.md.support.Ripple(this$MDButton, void 0, _.fg.md.button.MDButton.f(this$MDButton), _.fg.md.button.MDButton.f_0(this$MDButton));
               };
@@ -549,7 +549,7 @@ this['material-design'] = function (Kotlin, $module$beans, $module$elements) {
             return [$module$elements.fg.elements.Div];
           }, function MDCard() {
             MDCard.baseInitializer.call(this);
-            this.themeChangedHandler_en6nbg$ = _.fg.md.card.MDCard.themeChangedHandler_en6nbg$f(this);
+            this.themeChangedHandler_esihj5$_0 = _.fg.md.card.MDCard.themeChangedHandler_esihj5$_0$f(this);
           }, /** @lends _.fg.md.card.MDCard.prototype */ {
             render: function () {
               $module$elements.fg.elements.Div.prototype.render.call(this);
@@ -558,24 +558,24 @@ this['material-design'] = function (Kotlin, $module$beans, $module$elements) {
             },
             didMount: function () {
               $module$elements.fg.elements.Div.prototype.didMount.call(this);
-              _.fg.md.Context.theme.onPropertyChanged_3m4fm7$(this.themeChangedHandler_en6nbg$);
+              _.fg.md.Context.theme.onPropertyChanged_3m4fm7$(this.themeChangedHandler_esihj5$_0);
             }
           }, /** @lends _.fg.md.card.MDCard */ {
             MDCard: Kotlin.createObject(function () {
               return [$module$elements.fg.elements.StyledClass];
             }, function MDCard() {
-              _.fg.md.card.MDCard.MDCard.$classSelector_ehbdtp$ = $module$elements.fg.elements.toClassSelector_pdl1w0$('md-card');
-              _.fg.md.card.MDCard.MDCard.$rule_6rr7f4$ = _.fg.md.card.MDCard.MDCard.rule$f;
+              _.fg.md.card.MDCard.MDCard.classSelector_8qtykg$_0 = $module$elements.fg.elements.toClassSelector_pdl1w0$('md-card');
+              _.fg.md.card.MDCard.MDCard.rule_8qtykg$_0 = _.fg.md.card.MDCard.MDCard.rule$f;
               $module$elements.fg.elements.HTML.registerStyle_78phyd$(_.fg.md.card.MDCard.MDCard);
             }, /** @lends _.fg.md.card.MDCard.MDCard.prototype */ {
               classSelector: {
                 get: function () {
-                  return _.fg.md.card.MDCard.MDCard.$classSelector_ehbdtp$;
+                  return _.fg.md.card.MDCard.MDCard.classSelector_8qtykg$_0;
                 }
               },
               rule: {
                 get: function () {
-                  return _.fg.md.card.MDCard.MDCard.$rule_6rr7f4$;
+                  return _.fg.md.card.MDCard.MDCard.rule_8qtykg$_0;
                 }
               }
             }, /** @lends _.fg.md.card.MDCard.MDCard */ {
@@ -591,7 +591,7 @@ this['material-design'] = function (Kotlin, $module$beans, $module$elements) {
             object_initializer$: function () {
               _.fg.md.card.MDCard.MDCard;
             },
-            themeChangedHandler_en6nbg$f: function (this$MDCard) {
+            themeChangedHandler_esihj5$_0$f: function (this$MDCard) {
               return function (theme, property, old, new_0) {
                 if (Kotlin.equals(property.name, Kotlin.getCallableRefForMemberProperty('cardsNdialogs', true).name))
                   this$MDCard.style.backgroundColor = _.fg.md.Context.theme.background;
@@ -611,18 +611,18 @@ this['material-design'] = function (Kotlin, $module$beans, $module$elements) {
             MDCardActions: Kotlin.createObject(function () {
               return [$module$elements.fg.elements.StyledClass];
             }, function MDCardActions() {
-              _.fg.md.card.MDCardActions.MDCardActions.$classSelector_qdnqx9$ = $module$elements.fg.elements.toClassSelector_pdl1w0$('md-card-actions');
-              _.fg.md.card.MDCardActions.MDCardActions.$rule_xhufb4$ = _.fg.md.card.MDCardActions.MDCardActions.rule$f;
+              _.fg.md.card.MDCardActions.MDCardActions.classSelector_7v4640$_0 = $module$elements.fg.elements.toClassSelector_pdl1w0$('md-card-actions');
+              _.fg.md.card.MDCardActions.MDCardActions.rule_7v4640$_0 = _.fg.md.card.MDCardActions.MDCardActions.rule$f;
               $module$elements.fg.elements.HTML.registerStyle_78phyd$(_.fg.md.card.MDCardActions.MDCardActions);
             }, /** @lends _.fg.md.card.MDCardActions.MDCardActions.prototype */ {
               classSelector: {
                 get: function () {
-                  return _.fg.md.card.MDCardActions.MDCardActions.$classSelector_qdnqx9$;
+                  return _.fg.md.card.MDCardActions.MDCardActions.classSelector_7v4640$_0;
                 }
               },
               rule: {
                 get: function () {
-                  return _.fg.md.card.MDCardActions.MDCardActions.$rule_xhufb4$;
+                  return _.fg.md.card.MDCardActions.MDCardActions.rule_7v4640$_0;
                 }
               }
             }, /** @lends _.fg.md.card.MDCardActions.MDCardActions */ {
@@ -647,18 +647,18 @@ this['material-design'] = function (Kotlin, $module$beans, $module$elements) {
             MDCardAvatar: Kotlin.createObject(function () {
               return [$module$elements.fg.elements.StyledClass];
             }, function MDCardAvatar() {
-              _.fg.md.card.MDCardAvatar.MDCardAvatar.$classSelector_ayrml$ = $module$elements.fg.elements.toClassSelector_pdl1w0$('md-card-avatar');
-              _.fg.md.card.MDCardAvatar.MDCardAvatar.$rule_14b2hc$ = _.fg.md.card.MDCardAvatar.MDCardAvatar.rule$f;
+              _.fg.md.card.MDCardAvatar.MDCardAvatar.classSelector_jjnc68$_0 = $module$elements.fg.elements.toClassSelector_pdl1w0$('md-card-avatar');
+              _.fg.md.card.MDCardAvatar.MDCardAvatar.rule_jjnc68$_0 = _.fg.md.card.MDCardAvatar.MDCardAvatar.rule$f;
               $module$elements.fg.elements.HTML.registerStyle_78phyd$(_.fg.md.card.MDCardAvatar.MDCardAvatar);
             }, /** @lends _.fg.md.card.MDCardAvatar.MDCardAvatar.prototype */ {
               classSelector: {
                 get: function () {
-                  return _.fg.md.card.MDCardAvatar.MDCardAvatar.$classSelector_ayrml$;
+                  return _.fg.md.card.MDCardAvatar.MDCardAvatar.classSelector_jjnc68$_0;
                 }
               },
               rule: {
                 get: function () {
-                  return _.fg.md.card.MDCardAvatar.MDCardAvatar.$rule_14b2hc$;
+                  return _.fg.md.card.MDCardAvatar.MDCardAvatar.rule_jjnc68$_0;
                 }
               }
             }, /** @lends _.fg.md.card.MDCardAvatar.MDCardAvatar */ {
@@ -685,18 +685,18 @@ this['material-design'] = function (Kotlin, $module$beans, $module$elements) {
             Statics: Kotlin.createObject(function () {
               return [$module$elements.fg.elements.StyledClass];
             }, function Statics() {
-              _.fg.md.card.MDCardContent.Statics.$classSelector_khnmqq$ = $module$elements.fg.elements.toClassSelector_pdl1w0$('md-card-content');
-              _.fg.md.card.MDCardContent.Statics.$rule_ua91u3$ = _.fg.md.card.MDCardContent.Statics.rule$f;
+              _.fg.md.card.MDCardContent.Statics.classSelector_6a5kp1$_0 = $module$elements.fg.elements.toClassSelector_pdl1w0$('md-card-content');
+              _.fg.md.card.MDCardContent.Statics.rule_6a5kp1$_0 = _.fg.md.card.MDCardContent.Statics.rule$f;
               $module$elements.fg.elements.HTML.registerStyle_78phyd$(_.fg.md.card.MDCardContent.Statics);
             }, /** @lends _.fg.md.card.MDCardContent.Statics.prototype */ {
               classSelector: {
                 get: function () {
-                  return _.fg.md.card.MDCardContent.Statics.$classSelector_khnmqq$;
+                  return _.fg.md.card.MDCardContent.Statics.classSelector_6a5kp1$_0;
                 }
               },
               rule: {
                 get: function () {
-                  return _.fg.md.card.MDCardContent.Statics.$rule_ua91u3$;
+                  return _.fg.md.card.MDCardContent.Statics.rule_6a5kp1$_0;
                 }
               }
             }, /** @lends _.fg.md.card.MDCardContent.Statics */ {
@@ -729,18 +729,18 @@ this['material-design'] = function (Kotlin, $module$beans, $module$elements) {
             MDCardHeader: Kotlin.createObject(function () {
               return [$module$elements.fg.elements.StyledClass];
             }, function MDCardHeader() {
-              _.fg.md.card.MDCardHeader.MDCardHeader.$classSelector_b1thcz$ = $module$elements.fg.elements.toClassSelector_pdl1w0$('md-card-header');
-              _.fg.md.card.MDCardHeader.MDCardHeader.$rule_dg8c0$ = _.fg.md.card.MDCardHeader.MDCardHeader.rule$f;
+              _.fg.md.card.MDCardHeader.MDCardHeader.classSelector_giknxc$_0 = $module$elements.fg.elements.toClassSelector_pdl1w0$('md-card-header');
+              _.fg.md.card.MDCardHeader.MDCardHeader.rule_giknxc$_0 = _.fg.md.card.MDCardHeader.MDCardHeader.rule$f;
               $module$elements.fg.elements.HTML.registerStyle_78phyd$(_.fg.md.card.MDCardHeader.MDCardHeader);
             }, /** @lends _.fg.md.card.MDCardHeader.MDCardHeader.prototype */ {
               classSelector: {
                 get: function () {
-                  return _.fg.md.card.MDCardHeader.MDCardHeader.$classSelector_b1thcz$;
+                  return _.fg.md.card.MDCardHeader.MDCardHeader.classSelector_giknxc$_0;
                 }
               },
               rule: {
                 get: function () {
-                  return _.fg.md.card.MDCardHeader.MDCardHeader.$rule_dg8c0$;
+                  return _.fg.md.card.MDCardHeader.MDCardHeader.rule_giknxc$_0;
                 }
               }
             }, /** @lends _.fg.md.card.MDCardHeader.MDCardHeader */ {
@@ -781,18 +781,18 @@ this['material-design'] = function (Kotlin, $module$beans, $module$elements) {
             MDCardHeaderText: Kotlin.createObject(function () {
               return [$module$elements.fg.elements.StyledClass];
             }, function MDCardHeaderText() {
-              _.fg.md.card.MDCardHeaderText.MDCardHeaderText.$classSelector_4oq4vx$ = $module$elements.fg.elements.toClassSelector_pdl1w0$('md-card-header-text');
-              _.fg.md.card.MDCardHeaderText.MDCardHeaderText.$rule_rd7ei8$ = _.fg.md.card.MDCardHeaderText.MDCardHeaderText.rule$f;
+              _.fg.md.card.MDCardHeaderText.MDCardHeaderText.classSelector_x6lcxs$_0 = $module$elements.fg.elements.toClassSelector_pdl1w0$('md-card-header-text');
+              _.fg.md.card.MDCardHeaderText.MDCardHeaderText.rule_x6lcxs$_0 = _.fg.md.card.MDCardHeaderText.MDCardHeaderText.rule$f;
               $module$elements.fg.elements.HTML.registerStyle_78phyd$(_.fg.md.card.MDCardHeaderText.MDCardHeaderText);
             }, /** @lends _.fg.md.card.MDCardHeaderText.MDCardHeaderText.prototype */ {
               classSelector: {
                 get: function () {
-                  return _.fg.md.card.MDCardHeaderText.MDCardHeaderText.$classSelector_4oq4vx$;
+                  return _.fg.md.card.MDCardHeaderText.MDCardHeaderText.classSelector_x6lcxs$_0;
                 }
               },
               rule: {
                 get: function () {
-                  return _.fg.md.card.MDCardHeaderText.MDCardHeaderText.$rule_rd7ei8$;
+                  return _.fg.md.card.MDCardHeaderText.MDCardHeaderText.rule_x6lcxs$_0;
                 }
               }
             }, /** @lends _.fg.md.card.MDCardHeaderText.MDCardHeaderText */ {
@@ -828,18 +828,18 @@ this['material-design'] = function (Kotlin, $module$beans, $module$elements) {
             MDCardImage: Kotlin.createObject(function () {
               return [$module$elements.fg.elements.StyledClass];
             }, function MDCardImage() {
-              _.fg.md.card.MDCardImage.MDCardImage.$classSelector_en1ld$ = $module$elements.fg.elements.toClassSelector_pdl1w0$('md-card-image');
-              _.fg.md.card.MDCardImage.MDCardImage.$rule_mwd938$ = _.fg.md.card.MDCardImage.MDCardImage.rule$f;
+              _.fg.md.card.MDCardImage.MDCardImage.classSelector_3xxefo$_0 = $module$elements.fg.elements.toClassSelector_pdl1w0$('md-card-image');
+              _.fg.md.card.MDCardImage.MDCardImage.rule_3xxefo$_0 = _.fg.md.card.MDCardImage.MDCardImage.rule$f;
               $module$elements.fg.elements.HTML.registerStyle_78phyd$(_.fg.md.card.MDCardImage.MDCardImage);
             }, /** @lends _.fg.md.card.MDCardImage.MDCardImage.prototype */ {
               classSelector: {
                 get: function () {
-                  return _.fg.md.card.MDCardImage.MDCardImage.$classSelector_en1ld$;
+                  return _.fg.md.card.MDCardImage.MDCardImage.classSelector_3xxefo$_0;
                 }
               },
               rule: {
                 get: function () {
-                  return _.fg.md.card.MDCardImage.MDCardImage.$rule_mwd938$;
+                  return _.fg.md.card.MDCardImage.MDCardImage.rule_3xxefo$_0;
                 }
               }
             }, /** @lends _.fg.md.card.MDCardImage.MDCardImage */ {
@@ -865,18 +865,18 @@ this['material-design'] = function (Kotlin, $module$beans, $module$elements) {
             MDCardSubtitle: Kotlin.createObject(function () {
               return [$module$elements.fg.elements.StyledClass];
             }, function MDCardSubtitle() {
-              _.fg.md.card.MDCardSubtitle.MDCardSubtitle.$classSelector_o6q08t$ = $module$elements.fg.elements.toClassSelector_pdl1w0$('md-card-subtitle');
-              _.fg.md.card.MDCardSubtitle.MDCardSubtitle.$rule_vr57bk$ = _.fg.md.card.MDCardSubtitle.MDCardSubtitle.rule$f;
+              _.fg.md.card.MDCardSubtitle.MDCardSubtitle.classSelector_zal96o$_0 = $module$elements.fg.elements.toClassSelector_pdl1w0$('md-card-subtitle');
+              _.fg.md.card.MDCardSubtitle.MDCardSubtitle.rule_zal96o$_0 = _.fg.md.card.MDCardSubtitle.MDCardSubtitle.rule$f;
               $module$elements.fg.elements.HTML.registerStyle_78phyd$(_.fg.md.card.MDCardSubtitle.MDCardSubtitle);
             }, /** @lends _.fg.md.card.MDCardSubtitle.MDCardSubtitle.prototype */ {
               classSelector: {
                 get: function () {
-                  return _.fg.md.card.MDCardSubtitle.MDCardSubtitle.$classSelector_o6q08t$;
+                  return _.fg.md.card.MDCardSubtitle.MDCardSubtitle.classSelector_zal96o$_0;
                 }
               },
               rule: {
                 get: function () {
-                  return _.fg.md.card.MDCardSubtitle.MDCardSubtitle.$rule_vr57bk$;
+                  return _.fg.md.card.MDCardSubtitle.MDCardSubtitle.rule_zal96o$_0;
                 }
               }
             }, /** @lends _.fg.md.card.MDCardSubtitle.MDCardSubtitle */ {
@@ -903,18 +903,18 @@ this['material-design'] = function (Kotlin, $module$beans, $module$elements) {
             MDCardTitle: Kotlin.createObject(function () {
               return [$module$elements.fg.elements.StyledClass];
             }, function MDCardTitle() {
-              _.fg.md.card.MDCardTitle.MDCardTitle.$classSelector_dhyod3$ = $module$elements.fg.elements.toClassSelector_pdl1w0$('md-card-title');
-              _.fg.md.card.MDCardTitle.MDCardTitle.$rule_2n3jm2$ = _.fg.md.card.MDCardTitle.MDCardTitle.rule$f;
+              _.fg.md.card.MDCardTitle.MDCardTitle.classSelector_dg9fja$_0 = $module$elements.fg.elements.toClassSelector_pdl1w0$('md-card-title');
+              _.fg.md.card.MDCardTitle.MDCardTitle.rule_dg9fja$_0 = _.fg.md.card.MDCardTitle.MDCardTitle.rule$f;
               $module$elements.fg.elements.HTML.registerStyle_78phyd$(_.fg.md.card.MDCardTitle.MDCardTitle);
             }, /** @lends _.fg.md.card.MDCardTitle.MDCardTitle.prototype */ {
               classSelector: {
                 get: function () {
-                  return _.fg.md.card.MDCardTitle.MDCardTitle.$classSelector_dhyod3$;
+                  return _.fg.md.card.MDCardTitle.MDCardTitle.classSelector_dg9fja$_0;
                 }
               },
               rule: {
                 get: function () {
-                  return _.fg.md.card.MDCardTitle.MDCardTitle.$rule_2n3jm2$;
+                  return _.fg.md.card.MDCardTitle.MDCardTitle.rule_dg9fja$_0;
                 }
               }
             }, /** @lends _.fg.md.card.MDCardTitle.MDCardTitle */ {
@@ -944,18 +944,18 @@ this['material-design'] = function (Kotlin, $module$beans, $module$elements) {
             MDCardHeaderText: Kotlin.createObject(function () {
               return [$module$elements.fg.elements.StyledClass];
             }, function MDCardHeaderText() {
-              _.fg.md.card.MDCardTitleText.MDCardHeaderText.$classSelector_uf0nfy$ = $module$elements.fg.elements.toClassSelector_pdl1w0$('md-card-title-text');
-              _.fg.md.card.MDCardTitleText.MDCardHeaderText.$rule_i1a68r$ = _.fg.md.card.MDCardTitleText.MDCardHeaderText.rule$f;
+              _.fg.md.card.MDCardTitleText.MDCardHeaderText.classSelector_7iw2a3$_0 = $module$elements.fg.elements.toClassSelector_pdl1w0$('md-card-title-text');
+              _.fg.md.card.MDCardTitleText.MDCardHeaderText.rule_7iw2a3$_0 = _.fg.md.card.MDCardTitleText.MDCardHeaderText.rule$f;
               $module$elements.fg.elements.HTML.registerStyle_78phyd$(_.fg.md.card.MDCardTitleText.MDCardHeaderText);
             }, /** @lends _.fg.md.card.MDCardTitleText.MDCardHeaderText.prototype */ {
               classSelector: {
                 get: function () {
-                  return _.fg.md.card.MDCardTitleText.MDCardHeaderText.$classSelector_uf0nfy$;
+                  return _.fg.md.card.MDCardTitleText.MDCardHeaderText.classSelector_7iw2a3$_0;
                 }
               },
               rule: {
                 get: function () {
-                  return _.fg.md.card.MDCardTitleText.MDCardHeaderText.$rule_i1a68r$;
+                  return _.fg.md.card.MDCardTitleText.MDCardHeaderText.rule_7iw2a3$_0;
                 }
               }
             }, /** @lends _.fg.md.card.MDCardTitleText.MDCardHeaderText */ {
@@ -1010,154 +1010,154 @@ this['material-design'] = function (Kotlin, $module$beans, $module$elements) {
           MDGrayPalette: Kotlin.createObject(function () {
             return [_.fg.md.colour.MDPrimaryPalette];
           }, function MDGrayPalette() {
-            this.$p50_j0fhkq$ = $module$elements.fg.style.colour.RgbColor.Factory.from_61zpoe$('#FAFAFA');
-            this.$p100_l4fryy$ = $module$elements.fg.style.colour.RgbColor.Factory.from_61zpoe$('#F5F5F5');
-            this.$p200_l4fr89$ = $module$elements.fg.style.colour.RgbColor.Factory.from_61zpoe$('#EEEEEE');
-            this.$p300_l4fqhk$ = $module$elements.fg.style.colour.RgbColor.Factory.from_61zpoe$('#E0E0E0');
-            this.$p400_l4fpqv$ = $module$elements.fg.style.colour.RgbColor.Factory.from_61zpoe$('#BDBDBD');
-            this.$p500_l4fp06$ = $module$elements.fg.style.colour.RgbColor.Factory.from_61zpoe$('#9E9E9E');
-            this.$p600_l4fo9h$ = $module$elements.fg.style.colour.RgbColor.Factory.from_61zpoe$('#757575');
-            this.$p700_l4fnis$ = $module$elements.fg.style.colour.RgbColor.Factory.from_61zpoe$('#616161');
-            this.$p800_l4fms3$ = $module$elements.fg.style.colour.RgbColor.Factory.from_61zpoe$('#424242');
-            this.$p900_l4fm1e$ = $module$elements.fg.style.colour.RgbColor.Factory.from_61zpoe$('#212121');
+            this.p50_c1sckx$_0 = $module$elements.fg.style.colour.RgbColor.Factory.from_61zpoe$('#FAFAFA');
+            this.p100_c1sckx$_0 = $module$elements.fg.style.colour.RgbColor.Factory.from_61zpoe$('#F5F5F5');
+            this.p200_c1sckx$_0 = $module$elements.fg.style.colour.RgbColor.Factory.from_61zpoe$('#EEEEEE');
+            this.p300_c1sckx$_0 = $module$elements.fg.style.colour.RgbColor.Factory.from_61zpoe$('#E0E0E0');
+            this.p400_c1sckx$_0 = $module$elements.fg.style.colour.RgbColor.Factory.from_61zpoe$('#BDBDBD');
+            this.p500_c1sckx$_0 = $module$elements.fg.style.colour.RgbColor.Factory.from_61zpoe$('#9E9E9E');
+            this.p600_c1sckx$_0 = $module$elements.fg.style.colour.RgbColor.Factory.from_61zpoe$('#757575');
+            this.p700_c1sckx$_0 = $module$elements.fg.style.colour.RgbColor.Factory.from_61zpoe$('#616161');
+            this.p800_c1sckx$_0 = $module$elements.fg.style.colour.RgbColor.Factory.from_61zpoe$('#424242');
+            this.p900_c1sckx$_0 = $module$elements.fg.style.colour.RgbColor.Factory.from_61zpoe$('#212121');
           }, /** @lends _.fg.md.colour.MDGrayPalette.prototype */ {
             p50: {
               get: function () {
-                return this.$p50_j0fhkq$;
+                return this.p50_c1sckx$_0;
               }
             },
             p100: {
               get: function () {
-                return this.$p100_l4fryy$;
+                return this.p100_c1sckx$_0;
               }
             },
             p200: {
               get: function () {
-                return this.$p200_l4fr89$;
+                return this.p200_c1sckx$_0;
               }
             },
             p300: {
               get: function () {
-                return this.$p300_l4fqhk$;
+                return this.p300_c1sckx$_0;
               }
             },
             p400: {
               get: function () {
-                return this.$p400_l4fpqv$;
+                return this.p400_c1sckx$_0;
               }
             },
             p500: {
               get: function () {
-                return this.$p500_l4fp06$;
+                return this.p500_c1sckx$_0;
               }
             },
             p600: {
               get: function () {
-                return this.$p600_l4fo9h$;
+                return this.p600_c1sckx$_0;
               }
             },
             p700: {
               get: function () {
-                return this.$p700_l4fnis$;
+                return this.p700_c1sckx$_0;
               }
             },
             p800: {
               get: function () {
-                return this.$p800_l4fms3$;
+                return this.p800_c1sckx$_0;
               }
             },
             p900: {
               get: function () {
-                return this.$p900_l4fm1e$;
+                return this.p900_c1sckx$_0;
               }
             }
           }),
           MDGreenPalette: Kotlin.createObject(function () {
             return [_.fg.md.colour.MDAccentPalette, _.fg.md.colour.MDPrimaryPalette];
           }, function MDGreenPalette() {
-            this.$p50_dt28pw$ = $module$elements.fg.style.colour.RgbColor.Factory.from_61zpoe$('#E8F5E9');
-            this.$p100_1u93ig$ = $module$elements.fg.style.colour.RgbColor.Factory.from_61zpoe$('#C8E6C9');
-            this.$p200_1u9495$ = $module$elements.fg.style.colour.RgbColor.Factory.from_61zpoe$('#A5D6A7');
-            this.$p300_1u94zu$ = $module$elements.fg.style.colour.RgbColor.Factory.from_61zpoe$('#81C784');
-            this.$p400_1u95qj$ = $module$elements.fg.style.colour.RgbColor.Factory.from_61zpoe$('#66BB6A');
-            this.$p500_1u96h8$ = $module$elements.fg.style.colour.RgbColor.Factory.from_61zpoe$('#4CAF50');
-            this.$p600_1u977x$ = $module$elements.fg.style.colour.RgbColor.Factory.from_61zpoe$('#43A047');
-            this.$p700_1u97ym$ = $module$elements.fg.style.colour.RgbColor.Factory.from_61zpoe$('#388E3C');
-            this.$p800_1u98pb$ = $module$elements.fg.style.colour.RgbColor.Factory.from_61zpoe$('#2E7D32');
-            this.$p900_1u99g0$ = $module$elements.fg.style.colour.RgbColor.Factory.from_61zpoe$('#1B5E20');
-            this.$a100_1tzipj$ = $module$elements.fg.style.colour.RgbColor.Factory.from_61zpoe$('#B9F6CA');
-            this.$a200_1tzjg8$ = $module$elements.fg.style.colour.RgbColor.Factory.from_61zpoe$('#69F0AE');
-            this.$a400_1tzkxm$ = $module$elements.fg.style.colour.RgbColor.Factory.from_61zpoe$('#00E676');
-            this.$a700_1tzn5p$ = $module$elements.fg.style.colour.RgbColor.Factory.from_61zpoe$('#00C853');
+            this.p50_hxdkvh$_0 = $module$elements.fg.style.colour.RgbColor.Factory.from_61zpoe$('#E8F5E9');
+            this.p100_hxdkvh$_0 = $module$elements.fg.style.colour.RgbColor.Factory.from_61zpoe$('#C8E6C9');
+            this.p200_hxdkvh$_0 = $module$elements.fg.style.colour.RgbColor.Factory.from_61zpoe$('#A5D6A7');
+            this.p300_hxdkvh$_0 = $module$elements.fg.style.colour.RgbColor.Factory.from_61zpoe$('#81C784');
+            this.p400_hxdkvh$_0 = $module$elements.fg.style.colour.RgbColor.Factory.from_61zpoe$('#66BB6A');
+            this.p500_hxdkvh$_0 = $module$elements.fg.style.colour.RgbColor.Factory.from_61zpoe$('#4CAF50');
+            this.p600_hxdkvh$_0 = $module$elements.fg.style.colour.RgbColor.Factory.from_61zpoe$('#43A047');
+            this.p700_hxdkvh$_0 = $module$elements.fg.style.colour.RgbColor.Factory.from_61zpoe$('#388E3C');
+            this.p800_hxdkvh$_0 = $module$elements.fg.style.colour.RgbColor.Factory.from_61zpoe$('#2E7D32');
+            this.p900_hxdkvh$_0 = $module$elements.fg.style.colour.RgbColor.Factory.from_61zpoe$('#1B5E20');
+            this.a100_hxdkvh$_0 = $module$elements.fg.style.colour.RgbColor.Factory.from_61zpoe$('#B9F6CA');
+            this.a200_hxdkvh$_0 = $module$elements.fg.style.colour.RgbColor.Factory.from_61zpoe$('#69F0AE');
+            this.a400_hxdkvh$_0 = $module$elements.fg.style.colour.RgbColor.Factory.from_61zpoe$('#00E676');
+            this.a700_hxdkvh$_0 = $module$elements.fg.style.colour.RgbColor.Factory.from_61zpoe$('#00C853');
           }, /** @lends _.fg.md.colour.MDGreenPalette.prototype */ {
             p50: {
               get: function () {
-                return this.$p50_dt28pw$;
+                return this.p50_hxdkvh$_0;
               }
             },
             p100: {
               get: function () {
-                return this.$p100_1u93ig$;
+                return this.p100_hxdkvh$_0;
               }
             },
             p200: {
               get: function () {
-                return this.$p200_1u9495$;
+                return this.p200_hxdkvh$_0;
               }
             },
             p300: {
               get: function () {
-                return this.$p300_1u94zu$;
+                return this.p300_hxdkvh$_0;
               }
             },
             p400: {
               get: function () {
-                return this.$p400_1u95qj$;
+                return this.p400_hxdkvh$_0;
               }
             },
             p500: {
               get: function () {
-                return this.$p500_1u96h8$;
+                return this.p500_hxdkvh$_0;
               }
             },
             p600: {
               get: function () {
-                return this.$p600_1u977x$;
+                return this.p600_hxdkvh$_0;
               }
             },
             p700: {
               get: function () {
-                return this.$p700_1u97ym$;
+                return this.p700_hxdkvh$_0;
               }
             },
             p800: {
               get: function () {
-                return this.$p800_1u98pb$;
+                return this.p800_hxdkvh$_0;
               }
             },
             p900: {
               get: function () {
-                return this.$p900_1u99g0$;
+                return this.p900_hxdkvh$_0;
               }
             },
             a100: {
               get: function () {
-                return this.$a100_1tzipj$;
+                return this.a100_hxdkvh$_0;
               }
             },
             a200: {
               get: function () {
-                return this.$a200_1tzjg8$;
+                return this.a200_hxdkvh$_0;
               }
             },
             a400: {
               get: function () {
-                return this.$a400_1tzkxm$;
+                return this.a400_hxdkvh$_0;
               }
             },
             a700: {
               get: function () {
-                return this.$a700_1tzn5p$;
+                return this.a700_hxdkvh$_0;
               }
             }
           }),
@@ -1166,178 +1166,178 @@ this['material-design'] = function (Kotlin, $module$beans, $module$elements) {
           MDPurplePalette: Kotlin.createObject(function () {
             return [_.fg.md.colour.MDAccentPalette, _.fg.md.colour.MDPrimaryPalette];
           }, function MDPurplePalette() {
-            this.$p50_gr4bgt$ = $module$elements.fg.style.colour.RgbColor.Factory.from_61zpoe$('#F3E5F5');
-            this.$p100_m4xepr$ = $module$elements.fg.style.colour.RgbColor.Factory.from_61zpoe$('#E1BEE7');
-            this.$p200_m4xfgg$ = $module$elements.fg.style.colour.RgbColor.Factory.from_61zpoe$('#CE93D8');
-            this.$p300_m4xg75$ = $module$elements.fg.style.colour.RgbColor.Factory.from_61zpoe$('#BA68C8');
-            this.$p400_m4xgxu$ = $module$elements.fg.style.colour.RgbColor.Factory.from_61zpoe$('#AB47BC');
-            this.$p500_m4xhoj$ = $module$elements.fg.style.colour.RgbColor.Factory.from_61zpoe$('#9C27B0');
-            this.$p600_m4xif8$ = $module$elements.fg.style.colour.RgbColor.Factory.from_61zpoe$('#8E24AA');
-            this.$p700_m4xj5x$ = $module$elements.fg.style.colour.RgbColor.Factory.from_61zpoe$('#7B1FA2');
-            this.$p800_m4xjwm$ = $module$elements.fg.style.colour.RgbColor.Factory.from_61zpoe$('#6A1B9A');
-            this.$p900_m4xknb$ = $module$elements.fg.style.colour.RgbColor.Factory.from_61zpoe$('#4A148C');
-            this.$a100_m4ntwu$ = $module$elements.fg.style.colour.RgbColor.Factory.from_61zpoe$('#EA80FC');
-            this.$a200_m4nunj$ = $module$elements.fg.style.colour.RgbColor.Factory.from_61zpoe$('#E040FB');
-            this.$a400_m4nw4x$ = $module$elements.fg.style.colour.RgbColor.Factory.from_61zpoe$('#D500F9');
-            this.$a700_m4nyd0$ = $module$elements.fg.style.colour.RgbColor.Factory.from_61zpoe$('#AA00FF');
+            this.p50_cbtzg6$_0 = $module$elements.fg.style.colour.RgbColor.Factory.from_61zpoe$('#F3E5F5');
+            this.p100_cbtzg6$_0 = $module$elements.fg.style.colour.RgbColor.Factory.from_61zpoe$('#E1BEE7');
+            this.p200_cbtzg6$_0 = $module$elements.fg.style.colour.RgbColor.Factory.from_61zpoe$('#CE93D8');
+            this.p300_cbtzg6$_0 = $module$elements.fg.style.colour.RgbColor.Factory.from_61zpoe$('#BA68C8');
+            this.p400_cbtzg6$_0 = $module$elements.fg.style.colour.RgbColor.Factory.from_61zpoe$('#AB47BC');
+            this.p500_cbtzg6$_0 = $module$elements.fg.style.colour.RgbColor.Factory.from_61zpoe$('#9C27B0');
+            this.p600_cbtzg6$_0 = $module$elements.fg.style.colour.RgbColor.Factory.from_61zpoe$('#8E24AA');
+            this.p700_cbtzg6$_0 = $module$elements.fg.style.colour.RgbColor.Factory.from_61zpoe$('#7B1FA2');
+            this.p800_cbtzg6$_0 = $module$elements.fg.style.colour.RgbColor.Factory.from_61zpoe$('#6A1B9A');
+            this.p900_cbtzg6$_0 = $module$elements.fg.style.colour.RgbColor.Factory.from_61zpoe$('#4A148C');
+            this.a100_cbtzg6$_0 = $module$elements.fg.style.colour.RgbColor.Factory.from_61zpoe$('#EA80FC');
+            this.a200_cbtzg6$_0 = $module$elements.fg.style.colour.RgbColor.Factory.from_61zpoe$('#E040FB');
+            this.a400_cbtzg6$_0 = $module$elements.fg.style.colour.RgbColor.Factory.from_61zpoe$('#D500F9');
+            this.a700_cbtzg6$_0 = $module$elements.fg.style.colour.RgbColor.Factory.from_61zpoe$('#AA00FF');
           }, /** @lends _.fg.md.colour.MDPurplePalette.prototype */ {
             p50: {
               get: function () {
-                return this.$p50_gr4bgt$;
+                return this.p50_cbtzg6$_0;
               }
             },
             p100: {
               get: function () {
-                return this.$p100_m4xepr$;
+                return this.p100_cbtzg6$_0;
               }
             },
             p200: {
               get: function () {
-                return this.$p200_m4xfgg$;
+                return this.p200_cbtzg6$_0;
               }
             },
             p300: {
               get: function () {
-                return this.$p300_m4xg75$;
+                return this.p300_cbtzg6$_0;
               }
             },
             p400: {
               get: function () {
-                return this.$p400_m4xgxu$;
+                return this.p400_cbtzg6$_0;
               }
             },
             p500: {
               get: function () {
-                return this.$p500_m4xhoj$;
+                return this.p500_cbtzg6$_0;
               }
             },
             p600: {
               get: function () {
-                return this.$p600_m4xif8$;
+                return this.p600_cbtzg6$_0;
               }
             },
             p700: {
               get: function () {
-                return this.$p700_m4xj5x$;
+                return this.p700_cbtzg6$_0;
               }
             },
             p800: {
               get: function () {
-                return this.$p800_m4xjwm$;
+                return this.p800_cbtzg6$_0;
               }
             },
             p900: {
               get: function () {
-                return this.$p900_m4xknb$;
+                return this.p900_cbtzg6$_0;
               }
             },
             a100: {
               get: function () {
-                return this.$a100_m4ntwu$;
+                return this.a100_cbtzg6$_0;
               }
             },
             a200: {
               get: function () {
-                return this.$a200_m4nunj$;
+                return this.a200_cbtzg6$_0;
               }
             },
             a400: {
               get: function () {
-                return this.$a400_m4nw4x$;
+                return this.a400_cbtzg6$_0;
               }
             },
             a700: {
               get: function () {
-                return this.$a700_m4nyd0$;
+                return this.a700_cbtzg6$_0;
               }
             }
           }),
           MDRedPalette: Kotlin.createObject(function () {
             return [_.fg.md.colour.MDAccentPalette, _.fg.md.colour.MDPrimaryPalette];
           }, function MDRedPalette() {
-            this.$p50_kn2hnu$ = $module$elements.fg.style.colour.RgbColor.Factory.from_61zpoe$('#FFEBEE');
-            this.$p100_l4soa$ = $module$elements.fg.style.colour.RgbColor.Factory.from_61zpoe$('#FFCDD2');
-            this.$p200_l4rxl$ = $module$elements.fg.style.colour.RgbColor.Factory.from_61zpoe$('#EF9A9A');
-            this.$p300_l4r6w$ = $module$elements.fg.style.colour.RgbColor.Factory.from_61zpoe$('#E57373');
-            this.$p400_l4qg7$ = $module$elements.fg.style.colour.RgbColor.Factory.from_61zpoe$('#EF5350');
-            this.$p500_l4ppi$ = $module$elements.fg.style.colour.RgbColor.Factory.from_61zpoe$('#F44336');
-            this.$p600_l4oyt$ = $module$elements.fg.style.colour.RgbColor.Factory.from_61zpoe$('#E53935');
-            this.$p700_l4o84$ = $module$elements.fg.style.colour.RgbColor.Factory.from_61zpoe$('#D32F2F');
-            this.$p800_l4nhf$ = $module$elements.fg.style.colour.RgbColor.Factory.from_61zpoe$('#C62828');
-            this.$p900_l4mqq$ = $module$elements.fg.style.colour.RgbColor.Factory.from_61zpoe$('#B71C1C');
-            this.$a100_ledh7$ = $module$elements.fg.style.colour.RgbColor.Factory.from_61zpoe$('#FF8A80');
-            this.$a200_lecqi$ = $module$elements.fg.style.colour.RgbColor.Factory.from_61zpoe$('#FF5252');
-            this.$a400_leb94$ = $module$elements.fg.style.colour.RgbColor.Factory.from_61zpoe$('#FF1744');
-            this.$a700_le911$ = $module$elements.fg.style.colour.RgbColor.Factory.from_61zpoe$('#D50000');
+            this.p50_1vbi8v$_0 = $module$elements.fg.style.colour.RgbColor.Factory.from_61zpoe$('#FFEBEE');
+            this.p100_1vbi8v$_0 = $module$elements.fg.style.colour.RgbColor.Factory.from_61zpoe$('#FFCDD2');
+            this.p200_1vbi8v$_0 = $module$elements.fg.style.colour.RgbColor.Factory.from_61zpoe$('#EF9A9A');
+            this.p300_1vbi8v$_0 = $module$elements.fg.style.colour.RgbColor.Factory.from_61zpoe$('#E57373');
+            this.p400_1vbi8v$_0 = $module$elements.fg.style.colour.RgbColor.Factory.from_61zpoe$('#EF5350');
+            this.p500_1vbi8v$_0 = $module$elements.fg.style.colour.RgbColor.Factory.from_61zpoe$('#F44336');
+            this.p600_1vbi8v$_0 = $module$elements.fg.style.colour.RgbColor.Factory.from_61zpoe$('#E53935');
+            this.p700_1vbi8v$_0 = $module$elements.fg.style.colour.RgbColor.Factory.from_61zpoe$('#D32F2F');
+            this.p800_1vbi8v$_0 = $module$elements.fg.style.colour.RgbColor.Factory.from_61zpoe$('#C62828');
+            this.p900_1vbi8v$_0 = $module$elements.fg.style.colour.RgbColor.Factory.from_61zpoe$('#B71C1C');
+            this.a100_1vbi8v$_0 = $module$elements.fg.style.colour.RgbColor.Factory.from_61zpoe$('#FF8A80');
+            this.a200_1vbi8v$_0 = $module$elements.fg.style.colour.RgbColor.Factory.from_61zpoe$('#FF5252');
+            this.a400_1vbi8v$_0 = $module$elements.fg.style.colour.RgbColor.Factory.from_61zpoe$('#FF1744');
+            this.a700_1vbi8v$_0 = $module$elements.fg.style.colour.RgbColor.Factory.from_61zpoe$('#D50000');
           }, /** @lends _.fg.md.colour.MDRedPalette.prototype */ {
             p50: {
               get: function () {
-                return this.$p50_kn2hnu$;
+                return this.p50_1vbi8v$_0;
               }
             },
             p100: {
               get: function () {
-                return this.$p100_l4soa$;
+                return this.p100_1vbi8v$_0;
               }
             },
             p200: {
               get: function () {
-                return this.$p200_l4rxl$;
+                return this.p200_1vbi8v$_0;
               }
             },
             p300: {
               get: function () {
-                return this.$p300_l4r6w$;
+                return this.p300_1vbi8v$_0;
               }
             },
             p400: {
               get: function () {
-                return this.$p400_l4qg7$;
+                return this.p400_1vbi8v$_0;
               }
             },
             p500: {
               get: function () {
-                return this.$p500_l4ppi$;
+                return this.p500_1vbi8v$_0;
               }
             },
             p600: {
               get: function () {
-                return this.$p600_l4oyt$;
+                return this.p600_1vbi8v$_0;
               }
             },
             p700: {
               get: function () {
-                return this.$p700_l4o84$;
+                return this.p700_1vbi8v$_0;
               }
             },
             p800: {
               get: function () {
-                return this.$p800_l4nhf$;
+                return this.p800_1vbi8v$_0;
               }
             },
             p900: {
               get: function () {
-                return this.$p900_l4mqq$;
+                return this.p900_1vbi8v$_0;
               }
             },
             a100: {
               get: function () {
-                return this.$a100_ledh7$;
+                return this.a100_1vbi8v$_0;
               }
             },
             a200: {
               get: function () {
-                return this.$a200_lecqi$;
+                return this.a200_1vbi8v$_0;
               }
             },
             a400: {
               get: function () {
-                return this.$a400_leb94$;
+                return this.a400_1vbi8v$_0;
               }
             },
             a700: {
               get: function () {
-                return this.$a700_le911$;
+                return this.a700_1vbi8v$_0;
               }
             }
           })
@@ -1430,7 +1430,7 @@ this['material-design'] = function (Kotlin, $module$beans, $module$elements) {
           $receiver.expandedPanel = $module$elements.fg.elements.initAndAppendNode_i6bvtr$($receiver, new _.fg.md.panel.MDExpandedPanel(), init);
         },
         Theme: Kotlin.createClass(null, function Theme(primaryColor, accentColor, warnColor, statusBar, appBar, background, cardsNdialogs, font) {
-          this.propertyChangedListeners_xiispb$ = Kotlin.kotlin.collections.arrayListOf_9mqe4v$([]);
+          this.propertyChangedListeners_0 = Kotlin.kotlin.collections.arrayListOf_9mqe4v$([]);
           this.primaryColor$delegate = new Kotlin.kotlin.properties.Delegates.observable$f(_.fg.md.Theme.primaryColor$f, primaryColor);
           this.accentColor$delegate = new Kotlin.kotlin.properties.Delegates.observable$f(_.fg.md.Theme.accentColor$f, accentColor);
           this.warnColor$delegate = new Kotlin.kotlin.properties.Delegates.observable$f(_.fg.md.Theme.warnColor$f, warnColor);
@@ -1440,9 +1440,9 @@ this['material-design'] = function (Kotlin, $module$beans, $module$elements) {
           this.cardsNdialogs$delegate = new Kotlin.kotlin.properties.Delegates.observable$f(_.fg.md.Theme.cardsNdialogs$f, cardsNdialogs);
           this.font = font;
         }, /** @lends _.fg.md.Theme.prototype */ {
-          notifyPropertyChanged: function (property, old, new_0) {
+          notifyPropertyChanged_0: function (property, old, new_0) {
             var tmp$0;
-            tmp$0 = this.propertyChangedListeners_xiispb$.iterator();
+            tmp$0 = this.propertyChangedListeners_0.iterator();
             while (tmp$0.hasNext()) {
               var listener = tmp$0.next();
               listener(this, property, old, new_0);
@@ -1450,65 +1450,65 @@ this['material-design'] = function (Kotlin, $module$beans, $module$elements) {
           },
           onPropertyChanged_3m4fm7$: function (listener) {
             var tmp$0;
-            this.propertyChangedListeners_xiispb$.add_za3rmp$(typeof (tmp$0 = listener) === 'function' ? tmp$0 : Kotlin.throwCCE());
+            this.propertyChangedListeners_0.add_za3rmp$(typeof (tmp$0 = listener) === 'function' ? tmp$0 : Kotlin.throwCCE());
           },
           unPropertyChanged_3m4fm7$: function (listener) {
-            this.propertyChangedListeners_xiispb$.remove_za3rmp$(listener);
+            this.propertyChangedListeners_0.remove_za3rmp$(listener);
           },
           primaryColor: {
             get: function () {
               return this.primaryColor$delegate.getValue_dsk1ci$(this, new Kotlin.PropertyMetadata('primaryColor'));
             },
-            set: function (primaryColor) {
-              this.primaryColor$delegate.setValue_w32e13$(this, new Kotlin.PropertyMetadata('primaryColor'), primaryColor);
+            set: function (primaryColor_0) {
+              this.primaryColor$delegate.setValue_w32e13$(this, new Kotlin.PropertyMetadata('primaryColor'), primaryColor_0);
             }
           },
           accentColor: {
             get: function () {
               return this.accentColor$delegate.getValue_dsk1ci$(this, new Kotlin.PropertyMetadata('accentColor'));
             },
-            set: function (accentColor) {
-              this.accentColor$delegate.setValue_w32e13$(this, new Kotlin.PropertyMetadata('accentColor'), accentColor);
+            set: function (accentColor_0) {
+              this.accentColor$delegate.setValue_w32e13$(this, new Kotlin.PropertyMetadata('accentColor'), accentColor_0);
             }
           },
           warnColor: {
             get: function () {
               return this.warnColor$delegate.getValue_dsk1ci$(this, new Kotlin.PropertyMetadata('warnColor'));
             },
-            set: function (warnColor) {
-              this.warnColor$delegate.setValue_w32e13$(this, new Kotlin.PropertyMetadata('warnColor'), warnColor);
+            set: function (warnColor_0) {
+              this.warnColor$delegate.setValue_w32e13$(this, new Kotlin.PropertyMetadata('warnColor'), warnColor_0);
             }
           },
           statusBar: {
             get: function () {
               return this.statusBar$delegate.getValue_dsk1ci$(this, new Kotlin.PropertyMetadata('statusBar'));
             },
-            set: function (statusBar) {
-              this.statusBar$delegate.setValue_w32e13$(this, new Kotlin.PropertyMetadata('statusBar'), statusBar);
+            set: function (statusBar_0) {
+              this.statusBar$delegate.setValue_w32e13$(this, new Kotlin.PropertyMetadata('statusBar'), statusBar_0);
             }
           },
           appBar: {
             get: function () {
               return this.appBar$delegate.getValue_dsk1ci$(this, new Kotlin.PropertyMetadata('appBar'));
             },
-            set: function (appBar) {
-              this.appBar$delegate.setValue_w32e13$(this, new Kotlin.PropertyMetadata('appBar'), appBar);
+            set: function (appBar_0) {
+              this.appBar$delegate.setValue_w32e13$(this, new Kotlin.PropertyMetadata('appBar'), appBar_0);
             }
           },
           background: {
             get: function () {
               return this.background$delegate.getValue_dsk1ci$(this, new Kotlin.PropertyMetadata('background'));
             },
-            set: function (background) {
-              this.background$delegate.setValue_w32e13$(this, new Kotlin.PropertyMetadata('background'), background);
+            set: function (background_0) {
+              this.background$delegate.setValue_w32e13$(this, new Kotlin.PropertyMetadata('background'), background_0);
             }
           },
           cardsNdialogs: {
             get: function () {
               return this.cardsNdialogs$delegate.getValue_dsk1ci$(this, new Kotlin.PropertyMetadata('cardsNdialogs'));
             },
-            set: function (cardsNdialogs) {
-              this.cardsNdialogs$delegate.setValue_w32e13$(this, new Kotlin.PropertyMetadata('cardsNdialogs'), cardsNdialogs);
+            set: function (cardsNdialogs_0) {
+              this.cardsNdialogs$delegate.setValue_w32e13$(this, new Kotlin.PropertyMetadata('cardsNdialogs'), cardsNdialogs_0);
             }
           },
           color_6hl4m2$: function (color, default_0) {
@@ -1557,18 +1557,18 @@ this['material-design'] = function (Kotlin, $module$beans, $module$elements) {
             MDDrawer: Kotlin.createObject(function () {
               return [$module$elements.fg.elements.StyledClass];
             }, function MDDrawer() {
-              _.fg.md.drawer.MDDrawer.MDDrawer.$classSelector_zbfnr8$ = $module$elements.fg.elements.toClassSelector_pdl1w0$('md-drawer');
-              _.fg.md.drawer.MDDrawer.MDDrawer.$rule_bobqk1$ = _.fg.md.drawer.MDDrawer.MDDrawer.rule$f;
+              _.fg.md.drawer.MDDrawer.MDDrawer.classSelector_3lx8pr$_0 = $module$elements.fg.elements.toClassSelector_pdl1w0$('md-drawer');
+              _.fg.md.drawer.MDDrawer.MDDrawer.rule_3lx8pr$_0 = _.fg.md.drawer.MDDrawer.MDDrawer.rule$f;
               $module$elements.fg.elements.HTML.registerStyle_78phyd$(_.fg.md.drawer.MDDrawer.MDDrawer);
             }, /** @lends _.fg.md.drawer.MDDrawer.MDDrawer.prototype */ {
               classSelector: {
                 get: function () {
-                  return _.fg.md.drawer.MDDrawer.MDDrawer.$classSelector_zbfnr8$;
+                  return _.fg.md.drawer.MDDrawer.MDDrawer.classSelector_3lx8pr$_0;
                 }
               },
               rule: {
                 get: function () {
-                  return _.fg.md.drawer.MDDrawer.MDDrawer.$rule_bobqk1$;
+                  return _.fg.md.drawer.MDDrawer.MDDrawer.rule_3lx8pr$_0;
                 }
               }
             }, /** @lends _.fg.md.drawer.MDDrawer.MDDrawer */ {
@@ -1599,18 +1599,18 @@ this['material-design'] = function (Kotlin, $module$beans, $module$elements) {
             MDMenu: Kotlin.createObject(function () {
               return [$module$elements.fg.elements.StyledClass];
             }, function MDMenu() {
-              _.fg.md.menu.MDMenu.MDMenu.$classSelector_uoqxbm$ = $module$elements.fg.elements.toClassSelector_pdl1w0$('fg-md-menu');
-              _.fg.md.menu.MDMenu.MDMenu.$rule_mgjqw1$ = _.fg.md.menu.MDMenu.MDMenu.rule$f;
+              _.fg.md.menu.MDMenu.MDMenu.classSelector_pi48kx$_0 = $module$elements.fg.elements.toClassSelector_pdl1w0$('fg-md-menu');
+              _.fg.md.menu.MDMenu.MDMenu.rule_pi48kx$_0 = _.fg.md.menu.MDMenu.MDMenu.rule$f;
               $module$elements.fg.elements.HTML.registerStyle_78phyd$(_.fg.md.menu.MDMenu.MDMenu);
             }, /** @lends _.fg.md.menu.MDMenu.MDMenu.prototype */ {
               classSelector: {
                 get: function () {
-                  return _.fg.md.menu.MDMenu.MDMenu.$classSelector_uoqxbm$;
+                  return _.fg.md.menu.MDMenu.MDMenu.classSelector_pi48kx$_0;
                 }
               },
               rule: {
                 get: function () {
-                  return _.fg.md.menu.MDMenu.MDMenu.$rule_mgjqw1$;
+                  return _.fg.md.menu.MDMenu.MDMenu.rule_pi48kx$_0;
                 }
               }
             }, /** @lends _.fg.md.menu.MDMenu.MDMenu */ {
@@ -1629,9 +1629,9 @@ this['material-design'] = function (Kotlin, $module$beans, $module$elements) {
             return [$module$beans.fg.beans.menu.MenuItem];
           }, function MDMenuItem(action) {
             MDMenuItem.baseInitializer.call(this, action);
-            this.ripple$delegate = Kotlin.kotlin.lazy_un3fny$(_.fg.md.menu.MDMenuItem.ripple_1nmxsg$f(this));
+            this.ripple$delegate = Kotlin.kotlin.lazy_un3fny$(_.fg.md.menu.MDMenuItem.ripple_0$f(this));
           }, /** @lends _.fg.md.menu.MDMenuItem.prototype */ {
-            ripple_1nmxsg$: {
+            ripple_0: {
               get: function () {
                 return Kotlin.kotlin.getValue_em0fd4$(this.ripple$delegate, this, new Kotlin.PropertyMetadata('ripple'));
               }
@@ -1643,24 +1643,24 @@ this['material-design'] = function (Kotlin, $module$beans, $module$elements) {
             },
             didMount: function () {
               $module$beans.fg.beans.menu.MenuItem.prototype.didMount.call(this);
-              this.ripple_1nmxsg$.init();
+              this.ripple_0.init();
             }
           }, /** @lends _.fg.md.menu.MDMenuItem */ {
             MDMenuItem: Kotlin.createObject(function () {
               return [$module$elements.fg.elements.StyledClass];
             }, function MDMenuItem() {
-              _.fg.md.menu.MDMenuItem.MDMenuItem.$classSelector_xd7gry$ = $module$elements.fg.elements.toClassSelector_pdl1w0$('fg-md-menu-item');
-              _.fg.md.menu.MDMenuItem.MDMenuItem.$rule_qavf0h$ = _.fg.md.menu.MDMenuItem.MDMenuItem.rule$f;
+              _.fg.md.menu.MDMenuItem.MDMenuItem.classSelector_p9hgvj$_0 = $module$elements.fg.elements.toClassSelector_pdl1w0$('fg-md-menu-item');
+              _.fg.md.menu.MDMenuItem.MDMenuItem.rule_p9hgvj$_0 = _.fg.md.menu.MDMenuItem.MDMenuItem.rule$f;
               $module$elements.fg.elements.HTML.registerStyle_78phyd$(_.fg.md.menu.MDMenuItem.MDMenuItem);
             }, /** @lends _.fg.md.menu.MDMenuItem.MDMenuItem.prototype */ {
               classSelector: {
                 get: function () {
-                  return _.fg.md.menu.MDMenuItem.MDMenuItem.$classSelector_xd7gry$;
+                  return _.fg.md.menu.MDMenuItem.MDMenuItem.classSelector_p9hgvj$_0;
                 }
               },
               rule: {
                 get: function () {
-                  return _.fg.md.menu.MDMenuItem.MDMenuItem.$rule_qavf0h$;
+                  return _.fg.md.menu.MDMenuItem.MDMenuItem.rule_p9hgvj$_0;
                 }
               }
             }, /** @lends _.fg.md.menu.MDMenuItem.MDMenuItem */ {
@@ -1678,7 +1678,7 @@ this['material-design'] = function (Kotlin, $module$beans, $module$elements) {
             },
             f_0: function () {
             },
-            ripple_1nmxsg$f: function (this$MDMenuItem) {
+            ripple_0$f: function (this$MDMenuItem) {
               return function () {
                 return new _.fg.md.support.Ripple(this$MDMenuItem, $module$elements.fg.style.colour.RgbColor.Factory.BLUE, _.fg.md.menu.MDMenuItem.f, _.fg.md.menu.MDMenuItem.f_0);
               };
@@ -1694,18 +1694,18 @@ this['material-design'] = function (Kotlin, $module$beans, $module$elements) {
             MDCollapsedPanel: Kotlin.createObject(function () {
               return [$module$elements.fg.elements.StyledClass];
             }, function MDCollapsedPanel() {
-              _.fg.md.panel.MDCollapsedPanel.MDCollapsedPanel.$classSelector_olzrr1$ = $module$elements.fg.elements.toClassSelector_pdl1w0$('md-collapsed-panel');
-              _.fg.md.panel.MDCollapsedPanel.MDCollapsedPanel.$rule_44ub00$ = _.fg.md.panel.MDCollapsedPanel.MDCollapsedPanel.rule$f;
+              _.fg.md.panel.MDCollapsedPanel.MDCollapsedPanel.classSelector_7cc6v4$_0 = $module$elements.fg.elements.toClassSelector_pdl1w0$('md-collapsed-panel');
+              _.fg.md.panel.MDCollapsedPanel.MDCollapsedPanel.rule_7cc6v4$_0 = _.fg.md.panel.MDCollapsedPanel.MDCollapsedPanel.rule$f;
               $module$elements.fg.elements.HTML.registerStyle_78phyd$(_.fg.md.panel.MDCollapsedPanel.MDCollapsedPanel);
             }, /** @lends _.fg.md.panel.MDCollapsedPanel.MDCollapsedPanel.prototype */ {
               classSelector: {
                 get: function () {
-                  return _.fg.md.panel.MDCollapsedPanel.MDCollapsedPanel.$classSelector_olzrr1$;
+                  return _.fg.md.panel.MDCollapsedPanel.MDCollapsedPanel.classSelector_7cc6v4$_0;
                 }
               },
               rule: {
                 get: function () {
-                  return _.fg.md.panel.MDCollapsedPanel.MDCollapsedPanel.$rule_44ub00$;
+                  return _.fg.md.panel.MDCollapsedPanel.MDCollapsedPanel.rule_7cc6v4$_0;
                 }
               }
             }, /** @lends _.fg.md.panel.MDCollapsedPanel.MDCollapsedPanel */ {
@@ -1724,18 +1724,18 @@ this['material-design'] = function (Kotlin, $module$beans, $module$elements) {
             MDExpandedPanel: Kotlin.createObject(function () {
               return [$module$elements.fg.elements.StyledClass];
             }, function MDExpandedPanel() {
-              _.fg.md.panel.MDExpandedPanel.MDExpandedPanel.$classSelector_2041e7$ = $module$elements.fg.elements.toClassSelector_pdl1w0$('md-expanded-panel');
-              _.fg.md.panel.MDExpandedPanel.MDExpandedPanel.$rule_3d81i4$ = _.fg.md.panel.MDExpandedPanel.MDExpandedPanel.rule$f;
+              _.fg.md.panel.MDExpandedPanel.MDExpandedPanel.classSelector_p43iwk$_0 = $module$elements.fg.elements.toClassSelector_pdl1w0$('md-expanded-panel');
+              _.fg.md.panel.MDExpandedPanel.MDExpandedPanel.rule_p43iwk$_0 = _.fg.md.panel.MDExpandedPanel.MDExpandedPanel.rule$f;
               $module$elements.fg.elements.HTML.registerStyle_78phyd$(_.fg.md.panel.MDExpandedPanel.MDExpandedPanel);
             }, /** @lends _.fg.md.panel.MDExpandedPanel.MDExpandedPanel.prototype */ {
               classSelector: {
                 get: function () {
-                  return _.fg.md.panel.MDExpandedPanel.MDExpandedPanel.$classSelector_2041e7$;
+                  return _.fg.md.panel.MDExpandedPanel.MDExpandedPanel.classSelector_p43iwk$_0;
                 }
               },
               rule: {
                 get: function () {
-                  return _.fg.md.panel.MDExpandedPanel.MDExpandedPanel.$rule_3d81i4$;
+                  return _.fg.md.panel.MDExpandedPanel.MDExpandedPanel.rule_p43iwk$_0;
                 }
               }
             }, /** @lends _.fg.md.panel.MDExpandedPanel.MDExpandedPanel */ {
@@ -1756,7 +1756,7 @@ this['material-design'] = function (Kotlin, $module$beans, $module$elements) {
             render: function () {
               $module$elements.fg.elements.Div.prototype.render.call(this);
             },
-            renderState: function (state) {
+            renderState_0: function (state) {
               var tmp$1, tmp$2, tmp$3, tmp$4;
               if (Kotlin.equals(state, _.fg.md.panel.MDExpansionPanel.State.COLLAPSED)) {
                 (tmp$1 = this.expandedPanel) != null ? tmp$1.hide() : null;
@@ -1785,19 +1785,19 @@ this['material-design'] = function (Kotlin, $module$beans, $module$elements) {
             MDExpansionPanel: Kotlin.createObject(function () {
               return [$module$elements.fg.elements.StyledClass];
             }, function MDExpansionPanel() {
-              _.fg.md.panel.MDExpansionPanel.MDExpansionPanel.$classSelector_3ywvr7$ = $module$elements.fg.elements.toClassSelector_pdl1w0$('md-expansion-panel');
+              _.fg.md.panel.MDExpansionPanel.MDExpansionPanel.classSelector_v3q4lc$_0 = $module$elements.fg.elements.toClassSelector_pdl1w0$('md-expansion-panel');
               _.fg.md.panel.MDExpansionPanel.MDExpansionPanel.closed = $module$elements.fg.elements.toClassSelector_pdl1w0$('closed');
-              _.fg.md.panel.MDExpansionPanel.MDExpansionPanel.$rule_qzxhyo$ = _.fg.md.panel.MDExpansionPanel.MDExpansionPanel.rule$f;
+              _.fg.md.panel.MDExpansionPanel.MDExpansionPanel.rule_v3q4lc$_0 = _.fg.md.panel.MDExpansionPanel.MDExpansionPanel.rule$f;
               $module$elements.fg.elements.HTML.registerStyle_78phyd$(_.fg.md.panel.MDExpansionPanel.MDExpansionPanel);
             }, /** @lends _.fg.md.panel.MDExpansionPanel.MDExpansionPanel.prototype */ {
               classSelector: {
                 get: function () {
-                  return _.fg.md.panel.MDExpansionPanel.MDExpansionPanel.$classSelector_3ywvr7$;
+                  return _.fg.md.panel.MDExpansionPanel.MDExpansionPanel.classSelector_v3q4lc$_0;
                 }
               },
               rule: {
                 get: function () {
-                  return _.fg.md.panel.MDExpansionPanel.MDExpansionPanel.$rule_qzxhyo$;
+                  return _.fg.md.panel.MDExpansionPanel.MDExpansionPanel.rule_v3q4lc$_0;
                 }
               }
             }, /** @lends _.fg.md.panel.MDExpansionPanel.MDExpansionPanel */ {
@@ -1818,9 +1818,9 @@ this['material-design'] = function (Kotlin, $module$beans, $module$elements) {
             if (labelText === void 0)
               labelText = null;
             MDRadioButton.baseInitializer.call(this, checked, labelText);
-            this.ripple$delegate = Kotlin.kotlin.lazy_un3fny$(_.fg.md.radio.MDRadioButton.ripple_gxcgp1$f(this));
+            this.ripple$delegate = Kotlin.kotlin.lazy_un3fny$(_.fg.md.radio.MDRadioButton.ripple_0$f(this));
           }, /** @lends _.fg.md.radio.MDRadioButton.prototype */ {
-            ripple_gxcgp1$: {
+            ripple_0: {
               get: function () {
                 return Kotlin.kotlin.getValue_em0fd4$(this.ripple$delegate, this, new Kotlin.PropertyMetadata('ripple'));
               }
@@ -1828,8 +1828,8 @@ this['material-design'] = function (Kotlin, $module$beans, $module$elements) {
             render: function () {
               $module$beans.fg.beans.radio.LabelledRadioButton.prototype.render.call(this);
               this.addClass_bx842b$(_.fg.md.radio.MDRadioButton.MDRadioButton.classSelector);
-              Kotlin.callSetter(this, $module$beans.fg.beans.radio.LabelledRadioButton, 'checkedIcon', _.fg.md.radio.MDRadioButton.MDRadioButton.checkedIcon_vy7ihf$);
-              Kotlin.callSetter(this, $module$beans.fg.beans.radio.LabelledRadioButton, 'unCheckedIcon', _.fg.md.radio.MDRadioButton.MDRadioButton.unCheckedIcon_vcot6u$);
+              Kotlin.callSetter(this, $module$beans.fg.beans.radio.LabelledRadioButton, 'checkedIcon', _.fg.md.radio.MDRadioButton.MDRadioButton.checkedIcon_0);
+              Kotlin.callSetter(this, $module$beans.fg.beans.radio.LabelledRadioButton, 'unCheckedIcon', _.fg.md.radio.MDRadioButton.MDRadioButton.unCheckedIcon_0);
             },
             didMount: function () {
               $module$beans.fg.beans.radio.LabelledRadioButton.prototype.didMount.call(this);
@@ -1838,20 +1838,20 @@ this['material-design'] = function (Kotlin, $module$beans, $module$elements) {
             MDRadioButton: Kotlin.createObject(function () {
               return [$module$elements.fg.elements.StyledClass];
             }, function MDRadioButton() {
-              _.fg.md.radio.MDRadioButton.MDRadioButton.$classSelector_6uilhm$ = $module$elements.fg.elements.toClassSelector_pdl1w0$('md-radio-button');
-              _.fg.md.radio.MDRadioButton.MDRadioButton.checkedIcon_vy7ihf$ = $module$beans.fg.beans.icon.FontAwesomeIcons.dot_circle_o_629h0h$();
-              _.fg.md.radio.MDRadioButton.MDRadioButton.unCheckedIcon_vcot6u$ = $module$beans.fg.beans.icon.FontAwesomeIcons.circle_o_629h0h$();
-              _.fg.md.radio.MDRadioButton.MDRadioButton.$rule_z6xrnb$ = _.fg.md.radio.MDRadioButton.MDRadioButton.rule$f;
+              _.fg.md.radio.MDRadioButton.MDRadioButton.classSelector_udwazr$_0 = $module$elements.fg.elements.toClassSelector_pdl1w0$('md-radio-button');
+              _.fg.md.radio.MDRadioButton.MDRadioButton.checkedIcon_0 = $module$beans.fg.beans.icon.FontAwesomeIcons.dot_circle_o_629h0h$();
+              _.fg.md.radio.MDRadioButton.MDRadioButton.unCheckedIcon_0 = $module$beans.fg.beans.icon.FontAwesomeIcons.circle_o_629h0h$();
+              _.fg.md.radio.MDRadioButton.MDRadioButton.rule_udwazr$_0 = _.fg.md.radio.MDRadioButton.MDRadioButton.rule$f;
               $module$elements.fg.elements.HTML.registerStyle_78phyd$(_.fg.md.radio.MDRadioButton.MDRadioButton);
             }, /** @lends _.fg.md.radio.MDRadioButton.MDRadioButton.prototype */ {
               classSelector: {
                 get: function () {
-                  return _.fg.md.radio.MDRadioButton.MDRadioButton.$classSelector_6uilhm$;
+                  return _.fg.md.radio.MDRadioButton.MDRadioButton.classSelector_udwazr$_0;
                 }
               },
               rule: {
                 get: function () {
-                  return _.fg.md.radio.MDRadioButton.MDRadioButton.$rule_z6xrnb$;
+                  return _.fg.md.radio.MDRadioButton.MDRadioButton.rule_udwazr$_0;
                 }
               }
             }, /** @lends _.fg.md.radio.MDRadioButton.MDRadioButton */ {
@@ -1866,7 +1866,7 @@ this['material-design'] = function (Kotlin, $module$beans, $module$elements) {
             },
             f_0: function () {
             },
-            ripple_gxcgp1$f: function (this$MDRadioButton) {
+            ripple_0$f: function (this$MDRadioButton) {
               return function () {
                 return new _.fg.md.support.Ripple(this$MDRadioButton.iconI, void 0, _.fg.md.radio.MDRadioButton.f, _.fg.md.radio.MDRadioButton.f_0);
               };
@@ -1885,18 +1885,18 @@ this['material-design'] = function (Kotlin, $module$beans, $module$elements) {
             this.inkColor = inkColor;
             this.startedCallback = startedCallback;
             this.doneCallback = doneCallback;
-            this.started_8yl1p0$ = false;
-            this.rippleContainer$delegate = Kotlin.kotlin.lazy_un3fny$(_.fg.md.support.Ripple.rippleContainer_d3dn38$f);
-            this.handleMouseDown_i4zr62$ = _.fg.md.support.Ripple.handleMouseDown_i4zr62$f(this);
-            this.handleMouseDown_rippleDone_jxnhuh$ = _.fg.md.support.Ripple.handleMouseDown_rippleDone_jxnhuh$f(this);
-            this.cleanUp_yg27pt$ = _.fg.md.support.Ripple.cleanUp_yg27pt$f(this);
+            this.started_0 = false;
+            this.rippleContainer$delegate = Kotlin.kotlin.lazy_un3fny$(_.fg.md.support.Ripple.rippleContainer_0$f);
+            this.handleMouseDown_0 = _.fg.md.support.Ripple.handleMouseDown_0$f(this);
+            this.handleMouseDown_rippleDone_0 = _.fg.md.support.Ripple.handleMouseDown_rippleDone_0$f(this);
+            this.cleanUp_0 = _.fg.md.support.Ripple.cleanUp_0$f(this);
           }, /** @lends _.fg.md.support.Ripple.prototype */ {
-            rippleContainer_d3dn38$: {
+            rippleContainer_0: {
               get: function () {
                 return Kotlin.kotlin.getValue_em0fd4$(this.rippleContainer$delegate, this, new Kotlin.PropertyMetadata('rippleContainer'));
               }
             },
-            start: function (pageX, pageY) {
+            start_0: function (pageX, pageY) {
               var size = this.element.offsetWidth;
               var pos = this.element.boundingClientRect;
               var halfSize = size / 2;
@@ -1905,15 +1905,15 @@ this['material-design'] = function (Kotlin, $module$beans, $module$elements) {
               console.log('scrollX' + window.scrollX);
               console.log('scrollY' + window.scrollY);
               var rippleInk = new _.fg.md.support.RippleInk(this.inkColor);
-              this.rippleContainer_d3dn38$.appendChild_sr04hg$(rippleInk);
-              rippleInk.setPosition(Kotlin.kotlin.to_l1ob02$(x, y));
-              rippleInk.setSize($module$elements.fg.elements.get_px_yrwdxs$(size));
+              this.rippleContainer_0.appendChild_sr04hg$(rippleInk);
+              rippleInk.setPosition_0(Kotlin.kotlin.to_l1ob02$(x, y));
+              rippleInk.setSize_0($module$elements.fg.elements.get_px_yrwdxs$(size));
             },
             init: function () {
-              this.element.appendChild_sr04hg$(this.rippleContainer_d3dn38$);
-              $module$elements.fg.elements.onMouseDown_9cq9y2$(this.element, this.handleMouseDown_i4zr62$);
-              $module$elements.fg.elements.onMouseDown_9cq9y2$(this.element, $module$elements.fg.base.bounceUntil_w5kaku$(this.handleMouseDown_rippleDone_jxnhuh$, 1000));
-              $module$elements.fg.elements.onMouseUp_9cq9y2$(this.element, $module$elements.fg.base.debounce1_w5kaku$(this.cleanUp_yg27pt$, 2000));
+              this.element.appendChild_sr04hg$(this.rippleContainer_0);
+              $module$elements.fg.elements.onMouseDown_9cq9y2$(this.element, this.handleMouseDown_0);
+              $module$elements.fg.elements.onMouseDown_9cq9y2$(this.element, $module$elements.fg.base.bounceUntil_w5kaku$(this.handleMouseDown_rippleDone_0, 1000));
+              $module$elements.fg.elements.onMouseUp_9cq9y2$(this.element, $module$elements.fg.base.debounce1_w5kaku$(this.cleanUp_0, 2000));
               this.element.addClass_bx842b$(_.fg.md.support.Ripple.Factory.rippleTargetClass);
             }
           }, /** @lends _.fg.md.support.Ripple */ {
@@ -1931,30 +1931,30 @@ this['material-design'] = function (Kotlin, $module$beans, $module$elements) {
             object_initializer$: function () {
               _.fg.md.support.Ripple.Factory;
             },
-            rippleContainer_d3dn38$f: function () {
+            rippleContainer_0$f: function () {
               return new _.fg.md.support.RippleContainer();
             },
-            handleMouseDown_i4zr62$f: function (this$Ripple) {
+            handleMouseDown_0$f: function (this$Ripple) {
               return function (e) {
                 var tmp$0;
-                this$Ripple.start(e.pageX, e.pageY);
-                if (!this$Ripple.started_8yl1p0$) {
+                this$Ripple.start_0(e.pageX, e.pageY);
+                if (!this$Ripple.started_0) {
                   (tmp$0 = this$Ripple.startedCallback) != null ? tmp$0() : null;
-                  this$Ripple.started_8yl1p0$ = true;
+                  this$Ripple.started_0 = true;
                 }
               };
             },
-            handleMouseDown_rippleDone_jxnhuh$f: function (this$Ripple) {
+            handleMouseDown_rippleDone_0$f: function (this$Ripple) {
               return function (e) {
                 var tmp$0;
                 console.log('handleMouseDown_rippleDone');
                 (tmp$0 = this$Ripple.doneCallback) != null ? tmp$0() : null;
               };
             },
-            cleanUp_yg27pt$f: function (this$Ripple) {
+            cleanUp_0$f: function (this$Ripple) {
               return function (it) {
-                this$Ripple.rippleContainer_d3dn38$.removeChildren();
-                this$Ripple.started_8yl1p0$ = false;
+                this$Ripple.rippleContainer_0.removeChildren();
+                this$Ripple.started_0 = false;
               };
             }
           }),
@@ -1971,18 +1971,18 @@ this['material-design'] = function (Kotlin, $module$beans, $module$elements) {
             RippleContainer: Kotlin.createObject(function () {
               return [$module$elements.fg.elements.StyledClass];
             }, function RippleContainer() {
-              _.fg.md.support.RippleContainer.RippleContainer.$classSelector_mqrvos$ = $module$elements.fg.elements.toClassSelector_pdl1w0$('md-ripple-container');
-              _.fg.md.support.RippleContainer.RippleContainer.$rule_ifbmrj$ = _.fg.md.support.RippleContainer.RippleContainer.rule$f;
+              _.fg.md.support.RippleContainer.RippleContainer.classSelector_n6hd2p$_0 = $module$elements.fg.elements.toClassSelector_pdl1w0$('md-ripple-container');
+              _.fg.md.support.RippleContainer.RippleContainer.rule_n6hd2p$_0 = _.fg.md.support.RippleContainer.RippleContainer.rule$f;
               $module$elements.fg.elements.HTML.registerStyle_78phyd$(_.fg.md.support.RippleContainer.RippleContainer);
             }, /** @lends _.fg.md.support.RippleContainer.RippleContainer.prototype */ {
               classSelector: {
                 get: function () {
-                  return _.fg.md.support.RippleContainer.RippleContainer.$classSelector_mqrvos$;
+                  return _.fg.md.support.RippleContainer.RippleContainer.classSelector_n6hd2p$_0;
                 }
               },
               rule: {
                 get: function () {
-                  return _.fg.md.support.RippleContainer.RippleContainer.$rule_ifbmrj$;
+                  return _.fg.md.support.RippleContainer.RippleContainer.rule_n6hd2p$_0;
                 }
               }
             }, /** @lends _.fg.md.support.RippleContainer.RippleContainer */ {
@@ -2008,44 +2008,44 @@ this['material-design'] = function (Kotlin, $module$beans, $module$elements) {
               get: function () {
                 return this.color$delegate.getValue_dsk1ci$(this, new Kotlin.PropertyMetadata('color'));
               },
-              set: function (color) {
-                this.color$delegate.setValue_w32e13$(this, new Kotlin.PropertyMetadata('color'), color);
+              set: function (color_0) {
+                this.color$delegate.setValue_w32e13$(this, new Kotlin.PropertyMetadata('color'), color_0);
               }
             },
-            setSize: function (size) {
+            setSize_0: function (size) {
               this.style.width = size;
               this.style.height = size;
             },
-            setPosition: function (position) {
+            setPosition_0: function (position) {
               this.style.left = $module$elements.fg.elements.get_px_yrwdxs$(position.first);
               this.style.top = $module$elements.fg.elements.get_px_yrwdxs$(position.second);
             },
-            renderColor: function (color) {
+            renderColor_0: function (color) {
               this.style.backgroundColor = color;
             },
             render: function () {
               $module$elements.fg.elements.Span.prototype.render.call(this);
               this.addClass_bx842b$(_.fg.md.support.RippleInk.RippleInk.classSelector);
-              this.renderColor(this.color);
+              this.renderColor_0(this.color);
             }
           }, /** @lends _.fg.md.support.RippleInk */ {
             RippleInk: Kotlin.createObject(function () {
               return [$module$elements.fg.elements.StyledClass];
             }, function RippleInk() {
-              _.fg.md.support.RippleInk.RippleInk.$classSelector_6xzbs2$ = $module$elements.fg.elements.toClassSelector_pdl1w0$('md-ripple-ink');
-              _.fg.md.support.RippleInk.RippleInk.$rule_mlpfjp$ = _.fg.md.support.RippleInk.RippleInk.rule$f;
+              _.fg.md.support.RippleInk.RippleInk.classSelector_laepad$_0 = $module$elements.fg.elements.toClassSelector_pdl1w0$('md-ripple-ink');
+              _.fg.md.support.RippleInk.RippleInk.rule_laepad$_0 = _.fg.md.support.RippleInk.RippleInk.rule$f;
               $module$elements.fg.elements.HTML.registerStyle_78phyd$(_.fg.md.support.RippleInk.RippleInk);
               var rule = $module$elements.fg.style.keyframesRule_ndisjh$(Kotlin.kotlin.Unit, 'ripple', _.fg.md.support.RippleInk.RippleInk.RippleInk$f);
               $module$elements.fg.elements.HTML.registerCSSRule_3cka69$(rule);
             }, /** @lends _.fg.md.support.RippleInk.RippleInk.prototype */ {
               classSelector: {
                 get: function () {
-                  return _.fg.md.support.RippleInk.RippleInk.$classSelector_6xzbs2$;
+                  return _.fg.md.support.RippleInk.RippleInk.classSelector_laepad$_0;
                 }
               },
               rule: {
                 get: function () {
-                  return _.fg.md.support.RippleInk.RippleInk.$rule_mlpfjp$;
+                  return _.fg.md.support.RippleInk.RippleInk.rule_laepad$_0;
                 }
               }
             }, /** @lends _.fg.md.support.RippleInk.RippleInk */ {
@@ -2070,7 +2070,7 @@ this['material-design'] = function (Kotlin, $module$beans, $module$elements) {
             },
             color$f: function (this$RippleInk) {
               return function (property, old, new_0) {
-                this$RippleInk.renderColor(new_0);
+                this$RippleInk.renderColor_0(new_0);
               };
             }
           })

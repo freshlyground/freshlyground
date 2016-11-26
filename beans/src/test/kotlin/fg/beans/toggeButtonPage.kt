@@ -5,7 +5,7 @@ import fg.elements.h1
 import fg.elements.p
 import fg.elements.with
 
-object mainToggleButton {
+object toggeButtonPage {
 
     fun start() {
 

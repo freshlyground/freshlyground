@@ -1,0 +1,51 @@
+package fg.elements.layout
+
+import fg.elements.Element
+import kotlin.properties.Delegates
+import kotlin.properties.ReadWriteProperty
+import kotlin.reflect.KProperty
+
+class LayoutDelegate() : ReadWriteProperty<Element, Layout?> {
+
+    private var _layout: Layout? = null
+    private var _element: Element by Delegates.notNull()
+
+    private val resizedHandler: (Element.ResizedEvent) -> Unit = { event ->
+
+        console.log("Element resized: $event")
+
+        if (this._layout != null) {
+            doHandleResize(_layout!!, event)
+        }
+    }
+
+    private fun doHandleResize(layout: Layout, resizedEvent: Element.ResizedEvent) {
+
+        if (layout.xs != null && Breakpoint.xsmall.range.contains(resizedEvent.width)) {
+            layout.xs?.apply(this._element)
+        } else {
+            layout.apply(this._element)
+        }
+    }
+
+    override operator fun getValue(thisRef: Element, property: KProperty<*>): Layout? {
+        return _layout
+    }
+
+    override operator fun setValue(thisRef: Element, property: KProperty<*>, value: Layout?) {
+
+        _element = thisRef
+
+        if (value != null) {
+            console.log("LayoutDelegate.setValue(something) : ")
+            value.apply(thisRef)
+            thisRef.onResized(resizedHandler)
+        } else {
+            console.log("LayoutDelegate.setValue(null) : ")
+            thisRef.unResized(resizedHandler)
+            Layout.remove(thisRef)
+        }
+
+        _layout = value
+    }
+}

@@ -13,6 +13,7 @@ class TypedStyle(element: Element) {
     private val element: Element = element
 
     var display: Display? by DisplayDelegate()
+    var position: Position? by PositionDelegate()
     var color: RgbColor? by RgbColorDelegate()
     var backgroundColor: RgbColor? by RgbColorDelegate()
 
@@ -32,6 +33,9 @@ class TypedStyle(element: Element) {
 
     class DisplayDelegate() :
             TypedPropertyDelegate<Display>(getFn = String::toDisplay)
+
+    class PositionDelegate() :
+            TypedPropertyDelegate<Position>(getFn = String::toPosition)
 
     class RgbColorDelegate(attributeName: String? = null) :
             TypedPropertyDelegate<RgbColor>(attributeName, { RgbColor.from(it) })

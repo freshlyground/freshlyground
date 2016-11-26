@@ -5,7 +5,7 @@ import fg.elements.h1
 import fg.elements.p
 import fg.elements.with
 
-object mainButton {
+object buttonPage {
 
     fun start() {
 
