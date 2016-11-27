@@ -1442,6 +1442,8 @@ var elements = function (Kotlin) {
           this.w3cElement_gobymg$_0 = w3cElement;
           this.resizedListeners$delegate = Kotlin.kotlin.lazy_un3fny$(_.fg.elements.Element.resizedListeners_gobymg$_0$f);
           this.resizeSensor_gobymg$_0 = null;
+          this.hideOnBreakpoints$delegate = Kotlin.kotlin.lazy_un3fny$(_.fg.elements.Element.hideOnBreakpoints_gobymg$_0$f);
+          this.resizedHandler_gobymg$_0 = _.fg.elements.Element.resizedHandler_gobymg$_0$f(this);
           this._id$delegate = _.fg.elements.W3cDelegates.nullableAttribute_61zpoe$('id');
           this._tabindex$delegate = _.fg.elements.W3cDelegates.nullableAttribute_61zpoe$('tabindex');
           this._displayBeforeHiding_gobymg$_0 = '';
@@ -1451,6 +1453,11 @@ var elements = function (Kotlin) {
           resizedListeners_gobymg$_0: {
             get: function () {
               return Kotlin.kotlin.getValue_em0fd4$(this.resizedListeners$delegate, this, new Kotlin.PropertyMetadata('resizedListeners'));
+            }
+          },
+          hideOnBreakpoints_gobymg$_0: {
+            get: function () {
+              return Kotlin.kotlin.getValue_em0fd4$(this.hideOnBreakpoints$delegate, this, new Kotlin.PropertyMetadata('hideOnBreakpoints'));
             }
           },
           childElements: {
@@ -1559,6 +1566,28 @@ var elements = function (Kotlin) {
               return this.w3cElement_gobymg$_0.getBoundingClientRect();
             }
           },
+          parentResized_y9yt0u$_0: function (event) {
+            var hideOrShow;
+            var $receiver = this.hideOnBreakpoints_gobymg$_0;
+            any_udlcbx$break: {
+              var tmp$0;
+              tmp$0 = $receiver.iterator();
+              while (tmp$0.hasNext()) {
+                var element = tmp$0.next();
+                if (Kotlin.kotlin.ranges.contains_3hpgcq$(element.range, event.width)) {
+                  hideOrShow = true;
+                  break any_udlcbx$break;
+                }
+              }
+              hideOrShow = false;
+            }
+            if (hideOrShow) {
+              this.hide();
+            }
+             else {
+              this.show();
+            }
+          },
           render: function () {
           },
           didMount: function () {
@@ -1652,9 +1681,9 @@ var elements = function (Kotlin) {
             }
           },
           onResized_qyxj07$: function (listener) {
-            console.log('Element.onResized');
             this.resizedListeners_gobymg$_0.add_za3rmp$(listener);
             if (this.resizedListeners_gobymg$_0.size === 1 && this.resizeSensor_gobymg$_0 == null) {
+              this.resizedListeners_gobymg$_0.add_za3rmp$(this.resizedHandler_gobymg$_0);
               var sensor = new _.fg.elements.Element.ResizeSensor(this, this, this.resizedListeners_gobymg$_0);
               this.resizeSensor_gobymg$_0 = sensor;
               sensor.init();
@@ -1662,10 +1691,19 @@ var elements = function (Kotlin) {
           },
           unResized_qyxj07$: function (listener) {
             var tmp$0;
-            console.log('Element.unResized');
             this.resizedListeners_gobymg$_0.remove_za3rmp$(listener);
+            if (this.resizedListeners_gobymg$_0.size === 1 && Kotlin.equals(this.resizedListeners_gobymg$_0.get_za3lpa$(0), this.resizedHandler_gobymg$_0)) {
+              this.resizedListeners_gobymg$_0.remove_za3rmp$(this.resizedHandler_gobymg$_0);
+            }
             if (this.resizedListeners_gobymg$_0.isEmpty()) {
               (tmp$0 = this.resizeSensor_gobymg$_0) != null ? tmp$0.destroy() : null;
+            }
+          },
+          hideOn_hipntv$: function (breakpoint) {
+            var tmp$2;
+            for (tmp$2 = 0; tmp$2 !== breakpoint.length; ++tmp$2) {
+              var element = breakpoint[tmp$2];
+              this.hideOnBreakpoints_gobymg$_0.add_za3rmp$(element);
             }
           }
         }, /** @lends _.fg.elements.Element */ {
@@ -1912,6 +1950,23 @@ var elements = function (Kotlin) {
           }),
           resizedListeners_gobymg$_0$f: function () {
             return Kotlin.kotlin.collections.arrayListOf_9mqe4v$([]);
+          },
+          hideOnBreakpoints_gobymg$_0$f: function () {
+            return Kotlin.kotlin.collections.arrayListOf_9mqe4v$([]);
+          },
+          resizedHandler_gobymg$_0$f: function (this$Element) {
+            return function (event) {
+              if (this$Element.layout != null) {
+                var tmp$0;
+                tmp$0 = this$Element.childNodes.iterator();
+                while (tmp$0.hasNext()) {
+                  var element = tmp$0.next();
+                  if (Kotlin.isType(element, _.fg.elements.Element)) {
+                    element.parentResized_y9yt0u$_0(event);
+                  }
+                }
+              }
+            };
           },
           style$f: function (this$Element) {
             return function () {
@@ -3405,12 +3460,10 @@ var elements = function (Kotlin) {
             setValue_w32e13$: function (thisRef, property, value) {
               this._element_0 = thisRef;
               if (value != null) {
-                console.log('LayoutDelegate.setValue(something) : ');
                 value.apply_54c9de$(thisRef);
                 thisRef.onResized_qyxj07$(this.resizedHandler_0);
               }
                else {
-                console.log('LayoutDelegate.setValue(null) : ');
                 thisRef.unResized_qyxj07$(this.resizedHandler_0);
                 _.fg.elements.layout.Layout.Statics.remove_54c9de$(thisRef);
               }
@@ -3420,7 +3473,6 @@ var elements = function (Kotlin) {
             resizedHandler_0$f: function (this$LayoutDelegate) {
               return function (event) {
                 var tmp$0;
-                console.log('Element resized: ' + event);
                 if (this$LayoutDelegate._layout_0 != null) {
                   this$LayoutDelegate.doHandleResize_0((tmp$0 = this$LayoutDelegate._layout_0) != null ? tmp$0 : Kotlin.throwNPE(), event);
                 }
@@ -3475,6 +3527,162 @@ var elements = function (Kotlin) {
               }
               throw new Kotlin.IllegalArgumentException('Unknown display: ' + $receiver);
             },
+            Flex: Kotlin.createClass(null, function Flex(number, keyword) {
+              if (keyword === void 0)
+                keyword = null;
+              this.number = number;
+              this.keyword = keyword;
+            }, /** @lends _.fg.elements.style.typed.Flex.prototype */ {
+              toString: function () {
+                var tmp$0;
+                if (this.keyword !== null) {
+                  return this.keyword.name;
+                }
+                return ((tmp$0 = this.number) != null ? tmp$0 : Kotlin.throwNPE()).toString();
+              }
+            }, /** @lends _.fg.elements.style.typed.Flex */ {
+              Keyword: Kotlin.createEnumClass(function () {
+                return [Kotlin.Enum];
+              }, function Keyword() {
+                Keyword.baseInitializer.call(this);
+              }, function () {
+                return {
+                  initial: function () {
+                    return new _.fg.elements.style.typed.Flex.Keyword();
+                  },
+                  auto: function () {
+                    return new _.fg.elements.style.typed.Flex.Keyword();
+                  },
+                  none: function () {
+                    return new _.fg.elements.style.typed.Flex.Keyword();
+                  }
+                };
+              }),
+              Statics: Kotlin.createObject(null, function Statics() {
+                _.fg.elements.style.typed.Flex.Statics.initial = new _.fg.elements.style.typed.Flex(null, _.fg.elements.style.typed.Flex.Keyword.initial);
+                _.fg.elements.style.typed.Flex.Statics.auto = new _.fg.elements.style.typed.Flex(null, _.fg.elements.style.typed.Flex.Keyword.auto);
+                _.fg.elements.style.typed.Flex.Statics.none = new _.fg.elements.style.typed.Flex(null, _.fg.elements.style.typed.Flex.Keyword.none);
+              }),
+              object_initializer$: function () {
+                _.fg.elements.style.typed.Flex.Statics;
+              }
+            }),
+            toFlex_pdl1w0$: function ($receiver) {
+              var keyword;
+              var tmp$0;
+              var $receiver_0 = _.fg.elements.style.typed.Flex.Keyword.values();
+              find_dgtl0h$break: {
+                var tmp$2;
+                for (tmp$2 = 0; tmp$2 !== $receiver_0.length; ++tmp$2) {
+                  var element = $receiver_0[tmp$2];
+                  if (Kotlin.equals(element.name, $receiver)) {
+                    keyword = element;
+                    break find_dgtl0h$break;
+                  }
+                }
+                keyword = null;
+              }
+              if (keyword !== null) {
+                return new _.fg.elements.style.typed.Flex(null, keyword);
+              }
+              tmp$0 = Kotlin.safeParseInt($receiver);
+              if (tmp$0 == null) {
+                throw new Kotlin.IllegalArgumentException('String could not be parsed as Int: ' + $receiver);
+              }
+              var number = tmp$0;
+              return new _.fg.elements.style.typed.Flex(number, null);
+            },
+            FlexBasis: Kotlin.createClass(null, function FlexBasis(dimension, keyword) {
+              if (dimension === void 0)
+                dimension = null;
+              if (keyword === void 0)
+                keyword = null;
+              this.dimension = dimension;
+              this.keyword = keyword;
+            }, /** @lends _.fg.elements.style.typed.FlexBasis.prototype */ {
+              toString: function () {
+                var tmp$0;
+                if (this.keyword !== null) {
+                  return this.keyword.toString();
+                }
+                return ((tmp$0 = this.dimension) != null ? tmp$0 : Kotlin.throwNPE()).toString();
+              }
+            }, /** @lends _.fg.elements.style.typed.FlexBasis */ {
+              Keyword: Kotlin.createEnumClass(function () {
+                return [Kotlin.Enum];
+              }, function Keyword(asString) {
+                Keyword.baseInitializer.call(this);
+                this.asString = asString;
+              }, function () {
+                return {
+                  inherit: function () {
+                    return new _.fg.elements.style.typed.FlexBasis.Keyword('inherit');
+                  },
+                  initial: function () {
+                    return new _.fg.elements.style.typed.FlexBasis.Keyword('initial');
+                  },
+                  unset: function () {
+                    return new _.fg.elements.style.typed.FlexBasis.Keyword('unset');
+                  },
+                  auto: function () {
+                    return new _.fg.elements.style.typed.FlexBasis.Keyword('auto');
+                  },
+                  fill: function () {
+                    return new _.fg.elements.style.typed.FlexBasis.Keyword('fill');
+                  },
+                  content: function () {
+                    return new _.fg.elements.style.typed.FlexBasis.Keyword('content');
+                  },
+                  maxContent: function () {
+                    return new _.fg.elements.style.typed.FlexBasis.Keyword('max-content');
+                  },
+                  minContent: function () {
+                    return new _.fg.elements.style.typed.FlexBasis.Keyword('min-content');
+                  },
+                  fitContent: function () {
+                    return new _.fg.elements.style.typed.FlexBasis.Keyword('fit-content');
+                  }
+                };
+              }, /** @lends _.fg.elements.style.typed.FlexBasis.Keyword.prototype */ {
+                toString: function () {
+                  return this.asString;
+                }
+              }),
+              Statics: Kotlin.createObject(null, function Statics() {
+                _.fg.elements.style.typed.FlexBasis.Statics.inherit = new _.fg.elements.style.typed.FlexBasis(void 0, _.fg.elements.style.typed.FlexBasis.Keyword.inherit);
+                _.fg.elements.style.typed.FlexBasis.Statics.initial = new _.fg.elements.style.typed.FlexBasis(void 0, _.fg.elements.style.typed.FlexBasis.Keyword.initial);
+                _.fg.elements.style.typed.FlexBasis.Statics.unset = new _.fg.elements.style.typed.FlexBasis(void 0, _.fg.elements.style.typed.FlexBasis.Keyword.unset);
+                _.fg.elements.style.typed.FlexBasis.Statics.auto = new _.fg.elements.style.typed.FlexBasis(void 0, _.fg.elements.style.typed.FlexBasis.Keyword.auto);
+                _.fg.elements.style.typed.FlexBasis.Statics.fill = new _.fg.elements.style.typed.FlexBasis(void 0, _.fg.elements.style.typed.FlexBasis.Keyword.fill);
+                _.fg.elements.style.typed.FlexBasis.Statics.content = new _.fg.elements.style.typed.FlexBasis(void 0, _.fg.elements.style.typed.FlexBasis.Keyword.content);
+                _.fg.elements.style.typed.FlexBasis.Statics.maxContent = new _.fg.elements.style.typed.FlexBasis(void 0, _.fg.elements.style.typed.FlexBasis.Keyword.maxContent);
+                _.fg.elements.style.typed.FlexBasis.Statics.minContent = new _.fg.elements.style.typed.FlexBasis(void 0, _.fg.elements.style.typed.FlexBasis.Keyword.minContent);
+                _.fg.elements.style.typed.FlexBasis.Statics.fitContent = new _.fg.elements.style.typed.FlexBasis(void 0, _.fg.elements.style.typed.FlexBasis.Keyword.fitContent);
+              }),
+              object_initializer$: function () {
+                _.fg.elements.style.typed.FlexBasis.Statics;
+              }
+            }),
+            toFlexBasis_pdl1w0$: function ($receiver) {
+              var keyword;
+              var $receiver_0 = _.fg.elements.style.typed.FlexBasis.Keyword.values();
+              find_dgtl0h$break: {
+                var tmp$2;
+                for (tmp$2 = 0; tmp$2 !== $receiver_0.length; ++tmp$2) {
+                  var element = $receiver_0[tmp$2];
+                  if (Kotlin.equals(element.name, $receiver)) {
+                    keyword = element;
+                    break find_dgtl0h$break;
+                  }
+                }
+                keyword = null;
+              }
+              if (keyword !== null) {
+                return new _.fg.elements.style.typed.FlexBasis(null, keyword);
+              }
+              var dimension = _.fg.elements.toDimension_pdl1w0$($receiver);
+              return new _.fg.elements.style.typed.FlexBasis(dimension, null);
+            },
             FlexDirection: Kotlin.createEnumClass(function () {
               return [Kotlin.Enum];
             }, function FlexDirection(asString) {
@@ -3506,6 +3714,147 @@ var elements = function (Kotlin) {
                 }
               }
               throw new Kotlin.IllegalArgumentException('Unknown flex-direction: ' + $receiver);
+            },
+            FlexGrow: Kotlin.createClass(null, function FlexGrow(number, keyword) {
+              if (number === void 0)
+                number = null;
+              if (keyword === void 0)
+                keyword = null;
+              this.number = number;
+              this.keyword = keyword;
+            }, /** @lends _.fg.elements.style.typed.FlexGrow.prototype */ {
+              toString: function () {
+                var tmp$0;
+                if (this.keyword !== null) {
+                  return this.keyword.toString();
+                }
+                return ((tmp$0 = this.number) != null ? tmp$0 : Kotlin.throwNPE()).toString();
+              }
+            }, /** @lends _.fg.elements.style.typed.FlexGrow */ {
+              Keyword: Kotlin.createEnumClass(function () {
+                return [Kotlin.Enum];
+              }, function Keyword() {
+                Keyword.baseInitializer.call(this);
+              }, function () {
+                return {
+                  inherit: function () {
+                    return new _.fg.elements.style.typed.FlexGrow.Keyword();
+                  },
+                  initial: function () {
+                    return new _.fg.elements.style.typed.FlexGrow.Keyword();
+                  },
+                  unset: function () {
+                    return new _.fg.elements.style.typed.FlexGrow.Keyword();
+                  }
+                };
+              }, /** @lends _.fg.elements.style.typed.FlexGrow.Keyword.prototype */ {
+                toString: function () {
+                  return this.name;
+                }
+              }),
+              Statics: Kotlin.createObject(null, function Statics() {
+                _.fg.elements.style.typed.FlexGrow.Statics.inherit = new _.fg.elements.style.typed.FlexGrow(void 0, _.fg.elements.style.typed.FlexGrow.Keyword.inherit);
+                _.fg.elements.style.typed.FlexGrow.Statics.initial = new _.fg.elements.style.typed.FlexGrow(void 0, _.fg.elements.style.typed.FlexGrow.Keyword.initial);
+                _.fg.elements.style.typed.FlexGrow.Statics.unset = new _.fg.elements.style.typed.FlexGrow(void 0, _.fg.elements.style.typed.FlexGrow.Keyword.unset);
+              }),
+              object_initializer$: function () {
+                _.fg.elements.style.typed.FlexGrow.Statics;
+              }
+            }),
+            toFlexGrow_pdl1w0$: function ($receiver) {
+              var keyword;
+              var tmp$0;
+              var $receiver_0 = _.fg.elements.style.typed.FlexGrow.Keyword.values();
+              find_dgtl0h$break: {
+                var tmp$2;
+                for (tmp$2 = 0; tmp$2 !== $receiver_0.length; ++tmp$2) {
+                  var element = $receiver_0[tmp$2];
+                  if (Kotlin.equals(element.name, $receiver)) {
+                    keyword = element;
+                    break find_dgtl0h$break;
+                  }
+                }
+                keyword = null;
+              }
+              if (keyword !== null) {
+                return new _.fg.elements.style.typed.FlexGrow(null, keyword);
+              }
+              tmp$0 = Kotlin.safeParseDouble($receiver);
+              if (tmp$0 == null) {
+                throw new Kotlin.IllegalArgumentException('String could not be parsed as Double: ' + $receiver);
+              }
+              var number = tmp$0;
+              return new _.fg.elements.style.typed.FlexGrow(number, null);
+            },
+            FlexShrink: Kotlin.createClass(null, function FlexShrink(number, keyword) {
+              if (number === void 0)
+                number = null;
+              if (keyword === void 0)
+                keyword = null;
+              this.number = number;
+              this.keyword = keyword;
+            }, /** @lends _.fg.elements.style.typed.FlexShrink.prototype */ {
+              toString: function () {
+                if (this.keyword !== null) {
+                  return this.keyword.toString();
+                }
+                return Kotlin.toString(this.number);
+              }
+            }, /** @lends _.fg.elements.style.typed.FlexShrink */ {
+              Keyword: Kotlin.createEnumClass(function () {
+                return [Kotlin.Enum];
+              }, function Keyword() {
+                Keyword.baseInitializer.call(this);
+              }, function () {
+                return {
+                  inherit: function () {
+                    return new _.fg.elements.style.typed.FlexShrink.Keyword();
+                  },
+                  initial: function () {
+                    return new _.fg.elements.style.typed.FlexShrink.Keyword();
+                  },
+                  unset: function () {
+                    return new _.fg.elements.style.typed.FlexShrink.Keyword();
+                  }
+                };
+              }, /** @lends _.fg.elements.style.typed.FlexShrink.Keyword.prototype */ {
+                toString: function () {
+                  return this.name;
+                }
+              }),
+              Statics: Kotlin.createObject(null, function Statics() {
+                _.fg.elements.style.typed.FlexShrink.Statics.inherit = new _.fg.elements.style.typed.FlexShrink(void 0, _.fg.elements.style.typed.FlexShrink.Keyword.inherit);
+                _.fg.elements.style.typed.FlexShrink.Statics.initial = new _.fg.elements.style.typed.FlexShrink(void 0, _.fg.elements.style.typed.FlexShrink.Keyword.initial);
+                _.fg.elements.style.typed.FlexShrink.Statics.unset = new _.fg.elements.style.typed.FlexShrink(void 0, _.fg.elements.style.typed.FlexShrink.Keyword.unset);
+              }),
+              object_initializer$: function () {
+                _.fg.elements.style.typed.FlexShrink.Statics;
+              }
+            }),
+            toFlexShrink_pdl1w0$: function ($receiver) {
+              var keyword;
+              var tmp$0;
+              var $receiver_0 = _.fg.elements.style.typed.FlexShrink.Keyword.values();
+              find_dgtl0h$break: {
+                var tmp$2;
+                for (tmp$2 = 0; tmp$2 !== $receiver_0.length; ++tmp$2) {
+                  var element = $receiver_0[tmp$2];
+                  if (Kotlin.equals(element.name, $receiver)) {
+                    keyword = element;
+                    break find_dgtl0h$break;
+                  }
+                }
+                keyword = null;
+              }
+              if (keyword !== null) {
+                return new _.fg.elements.style.typed.FlexShrink(null, keyword);
+              }
+              tmp$0 = Kotlin.safeParseDouble($receiver);
+              if (tmp$0 == null) {
+                throw new Kotlin.IllegalArgumentException('String could not be parsed as Double: ' + $receiver);
+              }
+              var number = tmp$0;
+              return new _.fg.elements.style.typed.FlexShrink(number, null);
             },
             Position: Kotlin.createEnumClass(function () {
               return [Kotlin.Enum];
@@ -3572,6 +3921,10 @@ var elements = function (Kotlin) {
               this.maxWidth$delegate = new _.fg.elements.style.typed.TypedStyle.DimensionDelegate('max-width');
               this.maxHeight$delegate = new _.fg.elements.style.typed.TypedStyle.DimensionDelegate('max-height');
               this.flexDirection$delegate = new _.fg.elements.style.typed.TypedStyle.FlexDirectionDelegate();
+              this.flex$delegate = new _.fg.elements.style.typed.TypedStyle.FlexDelegate();
+              this.flexGrow$delegate = new _.fg.elements.style.typed.TypedStyle.FlexGrowDelegate();
+              this.flexShrink$delegate = new _.fg.elements.style.typed.TypedStyle.FlexShrinkDelegate();
+              this.flexBasis$delegate = new _.fg.elements.style.typed.TypedStyle.FlexBasisDelegate();
               this.order$delegate = new _.fg.elements.style.typed.TypedStyle.IntDelegate();
             }, /** @lends _.fg.elements.style.typed.TypedStyle.prototype */ {
               display: {
@@ -3694,6 +4047,38 @@ var elements = function (Kotlin) {
                   this.flexDirection$delegate.setValue_w32e13$(this, new Kotlin.PropertyMetadata('flexDirection'), flexDirection_0);
                 }
               },
+              flex: {
+                get: function () {
+                  return this.flex$delegate.getValue_dsk1ci$(this, new Kotlin.PropertyMetadata('flex'));
+                },
+                set: function (flex_0) {
+                  this.flex$delegate.setValue_w32e13$(this, new Kotlin.PropertyMetadata('flex'), flex_0);
+                }
+              },
+              flexGrow: {
+                get: function () {
+                  return this.flexGrow$delegate.getValue_dsk1ci$(this, new Kotlin.PropertyMetadata('flexGrow'));
+                },
+                set: function (flexGrow_0) {
+                  this.flexGrow$delegate.setValue_w32e13$(this, new Kotlin.PropertyMetadata('flexGrow'), flexGrow_0);
+                }
+              },
+              flexShrink: {
+                get: function () {
+                  return this.flexShrink$delegate.getValue_dsk1ci$(this, new Kotlin.PropertyMetadata('flexShrink'));
+                },
+                set: function (flexShrink_0) {
+                  this.flexShrink$delegate.setValue_w32e13$(this, new Kotlin.PropertyMetadata('flexShrink'), flexShrink_0);
+                }
+              },
+              flexBasis: {
+                get: function () {
+                  return this.flexBasis$delegate.getValue_dsk1ci$(this, new Kotlin.PropertyMetadata('flexBasis'));
+                },
+                set: function (flexBasis_0) {
+                  this.flexBasis$delegate.setValue_w32e13$(this, new Kotlin.PropertyMetadata('flexBasis'), flexBasis_0);
+                }
+              },
               order: {
                 get: function () {
                   return this.order$delegate.getValue_dsk1ci$(this, new Kotlin.PropertyMetadata('order'));
@@ -3751,6 +4136,26 @@ var elements = function (Kotlin) {
                 return [_.fg.elements.style.typed.TypedStyle.TypedPropertyDelegate];
               }, function FlexDirectionDelegate() {
                 FlexDirectionDelegate.baseInitializer.call(this, void 0, Kotlin.getCallableRefForExtensionFunction(_.fg.elements.style.typed.toFlexDirection_pdl1w0$));
+              }),
+              FlexDelegate: Kotlin.createClass(function () {
+                return [_.fg.elements.style.typed.TypedStyle.TypedPropertyDelegate];
+              }, function FlexDelegate() {
+                FlexDelegate.baseInitializer.call(this, void 0, Kotlin.getCallableRefForExtensionFunction(_.fg.elements.style.typed.toFlex_pdl1w0$));
+              }),
+              FlexGrowDelegate: Kotlin.createClass(function () {
+                return [_.fg.elements.style.typed.TypedStyle.TypedPropertyDelegate];
+              }, function FlexGrowDelegate() {
+                FlexGrowDelegate.baseInitializer.call(this, void 0, Kotlin.getCallableRefForExtensionFunction(_.fg.elements.style.typed.toFlexGrow_pdl1w0$));
+              }),
+              FlexShrinkDelegate: Kotlin.createClass(function () {
+                return [_.fg.elements.style.typed.TypedStyle.TypedPropertyDelegate];
+              }, function FlexShrinkDelegate() {
+                FlexShrinkDelegate.baseInitializer.call(this, void 0, Kotlin.getCallableRefForExtensionFunction(_.fg.elements.style.typed.toFlexShrink_pdl1w0$));
+              }),
+              FlexBasisDelegate: Kotlin.createClass(function () {
+                return [_.fg.elements.style.typed.TypedStyle.TypedPropertyDelegate];
+              }, function FlexBasisDelegate() {
+                FlexBasisDelegate.baseInitializer.call(this, void 0, Kotlin.getCallableRefForExtensionFunction(_.fg.elements.style.typed.toFlexBasis_pdl1w0$));
               }),
               TypedPropertyDelegate: Kotlin.createClass(function () {
                 return [Kotlin.kotlin.properties.ReadWriteProperty];

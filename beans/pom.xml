@@ -20,7 +20,6 @@
             <artifactId>kotlin-js-library</artifactId>
             <version>${kotlin.version}</version>
         </dependency>
-
         <dependency>
             <groupId>freshlyground</groupId>
             <artifactId>elements</artifactId>
