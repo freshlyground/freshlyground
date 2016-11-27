@@ -12,8 +12,6 @@ class LayoutDelegate() : ReadWriteProperty<Element, Layout?> {
 
     private val resizedHandler: (Element.ResizedEvent) -> Unit = { event ->
 
-        console.log("Element resized: $event")
-
         if (this._layout != null) {
             doHandleResize(_layout!!, event)
         }
@@ -37,11 +35,9 @@ class LayoutDelegate() : ReadWriteProperty<Element, Layout?> {
         _element = thisRef
 
         if (value != null) {
-            console.log("LayoutDelegate.setValue(something) : ")
             value.apply(thisRef)
             thisRef.onResized(resizedHandler)
         } else {
-            console.log("LayoutDelegate.setValue(null) : ")
             thisRef.unResized(resizedHandler)
             Layout.remove(thisRef)
         }
