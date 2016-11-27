@@ -1,5 +1,6 @@
 package fg.elements
 
+import fg.elements.layout.Breakpoint
 import fg.elements.layout.Layout
 import fg.elements.layout.LayoutDelegate
 import fg.elements.style.typed.Position
@@ -20,6 +21,19 @@ open class Element(name: String? = null,
         arrayListOf<(ResizedEvent) -> Unit>()
     }
     private var resizeSensor: ResizeSensor? = null
+
+    private val hideOnBreakpoints: MutableList<Breakpoint> by lazy { arrayListOf<Breakpoint>() }
+
+    private val resizedHandler: (ResizedEvent) -> Unit = { event ->
+
+        if (layout != null) {
+            childNodes.forEach {
+                if (it is Element) {
+                    it.parentResized(event)
+                }
+            }
+        }
+    }
 
     val childElements: List<Element>
         get() {
@@ -79,6 +93,16 @@ open class Element(name: String? = null,
     val boundingClientRect: DOMRect
         get() = w3cElement.getBoundingClientRect()
 
+
+    internal fun parentResized(event: ResizedEvent) {
+
+        val hideOrShow = hideOnBreakpoints.any { it.range.contains(event.width) }
+        if (hideOrShow) {
+            hide()
+        } else {
+            show()
+        }
+    }
 
     /**
      * Called before didMount(). On parent elements before children.
@@ -192,10 +216,10 @@ open class Element(name: String? = null,
     }
 
     fun onResized(listener: (ResizedEvent) -> Unit) {
-        console.log("Element.onResized")
         resizedListeners.add(listener)
 
         if (resizedListeners.size == 1 && resizeSensor == null) {
+            resizedListeners.add(resizedHandler)
             val sensor = ResizeSensor(this, resizedListeners)
             resizeSensor = sensor
             sensor.init()
@@ -203,11 +227,19 @@ open class Element(name: String? = null,
     }
 
     fun unResized(listener: (ResizedEvent) -> Unit) {
-        console.log("Element.unResized")
         resizedListeners.remove(listener)
+
+        if (resizedListeners.size == 1 && resizedListeners[0] == resizedHandler) {
+            resizedListeners.remove(resizedHandler)
+        }
+
         if (resizedListeners.isEmpty()) {
             resizeSensor?.destroy()
         }
+    }
+
+    fun hideOn(vararg breakpoint: Breakpoint) {
+        breakpoint.forEach { hideOnBreakpoints.add(it) }
     }
 
     /**
