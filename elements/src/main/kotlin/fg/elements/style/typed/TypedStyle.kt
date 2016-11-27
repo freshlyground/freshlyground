@@ -29,6 +29,10 @@ class TypedStyle(element: Element) {
     var maxHeight: Dimension? by DimensionDelegate("max-height")
 
     var flexDirection: FlexDirection? by FlexDirectionDelegate()
+    var flex: Flex? by FlexDelegate()
+    var flexGrow: FlexGrow? by FlexGrowDelegate()
+    var flexShrink: FlexShrink? by FlexShrinkDelegate()
+    var flexBasis: FlexBasis? by FlexBasisDelegate()
     var order: Int? by IntDelegate()
 
     class DisplayDelegate() :
@@ -48,6 +52,18 @@ class TypedStyle(element: Element) {
 
     class FlexDirectionDelegate() :
             TypedPropertyDelegate<FlexDirection>(getFn = String::toFlexDirection)
+
+    class FlexDelegate() :
+            TypedPropertyDelegate<Flex>(getFn = String::toFlex)
+
+    class FlexGrowDelegate() :
+            TypedPropertyDelegate<FlexGrow>(getFn = String::toFlexGrow)
+
+    class FlexShrinkDelegate() :
+            TypedPropertyDelegate<FlexShrink>(getFn = String::toFlexShrink)
+
+    class FlexBasisDelegate() :
+            TypedPropertyDelegate<FlexBasis>(getFn = String::toFlexBasis)
 
     abstract class TypedPropertyDelegate<T : Any>(val attributeName: String? = null,
                                                   val getFn: (String) -> T) : ReadWriteProperty<TypedStyle, T?> {
