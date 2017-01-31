@@ -2,10 +2,10 @@ package fg.beans.menu
 
 import fg.base.OS
 import fg.base.OSDetector
-import fg.beans.Action
-import fg.beans.ActionBean
 import fg.beans.ElementStyle
-import fg.beans.SelectableAction
+import fg.beans.action.Action
+import fg.beans.action.ActionBean
+import fg.beans.action.SelectableAction
 import fg.beans.icon.FontAwesomeIcons
 import fg.beans.icon.IconI
 import fg.beans.pkg
@@ -100,7 +100,6 @@ open class MenuItem(action: Action) : Div(), ActionBean {
         beforePerformingActionListeners.forEach { it(action) }
 
         if (action is SelectableAction) {
-            action.selected = !action.selected
             action.perform(this)
         } else {
             action.perform(this)

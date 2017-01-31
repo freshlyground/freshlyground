@@ -19,8 +19,10 @@ class LayoutDelegate() : ReadWriteProperty<Element, Layout?> {
 
     private fun doHandleResize(layout: Layout, resizedEvent: Element.ResizedEvent) {
 
-        if (layout.xs != null && Breakpoint.xsmall.range.contains(resizedEvent.width)) {
-            layout.xs?.apply(this._element)
+        val breakpoint = layout.find(resizedEvent.width)
+
+        if (breakpoint != null) {
+            breakpoint.apply(this._element)
         } else {
             layout.apply(this._element)
         }

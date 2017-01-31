@@ -1,7 +1,7 @@
 package fg.md.radio
 
 import fg.beans.icon.FontAwesomeIcons
-import fg.beans.icon.Icon
+import fg.beans.icon.IconProvider
 import fg.beans.radio.LabelledRadioButton
 import fg.elements.HTML
 import fg.elements.StyledClass
@@ -42,8 +42,8 @@ class MDRadioButton(checked: Boolean = false, labelText: String? = null) :
 
         override val classSelector = "md-radio-button".toClassSelector()
 
-        private val checkedIcon: Icon = FontAwesomeIcons.dot_circle_o()
-        private val unCheckedIcon: Icon = FontAwesomeIcons.circle_o()
+        private val checkedIcon: IconProvider = FontAwesomeIcons.dot_circle_o()
+        private val unCheckedIcon: IconProvider = FontAwesomeIcons.circle_o()
 
         override val rule: ClassRule.() -> Unit = {
 

@@ -1,7 +1,7 @@
 package fg.beans.radio
 
-import fg.beans.icon.Icon
 import fg.beans.icon.IconI
+import fg.beans.icon.IconProvider
 import fg.elements.Div
 import fg.elements.HTML
 import fg.elements.Label
@@ -16,18 +16,18 @@ import kotlin.properties.Delegates
 
 open class LabelledRadioButton(checked: Boolean,
                                labelText: String?,
-                               checkedIcon: Icon? = null,
-                               unCheckedIcon: Icon? = null) : Div() {
+                               checkedIcon: IconProvider? = null,
+                               unCheckedIcon: IconProvider? = null) : Div() {
 
     val radioButton: RadioButton by lazy {
         RadioButton(checked)
     }
 
-    var checkedIcon: Icon? by Delegates.observable(checkedIcon) { property, old, new ->
+    var checkedIcon: IconProvider? by Delegates.observable(checkedIcon) { property, old, new ->
         renderChecked(radioButton.checked)
     }
 
-    var unCheckedIcon: Icon? by Delegates.observable(unCheckedIcon) { property, old, new ->
+    var unCheckedIcon: IconProvider? by Delegates.observable(unCheckedIcon) { property, old, new ->
         renderChecked(radioButton.checked)
     }
 

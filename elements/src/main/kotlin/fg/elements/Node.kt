@@ -59,7 +59,7 @@ open class Node(internal val w3cNode: org.w3c.dom.Node) {
 
         if (node is Element && (rendering || rendered) && !child.rendered) {
             node.rendering = true
-            node.render()
+            node.callRender()
             node.rendered = true
             node.rendering = false
             node.renderChildren()
@@ -89,7 +89,7 @@ open class Node(internal val w3cNode: org.w3c.dom.Node) {
 
         if (node is Element && (rendering || rendered) && !node.rendered) {
             node.rendering = true
-            node.render()
+            node.callRender()
             node.rendered = true
             node.rendering = false
             node.renderChildren()
@@ -127,7 +127,7 @@ open class Node(internal val w3cNode: org.w3c.dom.Node) {
 
         for (child in _childNodes) {
             if (child is Element && !child.rendered) {
-                child.render()
+                child.callRender()
                 child.rendered = true
             }
             child.renderChildren()
@@ -135,11 +135,11 @@ open class Node(internal val w3cNode: org.w3c.dom.Node) {
     }
 
     private fun mountChild(mountFn: (Node) -> Unit, child: Node) {
-        console.info("${jsClass.name}.mountChild(${child.jsClass.name}) ")
+        //console.info("${jsClass.name}.mountChild(${child.jsClass.name}) ")
         mountFn(child)
 
         if (child is Element) {
-            child.didMount()
+            child.callDidMount()
         }
     }
 
@@ -165,7 +165,7 @@ open class Node(internal val w3cNode: org.w3c.dom.Node) {
     fun removeChild(node: Node) {
 
         if (node is Element) {
-            node.willUnMount()
+            node.callWillUnMount()
         }
 
         if (mounted) {

@@ -1,3 +1,9 @@
+if (typeof kotlin === 'undefined') {
+  throw new Error("Error loading module 'beans'. Its dependency 'kotlin' was not found. Please, check whether 'kotlin' is loaded prior to 'beans'.");
+}
+if (typeof elements === 'undefined') {
+  throw new Error("Error loading module 'beans'. Its dependency 'elements' was not found. Please, check whether 'elements' is loaded prior to 'beans'.");
+}
 var beans = function (Kotlin, $module$elements) {
   'use strict';
   var _ = Kotlin.defineRootPackage(null, /** @lends _ */ {
@@ -5,310 +11,216 @@ var beans = function (Kotlin, $module$elements) {
       beans: Kotlin.definePackage(function () {
         this.pkg = 'fg-bn';
       }, /** @lends _.fg.beans */ {
-        Action: Kotlin.createClass(null, function Action(label, enabled, icon, shortcut, perform) {
-          if (label === void 0)
-            label = null;
-          if (enabled === void 0)
-            enabled = true;
-          if (icon === void 0)
-            icon = null;
-          if (shortcut === void 0)
-            shortcut = null;
-          this._perform_jgdcs4$_0 = perform;
-          var initialValue = label;
-          this.label$delegate = new Kotlin.kotlin.properties.Delegates.observable$f(_.fg.beans.Action.label$f(this), initialValue);
-          var initialValue_0 = enabled;
-          this.enabled$delegate = new Kotlin.kotlin.properties.Delegates.observable$f(_.fg.beans.Action.enabled$f(this), initialValue_0);
-          var initialValue_1 = icon;
-          this.icon$delegate = new Kotlin.kotlin.properties.Delegates.observable$f(_.fg.beans.Action.icon$f(this), initialValue_1);
-          var initialValue_2 = shortcut;
-          this.shortcut$delegate = new Kotlin.kotlin.properties.Delegates.observable$f(_.fg.beans.Action.shortcut$f(this), initialValue_2);
-          this.propertyChangedListeners = Kotlin.kotlin.collections.arrayListOf_9mqe4v$([]);
-        }, /** @lends _.fg.beans.Action.prototype */ {
-          label: {
-            get: function () {
-              return this.label$delegate.getValue_dsk1ci$(this, new Kotlin.PropertyMetadata('label'));
+        action: Kotlin.definePackage(null, /** @lends _.fg.beans.action */ {
+          Action: Kotlin.createClass(null, function Action(label, enabled, icon, shortcut, perform) {
+            if (label === void 0)
+              label = null;
+            if (enabled === void 0)
+              enabled = true;
+            if (icon === void 0)
+              icon = null;
+            if (shortcut === void 0)
+              shortcut = null;
+            if (perform === void 0)
+              perform = null;
+            this.propertyChangedListeners = Kotlin.kotlin.collections.arrayListOf_9mqe4v$([]);
+            var initialValue = perform;
+            this.perform$delegate = new Kotlin.kotlin.properties.Delegates.observable$f(_.fg.beans.action.Action.perform$f(this), initialValue);
+            var initialValue_0 = label;
+            this.label$delegate = new Kotlin.kotlin.properties.Delegates.observable$f(_.fg.beans.action.Action.label$f(this), initialValue_0);
+            var initialValue_1 = enabled;
+            this.enabled$delegate = new Kotlin.kotlin.properties.Delegates.observable$f(_.fg.beans.action.Action.enabled$f(this), initialValue_1);
+            var initialValue_2 = icon;
+            this.icon$delegate = new Kotlin.kotlin.properties.Delegates.observable$f(_.fg.beans.action.Action.icon$f(this), initialValue_2);
+            var initialValue_3 = shortcut;
+            this.shortcut$delegate = new Kotlin.kotlin.properties.Delegates.observable$f(_.fg.beans.action.Action.shortcut$f(this), initialValue_3);
+          }, /** @lends _.fg.beans.action.Action.prototype */ {
+            perform: {
+              get: function () {
+                return this.perform$delegate.getValue_dsk1ci$(this, new Kotlin.PropertyMetadata('perform'));
+              },
+              set: function (perform_0) {
+                this.perform$delegate.setValue_w32e13$(this, new Kotlin.PropertyMetadata('perform'), perform_0);
+              }
             },
-            set: function (label_0) {
-              this.label$delegate.setValue_w32e13$(this, new Kotlin.PropertyMetadata('label'), label_0);
-            }
-          },
-          enabled: {
-            get: function () {
-              return this.enabled$delegate.getValue_dsk1ci$(this, new Kotlin.PropertyMetadata('enabled'));
+            label: {
+              get: function () {
+                return this.label$delegate.getValue_dsk1ci$(this, new Kotlin.PropertyMetadata('label'));
+              },
+              set: function (label_0) {
+                this.label$delegate.setValue_w32e13$(this, new Kotlin.PropertyMetadata('label'), label_0);
+              }
             },
-            set: function (enabled_0) {
-              this.enabled$delegate.setValue_w32e13$(this, new Kotlin.PropertyMetadata('enabled'), enabled_0);
-            }
-          },
-          disabled: {
-            get: function () {
-              return !this.enabled;
-            }
-          },
-          icon: {
-            get: function () {
-              return this.icon$delegate.getValue_dsk1ci$(this, new Kotlin.PropertyMetadata('icon'));
+            enabled: {
+              get: function () {
+                return this.enabled$delegate.getValue_dsk1ci$(this, new Kotlin.PropertyMetadata('enabled'));
+              },
+              set: function (enabled_0) {
+                this.enabled$delegate.setValue_w32e13$(this, new Kotlin.PropertyMetadata('enabled'), enabled_0);
+              }
             },
-            set: function (icon_0) {
-              this.icon$delegate.setValue_w32e13$(this, new Kotlin.PropertyMetadata('icon'), icon_0);
-            }
-          },
-          shortcut: {
-            get: function () {
-              return this.shortcut$delegate.getValue_dsk1ci$(this, new Kotlin.PropertyMetadata('shortcut'));
+            disabled: {
+              get: function () {
+                return !this.enabled;
+              }
             },
-            set: function (shortcut_0) {
-              this.shortcut$delegate.setValue_w32e13$(this, new Kotlin.PropertyMetadata('shortcut'), shortcut_0);
-            }
-          },
-          notifyPropertyChanged_dgnimp$_0: function (property, old, new_0) {
-            var tmp$0;
-            tmp$0 = this.propertyChangedListeners.iterator();
-            while (tmp$0.hasNext()) {
-              var listener = tmp$0.next();
-              listener(this, property, old, new_0);
-            }
-          },
-          onPropertyChanged_uamkrm$: function (listener) {
-            this.propertyChangedListeners.add_za3rmp$(listener);
-          },
-          unPropertyChanged_uamkrm$: function (listener) {
-            this.propertyChangedListeners.remove_za3rmp$(listener);
-          },
-          perform_54c9de$: function (source) {
-            if (this.enabled) {
-              this._perform_jgdcs4$_0(new _.fg.beans.ActionPerform(this, source));
-            }
-          }
-        }, /** @lends _.fg.beans.Action */ {
-          label$f: function (this$Action) {
-            return function (prop, old, new_0) {
-              this$Action.notifyPropertyChanged_dgnimp$_0(prop, old, new_0);
-            };
-          },
-          enabled$f: function (this$Action) {
-            return function (prop, old, new_0) {
-              this$Action.notifyPropertyChanged_dgnimp$_0(prop, old, new_0);
-            };
-          },
-          icon$f: function (this$Action) {
-            return function (prop, old, new_0) {
-              this$Action.notifyPropertyChanged_dgnimp$_0(prop, old, new_0);
-            };
-          },
-          shortcut$f: function (this$Action) {
-            return function (prop, old, new_0) {
-              this$Action.notifyPropertyChanged_dgnimp$_0(prop, old, new_0);
-            };
-          }
-        }),
-        ActionBean: Kotlin.createTrait(null),
-        ActionPerform: Kotlin.createClass(null, function ActionPerform(action, source) {
-          this.action = action;
-          this.source = source;
-        }, /** @lends _.fg.beans.ActionPerform.prototype */ {
-          component1: function () {
-            return this.action;
-          },
-          component2: function () {
-            return this.source;
-          },
-          copy_7yf9l8$: function (action, source) {
-            return new _.fg.beans.ActionPerform(action === void 0 ? this.action : action, source === void 0 ? this.source : source);
-          },
-          toString: function () {
-            return 'ActionPerform(action=' + Kotlin.toString(this.action) + (', source=' + Kotlin.toString(this.source)) + ')';
-          },
-          hashCode: function () {
-            var result = 0;
-            result = result * 31 + Kotlin.hashCode(this.action) | 0;
-            result = result * 31 + Kotlin.hashCode(this.source) | 0;
-            return result;
-          },
-          equals_za3rmp$: function (other) {
-            return this === other || (other !== null && (typeof other === 'object' && (Object.getPrototypeOf(this) === Object.getPrototypeOf(other) && (Kotlin.equals(this.action, other.action) && Kotlin.equals(this.source, other.source)))));
-          }
-        }),
-        anchor_xnxh4m$: function ($receiver, link, target, useDisplay, init) {
-          if (link === void 0)
-            link = null;
-          if (target === void 0)
-            target = '_blank';
-          if (useDisplay === void 0)
-            useDisplay = true;
-          return $module$elements.fg.elements.initAndAppendNode_i6bvtr$($receiver, new _.fg.beans.link.Anchor(link, target, useDisplay), init);
-        },
-        button_umrm8d$: function ($receiver, action, init) {
-          return $module$elements.fg.elements.initAndAppendNode_i6bvtr$($receiver, new _.fg.beans.button.Button(action), init);
-        },
-        deck_iokvsb$: function ($receiver, init) {
-          return $module$elements.fg.elements.initAndAppendNode_i6bvtr$($receiver, new _.fg.beans.deck.Deck(), init);
-        },
-        drawer_jvh5j6$: function ($receiver, side, init) {
-          return $module$elements.fg.elements.initAndAppendNode_i6bvtr$($receiver, new _.fg.beans.drawer.Drawer(side), init);
-        },
-        menuBar_ubzj3q$: function ($receiver, init) {
-          return $module$elements.fg.elements.initAndAppendNode_i6bvtr$($receiver, new _.fg.beans.menu.MenuBar(), init);
-        },
-        menu_wo0x8d$: function ($receiver, label, init) {
-          if (label === void 0)
-            label = null;
-          return $module$elements.fg.elements.initAndAppendNode_i6bvtr$($receiver, new _.fg.beans.menu.Menu(label), init);
-        },
-        menuItem_mt53wc$: function ($receiver, action, init) {
-          return $module$elements.fg.elements.initAndAppendNode_i6bvtr$($receiver, new _.fg.beans.menu.MenuItem(action), init);
-        },
-        toggleButton_96ntx3$: function ($receiver, action, init) {
-          return $module$elements.fg.elements.initAndAppendNode_i6bvtr$($receiver, new _.fg.beans.button.ToggleButton(action), init);
-        },
-        ElementStyle: Kotlin.createClass(null, function ElementStyle() {
-          this.cursor_1bqtbn$_0 = null;
-          this.margin_1bqtbn$_0 = null;
-          this.backgroundColor_1bqtbn$_0 = null;
-          this.color_1bqtbn$_0 = null;
-          this.borderStyle_1bqtbn$_0 = null;
-          this.borderWidth_1bqtbn$_0 = null;
-          this.borderColor_1bqtbn$_0 = null;
-          this.borderRadius_1bqtbn$_0 = null;
-          this.boxShadow_1bqtbn$_0 = null;
-          this.outline_1bqtbn$_0 = null;
-        }, /** @lends _.fg.beans.ElementStyle.prototype */ {
-          cursor: {
-            get: function () {
-              return this.cursor_1bqtbn$_0;
+            icon: {
+              get: function () {
+                return this.icon$delegate.getValue_dsk1ci$(this, new Kotlin.PropertyMetadata('icon'));
+              },
+              set: function (icon_0) {
+                this.icon$delegate.setValue_w32e13$(this, new Kotlin.PropertyMetadata('icon'), icon_0);
+              }
             },
-            set: function (cursor_0) {
-              this.cursor_1bqtbn$_0 = cursor_0;
-            }
-          },
-          margin: {
-            get: function () {
-              return this.margin_1bqtbn$_0;
+            shortcut: {
+              get: function () {
+                return this.shortcut$delegate.getValue_dsk1ci$(this, new Kotlin.PropertyMetadata('shortcut'));
+              },
+              set: function (shortcut_0) {
+                this.shortcut$delegate.setValue_w32e13$(this, new Kotlin.PropertyMetadata('shortcut'), shortcut_0);
+              }
             },
-            set: function (margin_0) {
-              this.margin_1bqtbn$_0 = margin_0;
-            }
-          },
-          backgroundColor: {
-            get: function () {
-              return this.backgroundColor_1bqtbn$_0;
+            notifyPropertyChanged_th07t5$_0: function (property, old, new_0) {
+              var tmp$0;
+              tmp$0 = this.propertyChangedListeners.iterator();
+              while (tmp$0.hasNext()) {
+                var listener = tmp$0.next();
+                listener(this, property, old, new_0);
+              }
             },
-            set: function (backgroundColor_0) {
-              this.backgroundColor_1bqtbn$_0 = backgroundColor_0;
-            }
-          },
-          color: {
-            get: function () {
-              return this.color_1bqtbn$_0;
+            onPropertyChanged_9srlr4$: function (listener) {
+              this.propertyChangedListeners.add_za3rmp$(listener);
             },
-            set: function (color_0) {
-              this.color_1bqtbn$_0 = color_0;
-            }
-          },
-          borderStyle: {
-            get: function () {
-              return this.borderStyle_1bqtbn$_0;
+            unPropertyChanged_9srlr4$: function (listener) {
+              this.propertyChangedListeners.remove_za3rmp$(listener);
             },
-            set: function (borderStyle_0) {
-              this.borderStyle_1bqtbn$_0 = borderStyle_0;
+            perform_54c9de$: function (source) {
+              var tmp$0;
+              if (this.enabled) {
+                (tmp$0 = this.perform) != null ? tmp$0(new _.fg.beans.action.ActionPerform(this, source)) : null;
+              }
             }
-          },
-          borderWidth: {
-            get: function () {
-              return this.borderWidth_1bqtbn$_0;
+          }, /** @lends _.fg.beans.action.Action */ {
+            perform$f: function (this$Action) {
+              return function (prop, old, new_0) {
+                this$Action.notifyPropertyChanged_th07t5$_0(prop, old, new_0);
+              };
             },
-            set: function (borderWidth_0) {
-              this.borderWidth_1bqtbn$_0 = borderWidth_0;
-            }
-          },
-          borderColor: {
-            get: function () {
-              return this.borderColor_1bqtbn$_0;
+            label$f: function (this$Action) {
+              return function (prop, old, new_0) {
+                this$Action.notifyPropertyChanged_th07t5$_0(prop, old, new_0);
+              };
             },
-            set: function (borderColor_0) {
-              this.borderColor_1bqtbn$_0 = borderColor_0;
-            }
-          },
-          borderRadius: {
-            get: function () {
-              return this.borderRadius_1bqtbn$_0;
+            enabled$f: function (this$Action) {
+              return function (prop, old, new_0) {
+                this$Action.notifyPropertyChanged_th07t5$_0(prop, old, new_0);
+              };
             },
-            set: function (borderRadius_0) {
-              this.borderRadius_1bqtbn$_0 = borderRadius_0;
-            }
-          },
-          boxShadow: {
-            get: function () {
-              return this.boxShadow_1bqtbn$_0;
+            icon$f: function (this$Action) {
+              return function (prop, old, new_0) {
+                this$Action.notifyPropertyChanged_th07t5$_0(prop, old, new_0);
+              };
             },
-            set: function (boxShadow_0) {
-              this.boxShadow_1bqtbn$_0 = boxShadow_0;
+            shortcut$f: function (this$Action) {
+              return function (prop, old, new_0) {
+                this$Action.notifyPropertyChanged_th07t5$_0(prop, old, new_0);
+              };
             }
-          },
-          outline: {
-            get: function () {
-              return this.outline_1bqtbn$_0;
-            },
-            set: function (outline_0) {
-              this.outline_1bqtbn$_0 = outline_0;
-            }
-          }
-        }),
-        SelectableAction: Kotlin.createClass(function () {
-          return [_.fg.beans.Action];
-        }, function SelectableAction(label, enabled, icon_0, selected, shortcut, perform) {
-          if (enabled === void 0)
-            enabled = true;
-          if (icon_0 === void 0)
-            icon_0 = null;
-          if (selected === void 0)
-            selected = false;
-          if (shortcut === void 0)
-            shortcut = null;
-          SelectableAction.baseInitializer.call(this, label, enabled, icon_0, shortcut, perform);
-          var initialValue = selected;
-          this.selected$delegate = new Kotlin.kotlin.properties.Delegates.observable$f(_.fg.beans.SelectableAction.selected$f(this), initialValue);
-        }, /** @lends _.fg.beans.SelectableAction.prototype */ {
-          selected: {
-            get: function () {
-              return this.selected$delegate.getValue_dsk1ci$(this, new Kotlin.PropertyMetadata('selected'));
-            },
-            set: function (selected_0) {
-              this.selected$delegate.setValue_w32e13$(this, new Kotlin.PropertyMetadata('selected'), selected_0);
-            }
-          }
-        }, /** @lends _.fg.beans.SelectableAction */ {
-          Statics: Kotlin.createObject(null, function Statics() {
-            _.fg.beans.SelectableAction.Statics.selectedSelector = $module$elements.fg.elements.toClassSelector_pdl1w0$('.action-selected');
           }),
-          object_initializer$: function () {
-            _.fg.beans.SelectableAction.Statics;
-          },
-          selected$f: function (this$SelectableAction) {
-            return function (prop, old, new_0) {
-              this$SelectableAction.notifyPropertyChanged_dgnimp$_0(prop, old, new_0);
-            };
-          }
+          ActionBean: Kotlin.createTrait(null),
+          ActionPerform: Kotlin.createClass(null, function ActionPerform(action_0, source) {
+            this.action = action_0;
+            this.source = source;
+          }, /** @lends _.fg.beans.action.ActionPerform.prototype */ {
+            component1: function () {
+              return this.action;
+            },
+            component2: function () {
+              return this.source;
+            },
+            copy_j9nhz8$: function (action_0, source) {
+              return new _.fg.beans.action.ActionPerform(action_0 === void 0 ? this.action : action_0, source === void 0 ? this.source : source);
+            },
+            toString: function () {
+              return 'ActionPerform(action=' + Kotlin.toString(this.action) + (', source=' + Kotlin.toString(this.source)) + ')';
+            },
+            hashCode: function () {
+              var result = 0;
+              result = result * 31 + Kotlin.hashCode(this.action) | 0;
+              result = result * 31 + Kotlin.hashCode(this.source) | 0;
+              return result;
+            },
+            equals_za3rmp$: function (other) {
+              return this === other || (other !== null && (typeof other === 'object' && (Object.getPrototypeOf(this) === Object.getPrototypeOf(other) && (Kotlin.equals(this.action, other.action) && Kotlin.equals(this.source, other.source)))));
+            }
+          }),
+          SelectableAction: Kotlin.createClass(function () {
+            return [_.fg.beans.action.Action];
+          }, function SelectableAction(label, enabled, selectedIcon, deselectedIcon, selected, shortcut, perform) {
+            if (label === void 0)
+              label = null;
+            if (enabled === void 0)
+              enabled = true;
+            if (selectedIcon === void 0)
+              selectedIcon = null;
+            if (deselectedIcon === void 0)
+              deselectedIcon = null;
+            if (selected === void 0)
+              selected = false;
+            if (shortcut === void 0)
+              shortcut = null;
+            if (perform === void 0)
+              perform = null;
+            SelectableAction.baseInitializer.call(this, label, enabled, deselectedIcon, shortcut, perform);
+            this.selectedIcon = selectedIcon;
+            this.deselectedIcon = deselectedIcon;
+            var initialValue = selected;
+            this.selected$delegate = new Kotlin.kotlin.properties.Delegates.observable$f(_.fg.beans.action.SelectableAction.selected$f(this), initialValue);
+          }, /** @lends _.fg.beans.action.SelectableAction.prototype */ {
+            selected: {
+              get: function () {
+                return this.selected$delegate.getValue_dsk1ci$(this, new Kotlin.PropertyMetadata('selected'));
+              },
+              set: function (selected_0) {
+                this.selected$delegate.setValue_w32e13$(this, new Kotlin.PropertyMetadata('selected'), selected_0);
+              }
+            },
+            perform_54c9de$: function (source) {
+              this.selected = !this.selected;
+              _.fg.beans.action.Action.prototype.perform_54c9de$.call(this, source);
+            }
+          }, /** @lends _.fg.beans.action.SelectableAction */ {
+            Statics: Kotlin.createObject(null, function Statics() {
+              _.fg.beans.action.SelectableAction.Statics.selectedSelector = $module$elements.fg.elements.toClassSelector_pdl1w0$('.action-selected');
+            }),
+            object_initializer$: function () {
+              _.fg.beans.action.SelectableAction.Statics;
+            },
+            selected$f: function (this$SelectableAction) {
+              return function (prop, old, new_0) {
+                this$SelectableAction.notifyPropertyChanged_th07t5$_0(prop, old, new_0);
+              };
+            }
+          })
         }),
         button: Kotlin.definePackage(null, /** @lends _.fg.beans.button */ {
           AbstractButton: Kotlin.createClass(function () {
-            return [_.fg.beans.ActionBean, $module$elements.fg.elements.Button];
-          }, function AbstractButton(action) {
+            return [_.fg.beans.action.ActionBean, $module$elements.fg.elements.Button];
+          }, function AbstractButton(action_0) {
             AbstractButton.baseInitializer.call(this);
-            this.action_msbs76$_0 = action;
+            this.action_msbs76$_0 = action_0;
             this.hovered_msbs76$_0 = false;
             this.focused_msbs76$_0 = false;
             this.pressed_msbs76$_0 = false;
             this.label$delegate = Kotlin.kotlin.lazy_un3fny$(_.fg.beans.button.AbstractButton.label$f);
-            this.icon$delegate = Kotlin.kotlin.lazy_un3fny$(_.fg.beans.button.AbstractButton.icon$f(this));
+            this.iconI$delegate = Kotlin.kotlin.lazy_un3fny$(_.fg.beans.button.AbstractButton.iconI$f(this));
             this.actionPropertyChangedHandler_msbs76$_0 = _.fg.beans.button.AbstractButton.actionPropertyChangedHandler_msbs76$_0$f(this);
             this.clickHandler_msbs76$_0 = _.fg.beans.button.AbstractButton.clickHandler_msbs76$_0$f(this);
             this.mouseEnterHandler_msbs76$_0 = _.fg.beans.button.AbstractButton.mouseEnterHandler_msbs76$_0$f(this);
             this.mouseLeaveHandler_msbs76$_0 = _.fg.beans.button.AbstractButton.mouseLeaveHandler_msbs76$_0$f(this);
             this.focusHandler_msbs76$_0 = _.fg.beans.button.AbstractButton.focusHandler_msbs76$_0$f(this);
             this.blurHandler_msbs76$_0 = _.fg.beans.button.AbstractButton.blurHandler_msbs76$_0$f(this);
-            this.mouseDownHandler_msbs76$_0 = _.fg.beans.button.AbstractButton.mouseDownHandler_msbs76$_0$f(action, this);
+            this.mouseDownHandler_msbs76$_0 = _.fg.beans.button.AbstractButton.mouseDownHandler_msbs76$_0$f(action_0, this);
             this.mouseUpHandler_msbs76$_0 = _.fg.beans.button.AbstractButton.mouseUpHandler_msbs76$_0$f(this);
           }, /** @lends _.fg.beans.button.AbstractButton.prototype */ {
             action: {
@@ -345,12 +257,10 @@ var beans = function (Kotlin, $module$elements) {
                 return Kotlin.kotlin.getValue_em0fd4$(this.label$delegate, this, new Kotlin.PropertyMetadata('label'));
               }
             },
-            icon: {
+            iconI: {
               get: function () {
-                return Kotlin.kotlin.getValue_em0fd4$(this.icon$delegate, this, new Kotlin.PropertyMetadata('icon'));
+                return Kotlin.kotlin.getValue_em0fd4$(this.iconI$delegate, this, new Kotlin.PropertyMetadata('iconI'));
               }
-            },
-            onBeforeActionPerform: function () {
             },
             onHover: function () {
             },
@@ -370,15 +280,15 @@ var beans = function (Kotlin, $module$elements) {
             },
             render: function () {
               $module$elements.fg.elements.Button.prototype.render.call(this);
-              this.appendChild_sr04hg$(this.icon);
+              this.appendChild_sr04hg$(this.iconI);
               this.appendChild_sr04hg$(this.label);
-              this.renderIcon_j6jgko$_0(this.action.icon);
+              this.renderIcon_qhwwh5$_0(this.action.icon);
               this.renderLabel_b958ck$_0(this.action.label);
               this.renderDisabled_wk6cbn$_0(this.action.disabled);
             },
             didMount: function () {
               $module$elements.fg.elements.Button.prototype.didMount.call(this);
-              this.action.onPropertyChanged_uamkrm$(this.actionPropertyChangedHandler_msbs76$_0);
+              this.action.onPropertyChanged_9srlr4$(this.actionPropertyChangedHandler_msbs76$_0);
               $module$elements.fg.elements.onClick_m2anqv$(this, this.clickHandler_msbs76$_0);
               $module$elements.fg.elements.onMouseEnter_9cq9y2$(this, this.mouseEnterHandler_msbs76$_0);
               $module$elements.fg.elements.onMouseLeave_9cq9y2$(this, this.mouseLeaveHandler_msbs76$_0);
@@ -405,13 +315,13 @@ var beans = function (Kotlin, $module$elements) {
                 this.label.hide();
               }
             },
-            renderIcon_j6jgko$_0: function (icon) {
+            renderIcon_qhwwh5$_0: function (icon) {
               if (icon == null) {
-                this.icon.hide();
+                this.iconI.hide();
               }
                else {
-                icon.apply_54c9de$(this.icon);
-                this.icon.show();
+                icon.apply_54c9de$(this.iconI);
+                this.iconI.show();
               }
             },
             renderDisabled_wk6cbn$_0: function (disabled) {
@@ -436,7 +346,7 @@ var beans = function (Kotlin, $module$elements) {
               span.hide();
               return span;
             },
-            icon$f: function (this$AbstractButton) {
+            iconI$f: function (this$AbstractButton) {
               return function () {
                 var iconI = new _.fg.beans.icon.IconI(this$AbstractButton.action.icon);
                 iconI.hide();
@@ -444,16 +354,16 @@ var beans = function (Kotlin, $module$elements) {
               };
             },
             actionPropertyChangedHandler_msbs76$_0$f: function (this$AbstractButton) {
-              return function (action, property, old, new_0) {
+              return function (action_0, property, old, new_0) {
                 var tmp$0;
                 tmp$0 = property.name;
                 if (Kotlin.equals(tmp$0, Kotlin.getCallableRefForMemberProperty('label', true).name))
-                  this$AbstractButton.renderLabel_b958ck$_0(action.label);
+                  this$AbstractButton.renderLabel_b958ck$_0(action_0.label);
                 else if (Kotlin.equals(tmp$0, Kotlin.getCallableRefForMemberProperty('icon', true).name))
-                  this$AbstractButton.renderIcon_j6jgko$_0(action.icon);
+                  this$AbstractButton.renderIcon_qhwwh5$_0(action_0.icon);
                 else if (Kotlin.equals(tmp$0, Kotlin.getCallableRefForMemberProperty('enabled', true).name)) {
-                  this$AbstractButton.renderDisabled_wk6cbn$_0(action.disabled);
-                  if (action.enabled) {
+                  this$AbstractButton.renderDisabled_wk6cbn$_0(action_0.disabled);
+                  if (action_0.enabled) {
                     this$AbstractButton.onEnabled();
                   }
                    else {
@@ -464,7 +374,6 @@ var beans = function (Kotlin, $module$elements) {
             },
             clickHandler_msbs76$_0$f: function (this$AbstractButton) {
               return function (it) {
-                this$AbstractButton.onBeforeActionPerform();
                 this$AbstractButton.action.perform_54c9de$(this$AbstractButton);
               };
             },
@@ -515,8 +424,8 @@ var beans = function (Kotlin, $module$elements) {
           }),
           Button: Kotlin.createClass(function () {
             return [_.fg.beans.button.AbstractButton];
-          }, function Button(action) {
-            Button.baseInitializer.call(this, action);
+          }, function Button(action_0) {
+            Button.baseInitializer.call(this, action_0);
           }, /** @lends _.fg.beans.button.Button.prototype */ {
             render: function () {
               _.fg.beans.button.AbstractButton.prototype.render.call(this);
@@ -726,9 +635,9 @@ var beans = function (Kotlin, $module$elements) {
           }),
           ToggleButton: Kotlin.createClass(function () {
             return [_.fg.beans.button.AbstractButton];
-          }, function ToggleButton(action) {
-            ToggleButton.baseInitializer.call(this, action);
-            this.action_q923u8$_0 = action;
+          }, function ToggleButton(action_0) {
+            ToggleButton.baseInitializer.call(this, action_0);
+            this.action_q923u8$_0 = action_0;
             this.actionPropertyChangedHandler_q923u8$_0 = _.fg.beans.button.ToggleButton.actionPropertyChangedHandler_q923u8$_0$f(this);
             this.previousBackgroundColor_q923u8$_0 = '';
           }, /** @lends _.fg.beans.button.ToggleButton.prototype */ {
@@ -737,10 +646,6 @@ var beans = function (Kotlin, $module$elements) {
                 return this.action_q923u8$_0;
               }
             },
-            onBeforeActionPerform: function () {
-              _.fg.beans.button.AbstractButton.prototype.onBeforeActionPerform.call(this);
-              this.action.selected = !this.action.selected;
-            },
             render: function () {
               _.fg.beans.button.AbstractButton.prototype.render.call(this);
               this.addClass_bx842b$(_.fg.beans.button.ToggleButton.ToggleButton.classSelector);
@@ -748,18 +653,19 @@ var beans = function (Kotlin, $module$elements) {
             renderSelected_2iqzmd$_0: function (selected) {
               if (selected) {
                 this.previousBackgroundColor_q923u8$_0 = this._style.backgroundColor;
+                this.iconI.icon = this.action.selectedIcon;
                 this.addClass_61zpoe$('selected');
               }
                else {
+                this.iconI.icon = this.action.deselectedIcon;
                 this.removeClass_61zpoe$('selected');
               }
             },
             didMount: function () {
               _.fg.beans.button.AbstractButton.prototype.didMount.call(this);
-              this.action.onPropertyChanged_uamkrm$(this.actionPropertyChangedHandler_q923u8$_0);
+              this.action.onPropertyChanged_9srlr4$(this.actionPropertyChangedHandler_q923u8$_0);
             },
             toggle: function () {
-              this.onBeforeActionPerform();
               this.action.perform_54c9de$(this);
             }
           }, /** @lends _.fg.beans.button.ToggleButton */ {
@@ -817,7 +723,7 @@ var beans = function (Kotlin, $module$elements) {
               _.fg.beans.button.ToggleButton.ToggleButton;
             },
             actionPropertyChangedHandler_q923u8$_0$f: function (this$ToggleButton) {
-              return function (action, property, old, new_0) {
+              return function (action_0, property, old, new_0) {
                 if (Kotlin.equals(property.name, Kotlin.getCallableRefForMemberProperty('selected', true).name))
                   this$ToggleButton.renderSelected_2iqzmd$_0(this$ToggleButton.action.selected);
               };
@@ -961,9 +867,134 @@ var beans = function (Kotlin, $module$elements) {
             }
           })
         }),
+        anchor_xnxh4m$: function ($receiver, link, target, useDisplay, init) {
+          if (link === void 0)
+            link = null;
+          if (target === void 0)
+            target = '_blank';
+          if (useDisplay === void 0)
+            useDisplay = true;
+          return $module$elements.fg.elements.initAndAppendNode_i6bvtr$($receiver, new _.fg.beans.link.Anchor(link, target, useDisplay), init);
+        },
+        button_6c0d$: function ($receiver, action_0, init) {
+          return $module$elements.fg.elements.initAndAppendNode_i6bvtr$($receiver, new _.fg.beans.button.Button(action_0), init);
+        },
+        deck_iokvsb$: function ($receiver, init) {
+          return $module$elements.fg.elements.initAndAppendNode_i6bvtr$($receiver, new _.fg.beans.deck.Deck(), init);
+        },
+        drawer_jvh5j6$: function ($receiver, side, init) {
+          return $module$elements.fg.elements.initAndAppendNode_i6bvtr$($receiver, new _.fg.beans.drawer.Drawer(side), init);
+        },
+        menuBar_ubzj3q$: function ($receiver, init) {
+          return $module$elements.fg.elements.initAndAppendNode_i6bvtr$($receiver, new _.fg.beans.menu.MenuBar(), init);
+        },
+        menu_wo0x8d$: function ($receiver, label, init) {
+          if (label === void 0)
+            label = null;
+          return $module$elements.fg.elements.initAndAppendNode_i6bvtr$($receiver, new _.fg.beans.menu.Menu(label), init);
+        },
+        menuItem_lvzp6k$: function ($receiver, action_0, init) {
+          return $module$elements.fg.elements.initAndAppendNode_i6bvtr$($receiver, new _.fg.beans.menu.MenuItem(action_0), init);
+        },
+        toggleButton_w93kjt$: function ($receiver, action_0, init) {
+          return $module$elements.fg.elements.initAndAppendNode_i6bvtr$($receiver, new _.fg.beans.button.ToggleButton(action_0), init);
+        },
+        ElementStyle: Kotlin.createClass(null, function ElementStyle() {
+          this.cursor_1bqtbn$_0 = null;
+          this.margin_1bqtbn$_0 = null;
+          this.backgroundColor_1bqtbn$_0 = null;
+          this.color_1bqtbn$_0 = null;
+          this.borderStyle_1bqtbn$_0 = null;
+          this.borderWidth_1bqtbn$_0 = null;
+          this.borderColor_1bqtbn$_0 = null;
+          this.borderRadius_1bqtbn$_0 = null;
+          this.boxShadow_1bqtbn$_0 = null;
+          this.outline_1bqtbn$_0 = null;
+        }, /** @lends _.fg.beans.ElementStyle.prototype */ {
+          cursor: {
+            get: function () {
+              return this.cursor_1bqtbn$_0;
+            },
+            set: function (cursor_0) {
+              this.cursor_1bqtbn$_0 = cursor_0;
+            }
+          },
+          margin: {
+            get: function () {
+              return this.margin_1bqtbn$_0;
+            },
+            set: function (margin_0) {
+              this.margin_1bqtbn$_0 = margin_0;
+            }
+          },
+          backgroundColor: {
+            get: function () {
+              return this.backgroundColor_1bqtbn$_0;
+            },
+            set: function (backgroundColor_0) {
+              this.backgroundColor_1bqtbn$_0 = backgroundColor_0;
+            }
+          },
+          color: {
+            get: function () {
+              return this.color_1bqtbn$_0;
+            },
+            set: function (color_0) {
+              this.color_1bqtbn$_0 = color_0;
+            }
+          },
+          borderStyle: {
+            get: function () {
+              return this.borderStyle_1bqtbn$_0;
+            },
+            set: function (borderStyle_0) {
+              this.borderStyle_1bqtbn$_0 = borderStyle_0;
+            }
+          },
+          borderWidth: {
+            get: function () {
+              return this.borderWidth_1bqtbn$_0;
+            },
+            set: function (borderWidth_0) {
+              this.borderWidth_1bqtbn$_0 = borderWidth_0;
+            }
+          },
+          borderColor: {
+            get: function () {
+              return this.borderColor_1bqtbn$_0;
+            },
+            set: function (borderColor_0) {
+              this.borderColor_1bqtbn$_0 = borderColor_0;
+            }
+          },
+          borderRadius: {
+            get: function () {
+              return this.borderRadius_1bqtbn$_0;
+            },
+            set: function (borderRadius_0) {
+              this.borderRadius_1bqtbn$_0 = borderRadius_0;
+            }
+          },
+          boxShadow: {
+            get: function () {
+              return this.boxShadow_1bqtbn$_0;
+            },
+            set: function (boxShadow_0) {
+              this.boxShadow_1bqtbn$_0 = boxShadow_0;
+            }
+          },
+          outline: {
+            get: function () {
+              return this.outline_1bqtbn$_0;
+            },
+            set: function (outline_0) {
+              this.outline_1bqtbn$_0 = outline_0;
+            }
+          }
+        }),
         icon: Kotlin.definePackage(null, /** @lends _.fg.beans.icon */ {
           FontAwesomeIcon: Kotlin.createClass(function () {
-            return [_.fg.beans.icon.Icon];
+            return [_.fg.beans.icon.IconProvider];
           }, function FontAwesomeIcon(name, size) {
             if (size === void 0)
               size = null;
@@ -971,6 +1002,7 @@ var beans = function (Kotlin, $module$elements) {
             this.size = size;
           }, /** @lends _.fg.beans.icon.FontAwesomeIcon.prototype */ {
             apply_54c9de$: function (element) {
+              element.removeClasses_ic64ld$(_.fg.beans.icon.FontAwesomeIcon.apply_54c9de$f);
               element.addClass_61zpoe$('fa');
               element.addClass_61zpoe$('fa-' + this.name);
               if (this.size !== null && this.size !== _.fg.beans.icon.FontAwesomeIcon.Size.NORMAL) {
@@ -983,6 +1015,9 @@ var beans = function (Kotlin, $module$elements) {
               return i;
             }
           }, /** @lends _.fg.beans.icon.FontAwesomeIcon */ {
+            apply_54c9de$f: function (it) {
+              return Kotlin.kotlin.text.startsWith_41xvrb$(it, 'fa');
+            },
             Size: Kotlin.createEnumClass(function () {
               return [Kotlin.Enum];
             }, function Size(selector) {
@@ -1058,22 +1093,22 @@ var beans = function (Kotlin, $module$elements) {
                 size = null;
               return new _.fg.beans.icon.FontAwesomeIcon('plus', size);
             },
+            toggle_on_629h0h$: function (size) {
+              if (size === void 0)
+                size = null;
+              return new _.fg.beans.icon.FontAwesomeIcon('toggle-on', size);
+            },
+            toggle_off_629h0h$: function (size) {
+              if (size === void 0)
+                size = null;
+              return new _.fg.beans.icon.FontAwesomeIcon('toggle-off', size);
+            },
             windows_629h0h$: function (size) {
               if (size === void 0)
                 size = null;
               return new _.fg.beans.icon.FontAwesomeIcon('windows', size);
             }
           }),
-          Icon: Kotlin.createTrait(null),
-          apply_gnxmu2$f: function (it) {
-            return Kotlin.kotlin.text.startsWith_41xvrb$(it, 'fa');
-          },
-          apply_gnxmu2$: function ($receiver, element) {
-            element.removeClasses_ic64ld$(_.fg.beans.icon.apply_gnxmu2$f);
-            if ($receiver != null) {
-              $receiver.apply_54c9de$(element);
-            }
-          },
           IconI: Kotlin.createClass(function () {
             return [$module$elements.fg.elements.I];
           }, function IconI(icon_0) {
@@ -1098,7 +1133,7 @@ var beans = function (Kotlin, $module$elements) {
               }
             },
             renderIcon_0: function (icon_0) {
-              _.fg.beans.icon.apply_gnxmu2$(icon_0, this);
+              icon_0 != null ? icon_0.apply_54c9de$(this) : null;
             }
           }, /** @lends _.fg.beans.icon.IconI */ {
             icon$f: function (this$IconI) {
@@ -1106,7 +1141,8 @@ var beans = function (Kotlin, $module$elements) {
                 this$IconI.renderIcon_0(new_0);
               };
             }
-          })
+          }),
+          IconProvider: Kotlin.createTrait(null)
         }),
         link: Kotlin.definePackage(null, /** @lends _.fg.beans.link */ {
           Anchor: Kotlin.createClass(function () {
@@ -1283,16 +1319,16 @@ var beans = function (Kotlin, $module$elements) {
                 this.shortcut$delegate.setValue_w32e13$(this, new Kotlin.PropertyMetadata('shortcut'), shortcut_0);
               }
             },
-            onBeforePerformingMenuItemAction_bakdqu$: function (listener) {
+            onBeforePerformingMenuItemAction_szc0gg$: function (listener) {
               this.beforePerformingMenuItemActionListeners_i0djac$_0.add_za3rmp$(listener);
             },
-            unBeforePerformingMenuItemAction_bakdqu$: function (listener) {
+            unBeforePerformingMenuItemAction_szc0gg$: function (listener) {
               this.beforePerformingMenuItemActionListeners_i0djac$_0.remove_za3rmp$(listener);
             },
-            onAfterPerformingMenuItemAction_bakdqu$: function (listener) {
+            onAfterPerformingMenuItemAction_szc0gg$: function (listener) {
               this.afterPerformingMenuItemActionListeners_i0djac$_0.add_za3rmp$(listener);
             },
-            unAfterPerformingMenuItemAction_bakdqu$: function (listener) {
+            unAfterPerformingMenuItemAction_szc0gg$: function (listener) {
               this.afterPerformingMenuItemActionListeners_i0djac$_0.remove_za3rmp$(listener);
             },
             render: function () {
@@ -1302,8 +1338,8 @@ var beans = function (Kotlin, $module$elements) {
             childAdded_sr04hg$: function (child) {
               $module$elements.fg.elements.Div.prototype.childAdded_sr04hg$.call(this, child);
               if (Kotlin.isType(child, _.fg.beans.menu.MenuItem)) {
-                child.onBeforePerformingAction_k3q9i7$(this.beforePerformingMenuItemActionHandler_i0djac$_0);
-                child.onAfterPerformingAction_k3q9i7$(this.afterPerformingMenuItemActionHandler_i0djac$_0);
+                child.onBeforePerformingAction_ez4n0n$(this.beforePerformingMenuItemActionHandler_i0djac$_0);
+                child.onAfterPerformingAction_ez4n0n$(this.afterPerformingMenuItemActionHandler_i0djac$_0);
               }
             }
           }, /** @lends _.fg.beans.menu.Menu */ {
@@ -1336,22 +1372,22 @@ var beans = function (Kotlin, $module$elements) {
               _.fg.beans.menu.Menu.Menu;
             },
             beforePerformingMenuItemActionHandler_i0djac$_0$f: function (this$Menu) {
-              return function (action) {
+              return function (action_0) {
                 var tmp$0;
                 tmp$0 = this$Menu.beforePerformingMenuItemActionListeners_i0djac$_0.iterator();
                 while (tmp$0.hasNext()) {
                   var element = tmp$0.next();
-                  element(action, this$Menu);
+                  element(action_0, this$Menu);
                 }
               };
             },
             afterPerformingMenuItemActionHandler_i0djac$_0$f: function (this$Menu) {
-              return function (action) {
+              return function (action_0) {
                 var tmp$0;
                 tmp$0 = this$Menu.afterPerformingMenuItemActionListeners_i0djac$_0.iterator();
                 while (tmp$0.hasNext()) {
                   var element = tmp$0.next();
-                  element(action, this$Menu);
+                  element(action_0, this$Menu);
                 }
               };
             },
@@ -1379,11 +1415,11 @@ var beans = function (Kotlin, $module$elements) {
               }
               if (Kotlin.isType(child, _.fg.beans.menu.Menu)) {
                 child.hide();
-                var menuButton = new _.fg.beans.menu.MenuButton(new _.fg.beans.SelectableAction(child.label, void 0, void 0, void 0, void 0, _.fg.beans.menu.MenuBar.childAdded_sr04hg$f(child, this)));
+                var menuButton = new _.fg.beans.menu.MenuButton(new _.fg.beans.action.SelectableAction(child.label, void 0, void 0, void 0, void 0, void 0, _.fg.beans.menu.MenuBar.childAdded_sr04hg$f(child, this)));
                 $module$elements.fg.elements.Div.prototype.appendChild_sr04hg$.call(this, menuButton);
                 this.menuButtonByMenu_0.put_wn2jw4$(child, menuButton);
-                child.onBeforePerformingMenuItemAction_bakdqu$(this.beforePerformingMenuItemActionHandler_0);
-                child.onAfterPerformingMenuItemAction_bakdqu$(this.afterPerformingMenuItemActionHandler_0);
+                child.onBeforePerformingMenuItemAction_szc0gg$(this.beforePerformingMenuItemActionHandler_0);
+                child.onAfterPerformingMenuItemAction_szc0gg$(this.afterPerformingMenuItemActionHandler_0);
                 $module$elements.fg.elements.onMouseEnter_9cq9y2$(menuButton, _.fg.beans.menu.MenuBar.childAdded_sr04hg$f_0(menuButton, this, child));
               }
             },
@@ -1432,7 +1468,7 @@ var beans = function (Kotlin, $module$elements) {
             childAdded_sr04hg$f: function (closure$child, this$MenuBar) {
               return function (actionPerform) {
                 var tmp$0;
-                Kotlin.isType(tmp$0 = actionPerform.action, _.fg.beans.SelectableAction) ? tmp$0 : Kotlin.throwCCE();
+                Kotlin.isType(tmp$0 = actionPerform.action, _.fg.beans.action.SelectableAction) ? tmp$0 : Kotlin.throwCCE();
                 if (actionPerform.action.selected) {
                   this$MenuBar.openMenu_0(closure$child);
                 }
@@ -1482,18 +1518,18 @@ var beans = function (Kotlin, $module$elements) {
             object_initializer$: function () {
               _.fg.beans.menu.MenuBar.MenuBar;
             },
-            beforePerformingMenuItemActionHandler_0$f: function (action, menu_0) {
+            beforePerformingMenuItemActionHandler_0$f: function (action_0, menu_0) {
             },
             afterPerformingMenuItemActionHandler_0$f: function (this$MenuBar) {
-              return function (action, menu_0) {
+              return function (action_0, menu_0) {
                 this$MenuBar.closeMenu_0(menu_0);
               };
             }
           }),
           MenuButton: Kotlin.createClass(function () {
             return [_.fg.beans.button.ToggleButton];
-          }, function MenuButton(action) {
-            MenuButton.baseInitializer.call(this, action);
+          }, function MenuButton(action_0) {
+            MenuButton.baseInitializer.call(this, action_0);
           }, /** @lends _.fg.beans.menu.MenuButton.prototype */ {
             render: function () {
               _.fg.beans.button.ToggleButton.prototype.render.call(this);
@@ -1539,10 +1575,10 @@ var beans = function (Kotlin, $module$elements) {
             }
           }),
           MenuItem: Kotlin.createClass(function () {
-            return [_.fg.beans.ActionBean, $module$elements.fg.elements.Div];
-          }, function MenuItem(action) {
+            return [_.fg.beans.action.ActionBean, $module$elements.fg.elements.Div];
+          }, function MenuItem(action_0) {
             MenuItem.baseInitializer.call(this);
-            this.action_iiuj5$_0 = action;
+            this.action_iiuj5$_0 = action_0;
             this.hovered_iiuj5$_0 = false;
             this.focused_iiuj5$_0 = false;
             this.pressed_iiuj5$_0 = false;
@@ -1553,12 +1589,12 @@ var beans = function (Kotlin, $module$elements) {
             this.secondaryTextSpan$delegate = Kotlin.kotlin.lazy_un3fny$(_.fg.beans.menu.MenuItem.secondaryTextSpan_iiuj5$_0$f);
             this.secondaryText$delegate = Kotlin.kotlin.lazy_un3fny$(_.fg.beans.menu.MenuItem.secondaryText_iiuj5$_0$f(this));
             this.actionPropertyChangedHandler_iiuj5$_0 = _.fg.beans.menu.MenuItem.actionPropertyChangedHandler_iiuj5$_0$f(this);
-            this.clickHandler_iiuj5$_0 = _.fg.beans.menu.MenuItem.clickHandler_iiuj5$_0$f(this, action);
+            this.clickHandler_iiuj5$_0 = _.fg.beans.menu.MenuItem.clickHandler_iiuj5$_0$f(this, action_0);
             this.mouseEnterHandler_iiuj5$_0 = _.fg.beans.menu.MenuItem.mouseEnterHandler_iiuj5$_0$f(this);
             this.mouseLeaveHandler_iiuj5$_0 = _.fg.beans.menu.MenuItem.mouseLeaveHandler_iiuj5$_0$f(this);
             this.focusHandler_iiuj5$_0 = _.fg.beans.menu.MenuItem.focusHandler_iiuj5$_0$f(this);
             this.blurHandler_iiuj5$_0 = _.fg.beans.menu.MenuItem.blurHandler_iiuj5$_0$f(this);
-            this.mouseDownHandler_iiuj5$_0 = _.fg.beans.menu.MenuItem.mouseDownHandler_iiuj5$_0$f(action, this);
+            this.mouseDownHandler_iiuj5$_0 = _.fg.beans.menu.MenuItem.mouseDownHandler_iiuj5$_0$f(action_0, this);
             this.mouseUpHandler_iiuj5$_0 = _.fg.beans.menu.MenuItem.mouseUpHandler_iiuj5$_0$f(this);
             this.menuItemStyle = new _.fg.beans.menu.MenuItem.Style();
           }, /** @lends _.fg.beans.menu.MenuItem.prototype */ {
@@ -1640,10 +1676,10 @@ var beans = function (Kotlin, $module$elements) {
               $module$elements.fg.elements.Div.prototype.render.call(this);
               this.addClass_bx842b$(_.fg.beans.menu.MenuItem.MenuItem.classSelector);
               this._tabindex = '0';
-              if (Kotlin.isType(this.action, _.fg.beans.SelectableAction)) {
-                var action = Kotlin.isType(tmp$0 = this.action, _.fg.beans.SelectableAction) ? tmp$0 : Kotlin.throwCCE();
+              if (Kotlin.isType(this.action, _.fg.beans.action.SelectableAction)) {
+                var action_0 = Kotlin.isType(tmp$0 = this.action, _.fg.beans.action.SelectableAction) ? tmp$0 : Kotlin.throwCCE();
                 this.appendChild_sr04hg$(this.selectedIcon_iiuj5$_0);
-                this.renderSelected_f058yc$_0(action.selected);
+                this.renderSelected_f058yc$_0(action_0.selected);
               }
               this.appendChild_sr04hg$(this.primaryText_iiuj5$_0);
               this.appendChild_sr04hg$(this.secondaryText_iiuj5$_0);
@@ -1691,7 +1727,7 @@ var beans = function (Kotlin, $module$elements) {
             },
             didMount: function () {
               $module$elements.fg.elements.Div.prototype.didMount.call(this);
-              this.action.onPropertyChanged_uamkrm$(this.actionPropertyChangedHandler_iiuj5$_0);
+              this.action.onPropertyChanged_9srlr4$(this.actionPropertyChangedHandler_iiuj5$_0);
               $module$elements.fg.elements.onClick_m2anqv$(this, this.clickHandler_iiuj5$_0);
               $module$elements.fg.elements.onMouseEnter_9cq9y2$(this, this.mouseEnterHandler_iiuj5$_0);
               $module$elements.fg.elements.onMouseLeave_9cq9y2$(this, this.mouseLeaveHandler_iiuj5$_0);
@@ -1702,11 +1738,11 @@ var beans = function (Kotlin, $module$elements) {
             },
             renderSelected_f058yc$_0: function (selected) {
               if (selected) {
-                this.addClass_bx842b$(_.fg.beans.SelectableAction.Statics.selectedSelector);
+                this.addClass_bx842b$(_.fg.beans.action.SelectableAction.Statics.selectedSelector);
                 this.selectedIcon_iiuj5$_0._style.opacity = '1';
               }
                else {
-                this.removeClass_bx842b$(_.fg.beans.SelectableAction.Statics.selectedSelector);
+                this.removeClass_bx842b$(_.fg.beans.action.SelectableAction.Statics.selectedSelector);
                 this.selectedIcon_iiuj5$_0._style.opacity = '0';
               }
             },
@@ -1718,16 +1754,16 @@ var beans = function (Kotlin, $module$elements) {
                 this.toggleClass_ivxn3r$(_.fg.beans.menu.MenuItem.MenuItem.DISABLED.value);
               }
             },
-            onBeforePerformingAction_k3q9i7$: function (listener) {
+            onBeforePerformingAction_ez4n0n$: function (listener) {
               this.beforePerformingActionListeners_iiuj5$_0.add_za3rmp$(listener);
             },
-            unBeforePerformingAction_k3q9i7$: function (listener) {
+            unBeforePerformingAction_ez4n0n$: function (listener) {
               this.beforePerformingActionListeners_iiuj5$_0.remove_za3rmp$(listener);
             },
-            onAfterPerformingAction_k3q9i7$: function (listener) {
+            onAfterPerformingAction_ez4n0n$: function (listener) {
               this.afterPerformingActionListeners_iiuj5$_0.add_za3rmp$(listener);
             },
-            unAfterPerformingAction_k3q9i7$: function (listener) {
+            unAfterPerformingAction_ez4n0n$: function (listener) {
               this.afterPerformingActionListeners_iiuj5$_0.remove_za3rmp$(listener);
             },
             renderColor_iiuj5$_0: function () {
@@ -1967,25 +2003,25 @@ var beans = function (Kotlin, $module$elements) {
               };
             },
             actionPropertyChangedHandler_iiuj5$_0$f: function (this$MenuItem) {
-              return function (action, property, old, new_0) {
+              return function (action_0, property, old, new_0) {
                 if (Kotlin.equals(property.name, Kotlin.getCallableRefForMemberProperty('label', true).name)) {
-                  this$MenuItem.primaryText_iiuj5$_0.textContent = action.label;
+                  this$MenuItem.primaryText_iiuj5$_0.textContent = action_0.label;
                 }
                  else if (Kotlin.equals(property.name, Kotlin.getCallableRefForMemberProperty('shortcut', true).name)) {
-                  this$MenuItem.renderShortcut_4fjyxg$_0(action.shortcut);
+                  this$MenuItem.renderShortcut_4fjyxg$_0(action_0.shortcut);
                 }
                  else if (Kotlin.equals(property.name, Kotlin.getCallableRefForMemberProperty('enabled', true).name)) {
-                  this$MenuItem.renderDisabled_f058yc$_0(action.disabled);
-                  if (action.enabled) {
+                  this$MenuItem.renderDisabled_f058yc$_0(action_0.disabled);
+                  if (action_0.enabled) {
                     this$MenuItem.onEnabled();
                   }
                    else {
                     this$MenuItem.onDisabled();
                   }
                 }
-                if (Kotlin.isType(action, _.fg.beans.SelectableAction)) {
+                if (Kotlin.isType(action_0, _.fg.beans.action.SelectableAction)) {
                   if (Kotlin.equals(property.name, Kotlin.getCallableRefForMemberProperty('selected', true).name)) {
-                    this$MenuItem.renderSelected_f058yc$_0(action.selected);
+                    this$MenuItem.renderSelected_f058yc$_0(action_0.selected);
                   }
                 }
               };
@@ -1998,8 +2034,7 @@ var beans = function (Kotlin, $module$elements) {
                   var element = tmp$0.next();
                   element(closure$action);
                 }
-                if (Kotlin.isType(closure$action, _.fg.beans.SelectableAction)) {
-                  closure$action.selected = !closure$action.selected;
+                if (Kotlin.isType(closure$action, _.fg.beans.action.SelectableAction)) {
                   closure$action.perform_54c9de$(this$MenuItem);
                 }
                  else {

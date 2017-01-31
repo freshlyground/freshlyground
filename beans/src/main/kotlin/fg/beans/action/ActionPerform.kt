@@ -1,4 +1,4 @@
-package fg.beans
+package fg.beans.action
 
 import fg.elements.Element
 

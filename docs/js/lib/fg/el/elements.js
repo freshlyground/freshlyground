@@ -1,3 +1,6 @@
+if (typeof kotlin === 'undefined') {
+  throw new Error("Error loading module 'elements'. Its dependency 'kotlin' was not found. Please, check whether 'kotlin' is loaded prior to 'elements'.");
+}
 var elements = function (Kotlin) {
   'use strict';
   var _ = Kotlin.defineRootPackage(null, /** @lends _ */ {
@@ -1215,6 +1218,9 @@ var elements = function (Kotlin) {
         p_ykyrxp$: function ($receiver, init) {
           return _.fg.elements.initAndAppendNode_i6bvtr$($receiver, new _.fg.elements.P(), init);
         },
+        span_n6q0mh$: function ($receiver, init) {
+          return _.fg.elements.initAndAppendNode_i6bvtr$($receiver, new _.fg.elements.Span(), init);
+        },
         hr_tcpxbd$: function ($receiver, init) {
           return _.fg.elements.initAndAppendNode_i6bvtr$($receiver, new _.fg.elements.Hr(), init);
         },
@@ -1248,6 +1254,9 @@ var elements = function (Kotlin) {
         },
         i_3zgx1o$: function ($receiver, init) {
           return _.fg.elements.initAndAppendNode_i6bvtr$($receiver, new _.fg.elements.I(), init);
+        },
+        inputText_tmw6ti$: function ($receiver, init) {
+          return _.fg.elements.initAndAppendNode_i6bvtr$($receiver, new _.fg.elements.InputText(), init);
         },
         img_dgbhyk$: function ($receiver, src, init) {
           return _.fg.elements.initAndAppendNode_i6bvtr$($receiver, new _.fg.elements.Img(src), init);
@@ -1440,6 +1449,8 @@ var elements = function (Kotlin) {
             w3cElement = existingElement != null ? existingElement : Kotlin.isType(tmp$0 = document.createElement(name != null ? name : Kotlin.throwNPE()), HTMLElement) ? tmp$0 : Kotlin.throwCCE();
           Element$.baseInitializer.call(this, w3cElement);
           this.w3cElement_gobymg$_0 = w3cElement;
+          this.renderCalled_gobymg$_0 = false;
+          this.didMountCalled_gobymg$_0 = false;
           this.resizedListeners$delegate = Kotlin.kotlin.lazy_un3fny$(_.fg.elements.Element.resizedListeners_gobymg$_0$f);
           this.resizeSensor_gobymg$_0 = null;
           this.hideOnBreakpoints$delegate = Kotlin.kotlin.lazy_un3fny$(_.fg.elements.Element.hideOnBreakpoints_gobymg$_0$f);
@@ -1450,6 +1461,22 @@ var elements = function (Kotlin) {
           this.style$delegate = Kotlin.kotlin.lazy_un3fny$(_.fg.elements.Element.style$f(this));
           this.layout$delegate = new _.fg.elements.layout.LayoutDelegate();
         }, /** @lends _.fg.elements.Element.prototype */ {
+          renderCalled: {
+            get: function () {
+              return this.renderCalled_gobymg$_0;
+            },
+            set: function (renderCalled_0) {
+              this.renderCalled_gobymg$_0 = renderCalled_0;
+            }
+          },
+          didMountCalled: {
+            get: function () {
+              return this.didMountCalled_gobymg$_0;
+            },
+            set: function (didMountCalled_0) {
+              this.didMountCalled_gobymg$_0 = didMountCalled_0;
+            }
+          },
           resizedListeners_gobymg$_0: {
             get: function () {
               return Kotlin.kotlin.getValue_em0fd4$(this.resizedListeners$delegate, this, new Kotlin.PropertyMetadata('resizedListeners'));
@@ -1574,7 +1601,7 @@ var elements = function (Kotlin) {
               tmp$0 = $receiver.iterator();
               while (tmp$0.hasNext()) {
                 var element = tmp$0.next();
-                if (Kotlin.kotlin.ranges.contains_3hpgcq$(element.range, event.width)) {
+                if (element.contains_14dthe$(event.width)) {
                   hideOrShow = true;
                   break any_udlcbx$break;
                 }
@@ -1588,20 +1615,37 @@ var elements = function (Kotlin) {
               this.show();
             }
           },
+          callRender_gobymg$_0: function () {
+            if (this.renderCalled) {
+              throw new Kotlin.IllegalStateException('render has already been called for this element');
+            }
+            this.render();
+            this.renderCalled = true;
+          },
+          callDidMount_gobymg$_0: function () {
+            if (this.didMountCalled) {
+              throw new Kotlin.IllegalStateException('didMount has already been called for this element');
+            }
+            this.didMount();
+            this.didMountCalled = true;
+          },
+          callWillUnMount_gobymg$_0: function () {
+            this.willUnMount();
+          },
           render: function () {
           },
           didMount: function () {
           },
           willUnMount: function () {
           },
-          callDidMount_gobymg$_0: function () {
+          callDidMountOnChildren_gobymg$_0: function () {
             var tmp$0;
             tmp$0 = this.childNodes.iterator();
             while (tmp$0.hasNext()) {
               var child = tmp$0.next();
               if (Kotlin.isType(child, _.fg.elements.Element)) {
+                child.callDidMountOnChildren_gobymg$_0();
                 child.callDidMount_gobymg$_0();
-                child.didMount();
               }
             }
           },
@@ -1655,6 +1699,10 @@ var elements = function (Kotlin) {
               this._displayBeforeHiding_gobymg$_0 = this._style.display;
               this._style.display = 'none';
             }
+          },
+          focus: function () {
+            this.w3cElement_gobymg$_0.focus();
+            return Kotlin.equals(document.activeElement, this.w3cElement_gobymg$_0);
           },
           traverseElements_su6ycz$: function (each) {
             var tmp$0;
@@ -2601,7 +2649,6 @@ var elements = function (Kotlin) {
             this.addCSSRule_3cka69$(_.fg.elements.with_ji1yox$(new _.fg.style.TypeRule(new _.fg.elements.TypeSelector('html')), _.fg.elements.Html.init$f_0));
             this.addCSSRule_3cka69$(_.fg.elements.with_ji1yox$(new _.fg.style.TypeRule(new _.fg.elements.TypeSelector('body')), _.fg.elements.Html.init$f_1));
             _.fg.elements.BODY.init_0();
-            window.setTimeout(_.fg.elements.Html.init$f_2, 10);
           },
           registerStyle_78phyd$: function (styledClass) {
             var rule = _.fg.elements.Html.registerStyle_78phyd$rule(styledClass);
@@ -2636,9 +2683,6 @@ var elements = function (Kotlin) {
           },
           init$f_1: function () {
             this.height = '100%';
-          },
-          init$f_2: function () {
-            _.fg.elements.BODY.callDidMount_gobymg$_0();
           },
           registerStyle_78phyd$rule: function (closure$styledClass) {
             return function (styledClass, init) {
@@ -2741,7 +2785,7 @@ var elements = function (Kotlin) {
             node._parentNode_w5cupa$_0 = this;
             if (Kotlin.isType(node, _.fg.elements.Element) && (this.rendering || this.rendered) && !child.rendered) {
               node.rendering = true;
-              node.render();
+              node.callRender_gobymg$_0();
               node.rendered = true;
               node.rendering = false;
               node.renderChildren_w5cupa$_0();
@@ -2765,7 +2809,7 @@ var elements = function (Kotlin) {
             node._parentNode_w5cupa$_0 = this;
             if (Kotlin.isType(node, _.fg.elements.Element) && (this.rendering || this.rendered) && !node.rendered) {
               node.rendering = true;
-              node.render();
+              node.callRender_gobymg$_0();
               node.rendered = true;
               node.rendering = false;
               node.renderChildren_w5cupa$_0();
@@ -2802,17 +2846,16 @@ var elements = function (Kotlin) {
             while (tmp$0.hasNext()) {
               var child = tmp$0.next();
               if (Kotlin.isType(child, _.fg.elements.Element) && !child.rendered) {
-                child.render();
+                child.callRender_gobymg$_0();
                 child.rendered = true;
               }
               child.renderChildren_w5cupa$_0();
             }
           },
           mountChild_fhrjh3$_0: function (mountFn, child) {
-            console.info(Kotlin.kotlin.js.get_jsClass_s8jyvl$(this).name + '.mountChild(' + Kotlin.kotlin.js.get_jsClass_s8jyvl$(child).name + ') ');
             mountFn(child);
             if (Kotlin.isType(child, _.fg.elements.Element)) {
-              child.didMount();
+              child.callDidMount_gobymg$_0();
             }
           },
           mountChildren_w5cupa$_0: function () {
@@ -2836,7 +2879,7 @@ var elements = function (Kotlin) {
           },
           removeChild_sr04hg$: function (node) {
             if (Kotlin.isType(node, _.fg.elements.Element)) {
-              node.willUnMount();
+              node.callWillUnMount_gobymg$_0();
             }
             if (this.mounted) {
               this.w3cNode_w5cupa$_0.removeChild(node.w3cNode_w5cupa$_0);
@@ -3307,29 +3350,69 @@ var elements = function (Kotlin) {
           })
         }),
         layout: Kotlin.definePackage(null, /** @lends _.fg.elements.layout */ {
-          Breakpoint: Kotlin.createEnumClass(function () {
-            return [Kotlin.Enum];
-          }, function Breakpoint(range) {
-            Breakpoint.baseInitializer.call(this);
+          AbstractLayout: Kotlin.createClass(null, function AbstractLayout(direction) {
+            this.direction$delegate = new Kotlin.kotlin.properties.Delegates.observable$f(_.fg.elements.layout.AbstractLayout.direction$f, direction);
+          }, /** @lends _.fg.elements.layout.AbstractLayout.prototype */ {
+            direction: {
+              get: function () {
+                return this.direction$delegate.getValue_dsk1ci$(this, new Kotlin.PropertyMetadata('direction'));
+              },
+              set: function (direction_0) {
+                this.direction$delegate.setValue_w32e13$(this, new Kotlin.PropertyMetadata('direction'), direction_0);
+              }
+            },
+            apply_54c9de$: function (element) {
+              element.w3cElement_gobymg$_0.setAttribute('data-fg-layout', this.direction.name);
+              element.style.display = _.fg.elements.style.typed.Display.flex;
+              element.style.flexDirection = this.direction.flex;
+            }
+          }, /** @lends _.fg.elements.layout.AbstractLayout */ {
+            Statics: Kotlin.createObject(null, function Statics() {
+              _.fg.elements.layout.AbstractLayout.Statics.ROW = new _.fg.elements.layout.Layout(_.fg.elements.layout.Direction.ROW);
+              _.fg.elements.layout.AbstractLayout.Statics.COLUMN = new _.fg.elements.layout.Layout(_.fg.elements.layout.Direction.COLUMN);
+            }, /** @lends _.fg.elements.layout.AbstractLayout.Statics.prototype */ {
+              from_54c9de$: function (element) {
+                var layoutDir = _.fg.elements.layout.Direction.Statics.from_61zpoe$(element.w3cElement_gobymg$_0.getAttribute('data-fg-layout'));
+                return _.fg.elements.layout.toLayout_zz9iv$(layoutDir);
+              },
+              remove_54c9de$: function (element) {
+                element.w3cElement_gobymg$_0.removeAttribute('data-fg-layout');
+              }
+            }),
+            object_initializer$: function () {
+              _.fg.elements.layout.AbstractLayout.Statics;
+            },
+            direction$f: function (property, old, new_0) {
+            }
+          }),
+          Breakpoint: Kotlin.createTrait(null),
+          DefaultBreakpoints: Kotlin.createEnumClass(function () {
+            return [_.fg.elements.layout.Breakpoint, Kotlin.Enum];
+          }, function DefaultBreakpoints(range) {
+            DefaultBreakpoints.baseInitializer.call(this);
             this.range = range;
           }, function () {
             return {
               xsmall: function () {
-                return new _.fg.elements.layout.Breakpoint(new Kotlin.NumberRange(0, 599));
+                return new _.fg.elements.layout.DefaultBreakpoints(new Kotlin.NumberRange(0, 599));
               },
               small: function () {
-                return new _.fg.elements.layout.Breakpoint(new Kotlin.NumberRange(600, 959));
+                return new _.fg.elements.layout.DefaultBreakpoints(new Kotlin.NumberRange(600, 959));
               },
               medium: function () {
-                return new _.fg.elements.layout.Breakpoint(new Kotlin.NumberRange(960, 1279));
+                return new _.fg.elements.layout.DefaultBreakpoints(new Kotlin.NumberRange(960, 1279));
               },
               large: function () {
-                return new _.fg.elements.layout.Breakpoint(new Kotlin.NumberRange(1280, 1919));
+                return new _.fg.elements.layout.DefaultBreakpoints(new Kotlin.NumberRange(1280, 1919));
               },
               xlarge: function () {
-                return new _.fg.elements.layout.Breakpoint(new Kotlin.NumberRange(1920, Kotlin.kotlin.js.internal.IntCompanionObject.MAX_VALUE));
+                return new _.fg.elements.layout.DefaultBreakpoints(new Kotlin.NumberRange(1920, Kotlin.kotlin.js.internal.IntCompanionObject.MAX_VALUE));
               }
             };
+          }, /** @lends _.fg.elements.layout.DefaultBreakpoints.prototype */ {
+            contains_14dthe$: function (x) {
+              return Kotlin.kotlin.ranges.contains_3hpgcq$(this.range, x);
+            }
           }),
           Direction: Kotlin.createEnumClass(function () {
             return [Kotlin.Enum];
@@ -3370,17 +3453,52 @@ var elements = function (Kotlin) {
             init.call(layout_0);
             $receiver.layout = layout_0;
           },
-          xs_u8ll43$: function ($receiver, direction, init) {
-            var layout_0 = new _.fg.elements.layout.LayoutBreakpoint(direction);
-            init.call(layout_0);
-            $receiver.xs = layout_0;
+          xsmall_u8ll43$: function ($receiver, direction, init) {
+            var breakpoint = new _.fg.elements.layout.LayoutBreakpoint(direction, _.fg.elements.layout.DefaultBreakpoints.xsmall);
+            init.call(breakpoint);
+            $receiver.addBreakpoint_7i97bf$(breakpoint);
+          },
+          small_u8ll43$: function ($receiver, direction, init) {
+            var breakpoint = new _.fg.elements.layout.LayoutBreakpoint(direction, _.fg.elements.layout.DefaultBreakpoints.small);
+            init.call(breakpoint);
+            $receiver.addBreakpoint_7i97bf$(breakpoint);
+          },
+          medium_u8ll43$: function ($receiver, direction, init) {
+            var breakpoint = new _.fg.elements.layout.LayoutBreakpoint(direction, _.fg.elements.layout.DefaultBreakpoints.medium);
+            init.call(breakpoint);
+            $receiver.addBreakpoint_7i97bf$(breakpoint);
+          },
+          large_u8ll43$: function ($receiver, direction, init) {
+            var breakpoint = new _.fg.elements.layout.LayoutBreakpoint(direction, _.fg.elements.layout.DefaultBreakpoints.large);
+            init.call(breakpoint);
+            $receiver.addBreakpoint_7i97bf$(breakpoint);
+          },
+          xlarge_u8ll43$: function ($receiver, direction, init) {
+            var breakpoint = new _.fg.elements.layout.LayoutBreakpoint(direction, _.fg.elements.layout.DefaultBreakpoints.xlarge);
+            init.call(breakpoint);
+            $receiver.addBreakpoint_7i97bf$(breakpoint);
           },
           Layout: Kotlin.createClass(function () {
-            return [_.fg.elements.layout.LayoutBreakpoint];
+            return [_.fg.elements.layout.AbstractLayout];
           }, function Layout(direction) {
             Layout.baseInitializer.call(this, direction);
-            this.xs = null;
-          }, null, /** @lends _.fg.elements.layout.Layout */ {
+            this.breakpoints_0 = Kotlin.kotlin.collections.arrayListOf_9mqe4v$([]);
+          }, /** @lends _.fg.elements.layout.Layout.prototype */ {
+            addBreakpoint_7i97bf$: function (breakpoint) {
+              this.breakpoints_0.add_za3rmp$(breakpoint);
+            },
+            find_14dthe$: function (width) {
+              var tmp$0;
+              tmp$0 = this.breakpoints_0.iterator();
+              while (tmp$0.hasNext()) {
+                var element = tmp$0.next();
+                if (element.breakpoint.contains_14dthe$(width)) {
+                  return element;
+                }
+              }
+              return null;
+            }
+          }, /** @lends _.fg.elements.layout.Layout */ {
             Statics: Kotlin.createObject(null, function Statics() {
             }, /** @lends _.fg.elements.layout.Layout.Statics.prototype */ {
               from_54c9de$: function (element) {
@@ -3395,40 +3513,11 @@ var elements = function (Kotlin) {
               _.fg.elements.layout.Layout.Statics;
             }
           }),
-          LayoutBreakpoint: Kotlin.createClass(null, function LayoutBreakpoint(direction) {
-            this.direction$delegate = new Kotlin.kotlin.properties.Delegates.observable$f(_.fg.elements.layout.LayoutBreakpoint.direction$f, direction);
-          }, /** @lends _.fg.elements.layout.LayoutBreakpoint.prototype */ {
-            direction: {
-              get: function () {
-                return this.direction$delegate.getValue_dsk1ci$(this, new Kotlin.PropertyMetadata('direction'));
-              },
-              set: function (direction_0) {
-                this.direction$delegate.setValue_w32e13$(this, new Kotlin.PropertyMetadata('direction'), direction_0);
-              }
-            },
-            apply_54c9de$: function (element) {
-              element.w3cElement_gobymg$_0.setAttribute('data-fg-layout', this.direction.name);
-              element.style.display = _.fg.elements.style.typed.Display.flex;
-              element.style.flexDirection = this.direction.flex;
-            }
-          }, /** @lends _.fg.elements.layout.LayoutBreakpoint */ {
-            Statics: Kotlin.createObject(null, function Statics() {
-              _.fg.elements.layout.LayoutBreakpoint.Statics.ROW = new _.fg.elements.layout.Layout(_.fg.elements.layout.Direction.ROW);
-              _.fg.elements.layout.LayoutBreakpoint.Statics.COLUMN = new _.fg.elements.layout.Layout(_.fg.elements.layout.Direction.COLUMN);
-            }, /** @lends _.fg.elements.layout.LayoutBreakpoint.Statics.prototype */ {
-              from_54c9de$: function (element) {
-                var layoutDir = _.fg.elements.layout.Direction.Statics.from_61zpoe$(element.w3cElement_gobymg$_0.getAttribute('data-fg-layout'));
-                return _.fg.elements.layout.toLayout_zz9iv$(layoutDir);
-              },
-              remove_54c9de$: function (element) {
-                element.w3cElement_gobymg$_0.removeAttribute('data-fg-layout');
-              }
-            }),
-            object_initializer$: function () {
-              _.fg.elements.layout.LayoutBreakpoint.Statics;
-            },
-            direction$f: function (property, old, new_0) {
-            }
+          LayoutBreakpoint: Kotlin.createClass(function () {
+            return [_.fg.elements.layout.AbstractLayout];
+          }, function LayoutBreakpoint(direction, breakpoint) {
+            LayoutBreakpoint.baseInitializer.call(this, direction);
+            this.breakpoint = breakpoint;
           }),
           LayoutDelegate: Kotlin.createClass(function () {
             return [Kotlin.kotlin.properties.ReadWriteProperty];
@@ -3446,9 +3535,9 @@ var elements = function (Kotlin) {
               }
             },
             doHandleResize_0: function (layout_0, resizedEvent) {
-              var tmp$0;
-              if (layout_0.xs != null && Kotlin.kotlin.ranges.contains_3hpgcq$(_.fg.elements.layout.Breakpoint.xsmall.range, resizedEvent.width)) {
-                (tmp$0 = layout_0.xs) != null ? tmp$0.apply_54c9de$(this._element_0) : null;
+              var breakpoint = layout_0.find_14dthe$(resizedEvent.width);
+              if (breakpoint != null) {
+                breakpoint.apply_54c9de$(this._element_0);
               }
                else {
                 layout_0.apply_54c9de$(this._element_0);
@@ -3703,6 +3792,10 @@ var elements = function (Kotlin) {
                   return new _.fg.elements.style.typed.FlexDirection('column-reverse');
                 }
               };
+            }, /** @lends _.fg.elements.style.typed.FlexDirection.prototype */ {
+              toString: function () {
+                return this.asString;
+              }
             }),
             toFlexDirection_pdl1w0$: function ($receiver) {
               var tmp$0, tmp$2;
@@ -3856,6 +3949,45 @@ var elements = function (Kotlin) {
               var number = tmp$0;
               return new _.fg.elements.style.typed.FlexShrink(number, null);
             },
+            JustifyContent: Kotlin.createEnumClass(function () {
+              return [Kotlin.Enum];
+            }, function JustifyContent(asString) {
+              JustifyContent.baseInitializer.call(this);
+              this.asString = asString;
+            }, function () {
+              return {
+                flexStart: function () {
+                  return new _.fg.elements.style.typed.JustifyContent('flex-start');
+                },
+                flexEnd: function () {
+                  return new _.fg.elements.style.typed.JustifyContent('flex-end');
+                },
+                center: function () {
+                  return new _.fg.elements.style.typed.JustifyContent('center');
+                },
+                spaceBetween: function () {
+                  return new _.fg.elements.style.typed.JustifyContent('space-between');
+                },
+                spaceAround: function () {
+                  return new _.fg.elements.style.typed.JustifyContent('space-around');
+                }
+              };
+            }, /** @lends _.fg.elements.style.typed.JustifyContent.prototype */ {
+              toString: function () {
+                return this.asString;
+              }
+            }),
+            toJustifyContent_pdl1w0$: function ($receiver) {
+              var tmp$0, tmp$2;
+              tmp$0 = _.fg.elements.style.typed.JustifyContent.values();
+              for (tmp$2 = 0; tmp$2 !== tmp$0.length; ++tmp$2) {
+                var one = tmp$0[tmp$2];
+                if (Kotlin.equals(one.asString, $receiver)) {
+                  return one;
+                }
+              }
+              throw new Kotlin.IllegalArgumentException('Unknown justify-content: ' + $receiver);
+            },
             Position: Kotlin.createEnumClass(function () {
               return [Kotlin.Enum];
             }, function Position(asString) {
@@ -3920,7 +4052,12 @@ var elements = function (Kotlin) {
               this.minHeight$delegate = new _.fg.elements.style.typed.TypedStyle.DimensionDelegate('min-height');
               this.maxWidth$delegate = new _.fg.elements.style.typed.TypedStyle.DimensionDelegate('max-width');
               this.maxHeight$delegate = new _.fg.elements.style.typed.TypedStyle.DimensionDelegate('max-height');
+              this.paddingLeft$delegate = new _.fg.elements.style.typed.TypedStyle.DimensionDelegate();
+              this.paddingRight$delegate = new _.fg.elements.style.typed.TypedStyle.DimensionDelegate();
+              this.paddingTop$delegate = new _.fg.elements.style.typed.TypedStyle.DimensionDelegate();
+              this.paddingBottom$delegate = new _.fg.elements.style.typed.TypedStyle.DimensionDelegate();
               this.flexDirection$delegate = new _.fg.elements.style.typed.TypedStyle.FlexDirectionDelegate();
+              this.justifyContent$delegate = new _.fg.elements.style.typed.TypedStyle.JustifyContentDelegate();
               this.flex$delegate = new _.fg.elements.style.typed.TypedStyle.FlexDelegate();
               this.flexGrow$delegate = new _.fg.elements.style.typed.TypedStyle.FlexGrowDelegate();
               this.flexShrink$delegate = new _.fg.elements.style.typed.TypedStyle.FlexShrinkDelegate();
@@ -4039,12 +4176,52 @@ var elements = function (Kotlin) {
                   this.maxHeight$delegate.setValue_w32e13$(this, new Kotlin.PropertyMetadata('maxHeight'), maxHeight_0);
                 }
               },
+              paddingLeft: {
+                get: function () {
+                  return this.paddingLeft$delegate.getValue_dsk1ci$(this, new Kotlin.PropertyMetadata('paddingLeft'));
+                },
+                set: function (paddingLeft_0) {
+                  this.paddingLeft$delegate.setValue_w32e13$(this, new Kotlin.PropertyMetadata('paddingLeft'), paddingLeft_0);
+                }
+              },
+              paddingRight: {
+                get: function () {
+                  return this.paddingRight$delegate.getValue_dsk1ci$(this, new Kotlin.PropertyMetadata('paddingRight'));
+                },
+                set: function (paddingRight_0) {
+                  this.paddingRight$delegate.setValue_w32e13$(this, new Kotlin.PropertyMetadata('paddingRight'), paddingRight_0);
+                }
+              },
+              paddingTop: {
+                get: function () {
+                  return this.paddingTop$delegate.getValue_dsk1ci$(this, new Kotlin.PropertyMetadata('paddingTop'));
+                },
+                set: function (paddingTop_0) {
+                  this.paddingTop$delegate.setValue_w32e13$(this, new Kotlin.PropertyMetadata('paddingTop'), paddingTop_0);
+                }
+              },
+              paddingBottom: {
+                get: function () {
+                  return this.paddingBottom$delegate.getValue_dsk1ci$(this, new Kotlin.PropertyMetadata('paddingBottom'));
+                },
+                set: function (paddingBottom_0) {
+                  this.paddingBottom$delegate.setValue_w32e13$(this, new Kotlin.PropertyMetadata('paddingBottom'), paddingBottom_0);
+                }
+              },
               flexDirection: {
                 get: function () {
                   return this.flexDirection$delegate.getValue_dsk1ci$(this, new Kotlin.PropertyMetadata('flexDirection'));
                 },
                 set: function (flexDirection_0) {
                   this.flexDirection$delegate.setValue_w32e13$(this, new Kotlin.PropertyMetadata('flexDirection'), flexDirection_0);
+                }
+              },
+              justifyContent: {
+                get: function () {
+                  return this.justifyContent$delegate.getValue_dsk1ci$(this, new Kotlin.PropertyMetadata('justifyContent'));
+                },
+                set: function (justifyContent_0) {
+                  this.justifyContent$delegate.setValue_w32e13$(this, new Kotlin.PropertyMetadata('justifyContent'), justifyContent_0);
                 }
               },
               flex: {
@@ -4136,6 +4313,11 @@ var elements = function (Kotlin) {
                 return [_.fg.elements.style.typed.TypedStyle.TypedPropertyDelegate];
               }, function FlexDirectionDelegate() {
                 FlexDirectionDelegate.baseInitializer.call(this, void 0, Kotlin.getCallableRefForExtensionFunction(_.fg.elements.style.typed.toFlexDirection_pdl1w0$));
+              }),
+              JustifyContentDelegate: Kotlin.createClass(function () {
+                return [_.fg.elements.style.typed.TypedStyle.TypedPropertyDelegate];
+              }, function JustifyContentDelegate() {
+                JustifyContentDelegate.baseInitializer.call(this, void 0, Kotlin.getCallableRefForExtensionFunction(_.fg.elements.style.typed.toJustifyContent_pdl1w0$));
               }),
               FlexDelegate: Kotlin.createClass(function () {
                 return [_.fg.elements.style.typed.TypedStyle.TypedPropertyDelegate];
@@ -4484,6 +4666,15 @@ var elements = function (Kotlin) {
         })
       }),
       style: Kotlin.definePackage(null, /** @lends _.fg.style */ {
+        AdjacentSiblingRule: Kotlin.createClass(function () {
+          return [_.fg.style.Rule];
+        }, function AdjacentSiblingRule(selector) {
+          AdjacentSiblingRule.baseInitializer.call(this, selector);
+        }, /** @lends _.fg.style.AdjacentSiblingRule.prototype */ {
+          cssText: function () {
+            return this.cssText_y57xct$_0(this.selector);
+          }
+        }),
         AndRule: Kotlin.createClass(function () {
           return [_.fg.style.Rule];
         }, function AndRule(selector) {
@@ -4559,6 +4750,18 @@ var elements = function (Kotlin) {
         },
         and_dbehhi$: function ($receiver, selector, init) {
           var style_0 = new _.fg.style.AndRule(new _.fg.elements.AndSelector($receiver.selector, selector));
+          init.call(style_0);
+          $receiver._childStyles_1851tg$_0.add_za3rmp$(style_0);
+          return style_0;
+        },
+        adjacentSibling_41beoq$: function ($receiver, selector, init) {
+          var style_0 = new _.fg.style.AdjacentSiblingRule(new _.fg.elements.AdjacentSiblingSelector($receiver.selector, _.fg.elements.toSelector_pdl1w0$(selector)));
+          init.call(style_0);
+          $receiver._childStyles_1851tg$_0.add_za3rmp$(style_0);
+          return style_0;
+        },
+        adjacentSibling_5wx98v$: function ($receiver, selector, init) {
+          var style_0 = new _.fg.style.AdjacentSiblingRule(new _.fg.elements.AdjacentSiblingSelector($receiver.selector, selector));
           init.call(style_0);
           $receiver._childStyles_1851tg$_0.add_za3rmp$(style_0);
           return style_0;

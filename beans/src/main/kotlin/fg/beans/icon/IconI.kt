@@ -3,9 +3,9 @@ package fg.beans.icon
 import fg.elements.I
 import kotlin.properties.Delegates
 
-class IconI(icon: Icon? = null) : I() {
+class IconI(icon: IconProvider? = null) : I() {
 
-    var icon: Icon? by Delegates.observable(icon) {
+    var icon: IconProvider? by Delegates.observable(icon) {
         property, old, new ->
 
         renderIcon(new)
@@ -19,8 +19,8 @@ class IconI(icon: Icon? = null) : I() {
         }
     }
 
-    private fun renderIcon(icon: Icon?) {
+    private fun renderIcon(icon: IconProvider?) {
 
-        icon.apply(this)
+        icon?.apply(this)
     }
 }

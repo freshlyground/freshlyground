@@ -1,6 +1,6 @@
-package fg.beans
+package fg.beans.action
 
-import fg.beans.icon.Icon
+import fg.beans.icon.IconProvider
 import fg.elements.Element
 import fg.keyboard.Key
 import kotlin.properties.Delegates
@@ -8,11 +8,17 @@ import kotlin.reflect.KProperty
 
 open class Action(label: String? = null,
                   enabled: Boolean = true,
-                  icon: Icon? = null,
+                  icon: IconProvider? = null,
                   shortcut: Key? = null,
-                  perform: (ActionPerform) -> Unit) {
+                  perform: ((ActionPerform) -> Unit)? = null) {
 
-    private val _perform: (ActionPerform) -> Unit = perform
+    protected val propertyChangedListeners: MutableList<(action: Action,
+                                                         property: KProperty<*>,
+                                                         old: Any?, new: Any?) -> Unit> = arrayListOf()
+
+    var perform: ((ActionPerform) -> Unit)? by Delegates.observable(perform) { prop, old, new ->
+        notifyPropertyChanged(prop, old, new)
+    }
 
     var label: String? by Delegates.observable(label) { prop, old, new ->
         notifyPropertyChanged(prop, old, new)
@@ -23,17 +29,13 @@ open class Action(label: String? = null,
     }
     val disabled: Boolean get() = !enabled
 
-    var icon: Icon? by Delegates.observable(icon) { prop, old, new ->
+    var icon: IconProvider? by Delegates.observable(icon) { prop, old, new ->
         notifyPropertyChanged(prop, old, new)
     }
 
     var shortcut: Key? by Delegates.observable(shortcut) { prop, old, new ->
         notifyPropertyChanged(prop, old, new)
     }
-
-    protected val propertyChangedListeners: MutableList<(action: Action,
-                                                       property: KProperty<*>,
-                                                       old: Any?, new: Any?) -> Unit> = arrayListOf()
 
     internal fun notifyPropertyChanged(property: KProperty<*>, old: Any?, new: Any?) {
         for (listener in propertyChangedListeners) listener(this, property, old, new)
@@ -47,9 +49,10 @@ open class Action(label: String? = null,
         propertyChangedListeners.remove(listener)
     }
 
-    fun perform(source: Element) {
+    open fun perform(source: Element) {
+
         if (enabled) {
-            this._perform.invoke(ActionPerform(this, source))
+            this.perform?.invoke(ActionPerform(this, source))
         }
     }
 }

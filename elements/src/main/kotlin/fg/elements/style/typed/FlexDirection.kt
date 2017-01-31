@@ -5,7 +5,11 @@ enum class FlexDirection(val asString: String) {
     row("row"),
     rowReverse("row-reverse"),
     column("column"),
-    columnReverse("column-reverse")
+    columnReverse("column-reverse");
+
+    override fun toString(): String {
+        return asString
+    }
 }
 
 fun String.toFlexDirection(): FlexDirection {

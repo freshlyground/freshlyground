@@ -17,6 +17,12 @@ open class Element(name: String? = null,
                    internal val w3cElement: HTMLElement = existingElement ?: document.createElement(name!!) as HTMLElement) :
         Node(w3cElement) {
 
+    var renderCalled = false
+        private set
+
+    var didMountCalled = false
+        private set
+
     private val resizedListeners: MutableList<(ResizedEvent) -> Unit> by lazy {
         arrayListOf<(ResizedEvent) -> Unit>()
     }
@@ -65,29 +71,28 @@ open class Element(name: String? = null,
     /**
      * Without borders.
      */
-    val clientWidth: Double
+    val clientWidth: Int
         get() = w3cElement.clientWidth
-    val clientHeight: Double
+    val clientHeight: Int
         get() = w3cElement.clientHeight
-
 
     /**
      * Including borders, but not margins.
      */
-    val offsetWidth: Double
+    val offsetWidth: Int
         get() = w3cElement.offsetWidth
-    val offsetHeight: Double
+    val offsetHeight: Int
         get() = w3cElement.offsetHeight
 
 
-    val scrollWidth: Double
+    val scrollWidth: Int
         get() = w3cElement.scrollWidth
-    val scrollHeight: Double
+    val scrollHeight: Int
         get() = w3cElement.scrollHeight
 
-    val offsetTop: Double
+    val offsetTop: Int
         get() = w3cElement.offsetTop
-    val offsetLeft: Double
+    val offsetLeft: Int
         get() = w3cElement.offsetLeft
 
     val boundingClientRect: DOMRect
@@ -96,7 +101,7 @@ open class Element(name: String? = null,
 
     internal fun parentResized(event: ResizedEvent) {
 
-        val hideOrShow = hideOnBreakpoints.any { it.range.contains(event.width) }
+        val hideOrShow = hideOnBreakpoints.any { it.contains(event.width) }
         if (hideOrShow) {
             hide()
         } else {
@@ -104,11 +109,31 @@ open class Element(name: String? = null,
         }
     }
 
+    internal fun callRender() {
+        if (renderCalled) {
+            throw  IllegalStateException("render has already been called for this element")
+        }
+        render()
+        renderCalled = true
+    }
+
+    internal fun callDidMount() {
+        if (didMountCalled) {
+            throw IllegalStateException("didMount has already been called for this element")
+        }
+        didMount()
+        didMountCalled = true
+    }
+
+    internal fun callWillUnMount() {
+        willUnMount()
+    }
+
     /**
      * Called before didMount(). On parent elements before children.
      * Override when needed, but remember to call super.render().
      */
-    open fun render() {
+    open protected fun render() {
 
     }
 
@@ -116,23 +141,23 @@ open class Element(name: String? = null,
      * Called after render(). On children before parent elements.
      * Override when needed, but remember to call super.didMount().
      */
-    open fun didMount() {
+    open protected fun didMount() {
 
     }
 
     /**
      * Called just before the element is removed from the dom.
      */
-    open fun willUnMount() {
+    open protected fun willUnMount() {
 
     }
 
-    internal fun callDidMount() {
+    internal fun callDidMountOnChildren() {
 
         for (child in childNodes) {
             if (child is Element) {
+                child.callDidMountOnChildren()
                 child.callDidMount()
-                child.didMount()
             }
         }
     }
@@ -192,6 +217,11 @@ open class Element(name: String? = null,
             _displayBeforeHiding = this._style.display
             this._style.display = "none"
         }
+    }
+
+    fun focus(): Boolean {
+        this.w3cElement.focus()
+        return document.activeElement == this.w3cElement
     }
 
     fun traverseElements(each: (Element) -> Boolean) {
@@ -269,8 +299,8 @@ open class Element(name: String? = null,
 
         private val scrollHandler: (Event) -> Unit = {
 
-            this.cachedWidth = element.w3cElement.offsetWidth
-            this.cachedHeight = element.w3cElement.offsetHeight
+            this.cachedWidth = element.w3cElement.offsetWidth.toDouble()
+            this.cachedHeight = element.w3cElement.offsetHeight.toDouble()
 
             if (this.cachedWidth != this.lastWidth) {
                 this.dirtyWidth = true
@@ -390,8 +420,8 @@ open class Element(name: String? = null,
                 this.child.style.width = 100000.px
                 this.child.style.height = 100000.px
 
-                this.w3cElement.scrollLeft = 100000
-                this.w3cElement.scrollTop = 100000
+                this.w3cElement.scrollLeft = 100000.toDouble()
+                this.w3cElement.scrollTop = 100000.toDouble()
             }
         }
 
@@ -415,8 +445,8 @@ open class Element(name: String? = null,
             }
 
             fun reset() {
-                this.w3cElement.scrollLeft = 100000
-                this.w3cElement.scrollTop = 100000
+                this.w3cElement.scrollLeft = 100000.toDouble()
+                this.w3cElement.scrollTop = 100000.toDouble()
             }
         }
 

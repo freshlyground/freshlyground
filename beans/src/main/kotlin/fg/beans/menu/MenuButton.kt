@@ -1,6 +1,6 @@
 package fg.beans.menu
 
-import fg.beans.SelectableAction
+import fg.beans.action.SelectableAction
 import fg.beans.button.ToggleButton
 import fg.beans.pkg
 import fg.elements.HTML

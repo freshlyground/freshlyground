@@ -1,8 +1,8 @@
 package fg.md
 
 import fg.base.Side
-import fg.beans.Action
-import fg.beans.SelectableAction
+import fg.beans.action.Action
+import fg.beans.action.SelectableAction
 import fg.beans.button
 import fg.beans.deck.Deck
 import fg.beans.drawer.dock
@@ -10,15 +10,25 @@ import fg.elements.BODY
 import fg.elements.ClassSelector
 import fg.elements.Div
 import fg.elements.HTML
+import fg.elements.Percent
+import fg.elements.br
+import fg.elements.div
 import fg.elements.h1
 import fg.elements.h2
 import fg.elements.hr
+import fg.elements.inputText
+import fg.elements.layout.Direction
+import fg.elements.layout.Layout
+import fg.elements.layout.setLayout
 import fg.elements.p
+import fg.elements.span
 import fg.elements.with
 import fg.keyboard.Key
 import fg.md.button.MDButton
 import fg.md.colour.MDColor
 import fg.md.drawer.MDDrawer
+import fg.md.icon.MDIcon
+import fg.md.icon.MDIconProvider
 import fg.style.AnyRule
 import fg.style.ClassRule
 import fg.style.colour.RgbColor
@@ -32,9 +42,11 @@ class Main() {
                 mdMenu {
                     mdMenuItem(Action("Drawer") { deck.show(drawer) }) {}
                     mdMenuItem(Action("Button") { deck.show(button) }) {}
+                    mdMenuItem(Action("Icon") { deck.show(icon) }) {}
                     mdMenuItem(Action("Menu") { deck.show(menu) }) {}
                     mdMenuItem(Action("Card") { deck.show(card) }) {}
                     mdMenuItem(Action("ExpansionPanel") { deck.show(expansionPanel) }) {}
+                    mdMenuItem(Action("Toolbar") { deck.show(toolbar) }) {}
                 }
             }
         }
@@ -75,28 +87,46 @@ class Main() {
         }
     }
 
-    val button: Div = Div() with {
+    val icon: Div = Div() with {
 
+        h2 {
+            +"Icon"
+        }
+        p {
+            mdIcon { +"face"; size = MDIcon.Size.s36px }
+        }
+    }
+
+
+    val button: Div = Div() with {
+        setLayout(direction = Direction.COLUMN) {}
         h2 {
             +"Button"
         }
-        p {
-            addClass("flex-row")
-            p() {
-                addClass("flex-column")
+        div {
+            setLayout(direction = Direction.COLUMN) {}
+            div {
+                setLayout(direction = Direction.ROW) {}
+
+                span { +"Flat: " }
+
                 mdButton(Action(label = "FLAT", perform = {}), MDButton.Type.FLAT) {}
                 mdButton(Action(label = "CUSTOM STYLE", perform = {}), MDButton.Type.FLAT) {
                     flatStyle.backgroundColor = RgbColor(200, 200, 255)
                 }
                 mdButton(Action(label = "FLAT", enabled = false, perform = {}), MDButton.Type.FLAT) {}
             }
-            p {
-                addClass("flex-column")
+            div {
+                setLayout(direction = Direction.ROW) {}
+
+                span { +"Raised: " }
                 mdButton(Action(label = "RAISED", perform = {}), MDButton.Type.RAISED) {}
                 mdButton(Action(label = "RAISED", enabled = false, perform = {}), MDButton.Type.RAISED) {}
             }
-            p {
-                addClass("flex-column")
+            div {
+                setLayout(direction = Direction.ROW) {}
+
+                span { +"Floating: " }
                 mdButton(Action(label = "ACCENT", perform = {}), MDButton.Type.FLOATING) {
                     color = MDColor.ACCENT
                 }
@@ -110,6 +140,17 @@ class Main() {
                     color = MDColor.PRIMARY
                 }
             }
+            div {
+                setLayout(direction = Direction.ROW) {}
+
+                span { +"Toggle: " }
+                mdToggleButton(SelectableAction("Toggle") {}) {}
+                mdToggleButton(SelectableAction(
+                        deselectedIcon = MDIconProvider.expand_more,
+                        selectedIcon = MDIconProvider.expand_less,
+                        label = "",
+                        perform = {})) {}
+            }
         }
     }
 
@@ -118,7 +159,7 @@ class Main() {
             +"Menu"
         }
         p {
-            mdMenu() {
+            mdMenu {
                 mdMenuItem(Action("Home") {}) {}
                 mdMenuItem(Action("Back") {}) {}
                 mdMenuItem(Action("Forward", enabled = false) {}) {}
@@ -349,29 +390,95 @@ class Main() {
 
     val expansionPanel = Div() with {
         mdExpansionPanel {
-            mdCollapsedPanel { +"Collapsed" }
-            mdExpandedPanel { +"Expanded" }
-        }
+            collapsed.toolbar with {
+                +"Trip name"
+                span { +"Caribbean Cruise" }
+                span { +"" }
+            }
+            expanded.toolbar with {
+                +"Trip name"
+                inputText { value = "Caribbean Cruise" }
+                span { +"" }
+            }
+            expanded.content with {
+                +"Some information coming here"
+            }
 
+        }
+        br { }
+        mdExpansionPanel {
+            collapsed.toolbar with {
+                +"Trip name"
+                span { +"Caribbean Cruise" }
+                span { +"" }
+            }
+            expanded.toolbar with {
+                +"Trip name"
+                inputText { value = "Caribbean Cruise" }
+                span { +"" }
+            }
+            expanded.content with {
+                +"Some information coming here"
+            }
+
+        }
+        mdExpansionPanel {
+            collapsed.toolbar with {
+                +"Trip name"
+                span { +"Mediterranean Cruise" }
+                span { +"" }
+            }
+            expanded.toolbar with {
+                +"Trip name"
+                inputText { value = "Mediterranean Cruise" }
+                span { +"" }
+            }
+            expanded.content with {
+                +"Some information coming here"
+            }
+
+        }
+    }
+
+    val toolbar = Div() with {
+
+        h2 {
+            +"Toolbar"
+        }
+        div {
+            mdToolbar {
+                span { +"Application" }
+                mdButton(Action("FLAT") {}, MDButton.Type.FLAT) {}
+                mdButton(Action("RAISED") {}, MDButton.Type.RAISED) {}
+                spacer()
+                mdToggleButton(SelectableAction(selectedIcon = MDIconProvider.expand_less, deselectedIcon = MDIconProvider.expand_more)) {}
+            }
+        }
     }
 
     val deck = Deck() with {
+        style.width = Percent(100.0)
 
         appendChild(drawer)
+        appendChild(icon)
         appendChild(button)
         appendChild(menu)
         appendChild(radioButton)
         appendChild(card)
         appendChild(expansionPanel)
+        appendChild(toolbar)
     }
 
     init {
 
         BODY with {
             _style.backgroundColor = "#ededed"
+            layout = Layout(direction = Direction.ROW)
 
             BODY.dock(leftDrawer)
+            leftDrawer.style.backgroundColor = RgbColor.TRANSPARENT
             appendChild(deck)
+            deck._style.marginLeft = "8px"
         }
 
         HTML.addCSSRule(AnyRule() with {

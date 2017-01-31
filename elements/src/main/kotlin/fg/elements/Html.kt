@@ -9,7 +9,6 @@ import org.w3c.dom.Element
 import org.w3c.dom.css.CSSStyleSheet
 import org.w3c.dom.events.Event
 import kotlin.browser.document
-import kotlin.browser.window
 
 val HTML = Html()
 
@@ -33,7 +32,7 @@ class Html internal constructor(val w3cElement: Element = document.documentEleme
 
         BODY.init()
 
-        window.setTimeout({ BODY.callDidMount() }, 10)
+        //window.setTimeout({ BODY.callDidMountOnChildren() }, 10)
     }
 
     fun registerStyle(styledClass: StyledClass) {

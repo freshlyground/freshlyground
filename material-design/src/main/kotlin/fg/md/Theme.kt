@@ -14,6 +14,7 @@ class Theme(primaryColor: RgbColor,
             warnColor: RgbColor,
             statusBar: RgbColor,
             appBar: RgbColor,
+            toolbar: RgbColor,
             background: RgbColor,
             cardsNdialogs: RgbColor,
             font: String) {
@@ -51,6 +52,9 @@ class Theme(primaryColor: RgbColor,
     var appBar: RgbColor by Delegates.observable(appBar) {
         property, old, new ->
     }
+    var toolbar: RgbColor by Delegates.observable(toolbar) {
+        property, old, new ->
+    }
     var background: RgbColor by Delegates.observable(background) {
         property, old, new ->
     }
@@ -76,6 +80,7 @@ class Theme(primaryColor: RgbColor,
                 warnColor = MDRedPalette.p500,
                 statusBar = MDGrayPalette.p300,
                 appBar = MDGrayPalette.p100,
+                toolbar = RgbColor.WHITE,
                 background = MDGrayPalette.p50,
                 cardsNdialogs = RgbColor.WHITE,
                 font = "Roboto, sans-serif")

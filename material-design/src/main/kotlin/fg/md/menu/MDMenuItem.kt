@@ -1,6 +1,6 @@
 package fg.md.menu
 
-import fg.beans.Action
+import fg.beans.action.Action
 import fg.beans.menu.MenuItem
 import fg.elements.HTML
 import fg.elements.StyledClass

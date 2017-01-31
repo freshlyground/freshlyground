@@ -27,8 +27,13 @@ class TypedStyle(element: Element) {
     var minHeight: Dimension? by DimensionDelegate("min-height")
     var maxWidth: Dimension? by DimensionDelegate("max-width")
     var maxHeight: Dimension? by DimensionDelegate("max-height")
+    var paddingLeft: Dimension? by DimensionDelegate()
+    var paddingRight: Dimension? by DimensionDelegate()
+    var paddingTop: Dimension? by DimensionDelegate()
+    var paddingBottom: Dimension? by DimensionDelegate()
 
     var flexDirection: FlexDirection? by FlexDirectionDelegate()
+    var justifyContent: JustifyContent? by JustifyContentDelegate()
     var flex: Flex? by FlexDelegate()
     var flexGrow: FlexGrow? by FlexGrowDelegate()
     var flexShrink: FlexShrink? by FlexShrinkDelegate()
@@ -52,6 +57,9 @@ class TypedStyle(element: Element) {
 
     class FlexDirectionDelegate() :
             TypedPropertyDelegate<FlexDirection>(getFn = String::toFlexDirection)
+
+    class JustifyContentDelegate() :
+            TypedPropertyDelegate<JustifyContent>(getFn = String::toJustifyContent)
 
     class FlexDelegate() :
             TypedPropertyDelegate<Flex>(getFn = String::toFlex)

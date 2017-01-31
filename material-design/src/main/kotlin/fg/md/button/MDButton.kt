@@ -1,7 +1,7 @@
 package fg.md.button
 
-import fg.beans.Action
 import fg.beans.ElementStyle
+import fg.beans.action.Action
 import fg.beans.button.Button
 import fg.beans.icon.FontAwesomeIcons
 import fg.elements.ClassSelector
@@ -110,21 +110,21 @@ class MDButton(action: Action, type: Type = Type.FLAT,
         when (type) {
             Type.FLAT -> {
 
-                icon.hide()
+                iconI.hide()
                 label.textContent = action.label
                 label.show()
             }
             Type.RAISED -> {
 
-                icon.hide()
+                iconI.hide()
                 label.textContent = action.label
                 label.show()
             }
             Type.FLOATING -> {
                 label.hide()
                 label.textContent = null
-                icon.show()
-                icon.icon = MDButton.plusIcon
+                iconI.show()
+                iconI.icon = MDButton.plusIcon
             }
         }
     }

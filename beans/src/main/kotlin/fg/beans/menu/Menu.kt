@@ -1,6 +1,6 @@
 package fg.beans.menu
 
-import fg.beans.Action
+import fg.beans.action.Action
 import fg.beans.pkg
 import fg.elements.ClassSelector
 import fg.elements.Div

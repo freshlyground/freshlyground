@@ -1,7 +1,7 @@
 package fg.beans.button
 
-import fg.beans.Action
 import fg.beans.ElementStyle
+import fg.beans.action.Action
 import fg.beans.pkg
 import fg.elements.Dimension
 import fg.elements.HTML

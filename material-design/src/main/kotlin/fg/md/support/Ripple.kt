@@ -40,28 +40,7 @@ class Ripple(val element: Element,
     }
 
     private val handleMouseDown_rippleDone: (MouseEvent) -> Unit = { e ->
-        console.log("handleMouseDown_rippleDone")
         doneCallback?.invoke()
-    }
-
-    private fun start(pageX: Double, pageY: Double) {
-
-        val size = element.offsetWidth
-        val pos = element.boundingClientRect
-        // get click coordinates
-        // logic = click coordinates relative to page
-        // - parent's position relative to page -
-        // half of self height/width to make it controllable from the center;
-        val halfSize = size / 2
-        val x = pageX - pos.left - halfSize - window.scrollX
-        val y = pageY - pos.top - halfSize - window.scrollY
-        console.log("scrollX" + window.scrollX)
-        console.log("scrollY" + window.scrollY)
-
-        val rippleInk = RippleInk(inkColor)
-        this.rippleContainer.appendChild(rippleInk)
-        rippleInk.setPosition(x to y)
-        rippleInk.setSize(size.px)
     }
 
     private val cleanUp: (Event) -> Unit = {
@@ -76,6 +55,24 @@ class Ripple(val element: Element,
         element.onMouseDown(bounceUntil(handleMouseDown_rippleDone, 1000))
         element.onMouseUp(debounce1(cleanUp, 2000))
         element.addClass(rippleTargetClass)
+    }
+
+    private fun start(pageX: Double, pageY: Double) {
+
+        val size = element.offsetWidth
+        val pos = element.boundingClientRect
+        // get click coordinates
+        // logic = click coordinates relative to page
+        // - parent's position relative to page -
+        // half of self height/width to make it controllable from the center;
+        val halfSize = size / 2
+        val x = pageX - pos.left - halfSize - window.scrollX
+        val y = pageY - pos.top - halfSize - window.scrollY
+
+        val rippleInk = RippleInk(inkColor)
+        this.rippleContainer.appendChild(rippleInk)
+        rippleInk.setPosition(x to y)
+        rippleInk.setSize(size.px)
     }
 
 

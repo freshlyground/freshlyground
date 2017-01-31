@@ -2,9 +2,17 @@ package fg.elements.layout
 
 import fg.elements.Element
 
-class Layout(direction: Direction) : LayoutBreakpoint(direction) {
+class Layout(direction: Direction) : AbstractLayout(direction) {
 
-    var xs: LayoutBreakpoint? = null
+    private val breakpoints: MutableList<LayoutBreakpoint> = arrayListOf()
+
+    fun addBreakpoint(breakpoint: LayoutBreakpoint) {
+        breakpoints.add(breakpoint)
+    }
+
+    fun find(width: Double): LayoutBreakpoint? {
+        return breakpoints.find { it.breakpoint.contains(width) }
+    }
 
     companion object Statics {
 

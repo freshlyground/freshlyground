@@ -1,6 +1,6 @@
 package fg.beans.link
 
-import fg.beans.icon.Icon
+import fg.beans.icon.IconProvider
 
 abstract class Link<in T> internal constructor(val display: String,
-                                               val icon: Icon?) : Comparable<T>
+                                               val icon: IconProvider?) : Comparable<T>

@@ -1,7 +1,7 @@
 package fg.docs
 
-import fg.beans.Action
-import fg.beans.SelectableAction
+import fg.beans.action.Action
+import fg.beans.action.SelectableAction
 import fg.beans.button
 import fg.beans.icon.FontAwesomeIcons
 import fg.beans.menu

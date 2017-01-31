@@ -1,7 +1,7 @@
 package fg.beans.button
 
-import fg.beans.Action
-import fg.beans.SelectableAction
+import fg.beans.action.Action
+import fg.beans.action.SelectableAction
 import fg.beans.pkg
 import fg.elements.HTML
 import fg.elements.StyledClass
@@ -25,11 +25,6 @@ open class ToggleButton(action: SelectableAction) : AbstractButton(action) {
         }
     }
 
-    override fun onBeforeActionPerform() {
-        super.onBeforeActionPerform()
-        this.action.selected = !this.action.selected
-    }
-
     override fun render() {
         super.render()
 
@@ -41,8 +36,10 @@ open class ToggleButton(action: SelectableAction) : AbstractButton(action) {
     private fun renderSelected(selected: Boolean) {
         if (selected) {
             previousBackgroundColor = _style.backgroundColor
+            this.iconI.icon = action.selectedIcon
             addClass("selected")
         } else {
+            this.iconI.icon = action.deselectedIcon
             removeClass("selected")
         }
     }
@@ -54,7 +51,6 @@ open class ToggleButton(action: SelectableAction) : AbstractButton(action) {
     }
 
     fun toggle() {
-        this.onBeforeActionPerform()
         this.action.perform(this)
     }
 

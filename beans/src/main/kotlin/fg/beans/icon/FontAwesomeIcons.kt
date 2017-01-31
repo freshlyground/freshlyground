@@ -11,5 +11,7 @@ object FontAwesomeIcons {
     fun link(size: FontAwesomeIcon.Size? = null) = FontAwesomeIcon("link", size)
     fun linux(size: FontAwesomeIcon.Size? = null) = FontAwesomeIcon("linux", size)
     fun plus(size: FontAwesomeIcon.Size? = null) = FontAwesomeIcon("plus", size)
+    fun toggle_on(size: FontAwesomeIcon.Size? = null) = FontAwesomeIcon("toggle-on", size)
+    fun toggle_off(size: FontAwesomeIcon.Size? = null) = FontAwesomeIcon("toggle-off", size)
     fun windows(size: FontAwesomeIcon.Size? = null) = FontAwesomeIcon("windows", size)
 }

@@ -1,6 +1,8 @@
 package fg.beans
 
 import fg.base.Side
+import fg.beans.action.Action
+import fg.beans.action.SelectableAction
 import fg.beans.button.Button
 import fg.beans.button.ToggleButton
 import fg.beans.deck.Deck

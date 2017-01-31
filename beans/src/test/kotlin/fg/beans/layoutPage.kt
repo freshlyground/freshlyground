@@ -4,10 +4,10 @@ import fg.elements.BODY
 import fg.elements.div
 import fg.elements.h1
 import fg.elements.h2
-import fg.elements.layout.Breakpoint
+import fg.elements.layout.DefaultBreakpoints
 import fg.elements.layout.Direction
 import fg.elements.layout.setLayout
-import fg.elements.layout.xs
+import fg.elements.layout.xsmall
 import fg.elements.style.typed.Flex
 import fg.elements.style.typed.FlexGrow
 import fg.elements.with
@@ -63,7 +63,7 @@ object layoutPage {
             }
             div {
                 setLayout(Direction.ROW) {
-                    xs(Direction.COLUMN) {}
+                    xsmall(Direction.COLUMN) {}
                 }
                 div {
                     +" I'm above on mobile, and to the left on larger devices."
@@ -78,7 +78,7 @@ object layoutPage {
                 }
                 div {
                     +"Im hidden, when not wide enough"
-                    hideOn(Breakpoint.small, Breakpoint.xsmall)
+                    hideOn(DefaultBreakpoints.small, DefaultBreakpoints.xsmall)
                 }
             }
             h2 {

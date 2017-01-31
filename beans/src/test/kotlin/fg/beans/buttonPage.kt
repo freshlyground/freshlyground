@@ -1,5 +1,6 @@
 package fg.beans
 
+import fg.beans.action.Action
 import fg.elements.BODY
 import fg.elements.h1
 import fg.elements.p
@@ -15,8 +16,8 @@ object buttonPage {
                 +"Button"
             }
             p {
-                button(Action("Button 1") {}) {}
-                button(Action("Button 2") {}) {}
+                button(Action("Button 1") { console.log(it) }) {}
+                button(Action("Button 2") { console.log(it) }) {}
             }
             p {
                 button(Action("Button, disabled", enabled = false) {}) {}

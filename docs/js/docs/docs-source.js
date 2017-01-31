@@ -1,3 +1,12 @@
+if (typeof kotlin === 'undefined') {
+  throw new Error("Error loading module 'docs-source'. Its dependency 'kotlin' was not found. Please, check whether 'kotlin' is loaded prior to 'docs-source'.");
+}
+if (typeof elements === 'undefined') {
+  throw new Error("Error loading module 'docs-source'. Its dependency 'elements' was not found. Please, check whether 'elements' is loaded prior to 'docs-source'.");
+}
+if (typeof beans === 'undefined') {
+  throw new Error("Error loading module 'docs-source'. Its dependency 'beans' was not found. Please, check whether 'beans' is loaded prior to 'docs-source'.");
+}
 this['docs-source'] = function (Kotlin, $module$elements, $module$beans) {
   'use strict';
   var _ = Kotlin.defineRootPackage(null, /** @lends _ */ {
@@ -64,8 +73,8 @@ this['docs-source'] = function (Kotlin, $module$elements, $module$beans) {
         f_14: function () {
         },
         f_15: function () {
-          $module$beans.fg.beans.menuItem_mt53wc$(this, new $module$beans.fg.beans.SelectableAction('Menu Item 1', void 0, void 0, void 0, void 0, _.fg.docs.f_11), _.fg.docs.f_12);
-          $module$beans.fg.beans.menuItem_mt53wc$(this, new $module$beans.fg.beans.SelectableAction('Menu Item 2', void 0, void 0, void 0, void 0, _.fg.docs.f_13), _.fg.docs.f_14);
+          $module$beans.fg.beans.menuItem_lvzp6k$(this, new $module$beans.fg.beans.action.SelectableAction('Menu Item 1', void 0, void 0, void 0, void 0, void 0, _.fg.docs.f_11), _.fg.docs.f_12);
+          $module$beans.fg.beans.menuItem_lvzp6k$(this, new $module$beans.fg.beans.action.SelectableAction('Menu Item 2', void 0, void 0, void 0, void 0, void 0, _.fg.docs.f_13), _.fg.docs.f_14);
         },
         f_16: function () {
           $module$beans.fg.beans.menu_wo0x8d$(this, void 0, _.fg.docs.f_15);
@@ -82,8 +91,8 @@ this['docs-source'] = function (Kotlin, $module$elements, $module$beans) {
         f_21: function () {
         },
         f_22: function () {
-          $module$beans.fg.beans.button_umrm8d$(this, new $module$beans.fg.beans.Action('Button 1', void 0, void 0, void 0, _.fg.docs.f_18), _.fg.docs.f_19);
-          $module$beans.fg.beans.button_umrm8d$(this, new $module$beans.fg.beans.Action(void 0, void 0, $module$beans.fg.beans.icon.FontAwesomeIcons.camera_retro_629h0h$(), void 0, _.fg.docs.f_20), _.fg.docs.f_21);
+          $module$beans.fg.beans.button_6c0d$(this, new $module$beans.fg.beans.action.Action('Button 1', void 0, void 0, void 0, _.fg.docs.f_18), _.fg.docs.f_19);
+          $module$beans.fg.beans.button_6c0d$(this, new $module$beans.fg.beans.action.Action(void 0, void 0, $module$beans.fg.beans.icon.FontAwesomeIcons.camera_retro_629h0h$(), void 0, _.fg.docs.f_20), _.fg.docs.f_21);
         },
         f_23: function () {
           this.unaryPlus_pdl1w0$('Resources');
@@ -140,7 +149,7 @@ this['docs-source'] = function (Kotlin, $module$elements, $module$beans) {
           this.borderBottom = '1px solid red';
         },
         f_34: function () {
-          $module$elements.fg.style.and_dbehhi$(this, $module$beans.fg.beans.SelectableAction.Statics.selectedSelector, _.fg.docs.f_33);
+          $module$elements.fg.style.and_dbehhi$(this, $module$beans.fg.beans.action.SelectableAction.Statics.selectedSelector, _.fg.docs.f_33);
         },
         main_kand9s$f_1: function () {
           $module$elements.fg.style.desc_4v8hhk$(this, $module$beans.fg.beans.menu.MenuItem.MenuItem.classSelector, _.fg.docs.f_34);

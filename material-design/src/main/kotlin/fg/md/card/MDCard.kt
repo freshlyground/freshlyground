@@ -11,6 +11,16 @@ import kotlin.reflect.KProperty
 
 open class MDCard : Div() {
 
+    private val themeChangedHandler: (Theme, KProperty<*>, Any?, Any?) -> Unit = {
+        theme, property, old, new ->
+
+        when (property.name) {
+            Theme::cardsNdialogs.name -> {
+                style.backgroundColor = Context.theme.background
+            }
+        }
+    }
+
     override fun render() {
         super.render()
 
@@ -23,16 +33,6 @@ open class MDCard : Div() {
         super.didMount()
 
         Context.theme.onPropertyChanged(themeChangedHandler)
-    }
-
-    private val themeChangedHandler: (Theme, KProperty<*>, Any?, Any?) -> Unit = {
-        theme, property, old, new ->
-
-        when (property.name) {
-            Theme::cardsNdialogs.name -> {
-                style.backgroundColor = Context.theme.background
-            }
-        }
     }
 
     companion object MDCard : StyledClass {

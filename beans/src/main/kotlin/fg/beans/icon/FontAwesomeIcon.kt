@@ -4,9 +4,11 @@ import fg.elements.ClassSelector
 import fg.elements.Element
 import fg.elements.I
 
-class FontAwesomeIcon(val name: String, val size: Size? = null) : Icon {
+class FontAwesomeIcon(val name: String, val size: Size? = null) : IconProvider {
 
     override fun apply(element: Element) {
+
+        element.removeClasses({ it.startsWith("fa") })
 
         element.addClass("fa")
         element.addClass("fa-$name")

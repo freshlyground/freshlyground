@@ -1,9 +1,9 @@
 package fg.beans.button
 
-import fg.beans.Action
-import fg.beans.ActionBean
-import fg.beans.icon.Icon
+import fg.beans.action.Action
+import fg.beans.action.ActionBean
 import fg.beans.icon.IconI
+import fg.beans.icon.IconProvider
 import fg.elements.Button
 import fg.elements.Span
 import fg.elements.onBlur
@@ -41,7 +41,7 @@ abstract class AbstractButton(action: Action) : Button(), ActionBean {
         span
     }
 
-    protected val icon: IconI by lazy {
+    protected val iconI: IconI by lazy {
         val iconI = IconI(this.action.icon)
         iconI.hide()
         iconI
@@ -71,7 +71,6 @@ abstract class AbstractButton(action: Action) : Button(), ActionBean {
 
     private val clickHandler: (Event) -> Unit = {
 
-        this.onBeforeActionPerform()
         this.action.perform(this)
     }
 
@@ -119,10 +118,6 @@ abstract class AbstractButton(action: Action) : Button(), ActionBean {
         unPressed()
     }
 
-    open protected fun onBeforeActionPerform() {
-
-    }
-
     open protected fun onHover() {
 
     }
@@ -158,7 +153,7 @@ abstract class AbstractButton(action: Action) : Button(), ActionBean {
     override fun render() {
         super.render()
 
-        appendChild(icon)
+        appendChild(iconI)
         appendChild(label)
 
         renderIcon(action.icon)
@@ -200,12 +195,12 @@ abstract class AbstractButton(action: Action) : Button(), ActionBean {
         }
     }
 
-    private fun renderIcon(icon: Icon?) {
+    private fun renderIcon(icon: IconProvider?) {
         if (icon == null) {
-            this.icon.hide()
+            this.iconI.hide()
         } else {
-            icon.apply(this.icon)
-            this.icon.show()
+            icon.apply(this.iconI)
+            this.iconI.show()
         }
     }
 

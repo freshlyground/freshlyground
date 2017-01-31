@@ -1,3 +1,12 @@
+if (typeof kotlin === 'undefined') {
+  throw new Error("Error loading module 'material-design'. Its dependency 'kotlin' was not found. Please, check whether 'kotlin' is loaded prior to 'material-design'.");
+}
+if (typeof beans === 'undefined') {
+  throw new Error("Error loading module 'material-design'. Its dependency 'beans' was not found. Please, check whether 'beans' is loaded prior to 'material-design'.");
+}
+if (typeof elements === 'undefined') {
+  throw new Error("Error loading module 'material-design'. Its dependency 'elements' was not found. Please, check whether 'elements' is loaded prior to 'material-design'.");
+}
 this['material-design'] = function (Kotlin, $module$beans, $module$elements) {
   'use strict';
   var _ = Kotlin.defineRootPackage(null, /** @lends _ */ {
@@ -106,20 +115,20 @@ this['material-design'] = function (Kotlin, $module$beans, $module$elements) {
               }
               this.addClass_bx842b$(type.selector);
               if (Kotlin.equals(type, _.fg.md.button.MDButton.Type.FLAT)) {
-                this.icon.hide();
+                this.iconI.hide();
                 this.label.textContent = this.action.label;
                 this.label.show();
               }
                else if (Kotlin.equals(type, _.fg.md.button.MDButton.Type.RAISED)) {
-                this.icon.hide();
+                this.iconI.hide();
                 this.label.textContent = this.action.label;
                 this.label.show();
               }
                else if (Kotlin.equals(type, _.fg.md.button.MDButton.Type.FLOATING)) {
                 this.label.hide();
                 this.label.textContent = null;
-                this.icon.show();
-                this.icon.icon = _.fg.md.button.MDButton.MDButton.plusIcon_0;
+                this.iconI.show();
+                this.iconI.icon = _.fg.md.button.MDButton.MDButton.plusIcon_0;
               }
             },
             renderColor_0: function (color) {
@@ -541,6 +550,57 @@ this['material-design'] = function (Kotlin, $module$beans, $module$elements) {
               return function () {
                 return new _.fg.md.support.Ripple(this$MDButton, void 0, _.fg.md.button.MDButton.f(this$MDButton), _.fg.md.button.MDButton.f_0(this$MDButton));
               };
+            }
+          }),
+          MDToggleButton: Kotlin.createClass(function () {
+            return [$module$beans.fg.beans.button.ToggleButton];
+          }, function MDToggleButton(action) {
+            MDToggleButton.baseInitializer.call(this, action);
+          }, /** @lends _.fg.md.button.MDToggleButton.prototype */ {
+            render: function () {
+              $module$beans.fg.beans.button.ToggleButton.prototype.render.call(this);
+              this.addClass_bx842b$(_.fg.md.button.MDToggleButton.MDToggleButton.classSelector);
+            }
+          }, /** @lends _.fg.md.button.MDToggleButton */ {
+            MDToggleButton: Kotlin.createObject(function () {
+              return [$module$elements.fg.elements.StyledClass];
+            }, function MDToggleButton() {
+              _.fg.md.button.MDToggleButton.MDToggleButton.classSelector_axwc4i$_0 = $module$elements.fg.elements.toClassSelector_pdl1w0$('fg-bn-md-toggle-button');
+              _.fg.md.button.MDToggleButton.MDToggleButton.rule_axwc4i$_0 = _.fg.md.button.MDToggleButton.MDToggleButton.rule$f;
+              $module$elements.fg.elements.HTML.registerStyle_78phyd$(_.fg.md.button.MDToggleButton.MDToggleButton);
+            }, /** @lends _.fg.md.button.MDToggleButton.MDToggleButton.prototype */ {
+              classSelector: {
+                get: function () {
+                  return _.fg.md.button.MDToggleButton.MDToggleButton.classSelector_axwc4i$_0;
+                }
+              },
+              rule: {
+                get: function () {
+                  return _.fg.md.button.MDToggleButton.MDToggleButton.rule_axwc4i$_0;
+                }
+              }
+            }, /** @lends _.fg.md.button.MDToggleButton.MDToggleButton */ {
+              f: function () {
+                this.boxShadow = 'none';
+                this.border = 'none';
+                this.backgroundColor = $module$elements.fg.style.colour.RgbColor.Factory.TRANSPARENT.toString();
+              },
+              f_0: function () {
+                this.boxShadow = 'none';
+                this.border = 'none';
+                this.backgroundColor = $module$elements.fg.style.colour.RgbColor.Factory.TRANSPARENT.toString();
+              },
+              rule$f: function () {
+                this.height = '36px';
+                this.boxShadow = 'none';
+                this.border = 'none';
+                this.backgroundColor = $module$elements.fg.style.colour.RgbColor.Factory.TRANSPARENT.toString();
+                $module$elements.fg.style.and_jweaar$(this, '.selected', _.fg.md.button.MDToggleButton.MDToggleButton.f);
+                $module$elements.fg.style.and_jweaar$(this, '.focused', _.fg.md.button.MDToggleButton.MDToggleButton.f_0);
+              }
+            }),
+            object_initializer$: function () {
+              _.fg.md.button.MDToggleButton.MDToggleButton;
             }
           })
         }),
@@ -1345,7 +1405,7 @@ this['material-design'] = function (Kotlin, $module$beans, $module$elements) {
         Context: Kotlin.createObject(null, function Context() {
           this.theme = _.fg.md.Theme.Statics.LIGHT;
         }),
-        mdButton_2sp1zl$: function ($receiver, action, type, init) {
+        mdButton_66gb73$: function ($receiver, action, type, init) {
           return $module$elements.fg.elements.initAndAppendNode_i6bvtr$($receiver, new _.fg.md.button.MDButton(action, type), init);
         },
         mdCard_mw30zs$: function ($receiver, init) {
@@ -1356,6 +1416,9 @@ this['material-design'] = function (Kotlin, $module$beans, $module$elements) {
         },
         mdExpansionPanel_n7ohdx$: function ($receiver, init) {
           return $module$elements.fg.elements.initAndAppendNode_i6bvtr$($receiver, new _.fg.md.panel.MDExpansionPanel(), init);
+        },
+        mdIcon_8motaw$: function ($receiver, init) {
+          return $module$elements.fg.elements.initAndAppendNode_i6bvtr$($receiver, new _.fg.md.icon.MDIcon(), init);
         },
         mdMenu_rsebdp$: function ($receiver, label, shortcut, init) {
           if (label === void 0)
@@ -1368,6 +1431,12 @@ this['material-design'] = function (Kotlin, $module$beans, $module$elements) {
           if (labelText === void 0)
             labelText = null;
           return $module$elements.fg.elements.initAndAppendNode_i6bvtr$($receiver, new _.fg.md.radio.MDRadioButton(void 0, labelText), init);
+        },
+        mdToggleButton_pvs3lw$: function ($receiver, action, init) {
+          return $module$elements.fg.elements.initAndAppendNode_i6bvtr$($receiver, new _.fg.md.button.MDToggleButton(action), init);
+        },
+        mdToolbar_qpb3vw$: function ($receiver, init) {
+          return $module$elements.fg.elements.initAndAppendNode_i6bvtr$($receiver, new _.fg.md.toolbar.MDToolbar(), init);
         },
         title_9ngzzv$: function ($receiver, init) {
           return $module$elements.fg.elements.initAndAppendNode_i6bvtr$($receiver, new _.fg.md.card.MDCardTitle(), init);
@@ -1414,28 +1483,34 @@ this['material-design'] = function (Kotlin, $module$beans, $module$elements) {
         subtitle_n5hv2w$: function ($receiver, init) {
           return $module$elements.fg.elements.initAndAppendNode_i6bvtr$($receiver, new _.fg.md.card.MDCardSubtitle(), init);
         },
-        mdButton_epm7bq$: function ($receiver, action, init) {
+        mdButton_9zbw96$: function ($receiver, action, init) {
           return $module$elements.fg.elements.initAndAppendNode_i6bvtr$($receiver, new _.fg.md.button.MDButton(action, _.fg.md.button.MDButton.Type.FLAT), init);
         },
-        mdButton_gwa2rj$: function ($receiver, action, type, init) {
+        mdButton_a6wizl$: function ($receiver, action, type, init) {
           return $module$elements.fg.elements.initAndAppendNode_i6bvtr$($receiver, new _.fg.md.button.MDButton(action, type), init);
         },
-        mdMenuItem_av74$: function ($receiver, action, init) {
+        mdMenuItem_ue1tpa$: function ($receiver, action, init) {
           return $module$elements.fg.elements.initAndAppendNode_i6bvtr$($receiver, new _.fg.md.menu.MDMenuItem(action), init);
         },
-        mdCollapsedPanel_fr84r$: function ($receiver, init) {
-          $receiver.collapsedPanel = $module$elements.fg.elements.initAndAppendNode_i6bvtr$($receiver, new _.fg.md.panel.MDCollapsedPanel(), init);
+        content_dqjaef$: function ($receiver, init) {
+          return $module$elements.fg.elements.initAndAppendNode_i6bvtr$($receiver, new _.fg.md.card.MDCardContent(), init);
         },
-        mdExpandedPanel_q52uq9$: function ($receiver, init) {
-          $receiver.expandedPanel = $module$elements.fg.elements.initAndAppendNode_i6bvtr$($receiver, new _.fg.md.panel.MDExpandedPanel(), init);
+        content_55fl1d$: function ($receiver, init) {
+          return $module$elements.fg.elements.initAndAppendNode_i6bvtr$($receiver, new _.fg.md.card.MDCardContent(), init);
         },
-        Theme: Kotlin.createClass(null, function Theme(primaryColor, accentColor, warnColor, statusBar, appBar, background, cardsNdialogs, font) {
+        spacer_oaybh5$f: function () {
+        },
+        spacer_oaybh5$: function ($receiver) {
+          return $module$elements.fg.elements.initAndAppendNode_i6bvtr$($receiver, _.fg.md.toolbar.MDToolbar.MDToolbar.spacer(), _.fg.md.spacer_oaybh5$f);
+        },
+        Theme: Kotlin.createClass(null, function Theme(primaryColor, accentColor, warnColor, statusBar, appBar, toolbar_0, background, cardsNdialogs, font) {
           this.propertyChangedListeners_0 = Kotlin.kotlin.collections.arrayListOf_9mqe4v$([]);
           this.primaryColor$delegate = new Kotlin.kotlin.properties.Delegates.observable$f(_.fg.md.Theme.primaryColor$f, primaryColor);
           this.accentColor$delegate = new Kotlin.kotlin.properties.Delegates.observable$f(_.fg.md.Theme.accentColor$f, accentColor);
           this.warnColor$delegate = new Kotlin.kotlin.properties.Delegates.observable$f(_.fg.md.Theme.warnColor$f, warnColor);
           this.statusBar$delegate = new Kotlin.kotlin.properties.Delegates.observable$f(_.fg.md.Theme.statusBar$f, statusBar);
           this.appBar$delegate = new Kotlin.kotlin.properties.Delegates.observable$f(_.fg.md.Theme.appBar$f, appBar);
+          this.toolbar$delegate = new Kotlin.kotlin.properties.Delegates.observable$f(_.fg.md.Theme.toolbar$f, toolbar_0);
           this.background$delegate = new Kotlin.kotlin.properties.Delegates.observable$f(_.fg.md.Theme.background$f, background);
           this.cardsNdialogs$delegate = new Kotlin.kotlin.properties.Delegates.observable$f(_.fg.md.Theme.cardsNdialogs$f, cardsNdialogs);
           this.font = font;
@@ -1495,6 +1570,14 @@ this['material-design'] = function (Kotlin, $module$beans, $module$elements) {
               this.appBar$delegate.setValue_w32e13$(this, new Kotlin.PropertyMetadata('appBar'), appBar_0);
             }
           },
+          toolbar: {
+            get: function () {
+              return this.toolbar$delegate.getValue_dsk1ci$(this, new Kotlin.PropertyMetadata('toolbar'));
+            },
+            set: function (toolbar_0) {
+              this.toolbar$delegate.setValue_w32e13$(this, new Kotlin.PropertyMetadata('toolbar'), toolbar_0);
+            }
+          },
           background: {
             get: function () {
               return this.background$delegate.getValue_dsk1ci$(this, new Kotlin.PropertyMetadata('background'));
@@ -1523,7 +1606,7 @@ this['material-design'] = function (Kotlin, $module$beans, $module$elements) {
           }
         }, /** @lends _.fg.md.Theme */ {
           Statics: Kotlin.createObject(null, function Statics() {
-            _.fg.md.Theme.Statics.LIGHT = new _.fg.md.Theme(_.fg.md.colour.MDGreenPalette.p500, _.fg.md.colour.MDPurplePalette.p500, _.fg.md.colour.MDRedPalette.p500, _.fg.md.colour.MDGrayPalette.p300, _.fg.md.colour.MDGrayPalette.p100, _.fg.md.colour.MDGrayPalette.p50, $module$elements.fg.style.colour.RgbColor.Factory.WHITE, 'Roboto, sans-serif');
+            _.fg.md.Theme.Statics.LIGHT = new _.fg.md.Theme(_.fg.md.colour.MDGreenPalette.p500, _.fg.md.colour.MDPurplePalette.p500, _.fg.md.colour.MDRedPalette.p500, _.fg.md.colour.MDGrayPalette.p300, _.fg.md.colour.MDGrayPalette.p100, $module$elements.fg.style.colour.RgbColor.Factory.WHITE, _.fg.md.colour.MDGrayPalette.p50, $module$elements.fg.style.colour.RgbColor.Factory.WHITE, 'Roboto, sans-serif');
           }),
           object_initializer$: function () {
             _.fg.md.Theme.Statics;
@@ -1537,6 +1620,8 @@ this['material-design'] = function (Kotlin, $module$beans, $module$elements) {
           statusBar$f: function (property, old, new_0) {
           },
           appBar$f: function (property, old, new_0) {
+          },
+          toolbar$f: function (property, old, new_0) {
           },
           background$f: function (property, old, new_0) {
           },
@@ -1578,6 +1663,174 @@ this['material-design'] = function (Kotlin, $module$beans, $module$elements) {
             }),
             object_initializer$: function () {
               _.fg.md.drawer.MDDrawer.MDDrawer;
+            }
+          })
+        }),
+        icon: Kotlin.definePackage(null, /** @lends _.fg.md.icon */ {
+          MDIcon: Kotlin.createClass(function () {
+            return [$module$elements.fg.elements.I];
+          }, function MDIcon() {
+            MDIcon.baseInitializer.call(this);
+            this.size$delegate = new Kotlin.kotlin.properties.Delegates.observable$f(_.fg.md.icon.MDIcon.size$f(this), null);
+          }, /** @lends _.fg.md.icon.MDIcon.prototype */ {
+            size: {
+              get: function () {
+                return this.size$delegate.getValue_dsk1ci$(this, new Kotlin.PropertyMetadata('size'));
+              },
+              set: function (size_0) {
+                this.size$delegate.setValue_w32e13$(this, new Kotlin.PropertyMetadata('size'), size_0);
+              }
+            },
+            render: function () {
+              $module$elements.fg.elements.I.prototype.render.call(this);
+              this.addClass_61zpoe$('material-icons');
+              this.addClass_bx842b$(_.fg.md.icon.MDIcon.MDIcon.classSelector);
+            }
+          }, /** @lends _.fg.md.icon.MDIcon */ {
+            Size: Kotlin.createEnumClass(function () {
+              return [Kotlin.Enum];
+            }, function Size(cssClassName) {
+              Size.baseInitializer.call(this);
+              this.cssClassName = cssClassName;
+            }, function () {
+              return {
+                s18px: function () {
+                  return new _.fg.md.icon.MDIcon.Size($module$elements.fg.elements.toClassSelector_pdl1w0$('md-18'));
+                },
+                s24px: function () {
+                  return new _.fg.md.icon.MDIcon.Size($module$elements.fg.elements.toClassSelector_pdl1w0$('md-24'));
+                },
+                s36px: function () {
+                  return new _.fg.md.icon.MDIcon.Size($module$elements.fg.elements.toClassSelector_pdl1w0$('md-36'));
+                },
+                s48px: function () {
+                  return new _.fg.md.icon.MDIcon.Size($module$elements.fg.elements.toClassSelector_pdl1w0$('md-48'));
+                }
+              };
+            }),
+            MDIcon: Kotlin.createObject(function () {
+              return [$module$elements.fg.elements.StyledClass];
+            }, function MDIcon() {
+              _.fg.md.icon.MDIcon.MDIcon.classSelector_qh3r6f$_0 = $module$elements.fg.elements.toClassSelector_pdl1w0$('md-icon');
+              _.fg.md.icon.MDIcon.MDIcon.rule_qh3r6f$_0 = _.fg.md.icon.MDIcon.MDIcon.rule$f;
+              $module$elements.fg.elements.HTML.registerStyle_78phyd$(_.fg.md.icon.MDIcon.MDIcon);
+            }, /** @lends _.fg.md.icon.MDIcon.MDIcon.prototype */ {
+              classSelector: {
+                get: function () {
+                  return _.fg.md.icon.MDIcon.MDIcon.classSelector_qh3r6f$_0;
+                }
+              },
+              rule: {
+                get: function () {
+                  return _.fg.md.icon.MDIcon.MDIcon.rule_qh3r6f$_0;
+                }
+              }
+            }, /** @lends _.fg.md.icon.MDIcon.MDIcon */ {
+              f: function () {
+                this.fontSize = '18px';
+              },
+              f_0: function () {
+                this.fontSize = '24px';
+              },
+              f_1: function () {
+                this.fontSize = '36px';
+              },
+              f_2: function () {
+                this.fontSize = '48px';
+              },
+              rule$f: function () {
+                $module$elements.fg.style.and_dbehhi$(this, _.fg.md.icon.MDIcon.Size.s18px.cssClassName, _.fg.md.icon.MDIcon.MDIcon.f);
+                $module$elements.fg.style.and_dbehhi$(this, _.fg.md.icon.MDIcon.Size.s24px.cssClassName, _.fg.md.icon.MDIcon.MDIcon.f_0);
+                $module$elements.fg.style.and_dbehhi$(this, _.fg.md.icon.MDIcon.Size.s36px.cssClassName, _.fg.md.icon.MDIcon.MDIcon.f_1);
+                $module$elements.fg.style.and_dbehhi$(this, _.fg.md.icon.MDIcon.Size.s48px.cssClassName, _.fg.md.icon.MDIcon.MDIcon.f_2);
+              }
+            }),
+            object_initializer$: function () {
+              _.fg.md.icon.MDIcon.MDIcon;
+            },
+            size$f: function (this$MDIcon) {
+              return function (property, old, new_0) {
+                if (old !== null) {
+                  this$MDIcon.removeClass_bx842b$(old.cssClassName);
+                }
+                if (new_0 !== null) {
+                  this$MDIcon.addClass_bx842b$(new_0.cssClassName);
+                }
+              };
+            }
+          }),
+          MDIconProvider: Kotlin.createClass(function () {
+            return [$module$beans.fg.beans.icon.IconProvider];
+          }, function MDIconProvider(name) {
+            this.name = name;
+          }, /** @lends _.fg.md.icon.MDIconProvider.prototype */ {
+            apply_54c9de$: function (element) {
+              element.addClass_61zpoe$('material-icons');
+              element.textContent = this.name;
+            }
+          }, /** @lends _.fg.md.icon.MDIconProvider */ {
+            Statics: Kotlin.createObject(null, function Statics() {
+              _.fg.md.icon.MDIconProvider.Statics.face = new _.fg.md.icon.MDIconProvider('face');
+              _.fg.md.icon.MDIconProvider.Statics.expand_more = new _.fg.md.icon.MDIconProvider('expand_more');
+              _.fg.md.icon.MDIconProvider.Statics.expand_less = new _.fg.md.icon.MDIconProvider('expand_less');
+            }),
+            object_initializer$: function () {
+              _.fg.md.icon.MDIconProvider.Statics;
+            }
+          })
+        }),
+        layout: Kotlin.definePackage(null, /** @lends _.fg.md.layout */ {
+          mdXsmall_u8ll43$: function ($receiver, direction, init) {
+            var breakpoint = new $module$elements.fg.elements.layout.LayoutBreakpoint(direction, _.fg.md.layout.MDBreakpoints.xsmall);
+            init.call(breakpoint);
+            $receiver.addBreakpoint_7i97bf$(breakpoint);
+          },
+          mdSmall_u8ll43$: function ($receiver, direction, init) {
+            var breakpoint = new $module$elements.fg.elements.layout.LayoutBreakpoint(direction, _.fg.md.layout.MDBreakpoints.small);
+            init.call(breakpoint);
+            $receiver.addBreakpoint_7i97bf$(breakpoint);
+          },
+          mdMedium_u8ll43$: function ($receiver, direction, init) {
+            var breakpoint = new $module$elements.fg.elements.layout.LayoutBreakpoint(direction, _.fg.md.layout.MDBreakpoints.medium);
+            init.call(breakpoint);
+            $receiver.addBreakpoint_7i97bf$(breakpoint);
+          },
+          mdLarge_u8ll43$: function ($receiver, direction, init) {
+            var breakpoint = new $module$elements.fg.elements.layout.LayoutBreakpoint(direction, _.fg.md.layout.MDBreakpoints.large);
+            init.call(breakpoint);
+            $receiver.addBreakpoint_7i97bf$(breakpoint);
+          },
+          mdXlarge_u8ll43$: function ($receiver, direction, init) {
+            var breakpoint = new $module$elements.fg.elements.layout.LayoutBreakpoint(direction, _.fg.md.layout.MDBreakpoints.xlarge);
+            init.call(breakpoint);
+            $receiver.addBreakpoint_7i97bf$(breakpoint);
+          },
+          MDBreakpoints: Kotlin.createEnumClass(function () {
+            return [$module$elements.fg.elements.layout.Breakpoint, Kotlin.Enum];
+          }, function MDBreakpoints(range) {
+            MDBreakpoints.baseInitializer.call(this);
+            this.range = range;
+          }, function () {
+            return {
+              xsmall: function () {
+                return new _.fg.md.layout.MDBreakpoints(new Kotlin.NumberRange(0, 599));
+              },
+              small: function () {
+                return new _.fg.md.layout.MDBreakpoints(new Kotlin.NumberRange(600, 959));
+              },
+              medium: function () {
+                return new _.fg.md.layout.MDBreakpoints(new Kotlin.NumberRange(960, 1279));
+              },
+              large: function () {
+                return new _.fg.md.layout.MDBreakpoints(new Kotlin.NumberRange(1280, 1919));
+              },
+              xlarge: function () {
+                return new _.fg.md.layout.MDBreakpoints(new Kotlin.NumberRange(1920, Kotlin.kotlin.js.internal.IntCompanionObject.MAX_VALUE));
+              }
+            };
+          }, /** @lends _.fg.md.layout.MDBreakpoints.prototype */ {
+            contains_14dthe$: function (x) {
+              return Kotlin.kotlin.ranges.contains_3hpgcq$(this.range, x);
             }
           })
         }),
@@ -1685,16 +1938,51 @@ this['material-design'] = function (Kotlin, $module$beans, $module$elements) {
             }
           })
         }),
-        panel: Kotlin.definePackage(null, /** @lends _.fg.md.panel */ {
+        panel: Kotlin.definePackage(function () {
+          this.pkg = _.fg.md.pkg + '-panel';
+        }, /** @lends _.fg.md.panel */ {
           MDCollapsedPanel: Kotlin.createClass(function () {
             return [$module$elements.fg.elements.Div];
-          }, function MDCollapsedPanel() {
+          }, function MDCollapsedPanel(expandAction) {
             MDCollapsedPanel.baseInitializer.call(this);
-          }, null, /** @lends _.fg.md.panel.MDCollapsedPanel */ {
+            this.expandAction = expandAction;
+            this.expandButton$delegate = Kotlin.kotlin.lazy_un3fny$(_.fg.md.panel.MDCollapsedPanel.expandButton_0$f(this));
+            this.outerToolbar$delegate = Kotlin.kotlin.lazy_un3fny$(_.fg.md.panel.MDCollapsedPanel.outerToolbar_0$f);
+            this.toolbar$delegate = Kotlin.kotlin.lazy_un3fny$(_.fg.md.panel.MDCollapsedPanel.toolbar$f);
+            this.themeChangedHandler_0 = _.fg.md.panel.MDCollapsedPanel.themeChangedHandler_0$f(this);
+          }, /** @lends _.fg.md.panel.MDCollapsedPanel.prototype */ {
+            expandButton_0: {
+              get: function () {
+                return Kotlin.kotlin.getValue_em0fd4$(this.expandButton$delegate, this, new Kotlin.PropertyMetadata('expandButton'));
+              }
+            },
+            outerToolbar_0: {
+              get: function () {
+                return Kotlin.kotlin.getValue_em0fd4$(this.outerToolbar$delegate, this, new Kotlin.PropertyMetadata('outerToolbar'));
+              }
+            },
+            toolbar: {
+              get: function () {
+                return Kotlin.kotlin.getValue_em0fd4$(this.toolbar$delegate, this, new Kotlin.PropertyMetadata('toolbar'));
+              }
+            },
+            render: function () {
+              $module$elements.fg.elements.Div.prototype.render.call(this);
+              this.addClass_bx842b$(_.fg.md.panel.MDCollapsedPanel.MDCollapsedPanel.classSelector);
+              this.appendChild_sr04hg$(this.outerToolbar_0);
+              this.outerToolbar_0.appendChild_sr04hg$(this.toolbar);
+              this.outerToolbar_0.appendChild_sr04hg$(this.expandButton_0);
+              this.style.backgroundColor = _.fg.md.Context.theme.cardsNdialogs;
+            },
+            didMount: function () {
+              $module$elements.fg.elements.Div.prototype.didMount.call(this);
+              _.fg.md.Context.theme.onPropertyChanged_3m4fm7$(this.themeChangedHandler_0);
+            }
+          }, /** @lends _.fg.md.panel.MDCollapsedPanel */ {
             MDCollapsedPanel: Kotlin.createObject(function () {
               return [$module$elements.fg.elements.StyledClass];
             }, function MDCollapsedPanel() {
-              _.fg.md.panel.MDCollapsedPanel.MDCollapsedPanel.classSelector_7cc6v4$_0 = $module$elements.fg.elements.toClassSelector_pdl1w0$('md-collapsed-panel');
+              _.fg.md.panel.MDCollapsedPanel.MDCollapsedPanel.classSelector_7cc6v4$_0 = $module$elements.fg.elements.toClassSelector_pdl1w0$('fg-md-panel-collapsed-panel');
               _.fg.md.panel.MDCollapsedPanel.MDCollapsedPanel.rule_7cc6v4$_0 = _.fg.md.panel.MDCollapsedPanel.MDCollapsedPanel.rule$f;
               $module$elements.fg.elements.HTML.registerStyle_78phyd$(_.fg.md.panel.MDCollapsedPanel.MDCollapsedPanel);
             }, /** @lends _.fg.md.panel.MDCollapsedPanel.MDCollapsedPanel.prototype */ {
@@ -1710,21 +1998,168 @@ this['material-design'] = function (Kotlin, $module$beans, $module$elements) {
               }
             }, /** @lends _.fg.md.panel.MDCollapsedPanel.MDCollapsedPanel */ {
               rule$f: function () {
+                this.display = 'block';
+                this.position = 'relative';
+                this.borderRadius = '2px';
+                this.boxShadow = '0 2px 5px 0 rgba(0, 0, 0, 0.26)';
+                this.fontFamily = "Roboto, 'Helvetica Neue', sans-serif";
+                this.backgroundSize = 'cover';
               }
             }),
             object_initializer$: function () {
               _.fg.md.panel.MDCollapsedPanel.MDCollapsedPanel;
+            },
+            expandButton_0$f: function (this$MDCollapsedPanel) {
+              return function () {
+                return new _.fg.md.panel.MDExpandButton(this$MDCollapsedPanel.expandAction);
+              };
+            },
+            outerToolbar_0$f: function () {
+              var outerToolbar = new _.fg.md.toolbar.MDToolbar();
+              outerToolbar.style.paddingLeft = $module$elements.fg.elements.get_px_s8ev3o$(24);
+              outerToolbar.style.paddingRight = $module$elements.fg.elements.get_px_s8ev3o$(24);
+              outerToolbar.style.height = $module$elements.fg.elements.get_px_s8ev3o$(48);
+              outerToolbar.style.justifyContent = $module$elements.fg.elements.style.typed.JustifyContent.spaceBetween;
+              return outerToolbar;
+            },
+            toolbar$f: function () {
+              var toolbar_0 = new _.fg.md.toolbar.MDToolbar();
+              toolbar_0.style.width = new $module$elements.fg.elements.Percent(100.0);
+              toolbar_0.style.justifyContent = $module$elements.fg.elements.style.typed.JustifyContent.spaceBetween;
+              return toolbar_0;
+            },
+            themeChangedHandler_0$f: function (this$MDCollapsedPanel) {
+              return function (theme, property, old, new_0) {
+                if (Kotlin.equals(property.name, Kotlin.getCallableRefForMemberProperty('cardsNdialogs', true).name))
+                  this$MDCollapsedPanel.style.backgroundColor = _.fg.md.Context.theme.background;
+              };
+            }
+          }),
+          MDExpandButton: Kotlin.createClass(function () {
+            return [_.fg.md.button.MDToggleButton];
+          }, function MDExpandButton(action) {
+            MDExpandButton.baseInitializer.call(this, action);
+          }, /** @lends _.fg.md.panel.MDExpandButton.prototype */ {
+            render: function () {
+              _.fg.md.button.MDToggleButton.prototype.render.call(this);
+              this.addClass_bx842b$(_.fg.md.panel.MDExpandButton.MDExpandButton.classSelector);
+              this._tabindex = '-1';
+            }
+          }, /** @lends _.fg.md.panel.MDExpandButton */ {
+            MDExpandButton: Kotlin.createObject(function () {
+              return [$module$elements.fg.elements.StyledClass];
+            }, function MDExpandButton() {
+              _.fg.md.panel.MDExpandButton.MDExpandButton.classSelector_ihlpb4$_0 = $module$elements.fg.elements.toClassSelector_pdl1w0$('fg-md-panel-expand-button');
+              _.fg.md.panel.MDExpandButton.MDExpandButton.rule_ihlpb4$_0 = _.fg.md.panel.MDExpandButton.MDExpandButton.rule$f;
+              $module$elements.fg.elements.HTML.registerStyle_78phyd$(_.fg.md.panel.MDExpandButton.MDExpandButton);
+            }, /** @lends _.fg.md.panel.MDExpandButton.MDExpandButton.prototype */ {
+              classSelector: {
+                get: function () {
+                  return _.fg.md.panel.MDExpandButton.MDExpandButton.classSelector_ihlpb4$_0;
+                }
+              },
+              rule: {
+                get: function () {
+                  return _.fg.md.panel.MDExpandButton.MDExpandButton.rule_ihlpb4$_0;
+                }
+              }
+            }, /** @lends _.fg.md.panel.MDExpandButton.MDExpandButton */ {
+              rule$f: function () {
+                this.paddingLeft = '16px';
+              }
+            }),
+            object_initializer$: function () {
+              _.fg.md.panel.MDExpandButton.MDExpandButton;
+            }
+          }),
+          MDExpandedContent: Kotlin.createClass(function () {
+            return [$module$elements.fg.elements.Div];
+          }, function MDExpandedContent() {
+            MDExpandedContent.baseInitializer.call(this);
+          }, /** @lends _.fg.md.panel.MDExpandedContent.prototype */ {
+            render: function () {
+              $module$elements.fg.elements.Div.prototype.render.call(this);
+              this.addClass_bx842b$(_.fg.md.panel.MDExpandedContent.MDExpandedContent.classSelector);
+            }
+          }, /** @lends _.fg.md.panel.MDExpandedContent */ {
+            MDExpandedContent: Kotlin.createObject(function () {
+              return [$module$elements.fg.elements.StyledClass];
+            }, function MDExpandedContent() {
+              _.fg.md.panel.MDExpandedContent.MDExpandedContent.classSelector_8uui6i$_0 = $module$elements.fg.elements.toClassSelector_pdl1w0$('fg-md-panel-expanded-content');
+              _.fg.md.panel.MDExpandedContent.MDExpandedContent.rule_8uui6i$_0 = _.fg.md.panel.MDExpandedContent.MDExpandedContent.rule$f;
+              $module$elements.fg.elements.HTML.registerStyle_78phyd$(_.fg.md.panel.MDExpandedContent.MDExpandedContent);
+            }, /** @lends _.fg.md.panel.MDExpandedContent.MDExpandedContent.prototype */ {
+              classSelector: {
+                get: function () {
+                  return _.fg.md.panel.MDExpandedContent.MDExpandedContent.classSelector_8uui6i$_0;
+                }
+              },
+              rule: {
+                get: function () {
+                  return _.fg.md.panel.MDExpandedContent.MDExpandedContent.rule_8uui6i$_0;
+                }
+              }
+            }, /** @lends _.fg.md.panel.MDExpandedContent.MDExpandedContent */ {
+              rule$f: function () {
+                this.paddingTop = '16px';
+                this.paddingLeft = '16px';
+                this.paddingRight = '16px';
+                this.paddingBottom = '16px';
+              }
+            }),
+            object_initializer$: function () {
+              _.fg.md.panel.MDExpandedContent.MDExpandedContent;
             }
           }),
           MDExpandedPanel: Kotlin.createClass(function () {
             return [$module$elements.fg.elements.Div];
-          }, function MDExpandedPanel() {
+          }, function MDExpandedPanel(expandAction) {
             MDExpandedPanel.baseInitializer.call(this);
-          }, null, /** @lends _.fg.md.panel.MDExpandedPanel */ {
+            this.expandAction = expandAction;
+            this.expandButton$delegate = Kotlin.kotlin.lazy_un3fny$(_.fg.md.panel.MDExpandedPanel.expandButton_0$f(this));
+            this.outerToolbar$delegate = Kotlin.kotlin.lazy_un3fny$(_.fg.md.panel.MDExpandedPanel.outerToolbar_0$f);
+            this.toolbar$delegate = Kotlin.kotlin.lazy_un3fny$(_.fg.md.panel.MDExpandedPanel.toolbar$f);
+            this.content$delegate = Kotlin.kotlin.lazy_un3fny$(_.fg.md.panel.MDExpandedPanel.content$f);
+            this.themeChangedHandler_0 = _.fg.md.panel.MDExpandedPanel.themeChangedHandler_0$f(this);
+          }, /** @lends _.fg.md.panel.MDExpandedPanel.prototype */ {
+            expandButton_0: {
+              get: function () {
+                return Kotlin.kotlin.getValue_em0fd4$(this.expandButton$delegate, this, new Kotlin.PropertyMetadata('expandButton'));
+              }
+            },
+            outerToolbar_0: {
+              get: function () {
+                return Kotlin.kotlin.getValue_em0fd4$(this.outerToolbar$delegate, this, new Kotlin.PropertyMetadata('outerToolbar'));
+              }
+            },
+            toolbar: {
+              get: function () {
+                return Kotlin.kotlin.getValue_em0fd4$(this.toolbar$delegate, this, new Kotlin.PropertyMetadata('toolbar'));
+              }
+            },
+            content: {
+              get: function () {
+                return Kotlin.kotlin.getValue_em0fd4$(this.content$delegate, this, new Kotlin.PropertyMetadata('content'));
+              }
+            },
+            render: function () {
+              $module$elements.fg.elements.Div.prototype.render.call(this);
+              this.addClass_bx842b$(_.fg.md.panel.MDExpandedPanel.MDExpandedPanel.classSelector);
+              this.outerToolbar_0.appendChild_sr04hg$(this.toolbar);
+              this.outerToolbar_0.appendChild_sr04hg$(this.expandButton_0);
+              this.appendChild_sr04hg$(this.outerToolbar_0);
+              this.appendChild_sr04hg$(this.content);
+              this.style.backgroundColor = _.fg.md.Context.theme.cardsNdialogs;
+            },
+            didMount: function () {
+              $module$elements.fg.elements.Div.prototype.didMount.call(this);
+              _.fg.md.Context.theme.onPropertyChanged_3m4fm7$(this.themeChangedHandler_0);
+            }
+          }, /** @lends _.fg.md.panel.MDExpandedPanel */ {
             MDExpandedPanel: Kotlin.createObject(function () {
               return [$module$elements.fg.elements.StyledClass];
             }, function MDExpandedPanel() {
-              _.fg.md.panel.MDExpandedPanel.MDExpandedPanel.classSelector_p43iwk$_0 = $module$elements.fg.elements.toClassSelector_pdl1w0$('md-expanded-panel');
+              _.fg.md.panel.MDExpandedPanel.MDExpandedPanel.classSelector_p43iwk$_0 = $module$elements.fg.elements.toClassSelector_pdl1w0$('fg-md-panel-expanded-panel');
               _.fg.md.panel.MDExpandedPanel.MDExpandedPanel.rule_p43iwk$_0 = _.fg.md.panel.MDExpandedPanel.MDExpandedPanel.rule$f;
               $module$elements.fg.elements.HTML.registerStyle_78phyd$(_.fg.md.panel.MDExpandedPanel.MDExpandedPanel);
             }, /** @lends _.fg.md.panel.MDExpandedPanel.MDExpandedPanel.prototype */ {
@@ -1740,31 +2175,143 @@ this['material-design'] = function (Kotlin, $module$beans, $module$elements) {
               }
             }, /** @lends _.fg.md.panel.MDExpandedPanel.MDExpandedPanel */ {
               rule$f: function () {
+                this.display = 'block';
+                this.position = 'relative';
+                this.borderRadius = '2px';
+                this.boxShadow = '0 2px 5px 0 rgba(0, 0, 0, 0.26)';
+                this.fontFamily = "Roboto, 'Helvetica Neue', sans-serif";
+                this.backgroundSize = 'cover';
               }
             }),
             object_initializer$: function () {
               _.fg.md.panel.MDExpandedPanel.MDExpandedPanel;
+            },
+            expandButton_0$f: function (this$MDExpandedPanel) {
+              return function () {
+                return new _.fg.md.panel.MDExpandButton(this$MDExpandedPanel.expandAction);
+              };
+            },
+            outerToolbar_0$f: function () {
+              var outerToolbar = new _.fg.md.toolbar.MDToolbar();
+              outerToolbar.style.paddingLeft = $module$elements.fg.elements.get_px_s8ev3o$(24);
+              outerToolbar.style.paddingRight = $module$elements.fg.elements.get_px_s8ev3o$(24);
+              outerToolbar.style.height = $module$elements.fg.elements.get_px_s8ev3o$(48);
+              outerToolbar.style.justifyContent = $module$elements.fg.elements.style.typed.JustifyContent.spaceBetween;
+              return outerToolbar;
+            },
+            toolbar$f: function () {
+              var toolbar_0 = new _.fg.md.toolbar.MDToolbar();
+              toolbar_0.style.width = new $module$elements.fg.elements.Percent(100.0);
+              toolbar_0.style.justifyContent = $module$elements.fg.elements.style.typed.JustifyContent.spaceBetween;
+              return toolbar_0;
+            },
+            content$f: function () {
+              return new _.fg.md.panel.MDExpandedContent();
+            },
+            themeChangedHandler_0$f: function (this$MDExpandedPanel) {
+              return function (theme, property, old, new_0) {
+                if (Kotlin.equals(property.name, Kotlin.getCallableRefForMemberProperty('cardsNdialogs', true).name))
+                  this$MDExpandedPanel.style.backgroundColor = _.fg.md.Context.theme.background;
+              };
             }
           }),
           MDExpansionPanel: Kotlin.createClass(function () {
             return [$module$elements.fg.elements.Div];
           }, function MDExpansionPanel() {
             MDExpansionPanel.baseInitializer.call(this);
-            this.collapsedPanel = null;
-            this.expandedPanel = null;
+            this.expandCollapseHandler_0 = _.fg.md.panel.MDExpansionPanel.expandCollapseHandler_0$f(this);
+            this.state$delegate = new Kotlin.kotlin.properties.Delegates.observable$f(_.fg.md.panel.MDExpansionPanel.state$f(this), _.fg.md.panel.MDExpansionPanel.State.COLLAPSED);
+            this.expandAction$delegate = Kotlin.kotlin.lazy_un3fny$(_.fg.md.panel.MDExpansionPanel.expandAction_0$f(this));
+            this.collapsed$delegate = Kotlin.kotlin.lazy_un3fny$(_.fg.md.panel.MDExpansionPanel.collapsed$f(this));
+            this.expanded$delegate = Kotlin.kotlin.lazy_un3fny$(_.fg.md.panel.MDExpansionPanel.expanded$f(this));
+            this.focused_4n7l8q$_0 = false;
+            this.focusHandler_0 = _.fg.md.panel.MDExpansionPanel.focusHandler_0$f(this);
+            this.blurHandler_0 = _.fg.md.panel.MDExpansionPanel.blurHandler_0$f(this);
+            this.keyUpHandler_0 = _.fg.md.panel.MDExpansionPanel.keyUpHandler_0$f(this);
           }, /** @lends _.fg.md.panel.MDExpansionPanel.prototype */ {
+            state: {
+              get: function () {
+                return this.state$delegate.getValue_dsk1ci$(this, new Kotlin.PropertyMetadata('state'));
+              },
+              set: function (state_0) {
+                this.state$delegate.setValue_w32e13$(this, new Kotlin.PropertyMetadata('state'), state_0);
+              }
+            },
+            expandAction_0: {
+              get: function () {
+                return Kotlin.kotlin.getValue_em0fd4$(this.expandAction$delegate, this, new Kotlin.PropertyMetadata('expandAction'));
+              }
+            },
+            collapsed: {
+              get: function () {
+                return Kotlin.kotlin.getValue_em0fd4$(this.collapsed$delegate, this, new Kotlin.PropertyMetadata('collapsed'));
+              }
+            },
+            expanded: {
+              get: function () {
+                return Kotlin.kotlin.getValue_em0fd4$(this.expanded$delegate, this, new Kotlin.PropertyMetadata('expanded'));
+              }
+            },
+            focused: {
+              get: function () {
+                return this.focused_4n7l8q$_0;
+              },
+              set: function (focused_0) {
+                this.focused_4n7l8q$_0 = focused_0;
+              }
+            },
+            onFocus_0: function () {
+              if (this.isCollapsed()) {
+                this.collapsed.outerToolbar_0.style.backgroundColor = new $module$elements.fg.style.colour.RgbColor(238, 238, 238);
+                this.collapsed.toolbar.style.backgroundColor = new $module$elements.fg.style.colour.RgbColor(238, 238, 238);
+              }
+               else {
+                this.expanded.outerToolbar_0.style.backgroundColor = new $module$elements.fg.style.colour.RgbColor(238, 238, 238);
+                this.expanded.toolbar.style.backgroundColor = new $module$elements.fg.style.colour.RgbColor(238, 238, 238);
+              }
+            },
+            unFocus_0: function () {
+              if (this.isCollapsed()) {
+                this.collapsed.outerToolbar_0.style.backgroundColor = $module$elements.fg.style.colour.RgbColor.Factory.WHITE;
+                this.collapsed.toolbar.style.backgroundColor = $module$elements.fg.style.colour.RgbColor.Factory.WHITE;
+              }
+               else {
+                this.expanded.outerToolbar_0.style.backgroundColor = $module$elements.fg.style.colour.RgbColor.Factory.WHITE;
+                this.expanded.toolbar.style.backgroundColor = $module$elements.fg.style.colour.RgbColor.Factory.WHITE;
+              }
+            },
+            isExpanded: function () {
+              return !this.expanded.hidden;
+            },
+            isCollapsed: function () {
+              return !this.collapsed.hidden;
+            },
+            toggle: function () {
+              this.expandAction_0.perform_54c9de$(this);
+            },
             render: function () {
               $module$elements.fg.elements.Div.prototype.render.call(this);
+              this.addClass_bx842b$(_.fg.md.panel.MDExpansionPanel.MDExpansionPanel.classSelector);
+              this._tabindex = '0';
+              this.prependChild_sr04hg$(this.expanded);
+              this.prependChild_sr04hg$(this.collapsed);
+              this.collapsed.show();
+              this.expanded.hide();
+            },
+            didMount: function () {
+              $module$elements.fg.elements.Div.prototype.didMount.call(this);
+              $module$elements.fg.elements.onFocus_m2anqv$(this, this.focusHandler_0);
+              $module$elements.fg.elements.onBlur_m2anqv$(this, this.blurHandler_0);
+              $module$elements.fg.elements.onKeyUp_da4jf4$(this, this.keyUpHandler_0);
             },
             renderState_0: function (state) {
-              var tmp$1, tmp$2, tmp$3, tmp$4;
               if (Kotlin.equals(state, _.fg.md.panel.MDExpansionPanel.State.COLLAPSED)) {
-                (tmp$1 = this.expandedPanel) != null ? tmp$1.hide() : null;
-                (tmp$2 = this.collapsedPanel) != null ? tmp$2.show() : null;
+                this.expanded.hide();
+                this.collapsed.show();
               }
                else if (Kotlin.equals(state, _.fg.md.panel.MDExpansionPanel.State.EXPANDED)) {
-                (tmp$3 = this.collapsedPanel) != null ? tmp$3.hide() : null;
-                (tmp$4 = this.expandedPanel) != null ? tmp$4.show() : null;
+                this.collapsed.hide();
+                this.expanded.show();
               }
             }
           }, /** @lends _.fg.md.panel.MDExpansionPanel */ {
@@ -1785,9 +2332,8 @@ this['material-design'] = function (Kotlin, $module$beans, $module$elements) {
             MDExpansionPanel: Kotlin.createObject(function () {
               return [$module$elements.fg.elements.StyledClass];
             }, function MDExpansionPanel() {
-              _.fg.md.panel.MDExpansionPanel.MDExpansionPanel.classSelector_v3q4lc$_0 = $module$elements.fg.elements.toClassSelector_pdl1w0$('md-expansion-panel');
-              _.fg.md.panel.MDExpansionPanel.MDExpansionPanel.closed = $module$elements.fg.elements.toClassSelector_pdl1w0$('closed');
-              _.fg.md.panel.MDExpansionPanel.MDExpansionPanel.rule_v3q4lc$_0 = _.fg.md.panel.MDExpansionPanel.MDExpansionPanel.rule$f;
+              _.fg.md.panel.MDExpansionPanel.MDExpansionPanel.classSelector_v3q4lc$_0 = $module$elements.fg.elements.toClassSelector_pdl1w0$('fg-md-panel-expansion-panel');
+              _.fg.md.panel.MDExpansionPanel.MDExpansionPanel.rule_v3q4lc$_0 = _.fg.md.panel.MDExpansionPanel.MDExpansionPanel.rule$f(_.fg.md.panel.MDExpansionPanel.MDExpansionPanel);
               $module$elements.fg.elements.HTML.registerStyle_78phyd$(_.fg.md.panel.MDExpansionPanel.MDExpansionPanel);
             }, /** @lends _.fg.md.panel.MDExpansionPanel.MDExpansionPanel.prototype */ {
               classSelector: {
@@ -1801,11 +2347,67 @@ this['material-design'] = function (Kotlin, $module$beans, $module$elements) {
                 }
               }
             }, /** @lends _.fg.md.panel.MDExpansionPanel.MDExpansionPanel */ {
-              rule$f: function () {
+              f: function () {
+                this.marginTop = '1px';
+              },
+              f_0: function () {
+                this.outline = 'none';
+              },
+              rule$f: function (this$MDExpansionPanel$) {
+                return function () {
+                  $module$elements.fg.style.adjacentSibling_5wx98v$(this, this$MDExpansionPanel$.classSelector, _.fg.md.panel.MDExpansionPanel.MDExpansionPanel.f);
+                  $module$elements.fg.style.focus_i5tde3$(this, _.fg.md.panel.MDExpansionPanel.MDExpansionPanel.f_0);
+                };
               }
             }),
             object_initializer$: function () {
               _.fg.md.panel.MDExpansionPanel.MDExpansionPanel;
+            },
+            expandCollapseHandler_0$f: function (this$MDExpansionPanel) {
+              return function (action) {
+                this$MDExpansionPanel.state = this$MDExpansionPanel.state === _.fg.md.panel.MDExpansionPanel.State.EXPANDED ? _.fg.md.panel.MDExpansionPanel.State.COLLAPSED : _.fg.md.panel.MDExpansionPanel.State.EXPANDED;
+              };
+            },
+            state$f: function (this$MDExpansionPanel) {
+              return function (property, old, new_0) {
+                this$MDExpansionPanel.renderState_0(new_0);
+              };
+            },
+            expandAction_0$f: function (this$MDExpansionPanel) {
+              return function () {
+                return new $module$beans.fg.beans.action.SelectableAction(void 0, void 0, _.fg.md.icon.MDIconProvider.Statics.expand_less, _.fg.md.icon.MDIconProvider.Statics.expand_more, void 0, void 0, this$MDExpansionPanel.expandCollapseHandler_0);
+              };
+            },
+            collapsed$f: function (this$MDExpansionPanel) {
+              return function () {
+                return new _.fg.md.panel.MDCollapsedPanel(this$MDExpansionPanel.expandAction_0);
+              };
+            },
+            expanded$f: function (this$MDExpansionPanel) {
+              return function () {
+                return new _.fg.md.panel.MDExpandedPanel(this$MDExpansionPanel.expandAction_0);
+              };
+            },
+            focusHandler_0$f: function (this$MDExpansionPanel) {
+              return function (it) {
+                this$MDExpansionPanel.focused = true;
+                this$MDExpansionPanel.toggleClass_ivxn3r$('focused', true);
+                this$MDExpansionPanel.onFocus_0();
+              };
+            },
+            blurHandler_0$f: function (this$MDExpansionPanel) {
+              return function (it) {
+                this$MDExpansionPanel.focused = false;
+                this$MDExpansionPanel.toggleClass_ivxn3r$('focused');
+                this$MDExpansionPanel.unFocus_0();
+              };
+            },
+            keyUpHandler_0$f: function (this$MDExpansionPanel) {
+              return function (event) {
+                if (event.which === 13) {
+                  this$MDExpansionPanel.toggle();
+                }
+              };
             }
           })
         }),
@@ -1896,25 +2498,23 @@ this['material-design'] = function (Kotlin, $module$beans, $module$elements) {
                 return Kotlin.kotlin.getValue_em0fd4$(this.rippleContainer$delegate, this, new Kotlin.PropertyMetadata('rippleContainer'));
               }
             },
-            start_0: function (pageX, pageY) {
-              var size = this.element.offsetWidth;
-              var pos = this.element.boundingClientRect;
-              var halfSize = size / 2;
-              var x = pageX - pos.left - halfSize - window.scrollX;
-              var y = pageY - pos.top - halfSize - window.scrollY;
-              console.log('scrollX' + window.scrollX);
-              console.log('scrollY' + window.scrollY);
-              var rippleInk = new _.fg.md.support.RippleInk(this.inkColor);
-              this.rippleContainer_0.appendChild_sr04hg$(rippleInk);
-              rippleInk.setPosition_0(Kotlin.kotlin.to_l1ob02$(x, y));
-              rippleInk.setSize_0($module$elements.fg.elements.get_px_yrwdxs$(size));
-            },
             init: function () {
               this.element.appendChild_sr04hg$(this.rippleContainer_0);
               $module$elements.fg.elements.onMouseDown_9cq9y2$(this.element, this.handleMouseDown_0);
               $module$elements.fg.elements.onMouseDown_9cq9y2$(this.element, $module$elements.fg.base.bounceUntil_w5kaku$(this.handleMouseDown_rippleDone_0, 1000));
               $module$elements.fg.elements.onMouseUp_9cq9y2$(this.element, $module$elements.fg.base.debounce1_w5kaku$(this.cleanUp_0, 2000));
               this.element.addClass_bx842b$(_.fg.md.support.Ripple.Factory.rippleTargetClass);
+            },
+            start_0: function (pageX, pageY) {
+              var size = this.element.offsetWidth;
+              var pos = this.element.boundingClientRect;
+              var halfSize = size / 2 | 0;
+              var x = pageX - pos.left - halfSize - window.scrollX;
+              var y = pageY - pos.top - halfSize - window.scrollY;
+              var rippleInk = new _.fg.md.support.RippleInk(this.inkColor);
+              this.rippleContainer_0.appendChild_sr04hg$(rippleInk);
+              rippleInk.setPosition_0(Kotlin.kotlin.to_l1ob02$(x, y));
+              rippleInk.setSize_0($module$elements.fg.elements.get_px_s8ev3o$(size));
             }
           }, /** @lends _.fg.md.support.Ripple */ {
             Factory: Kotlin.createObject(null, function Factory() {
@@ -1947,7 +2547,6 @@ this['material-design'] = function (Kotlin, $module$beans, $module$elements) {
             handleMouseDown_rippleDone_0$f: function (this$Ripple) {
               return function (e) {
                 var tmp$0;
-                console.log('handleMouseDown_rippleDone');
                 (tmp$0 = this$Ripple.doneCallback) != null ? tmp$0() : null;
               };
             },
@@ -2072,6 +2671,54 @@ this['material-design'] = function (Kotlin, $module$beans, $module$elements) {
               return function (property, old, new_0) {
                 this$RippleInk.renderColor_0(new_0);
               };
+            }
+          })
+        }),
+        toolbar: Kotlin.definePackage(null, /** @lends _.fg.md.toolbar */ {
+          MDToolbar: Kotlin.createClass(function () {
+            return [$module$elements.fg.elements.Div];
+          }, function MDToolbar() {
+            MDToolbar.baseInitializer.call(this);
+          }, /** @lends _.fg.md.toolbar.MDToolbar.prototype */ {
+            render: function () {
+              $module$elements.fg.elements.Div.prototype.render.call(this);
+              this.addClass_bx842b$(_.fg.md.toolbar.MDToolbar.MDToolbar.classSelector);
+              this.style.backgroundColor = _.fg.md.Context.theme.toolbar;
+            }
+          }, /** @lends _.fg.md.toolbar.MDToolbar */ {
+            MDToolbar: Kotlin.createObject(function () {
+              return [$module$elements.fg.elements.StyledClass];
+            }, function MDToolbar() {
+              _.fg.md.toolbar.MDToolbar.MDToolbar.classSelector_z3ettp$_0 = $module$elements.fg.elements.toClassSelector_pdl1w0$('fg-md-toolbar');
+              _.fg.md.toolbar.MDToolbar.MDToolbar.rule_z3ettp$_0 = _.fg.md.toolbar.MDToolbar.MDToolbar.rule$f;
+              $module$elements.fg.elements.HTML.registerStyle_78phyd$(_.fg.md.toolbar.MDToolbar.MDToolbar);
+            }, /** @lends _.fg.md.toolbar.MDToolbar.MDToolbar.prototype */ {
+              spacer: function () {
+                var span = $module$elements.fg.elements.with_ji1yox$(new $module$elements.fg.elements.Span(), _.fg.md.toolbar.MDToolbar.MDToolbar.spacer$f);
+                return span;
+              },
+              classSelector: {
+                get: function () {
+                  return _.fg.md.toolbar.MDToolbar.MDToolbar.classSelector_z3ettp$_0;
+                }
+              },
+              rule: {
+                get: function () {
+                  return _.fg.md.toolbar.MDToolbar.MDToolbar.rule_z3ettp$_0;
+                }
+              }
+            }, /** @lends _.fg.md.toolbar.MDToolbar.MDToolbar */ {
+              spacer$f: function () {
+                this.style.flex = new $module$elements.fg.elements.style.typed.Flex(1);
+              },
+              rule$f: function () {
+                this.display = 'flex';
+                this.flexDirection = 'row';
+                this.alignItems = 'center';
+              }
+            }),
+            object_initializer$: function () {
+              _.fg.md.toolbar.MDToolbar.MDToolbar;
             }
           })
         })

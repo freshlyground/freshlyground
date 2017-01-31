@@ -1,5 +1,6 @@
 package fg.style
 
+import fg.elements.AdjacentSiblingSelector
 import fg.elements.AndSelector
 import fg.elements.AnimationNameSelector
 import fg.elements.ChildSelector
@@ -41,6 +42,20 @@ fun Rule<*>.and(selector: String, init: AndRule.() -> Unit): AndRule {
 
 fun Rule<*>.and(selector: Selector, init: AndRule.() -> Unit): AndRule {
     val style = AndRule(AndSelector(this.selector, selector))
+    style.init()
+    this._childStyles.add(style)
+    return style
+}
+
+fun Rule<*>.adjacentSibling(selector: String, init: AdjacentSiblingRule.() -> Unit): AdjacentSiblingRule {
+    val style = AdjacentSiblingRule(AdjacentSiblingSelector(this.selector, selector.toSelector()))
+    style.init()
+    this._childStyles.add(style)
+    return style
+}
+
+fun Rule<*>.adjacentSibling(selector: Selector, init: AdjacentSiblingRule.() -> Unit): AdjacentSiblingRule {
+    val style = AdjacentSiblingRule(AdjacentSiblingSelector(this.selector, selector))
     style.init()
     this._childStyles.add(style)
     return style

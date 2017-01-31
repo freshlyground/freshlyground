@@ -1,6 +1,9 @@
 package fg.beans
 
 import fg.base.Side
+import fg.beans.action.Action
+import fg.beans.action.ActionPerform
+import fg.beans.action.SelectableAction
 import fg.beans.drawer.dock
 import fg.beans.drawer.undock
 import fg.elements.BODY
