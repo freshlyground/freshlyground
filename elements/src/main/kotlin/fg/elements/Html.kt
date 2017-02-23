@@ -17,18 +17,23 @@ class Html internal constructor(val w3cElement: Element = document.documentEleme
     private val stylesheet: CSSStyleSheet by lazy { document.styleSheets[0] as CSSStyleSheet }
     private val registeredClassStyles: MutableMap<String, Rule<*>> = hashMapOf()
 
-    fun init() {
+    fun init(borderBox: Boolean = true,
+             height100percent: Boolean = true) {
 
-        addCSSRule(AnyRule() with {
-            boxSizing = "border-box"
-        })
+        if (borderBox) {
+            addCSSRule(AnyRule() with {
+                boxSizing = "border-box"
+            })
+        }
 
-        addCSSRule(TypeRule(TypeSelector("html")) with {
-            height = "100%"
-        })
-        addCSSRule(TypeRule(TypeSelector("body")) with {
-            height = "100%"
-        })
+        if (height100percent) {
+            addCSSRule(TypeRule(TypeSelector("html")) with {
+                height = "100%"
+            })
+            addCSSRule(TypeRule(TypeSelector("body")) with {
+                height = "100%"
+            })
+        }
 
         BODY.init()
 
