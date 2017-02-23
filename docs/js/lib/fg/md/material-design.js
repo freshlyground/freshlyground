@@ -462,53 +462,53 @@ this['material-design'] = function (Kotlin, $module$beans, $module$elements) {
               }
             }, /** @lends _.fg.md.button.MDButton.MDButton */ {
               f: function () {
-                this.outline = 'none';
+                this._outline = 'none';
               },
               f_0: function () {
-                this.minWidth = '88px';
-                this.width = '';
-                this.height = '36px';
-                this.boxShadow = 'none';
-                this.border = 'none';
+                this._minWidth = '88px';
+                this._width = '';
+                this._height = '36px';
+                this._boxShadow = 'none';
+                this._border = 'none';
               },
               f_1: function () {
-                this.boxShadow = '0 4px 8px 0 rgba(0,0,0,.4)';
+                this._boxShadow = '0 4px 8px 0 rgba(0,0,0,.4)';
               },
               f_2: function () {
-                this.boxShadow = 'none';
+                this._boxShadow = 'none';
               },
               f_3: function () {
-                this.minWidth = '88px';
-                this.width = '';
-                this.height = '36px';
-                this.border = 'none';
-                this.boxShadow = 'rgba(0, 0, 0, 0.117647) 0px 1px 6px, rgba(0, 0, 0, 0.117647) 0px 1px 4px';
+                this._minWidth = '88px';
+                this._width = '';
+                this._height = '36px';
+                this._border = 'none';
+                this._boxShadow = 'rgba(0, 0, 0, 0.117647) 0px 1px 6px, rgba(0, 0, 0, 0.117647) 0px 1px 4px';
                 $module$elements.fg.style.active_i5tde3$(this, _.fg.md.button.MDButton.MDButton.f_1);
                 $module$elements.fg.style.and_dbehhi$(this, $module$beans.fg.beans.button.AbstractButton.AbstractButton.DISABLED, _.fg.md.button.MDButton.MDButton.f_2);
               },
               f_4: function () {
-                this.boxShadow = '0 4px 8px 0 rgba(0,0,0,.4)';
+                this._boxShadow = '0 4px 8px 0 rgba(0,0,0,.4)';
               },
               f_5: function () {
-                this.boxShadow = 'none';
+                this._boxShadow = 'none';
               },
               f_6: function () {
-                this.width = '40px';
-                this.height = '40px';
-                this.border = 'none';
-                this.boxShadow = 'rgba(0, 0, 0, 0.117647) 0px 1px 6px, rgba(0, 0, 0, 0.117647) 0px 1px 4px';
-                this.borderRadius = '50%';
+                this._width = '40px';
+                this._height = '40px';
+                this._border = 'none';
+                this._boxShadow = 'rgba(0, 0, 0, 0.117647) 0px 1px 6px, rgba(0, 0, 0, 0.117647) 0px 1px 4px';
+                this._borderRadius = '50%';
                 $module$elements.fg.style.active_i5tde3$(this, _.fg.md.button.MDButton.MDButton.f_4);
                 $module$elements.fg.style.and_dbehhi$(this, $module$beans.fg.beans.button.AbstractButton.AbstractButton.DISABLED, _.fg.md.button.MDButton.MDButton.f_5);
               },
               rule$f: function (this$MDButton$) {
                 return function () {
-                  this.borderRadius = '2px';
-                  this.marginLeft = '8px';
-                  this.marginRight = '8px';
-                  this.fontFamily = _.fg.md.Context.theme.font;
-                  this.fontSize = '14px';
-                  this.fontWeight = '500';
+                  this._borderRadius = '2px';
+                  this._marginLeft = '8px';
+                  this._marginRight = '8px';
+                  this._fontFamily = _.fg.md.Context.theme.font;
+                  this._fontSize = '14px';
+                  this._fontWeight = '500';
                   $module$elements.fg.style.focus_i5tde3$(this, _.fg.md.button.MDButton.MDButton.f);
                   $module$elements.fg.style.and_dbehhi$(this, this$MDButton$.TYPE_FLAT_0, _.fg.md.button.MDButton.MDButton.f_0);
                   $module$elements.fg.style.and_dbehhi$(this, this$MDButton$.TYPE_RAISED_0, _.fg.md.button.MDButton.MDButton.f_3);
@@ -581,20 +581,20 @@ this['material-design'] = function (Kotlin, $module$beans, $module$elements) {
               }
             }, /** @lends _.fg.md.button.MDToggleButton.MDToggleButton */ {
               f: function () {
-                this.boxShadow = 'none';
-                this.border = 'none';
-                this.backgroundColor = $module$elements.fg.style.colour.RgbColor.Factory.TRANSPARENT.toString();
+                this._boxShadow = 'none';
+                this._border = 'none';
+                this._backgroundColor = $module$elements.fg.style.colour.RgbColor.Factory.TRANSPARENT.toString();
               },
               f_0: function () {
-                this.boxShadow = 'none';
-                this.border = 'none';
-                this.backgroundColor = $module$elements.fg.style.colour.RgbColor.Factory.TRANSPARENT.toString();
+                this._boxShadow = 'none';
+                this._border = 'none';
+                this._backgroundColor = $module$elements.fg.style.colour.RgbColor.Factory.TRANSPARENT.toString();
               },
               rule$f: function () {
-                this.height = '36px';
-                this.boxShadow = 'none';
-                this.border = 'none';
-                this.backgroundColor = $module$elements.fg.style.colour.RgbColor.Factory.TRANSPARENT.toString();
+                this._height = '36px';
+                this._boxShadow = 'none';
+                this._border = 'none';
+                this._backgroundColor = $module$elements.fg.style.colour.RgbColor.Factory.TRANSPARENT.toString();
                 $module$elements.fg.style.and_jweaar$(this, '.selected', _.fg.md.button.MDToggleButton.MDToggleButton.f);
                 $module$elements.fg.style.and_jweaar$(this, '.focused', _.fg.md.button.MDToggleButton.MDToggleButton.f_0);
               }
@@ -640,12 +640,12 @@ this['material-design'] = function (Kotlin, $module$beans, $module$elements) {
               }
             }, /** @lends _.fg.md.card.MDCard.MDCard */ {
               rule$f: function () {
-                this.display = 'block';
-                this.position = 'relative';
-                this.borderRadius = '2px';
-                this.boxShadow = '0 2px 5px 0 rgba(0, 0, 0, 0.26)';
-                this.fontFamily = "Roboto, 'Helvetica Neue', sans-serif";
-                this.backgroundSize = 'cover';
+                this._display = 'block';
+                this._position = 'relative';
+                this._borderRadius = '2px';
+                this._boxShadow = '0 2px 5px 0 rgba(0, 0, 0, 0.26)';
+                this._fontFamily = "Roboto, 'Helvetica Neue', sans-serif";
+                this._backgroundSize = 'cover';
               }
             }),
             object_initializer$: function () {
@@ -687,7 +687,7 @@ this['material-design'] = function (Kotlin, $module$beans, $module$elements) {
               }
             }, /** @lends _.fg.md.card.MDCardActions.MDCardActions */ {
               rule$f: function () {
-                this.padding = '8px';
+                this._padding = '8px';
               }
             }),
             object_initializer$: function () {
@@ -723,9 +723,9 @@ this['material-design'] = function (Kotlin, $module$beans, $module$elements) {
               }
             }, /** @lends _.fg.md.card.MDCardAvatar.MDCardAvatar */ {
               rule$f: function () {
-                this.width = '40px';
-                this.height = '40px';
-                this.borderRadius = '50%';
+                this._width = '40px';
+                this._height = '40px';
+                this._borderRadius = '50%';
               }
             }),
             object_initializer$: function () {
@@ -761,14 +761,14 @@ this['material-design'] = function (Kotlin, $module$beans, $module$elements) {
               }
             }, /** @lends _.fg.md.card.MDCardContent.Statics */ {
               f: function () {
-                this.marginTop = '0';
+                this._marginTop = '0';
               },
               f_0: function () {
                 $module$elements.fg.style.firstChild_i5tde3$(this, _.fg.md.card.MDCardContent.Statics.f);
               },
               rule$f: function () {
-                this.fontSize = '14px';
-                this.padding = '16px';
+                this._fontSize = '14px';
+                this._padding = '16px';
                 $module$elements.fg.style.child_lij791$(this, $module$elements.fg.elements.Selector.Statics.ANY, _.fg.md.card.MDCardContent.Statics.f_0);
               }
             }),
@@ -805,10 +805,10 @@ this['material-design'] = function (Kotlin, $module$beans, $module$elements) {
               }
             }, /** @lends _.fg.md.card.MDCardHeader.MDCardHeader */ {
               f: function () {
-                this.fontSize = '14px';
+                this._fontSize = '14px';
               },
               f_0: function () {
-                this.marginRight = '12px';
+                this._marginRight = '12px';
               },
               f_1: function () {
               },
@@ -816,9 +816,9 @@ this['material-design'] = function (Kotlin, $module$beans, $module$elements) {
                 $module$elements.fg.style.not_dbehhi$(this, $module$elements.fg.elements.toSelector_pdl1w0$(':first-child'), _.fg.md.card.MDCardHeader.MDCardHeader.f_1);
               },
               rule$f: function () {
-                this.display = 'flex';
-                this.flexDirection = 'row';
-                this.padding = '16px';
+                this._display = 'flex';
+                this._flexDirection = 'row';
+                this._padding = '16px';
                 $module$elements.fg.style.child_lij791$(this, _.fg.md.card.MDCardTitle.MDCardTitle.classSelector, _.fg.md.card.MDCardHeader.MDCardHeader.f);
                 $module$elements.fg.style.child_lij791$(this, _.fg.md.card.MDCardAvatar.MDCardAvatar.classSelector, _.fg.md.card.MDCardHeader.MDCardHeader.f_0);
                 $module$elements.fg.style.child_lij791$(this, _.fg.md.card.MDCardSubtitle.MDCardSubtitle.classSelector, _.fg.md.card.MDCardHeader.MDCardHeader.f_2);
@@ -857,16 +857,16 @@ this['material-design'] = function (Kotlin, $module$beans, $module$elements) {
               }
             }, /** @lends _.fg.md.card.MDCardHeaderText.MDCardHeaderText */ {
               f: function () {
-                this.padding = '0';
-                this.fontSize = '14px';
-                this.fontWeight = '500';
+                this._padding = '0';
+                this._fontSize = '14px';
+                this._fontWeight = '500';
               },
               f_0: function () {
-                this.flex = '1';
+                this._flex = '1';
               },
               rule$f: function () {
-                this.display = 'flex';
-                this.flexDirection = 'column';
+                this._display = 'flex';
+                this._flexDirection = 'column';
                 $module$elements.fg.style.child_lij791$(this, _.fg.md.card.MDCardTitle.MDCardTitle.classSelector, _.fg.md.card.MDCardHeaderText.MDCardHeaderText.f);
                 $module$elements.fg.style.child_lij791$(this, $module$elements.fg.elements.Selector.Statics.ANY, _.fg.md.card.MDCardHeaderText.MDCardHeaderText.f_0);
               }
@@ -904,8 +904,8 @@ this['material-design'] = function (Kotlin, $module$beans, $module$elements) {
               }
             }, /** @lends _.fg.md.card.MDCardImage.MDCardImage */ {
               rule$f: function () {
-                this.height = '100%';
-                this.width = '100%';
+                this._height = '100%';
+                this._width = '100%';
               }
             }),
             object_initializer$: function () {
@@ -941,9 +941,9 @@ this['material-design'] = function (Kotlin, $module$beans, $module$elements) {
               }
             }, /** @lends _.fg.md.card.MDCardSubtitle.MDCardSubtitle */ {
               rule$f: function () {
-                this.fontSize = '14px';
-                this.fontWeight = '400';
-                this.color = _.fg.md.colour.MDGrayPalette.p600.toHtml();
+                this._fontSize = '14px';
+                this._fontWeight = '400';
+                this._color = _.fg.md.colour.MDGrayPalette.p600.toHtml();
               }
             }),
             object_initializer$: function () {
@@ -979,12 +979,12 @@ this['material-design'] = function (Kotlin, $module$beans, $module$elements) {
               }
             }, /** @lends _.fg.md.card.MDCardTitle.MDCardTitle */ {
               rule$f: function () {
-                this.fontSize = '24px';
-                this.fontWeight = '400';
-                this.paddingTop = '24px';
-                this.paddingBottom = '16px';
-                this.paddingLeft = '16px';
-                this.paddingRight = '16px';
+                this._fontSize = '24px';
+                this._fontWeight = '400';
+                this._paddingTop = '24px';
+                this._paddingBottom = '16px';
+                this._paddingLeft = '16px';
+                this._paddingRight = '16px';
               }
             }),
             object_initializer$: function () {
@@ -1020,23 +1020,23 @@ this['material-design'] = function (Kotlin, $module$beans, $module$elements) {
               }
             }, /** @lends _.fg.md.card.MDCardTitleText.MDCardHeaderText */ {
               f: function () {
-                this.paddingTop = '12px';
+                this._paddingTop = '12px';
               },
               f_0: function () {
-                this.padding = '0';
+                this._padding = '0';
                 $module$elements.fg.style.not_dbehhi$(this, $module$elements.fg.elements.toSelector_pdl1w0$(':first-child'), _.fg.md.card.MDCardTitleText.MDCardHeaderText.f);
               },
               f_1: function () {
-                this.paddingTop = '12px';
+                this._paddingTop = '12px';
               },
               f_2: function () {
                 $module$elements.fg.style.not_dbehhi$(this, $module$elements.fg.elements.toSelector_pdl1w0$(':first-child'), _.fg.md.card.MDCardTitleText.MDCardHeaderText.f_1);
               },
               rule$f: function () {
-                this.paddingTop = '24px';
-                this.paddingLeft = '16px';
-                this.paddingRight = '16px';
-                this.paddingBottom = '16px';
+                this._paddingTop = '24px';
+                this._paddingLeft = '16px';
+                this._paddingRight = '16px';
+                this._paddingBottom = '16px';
                 $module$elements.fg.style.child_lij791$(this, _.fg.md.card.MDCardTitle.MDCardTitle.classSelector, _.fg.md.card.MDCardTitleText.MDCardHeaderText.f_0);
                 $module$elements.fg.style.child_lij791$(this, _.fg.md.card.MDCardSubtitle.MDCardSubtitle.classSelector, _.fg.md.card.MDCardTitleText.MDCardHeaderText.f_2);
               }
@@ -1658,7 +1658,7 @@ this['material-design'] = function (Kotlin, $module$beans, $module$elements) {
               }
             }, /** @lends _.fg.md.drawer.MDDrawer.MDDrawer */ {
               rule$f: function () {
-                this.backgroundColor = 'white';
+                this._backgroundColor = 'white';
               }
             }),
             object_initializer$: function () {
@@ -1727,16 +1727,16 @@ this['material-design'] = function (Kotlin, $module$beans, $module$elements) {
               }
             }, /** @lends _.fg.md.icon.MDIcon.MDIcon */ {
               f: function () {
-                this.fontSize = '18px';
+                this._fontSize = '18px';
               },
               f_0: function () {
-                this.fontSize = '24px';
+                this._fontSize = '24px';
               },
               f_1: function () {
-                this.fontSize = '36px';
+                this._fontSize = '36px';
               },
               f_2: function () {
-                this.fontSize = '48px';
+                this._fontSize = '48px';
               },
               rule$f: function () {
                 $module$elements.fg.style.and_dbehhi$(this, _.fg.md.icon.MDIcon.Size.s18px.cssClassName, _.fg.md.icon.MDIcon.MDIcon.f);
@@ -1868,10 +1868,10 @@ this['material-design'] = function (Kotlin, $module$beans, $module$elements) {
               }
             }, /** @lends _.fg.md.menu.MDMenu.MDMenu */ {
               rule$f: function () {
-                this.paddingTop = '16px';
-                this.paddingBottom = '16px';
-                this.backgroundColor = 'white';
-                this.boxShadow = '0 2px 4px -1px rgba(0,0,0,.2),0 4px 5px 0 rgba(0,0,0,.14),0 1px 10px 0 rgba(0,0,0,.12)';
+                this._paddingTop = '16px';
+                this._paddingBottom = '16px';
+                this._backgroundColor = 'white';
+                this._boxShadow = '0 2px 4px -1px rgba(0,0,0,.2),0 4px 5px 0 rgba(0,0,0,.14),0 1px 10px 0 rgba(0,0,0,.12)';
               }
             }),
             object_initializer$: function () {
@@ -1918,10 +1918,10 @@ this['material-design'] = function (Kotlin, $module$beans, $module$elements) {
               }
             }, /** @lends _.fg.md.menu.MDMenuItem.MDMenuItem */ {
               rule$f: function () {
-                this.fontFamily = "Roboto, 'Helvetica Neue', sans-serif";
-                this.height = '32px';
-                this.paddingLeft = '24px';
-                this.paddingRight = '24px';
+                this._fontFamily = "Roboto, 'Helvetica Neue', sans-serif";
+                this._height = '32px';
+                this._paddingLeft = '24px';
+                this._paddingRight = '24px';
               }
             }),
             object_initializer$: function () {
@@ -1998,12 +1998,12 @@ this['material-design'] = function (Kotlin, $module$beans, $module$elements) {
               }
             }, /** @lends _.fg.md.panel.MDCollapsedPanel.MDCollapsedPanel */ {
               rule$f: function () {
-                this.display = 'block';
-                this.position = 'relative';
-                this.borderRadius = '2px';
-                this.boxShadow = '0 2px 5px 0 rgba(0, 0, 0, 0.26)';
-                this.fontFamily = "Roboto, 'Helvetica Neue', sans-serif";
-                this.backgroundSize = 'cover';
+                this._display = 'block';
+                this._position = 'relative';
+                this._borderRadius = '2px';
+                this._boxShadow = '0 2px 5px 0 rgba(0, 0, 0, 0.26)';
+                this._fontFamily = "Roboto, 'Helvetica Neue', sans-serif";
+                this._backgroundSize = 'cover';
               }
             }),
             object_initializer$: function () {
@@ -2065,7 +2065,7 @@ this['material-design'] = function (Kotlin, $module$beans, $module$elements) {
               }
             }, /** @lends _.fg.md.panel.MDExpandButton.MDExpandButton */ {
               rule$f: function () {
-                this.paddingLeft = '16px';
+                this._paddingLeft = '16px';
               }
             }),
             object_initializer$: function () {
@@ -2101,10 +2101,10 @@ this['material-design'] = function (Kotlin, $module$beans, $module$elements) {
               }
             }, /** @lends _.fg.md.panel.MDExpandedContent.MDExpandedContent */ {
               rule$f: function () {
-                this.paddingTop = '16px';
-                this.paddingLeft = '16px';
-                this.paddingRight = '16px';
-                this.paddingBottom = '16px';
+                this._paddingTop = '16px';
+                this._paddingLeft = '16px';
+                this._paddingRight = '16px';
+                this._paddingBottom = '16px';
               }
             }),
             object_initializer$: function () {
@@ -2175,12 +2175,12 @@ this['material-design'] = function (Kotlin, $module$beans, $module$elements) {
               }
             }, /** @lends _.fg.md.panel.MDExpandedPanel.MDExpandedPanel */ {
               rule$f: function () {
-                this.display = 'block';
-                this.position = 'relative';
-                this.borderRadius = '2px';
-                this.boxShadow = '0 2px 5px 0 rgba(0, 0, 0, 0.26)';
-                this.fontFamily = "Roboto, 'Helvetica Neue', sans-serif";
-                this.backgroundSize = 'cover';
+                this._display = 'block';
+                this._position = 'relative';
+                this._borderRadius = '2px';
+                this._boxShadow = '0 2px 5px 0 rgba(0, 0, 0, 0.26)';
+                this._fontFamily = "Roboto, 'Helvetica Neue', sans-serif";
+                this._backgroundSize = 'cover';
               }
             }),
             object_initializer$: function () {
@@ -2348,10 +2348,10 @@ this['material-design'] = function (Kotlin, $module$beans, $module$elements) {
               }
             }, /** @lends _.fg.md.panel.MDExpansionPanel.MDExpansionPanel */ {
               f: function () {
-                this.marginTop = '1px';
+                this._marginTop = '1px';
               },
               f_0: function () {
-                this.outline = 'none';
+                this._outline = 'none';
               },
               rule$f: function (this$MDExpansionPanel$) {
                 return function () {
@@ -2458,7 +2458,7 @@ this['material-design'] = function (Kotlin, $module$beans, $module$elements) {
               }
             }, /** @lends _.fg.md.radio.MDRadioButton.MDRadioButton */ {
               rule$f: function () {
-                this.fontFamily = _.fg.md.Context.theme.font;
+                this._fontFamily = _.fg.md.Context.theme.font;
               }
             }),
             object_initializer$: function () {
@@ -2523,9 +2523,9 @@ this['material-design'] = function (Kotlin, $module$beans, $module$elements) {
               $module$elements.fg.elements.HTML.registerCSSRule_3cka69$(_.fg.md.support.Ripple.Factory.rippleTarget);
             }, null, /** @lends _.fg.md.support.Ripple.Factory */ {
               rippleTarget$f: function () {
-                this.position = 'relative';
-                this.overflowX = 'hidden';
-                this.overflowY = 'hidden';
+                this._position = 'relative';
+                this._overflowX = 'hidden';
+                this._overflowY = 'hidden';
               }
             }),
             object_initializer$: function () {
@@ -2586,11 +2586,11 @@ this['material-design'] = function (Kotlin, $module$beans, $module$elements) {
               }
             }, /** @lends _.fg.md.support.RippleContainer.RippleContainer */ {
               rule$f: function () {
-                this.position = 'absolute';
-                this.top = '0';
-                this.right = '0';
-                this.bottom = '0';
-                this.left = '0';
+                this._position = 'absolute';
+                this._top = '0';
+                this._right = '0';
+                this._bottom = '0';
+                this._left = '0';
               }
             }),
             object_initializer$: function () {
@@ -2649,16 +2649,16 @@ this['material-design'] = function (Kotlin, $module$beans, $module$elements) {
               }
             }, /** @lends _.fg.md.support.RippleInk.RippleInk */ {
               rule$f: function () {
-                this.transform = 'scale(0)';
-                this.position = 'absolute';
-                this.opacity = '0.75';
-                this.padding = '24px';
-                this.borderRadius = '100%';
-                this.animation = 'ripple 1000ms';
+                this._transform = 'scale(0)';
+                this._position = 'absolute';
+                this._opacity = '0.75';
+                this._padding = '24px';
+                this._borderRadius = '100%';
+                this._animation = 'ripple 1000ms';
               },
               f: function () {
-                this.opacity = '0';
-                this.transform = 'scale(2)';
+                this._opacity = '0';
+                this._transform = 'scale(2)';
               },
               RippleInk$f: function () {
                 $module$elements.fg.style.kto_q2xcpo$(this, _.fg.md.support.RippleInk.RippleInk.f);
@@ -2712,9 +2712,9 @@ this['material-design'] = function (Kotlin, $module$beans, $module$elements) {
                 this.style.flex = new $module$elements.fg.elements.style.typed.Flex(1);
               },
               rule$f: function () {
-                this.display = 'flex';
-                this.flexDirection = 'row';
-                this.alignItems = 'center';
+                this._display = 'flex';
+                this._flexDirection = 'row';
+                this._alignItems = 'center';
               }
             }),
             object_initializer$: function () {
