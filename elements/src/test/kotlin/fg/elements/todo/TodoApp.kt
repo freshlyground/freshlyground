@@ -42,10 +42,10 @@ class TodoApp : Section() {
         override val classSelector = ClassSelector("todo-app")
 
         override val rule: ClassRule.() -> Unit = {
-            background = "#fff"
-            margin = "130px 0 40px 0"
-            position = "relative"
-            boxShadow = "0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 25px 50px 0 rgba(0, 0, 0, 0.1)"
+            _background = "#fff"
+            _margin = "130px 0 40px 0"
+            _position = "relative"
+            _boxShadow = "0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 25px 50px 0 rgba(0, 0, 0, 0.1)"
         }
 
         init {

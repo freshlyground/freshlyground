@@ -19,13 +19,13 @@ class MDCardTitle : Div() {
         override val classSelector = "md-card-title".toClassSelector()
 
         override val rule: ClassRule.() -> Unit = {
-            fontSize = "24px"
-            fontWeight = "400"
+            _fontSize = "24px"
+            _fontWeight = "400"
 
-            paddingTop = "24px"
-            paddingBottom = "16px"
-            paddingLeft = "16px"
-            paddingRight = "16px"
+            _paddingTop = "24px"
+            _paddingBottom = "16px"
+            _paddingLeft = "16px"
+            _paddingRight = "16px"
         }
 
         init {

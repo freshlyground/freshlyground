@@ -38,11 +38,11 @@ open class Drawer(side: Side) : Div() {
         override val classSelector = "drawer".toClassSelector()
 
         override val rule: ClassRule.() -> Unit = {
-            position = "fixed"
-            zIndex = "1300"
-            top = "0"
-            height = "100%"
-            backgroundColor = "white"
+            _position = "fixed"
+            _zIndex = "1300"
+            _top = "0"
+            _height = "100%"
+            _backgroundColor = "white"
         }
 
         init {

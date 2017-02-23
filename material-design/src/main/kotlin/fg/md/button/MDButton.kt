@@ -265,55 +265,55 @@ class MDButton(action: Action, type: Type = Type.FLAT,
 
         override val rule: ClassRule.() -> Unit = {
 
-            borderRadius = "2px"
-            marginLeft = "8px"
-            marginRight = "8px"
-            fontFamily = Context.theme.font
-            fontSize = "14px"
-            fontWeight = "500"
+            _borderRadius = "2px"
+            _marginLeft = "8px"
+            _marginRight = "8px"
+            _fontFamily = Context.theme.font
+            _fontSize = "14px"
+            _fontWeight = "500"
 
             focus {
-                outline = "none"
+                _outline = "none"
             }
 
             and(TYPE_FLAT) {
-                minWidth = "88px"
-                width = ""
-                height = "36px"
-                boxShadow = "none"
-                border = "none"
+                _minWidth = "88px"
+                _width = ""
+                _height = "36px"
+                _boxShadow = "none"
+                _border = "none"
             }
 
             and(TYPE_RAISED) {
-                minWidth = "88px"
-                width = ""
-                height = "36px"
-                border = "none"
-                boxShadow = "rgba(0, 0, 0, 0.117647) 0px 1px 6px, rgba(0, 0, 0, 0.117647) 0px 1px 4px"
+                _minWidth = "88px"
+                _width = ""
+                _height = "36px"
+                _border = "none"
+                _boxShadow = "rgba(0, 0, 0, 0.117647) 0px 1px 6px, rgba(0, 0, 0, 0.117647) 0px 1px 4px"
 
                 active {
-                    boxShadow = "0 4px 8px 0 rgba(0,0,0,.4)"
+                    _boxShadow = "0 4px 8px 0 rgba(0,0,0,.4)"
                 }
 
                 and(DISABLED) {
-                    boxShadow = "none"
+                    _boxShadow = "none"
                 }
             }
 
 
             and(TYPE_FLOATING) {
-                width = "40px"
-                height = "40px"
-                border = "none"
-                boxShadow = "rgba(0, 0, 0, 0.117647) 0px 1px 6px, rgba(0, 0, 0, 0.117647) 0px 1px 4px"
-                borderRadius = "50%"
+                _width = "40px"
+                _height = "40px"
+                _border = "none"
+                _boxShadow = "rgba(0, 0, 0, 0.117647) 0px 1px 6px, rgba(0, 0, 0, 0.117647) 0px 1px 4px"
+                _borderRadius = "50%"
 
                 active {
-                    boxShadow = "0 4px 8px 0 rgba(0,0,0,.4)"
+                    _boxShadow = "0 4px 8px 0 rgba(0,0,0,.4)"
                 }
 
                 and(DISABLED) {
-                    boxShadow = "none"
+                    _boxShadow = "none"
                 }
             }
 

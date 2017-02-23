@@ -25,21 +25,21 @@ open class MDToggleButton(action: SelectableAction) :
 
         override val rule: ClassRule.() -> Unit = {
 
-            height = "36px"
-            boxShadow = "none"
-            border = "none"
-            backgroundColor = RgbColor.TRANSPARENT.toString()
+            _height = "36px"
+            _boxShadow = "none"
+            _border = "none"
+            _backgroundColor = RgbColor.TRANSPARENT.toString()
 
             and(".selected") {
-                boxShadow = "none"
-                border = "none"
-                backgroundColor = RgbColor.TRANSPARENT.toString()
+                _boxShadow = "none"
+                _border = "none"
+                _backgroundColor = RgbColor.TRANSPARENT.toString()
             }
 
             and(".focused") {
-                boxShadow = "none"
-                border = "none"
-                backgroundColor = RgbColor.TRANSPARENT.toString()
+                _boxShadow = "none"
+                _border = "none"
+                _backgroundColor = RgbColor.TRANSPARENT.toString()
             }
         }
 

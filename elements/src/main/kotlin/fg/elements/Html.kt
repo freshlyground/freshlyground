@@ -22,16 +22,16 @@ class Html internal constructor(val w3cElement: Element = document.documentEleme
 
         if (borderBox) {
             addCSSRule(AnyRule() with {
-                boxSizing = "border-box"
+                _boxSizing = "border-box"
             })
         }
 
         if (height100percent) {
             addCSSRule(TypeRule(TypeSelector("html")) with {
-                height = "100%"
+                _height = "100%"
             })
             addCSSRule(TypeRule(TypeSelector("body")) with {
-                height = "100%"
+                _height = "100%"
             })
         }
 

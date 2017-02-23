@@ -345,40 +345,40 @@ open class MenuItem(action: Action) : Div(), ActionBean {
 
         override val rule: ClassRule.() -> Unit = {
 
-            cursor = "pointer"
-            paddingLeft = "8px"
-            paddingRight = "24px"
-            textAlign = "left"
+            _cursor = "pointer"
+            _paddingLeft = "8px"
+            _paddingRight = "24px"
+            _textAlign = "left"
 
-            display = "flex"
-            flexWrap = "nowrap"
-            flexDirection = "row"
-            alignItems = "center"
+            _display = "flex"
+            _flexWrap = "nowrap"
+            _flexDirection = "row"
+            _alignItems = "center"
 
-            fontSize = "15px"
+            _fontSize = "15px"
 
             child(".selected-icon") {
-                marginRight = "24px"
-                marginLeft = "0px"
+                _marginRight = "24px"
+                _marginLeft = "0px"
 
-                flex = "initial"
+                _flex = "initial"
             }
 
             child(".primary-text") {
-                flex = "1"
+                _flex = "1"
             }
 
             child(".secondary-text") {
-                marginLeft = "8px"
-                flex = "initial"
+                _marginLeft = "8px"
+                _flex = "initial"
             }
 
             focus {
-                outline = "none"
+                _outline = "none"
             }
 
             and(DISABLED) {
-                cursor = "not-allowed"
+                _cursor = "not-allowed"
             }
         }
 

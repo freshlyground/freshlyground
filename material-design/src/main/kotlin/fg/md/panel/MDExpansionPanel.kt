@@ -144,11 +144,11 @@ class MDExpansionPanel : Div() {
         override val rule: ClassRule.() -> Unit = {
 
             adjacentSibling(classSelector) {
-                marginTop = "1px"
+                _marginTop = "1px"
             }
 
             focus {
-                outline = "none"
+                _outline = "none"
             }
         }
 

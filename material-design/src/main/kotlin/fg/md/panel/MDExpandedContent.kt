@@ -20,10 +20,10 @@ class MDExpandedContent : Div() {
 
         override val rule: ClassRule.() -> Unit = {
 
-            paddingTop = "16px"
-            paddingLeft = "16px"
-            paddingRight = "16px"
-            paddingBottom = "16px"
+            _paddingTop = "16px"
+            _paddingLeft = "16px"
+            _paddingRight = "16px"
+            _paddingBottom = "16px"
         }
 
         init {

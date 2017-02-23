@@ -44,12 +44,12 @@ class RippleInk(color: RgbColor) : Span() {
         override val classSelector = "md-ripple-ink".toClassSelector()
 
         override val rule: ClassRule.() -> Unit = {
-            transform = "scale(0)"
-            position = "absolute"
-            opacity = "0.75"
-            padding = "24px"
-            borderRadius = "100%"
-            animation = "ripple 1000ms"
+            _transform = "scale(0)"
+            _position = "absolute"
+            _opacity = "0.75"
+            _padding = "24px"
+            _borderRadius = "100%"
+            _animation = "ripple 1000ms"
         }
 
         init {
@@ -57,8 +57,8 @@ class RippleInk(color: RgbColor) : Span() {
 
             val rule = Unit.keyframesRule("ripple") {
                 kto() {
-                    opacity = "0"
-                    transform = "scale(2)"
+                    _opacity = "0"
+                    _transform = "scale(2)"
                 }
             }
             HTML.registerCSSRule(rule)

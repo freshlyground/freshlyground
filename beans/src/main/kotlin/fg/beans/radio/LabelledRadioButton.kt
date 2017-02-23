@@ -109,12 +109,12 @@ open class LabelledRadioButton(checked: Boolean,
         override val rule: ClassRule.() -> Unit = {
 
             hover {
-                cursor = "pointer"
+                _cursor = "pointer"
             }
 
             child("label") {
                 hover {
-                    cursor = "pointer"
+                    _cursor = "pointer"
                 }
             }
 

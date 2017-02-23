@@ -60,33 +60,33 @@ open class ToggleButton(action: SelectableAction) : AbstractButton(action) {
 
         override val rule: ClassRule.() -> Unit = {
 
-            border = "1px outset #e4e4e4"
-            borderRadius = "4px"
-            backgroundColor = "#ffffff"
-            boxShadow = "none"
-            margin = "0"
+            _border = "1px outset #e4e4e4"
+            _borderRadius = "4px"
+            _backgroundColor = "#ffffff"
+            _boxShadow = "none"
+            _margin = "0"
 
             hover {
-                cursor = "pointer"
+                _cursor = "pointer"
                 and(DISABLED) {
-                    cursor = "not-allowed"
+                    _cursor = "not-allowed"
                 }
             }
 
             and(".selected") {
-                border = "1px outset rgb(144, 191, 240)"
-                backgroundColor = "rgb(118, 178, 240)"
-                boxShadow = "1px 1px 1px 1px rgba(0, 0, 0, 0.2)"
+                _border = "1px outset rgb(144, 191, 240)"
+                _backgroundColor = "rgb(118, 178, 240)"
+                _boxShadow = "1px 1px 1px 1px rgba(0, 0, 0, 0.2)"
             }
 
             focus {
-                border = "1px outset rgb(144, 191, 240)"
-                outline = "none"
+                _border = "1px outset rgb(144, 191, 240)"
+                _outline = "none"
             }
 
             and(".focused") {
-                border = "1px outset rgb(144, 191, 240)"
-                outline = "none"
+                _border = "1px outset rgb(144, 191, 240)"
+                _outline = "none"
             }
         }
 

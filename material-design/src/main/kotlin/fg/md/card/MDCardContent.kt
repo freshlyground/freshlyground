@@ -22,12 +22,12 @@ open class MDCardContent : Div() {
         override val classSelector = "md-card-content".toClassSelector()
 
         override val rule: ClassRule.() -> Unit = {
-            fontSize = "14px"
-            padding = "16px"
+            _fontSize = "14px"
+            _padding = "16px"
 
             child(Selector.ANY) {
                 firstChild {
-                    marginTop = "0"
+                    _marginTop = "0"
                 }
             }
         }

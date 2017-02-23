@@ -81,9 +81,9 @@ class Ripple(val element: Element,
         val rippleTargetClass: ClassSelector = "md-ripple-target".toClassSelector()
 
         val rippleTarget: ClassRule = Unit.classRule(rippleTargetClass) {
-            position = "relative"
-            overflowX = "hidden"
-            overflowY = "hidden"
+            _position = "relative"
+            _overflowX = "hidden"
+            _overflowY = "hidden"
         }
 
         init {

@@ -22,22 +22,22 @@ class MDCardTitleText : Div() {
         override val classSelector = "md-card-title-text".toClassSelector()
 
         override val rule: ClassRule.() -> Unit = {
-            paddingTop = "24px"
-            paddingLeft = "16px"
-            paddingRight = "16px"
-            paddingBottom = "16px"
+            _paddingTop = "24px"
+            _paddingLeft = "16px"
+            _paddingRight = "16px"
+            _paddingBottom = "16px"
 
             child(MDCardTitle.classSelector) {
-                padding = "0"
+                _padding = "0"
 
                 not(":first-child".toSelector()) {
-                    paddingTop = "12px"
+                    _paddingTop = "12px"
                 }
             }
 
             child(MDCardSubtitle.classSelector) {
                 not(":first-child".toSelector()) {
-                    paddingTop = "12px"
+                    _paddingTop = "12px"
                 }
             }
         }

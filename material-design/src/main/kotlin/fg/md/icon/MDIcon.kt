@@ -41,19 +41,19 @@ class MDIcon : I() {
         override val rule: ClassRule.() -> Unit = {
 
             and(Size.s18px.cssClassName) {
-                fontSize = "18px"
+                _fontSize = "18px"
             }
 
             and(Size.s24px.cssClassName) {
-                fontSize = "24px"
+                _fontSize = "24px"
             }
 
             and(Size.s36px.cssClassName) {
-                fontSize = "36px"
+                _fontSize = "36px"
             }
 
             and(Size.s48px.cssClassName) {
-                fontSize = "48px"
+                _fontSize = "48px"
             }
         }
 

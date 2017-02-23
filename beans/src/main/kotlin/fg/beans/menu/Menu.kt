@@ -67,10 +67,10 @@ open class Menu(label: String? = null, shortcut: Key? = null) : Div() {
 
         override val classSelector: ClassSelector = ClassSelector("$pkg-menu")
         override val rule: ClassRule.() -> Unit = {
-            display = "inline-block"
-            paddingTop = "4px"
-            paddingBottom = "4px"
-            backgroundColor = RgbColor.WHITE.toString()
+            _display = "inline-block"
+            _paddingTop = "4px"
+            _paddingBottom = "4px"
+            _backgroundColor = RgbColor.WHITE.toString()
         }
 
         init {

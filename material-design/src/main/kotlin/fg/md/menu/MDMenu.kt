@@ -22,11 +22,11 @@ class MDMenu(label: String? = null, shortcut: Key? = null) :
         override val classSelector = "$pkg-menu".toClassSelector()
 
         override val rule: ClassRule.() -> Unit = {
-            paddingTop = "16px"
-            paddingBottom = "16px"
-            backgroundColor = "white"
+            _paddingTop = "16px"
+            _paddingBottom = "16px"
+            _backgroundColor = "white"
             //boxShadow = "0 2px 5px 0 rgba(0, 0, 0, 0.26)"
-            boxShadow = "0 2px 4px -1px rgba(0,0,0,.2),0 4px 5px 0 rgba(0,0,0,.14),0 1px 10px 0 rgba(0,0,0,.12)"
+            _boxShadow = "0 2px 4px -1px rgba(0,0,0,.2),0 4px 5px 0 rgba(0,0,0,.14),0 1px 10px 0 rgba(0,0,0,.12)"
         }
 
         init {

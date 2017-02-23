@@ -119,11 +119,11 @@ class MenuBar : Div() {
         override val classSelector = "$pkg-menu-bar".toClassSelector()
 
         override val rule: ClassRule.() -> Unit = {
-            position = "relative"
+            _position = "relative"
 
             child(Menu.classSelector) {
-                position = "absolute"
-                border = "1px solid #ccc"
+                _position = "absolute"
+                _border = "1px solid #ccc"
             }
         }
 

@@ -60,10 +60,10 @@ open class RadioButton(checked: Boolean = false) : InputRadio() {
 
         override val rule: ClassRule.() -> Unit = {
 
-            background = "red"
+            _background = "red"
 
             hover {
-                cursor = "pointer"
+                _cursor = "pointer"
             }
 
         }

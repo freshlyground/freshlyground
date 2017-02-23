@@ -482,12 +482,12 @@ class Main() {
         }
 
         HTML.addCSSRule(AnyRule() with {
-            boxSizing = "border-box"
+            _boxSizing = "border-box"
         })
         HTML.addCSSRule(ClassRule(ClassSelector("card-container")) with {
 
             desc(".md-card") {
-                marginBottom = "1em"
+                _marginBottom = "1em"
 
 
                 desc("test") {
@@ -500,15 +500,15 @@ class Main() {
 
         HTML.addCSSRule(ClassRule(ClassSelector("flex-row")) with {
 
-            display = "flex"
-            flexDirection = "row"
+            _display = "flex"
+            _flexDirection = "row"
 
         })
 
         HTML.addCSSRule(ClassRule(ClassSelector("flex-column")) with {
 
-            display = "flex"
-            flexDirection = "column"
+            _display = "flex"
+            _flexDirection = "column"
 
         })
 

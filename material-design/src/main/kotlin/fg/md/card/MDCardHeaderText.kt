@@ -22,17 +22,17 @@ class MDCardHeaderText : Div() {
 
         override val rule: ClassRule.() -> Unit = {
 
-            display = "flex"
-            flexDirection = "column"
+            _display = "flex"
+            _flexDirection = "column"
 
             child(MDCardTitle.classSelector) {
-                padding = "0"
-                fontSize = "14px"
-                fontWeight = "500"
+                _padding = "0"
+                _fontSize = "14px"
+                _fontWeight = "500"
             }
 
             child(Selector.ANY) {
-                flex = "1"
+                _flex = "1"
             }
         }
 

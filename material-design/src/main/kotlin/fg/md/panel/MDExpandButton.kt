@@ -23,7 +23,7 @@ class MDExpandButton(action: SelectableAction) :
 
         override val rule: ClassRule.() -> Unit = {
 
-            paddingLeft = "16px"
+            _paddingLeft = "16px"
         }
 
         init {

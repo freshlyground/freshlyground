@@ -20,10 +20,10 @@ class MDCardSubtitle : Div() {
         override val classSelector = "md-card-subtitle".toClassSelector()
 
         override val rule: ClassRule.() -> Unit = {
-            fontSize = "14px"
-            fontWeight = "400"
+            _fontSize = "14px"
+            _fontWeight = "400"
 
-            color = MDGrayPalette.p600.toHtml()
+            _color = MDGrayPalette.p600.toHtml()
         }
 
         init {

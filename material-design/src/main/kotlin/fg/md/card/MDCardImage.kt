@@ -19,8 +19,8 @@ class MDCardImage(src: String) : Img(src = src) {
         override val classSelector = "md-card-image".toClassSelector()
 
         override val rule: ClassRule.() -> Unit = {
-            height = "100%"
-            width = "100%"
+            _height = "100%"
+            _width = "100%"
         }
 
         init {

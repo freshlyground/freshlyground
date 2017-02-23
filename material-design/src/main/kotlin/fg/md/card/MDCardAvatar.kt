@@ -19,9 +19,9 @@ class MDCardAvatar(src: String) : Img(src = src) {
         override val classSelector = "md-card-avatar".toClassSelector()
 
         override val rule: ClassRule.() -> Unit = {
-            width = "40px"
-            height = "40px"
-            borderRadius = "50%"
+            _width = "40px"
+            _height = "40px"
+            _borderRadius = "50%"
         }
 
         init {

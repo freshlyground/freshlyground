@@ -47,7 +47,7 @@ class MDRadioButton(checked: Boolean = false, labelText: String? = null) :
 
         override val rule: ClassRule.() -> Unit = {
 
-            fontFamily = Context.theme.font
+            _fontFamily = Context.theme.font
 
         }
 

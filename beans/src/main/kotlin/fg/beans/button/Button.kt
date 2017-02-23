@@ -59,29 +59,29 @@ open class Button(action: Action) : AbstractButton(action) {
 
         override val rule: ClassRule.() -> Unit = {
 
-            margin = ButtonStyle.margin
+            _margin = ButtonStyle.margin
 
-            borderStyle = ButtonStyle.borderStyle
-            borderWidth = ButtonStyle.borderWidth?.toString()
-            borderColor = ButtonStyle.borderColor?.toString()
-            borderRadius = ButtonStyle.borderRadius?.toString()
-            backgroundColor = ButtonStyle.backgroundColor?.toString()
-            boxShadow = ButtonStyle.boxShadow
+            _borderStyle = ButtonStyle.borderStyle
+            _borderWidth = ButtonStyle.borderWidth?.toString()
+            _borderColor = ButtonStyle.borderColor?.toString()
+            _borderRadius = ButtonStyle.borderRadius?.toString()
+            _backgroundColor = ButtonStyle.backgroundColor?.toString()
+            _boxShadow = ButtonStyle.boxShadow
 
             hover {
-                cursor = ButtonStyle.hovered?.cursor
+                _cursor = ButtonStyle.hovered?.cursor
                 and(DISABLED) {
-                    cursor = ButtonStyle.disabled?.cursor
+                    _cursor = ButtonStyle.disabled?.cursor
                 }
             }
 
             focus {
-                borderColor = ButtonStyle.focused?.borderColor?.toString()
-                outline = ButtonStyle.focused?.outline
+                _borderColor = ButtonStyle.focused?.borderColor?.toString()
+                _outline = ButtonStyle.focused?.outline
             }
 
             and(".pressed") {
-                backgroundColor = ButtonStyle.pressed?.backgroundColor?.toString()
+                _backgroundColor = ButtonStyle.pressed?.backgroundColor?.toString()
             }
         }
 

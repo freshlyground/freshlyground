@@ -43,10 +43,10 @@ class MDMenuItem(action: Action) : MenuItem(action) {
         override val classSelector = "$pkg-menu-item".toClassSelector()
 
         override val rule: ClassRule.() -> Unit = {
-            fontFamily = "Roboto, 'Helvetica Neue', sans-serif"
-            height = "32px"
-            paddingLeft = "24px"
-            paddingRight = "24px"
+            _fontFamily = "Roboto, 'Helvetica Neue', sans-serif"
+            _height = "32px"
+            _paddingLeft = "24px"
+            _paddingRight = "24px"
         }
 
         init {

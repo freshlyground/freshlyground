@@ -19,7 +19,7 @@ class MDCardActions : Div() {
         override val classSelector = "md-card-actions".toClassSelector()
 
         override val rule: ClassRule.() -> Unit = {
-            padding = "8px"
+            _padding = "8px"
         }
 
         init {

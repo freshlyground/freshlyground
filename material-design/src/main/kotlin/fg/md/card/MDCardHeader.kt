@@ -22,16 +22,16 @@ class MDCardHeader : Div() {
         override val classSelector = "md-card-header".toClassSelector()
 
         override val rule: ClassRule.() -> Unit = {
-            display = "flex"
-            flexDirection = "row"
-            padding = "16px"
+            _display = "flex"
+            _flexDirection = "row"
+            _padding = "16px"
 
             child(MDCardTitle.classSelector) {
-                fontSize = "14px"
+                _fontSize = "14px"
             }
 
             child(MDCardAvatar.classSelector) {
-                marginRight = "12px"
+                _marginRight = "12px"
             }
 
             child(MDCardSubtitle.classSelector) {

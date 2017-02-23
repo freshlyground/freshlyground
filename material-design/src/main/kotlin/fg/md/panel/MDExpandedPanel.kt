@@ -72,13 +72,13 @@ class MDExpandedPanel(val expandAction: SelectableAction) : Div() {
 
         override val rule: ClassRule.() -> Unit = {
 
-            display = "block"
-            position = "relative"
-            borderRadius = "2px"
-            boxShadow = "0 2px 5px 0 rgba(0, 0, 0, 0.26)"
-            fontFamily = "Roboto, 'Helvetica Neue', sans-serif"
+            _display = "block"
+            _position = "relative"
+            _borderRadius = "2px"
+            _boxShadow = "0 2px 5px 0 rgba(0, 0, 0, 0.26)"
+            _fontFamily = "Roboto, 'Helvetica Neue', sans-serif"
 
-            backgroundSize = "cover"
+            _backgroundSize = "cover"
         }
 
         init {

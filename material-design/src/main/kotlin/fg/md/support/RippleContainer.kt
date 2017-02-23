@@ -19,11 +19,11 @@ class RippleContainer : Div() {
         override val classSelector = "md-ripple-container".toClassSelector()
 
         override val rule: ClassRule.() -> Unit = {
-            position = "absolute"
-            top = "0"
-            right = "0"
-            bottom = "0"
-            left = "0"
+            _position = "absolute"
+            _top = "0"
+            _right = "0"
+            _bottom = "0"
+            _left = "0"
         }
 
         init {

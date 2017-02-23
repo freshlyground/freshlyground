@@ -5,9 +5,7 @@ import fg.elements.HTML
 import fg.elements.InputText
 import fg.elements.StyledClass
 import fg.elements.onKeyDown
-import fg.style.Rule
 import fg.style.ClassRule
-import fg.style.rule
 import org.w3c.dom.events.Event
 
 class NewTodo : InputText() {
@@ -33,10 +31,10 @@ class NewTodo : InputText() {
         override val classSelector = ClassSelector("new-todo")
 
         override val rule: ClassRule.() -> Unit = {
-            padding = "16px 16px 16px 60px"
-            border = "none"
-            background = "rgba(0, 0, 0, 0.003)"
-            boxShadow = "inset 0 -2px 1px rgba(0,0,0,0.03)"
+            _padding = "16px 16px 16px 60px"
+            _border = "none"
+            _background = "rgba(0, 0, 0, 0.003)"
+            _boxShadow = "inset 0 -2px 1px rgba(0,0,0,0.03)"
         }
 
         init {

@@ -32,9 +32,9 @@ class MDToolbar : Div() {
 
         override val rule: ClassRule.() -> Unit = {
 
-            display = "flex"
-            flexDirection = "row"
-            alignItems = "center"
+            _display = "flex"
+            _flexDirection = "row"
+            _alignItems = "center"
         }
 
         init {

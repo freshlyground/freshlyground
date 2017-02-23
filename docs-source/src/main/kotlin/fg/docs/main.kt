@@ -124,20 +124,20 @@ fun main(vararg args: String) {
     }
 
     HTML.addCSSRule(AnyRule() with {
-        boxSizing = "border-box"
+        _boxSizing = "border-box"
     })
     HTML.addCSSRule(ClassRule(Menu.classSelector) with {
 
         desc(MenuItem.classSelector) {
 
             and(SelectableAction.selectedSelector) {
-                borderBottom = "1px solid red"
+                _borderBottom = "1px solid red"
             }
         }
     })
     HTML.addCSSRule(ClassRule(MenuItem.classSelector) with {
         hover {
-            backgroundColor = "lightgrey"
+            _backgroundColor = "lightgrey"
         }
     })
 

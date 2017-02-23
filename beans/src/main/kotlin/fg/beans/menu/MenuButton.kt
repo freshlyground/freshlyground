@@ -24,18 +24,18 @@ class MenuButton(action: SelectableAction) : ToggleButton(action) {
 
         override val rule: ClassRule.() -> Unit = {
 
-            borderColor = "#e4e4e4"
-            borderRadius = "0"
+            _borderColor = "#e4e4e4"
+            _borderRadius = "0"
 
             focus {
-                borderColor = "#e4e4e4"
+                _borderColor = "#e4e4e4"
             }
 
             and(".selected") {
-                borderBottom = "none"
-                borderColor = "#e4e4e4"
-                backgroundColor = "rgb(118, 178, 240)"
-                boxShadow = "none"
+                _borderBottom = "none"
+                _borderColor = "#e4e4e4"
+                _backgroundColor = "rgb(118, 178, 240)"
+                _boxShadow = "none"
             }
         }
 
