@@ -12,6 +12,12 @@ infix fun <T> T.with(init: T.() -> Unit): T {
     return this
 }
 
+infix fun <T : Element> T.render(init: T.() -> Unit): T {
+    console.log("render block")
+    this.renderBlocks.add(init as Element.() -> Unit)
+    return this
+}
+
 fun Element.onClick(listener: (event: Event) -> Unit) {
     this.w3cElement.addEventListener("click", listener)
 }

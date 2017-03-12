@@ -21,6 +21,7 @@ import fg.elements.layout.Direction
 import fg.elements.layout.Layout
 import fg.elements.layout.setLayout
 import fg.elements.p
+import fg.elements.render
 import fg.elements.span
 import fg.elements.with
 import fg.keyboard.Key
@@ -29,7 +30,6 @@ import fg.md.colour.MDColor
 import fg.md.drawer.MDDrawer
 import fg.md.icon.MDIcon
 import fg.md.icon.MDIconProvider
-import fg.style.AnyRule
 import fg.style.ClassRule
 import fg.style.colour.RgbColor
 import fg.style.desc
@@ -390,50 +390,50 @@ class Main() {
 
     val expansionPanel = Div() with {
         mdExpansionPanel {
-            collapsed.toolbar with {
+            collapsed.toolbar render {
                 +"Trip name"
                 span { +"Caribbean Cruise" }
                 span { +"" }
             }
-            expanded.toolbar with {
+            expanded.toolbar render {
                 +"Trip name"
                 inputText { value = "Caribbean Cruise" }
                 span { +"" }
             }
-            expanded.content with {
+            expanded.content render {
                 +"Some information coming here"
             }
 
         }
         br { }
         mdExpansionPanel {
-            collapsed.toolbar with {
+            collapsed.toolbar render {
                 +"Trip name"
                 span { +"Caribbean Cruise" }
                 span { +"" }
             }
-            expanded.toolbar with {
+            expanded.toolbar render {
                 +"Trip name"
                 inputText { value = "Caribbean Cruise" }
                 span { +"" }
             }
-            expanded.content with {
+            expanded.content render {
                 +"Some information coming here"
             }
 
         }
         mdExpansionPanel {
-            collapsed.toolbar with {
+            collapsed.toolbar render {
                 +"Trip name"
                 span { +"Mediterranean Cruise" }
                 span { +"" }
             }
-            expanded.toolbar with {
+            expanded.toolbar render {
                 +"Trip name"
                 inputText { value = "Mediterranean Cruise" }
                 span { +"" }
             }
-            expanded.content with {
+            expanded.content render {
                 +"Some information coming here"
             }
 
@@ -481,21 +481,13 @@ class Main() {
             deck._style.marginLeft = "8px"
         }
 
-        HTML.addCSSRule(AnyRule() with {
-            _boxSizing = "border-box"
-        })
         HTML.addCSSRule(ClassRule(ClassSelector("card-container")) with {
 
             desc(".md-card") {
                 _marginBottom = "1em"
 
-
-                desc("test") {
-
-                }
+                desc("test") {}
             }
-
-
         })
 
         HTML.addCSSRule(ClassRule(ClassSelector("flex-row")) with {
@@ -512,7 +504,9 @@ class Main() {
 
         })
 
-        HTML.init()
+        HTML.init(
+                borderBox = true,
+                height100percent = true)
     }
 }
 
