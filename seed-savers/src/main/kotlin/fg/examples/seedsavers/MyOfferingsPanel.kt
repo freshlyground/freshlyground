@@ -1,3 +1,5 @@
+package fg.examples.seedsavers
+
 import fg.elements.Div
 import fg.elements.Text
 

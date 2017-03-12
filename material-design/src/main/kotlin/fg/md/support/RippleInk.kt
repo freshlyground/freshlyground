@@ -56,7 +56,7 @@ class RippleInk(color: RgbColor) : Span() {
             HTML.registerStyle(this)
 
             val rule = Unit.keyframesRule("ripple") {
-                kto() {
+                kto {
                     _opacity = "0"
                     _transform = "scale(2)"
                 }

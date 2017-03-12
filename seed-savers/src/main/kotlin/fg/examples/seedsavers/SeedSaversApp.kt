@@ -1,3 +1,5 @@
+package fg.examples.seedsavers
+
 import fg.base.Side
 import fg.beans.action.Action
 import fg.beans.action.SelectableAction
@@ -5,7 +7,6 @@ import fg.beans.app.AppBar
 import fg.beans.app.Application
 import fg.beans.app.DrawerNavigation
 import fg.beans.deck.Deck
-import fg.beans.drawer.dock
 import fg.elements.BODY
 import fg.elements.Div
 import fg.elements.style.typed.Display
