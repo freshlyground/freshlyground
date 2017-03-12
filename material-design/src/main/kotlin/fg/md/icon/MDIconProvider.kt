@@ -14,5 +14,10 @@ class MDIconProvider(val name: String) : IconProvider {
         val face = MDIconProvider("face")
         val expand_more = MDIconProvider("expand_more")
         val expand_less = MDIconProvider("expand_less")
+        val reorder = MDIconProvider("reorder")
+        val reportProblem = MDIconProvider("reportProblem")
+        val settings = MDIconProvider("settings")
+        val settingsApplications = MDIconProvider("settings applications")
+        val search = MDIconProvider("search")
     }
 }

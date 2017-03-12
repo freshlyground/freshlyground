@@ -17,7 +17,7 @@
     <dependencies>
         <dependency>
             <groupId>org.jetbrains.kotlin</groupId>
-            <artifactId>kotlin-js-library</artifactId>
+            <artifactId>kotlin-stdlib-js</artifactId>
             <version>${kotlin.version}</version>
         </dependency>
 
@@ -84,7 +84,7 @@
                             <artifactItems>
                                 <artifactItem>
                                     <groupId>org.jetbrains.kotlin</groupId>
-                                    <artifactId>kotlin-js-library</artifactId>
+                                    <artifactId>kotlin-stdlib-js</artifactId>
                                     <version>${kotlin.version}</version>
                                     <outputDirectory>${project.build.directory}/js/lib</outputDirectory>
                                     <includes>*.js</includes>
@@ -110,7 +110,7 @@
                             <artifactItems>
                                 <artifactItem>
                                     <groupId>org.jetbrains.kotlin</groupId>
-                                    <artifactId>kotlin-js-library</artifactId>
+                                    <artifactId>kotlin-stdlib-js</artifactId>
                                     <version>${kotlin.version}</version>
                                     <outputDirectory>../docs/js/lib/kotlin</outputDirectory>
                                     <includes>*.js</includes>

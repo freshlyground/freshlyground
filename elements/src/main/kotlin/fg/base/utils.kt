@@ -32,8 +32,7 @@ fun <A> debounce1(func: (dynamic) -> dynamic, delay: Int): (A) -> Unit {
 
     return {
 
-        val arguments: dynamic = js("arguments")
-        val argument1 = arguments[0]
+        val argument1 = js("arguments[0]")
 
         if (timeout == -1) {
 
@@ -52,8 +51,7 @@ fun <A> bounceUntil(func: (dynamic) -> dynamic, delay: Int): (A) -> Unit {
 
     return {
 
-        val arguments: dynamic = js("arguments")
-        val argument1 = arguments[0]
+        val argument1 = js("arguments[0]")
 
         window.clearTimeout(timeout)
 

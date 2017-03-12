@@ -31,6 +31,6 @@ fun String.toFlexShrink(): FlexShrink {
     if (keyword != null) {
         return FlexShrink(number = null, keyword = keyword)
     }
-    val number = safeParseDouble(this) ?: throw IllegalArgumentException("String could not be parsed as Double: " + this)
+    val number = this.toDouble()
     return FlexShrink(number = number, keyword = null)
 }

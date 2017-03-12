@@ -1,5 +1,7 @@
 package fg.elements
 
+import org.w3c.dom.get
+
 
 open class Node(internal val w3cNode: org.w3c.dom.Node) {
 

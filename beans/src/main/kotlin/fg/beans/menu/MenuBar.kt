@@ -37,7 +37,7 @@ class MenuBar : Div() {
         super.childAdded(child)
 
         if (!(child is Menu || child is MenuButton)) {
-            throw IllegalArgumentException("Only a Menu can be added to a MenuBar: " + child.jsClass.name)
+            throw IllegalArgumentException("Only a Menu can be added to a MenuBar: " + child::class.js.name)
         }
 
         if (child is Menu) {
@@ -62,7 +62,7 @@ class MenuBar : Div() {
             menuButton.onMouseEnter {
 
                 console.log("MenuButton[${menuButton.action.label}].onMouseEnter")
-                var anyMenuOpen = anyMenuOpen()
+                val anyMenuOpen = anyMenuOpen()
                 console.log("MenuButton[${menuButton.action.label}] anyMenuOpen = " + anyMenuOpen)
 
                 if (anyMenuOpen) {

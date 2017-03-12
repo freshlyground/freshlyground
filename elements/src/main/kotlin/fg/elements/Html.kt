@@ -5,8 +5,10 @@ import fg.style.ClassRule
 import fg.style.KeyframesRule
 import fg.style.Rule
 import fg.style.TypeRule
+import fg.style.TypedClassRule
 import org.w3c.dom.Element
 import org.w3c.dom.css.CSSStyleSheet
+import org.w3c.dom.css.get
 import org.w3c.dom.events.Event
 import kotlin.browser.document
 
@@ -44,6 +46,18 @@ class Html internal constructor(val w3cElement: Element = document.documentEleme
 
         fun rule(styledClass: StyledClass, init: ClassRule.() -> Unit = styledClass.rule): ClassRule {
             val style = ClassRule(styledClass.classSelector)
+            style.init()
+            return style
+        }
+
+        val rule = rule(styledClass, styledClass.rule)
+        registerCSSRule(rule)
+    }
+
+    fun registerStyle(styledClass: TypedStyledClass) {
+
+        fun rule(styledClass: TypedStyledClass, init: TypedClassRule.() -> Unit = styledClass.rule): TypedClassRule {
+            val style = TypedClassRule(styledClass.classSelector)
             style.init()
             return style
         }

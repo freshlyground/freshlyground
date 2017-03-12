@@ -18,9 +18,9 @@ import org.w3c.dom.events.Event
 import org.w3c.dom.events.KeyboardEvent
 import kotlin.properties.Delegates
 
-class MDExpansionPanel : Div() {
+open class MDExpansionPanel : Div() {
 
-    private val expandCollapseHandler: (ActionPerform) -> Unit = { action ->
+    private val expandCollapseHandler: (ActionPerform) -> Unit = {
         state = if (state == State.EXPANDED)
             State.COLLAPSED
         else

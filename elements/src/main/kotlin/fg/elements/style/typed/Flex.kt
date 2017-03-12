@@ -27,6 +27,6 @@ fun String.toFlex(): Flex {
     if (keyword != null) {
         return Flex(number = null, keyword = keyword)
     }
-    val number = safeParseInt(this) ?: throw IllegalArgumentException("String could not be parsed as Int: " + this)
+    val number = this.toInt()
     return Flex(number = number, keyword = null)
 }

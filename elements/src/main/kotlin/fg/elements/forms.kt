@@ -80,7 +80,7 @@ open class InputNumber() : Input(Input.Type.number) {
             if (super.value == null) {
                 return null
             } else {
-                return safeParseDouble(super.value!!)
+                return super.value!!.toDouble()
             }
         }
         set(value) {
@@ -92,7 +92,7 @@ open class InputNumber() : Input(Input.Type.number) {
             if (super.value == null) {
                 return null
             } else {
-                return safeParseInt(super.value!!)
+                return super.value!!.toInt()
             }
         }
         set(value) {

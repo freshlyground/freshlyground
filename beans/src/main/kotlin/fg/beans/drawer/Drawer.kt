@@ -1,14 +1,21 @@
 package fg.beans.drawer
 
 import fg.base.Side
+import fg.beans.app.Application
+import fg.elements.BODY
 import fg.elements.Div
 import fg.elements.HTML
 import fg.elements.StyledClass
+import fg.elements.style.typed.Display
+import fg.elements.style.typed.Position
 import fg.elements.toClassSelector
 import fg.style.ClassRule
 import kotlin.properties.Delegates
 
 open class Drawer(side: Side) : Div() {
+
+    internal var undockedPositionValue: String = ""
+    internal var undockedCssFloatValue: String = ""
 
     var side: Side by Delegates.observable(side) {
         property, old, new ->
@@ -20,6 +27,12 @@ open class Drawer(side: Side) : Div() {
 
         addClass(classSelector)
         renderSide(side)
+    }
+
+    fun float() {
+        removeSelf()
+        renderSide(side)
+        style.position = Position.absolute
     }
 
     private fun renderSide(side: Side) {

@@ -95,7 +95,9 @@ open class MenuItem(action: Action) : Div(), ActionBean {
         }
     }
 
-    private val clickHandler: (Event) -> Unit = {
+    private val clickHandler: (Event) -> Unit = { event ->
+
+        console.log("MenuItem.clicked", event )
 
         beforePerformingActionListeners.forEach { it(action) }
 

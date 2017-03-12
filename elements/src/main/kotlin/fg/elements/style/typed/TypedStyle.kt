@@ -23,10 +23,16 @@ class TypedStyle(element: Element) {
     var bottom: Dimension? by DimensionDelegate()
     var width: Dimension? by DimensionDelegate()
     var height: Dimension? by DimensionDelegate()
+
     var minWidth: Dimension? by DimensionDelegate("min-width")
     var minHeight: Dimension? by DimensionDelegate("min-height")
     var maxWidth: Dimension? by DimensionDelegate("max-width")
     var maxHeight: Dimension? by DimensionDelegate("max-height")
+
+    var marginLeft: Dimension? by DimensionDelegate()
+    var marginRight: Dimension? by DimensionDelegate()
+    var marginTop: Dimension? by DimensionDelegate()
+    var marginBottom: Dimension? by DimensionDelegate()
     var paddingLeft: Dimension? by DimensionDelegate()
     var paddingRight: Dimension? by DimensionDelegate()
     var paddingTop: Dimension? by DimensionDelegate()
@@ -34,6 +40,7 @@ class TypedStyle(element: Element) {
 
     var flexDirection: FlexDirection? by FlexDirectionDelegate()
     var justifyContent: JustifyContent? by JustifyContentDelegate()
+    var alignItems: AlignItems? by AlignItemsDelegate()
     var flex: Flex? by FlexDelegate()
     var flexGrow: FlexGrow? by FlexGrowDelegate()
     var flexShrink: FlexShrink? by FlexShrinkDelegate()
@@ -50,13 +57,16 @@ class TypedStyle(element: Element) {
             TypedPropertyDelegate<RgbColor>(attributeName, { RgbColor.from(it) })
 
     class IntDelegate(attributeName: String? = null) :
-            TypedPropertyDelegate<Int>(attributeName, { parseInt(it) })
+            TypedPropertyDelegate<Int>(attributeName, String::toInt)
 
     class DimensionDelegate(attributeName: String? = null) :
             TypedPropertyDelegate<Dimension>(attributeName, { it -> it.toDimension()!! })
 
     class FlexDirectionDelegate() :
             TypedPropertyDelegate<FlexDirection>(getFn = String::toFlexDirection)
+
+    class AlignItemsDelegate() :
+            TypedPropertyDelegate<AlignItems>(getFn = String::toAlignItems)
 
     class JustifyContentDelegate() :
             TypedPropertyDelegate<JustifyContent>(getFn = String::toJustifyContent)

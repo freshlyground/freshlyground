@@ -53,19 +53,19 @@ fun main(vararg args: String) {
 
     val page = currUrl.query.map["page"]
     when (page) {
-        Button.jsClass.name -> {
+        Button::class.js.name -> {
             buttonPage.start()
         }
-        ToggleButton.jsClass.name -> {
+        ToggleButton::class.js.name -> {
             toggeButtonPage.start()
         }
-        MenuBar.jsClass.name -> {
+        MenuBar::class.js.name -> {
             menuBarPage.start()
         }
-        Menu.jsClass.name -> {
+        Menu::class.js.name -> {
             menuPage.start()
         }
-        Drawer.jsClass.name -> {
+        Drawer::class.js.name -> {
             drawerPage.start()
         }
         layoutPage.name -> {

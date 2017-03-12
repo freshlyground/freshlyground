@@ -54,7 +54,7 @@ class Anchor(link: Link<*>? = null,
             _style.cursor = "pointer"
             when (link) {
                 is ExternalLink -> {
-                    this._href = link.url?.toString() ?: null
+                    this._href = link.url?.toString()
 
                     if (useDisplay) {
                         textContent = link.display

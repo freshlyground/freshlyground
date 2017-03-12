@@ -11,7 +11,7 @@
     <packaging>pom</packaging>
 
     <properties>
-        <kotlin.version>1.0.6</kotlin.version>
+        <kotlin.version>1.1.0</kotlin.version>
         <dokka.version>0.9.9</dokka.version>
         <maven.jar.plugin>2.6</maven.jar.plugin>
     </properties>
@@ -22,19 +22,7 @@
         <module>beans-statics</module>
         <module>material-design</module>
         <module>docs-source</module>
+        <module>seed-savers</module>
     </modules>
-
-    <repositories>
-        <repository>
-            <id>kotlin-eap</id>
-            <url>https://dl.bintray.com/kotlin/kotlin-eap</url>
-        </repository>
-    </repositories>
-    <pluginRepositories>
-        <pluginRepository>
-            <id>kotlin-eap</id>
-            <url>https://dl.bintray.com/kotlin/kotlin-eap</url>
-        </pluginRepository>
-    </pluginRepositories>
 
 </project>

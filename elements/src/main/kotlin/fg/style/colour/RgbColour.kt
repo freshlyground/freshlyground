@@ -1,6 +1,7 @@
 package fg.style.colour
 
 import fg.base.toHexString
+import kotlin.js.Math
 
 class RgbColor(val r: Int, val g: Int, val b: Int, val a: Double? = null) : Colour {
 
@@ -97,18 +98,18 @@ class RgbColor(val r: Int, val g: Int, val b: Int, val a: Double? = null) : Colo
                 val rs = stringWithoutHash.substring(0, 2)
                 val gs = stringWithoutHash.substring(2, 4)
                 val bs = stringWithoutHash.substring(4, 6)
-                val r = parseInt(rs, 16)
-                val g = parseInt(gs, 16)
-                val b = parseInt(bs, 16)
+                val r = rs.toInt(16)
+                val g = gs.toInt(16)
+                val b = bs.toInt(16)
                 return RgbColor(r, g, b)
             } else {
                 // #f0e
                 val rs = stringWithoutHash.substring(0, 1)
                 val gs = stringWithoutHash.substring(1, 2)
                 val bs = stringWithoutHash.substring(2, 3)
-                val r = parseInt(rs, 16)
-                val g = parseInt(gs, 16)
-                val b = parseInt(bs, 16)
+                val r = rs.toInt(16)
+                val g = gs.toInt(16)
+                val b = bs.toInt(16)
                 return RgbColor(r, g, b)
             }
         }

@@ -40,6 +40,7 @@ class Ripple(val element: Element,
     }
 
     private val handleMouseDown_rippleDone: (MouseEvent) -> Unit = { e ->
+        console.log("Ripple done, invoking doneCallback")
         doneCallback?.invoke()
     }
 
@@ -70,9 +71,12 @@ class Ripple(val element: Element,
         val y = pageY - pos.top - halfSize - window.scrollY
 
         val rippleInk = RippleInk(inkColor)
-        this.rippleContainer.appendChild(rippleInk)
         rippleInk.setPosition(x to y)
         rippleInk.setSize(size.px)
+
+        this.rippleContainer.appendChild(rippleInk)
+
+        this.rippleContainer._enforceStyleRecalculation()
     }
 
 

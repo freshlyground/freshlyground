@@ -31,6 +31,6 @@ fun String.toFlexGrow(): FlexGrow {
     if (keyword != null) {
         return FlexGrow(number = null, keyword = keyword)
     }
-    val number = safeParseDouble(this) ?: throw IllegalArgumentException("String could not be parsed as Double: " + this)
+    val number = this.toDouble()
     return FlexGrow(number = number, keyword = null)
 }

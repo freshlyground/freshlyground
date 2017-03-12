@@ -17,7 +17,7 @@ class Deck : Div() {
         super.childAdded(child)
 
         if (child !is Element) {
-            throw IllegalArgumentException("Only a Element can be added to a Deck")
+            throw IllegalArgumentException("Only a Element can be added to a Deck: ${child::class.js.name}" )
         }
         deck.add(child)
 

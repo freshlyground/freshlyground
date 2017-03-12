@@ -7,11 +7,11 @@ fun String?.toDimension(): Dimension? {
     }
 
     for (type in DimensionType.values()) {
-        if (type.postfix == this) {
-            return type.newFn.invoke(this)
+        if (this.endsWith(type.postfix)) {
+            return type.newFn.invoke(this.substringBeforeLast(type.postfix))
         }
     }
-    throw IllegalArgumentException("String cannot be converted to Dimension: " + this)
+    throw IllegalArgumentException("String [$this] cannot be converted to any Dimension")
 }
 
 interface Dimension {
@@ -25,19 +25,19 @@ interface Dimension {
 }
 
 enum class DimensionType(val postfix: String, val newFn: (String) -> Dimension) {
-    percent("%", { Percent(safeParseDouble(it)!!) }),
-    pixels("px", { Pixels(safeParseDouble(it)!!) }),
-    mm("mm", { Mm(parseInt(it)) }),
-    cm("cm", { Cm(safeParseDouble(it)!!) }),
-    inch("in", { In(safeParseDouble(it)!!) }),
-    pt("pt", { Pt(parseInt(it)) }),
-    pc("pc", { Pc(parseInt(it)) }),
-    em("em", { Em(safeParseDouble(it)!!) }),
-    rem("rem", { Rem(safeParseDouble(it)!!) }),
-    vh("vh", { Vh(parseInt(it)) }),
-    vw("vw", { Vw(parseInt(it)) }),
-    vmin("vmin", { VMin(parseInt(it)) }),
-    vmax("vmax", { VMax(parseInt(it)) })
+    percent("%", { Percent(it.toDouble()) }),
+    pixels("px", { Pixels(it.toDouble()) }),
+    mm("mm", { Mm(it.toInt()) }),
+    cm("cm", { Cm(it.toDouble()) }),
+    inch("in", { In(it.toDouble()) }),
+    pt("pt", { Pt(it.toInt()) }),
+    pc("pc", { Pc(it.toInt()) }),
+    em("em", { Em(it.toDouble()) }),
+    rem("rem", { Rem(it.toDouble()) }),
+    vh("vh", { Vh(it.toInt()) }),
+    vw("vw", { Vw(it.toInt()) }),
+    vmin("vmin", { VMin(it.toInt()) }),
+    vmax("vmax", { VMax(it.toInt()) })
 }
 
 data class Percent(override val value: Double) : Dimension {
@@ -64,7 +64,7 @@ data class Pixels(override val value: Double) : Dimension {
 val Double.px: Pixels get() = Pixels(this)
 val Int.px: Pixels get() = Pixels(this.toDouble())
 val String.px: Pixels get() {
-    return Pixels(safeParseDouble(this.substringBefore("px")) ?: throw IllegalArgumentException("'$this' is not parse-able as Pixels"))
+    return Pixels(this.substringBefore("px").toDouble())
 }
 
 data class Mm(override val value: Int) : Dimension {
