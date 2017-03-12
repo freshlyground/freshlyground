@@ -9,8 +9,10 @@ import org.w3c.dom.DOMRect
 import org.w3c.dom.HTMLElement
 import org.w3c.dom.css.CSSStyleDeclaration
 import org.w3c.dom.events.Event
+import org.w3c.dom.get
 import kotlin.browser.document
 import kotlin.browser.window
+import kotlin.js.Math
 
 open class Element(name: String? = null,
                    existingElement: HTMLElement? = null,
@@ -64,6 +66,8 @@ open class Element(name: String? = null,
 
     var layout: Layout? by LayoutDelegate()
 
+    internal val renderBlocks: MutableList<Element.() -> Unit> = arrayListOf()
+
     /**
      * https://developer.mozilla.org/en-US/docs/Web/API/CSS_Object_Model/Determining_the_dimensions_of_elements
      */
@@ -114,6 +118,7 @@ open class Element(name: String? = null,
             throw  IllegalStateException("render has already been called for this element")
         }
         render()
+        renderBlocks.forEach { it.invoke(this) }
         renderCalled = true
     }
 
@@ -126,6 +131,7 @@ open class Element(name: String? = null,
     }
 
     internal fun callWillUnMount() {
+        didMountCalled = false
         willUnMount()
     }
 
@@ -270,6 +276,11 @@ open class Element(name: String? = null,
 
     fun hideOn(vararg breakpoint: Breakpoint) {
         breakpoint.forEach { hideOnBreakpoints.add(it) }
+    }
+
+    // https://github.com/angular/material2/blob/master/src/lib/core/ripple/ripple-renderer.ts
+    fun _enforceStyleRecalculation() {
+        window.getComputedStyle(this.w3cElement).getPropertyValue("opacity")
     }
 
     /**
