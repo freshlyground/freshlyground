@@ -21,7 +21,24 @@ fun Element.pre(init: Pre.() -> Unit) = initAndAppendNode(Pre(), init)
 fun Element.a(href: String? = null, target: String? = null, init: A.() -> Unit) = initAndAppendNode(A() with { _href = href; _target = target }, init)
 fun Element.i(init: I.() -> Unit) = initAndAppendNode(I(), init)
 fun Element.inputText(init: InputText.() -> Unit) = initAndAppendNode(InputText(), init)
+fun Element.inputNumber(init: InputNumber.() -> Unit) = initAndAppendNode(InputNumber(), init)
 fun Element.img(src: String, init: Img.() -> Unit) = initAndAppendNode(Img(src), init)
+
+fun Element.button(init: Button.() -> Unit) = initAndAppendNode(Button(), init)
+fun Element.label(init: Label.() -> Unit) = initAndAppendNode(Label(), init)
+fun Element.select(init: Select.() -> Unit) = initAndAppendNode(Select(), init)
+
+
+fun Element.table(init: Table.() -> Unit) = initAndAppendNode(Table(), init)
+fun Element.caption(init: Caption.() -> Unit) = initAndAppendNode(Caption(), init)
+fun Element.colgroup(init: Colgroup.() -> Unit) = initAndAppendNode(Colgroup(), init)
+fun Element.col(init: Col.() -> Unit) = initAndAppendNode(Col(), init)
+fun Element.tbody(init: Tbody.() -> Unit) = initAndAppendNode(Tbody(), init)
+fun Element.thead(init: Thead.() -> Unit) = initAndAppendNode(Thead(), init)
+fun Element.tfoot(init: Tfoot.() -> Unit) = initAndAppendNode(Tfoot(), init)
+fun Element.tr(init: Tr.() -> Unit) = initAndAppendNode(Tr(), init)
+fun Element.td(init: Td.() -> Unit) = initAndAppendNode(Td(), init)
+fun Element.th(init: Th.() -> Unit) = initAndAppendNode(Th(), init)
 
 fun <T : Node> Node.initAndAppendNode(node: T, init: T.() -> Unit): T {
     node.init()

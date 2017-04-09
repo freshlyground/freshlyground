@@ -17,15 +17,22 @@ open class Button() : Element(name = "button") {
     var _value: String? by W3cDelegates.nullableAttribute("value")
 }
 
+open class Select() : Element(name = "select")
+
 /**
  * https://www.w3.org/TR/html5/forms.html#the-input-element
  */
 abstract class Input(type: Type) : Element(name = "input") {
 
-    val _inputElement: HTMLInputElement
-        get() = super.w3cElement as HTMLInputElement
+    val _inputElement: HTMLInputElement = w3cElement as HTMLInputElement
 
-    var value: String? by W3cDelegates.nullableAttribute("value")
+    var value: String?
+        set(value) {
+            _inputElement.value = value ?: ""
+        }
+        get() {
+            return _inputElement.value
+        }
 
     @Suppress("LeakingThis")
     val _type: String by W3cDelegates.attribute(this, type.name, "type")
