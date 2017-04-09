@@ -13,7 +13,6 @@ infix fun <T> T.with(init: T.() -> Unit): T {
 }
 
 infix fun <T : Element> T.render(init: T.() -> Unit): T {
-    console.log("render block")
     this.renderBlocks.add(init as Element.() -> Unit)
     return this
 }
