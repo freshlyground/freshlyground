@@ -1,16 +1,23 @@
 package fg.docs
 
+import fg.base.Side
 import fg.beans.action.Action
 import fg.beans.action.SelectableAction
 import fg.beans.button
+import fg.beans.collapseOn
+import fg.beans.drawer
 import fg.beans.icon.FontAwesomeIcons
 import fg.beans.menu
 import fg.beans.menu.Menu
 import fg.beans.menu.MenuItem
 import fg.beans.menuItem
+import fg.beans.toggleButton
 import fg.elements.BODY
+import fg.elements.Div
 import fg.elements.HTML
 import fg.elements.a
+import fg.elements.div
+import fg.elements.em
 import fg.elements.h1
 import fg.elements.h2
 import fg.elements.h3
@@ -18,6 +25,8 @@ import fg.elements.header
 import fg.elements.li
 import fg.elements.p
 import fg.elements.pre
+import fg.elements.style.typed.Display
+import fg.elements.style.typed.FlexDirection
 import fg.elements.ul
 import fg.elements.with
 import fg.style.AnyRule
@@ -25,12 +34,42 @@ import fg.style.ClassRule
 import fg.style.and
 import fg.style.desc
 import fg.style.hover
+import kotlin.browser.window
 
 
 fun main(vararg args: String) {
 
-    BODY with {
+    val beansAction = SelectableAction("Beans") { window.location.href = "#Beans" }
+    val beansContainer = Div() with {
 
+        style.display = Display.flex
+        style.flexDirection = FlexDirection.column
+        style.paddingLeft = 3.em
+        button(Action("Action") { window.location.href = "#Beans_Action" }) {}
+
+        button(Action("Button") { window.location.href = "#Beans_Button" }) {}
+    }
+    beansContainer.collapseOn(beansAction)
+    beansAction.selected = false
+
+    BODY with {
+        drawer(Side.RIGHT) {
+
+            _style.borderLeft = "1px solid black"
+
+            div {
+                style.display = Display.flex
+                style.flexDirection = FlexDirection.column
+
+                button(Action("Elements") { window.location.href = "#Elements" }) {}
+                toggleButton(beansAction) {}
+
+                appendChild(beansContainer)
+
+                button(Action("Material Design")) { }
+                button(Action("Resources") { window.location.href = "#Resources" }) { }
+            }
+        }
         header {
             h1 {
                 +"Freshlyground"
@@ -61,6 +100,7 @@ fun main(vararg args: String) {
             +"}\n"
         }
         h2 {
+            _id = "Elements"
             +"Elements"
         }
         p {
@@ -69,7 +109,24 @@ fun main(vararg args: String) {
             }
         }
         h2 {
+            _id = "Beans"
             +"Beans"
+        }
+        h3 {
+            _id = "Beans_Action"
+            +"Action"
+        }
+        p {
+            +"Actions are configurations of action components, like Button, ToggleButton, MenuItem. "
+            + "This means these components are configured and changed through their actions and not directly."
+        }
+        p {
+            +"One action can be used by more than one component, meaning all components created using the same action "
+            +"will be changed upon changes on the action."
+        }
+        h3 {
+            _id = "Beans_Button"
+            +"Button"
         }
         p {
             a("api/beans/index.html", "_blank") {
@@ -97,6 +154,7 @@ fun main(vararg args: String) {
             }
         }
         h2 {
+            _id = "Resources"
             +"Resources"
         }
         ul {
@@ -122,6 +180,8 @@ fun main(vararg args: String) {
             }
         }
     }
+
+
 
     HTML.addCSSRule(AnyRule() with {
         _boxSizing = "border-box"

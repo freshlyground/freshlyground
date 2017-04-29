@@ -21,8 +21,8 @@ object drawerPage {
             _style.textAlign = "right"
         }
 
-        val handleMenuItemAction: (ActionPerform) -> Unit = { actionPerform ->
-            lastShortDisplay.textContent = actionPerform.action.shortcut.toString()
+        val handleMenuItemAction: (ActionPerform) -> Unit = { (action) ->
+            lastShortDisplay.textContent = action.shortcut.toString()
         }
 
         BODY with {
