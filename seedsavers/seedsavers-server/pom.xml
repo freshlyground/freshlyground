@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project
+        xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+        xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>freshlyground.seedsavers</groupId>
+        <artifactId>seedsavers</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
+    </parent>
+
+    <artifactId>seedsavers-server</artifactId>
+    <packaging>jar</packaging>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.jetbrains.kotlin</groupId>
+            <artifactId>kotlin-stdlib</artifactId>
+            <version>${kotlin.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.jetbrains.ktor</groupId>
+            <artifactId>ktor-html-builder</artifactId>
+            <version>0.3.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.jetbrains.ktor</groupId>
+            <artifactId>ktor-locations</artifactId>
+            <version>0.3.0</version>
+        </dependency>
+        <dependency>
+            <groupId>freshlyground.query</groupId>
+            <artifactId>query-json-kt-jvm</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+            <version>2.3.1</version>
+        </dependency>
+
+        <!-- runtime dependencies -->
+        <dependency>
+            <groupId>org.jetbrains.ktor</groupId>
+            <artifactId>ktor-jetty</artifactId>
+            <version>0.3.0</version>
+            <scope>runtime</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <sourceDirectory>src/main/kotlin</sourceDirectory>
+        <testSourceDirectory>src/test/kotlin</testSourceDirectory>
+        <resources>
+            <resource>
+                <directory>resources</directory>
+            </resource>
+            <resource>
+                <directory>src/main/resources</directory>
+            </resource>
+        </resources>
+        <plugins>
+            <plugin>
+                <groupId>org.jetbrains.kotlin</groupId>
+                <artifactId>kotlin-maven-plugin</artifactId>
+                <version>${kotlin.version}</version>
+                <executions>
+                    <execution>
+                        <id>compile</id>
+                        <phase>compile</phase>
+                        <goals>
+                            <goal>compile</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <jvmTarget>1.8</jvmTarget>
+                    <args>
+                        <arg>-Xcoroutines=enable</arg>
+                    </args>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>unpack</id>
+                        <phase>compile</phase>
+                        <goals>
+                            <goal>unpack</goal>
+                        </goals>
+                        <configuration>
+                            <overWriteSnapshots>true</overWriteSnapshots>
+                            <artifactItems>
+                                <artifactItem>
+                                    <groupId>org.jetbrains.kotlin</groupId>
+                                    <artifactId>kotlin-stdlib-js</artifactId>
+                                    <version>${kotlin.version}</version>
+                                    <outputDirectory>${project.build.directory}/classes/_resources/js/lib</outputDirectory>
+                                    <includes>*.js</includes>
+                                </artifactItem>
+                                <artifactItem>
+                                    <groupId>freshlyground.query</groupId>
+                                    <artifactId>query-kt-js</artifactId>
+                                    <version>${project.version}</version>
+                                    <outputDirectory>${project.build.directory}/classes/_resources/js/lib</outputDirectory>
+                                    <includes>*.js</includes>
+                                </artifactItem>
+                                <artifactItem>
+                                    <groupId>freshlyground</groupId>
+                                    <artifactId>elements</artifactId>
+                                    <version>${project.version}</version>
+                                    <outputDirectory>${project.build.directory}/classes/_resources/js/lib</outputDirectory>
+                                    <includes>*.js</includes>
+                                </artifactItem>
+                                <artifactItem>
+                                    <groupId>freshlyground</groupId>
+                                    <artifactId>beans</artifactId>
+                                    <version>${project.version}</version>
+                                    <outputDirectory>${project.build.directory}/classes/_resources/js/lib</outputDirectory>
+                                    <includes>*.js</includes>
+                                </artifactItem>
+                                <artifactItem>
+                                    <groupId>freshlyground</groupId>
+                                    <artifactId>material-design</artifactId>
+                                    <version>${project.version}</version>
+                                    <outputDirectory>${project.build.directory}/classes/_resources/js/lib</outputDirectory>
+                                    <includes>*.js</includes>
+                                </artifactItem>
+                                <artifactItem>
+                                    <groupId>freshlyground.seedsavers</groupId>
+                                    <artifactId>seed-savers-web</artifactId>
+                                    <version>${project.version}</version>
+                                    <outputDirectory>${project.build.directory}/classes/_resources/js/lib</outputDirectory>
+                                    <includes>*.js</includes>
+                                </artifactItem>
+                            </artifactItems>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <version>1.4.0</version>
+
+                <configuration>
+                    <mainClass>org.jetbrains.ktor.jetty.DevelopmentHost</mainClass>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+
+</project>

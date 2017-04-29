@@ -11,6 +11,7 @@ import fg.elements.BODY
 import fg.elements.Div
 import fg.elements.style.typed.Display
 import fg.elements.style.typed.FlexDirection
+import fg.examples.seedsavers.plant.MyPlantsPanel
 import fg.md.app.MDAppBar
 import fg.md.button.MDToggleButton
 import fg.md.drawer.MDDrawer

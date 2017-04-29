@@ -1,4 +1,6 @@
-package fg.examples.seedsavers
+package fg.examples.seedsavers.plant
+
+import fg.query.Query
 
 object PlantCatalogue {
 
@@ -8,8 +10,8 @@ object PlantCatalogue {
         plantsRepo.save(plant)
     }
 
-    fun getAll(): List<Plant> {
-        return plantsRepo.getAll()
+    suspend fun getAll(): List<Plant> {
+        return plantsRepo.query(Query()).list
     }
 
 }

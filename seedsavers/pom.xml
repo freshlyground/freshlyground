@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project
+        xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+        xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>freshlyground</groupId>
+        <artifactId>freshlyground-project</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
+    </parent>
+
+    <groupId>freshlyground.seedsavers</groupId>
+    <artifactId>seedsavers</artifactId>
+    <packaging>pom</packaging>
+
+    <modules>
+        <module>seedsavers-web</module>
+        <module>seedsavers-server</module>
+    </modules>
+
+    <repositories>
+        <repository>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+            <id>bintray-kotlin-ktor</id>
+            <name>bintray</name>
+            <url>http://dl.bintray.com/kotlin/ktor</url>
+        </repository>
+    </repositories>
+</project>
