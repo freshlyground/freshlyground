@@ -1,5 +1,6 @@
 <HTML>
 <HEAD>
+<meta charset="UTF-8">
 <title>fg.style - elements</title>
 <link rel="stylesheet" href="../../style.css">
 </HEAD>
@@ -10,6 +11,12 @@
 <h3>Types</h3>
 <table>
 <tbody>
+<tr>
+<td>
+<a href="-adjacent-sibling-rule/index.html">AdjacentSiblingRule</a></td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">AdjacentSiblingRule</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-rule/index.html"><span class="identifier">Rule</span></a><span class="symbol">&lt;</span><a href="../fg.elements/-adjacent-sibling-selector/index.html"><span class="identifier">AdjacentSiblingSelector</span></a><span class="symbol">&gt;</span></code></td>
+</tr>
 <tr>
 <td>
 <a href="-and-rule/index.html">AndRule</a></td>
@@ -64,6 +71,18 @@
 <td>
 <code><span class="keyword">class </span><span class="identifier">TypeRule</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-rule/index.html"><span class="identifier">Rule</span></a><span class="symbol">&lt;</span><a href="../fg.elements/-type-selector/index.html"><span class="identifier">TypeSelector</span></a><span class="symbol">&gt;</span></code></td>
 </tr>
+<tr>
+<td>
+<a href="-typed-class-rule/index.html">TypedClassRule</a></td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">TypedClassRule</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-typed-rule/index.html"><span class="identifier">TypedRule</span></a><span class="symbol">&lt;</span><a href="../fg.elements/-class-selector/index.html"><span class="identifier">ClassSelector</span></a><span class="symbol">&gt;</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="-typed-rule/index.html">TypedRule</a></td>
+<td>
+<code><span class="keyword">abstract</span> <span class="keyword">class </span><span class="identifier">TypedRule</span><span class="symbol">&lt;</span><span class="keyword">out</span>&nbsp;<span class="identifier">SELECTOR</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="../fg.elements/-selector/index.html"><span class="identifier">Selector</span></a><span class="symbol">&gt;</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-rule/index.html"><span class="identifier">Rule</span></a><span class="symbol">&lt;</span><span class="identifier">SELECTOR</span><span class="symbol">&gt;</span></code></td>
+</tr>
 </tbody>
 </table>
 <h3>Extensions for External Classes</h3>
@@ -91,6 +110,13 @@
 <a href="active.html">active</a></td>
 <td>
 <code><span class="keyword">infix</span> <span class="keyword">fun </span><a href="-rule/index.html"><span class="identifier">Rule</span></a><span class="symbol">&lt;</span><span class="identifier">*</span><span class="symbol">&gt;</span><span class="symbol">.</span><span class="identifier">active</span><span class="symbol">(</span><span class="identifier" id="fg.style$active(fg.style.Rule((fg.elements.Selector)), kotlin.Function1((fg.style.AndRule, kotlin.Unit)))/init">init</span><span class="symbol">:</span>&nbsp;<a href="-and-rule/index.html"><span class="identifier">AndRule</span></a><span class="symbol">.</span><span class="symbol">(</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<span class="identifier">Unit</span><span class="symbol">)</span><span class="symbol">: </span><a href="-and-rule/index.html"><span class="identifier">AndRule</span></a></code></td>
+</tr>
+<tr>
+<td>
+<a href="adjacent-sibling.html">adjacentSibling</a></td>
+<td>
+<code><span class="keyword">fun </span><a href="-rule/index.html"><span class="identifier">Rule</span></a><span class="symbol">&lt;</span><span class="identifier">*</span><span class="symbol">&gt;</span><span class="symbol">.</span><span class="identifier">adjacentSibling</span><span class="symbol">(</span><span class="identifier" id="fg.style$adjacentSibling(fg.style.Rule((fg.elements.Selector)), kotlin.String, kotlin.Function1((fg.style.AdjacentSiblingRule, kotlin.Unit)))/selector">selector</span><span class="symbol">:</span>&nbsp;<span class="identifier">String</span><span class="symbol">, </span><span class="identifier" id="fg.style$adjacentSibling(fg.style.Rule((fg.elements.Selector)), kotlin.String, kotlin.Function1((fg.style.AdjacentSiblingRule, kotlin.Unit)))/init">init</span><span class="symbol">:</span>&nbsp;<a href="-adjacent-sibling-rule/index.html"><span class="identifier">AdjacentSiblingRule</span></a><span class="symbol">.</span><span class="symbol">(</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<span class="identifier">Unit</span><span class="symbol">)</span><span class="symbol">: </span><a href="-adjacent-sibling-rule/index.html"><span class="identifier">AdjacentSiblingRule</span></a></code><br/>
+<code><span class="keyword">fun </span><a href="-rule/index.html"><span class="identifier">Rule</span></a><span class="symbol">&lt;</span><span class="identifier">*</span><span class="symbol">&gt;</span><span class="symbol">.</span><span class="identifier">adjacentSibling</span><span class="symbol">(</span><span class="identifier" id="fg.style$adjacentSibling(fg.style.Rule((fg.elements.Selector)), fg.elements.Selector, kotlin.Function1((fg.style.AdjacentSiblingRule, kotlin.Unit)))/selector">selector</span><span class="symbol">:</span>&nbsp;<a href="../fg.elements/-selector/index.html"><span class="identifier">Selector</span></a><span class="symbol">, </span><span class="identifier" id="fg.style$adjacentSibling(fg.style.Rule((fg.elements.Selector)), fg.elements.Selector, kotlin.Function1((fg.style.AdjacentSiblingRule, kotlin.Unit)))/init">init</span><span class="symbol">:</span>&nbsp;<a href="-adjacent-sibling-rule/index.html"><span class="identifier">AdjacentSiblingRule</span></a><span class="symbol">.</span><span class="symbol">(</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<span class="identifier">Unit</span><span class="symbol">)</span><span class="symbol">: </span><a href="-adjacent-sibling-rule/index.html"><span class="identifier">AdjacentSiblingRule</span></a></code></td>
 </tr>
 <tr>
 <td>

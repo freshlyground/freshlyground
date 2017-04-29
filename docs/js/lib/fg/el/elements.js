@@ -3,6 +3,10 @@ if (typeof kotlin === 'undefined') {
 }
 var elements = function (_, Kotlin) {
   'use strict';
+  var experimental_0 = Kotlin.kotlin.coroutines.experimental;
+  var Continuation = Kotlin.kotlin.coroutines.experimental.Continuation;
+  var startCoroutine = Kotlin.kotlin.coroutines.experimental.startCoroutine_xtwlez$;
+  var RuntimeException = Kotlin.kotlin.RuntimeException;
   var Enum = Kotlin.kotlin.Enum;
   var contains = Kotlin.kotlin.text.contains_li3zpu$;
   var lazy = Kotlin.kotlin.lazy_klfg04$;
@@ -40,6 +44,12 @@ var elements = function (_, Kotlin) {
   var sorted = Kotlin.kotlin.collections.sorted_exjks8$;
   var toInt_0 = Kotlin.kotlin.text.toInt_6ic1pp$;
   var iterator_0 = Kotlin.kotlin.text.iterator_gw00vp$;
+  UnexpectedStatusException.prototype = Object.create(RuntimeException.prototype);
+  UnexpectedStatusException.prototype.constructor = UnexpectedStatusException;
+  InternalServerErrorException.prototype = Object.create(UnexpectedStatusException.prototype);
+  InternalServerErrorException.prototype.constructor = InternalServerErrorException;
+  NotFoundException.prototype = Object.create(UnexpectedStatusException.prototype);
+  NotFoundException.prototype.constructor = NotFoundException;
   OS.prototype = Object.create(Enum.prototype);
   OS.prototype.constructor = OS;
   Side.prototype = Object.create(Enum.prototype);
@@ -62,6 +72,8 @@ var elements = function (_, Kotlin) {
   Img.prototype.constructor = Img;
   Button.prototype = Object.create(Element.prototype);
   Button.prototype.constructor = Button;
+  Select.prototype = Object.create(Element.prototype);
+  Select.prototype.constructor = Select;
   Input$Type.prototype = Object.create(Enum.prototype);
   Input$Type.prototype.constructor = Input$Type;
   Input.prototype = Object.create(Element.prototype);
@@ -206,6 +218,26 @@ var elements = function (_, Kotlin) {
   TypedStyle$FlexShrinkDelegate.prototype.constructor = TypedStyle$FlexShrinkDelegate;
   TypedStyle$FlexBasisDelegate.prototype = Object.create(TypedStyle$TypedPropertyDelegate.prototype);
   TypedStyle$FlexBasisDelegate.prototype.constructor = TypedStyle$FlexBasisDelegate;
+  Table.prototype = Object.create(Element.prototype);
+  Table.prototype.constructor = Table;
+  Caption.prototype = Object.create(Element.prototype);
+  Caption.prototype.constructor = Caption;
+  Colgroup.prototype = Object.create(Element.prototype);
+  Colgroup.prototype.constructor = Colgroup;
+  Col.prototype = Object.create(Element.prototype);
+  Col.prototype.constructor = Col;
+  Tbody.prototype = Object.create(Element.prototype);
+  Tbody.prototype.constructor = Tbody;
+  Thead.prototype = Object.create(Element.prototype);
+  Thead.prototype.constructor = Thead;
+  Tfoot.prototype = Object.create(Element.prototype);
+  Tfoot.prototype.constructor = Tfoot;
+  Tr.prototype = Object.create(Element.prototype);
+  Tr.prototype.constructor = Tr;
+  Td.prototype = Object.create(Element.prototype);
+  Td.prototype.constructor = Td;
+  Th.prototype = Object.create(Element.prototype);
+  Th.prototype.constructor = Th;
   A.prototype = Object.create(Element.prototype);
   A.prototype.constructor = A;
   Br.prototype = Object.create(Element.prototype);
@@ -331,6 +363,142 @@ var elements = function (_, Kotlin) {
       new CompareTo();
     }
     return CompareTo_instance;
+  }
+  function launch$ObjectLiteral() {
+  }
+  Object.defineProperty(launch$ObjectLiteral.prototype, 'context', {
+    get: function () {
+      return experimental_0.EmptyCoroutineContext;
+    }
+  });
+  launch$ObjectLiteral.prototype.resume_11rb$ = function (value) {
+  };
+  launch$ObjectLiteral.prototype.resumeWithException_tcv7n7$ = function (e) {
+    console.error(toStacktrace(e));
+  };
+  launch$ObjectLiteral.$metadata$ = {
+    kind: Kotlin.Kind.CLASS,
+    interfaces: [Continuation]
+  };
+  function launch(block) {
+    startCoroutine(block, new launch$ObjectLiteral());
+  }
+  function launch$ObjectLiteral_0(closure$element) {
+    this.closure$element = closure$element;
+  }
+  Object.defineProperty(launch$ObjectLiteral_0.prototype, 'context', {
+    get: function () {
+      return experimental_0.EmptyCoroutineContext;
+    }
+  });
+  launch$ObjectLiteral_0.prototype.resume_11rb$ = function (value) {
+  };
+  function launch$ObjectLiteral$resumeWithException$lambda$lambda($receiver) {
+    $receiver.style.backgroundColor = RgbColor$Factory_getInstance().RED;
+    $receiver.style.color = RgbColor$Factory_getInstance().WHITE;
+    $receiver._style.fontFamily = 'monospace';
+    $receiver.unaryPlus_pdl1vz$('Unexpected error while executing');
+  }
+  function launch$ObjectLiteral$resumeWithException$lambda(closure$preEl) {
+    return function ($receiver) {
+      $receiver._style.border = '1px solid red';
+      $receiver._style.margin = '0.5em';
+      div($receiver, launch$ObjectLiteral$resumeWithException$lambda$lambda);
+      $receiver.appendChild_sr04hg$(closure$preEl);
+    };
+  }
+  launch$ObjectLiteral_0.prototype.resumeWithException_tcv7n7$ = function (e) {
+    var stacktrace = toStacktrace(e);
+    console.error(stacktrace);
+    var preEl = new Pre();
+    preEl._style.whiteSpace = 'pre-wrap';
+    preEl._style.margin = '0.5em';
+    preEl.appendChild_sr04hg$(new Text_0(stacktrace));
+    var errorContainerElement = with_0(new Div(), launch$ObjectLiteral$resumeWithException$lambda(preEl));
+    this.closure$element.appendChild_sr04hg$(errorContainerElement);
+  };
+  launch$ObjectLiteral_0.$metadata$ = {
+    kind: Kotlin.Kind.CLASS,
+    interfaces: [Continuation]
+  };
+  function launch_0(element, block) {
+    startCoroutine(block, new launch$ObjectLiteral_0(element));
+  }
+  function InternalServerErrorException(message) {
+    UnexpectedStatusException.call(this, 'Internal Server error: ' + message);
+    this.name = 'InternalServerErrorException';
+  }
+  InternalServerErrorException.$metadata$ = {
+    kind: Kotlin.Kind.CLASS,
+    simpleName: 'InternalServerErrorException',
+    interfaces: [UnexpectedStatusException]
+  };
+  function NotFoundException(message) {
+    UnexpectedStatusException.call(this, 'Not fond: ' + message);
+    this.name = 'NotFoundException';
+  }
+  NotFoundException.$metadata$ = {
+    kind: Kotlin.Kind.CLASS,
+    simpleName: 'NotFoundException',
+    interfaces: [UnexpectedStatusException]
+  };
+  function UnexpectedStatusException(message) {
+    RuntimeException.call(this, message);
+    this.name = 'UnexpectedStatusException';
+  }
+  UnexpectedStatusException.$metadata$ = {
+    kind: Kotlin.Kind.CLASS,
+    simpleName: 'UnexpectedStatusException',
+    interfaces: [RuntimeException]
+  };
+  function await$lambda$lambda(closure$cont) {
+    return function (it) {
+      closure$cont.resume_11rb$(it);
+    };
+  }
+  function await$lambda$lambda_0(closure$cont) {
+    return function (it) {
+      closure$cont.resumeWithException_tcv7n7$(it);
+    };
+  }
+  function await$lambda(this$await) {
+    return function (cont) {
+      this$await.then(await$lambda$lambda(cont), await$lambda$lambda_0(cont));
+    };
+  }
+  function await_0($receiver, continuation) {
+    return Kotlin.kotlin.coroutines.experimental.suspendCoroutine$f(await$lambda($receiver))(continuation.facade);
+  }
+  function send$lambda$lambda(closure$request, closure$cont) {
+    return function (event) {
+      var readyState = closure$request.readyState;
+      if (readyState === XMLHttpRequest.DONE) {
+        if (closure$request.status === Kotlin.toShort(200)) {
+          closure$cont.resume_11rb$(closure$request.responseText);
+        }
+         else if (closure$request.status === Kotlin.toShort(404)) {
+          closure$cont.resumeWithException_tcv7n7$(new NotFoundException(closure$request.responseText));
+        }
+         else if (closure$request.status === Kotlin.toShort(500)) {
+          closure$cont.resumeWithException_tcv7n7$(new InternalServerErrorException(closure$request.responseText));
+        }
+         else {
+          closure$cont.resumeWithException_tcv7n7$(new UnexpectedStatusException(closure$request.responseText));
+        }
+      }
+    };
+  }
+  function send$lambda(closure$request, closure$body) {
+    return function (cont) {
+      closure$request.onreadystatechange = send$lambda$lambda(closure$request, cont);
+      closure$request.send(closure$body);
+    };
+  }
+  function send(request, body, continuation) {
+    if (body === void 0)
+      body = null;
+    var block = send$lambda(request, body);
+    return Kotlin.kotlin.coroutines.experimental.suspendCoroutine$f(block)(continuation.facade);
   }
   function OS(name, ordinal) {
     Enum.call(this);
@@ -521,9 +689,9 @@ var elements = function (_, Kotlin) {
       return true;
     if (!Kotlin.isType(other, Path))
       return false;
-    if (!Kotlin.equals(this.absolute, other.absolute))
+    if (this.absolute !== other.absolute)
       return false;
-    if (!Kotlin.equals(this.trailingSlash, other.trailingSlash))
+    if (this.trailingSlash !== other.trailingSlash)
       return false;
     if (!Kotlin.equals(this.elements, other.elements))
       return false;
@@ -603,6 +771,19 @@ var elements = function (_, Kotlin) {
     simpleName: 'Path',
     interfaces: [Comparable]
   };
+  function toStacktrace($receiver) {
+    var tmp$;
+    var stackTrace = '';
+    var thisError = $receiver;
+    if (thisError.stack != null) {
+      stackTrace += thisError.stack;
+      if ($receiver.cause != null) {
+        stackTrace += '\nCaused by: ' + toStacktrace((tmp$ = $receiver.cause) != null ? tmp$ : Kotlin.throwNPE());
+        return stackTrace;
+      }
+    }
+    return stackTrace;
+  }
   function URL(scheme, host, port, path, query, fragment) {
     URL$Factory_getInstance();
     if (path === void 0)
@@ -1747,8 +1928,50 @@ var elements = function (_, Kotlin) {
   function inputText($receiver, init) {
     return initAndAppendNode($receiver, new InputText(), init);
   }
+  function inputNumber($receiver, init) {
+    return initAndAppendNode($receiver, new InputNumber(), init);
+  }
   function img($receiver, src, init) {
     return initAndAppendNode($receiver, new Img(src), init);
+  }
+  function button($receiver, init) {
+    return initAndAppendNode($receiver, new Button(), init);
+  }
+  function label($receiver, init) {
+    return initAndAppendNode($receiver, new Label(), init);
+  }
+  function select($receiver, init) {
+    return initAndAppendNode($receiver, new Select(), init);
+  }
+  function table($receiver, init) {
+    return initAndAppendNode($receiver, new Table(), init);
+  }
+  function caption($receiver, init) {
+    return initAndAppendNode($receiver, new Caption(), init);
+  }
+  function colgroup($receiver, init) {
+    return initAndAppendNode($receiver, new Colgroup(), init);
+  }
+  function col($receiver, init) {
+    return initAndAppendNode($receiver, new Col(), init);
+  }
+  function tbody($receiver, init) {
+    return initAndAppendNode($receiver, new Tbody(), init);
+  }
+  function thead($receiver, init) {
+    return initAndAppendNode($receiver, new Thead(), init);
+  }
+  function tfoot($receiver, init) {
+    return initAndAppendNode($receiver, new Tfoot(), init);
+  }
+  function tr($receiver, init) {
+    return initAndAppendNode($receiver, new Tr(), init);
+  }
+  function td($receiver, init) {
+    return initAndAppendNode($receiver, new Td(), init);
+  }
+  function th($receiver, init) {
+    return initAndAppendNode($receiver, new Th(), init);
   }
   function initAndAppendNode($receiver, node, init) {
     init(node);
@@ -1761,7 +1984,6 @@ var elements = function (_, Kotlin) {
   }
   function render($receiver, init) {
     var tmp$;
-    console.log('render block');
     $receiver.renderBlocks_gobymg$_0.add_11rb$(typeof (tmp$ = init) === 'function' ? tmp$ : Kotlin.throwCCE());
     return $receiver;
   }
@@ -1953,7 +2175,7 @@ var elements = function (_, Kotlin) {
     this._displayBeforeHiding_gobymg$_0 = '';
     this.style$delegate = lazy(Element$style$lambda(this));
     this.layout$delegate = new LayoutDelegate();
-    this.renderBlocks_gobymg$_0 = Kotlin.kotlin.collections.ArrayList_init_ww73n8$();
+    this.renderBlocks$delegate = lazy(Element$renderBlocks$lambda);
   }
   Object.defineProperty(Element.prototype, 'renderCalled', {
     get: function () {
@@ -2046,6 +2268,13 @@ var elements = function (_, Kotlin) {
     },
     set: function (layout) {
       this.layout$delegate.setValue_9rddgb$(this, new Kotlin.PropertyMetadata('layout'), layout);
+    }
+  });
+  Object.defineProperty(Element.prototype, 'renderBlocks_gobymg$_0', {
+    get: function () {
+      var $receiver = this.renderBlocks$delegate;
+      new Kotlin.PropertyMetadata('renderBlocks');
+      return $receiver.value;
     }
   });
   Object.defineProperty(Element.prototype, 'clientWidth', {
@@ -2551,6 +2780,9 @@ var elements = function (_, Kotlin) {
       return new TypedStyle(this$Element);
     };
   }
+  function Element$renderBlocks$lambda() {
+    return Kotlin.kotlin.collections.ArrayList_init_ww73n8$();
+  }
   Element.$metadata$ = {
     kind: Kotlin.Kind.CLASS,
     simpleName: 'Element',
@@ -2716,9 +2948,18 @@ var elements = function (_, Kotlin) {
     simpleName: 'Button',
     interfaces: [Element]
   };
+  function Select() {
+    Element.call(this, 'select');
+  }
+  Select.$metadata$ = {
+    kind: Kotlin.Kind.CLASS,
+    simpleName: 'Select',
+    interfaces: [Element]
+  };
   function Input(type) {
     Element.call(this, 'input');
-    this.value$delegate = W3cDelegates_getInstance().nullableAttribute_61zpoe$('value');
+    var tmp$;
+    this._inputElement = Kotlin.isType(tmp$ = this.w3cElement_gobymg$_0, HTMLInputElement) ? tmp$ : Kotlin.throwCCE();
     this._type$delegate = W3cDelegates_getInstance().attribute_o3qcra$(this, type.name, 'type');
     this._accept$delegate = W3cDelegates_getInstance().nullableAttribute_61zpoe$('accept');
     this._alt$delegate = W3cDelegates_getInstance().nullableAttribute_61zpoe$('alt');
@@ -2751,18 +2992,12 @@ var elements = function (_, Kotlin) {
     this._step$delegate = W3cDelegates_getInstance().nullableAttribute_61zpoe$('step');
     this._width$delegate = W3cDelegates_getInstance().nullableDimensionAttribute_61zpoe$('width');
   }
-  Object.defineProperty(Input.prototype, '_inputElement', {
-    get: function () {
-      var tmp$;
-      return Kotlin.isType(tmp$ = Kotlin.callGetter(this, Element.prototype, 'w3cElement_gobymg$_0'), HTMLInputElement) ? tmp$ : Kotlin.throwCCE();
-    }
-  });
   Object.defineProperty(Input.prototype, 'value', {
     get: function () {
-      return this.value$delegate.getValue_lrcp0p$(this, new Kotlin.PropertyMetadata('value'));
+      return this._inputElement.value;
     },
     set: function (value) {
-      this.value$delegate.setValue_9rddgb$(this, new Kotlin.PropertyMetadata('value'), value);
+      this._inputElement.value = value != null ? value : '';
     }
   });
   Object.defineProperty(Input.prototype, '_type', {
@@ -5665,6 +5900,86 @@ var elements = function (_, Kotlin) {
     kind: Kotlin.Kind.INTERFACE,
     simpleName: 'StyledClass',
     interfaces: []
+  };
+  function Table() {
+    Element.call(this, 'table');
+  }
+  Table.$metadata$ = {
+    kind: Kotlin.Kind.CLASS,
+    simpleName: 'Table',
+    interfaces: [Element]
+  };
+  function Caption() {
+    Element.call(this, 'caption');
+  }
+  Caption.$metadata$ = {
+    kind: Kotlin.Kind.CLASS,
+    simpleName: 'Caption',
+    interfaces: [Element]
+  };
+  function Colgroup() {
+    Element.call(this, 'colgroup');
+  }
+  Colgroup.$metadata$ = {
+    kind: Kotlin.Kind.CLASS,
+    simpleName: 'Colgroup',
+    interfaces: [Element]
+  };
+  function Col() {
+    Element.call(this, 'col');
+  }
+  Col.$metadata$ = {
+    kind: Kotlin.Kind.CLASS,
+    simpleName: 'Col',
+    interfaces: [Element]
+  };
+  function Tbody() {
+    Element.call(this, 'tbody');
+  }
+  Tbody.$metadata$ = {
+    kind: Kotlin.Kind.CLASS,
+    simpleName: 'Tbody',
+    interfaces: [Element]
+  };
+  function Thead() {
+    Element.call(this, 'thead');
+  }
+  Thead.$metadata$ = {
+    kind: Kotlin.Kind.CLASS,
+    simpleName: 'Thead',
+    interfaces: [Element]
+  };
+  function Tfoot() {
+    Element.call(this, 'tfoot');
+  }
+  Tfoot.$metadata$ = {
+    kind: Kotlin.Kind.CLASS,
+    simpleName: 'Tfoot',
+    interfaces: [Element]
+  };
+  function Tr() {
+    Element.call(this, 'tr');
+  }
+  Tr.$metadata$ = {
+    kind: Kotlin.Kind.CLASS,
+    simpleName: 'Tr',
+    interfaces: [Element]
+  };
+  function Td() {
+    Element.call(this, 'td');
+  }
+  Td.$metadata$ = {
+    kind: Kotlin.Kind.CLASS,
+    simpleName: 'Td',
+    interfaces: [Element]
+  };
+  function Th() {
+    Element.call(this, 'th');
+  }
+  Th.$metadata$ = {
+    kind: Kotlin.Kind.CLASS,
+    simpleName: 'Th',
+    interfaces: [Element]
   };
   function A() {
     Element.call(this, 'a');
@@ -9228,6 +9543,16 @@ var elements = function (_, Kotlin) {
   Object.defineProperty(package$base, 'CompareTo', {
     get: CompareTo_getInstance
   });
+  var package$experimental = package$base.experimental || (package$base.experimental = {});
+  var package$coroutines = package$experimental.coroutines || (package$experimental.coroutines = {});
+  package$coroutines.launch_g2bo5h$ = launch;
+  package$coroutines.launch_zhpfat$ = launch_0;
+  var package$http = package$base.http || (package$base.http = {});
+  package$http.InternalServerErrorException = InternalServerErrorException;
+  package$http.NotFoundException = NotFoundException;
+  package$http.UnexpectedStatusException = UnexpectedStatusException;
+  package$http.await_t11jrl$ = await_0;
+  package$http.send_98uf27$ = send;
   Object.defineProperty(OS, 'WINDOWS', {
     get: OS$WINDOWS_getInstance
   });
@@ -9252,6 +9577,7 @@ var elements = function (_, Kotlin) {
   });
   Path.Element = Path$Element;
   package$base.Path = Path;
+  _.toStacktrace_dbl4o4$ = toStacktrace;
   Object.defineProperty(URL, 'Factory', {
     get: URL$Factory_getInstance
   });
@@ -9375,7 +9701,21 @@ var elements = function (_, Kotlin) {
   package$elements.a_ya8tl$ = a;
   package$elements.i_92csup$ = i;
   package$elements.inputText_sqgf27$ = inputText;
+  package$elements.inputNumber_glhjj9$ = inputNumber;
   package$elements.img_cipz99$ = img;
+  package$elements.button_4vwmzi$ = button;
+  package$elements.label_biljks$ = label;
+  package$elements.select_8ogc18$ = select;
+  package$elements.table_lbc0c6$ = table;
+  package$elements.caption_kqfnwu$ = caption;
+  package$elements.colgroup_an2rhr$ = colgroup;
+  package$elements.col_bbrg14$ = col;
+  package$elements.tbody_9llqf2$ = tbody;
+  package$elements.thead_u212ro$ = thead;
+  package$elements.tfoot_a870sq$ = tfoot;
+  package$elements.tr_hy4hea$ = tr;
+  package$elements.td_bud5eo$ = td;
+  package$elements.th_gur2as$ = th;
   package$elements.initAndAppendNode_n3qhgg$ = initAndAppendNode;
   package$elements.with_9bxh2u$ = with_0;
   package$elements.render_uy47cu$ = render;
@@ -9432,6 +9772,7 @@ var elements = function (_, Kotlin) {
   package$elements.Element = Element;
   package$elements.Img = Img;
   package$elements.Button = Button;
+  package$elements.Select = Select;
   Object.defineProperty(Input$Type, 'hidden', {
     get: Input$Type$hidden_getInstance
   });
@@ -9771,6 +10112,16 @@ var elements = function (_, Kotlin) {
   TypedStyle.TypedPropertyDelegate = TypedStyle$TypedPropertyDelegate;
   package$typed.TypedStyle = TypedStyle;
   package$elements.StyledClass = StyledClass;
+  package$elements.Table = Table;
+  package$elements.Caption = Caption;
+  package$elements.Colgroup = Colgroup;
+  package$elements.Col = Col;
+  package$elements.Tbody = Tbody;
+  package$elements.Thead = Thead;
+  package$elements.Tfoot = Tfoot;
+  package$elements.Tr = Tr;
+  package$elements.Td = Td;
+  package$elements.Th = Th;
   package$elements.A = A;
   package$elements.Br = Br;
   package$elements.Span = Span;

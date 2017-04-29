@@ -11,18 +11,33 @@
     <packaging>pom</packaging>
 
     <properties>
-        <kotlin.version>1.1.0</kotlin.version>
-        <dokka.version>0.9.9</dokka.version>
+        <kotlin.version>1.1.2</kotlin.version>
+        <kotlin.compiler.incremental>true</kotlin.compiler.incremental>
+        <dokka.version>0.9.13</dokka.version>
         <maven.jar.plugin>2.6</maven.jar.plugin>
     </properties>
 
     <modules>
+        <module>query</module>
         <module>elements</module>
         <module>beans</module>
         <module>beans-statics</module>
         <module>material-design</module>
         <module>docs-source</module>
-        <module>seed-savers</module>
+        <module>seedsavers</module>
     </modules>
 
+    <repositories>
+        <repository>
+            <id>jcenter</id>
+            <url>https://jcenter.bintray.com/</url>
+        </repository>
+    </repositories>
+    <pluginRepositories>
+        <pluginRepository>
+            <id>jcenter</id>
+            <name>JCenter</name>
+            <url>https://jcenter.bintray.com/</url>
+        </pluginRepository>
+    </pluginRepositories>
 </project>

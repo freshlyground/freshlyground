@@ -1,5 +1,6 @@
 <HTML>
 <HEAD>
+<meta charset="UTF-8">
 <title>TypedStyle - elements</title>
 <link rel="stylesheet" href="../../../style.css">
 </HEAD>
@@ -11,6 +12,12 @@
 <h3>Types</h3>
 <table>
 <tbody>
+<tr>
+<td>
+<a href="-align-items-delegate/index.html">AlignItemsDelegate</a></td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">AlignItemsDelegate</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-typed-property-delegate/index.html"><span class="identifier">TypedPropertyDelegate</span></a><span class="symbol">&lt;</span><a href="../-align-items/index.html"><span class="identifier">AlignItems</span></a><span class="symbol">&gt;</span></code></td>
+</tr>
 <tr>
 <td>
 <a href="-dimension-delegate/index.html">DimensionDelegate</a></td>
@@ -25,15 +32,51 @@
 </tr>
 <tr>
 <td>
+<a href="-flex-basis-delegate/index.html">FlexBasisDelegate</a></td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">FlexBasisDelegate</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-typed-property-delegate/index.html"><span class="identifier">TypedPropertyDelegate</span></a><span class="symbol">&lt;</span><a href="../-flex-basis/index.html"><span class="identifier">FlexBasis</span></a><span class="symbol">&gt;</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="-flex-delegate/index.html">FlexDelegate</a></td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">FlexDelegate</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-typed-property-delegate/index.html"><span class="identifier">TypedPropertyDelegate</span></a><span class="symbol">&lt;</span><a href="../-flex/index.html"><span class="identifier">Flex</span></a><span class="symbol">&gt;</span></code></td>
+</tr>
+<tr>
+<td>
 <a href="-flex-direction-delegate/index.html">FlexDirectionDelegate</a></td>
 <td>
 <code><span class="keyword">class </span><span class="identifier">FlexDirectionDelegate</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-typed-property-delegate/index.html"><span class="identifier">TypedPropertyDelegate</span></a><span class="symbol">&lt;</span><a href="../-flex-direction/index.html"><span class="identifier">FlexDirection</span></a><span class="symbol">&gt;</span></code></td>
 </tr>
 <tr>
 <td>
+<a href="-flex-grow-delegate/index.html">FlexGrowDelegate</a></td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">FlexGrowDelegate</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-typed-property-delegate/index.html"><span class="identifier">TypedPropertyDelegate</span></a><span class="symbol">&lt;</span><a href="../-flex-grow/index.html"><span class="identifier">FlexGrow</span></a><span class="symbol">&gt;</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="-flex-shrink-delegate/index.html">FlexShrinkDelegate</a></td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">FlexShrinkDelegate</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-typed-property-delegate/index.html"><span class="identifier">TypedPropertyDelegate</span></a><span class="symbol">&lt;</span><a href="../-flex-shrink/index.html"><span class="identifier">FlexShrink</span></a><span class="symbol">&gt;</span></code></td>
+</tr>
+<tr>
+<td>
 <a href="-int-delegate/index.html">IntDelegate</a></td>
 <td>
 <code><span class="keyword">class </span><span class="identifier">IntDelegate</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-typed-property-delegate/index.html"><span class="identifier">TypedPropertyDelegate</span></a><span class="symbol">&lt;</span><span class="identifier">Int</span><span class="symbol">&gt;</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="-justify-content-delegate/index.html">JustifyContentDelegate</a></td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">JustifyContentDelegate</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-typed-property-delegate/index.html"><span class="identifier">TypedPropertyDelegate</span></a><span class="symbol">&lt;</span><a href="../-justify-content/index.html"><span class="identifier">JustifyContent</span></a><span class="symbol">&gt;</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="-position-delegate/index.html">PositionDelegate</a></td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">PositionDelegate</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-typed-property-delegate/index.html"><span class="identifier">TypedPropertyDelegate</span></a><span class="symbol">&lt;</span><a href="../-position/index.html"><span class="identifier">Position</span></a><span class="symbol">&gt;</span></code></td>
 </tr>
 <tr>
 <td>
@@ -65,6 +108,12 @@
 <tbody>
 <tr>
 <td>
+<a href="align-items.html">alignItems</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">alignItems</span><span class="symbol">: </span><a href="../-align-items/index.html"><span class="identifier">AlignItems</span></a><span class="symbol">?</span></code></td>
+</tr>
+<tr>
+<td>
 <a href="background-color.html">backgroundColor</a></td>
 <td>
 <code><span class="keyword">var </span><span class="identifier">backgroundColor</span><span class="symbol">: </span><a href="../../fg.style.colour/-rgb-color/index.html"><span class="identifier">RgbColor</span></a><span class="symbol">?</span></code></td>
@@ -89,9 +138,33 @@
 </tr>
 <tr>
 <td>
+<a href="flex.html">flex</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">flex</span><span class="symbol">: </span><a href="../-flex/index.html"><span class="identifier">Flex</span></a><span class="symbol">?</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="flex-basis.html">flexBasis</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">flexBasis</span><span class="symbol">: </span><a href="../-flex-basis/index.html"><span class="identifier">FlexBasis</span></a><span class="symbol">?</span></code></td>
+</tr>
+<tr>
+<td>
 <a href="flex-direction.html">flexDirection</a></td>
 <td>
 <code><span class="keyword">var </span><span class="identifier">flexDirection</span><span class="symbol">: </span><a href="../-flex-direction/index.html"><span class="identifier">FlexDirection</span></a><span class="symbol">?</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="flex-grow.html">flexGrow</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">flexGrow</span><span class="symbol">: </span><a href="../-flex-grow/index.html"><span class="identifier">FlexGrow</span></a><span class="symbol">?</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="flex-shrink.html">flexShrink</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">flexShrink</span><span class="symbol">: </span><a href="../-flex-shrink/index.html"><span class="identifier">FlexShrink</span></a><span class="symbol">?</span></code></td>
 </tr>
 <tr>
 <td>
@@ -101,9 +174,39 @@
 </tr>
 <tr>
 <td>
+<a href="justify-content.html">justifyContent</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">justifyContent</span><span class="symbol">: </span><a href="../-justify-content/index.html"><span class="identifier">JustifyContent</span></a><span class="symbol">?</span></code></td>
+</tr>
+<tr>
+<td>
 <a href="left.html">left</a></td>
 <td>
 <code><span class="keyword">var </span><span class="identifier">left</span><span class="symbol">: </span><a href="../../fg.elements/-dimension/index.html"><span class="identifier">Dimension</span></a><span class="symbol">?</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="margin-bottom.html">marginBottom</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">marginBottom</span><span class="symbol">: </span><a href="../../fg.elements/-dimension/index.html"><span class="identifier">Dimension</span></a><span class="symbol">?</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="margin-left.html">marginLeft</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">marginLeft</span><span class="symbol">: </span><a href="../../fg.elements/-dimension/index.html"><span class="identifier">Dimension</span></a><span class="symbol">?</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="margin-right.html">marginRight</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">marginRight</span><span class="symbol">: </span><a href="../../fg.elements/-dimension/index.html"><span class="identifier">Dimension</span></a><span class="symbol">?</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="margin-top.html">marginTop</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">marginTop</span><span class="symbol">: </span><a href="../../fg.elements/-dimension/index.html"><span class="identifier">Dimension</span></a><span class="symbol">?</span></code></td>
 </tr>
 <tr>
 <td>
@@ -134,6 +237,36 @@
 <a href="order.html">order</a></td>
 <td>
 <code><span class="keyword">var </span><span class="identifier">order</span><span class="symbol">: </span><span class="identifier">Int</span><span class="symbol">?</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="padding-bottom.html">paddingBottom</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">paddingBottom</span><span class="symbol">: </span><a href="../../fg.elements/-dimension/index.html"><span class="identifier">Dimension</span></a><span class="symbol">?</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="padding-left.html">paddingLeft</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">paddingLeft</span><span class="symbol">: </span><a href="../../fg.elements/-dimension/index.html"><span class="identifier">Dimension</span></a><span class="symbol">?</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="padding-right.html">paddingRight</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">paddingRight</span><span class="symbol">: </span><a href="../../fg.elements/-dimension/index.html"><span class="identifier">Dimension</span></a><span class="symbol">?</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="padding-top.html">paddingTop</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">paddingTop</span><span class="symbol">: </span><a href="../../fg.elements/-dimension/index.html"><span class="identifier">Dimension</span></a><span class="symbol">?</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="position.html">position</a></td>
+<td>
+<code><span class="keyword">var </span><span class="identifier">position</span><span class="symbol">: </span><a href="../-position/index.html"><span class="identifier">Position</span></a><span class="symbol">?</span></code></td>
 </tr>
 <tr>
 <td>

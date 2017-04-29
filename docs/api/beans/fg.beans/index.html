@@ -1,5 +1,6 @@
 <HTML>
 <HEAD>
+<meta charset="UTF-8">
 <title>fg.beans - beans</title>
 <link rel="stylesheet" href="../../style.css">
 </HEAD>
@@ -12,33 +13,9 @@
 <tbody>
 <tr>
 <td>
-<a href="-action/index.html">Action</a></td>
-<td>
-<code><span class="keyword">open</span> <span class="keyword">class </span><span class="identifier">Action</span></code></td>
-</tr>
-<tr>
-<td>
-<a href="-action-bean/index.html">ActionBean</a></td>
-<td>
-<code><span class="keyword">interface </span><span class="identifier">ActionBean</span></code></td>
-</tr>
-<tr>
-<td>
-<a href="-action-perform/index.html">ActionPerform</a></td>
-<td>
-<code><span class="keyword">data</span> <span class="keyword">class </span><span class="identifier">ActionPerform</span></code></td>
-</tr>
-<tr>
-<td>
 <a href="-element-style/index.html">ElementStyle</a></td>
 <td>
 <code><span class="keyword">open</span> <span class="keyword">class </span><span class="identifier">ElementStyle</span></code></td>
-</tr>
-<tr>
-<td>
-<a href="-selectable-action/index.html">SelectableAction</a></td>
-<td>
-<code><span class="keyword">class </span><span class="identifier">SelectableAction</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="-action/index.html"><span class="identifier">Action</span></a></code></td>
 </tr>
 </tbody>
 </table>
@@ -66,7 +43,13 @@
 <td>
 <a href="button.html">button</a></td>
 <td>
-<code><span class="keyword">fun </span><span class="identifier">&lt;ERROR CLASS&gt;</span><span class="symbol">.</span><span class="identifier">button</span><span class="symbol">(</span><span class="identifier" id="fg.beans$button(, fg.beans.Action, kotlin.Function1((fg.beans.button.Button, kotlin.Unit)))/action">action</span><span class="symbol">:</span>&nbsp;<a href="-action/index.html"><span class="identifier">Action</span></a><span class="symbol">, </span><span class="identifier" id="fg.beans$button(, fg.beans.Action, kotlin.Function1((fg.beans.button.Button, kotlin.Unit)))/init">init</span><span class="symbol">:</span>&nbsp;<a href="../fg.beans.button/-button/index.html"><span class="identifier">Button</span></a><span class="symbol">.</span><span class="symbol">(</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<span class="identifier">Unit</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">&lt;ERROR CLASS&gt;</span></code></td>
+<code><span class="keyword">fun </span><span class="identifier">&lt;ERROR CLASS&gt;</span><span class="symbol">.</span><span class="identifier">button</span><span class="symbol">(</span><span class="identifier" id="fg.beans$button(, fg.beans.action.Action, kotlin.Function1((fg.beans.button.Button, kotlin.Unit)))/action">action</span><span class="symbol">:</span>&nbsp;<a href="../fg.beans.action/-action/index.html"><span class="identifier">Action</span></a><span class="symbol">, </span><span class="identifier" id="fg.beans$button(, fg.beans.action.Action, kotlin.Function1((fg.beans.button.Button, kotlin.Unit)))/init">init</span><span class="symbol">:</span>&nbsp;<a href="../fg.beans.button/-button/index.html"><span class="identifier">Button</span></a><span class="symbol">.</span><span class="symbol">(</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<span class="identifier">Unit</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">&lt;ERROR CLASS&gt;</span></code></td>
+</tr>
+<tr>
+<td>
+<a href="collapse-on.html">collapseOn</a></td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">&lt;ERROR CLASS&gt;</span><span class="symbol">.</span><span class="identifier">collapseOn</span><span class="symbol">(</span><span class="identifier" id="fg.beans$collapseOn(, fg.beans.action.SelectableAction)/action">action</span><span class="symbol">:</span>&nbsp;<a href="../fg.beans.action/-selectable-action/index.html"><span class="identifier">SelectableAction</span></a><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">Unit</span></code></td>
 </tr>
 <tr>
 <td>
@@ -96,13 +79,13 @@
 <td>
 <a href="menu-item.html">menuItem</a></td>
 <td>
-<code><span class="keyword">fun </span><a href="../fg.beans.menu/-menu/index.html"><span class="identifier">Menu</span></a><span class="symbol">.</span><span class="identifier">menuItem</span><span class="symbol">(</span><span class="identifier" id="fg.beans$menuItem(fg.beans.menu.Menu, fg.beans.Action, kotlin.Function1((fg.beans.menu.MenuItem, kotlin.Unit)))/action">action</span><span class="symbol">:</span>&nbsp;<a href="-action/index.html"><span class="identifier">Action</span></a><span class="symbol">, </span><span class="identifier" id="fg.beans$menuItem(fg.beans.menu.Menu, fg.beans.Action, kotlin.Function1((fg.beans.menu.MenuItem, kotlin.Unit)))/init">init</span><span class="symbol">:</span>&nbsp;<a href="../fg.beans.menu/-menu-item/index.html"><span class="identifier">MenuItem</span></a><span class="symbol">.</span><span class="symbol">(</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<span class="identifier">Unit</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">&lt;ERROR CLASS&gt;</span></code></td>
+<code><span class="keyword">fun </span><a href="../fg.beans.menu/-menu/index.html"><span class="identifier">Menu</span></a><span class="symbol">.</span><span class="identifier">menuItem</span><span class="symbol">(</span><span class="identifier" id="fg.beans$menuItem(fg.beans.menu.Menu, fg.beans.action.Action, kotlin.Function1((fg.beans.menu.MenuItem, kotlin.Unit)))/action">action</span><span class="symbol">:</span>&nbsp;<a href="../fg.beans.action/-action/index.html"><span class="identifier">Action</span></a><span class="symbol">, </span><span class="identifier" id="fg.beans$menuItem(fg.beans.menu.Menu, fg.beans.action.Action, kotlin.Function1((fg.beans.menu.MenuItem, kotlin.Unit)))/init">init</span><span class="symbol">:</span>&nbsp;<a href="../fg.beans.menu/-menu-item/index.html"><span class="identifier">MenuItem</span></a><span class="symbol">.</span><span class="symbol">(</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<span class="identifier">Unit</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">&lt;ERROR CLASS&gt;</span></code></td>
 </tr>
 <tr>
 <td>
 <a href="toggle-button.html">toggleButton</a></td>
 <td>
-<code><span class="keyword">fun </span><span class="identifier">&lt;ERROR CLASS&gt;</span><span class="symbol">.</span><span class="identifier">toggleButton</span><span class="symbol">(</span><span class="identifier" id="fg.beans$toggleButton(, fg.beans.SelectableAction, kotlin.Function1((fg.beans.button.ToggleButton, kotlin.Unit)))/action">action</span><span class="symbol">:</span>&nbsp;<a href="-selectable-action/index.html"><span class="identifier">SelectableAction</span></a><span class="symbol">, </span><span class="identifier" id="fg.beans$toggleButton(, fg.beans.SelectableAction, kotlin.Function1((fg.beans.button.ToggleButton, kotlin.Unit)))/init">init</span><span class="symbol">:</span>&nbsp;<a href="../fg.beans.button/-toggle-button/index.html"><span class="identifier">ToggleButton</span></a><span class="symbol">.</span><span class="symbol">(</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<span class="identifier">Unit</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">&lt;ERROR CLASS&gt;</span></code></td>
+<code><span class="keyword">fun </span><span class="identifier">&lt;ERROR CLASS&gt;</span><span class="symbol">.</span><span class="identifier">toggleButton</span><span class="symbol">(</span><span class="identifier" id="fg.beans$toggleButton(, fg.beans.action.SelectableAction, kotlin.Function1((fg.beans.button.ToggleButton, kotlin.Unit)))/action">action</span><span class="symbol">:</span>&nbsp;<a href="../fg.beans.action/-selectable-action/index.html"><span class="identifier">SelectableAction</span></a><span class="symbol">, </span><span class="identifier" id="fg.beans$toggleButton(, fg.beans.action.SelectableAction, kotlin.Function1((fg.beans.button.ToggleButton, kotlin.Unit)))/init">init</span><span class="symbol">:</span>&nbsp;<a href="../fg.beans.button/-toggle-button/index.html"><span class="identifier">ToggleButton</span></a><span class="symbol">.</span><span class="symbol">(</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<span class="identifier">Unit</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">&lt;ERROR CLASS&gt;</span></code></td>
 </tr>
 </tbody>
 </table>

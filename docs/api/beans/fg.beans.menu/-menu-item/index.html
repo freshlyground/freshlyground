@@ -1,5 +1,6 @@
 <HTML>
 <HEAD>
+<meta charset="UTF-8">
 <title>MenuItem - beans</title>
 <link rel="stylesheet" href="../../../style.css">
 </HEAD>
@@ -7,7 +8,7 @@
 <a href="../../index.html">beans</a>&nbsp;/&nbsp;<a href="../index.html">fg.beans.menu</a>&nbsp;/&nbsp;<a href=".">MenuItem</a><br/>
 <br/>
 <h1>MenuItem</h1>
-<code><span class="keyword">open</span> <span class="keyword">class </span><span class="identifier">MenuItem</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="../../fg.beans/-action-bean/index.html"><span class="identifier">ActionBean</span></a></code>
+<code><span class="keyword">open</span> <span class="keyword">class </span><span class="identifier">MenuItem</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="../../fg.beans.action/-action-bean/index.html"><span class="identifier">ActionBean</span></a></code>
 <h3>Types</h3>
 <table>
 <tbody>
@@ -26,7 +27,7 @@
 <td>
 <a href="-init-.html">&lt;init&gt;</a></td>
 <td>
-<code><span class="identifier">MenuItem</span><span class="symbol">(</span><span class="identifier" id="fg.beans.menu.MenuItem$<init>(fg.beans.Action)/action">action</span><span class="symbol">:</span>&nbsp;<a href="../../fg.beans/-action/index.html"><span class="identifier">Action</span></a><span class="symbol">)</span></code></td>
+<code><span class="identifier">MenuItem</span><span class="symbol">(</span><span class="identifier" id="fg.beans.menu.MenuItem$<init>(fg.beans.action.Action)/action">action</span><span class="symbol">:</span>&nbsp;<a href="../../fg.beans.action/-action/index.html"><span class="identifier">Action</span></a><span class="symbol">)</span></code></td>
 </tr>
 </tbody>
 </table>
@@ -37,7 +38,7 @@
 <td>
 <a href="action.html">action</a></td>
 <td>
-<code><span class="keyword">open</span> <span class="keyword">val </span><span class="identifier">action</span><span class="symbol">: </span><a href="../../fg.beans/-action/index.html"><span class="identifier">Action</span></a></code></td>
+<code><span class="keyword">open</span> <span class="keyword">val </span><span class="identifier">action</span><span class="symbol">: </span><a href="../../fg.beans.action/-action/index.html"><span class="identifier">Action</span></a></code></td>
 </tr>
 <tr>
 <td>
@@ -78,13 +79,13 @@
 <td>
 <a href="on-after-performing-action.html">onAfterPerformingAction</a></td>
 <td>
-<code><span class="keyword">fun </span><span class="identifier">onAfterPerformingAction</span><span class="symbol">(</span><span class="identifier" id="fg.beans.menu.MenuItem$onAfterPerformingAction(kotlin.Function1((fg.beans.Action, kotlin.Unit)))/listener">listener</span><span class="symbol">:</span>&nbsp;<span class="symbol">(</span><a href="../../fg.beans/-action/index.html"><span class="identifier">Action</span></a><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<span class="identifier">Unit</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">Unit</span></code></td>
+<code><span class="keyword">fun </span><span class="identifier">onAfterPerformingAction</span><span class="symbol">(</span><span class="identifier" id="fg.beans.menu.MenuItem$onAfterPerformingAction(kotlin.Function1((fg.beans.action.Action, kotlin.Unit)))/listener">listener</span><span class="symbol">:</span>&nbsp;<span class="symbol">(</span><span class="identifier">action</span><span class="symbol">:</span>&nbsp;<a href="../../fg.beans.action/-action/index.html"><span class="identifier">Action</span></a><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<span class="identifier">Unit</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">Unit</span></code></td>
 </tr>
 <tr>
 <td>
 <a href="on-before-performing-action.html">onBeforePerformingAction</a></td>
 <td>
-<code><span class="keyword">fun </span><span class="identifier">onBeforePerformingAction</span><span class="symbol">(</span><span class="identifier" id="fg.beans.menu.MenuItem$onBeforePerformingAction(kotlin.Function1((fg.beans.Action, kotlin.Unit)))/listener">listener</span><span class="symbol">:</span>&nbsp;<span class="symbol">(</span><a href="../../fg.beans/-action/index.html"><span class="identifier">Action</span></a><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<span class="identifier">Unit</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">Unit</span></code></td>
+<code><span class="keyword">fun </span><span class="identifier">onBeforePerformingAction</span><span class="symbol">(</span><span class="identifier" id="fg.beans.menu.MenuItem$onBeforePerformingAction(kotlin.Function1((fg.beans.action.Action, kotlin.Unit)))/listener">listener</span><span class="symbol">:</span>&nbsp;<span class="symbol">(</span><span class="identifier">action</span><span class="symbol">:</span>&nbsp;<a href="../../fg.beans.action/-action/index.html"><span class="identifier">Action</span></a><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<span class="identifier">Unit</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">Unit</span></code></td>
 </tr>
 <tr>
 <td>
@@ -126,13 +127,13 @@
 <td>
 <a href="un-after-performing-action.html">unAfterPerformingAction</a></td>
 <td>
-<code><span class="keyword">fun </span><span class="identifier">unAfterPerformingAction</span><span class="symbol">(</span><span class="identifier" id="fg.beans.menu.MenuItem$unAfterPerformingAction(kotlin.Function1((fg.beans.Action, kotlin.Unit)))/listener">listener</span><span class="symbol">:</span>&nbsp;<span class="symbol">(</span><a href="../../fg.beans/-action/index.html"><span class="identifier">Action</span></a><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<span class="identifier">Unit</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">Unit</span></code></td>
+<code><span class="keyword">fun </span><span class="identifier">unAfterPerformingAction</span><span class="symbol">(</span><span class="identifier" id="fg.beans.menu.MenuItem$unAfterPerformingAction(kotlin.Function1((fg.beans.action.Action, kotlin.Unit)))/listener">listener</span><span class="symbol">:</span>&nbsp;<span class="symbol">(</span><span class="identifier">action</span><span class="symbol">:</span>&nbsp;<a href="../../fg.beans.action/-action/index.html"><span class="identifier">Action</span></a><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<span class="identifier">Unit</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">Unit</span></code></td>
 </tr>
 <tr>
 <td>
 <a href="un-before-performing-action.html">unBeforePerformingAction</a></td>
 <td>
-<code><span class="keyword">fun </span><span class="identifier">unBeforePerformingAction</span><span class="symbol">(</span><span class="identifier" id="fg.beans.menu.MenuItem$unBeforePerformingAction(kotlin.Function1((fg.beans.Action, kotlin.Unit)))/listener">listener</span><span class="symbol">:</span>&nbsp;<span class="symbol">(</span><a href="../../fg.beans/-action/index.html"><span class="identifier">Action</span></a><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<span class="identifier">Unit</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">Unit</span></code></td>
+<code><span class="keyword">fun </span><span class="identifier">unBeforePerformingAction</span><span class="symbol">(</span><span class="identifier" id="fg.beans.menu.MenuItem$unBeforePerformingAction(kotlin.Function1((fg.beans.action.Action, kotlin.Unit)))/listener">listener</span><span class="symbol">:</span>&nbsp;<span class="symbol">(</span><span class="identifier">action</span><span class="symbol">:</span>&nbsp;<a href="../../fg.beans.action/-action/index.html"><span class="identifier">Action</span></a><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<span class="identifier">Unit</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">Unit</span></code></td>
 </tr>
 <tr>
 <td>

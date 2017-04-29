@@ -492,7 +492,7 @@ var beans = function (_, Kotlin, $module$elements) {
   };
   function DrawerNavigation$float$lambda(this$DrawerNavigation) {
     return function (property, old, new_0) {
-      if (!Kotlin.equals(new_0, old)) {
+      if (new_0 !== old) {
         this$DrawerNavigation.renderFloat_0(new_0);
       }
     };
@@ -2660,6 +2660,24 @@ var beans = function (_, Kotlin, $module$elements) {
     interfaces: [ActionBean, Div]
   };
   var pkg_0;
+  function collapseOn$lambda(closure$action, this$collapseOn) {
+    return function (f, property, f_0, f_1) {
+      if (Kotlin.equals(property.callableName, Kotlin.getPropertyCallableRef('selected', 1, function ($receiver) {
+        return $receiver.selected;
+      }, function ($receiver, value) {
+        $receiver.selected = value;
+      }).callableName))
+        if (closure$action.selected) {
+          this$collapseOn.show();
+        }
+         else {
+          this$collapseOn.hide();
+        }
+    };
+  }
+  function collapseOn($receiver, action) {
+    action.onPropertyChanged_saq78d$(collapseOn$lambda(action, $receiver));
+  }
   function LabelledRadioButton(checked, labelText, checkedIcon, unCheckedIcon) {
     LabelledRadioButton$LabelledRadioButton_getInstance();
     if (checkedIcon === void 0)
@@ -3064,6 +3082,7 @@ var beans = function (_, Kotlin, $module$elements) {
       return pkg_0;
     }
   });
+  package$beans.collapseOn_cutj6x$ = collapseOn;
   Object.defineProperty(LabelledRadioButton, 'LabelledRadioButton', {
     get: LabelledRadioButton$LabelledRadioButton_getInstance
   });
