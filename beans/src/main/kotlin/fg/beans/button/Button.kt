@@ -53,7 +53,7 @@ open class Button(action: Action) : AbstractButton(action) {
         }
     }
 
-    companion object Button : StyledClass {
+    companion object : StyledClass {
 
         override val classSelector = "$pkg-button".toClassSelector()
 

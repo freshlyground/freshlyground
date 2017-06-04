@@ -1,9 +1,6 @@
 package fg.keyboard
 
-import fg.elements.Element
-import fg.elements.onKeyDown
-import fg.elements.onKeyPress
-import fg.elements.onKeyUp
+import org.w3c.dom.Element
 import org.w3c.dom.events.Event
 import org.w3c.dom.events.KeyboardEvent
 import kotlin.browser.document
@@ -43,6 +40,7 @@ class Keyboard private constructor(val element: Element? = null) {
             element.onKeyPress(keyboardEventHandler)
             element.onKeyUp(keyboardEventHandler)
         } else {
+            @Suppress("UNCHECKED_CAST")
             document.addEventListener("keydown", keyboardEventHandler as (Event) -> Unit)
             document.addEventListener("keypress", keyboardEventHandler)
             document.addEventListener("keyup", keyboardEventHandler)
@@ -86,7 +84,7 @@ class Keyboard private constructor(val element: Element? = null) {
         // come in as an uppercase character whether you are pressing shift
         // or not.  we should make sure it is always lowercase for comparisons
         val character: String = js("String.fromCharCode(event.which)")
-        return character.toLowerCase().toString()
+        return character.toLowerCase()
     }
 
     private fun resolveEventModifiers(e: KeyboardEvent): Modifiers {

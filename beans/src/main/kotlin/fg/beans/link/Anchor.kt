@@ -108,7 +108,7 @@ class Anchor(link: Link<*>? = null,
         }
     }
 
-    companion object Anchor : StyledClass {
+    companion object : StyledClass {
 
         override val classSelector = "$pkg-anchor".toClassSelector()
 

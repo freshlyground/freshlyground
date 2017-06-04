@@ -18,7 +18,7 @@ class MenuButton(action: SelectableAction) : ToggleButton(action) {
         addClass(classSelector)
     }
 
-    companion object MenuButton : StyledClass {
+    companion object : StyledClass {
 
         override val classSelector = "${pkg}-menu-button".toClassSelector()
 

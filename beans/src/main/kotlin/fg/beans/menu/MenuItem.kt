@@ -339,7 +339,7 @@ open class MenuItem(action: Action) : Div(), ActionBean {
         }
     }
 
-    companion object MenuItem : StyledClass {
+    companion object : StyledClass {
 
         val DISABLED = "disabled".toClassSelector()
 

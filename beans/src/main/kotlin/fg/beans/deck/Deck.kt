@@ -45,7 +45,7 @@ class Deck : Div() {
         }
     }
 
-    companion object Deck : StyledClass {
+    companion object : StyledClass {
 
         override val classSelector = "$pkg-deck".toClassSelector()
 

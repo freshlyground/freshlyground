@@ -54,7 +54,7 @@ open class RadioButton(checked: Boolean = false) : InputRadio() {
         this._checked = newState
     }
 
-    companion object RadioButton : StyledClass {
+    companion object : StyledClass {
 
         override val classSelector = "bn-radio-button".toClassSelector()
 

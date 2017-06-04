@@ -114,7 +114,7 @@ class MenuBar : Div() {
         menuButtonByMenu[menu]?.action?.selected = false
     }
 
-    companion object MenuBar : StyledClass {
+    companion object : StyledClass {
 
         override val classSelector = "$pkg-menu-bar".toClassSelector()
 

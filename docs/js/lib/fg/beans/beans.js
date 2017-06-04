@@ -4,7 +4,10 @@ if (typeof kotlin === 'undefined') {
 if (typeof elements === 'undefined') {
   throw new Error("Error loading module 'beans'. Its dependency 'elements' was not found. Please, check whether 'elements' is loaded prior to 'beans'.");
 }
-var beans = function (_, Kotlin, $module$elements) {
+if (typeof this['fg-keyboard'] === 'undefined') {
+  throw new Error("Error loading module 'beans'. Its dependency 'fg-keyboard' was not found. Please, check whether 'fg-keyboard' is loaded prior to 'beans'.");
+}
+var beans = function (_, Kotlin, $module$elements, $module$fg_keyboard) {
   'use strict';
   var properties_0 = Kotlin.kotlin.properties;
   var toClassSelector = $module$elements.fg.elements.toClassSelector_pdl1vz$;
@@ -51,7 +54,7 @@ var beans = function (_, Kotlin, $module$elements) {
   var get_computedStyle = $module$elements.fg.elements.get_computedStyle_gobym5$;
   var get_px = $module$elements.fg.elements.get_px_pdl1vz$;
   var child = $module$elements.fg.style.child_xmmih7$;
-  var Modifier = $module$elements.fg.keyboard.Modifier;
+  var Modifier = $module$fg_keyboard.fg.keyboard.Modifier;
   var OS = $module$elements.fg.base.OS;
   var child_0 = $module$elements.fg.style.child_7k7416$;
   var Label = $module$elements.fg.elements.Label;
@@ -796,12 +799,12 @@ var beans = function (_, Kotlin, $module$elements) {
     interfaces: [ActionBean, Button]
   };
   function Button_0(action) {
-    Button$Button_getInstance();
+    Button$Companion_getInstance();
     AbstractButton.call(this, action);
   }
   Button_0.prototype.render = function () {
     AbstractButton.prototype.render.call(this);
-    this.addClass_bx842b$(Button$Button_getInstance().classSelector);
+    this.addClass_bx842b$(Button$Companion_getInstance().classSelector);
   };
   function Button$ButtonStyle() {
     Button$ButtonStyle_instance = this;
@@ -959,41 +962,41 @@ var beans = function (_, Kotlin, $module$elements) {
     }
     return Button$ButtonStyle_instance;
   }
-  function Button$Button() {
-    Button$Button_instance = this;
-    this.classSelector_q6hc5s$_0 = toClassSelector('fg-bn-button');
-    this.rule_q6hc5s$_0 = Button$Button$rule$lambda;
+  function Button$Companion() {
+    Button$Companion_instance = this;
+    this.classSelector_uao8xm$_0 = toClassSelector('fg-bn-button');
+    this.rule_uao8xm$_0 = Button$Companion$rule$lambda;
     elements_0.HTML.registerStyle_78phyd$(this);
   }
-  Object.defineProperty(Button$Button.prototype, 'classSelector', {
+  Object.defineProperty(Button$Companion.prototype, 'classSelector', {
     get: function () {
-      return this.classSelector_q6hc5s$_0;
+      return this.classSelector_uao8xm$_0;
     }
   });
-  Object.defineProperty(Button$Button.prototype, 'rule', {
+  Object.defineProperty(Button$Companion.prototype, 'rule', {
     get: function () {
-      return this.rule_q6hc5s$_0;
+      return this.rule_uao8xm$_0;
     }
   });
-  function Button$Button$rule$lambda$lambda$lambda($receiver) {
+  function Button$Companion$rule$lambda$lambda$lambda($receiver) {
     var tmp$;
     $receiver._cursor = (tmp$ = Button$ButtonStyle_getInstance().disabled) != null ? tmp$.cursor : null;
   }
-  function Button$Button$rule$lambda$lambda($receiver) {
+  function Button$Companion$rule$lambda$lambda($receiver) {
     var tmp$;
     $receiver._cursor = (tmp$ = Button$ButtonStyle_getInstance().hovered) != null ? tmp$.cursor : null;
-    and($receiver, AbstractButton$AbstractButton_getInstance().DISABLED, Button$Button$rule$lambda$lambda$lambda);
+    and($receiver, AbstractButton$AbstractButton_getInstance().DISABLED, Button$Companion$rule$lambda$lambda$lambda);
   }
-  function Button$Button$rule$lambda$lambda_0($receiver) {
+  function Button$Companion$rule$lambda$lambda_0($receiver) {
     var tmp$, tmp$_0, tmp$_1;
     $receiver._borderColor = (tmp$_0 = (tmp$ = Button$ButtonStyle_getInstance().focused) != null ? tmp$.borderColor : null) != null ? tmp$_0.toString() : null;
     $receiver._outline = (tmp$_1 = Button$ButtonStyle_getInstance().focused) != null ? tmp$_1.outline : null;
   }
-  function Button$Button$rule$lambda$lambda_1($receiver) {
+  function Button$Companion$rule$lambda$lambda_1($receiver) {
     var tmp$, tmp$_0;
     $receiver._backgroundColor = (tmp$_0 = (tmp$ = Button$ButtonStyle_getInstance().pressed) != null ? tmp$.backgroundColor : null) != null ? tmp$_0.toString() : null;
   }
-  function Button$Button$rule$lambda($receiver) {
+  function Button$Companion$rule$lambda($receiver) {
     var tmp$, tmp$_0, tmp$_1, tmp$_2;
     $receiver._margin = Button$ButtonStyle_getInstance().margin;
     $receiver._borderStyle = Button$ButtonStyle_getInstance().borderStyle;
@@ -1002,21 +1005,21 @@ var beans = function (_, Kotlin, $module$elements) {
     $receiver._borderRadius = (tmp$_1 = Button$ButtonStyle_getInstance().borderRadius) != null ? tmp$_1.toString() : null;
     $receiver._backgroundColor = (tmp$_2 = Button$ButtonStyle_getInstance().backgroundColor) != null ? tmp$_2.toString() : null;
     $receiver._boxShadow = Button$ButtonStyle_getInstance().boxShadow;
-    hover($receiver, Button$Button$rule$lambda$lambda);
-    focus($receiver, Button$Button$rule$lambda$lambda_0);
-    and_0($receiver, '.pressed', Button$Button$rule$lambda$lambda_1);
+    hover($receiver, Button$Companion$rule$lambda$lambda);
+    focus($receiver, Button$Companion$rule$lambda$lambda_0);
+    and_0($receiver, '.pressed', Button$Companion$rule$lambda$lambda_1);
   }
-  Button$Button.$metadata$ = {
+  Button$Companion.$metadata$ = {
     kind: Kotlin.Kind.OBJECT,
-    simpleName: 'Button',
+    simpleName: 'Companion',
     interfaces: [StyledClass]
   };
-  var Button$Button_instance = null;
-  function Button$Button_getInstance() {
-    if (Button$Button_instance === null) {
-      new Button$Button();
+  var Button$Companion_instance = null;
+  function Button$Companion_getInstance() {
+    if (Button$Companion_instance === null) {
+      new Button$Companion();
     }
-    return Button$Button_instance;
+    return Button$Companion_instance;
   }
   Button_0.$metadata$ = {
     kind: Kotlin.Kind.CLASS,
@@ -1024,7 +1027,7 @@ var beans = function (_, Kotlin, $module$elements) {
     interfaces: [AbstractButton]
   };
   function ToggleButton(action) {
-    ToggleButton$ToggleButton_getInstance();
+    ToggleButton$Companion_getInstance();
     AbstractButton.call(this, action);
     this.action_q923u8$_0 = action;
     this.actionPropertyChangedHandler_q923u8$_0 = ToggleButton$actionPropertyChangedHandler$lambda(this);
@@ -1037,7 +1040,7 @@ var beans = function (_, Kotlin, $module$elements) {
   });
   ToggleButton.prototype.render = function () {
     AbstractButton.prototype.render.call(this);
-    this.addClass_bx842b$(ToggleButton$ToggleButton_getInstance().classSelector);
+    this.addClass_bx842b$(ToggleButton$Companion_getInstance().classSelector);
   };
   ToggleButton.prototype.renderSelected_2iqzmd$_0 = function (selected) {
     if (selected) {
@@ -1057,64 +1060,64 @@ var beans = function (_, Kotlin, $module$elements) {
   ToggleButton.prototype.toggle = function () {
     this.action.perform_54c9de$(this);
   };
-  function ToggleButton$ToggleButton() {
-    ToggleButton$ToggleButton_instance = this;
-    this.classSelector_159g7k$_0 = toClassSelector('fg-bn-toggle-button');
-    this.rule_159g7k$_0 = ToggleButton$ToggleButton$rule$lambda;
+  function ToggleButton$Companion() {
+    ToggleButton$Companion_instance = this;
+    this.classSelector_66p8eq$_0 = toClassSelector('fg-bn-toggle-button');
+    this.rule_66p8eq$_0 = ToggleButton$Companion$rule$lambda;
     elements_0.HTML.registerStyle_78phyd$(this);
   }
-  Object.defineProperty(ToggleButton$ToggleButton.prototype, 'classSelector', {
+  Object.defineProperty(ToggleButton$Companion.prototype, 'classSelector', {
     get: function () {
-      return this.classSelector_159g7k$_0;
+      return this.classSelector_66p8eq$_0;
     }
   });
-  Object.defineProperty(ToggleButton$ToggleButton.prototype, 'rule', {
+  Object.defineProperty(ToggleButton$Companion.prototype, 'rule', {
     get: function () {
-      return this.rule_159g7k$_0;
+      return this.rule_66p8eq$_0;
     }
   });
-  function ToggleButton$ToggleButton$rule$lambda$lambda$lambda($receiver) {
+  function ToggleButton$Companion$rule$lambda$lambda$lambda($receiver) {
     $receiver._cursor = 'not-allowed';
   }
-  function ToggleButton$ToggleButton$rule$lambda$lambda($receiver) {
+  function ToggleButton$Companion$rule$lambda$lambda($receiver) {
     $receiver._cursor = 'pointer';
-    and($receiver, AbstractButton$AbstractButton_getInstance().DISABLED, ToggleButton$ToggleButton$rule$lambda$lambda$lambda);
+    and($receiver, AbstractButton$AbstractButton_getInstance().DISABLED, ToggleButton$Companion$rule$lambda$lambda$lambda);
   }
-  function ToggleButton$ToggleButton$rule$lambda$lambda_0($receiver) {
+  function ToggleButton$Companion$rule$lambda$lambda_0($receiver) {
     $receiver._border = '1px outset rgb(144, 191, 240)';
     $receiver._backgroundColor = 'rgb(118, 178, 240)';
     $receiver._boxShadow = '1px 1px 1px 1px rgba(0, 0, 0, 0.2)';
   }
-  function ToggleButton$ToggleButton$rule$lambda$lambda_1($receiver) {
+  function ToggleButton$Companion$rule$lambda$lambda_1($receiver) {
     $receiver._border = '1px outset rgb(144, 191, 240)';
     $receiver._outline = 'none';
   }
-  function ToggleButton$ToggleButton$rule$lambda$lambda_2($receiver) {
+  function ToggleButton$Companion$rule$lambda$lambda_2($receiver) {
     $receiver._border = '1px outset rgb(144, 191, 240)';
     $receiver._outline = 'none';
   }
-  function ToggleButton$ToggleButton$rule$lambda($receiver) {
+  function ToggleButton$Companion$rule$lambda($receiver) {
     $receiver._border = '1px outset #e4e4e4';
     $receiver._borderRadius = '4px';
     $receiver._backgroundColor = '#ffffff';
     $receiver._boxShadow = 'none';
     $receiver._margin = '0';
-    hover($receiver, ToggleButton$ToggleButton$rule$lambda$lambda);
-    and_0($receiver, '.selected', ToggleButton$ToggleButton$rule$lambda$lambda_0);
-    focus($receiver, ToggleButton$ToggleButton$rule$lambda$lambda_1);
-    and_0($receiver, '.focused', ToggleButton$ToggleButton$rule$lambda$lambda_2);
+    hover($receiver, ToggleButton$Companion$rule$lambda$lambda);
+    and_0($receiver, '.selected', ToggleButton$Companion$rule$lambda$lambda_0);
+    focus($receiver, ToggleButton$Companion$rule$lambda$lambda_1);
+    and_0($receiver, '.focused', ToggleButton$Companion$rule$lambda$lambda_2);
   }
-  ToggleButton$ToggleButton.$metadata$ = {
+  ToggleButton$Companion.$metadata$ = {
     kind: Kotlin.Kind.OBJECT,
-    simpleName: 'ToggleButton',
+    simpleName: 'Companion',
     interfaces: [StyledClass]
   };
-  var ToggleButton$ToggleButton_instance = null;
-  function ToggleButton$ToggleButton_getInstance() {
-    if (ToggleButton$ToggleButton_instance === null) {
-      new ToggleButton$ToggleButton();
+  var ToggleButton$Companion_instance = null;
+  function ToggleButton$Companion_getInstance() {
+    if (ToggleButton$Companion_instance === null) {
+      new ToggleButton$Companion();
     }
-    return ToggleButton$ToggleButton_instance;
+    return ToggleButton$Companion_instance;
   }
   function ToggleButton$actionPropertyChangedHandler$lambda(this$ToggleButton) {
     return function (action, property, old, new_0) {
@@ -1132,7 +1135,7 @@ var beans = function (_, Kotlin, $module$elements) {
     interfaces: [AbstractButton]
   };
   function Deck() {
-    Deck$Deck_getInstance();
+    Deck$Companion_getInstance();
     Div.call(this);
     this.deck_0 = Kotlin.kotlin.collections.ArrayList_init_ww73n8$();
   }
@@ -1151,7 +1154,7 @@ var beans = function (_, Kotlin, $module$elements) {
   };
   Deck.prototype.render = function () {
     Div.prototype.render.call(this);
-    this.addClass_bx842b$(Deck$Deck_getInstance().classSelector);
+    this.addClass_bx842b$(Deck$Companion_getInstance().classSelector);
   };
   Deck.prototype.show_54c9de$ = function (child_1) {
     var tmp$;
@@ -1166,35 +1169,35 @@ var beans = function (_, Kotlin, $module$elements) {
       }
     }
   };
-  function Deck$Deck() {
-    Deck$Deck_instance = this;
-    this.classSelector_errx15$_0 = toClassSelector('fg-bn-deck');
-    this.rule_errx15$_0 = Deck$Deck$rule$lambda;
+  function Deck$Companion() {
+    Deck$Companion_instance = this;
+    this.classSelector_6abtzu$_0 = toClassSelector('fg-bn-deck');
+    this.rule_6abtzu$_0 = Deck$Companion$rule$lambda;
     elements_0.HTML.registerStyle_78phyd$(this);
   }
-  Object.defineProperty(Deck$Deck.prototype, 'classSelector', {
+  Object.defineProperty(Deck$Companion.prototype, 'classSelector', {
     get: function () {
-      return this.classSelector_errx15$_0;
+      return this.classSelector_6abtzu$_0;
     }
   });
-  Object.defineProperty(Deck$Deck.prototype, 'rule', {
+  Object.defineProperty(Deck$Companion.prototype, 'rule', {
     get: function () {
-      return this.rule_errx15$_0;
+      return this.rule_6abtzu$_0;
     }
   });
-  function Deck$Deck$rule$lambda($receiver) {
+  function Deck$Companion$rule$lambda($receiver) {
   }
-  Deck$Deck.$metadata$ = {
+  Deck$Companion.$metadata$ = {
     kind: Kotlin.Kind.OBJECT,
-    simpleName: 'Deck',
+    simpleName: 'Companion',
     interfaces: [StyledClass]
   };
-  var Deck$Deck_instance = null;
-  function Deck$Deck_getInstance() {
-    if (Deck$Deck_instance === null) {
-      new Deck$Deck();
+  var Deck$Companion_instance = null;
+  function Deck$Companion_getInstance() {
+    if (Deck$Companion_instance === null) {
+      new Deck$Companion();
     }
-    return Deck$Deck_instance;
+    return Deck$Companion_instance;
   }
   Deck.$metadata$ = {
     kind: Kotlin.Kind.CLASS,
@@ -1214,7 +1217,7 @@ var beans = function (_, Kotlin, $module$elements) {
     $receiver._style.cssFloat = $receiver.undockedCssFloatValue_ahjj8c$_0;
   }
   function Drawer(side) {
-    Drawer$Drawer_getInstance();
+    Drawer$Companion_getInstance();
     Div.call(this);
     this.undockedPositionValue_ahjj8c$_0 = '';
     this.undockedCssFloatValue_ahjj8c$_0 = '';
@@ -1230,7 +1233,7 @@ var beans = function (_, Kotlin, $module$elements) {
   });
   Drawer.prototype.render = function () {
     Div.prototype.render.call(this);
-    this.addClass_bx842b$(Drawer$Drawer_getInstance().classSelector);
+    this.addClass_bx842b$(Drawer$Companion_getInstance().classSelector);
     this.renderSide_i584r$_0(this.side);
   };
   Drawer.prototype.float = function () {
@@ -1244,40 +1247,40 @@ var beans = function (_, Kotlin, $module$elements) {
     else if (Kotlin.equals(side, Side.RIGHT))
       this._style.right = '0';
   };
-  function Drawer$Drawer() {
-    Drawer$Drawer_instance = this;
-    this.classSelector_itekjz$_0 = toClassSelector('drawer');
-    this.rule_itekjz$_0 = Drawer$Drawer$rule$lambda;
+  function Drawer$Companion() {
+    Drawer$Companion_instance = this;
+    this.classSelector_gcygka$_0 = toClassSelector('drawer');
+    this.rule_gcygka$_0 = Drawer$Companion$rule$lambda;
     elements_0.HTML.registerStyle_78phyd$(this);
   }
-  Object.defineProperty(Drawer$Drawer.prototype, 'classSelector', {
+  Object.defineProperty(Drawer$Companion.prototype, 'classSelector', {
     get: function () {
-      return this.classSelector_itekjz$_0;
+      return this.classSelector_gcygka$_0;
     }
   });
-  Object.defineProperty(Drawer$Drawer.prototype, 'rule', {
+  Object.defineProperty(Drawer$Companion.prototype, 'rule', {
     get: function () {
-      return this.rule_itekjz$_0;
+      return this.rule_gcygka$_0;
     }
   });
-  function Drawer$Drawer$rule$lambda($receiver) {
+  function Drawer$Companion$rule$lambda($receiver) {
     $receiver._position = 'fixed';
     $receiver._zIndex = '1300';
     $receiver._top = '0';
     $receiver._height = '100%';
     $receiver._backgroundColor = 'white';
   }
-  Drawer$Drawer.$metadata$ = {
+  Drawer$Companion.$metadata$ = {
     kind: Kotlin.Kind.OBJECT,
-    simpleName: 'Drawer',
+    simpleName: 'Companion',
     interfaces: [StyledClass]
   };
-  var Drawer$Drawer_instance = null;
-  function Drawer$Drawer_getInstance() {
-    if (Drawer$Drawer_instance === null) {
-      new Drawer$Drawer();
+  var Drawer$Companion_instance = null;
+  function Drawer$Companion_getInstance() {
+    if (Drawer$Companion_instance === null) {
+      new Drawer$Companion();
     }
-    return Drawer$Drawer_instance;
+    return Drawer$Companion_instance;
   }
   function Drawer$side$lambda(this$Drawer) {
     return function (property, old, new_0) {
@@ -1635,7 +1638,7 @@ var beans = function (_, Kotlin, $module$elements) {
     interfaces: []
   };
   function Anchor(link, target, useDisplay) {
-    Anchor$Anchor_getInstance();
+    Anchor$Companion_getInstance();
     if (link === void 0)
       link = null;
     if (target === void 0)
@@ -1667,7 +1670,7 @@ var beans = function (_, Kotlin, $module$elements) {
   });
   Anchor.prototype.render = function () {
     A.prototype.render.call(this);
-    this.addClass_bx842b$(Anchor$Anchor_getInstance().classSelector);
+    this.addClass_bx842b$(Anchor$Companion_getInstance().classSelector);
     this.renderLink_0(this.link);
   };
   Anchor.prototype.didMount = function () {
@@ -1706,35 +1709,35 @@ var beans = function (_, Kotlin, $module$elements) {
       this.removeChild_sr04hg$(this.iconI);
     }
   };
-  function Anchor$Anchor() {
-    Anchor$Anchor_instance = this;
-    this.classSelector_9zo6vc$_0 = toClassSelector('fg-bn-anchor');
-    this.rule_9zo6vc$_0 = Anchor$Anchor$rule$lambda;
+  function Anchor$Companion() {
+    Anchor$Companion_instance = this;
+    this.classSelector_qhgsa3$_0 = toClassSelector('fg-bn-anchor');
+    this.rule_qhgsa3$_0 = Anchor$Companion$rule$lambda;
     elements_0.HTML.registerStyle_78phyd$(this);
   }
-  Object.defineProperty(Anchor$Anchor.prototype, 'classSelector', {
+  Object.defineProperty(Anchor$Companion.prototype, 'classSelector', {
     get: function () {
-      return this.classSelector_9zo6vc$_0;
+      return this.classSelector_qhgsa3$_0;
     }
   });
-  Object.defineProperty(Anchor$Anchor.prototype, 'rule', {
+  Object.defineProperty(Anchor$Companion.prototype, 'rule', {
     get: function () {
-      return this.rule_9zo6vc$_0;
+      return this.rule_qhgsa3$_0;
     }
   });
-  function Anchor$Anchor$rule$lambda($receiver) {
+  function Anchor$Companion$rule$lambda($receiver) {
   }
-  Anchor$Anchor.$metadata$ = {
+  Anchor$Companion.$metadata$ = {
     kind: Kotlin.Kind.OBJECT,
-    simpleName: 'Anchor',
+    simpleName: 'Companion',
     interfaces: [StyledClass]
   };
-  var Anchor$Anchor_instance = null;
-  function Anchor$Anchor_getInstance() {
-    if (Anchor$Anchor_instance === null) {
-      new Anchor$Anchor();
+  var Anchor$Companion_instance = null;
+  function Anchor$Companion_getInstance() {
+    if (Anchor$Companion_instance === null) {
+      new Anchor$Companion();
     }
-    return Anchor$Anchor_instance;
+    return Anchor$Companion_instance;
   }
   function Anchor$link$lambda(this$Anchor) {
     return function (property, old, new_0) {
@@ -1791,7 +1794,7 @@ var beans = function (_, Kotlin, $module$elements) {
     interfaces: [Link]
   };
   function Menu(label, shortcut) {
-    Menu$Menu_getInstance();
+    Menu$Companion_getInstance();
     if (label === void 0)
       label = null;
     if (shortcut === void 0)
@@ -1836,7 +1839,7 @@ var beans = function (_, Kotlin, $module$elements) {
   };
   Menu.prototype.render = function () {
     Div.prototype.render.call(this);
-    this.addClass_bx842b$(Menu$Menu_getInstance().classSelector);
+    this.addClass_bx842b$(Menu$Companion_getInstance().classSelector);
   };
   Menu.prototype.childAdded_sr04hg$ = function (child_1) {
     Div.prototype.childAdded_sr04hg$.call(this, child_1);
@@ -1845,39 +1848,39 @@ var beans = function (_, Kotlin, $module$elements) {
       child_1.onAfterPerformingAction_xbm201$(this.afterPerformingMenuItemActionHandler_i0djac$_0);
     }
   };
-  function Menu$Menu() {
-    Menu$Menu_instance = this;
-    this.classSelector_2kkkw3$_0 = new ClassSelector('fg-bn-menu');
-    this.rule_2kkkw3$_0 = Menu$Menu$rule$lambda;
+  function Menu$Companion() {
+    Menu$Companion_instance = this;
+    this.classSelector_pl531i$_0 = new ClassSelector('fg-bn-menu');
+    this.rule_pl531i$_0 = Menu$Companion$rule$lambda;
     elements_0.HTML.registerStyle_78phyd$(this);
   }
-  Object.defineProperty(Menu$Menu.prototype, 'classSelector', {
+  Object.defineProperty(Menu$Companion.prototype, 'classSelector', {
     get: function () {
-      return this.classSelector_2kkkw3$_0;
+      return this.classSelector_pl531i$_0;
     }
   });
-  Object.defineProperty(Menu$Menu.prototype, 'rule', {
+  Object.defineProperty(Menu$Companion.prototype, 'rule', {
     get: function () {
-      return this.rule_2kkkw3$_0;
+      return this.rule_pl531i$_0;
     }
   });
-  function Menu$Menu$rule$lambda($receiver) {
+  function Menu$Companion$rule$lambda($receiver) {
     $receiver._display = 'inline-block';
     $receiver._paddingTop = '4px';
     $receiver._paddingBottom = '4px';
     $receiver._backgroundColor = RgbColor.Factory.WHITE.toString();
   }
-  Menu$Menu.$metadata$ = {
+  Menu$Companion.$metadata$ = {
     kind: Kotlin.Kind.OBJECT,
-    simpleName: 'Menu',
+    simpleName: 'Companion',
     interfaces: [StyledClass]
   };
-  var Menu$Menu_instance = null;
-  function Menu$Menu_getInstance() {
-    if (Menu$Menu_instance === null) {
-      new Menu$Menu();
+  var Menu$Companion_instance = null;
+  function Menu$Companion_getInstance() {
+    if (Menu$Companion_instance === null) {
+      new Menu$Companion();
     }
-    return Menu$Menu_instance;
+    return Menu$Companion_instance;
   }
   function Menu$beforePerformingMenuItemActionHandler$lambda(this$Menu) {
     return function (action) {
@@ -1911,7 +1914,7 @@ var beans = function (_, Kotlin, $module$elements) {
     interfaces: [Div]
   };
   function MenuBar() {
-    MenuBar$MenuBar_getInstance();
+    MenuBar$Companion_getInstance();
     Div.call(this);
     this.menuButtonByMenu_0 = Kotlin.kotlin.collections.LinkedHashMap_init_q3lmfv$();
     this.beforePerformingMenuItemActionHandler_0 = MenuBar$beforePerformingMenuItemActionHandler$lambda;
@@ -1919,7 +1922,7 @@ var beans = function (_, Kotlin, $module$elements) {
   }
   MenuBar.prototype.render = function () {
     Div.prototype.render.call(this);
-    this.addClass_bx842b$(MenuBar$MenuBar_getInstance().classSelector);
+    this.addClass_bx842b$(MenuBar$Companion_getInstance().classSelector);
   };
   function MenuBar$childAdded$lambda(closure$child, this$MenuBar) {
     return function (actionPerform) {
@@ -2000,41 +2003,41 @@ var beans = function (_, Kotlin, $module$elements) {
     menu_0.hide();
     (tmp$_0 = (tmp$ = this.menuButtonByMenu_0.get_11rb$(menu_0)) != null ? tmp$.action : null) != null ? (tmp$_0.selected = false) : null;
   };
-  function MenuBar$MenuBar() {
-    MenuBar$MenuBar_instance = this;
-    this.classSelector_fhw95j$_0 = toClassSelector('fg-bn-menu-bar');
-    this.rule_fhw95j$_0 = MenuBar$MenuBar$rule$lambda;
+  function MenuBar$Companion() {
+    MenuBar$Companion_instance = this;
+    this.classSelector_mdebi9$_0 = toClassSelector('fg-bn-menu-bar');
+    this.rule_mdebi9$_0 = MenuBar$Companion$rule$lambda;
     elements_0.HTML.registerStyle_78phyd$(this);
   }
-  Object.defineProperty(MenuBar$MenuBar.prototype, 'classSelector', {
+  Object.defineProperty(MenuBar$Companion.prototype, 'classSelector', {
     get: function () {
-      return this.classSelector_fhw95j$_0;
+      return this.classSelector_mdebi9$_0;
     }
   });
-  Object.defineProperty(MenuBar$MenuBar.prototype, 'rule', {
+  Object.defineProperty(MenuBar$Companion.prototype, 'rule', {
     get: function () {
-      return this.rule_fhw95j$_0;
+      return this.rule_mdebi9$_0;
     }
   });
-  function MenuBar$MenuBar$rule$lambda$lambda($receiver) {
+  function MenuBar$Companion$rule$lambda$lambda($receiver) {
     $receiver._position = 'absolute';
     $receiver._border = '1px solid #ccc';
   }
-  function MenuBar$MenuBar$rule$lambda($receiver) {
+  function MenuBar$Companion$rule$lambda($receiver) {
     $receiver._position = 'relative';
-    child($receiver, Menu$Menu_getInstance().classSelector, MenuBar$MenuBar$rule$lambda$lambda);
+    child($receiver, Menu$Companion_getInstance().classSelector, MenuBar$Companion$rule$lambda$lambda);
   }
-  MenuBar$MenuBar.$metadata$ = {
+  MenuBar$Companion.$metadata$ = {
     kind: Kotlin.Kind.OBJECT,
-    simpleName: 'MenuBar',
+    simpleName: 'Companion',
     interfaces: [StyledClass]
   };
-  var MenuBar$MenuBar_instance = null;
-  function MenuBar$MenuBar_getInstance() {
-    if (MenuBar$MenuBar_instance === null) {
-      new MenuBar$MenuBar();
+  var MenuBar$Companion_instance = null;
+  function MenuBar$Companion_getInstance() {
+    if (MenuBar$Companion_instance === null) {
+      new MenuBar$Companion();
     }
-    return MenuBar$MenuBar_instance;
+    return MenuBar$Companion_instance;
   }
   function MenuBar$beforePerformingMenuItemActionHandler$lambda(action, menu_0) {
   }
@@ -2049,55 +2052,55 @@ var beans = function (_, Kotlin, $module$elements) {
     interfaces: [Div]
   };
   function MenuButton(action) {
-    MenuButton$MenuButton_getInstance();
+    MenuButton$Companion_getInstance();
     ToggleButton.call(this, action);
   }
   MenuButton.prototype.render = function () {
     ToggleButton.prototype.render.call(this);
-    this.addClass_bx842b$(MenuButton$MenuButton_getInstance().classSelector);
+    this.addClass_bx842b$(MenuButton$Companion_getInstance().classSelector);
   };
-  function MenuButton$MenuButton() {
-    MenuButton$MenuButton_instance = this;
-    this.classSelector_6dzver$_0 = toClassSelector('fg-bn-menu-button');
-    this.rule_6dzver$_0 = MenuButton$MenuButton$rule$lambda;
+  function MenuButton$Companion() {
+    MenuButton$Companion_instance = this;
+    this.classSelector_v2xnys$_0 = toClassSelector('fg-bn-menu-button');
+    this.rule_v2xnys$_0 = MenuButton$Companion$rule$lambda;
     elements_0.HTML.registerStyle_78phyd$(this);
   }
-  Object.defineProperty(MenuButton$MenuButton.prototype, 'classSelector', {
+  Object.defineProperty(MenuButton$Companion.prototype, 'classSelector', {
     get: function () {
-      return this.classSelector_6dzver$_0;
+      return this.classSelector_v2xnys$_0;
     }
   });
-  Object.defineProperty(MenuButton$MenuButton.prototype, 'rule', {
+  Object.defineProperty(MenuButton$Companion.prototype, 'rule', {
     get: function () {
-      return this.rule_6dzver$_0;
+      return this.rule_v2xnys$_0;
     }
   });
-  function MenuButton$MenuButton$rule$lambda$lambda($receiver) {
+  function MenuButton$Companion$rule$lambda$lambda($receiver) {
     $receiver._borderColor = '#e4e4e4';
   }
-  function MenuButton$MenuButton$rule$lambda$lambda_0($receiver) {
+  function MenuButton$Companion$rule$lambda$lambda_0($receiver) {
     $receiver._borderBottom = 'none';
     $receiver._borderColor = '#e4e4e4';
     $receiver._backgroundColor = 'rgb(118, 178, 240)';
     $receiver._boxShadow = 'none';
   }
-  function MenuButton$MenuButton$rule$lambda($receiver) {
+  function MenuButton$Companion$rule$lambda($receiver) {
     $receiver._borderColor = '#e4e4e4';
     $receiver._borderRadius = '0';
-    focus($receiver, MenuButton$MenuButton$rule$lambda$lambda);
-    and_0($receiver, '.selected', MenuButton$MenuButton$rule$lambda$lambda_0);
+    focus($receiver, MenuButton$Companion$rule$lambda$lambda);
+    and_0($receiver, '.selected', MenuButton$Companion$rule$lambda$lambda_0);
   }
-  MenuButton$MenuButton.$metadata$ = {
+  MenuButton$Companion.$metadata$ = {
     kind: Kotlin.Kind.OBJECT,
-    simpleName: 'MenuButton',
+    simpleName: 'Companion',
     interfaces: [StyledClass]
   };
-  var MenuButton$MenuButton_instance = null;
-  function MenuButton$MenuButton_getInstance() {
-    if (MenuButton$MenuButton_instance === null) {
-      new MenuButton$MenuButton();
+  var MenuButton$Companion_instance = null;
+  function MenuButton$Companion_getInstance() {
+    if (MenuButton$Companion_instance === null) {
+      new MenuButton$Companion();
     }
-    return MenuButton$MenuButton_instance;
+    return MenuButton$Companion_instance;
   }
   MenuButton.$metadata$ = {
     kind: Kotlin.Kind.CLASS,
@@ -2105,7 +2108,7 @@ var beans = function (_, Kotlin, $module$elements) {
     interfaces: [ToggleButton]
   };
   function MenuItem(action) {
-    MenuItem$MenuItem_getInstance();
+    MenuItem$Companion_getInstance();
     Div.call(this);
     this.action_iiuj5$_0 = action;
     this.hovered_iiuj5$_0 = false;
@@ -2211,7 +2214,7 @@ var beans = function (_, Kotlin, $module$elements) {
   MenuItem.prototype.render = function () {
     var tmp$;
     Div.prototype.render.call(this);
-    this.addClass_bx842b$(MenuItem$MenuItem_getInstance().classSelector);
+    this.addClass_bx842b$(MenuItem$Companion_getInstance().classSelector);
     this._tabindex = '0';
     if (Kotlin.isType(this.action, SelectableAction)) {
       var action = Kotlin.isType(tmp$ = this.action, SelectableAction) ? tmp$ : Kotlin.throwCCE();
@@ -2285,10 +2288,10 @@ var beans = function (_, Kotlin, $module$elements) {
   };
   MenuItem.prototype.renderDisabled_f058yc$_0 = function (disabled) {
     if (disabled) {
-      this.toggleClass_ivxn3r$(MenuItem$MenuItem_getInstance().DISABLED.value, true);
+      this.toggleClass_ivxn3r$(MenuItem$Companion_getInstance().DISABLED.value, true);
     }
      else {
-      this.toggleClass_ivxn3r$(MenuItem$MenuItem_getInstance().DISABLED.value);
+      this.toggleClass_ivxn3r$(MenuItem$Companion_getInstance().DISABLED.value);
     }
   };
   MenuItem.prototype.onBeforePerformingAction_xbm201$ = function (listener) {
@@ -2457,42 +2460,42 @@ var beans = function (_, Kotlin, $module$elements) {
     simpleName: 'Style',
     interfaces: [ElementStyle]
   };
-  function MenuItem$MenuItem() {
-    MenuItem$MenuItem_instance = this;
+  function MenuItem$Companion() {
+    MenuItem$Companion_instance = this;
     this.DISABLED = toClassSelector('disabled');
-    this.classSelector_w0w55p$_0 = new ClassSelector('fg-bn-menu-item');
-    this.rule_w0w55p$_0 = MenuItem$MenuItem$rule$lambda(this);
+    this.classSelector_jf1wt$_0 = new ClassSelector('fg-bn-menu-item');
+    this.rule_jf1wt$_0 = MenuItem$Companion$rule$lambda(this);
     elements_0.HTML.registerStyle_78phyd$(this);
   }
-  Object.defineProperty(MenuItem$MenuItem.prototype, 'classSelector', {
+  Object.defineProperty(MenuItem$Companion.prototype, 'classSelector', {
     get: function () {
-      return this.classSelector_w0w55p$_0;
+      return this.classSelector_jf1wt$_0;
     }
   });
-  Object.defineProperty(MenuItem$MenuItem.prototype, 'rule', {
+  Object.defineProperty(MenuItem$Companion.prototype, 'rule', {
     get: function () {
-      return this.rule_w0w55p$_0;
+      return this.rule_jf1wt$_0;
     }
   });
-  function MenuItem$MenuItem$rule$lambda$lambda($receiver) {
+  function MenuItem$Companion$rule$lambda$lambda($receiver) {
     $receiver._marginRight = '24px';
     $receiver._marginLeft = '0px';
     $receiver._flex = 'initial';
   }
-  function MenuItem$MenuItem$rule$lambda$lambda_0($receiver) {
+  function MenuItem$Companion$rule$lambda$lambda_0($receiver) {
     $receiver._flex = '1';
   }
-  function MenuItem$MenuItem$rule$lambda$lambda_1($receiver) {
+  function MenuItem$Companion$rule$lambda$lambda_1($receiver) {
     $receiver._marginLeft = '8px';
     $receiver._flex = 'initial';
   }
-  function MenuItem$MenuItem$rule$lambda$lambda_2($receiver) {
+  function MenuItem$Companion$rule$lambda$lambda_2($receiver) {
     $receiver._outline = 'none';
   }
-  function MenuItem$MenuItem$rule$lambda$lambda_3($receiver) {
+  function MenuItem$Companion$rule$lambda$lambda_3($receiver) {
     $receiver._cursor = 'not-allowed';
   }
-  function MenuItem$MenuItem$rule$lambda(this$MenuItem$) {
+  function MenuItem$Companion$rule$lambda(this$MenuItem$) {
     return function ($receiver) {
       $receiver._cursor = 'pointer';
       $receiver._paddingLeft = '8px';
@@ -2503,24 +2506,24 @@ var beans = function (_, Kotlin, $module$elements) {
       $receiver._flexDirection = 'row';
       $receiver._alignItems = 'center';
       $receiver._fontSize = '15px';
-      child_0($receiver, '.selected-icon', MenuItem$MenuItem$rule$lambda$lambda);
-      child_0($receiver, '.primary-text', MenuItem$MenuItem$rule$lambda$lambda_0);
-      child_0($receiver, '.secondary-text', MenuItem$MenuItem$rule$lambda$lambda_1);
-      focus($receiver, MenuItem$MenuItem$rule$lambda$lambda_2);
-      and($receiver, this$MenuItem$.DISABLED, MenuItem$MenuItem$rule$lambda$lambda_3);
+      child_0($receiver, '.selected-icon', MenuItem$Companion$rule$lambda$lambda);
+      child_0($receiver, '.primary-text', MenuItem$Companion$rule$lambda$lambda_0);
+      child_0($receiver, '.secondary-text', MenuItem$Companion$rule$lambda$lambda_1);
+      focus($receiver, MenuItem$Companion$rule$lambda$lambda_2);
+      and($receiver, this$MenuItem$.DISABLED, MenuItem$Companion$rule$lambda$lambda_3);
     };
   }
-  MenuItem$MenuItem.$metadata$ = {
+  MenuItem$Companion.$metadata$ = {
     kind: Kotlin.Kind.OBJECT,
-    simpleName: 'MenuItem',
+    simpleName: 'Companion',
     interfaces: [StyledClass]
   };
-  var MenuItem$MenuItem_instance = null;
-  function MenuItem$MenuItem_getInstance() {
-    if (MenuItem$MenuItem_instance === null) {
-      new MenuItem$MenuItem();
+  var MenuItem$Companion_instance = null;
+  function MenuItem$Companion_getInstance() {
+    if (MenuItem$Companion_instance === null) {
+      new MenuItem$Companion();
     }
-    return MenuItem$MenuItem_instance;
+    return MenuItem$Companion_instance;
   }
   function MenuItem$selectedIcon$lambda() {
     var iconI = new IconI();
@@ -2679,7 +2682,7 @@ var beans = function (_, Kotlin, $module$elements) {
     action.onPropertyChanged_saq78d$(collapseOn$lambda(action, $receiver));
   }
   function LabelledRadioButton(checked, labelText, checkedIcon, unCheckedIcon) {
-    LabelledRadioButton$LabelledRadioButton_getInstance();
+    LabelledRadioButton$Companion_getInstance();
     if (checkedIcon === void 0)
       checkedIcon = null;
     if (unCheckedIcon === void 0)
@@ -2742,7 +2745,7 @@ var beans = function (_, Kotlin, $module$elements) {
     }
   });
   LabelledRadioButton.prototype.render = function () {
-    this.addClass_bx842b$(LabelledRadioButton$LabelledRadioButton_getInstance().classSelector);
+    this.addClass_bx842b$(LabelledRadioButton$Companion_getInstance().classSelector);
     this.appendChild_sr04hg$(this.radioButton);
     this.appendChild_sr04hg$(this.iconI);
     this.appendChild_sr04hg$(this.label);
@@ -2775,46 +2778,46 @@ var beans = function (_, Kotlin, $module$elements) {
       this.iconI.hide();
     }
   };
-  function LabelledRadioButton$LabelledRadioButton() {
-    LabelledRadioButton$LabelledRadioButton_instance = this;
-    this.classSelector_rqspyf$_0 = toClassSelector('bn-labelled-radio-button');
-    this.rule_rqspyf$_0 = LabelledRadioButton$LabelledRadioButton$rule$lambda;
+  function LabelledRadioButton$Companion() {
+    LabelledRadioButton$Companion_instance = this;
+    this.classSelector_v713o1$_0 = toClassSelector('bn-labelled-radio-button');
+    this.rule_v713o1$_0 = LabelledRadioButton$Companion$rule$lambda;
     elements_0.HTML.registerStyle_78phyd$(this);
   }
-  Object.defineProperty(LabelledRadioButton$LabelledRadioButton.prototype, 'classSelector', {
+  Object.defineProperty(LabelledRadioButton$Companion.prototype, 'classSelector', {
     get: function () {
-      return this.classSelector_rqspyf$_0;
+      return this.classSelector_v713o1$_0;
     }
   });
-  Object.defineProperty(LabelledRadioButton$LabelledRadioButton.prototype, 'rule', {
+  Object.defineProperty(LabelledRadioButton$Companion.prototype, 'rule', {
     get: function () {
-      return this.rule_rqspyf$_0;
+      return this.rule_v713o1$_0;
     }
   });
-  function LabelledRadioButton$LabelledRadioButton$rule$lambda$lambda($receiver) {
+  function LabelledRadioButton$Companion$rule$lambda$lambda($receiver) {
     $receiver._cursor = 'pointer';
   }
-  function LabelledRadioButton$LabelledRadioButton$rule$lambda$lambda$lambda($receiver) {
+  function LabelledRadioButton$Companion$rule$lambda$lambda$lambda($receiver) {
     $receiver._cursor = 'pointer';
   }
-  function LabelledRadioButton$LabelledRadioButton$rule$lambda$lambda_0($receiver) {
-    hover($receiver, LabelledRadioButton$LabelledRadioButton$rule$lambda$lambda$lambda);
+  function LabelledRadioButton$Companion$rule$lambda$lambda_0($receiver) {
+    hover($receiver, LabelledRadioButton$Companion$rule$lambda$lambda$lambda);
   }
-  function LabelledRadioButton$LabelledRadioButton$rule$lambda($receiver) {
-    hover($receiver, LabelledRadioButton$LabelledRadioButton$rule$lambda$lambda);
-    child_0($receiver, 'label', LabelledRadioButton$LabelledRadioButton$rule$lambda$lambda_0);
+  function LabelledRadioButton$Companion$rule$lambda($receiver) {
+    hover($receiver, LabelledRadioButton$Companion$rule$lambda$lambda);
+    child_0($receiver, 'label', LabelledRadioButton$Companion$rule$lambda$lambda_0);
   }
-  LabelledRadioButton$LabelledRadioButton.$metadata$ = {
+  LabelledRadioButton$Companion.$metadata$ = {
     kind: Kotlin.Kind.OBJECT,
-    simpleName: 'LabelledRadioButton',
+    simpleName: 'Companion',
     interfaces: [StyledClass]
   };
-  var LabelledRadioButton$LabelledRadioButton_instance = null;
-  function LabelledRadioButton$LabelledRadioButton_getInstance() {
-    if (LabelledRadioButton$LabelledRadioButton_instance === null) {
-      new LabelledRadioButton$LabelledRadioButton();
+  var LabelledRadioButton$Companion_instance = null;
+  function LabelledRadioButton$Companion_getInstance() {
+    if (LabelledRadioButton$Companion_instance === null) {
+      new LabelledRadioButton$Companion();
     }
-    return LabelledRadioButton$LabelledRadioButton_instance;
+    return LabelledRadioButton$Companion_instance;
   }
   function LabelledRadioButton$radioButton$lambda(closure$checked) {
     return function () {
@@ -2865,7 +2868,7 @@ var beans = function (_, Kotlin, $module$elements) {
     interfaces: [Div]
   };
   function RadioButton(checked) {
-    RadioButton$RadioButton_getInstance();
+    RadioButton$Companion_getInstance();
     if (checked === void 0)
       checked = false;
     InputRadio.call(this);
@@ -2902,46 +2905,46 @@ var beans = function (_, Kotlin, $module$elements) {
   };
   RadioButton.prototype.render = function () {
     InputRadio.prototype.render.call(this);
-    this.addClass_bx842b$(RadioButton$RadioButton_getInstance().classSelector);
+    this.addClass_bx842b$(RadioButton$Companion_getInstance().classSelector);
   };
   RadioButton.prototype.didMount = function () {
     InputRadio.prototype.didMount.call(this);
     onClick(this, this.clickHandler_4r7lns$_0);
   };
-  function RadioButton$RadioButton() {
-    RadioButton$RadioButton_instance = this;
-    this.classSelector_dexyt5$_0 = toClassSelector('bn-radio-button');
-    this.rule_dexyt5$_0 = RadioButton$RadioButton$rule$lambda;
+  function RadioButton$Companion() {
+    RadioButton$Companion_instance = this;
+    this.classSelector_utzb8m$_0 = toClassSelector('bn-radio-button');
+    this.rule_utzb8m$_0 = RadioButton$Companion$rule$lambda;
     elements_0.HTML.registerStyle_78phyd$(this);
   }
-  Object.defineProperty(RadioButton$RadioButton.prototype, 'classSelector', {
+  Object.defineProperty(RadioButton$Companion.prototype, 'classSelector', {
     get: function () {
-      return this.classSelector_dexyt5$_0;
+      return this.classSelector_utzb8m$_0;
     }
   });
-  Object.defineProperty(RadioButton$RadioButton.prototype, 'rule', {
+  Object.defineProperty(RadioButton$Companion.prototype, 'rule', {
     get: function () {
-      return this.rule_dexyt5$_0;
+      return this.rule_utzb8m$_0;
     }
   });
-  function RadioButton$RadioButton$rule$lambda$lambda($receiver) {
+  function RadioButton$Companion$rule$lambda$lambda($receiver) {
     $receiver._cursor = 'pointer';
   }
-  function RadioButton$RadioButton$rule$lambda($receiver) {
+  function RadioButton$Companion$rule$lambda($receiver) {
     $receiver._background = 'red';
-    hover($receiver, RadioButton$RadioButton$rule$lambda$lambda);
+    hover($receiver, RadioButton$Companion$rule$lambda$lambda);
   }
-  RadioButton$RadioButton.$metadata$ = {
+  RadioButton$Companion.$metadata$ = {
     kind: Kotlin.Kind.OBJECT,
-    simpleName: 'RadioButton',
+    simpleName: 'Companion',
     interfaces: [StyledClass]
   };
-  var RadioButton$RadioButton_instance = null;
-  function RadioButton$RadioButton_getInstance() {
-    if (RadioButton$RadioButton_instance === null) {
-      new RadioButton$RadioButton();
+  var RadioButton$Companion_instance = null;
+  function RadioButton$Companion_getInstance() {
+    if (RadioButton$Companion_instance === null) {
+      new RadioButton$Companion();
     }
-    return RadioButton$RadioButton_instance;
+    return RadioButton$Companion_instance;
   }
   function RadioButton$checked$lambda(this$RadioButton) {
     return function (property, old, new_0) {
@@ -2996,24 +2999,24 @@ var beans = function (_, Kotlin, $module$elements) {
   Object.defineProperty(Button_0, 'ButtonStyle', {
     get: Button$ButtonStyle_getInstance
   });
-  Object.defineProperty(Button_0, 'Button', {
-    get: Button$Button_getInstance
+  Object.defineProperty(Button_0, 'Companion', {
+    get: Button$Companion_getInstance
   });
   package$button.Button = Button_0;
-  Object.defineProperty(ToggleButton, 'ToggleButton', {
-    get: ToggleButton$ToggleButton_getInstance
+  Object.defineProperty(ToggleButton, 'Companion', {
+    get: ToggleButton$Companion_getInstance
   });
   package$button.ToggleButton = ToggleButton;
-  Object.defineProperty(Deck, 'Deck', {
-    get: Deck$Deck_getInstance
+  Object.defineProperty(Deck, 'Companion', {
+    get: Deck$Companion_getInstance
   });
   var package$deck = package$beans.deck || (package$beans.deck = {});
   package$deck.Deck = Deck;
   var package$drawer = package$beans.drawer || (package$beans.drawer = {});
   package$drawer.dock_jdil3n$ = dock;
   package$drawer.undock_ahjj8n$ = undock;
-  Object.defineProperty(Drawer, 'Drawer', {
-    get: Drawer$Drawer_getInstance
+  Object.defineProperty(Drawer, 'Companion', {
+    get: Drawer$Companion_getInstance
   });
   package$drawer.Drawer = Drawer;
   package$beans.anchor_q8vlpp$ = anchor;
@@ -3051,30 +3054,30 @@ var beans = function (_, Kotlin, $module$elements) {
   });
   package$icon.IconI = IconI;
   package$icon.IconProvider = IconProvider;
-  Object.defineProperty(Anchor, 'Anchor', {
-    get: Anchor$Anchor_getInstance
+  Object.defineProperty(Anchor, 'Companion', {
+    get: Anchor$Companion_getInstance
   });
   var package$link = package$beans.link || (package$beans.link = {});
   package$link.Anchor = Anchor;
   package$link.ExternalLink = ExternalLink;
   package$link.Link = Link;
   package$link.LocalLink = LocalLink;
-  Object.defineProperty(Menu, 'Menu', {
-    get: Menu$Menu_getInstance
+  Object.defineProperty(Menu, 'Companion', {
+    get: Menu$Companion_getInstance
   });
   var package$menu = package$beans.menu || (package$beans.menu = {});
   package$menu.Menu = Menu;
-  Object.defineProperty(MenuBar, 'MenuBar', {
-    get: MenuBar$MenuBar_getInstance
+  Object.defineProperty(MenuBar, 'Companion', {
+    get: MenuBar$Companion_getInstance
   });
   package$menu.MenuBar = MenuBar;
-  Object.defineProperty(MenuButton, 'MenuButton', {
-    get: MenuButton$MenuButton_getInstance
+  Object.defineProperty(MenuButton, 'Companion', {
+    get: MenuButton$Companion_getInstance
   });
   package$menu.MenuButton = MenuButton;
   MenuItem.Style = MenuItem$Style;
-  Object.defineProperty(MenuItem, 'MenuItem', {
-    get: MenuItem$MenuItem_getInstance
+  Object.defineProperty(MenuItem, 'Companion', {
+    get: MenuItem$Companion_getInstance
   });
   package$menu.MenuItem = MenuItem;
   Object.defineProperty(package$beans, 'pkg', {
@@ -3083,19 +3086,19 @@ var beans = function (_, Kotlin, $module$elements) {
     }
   });
   package$beans.collapseOn_cutj6x$ = collapseOn;
-  Object.defineProperty(LabelledRadioButton, 'LabelledRadioButton', {
-    get: LabelledRadioButton$LabelledRadioButton_getInstance
+  Object.defineProperty(LabelledRadioButton, 'Companion', {
+    get: LabelledRadioButton$Companion_getInstance
   });
   var package$radio = package$beans.radio || (package$beans.radio = {});
   package$radio.LabelledRadioButton = LabelledRadioButton;
-  Object.defineProperty(RadioButton, 'RadioButton', {
-    get: RadioButton$RadioButton_getInstance
+  Object.defineProperty(RadioButton, 'Companion', {
+    get: RadioButton$Companion_getInstance
   });
   package$radio.RadioButton = RadioButton;
   pkg = 'fg-bn-app';
   pkg_0 = 'fg-bn';
   Kotlin.defineModule('beans', _);
   return _;
-}(typeof beans === 'undefined' ? {} : beans, kotlin, elements);
+}(typeof beans === 'undefined' ? {} : beans, kotlin, elements, this['fg-keyboard']);
 
 //@ sourceMappingURL=beans.js.map

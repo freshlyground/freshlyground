@@ -15,8 +15,6 @@ import fg.style.colour.RgbColor
 
 object layoutPage {
 
-    val name = "Layout"
-
     fun start() {
 
         BODY with {

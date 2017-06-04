@@ -63,7 +63,7 @@ open class Menu(label: String? = null, shortcut: Key? = null) : Div() {
         }
     }
 
-    companion object Menu : StyledClass {
+    companion object : StyledClass {
 
         override val classSelector: ClassSelector = ClassSelector("$pkg-menu")
         override val rule: ClassRule.() -> Unit = {

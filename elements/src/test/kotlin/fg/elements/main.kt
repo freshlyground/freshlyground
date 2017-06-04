@@ -24,6 +24,9 @@ fun main(vararg args: String) {
         "Element_performance" -> {
             mainElement_performance.start()
         }
+        "TypedStyle" -> {
+            mainTypedStyle.start()
+        }
     }
 
     val currUrl = URL.from(window.location.href)
@@ -63,6 +66,15 @@ fun main(vararg args: String) {
                     +"Element_performance"
                     onClick {
                         window.location.href = currUrl.replaceParam("page", "Element_performance").toString()
+                    }
+
+                }
+            }
+            li {
+                a("#") {
+                    +"TypedStyle"
+                    onClick {
+                        window.location.href = currUrl.replaceParam("page", "TypedStyle").toString()
                     }
 
                 }

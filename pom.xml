@@ -19,6 +19,7 @@
 
     <modules>
         <module>query</module>
+        <module>fg-keyboard</module>
         <module>elements</module>
         <module>beans</module>
         <module>beans-statics</module>

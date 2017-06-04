@@ -38,6 +38,8 @@ class TypedStyle(element: Element) {
     var paddingTop: Dimension? by DimensionDelegate()
     var paddingBottom: Dimension? by DimensionDelegate()
 
+    var border: Border? by BorderDelegate()
+
     var flexDirection: FlexDirection? by FlexDirectionDelegate()
     var justifyContent: JustifyContent? by JustifyContentDelegate()
     var alignItems: AlignItems? by AlignItemsDelegate()
@@ -47,41 +49,44 @@ class TypedStyle(element: Element) {
     var flexBasis: FlexBasis? by FlexBasisDelegate()
     var order: Int? by IntDelegate()
 
-    class DisplayDelegate() :
-            TypedPropertyDelegate<Display>(getFn = String::toDisplay)
+    class AlignItemsDelegate :
+            TypedPropertyDelegate<AlignItems>(getFn = String::toAlignItems)
 
-    class PositionDelegate() :
-            TypedPropertyDelegate<Position>(getFn = String::toPosition)
+    class BorderDelegate : TypedPropertyDelegate2<Border>(getFn = { Border.from(it) },
+            setFn = { value, element -> if (value != null) value.set(element) else Border().set(element) })
+
+    class DisplayDelegate :
+            TypedPropertyDelegate<Display>(getFn = String::toDisplay)
 
     class RgbColorDelegate(attributeName: String? = null) :
             TypedPropertyDelegate<RgbColor>(attributeName, { RgbColor.from(it) })
 
-    class IntDelegate(attributeName: String? = null) :
-            TypedPropertyDelegate<Int>(attributeName, String::toInt)
-
     class DimensionDelegate(attributeName: String? = null) :
             TypedPropertyDelegate<Dimension>(attributeName, { it -> it.toDimension()!! })
 
-    class FlexDirectionDelegate() :
+    class FlexDirectionDelegate :
             TypedPropertyDelegate<FlexDirection>(getFn = String::toFlexDirection)
 
-    class AlignItemsDelegate() :
-            TypedPropertyDelegate<AlignItems>(getFn = String::toAlignItems)
-
-    class JustifyContentDelegate() :
-            TypedPropertyDelegate<JustifyContent>(getFn = String::toJustifyContent)
-
-    class FlexDelegate() :
+    class FlexDelegate :
             TypedPropertyDelegate<Flex>(getFn = String::toFlex)
 
-    class FlexGrowDelegate() :
+    class FlexGrowDelegate :
             TypedPropertyDelegate<FlexGrow>(getFn = String::toFlexGrow)
 
-    class FlexShrinkDelegate() :
+    class FlexShrinkDelegate :
             TypedPropertyDelegate<FlexShrink>(getFn = String::toFlexShrink)
 
-    class FlexBasisDelegate() :
+    class FlexBasisDelegate :
             TypedPropertyDelegate<FlexBasis>(getFn = String::toFlexBasis)
+
+    class IntDelegate(attributeName: String? = null) :
+            TypedPropertyDelegate<Int>(attributeName, String::toInt)
+
+    class JustifyContentDelegate :
+            TypedPropertyDelegate<JustifyContent>(getFn = String::toJustifyContent)
+
+    class PositionDelegate :
+            TypedPropertyDelegate<Position>(getFn = String::toPosition)
 
     abstract class TypedPropertyDelegate<T : Any>(val attributeName: String? = null,
                                                   val getFn: (String) -> T) : ReadWriteProperty<TypedStyle, T?> {
@@ -106,6 +111,21 @@ class TypedStyle(element: Element) {
             }
         }
     }
+
+    abstract class TypedPropertyDelegate2<T : Any>(val getFn: (Element) -> T,
+                                                   val setFn: (T?, Element) -> Unit) : ReadWriteProperty<TypedStyle, T?> {
+
+        override operator fun getValue(thisRef: TypedStyle, property: KProperty<*>): T? {
+            return getFn(thisRef.element)
+        }
+
+        override operator fun setValue(thisRef: TypedStyle, property: KProperty<*>, value: T?) {
+
+            return setFn(value, thisRef.element)
+        }
+    }
+
+
 }
 
 

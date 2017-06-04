@@ -1,12 +1,9 @@
 package fg.beans.drawer
 
 import fg.base.Side
-import fg.beans.app.Application
-import fg.elements.BODY
 import fg.elements.Div
 import fg.elements.HTML
 import fg.elements.StyledClass
-import fg.elements.style.typed.Display
 import fg.elements.style.typed.Position
 import fg.elements.toClassSelector
 import fg.style.ClassRule
@@ -46,7 +43,7 @@ open class Drawer(side: Side) : Div() {
         }
     }
 
-    companion object Drawer : StyledClass {
+    companion object : StyledClass {
 
         override val classSelector = "drawer".toClassSelector()
 

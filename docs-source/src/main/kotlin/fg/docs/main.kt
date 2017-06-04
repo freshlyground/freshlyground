@@ -5,7 +5,8 @@ import fg.beans.action.Action
 import fg.beans.action.SelectableAction
 import fg.beans.button
 import fg.beans.collapseOn
-import fg.beans.drawer
+import fg.beans.drawer.Drawer
+import fg.beans.drawer.dock
 import fg.beans.icon.FontAwesomeIcons
 import fg.beans.menu
 import fg.beans.menu.Menu
@@ -25,6 +26,10 @@ import fg.elements.header
 import fg.elements.li
 import fg.elements.p
 import fg.elements.pre
+import fg.elements.px
+import fg.elements.render
+import fg.elements.style.typed.Border
+import fg.elements.style.typed.BorderStyle
 import fg.elements.style.typed.Display
 import fg.elements.style.typed.FlexDirection
 import fg.elements.ul
@@ -32,6 +37,7 @@ import fg.elements.with
 import fg.style.AnyRule
 import fg.style.ClassRule
 import fg.style.and
+import fg.style.colour.RgbColor
 import fg.style.desc
 import fg.style.hover
 import kotlin.browser.window
@@ -39,7 +45,7 @@ import kotlin.browser.window
 
 fun main(vararg args: String) {
 
-    val beansAction = SelectableAction("Beans") { window.location.href = "#Beans" }
+    val beansAction = SelectableAction("Beans")
     val beansContainer = Div() with {
 
         style.display = Display.flex
@@ -52,24 +58,25 @@ fun main(vararg args: String) {
     beansContainer.collapseOn(beansAction)
     beansAction.selected = false
 
-    BODY with {
-        drawer(Side.RIGHT) {
+    val rightDrawer = Drawer(Side.RIGHT) render {
 
-            _style.borderLeft = "1px solid black"
+        div {
+            style.border = Border(1.px, BorderStyle.dashed, RgbColor.RED)
+            style.display = Display.flex
+            style.flexDirection = FlexDirection.column
 
-            div {
-                style.display = Display.flex
-                style.flexDirection = FlexDirection.column
+            button(Action("Elements") { window.location.href = "#Elements" }) {}
+            toggleButton(beansAction) {}
 
-                button(Action("Elements") { window.location.href = "#Elements" }) {}
-                toggleButton(beansAction) {}
+            appendChild(beansContainer)
 
-                appendChild(beansContainer)
-
-                button(Action("Material Design")) { }
-                button(Action("Resources") { window.location.href = "#Resources" }) { }
-            }
+            button(Action("Material Design")) { }
+            button(Action("Resources") { window.location.href = "#Resources" }) { }
         }
+    }
+
+    BODY with {
+        appendChild(rightDrawer)
         header {
             h1 {
                 +"Freshlyground"
@@ -118,7 +125,7 @@ fun main(vararg args: String) {
         }
         p {
             +"Actions are configurations of action components, like Button, ToggleButton, MenuItem. "
-            + "This means these components are configured and changed through their actions and not directly."
+            +"This means these components are configured and changed through their actions and not directly."
         }
         p {
             +"One action can be used by more than one component, meaning all components created using the same action "
@@ -202,5 +209,6 @@ fun main(vararg args: String) {
     })
 
     HTML.init()
+    BODY.dock(rightDrawer)
 }
 

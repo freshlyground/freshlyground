@@ -38,10 +38,6 @@ var elements = function (_, Kotlin) {
   var ReadWriteProperty = Kotlin.kotlin.properties.ReadWriteProperty;
   var first = Kotlin.kotlin.collections.first_2p1efm$;
   var Pair = Kotlin.kotlin.Pair;
-  var last = Kotlin.kotlin.collections.last_2p1efm$;
-  var mapOf_0 = Kotlin.kotlin.collections.mapOf_qfcya0$;
-  var listOf_0 = Kotlin.kotlin.collections.listOf_mh5how$;
-  var sorted = Kotlin.kotlin.collections.sorted_exjks8$;
   var toInt_0 = Kotlin.kotlin.text.toInt_6ic1pp$;
   var iterator_0 = Kotlin.kotlin.text.iterator_gw00vp$;
   UnexpectedStatusException.prototype = Object.create(RuntimeException.prototype);
@@ -178,6 +174,8 @@ var elements = function (_, Kotlin) {
   NotSelector.prototype.constructor = NotSelector;
   AlignItems.prototype = Object.create(Enum.prototype);
   AlignItems.prototype.constructor = AlignItems;
+  BorderStyle.prototype = Object.create(Enum.prototype);
+  BorderStyle.prototype.constructor = BorderStyle;
   Display.prototype = Object.create(Enum.prototype);
   Display.prototype.constructor = Display;
   Flex$Keyword.prototype = Object.create(Enum.prototype);
@@ -194,22 +192,18 @@ var elements = function (_, Kotlin) {
   JustifyContent.prototype.constructor = JustifyContent;
   Position.prototype = Object.create(Enum.prototype);
   Position.prototype.constructor = Position;
+  TypedStyle$AlignItemsDelegate.prototype = Object.create(TypedStyle$TypedPropertyDelegate.prototype);
+  TypedStyle$AlignItemsDelegate.prototype.constructor = TypedStyle$AlignItemsDelegate;
+  TypedStyle$BorderDelegate.prototype = Object.create(TypedStyle$TypedPropertyDelegate2.prototype);
+  TypedStyle$BorderDelegate.prototype.constructor = TypedStyle$BorderDelegate;
   TypedStyle$DisplayDelegate.prototype = Object.create(TypedStyle$TypedPropertyDelegate.prototype);
   TypedStyle$DisplayDelegate.prototype.constructor = TypedStyle$DisplayDelegate;
-  TypedStyle$PositionDelegate.prototype = Object.create(TypedStyle$TypedPropertyDelegate.prototype);
-  TypedStyle$PositionDelegate.prototype.constructor = TypedStyle$PositionDelegate;
   TypedStyle$RgbColorDelegate.prototype = Object.create(TypedStyle$TypedPropertyDelegate.prototype);
   TypedStyle$RgbColorDelegate.prototype.constructor = TypedStyle$RgbColorDelegate;
-  TypedStyle$IntDelegate.prototype = Object.create(TypedStyle$TypedPropertyDelegate.prototype);
-  TypedStyle$IntDelegate.prototype.constructor = TypedStyle$IntDelegate;
   TypedStyle$DimensionDelegate.prototype = Object.create(TypedStyle$TypedPropertyDelegate.prototype);
   TypedStyle$DimensionDelegate.prototype.constructor = TypedStyle$DimensionDelegate;
   TypedStyle$FlexDirectionDelegate.prototype = Object.create(TypedStyle$TypedPropertyDelegate.prototype);
   TypedStyle$FlexDirectionDelegate.prototype.constructor = TypedStyle$FlexDirectionDelegate;
-  TypedStyle$AlignItemsDelegate.prototype = Object.create(TypedStyle$TypedPropertyDelegate.prototype);
-  TypedStyle$AlignItemsDelegate.prototype.constructor = TypedStyle$AlignItemsDelegate;
-  TypedStyle$JustifyContentDelegate.prototype = Object.create(TypedStyle$TypedPropertyDelegate.prototype);
-  TypedStyle$JustifyContentDelegate.prototype.constructor = TypedStyle$JustifyContentDelegate;
   TypedStyle$FlexDelegate.prototype = Object.create(TypedStyle$TypedPropertyDelegate.prototype);
   TypedStyle$FlexDelegate.prototype.constructor = TypedStyle$FlexDelegate;
   TypedStyle$FlexGrowDelegate.prototype = Object.create(TypedStyle$TypedPropertyDelegate.prototype);
@@ -218,6 +212,12 @@ var elements = function (_, Kotlin) {
   TypedStyle$FlexShrinkDelegate.prototype.constructor = TypedStyle$FlexShrinkDelegate;
   TypedStyle$FlexBasisDelegate.prototype = Object.create(TypedStyle$TypedPropertyDelegate.prototype);
   TypedStyle$FlexBasisDelegate.prototype.constructor = TypedStyle$FlexBasisDelegate;
+  TypedStyle$IntDelegate.prototype = Object.create(TypedStyle$TypedPropertyDelegate.prototype);
+  TypedStyle$IntDelegate.prototype.constructor = TypedStyle$IntDelegate;
+  TypedStyle$JustifyContentDelegate.prototype = Object.create(TypedStyle$TypedPropertyDelegate.prototype);
+  TypedStyle$JustifyContentDelegate.prototype.constructor = TypedStyle$JustifyContentDelegate;
+  TypedStyle$PositionDelegate.prototype = Object.create(TypedStyle$TypedPropertyDelegate.prototype);
+  TypedStyle$PositionDelegate.prototype.constructor = TypedStyle$PositionDelegate;
   Table.prototype = Object.create(Element.prototype);
   Table.prototype.constructor = Table;
   Caption.prototype = Object.create(Element.prototype);
@@ -248,10 +248,6 @@ var elements = function (_, Kotlin) {
   I.prototype.constructor = I;
   Text_0.prototype = Object.create(Node.prototype);
   Text_0.prototype.constructor = Text_0;
-  Modifier.prototype = Object.create(Enum.prototype);
-  Modifier.prototype.constructor = Modifier;
-  Type.prototype = Object.create(Enum.prototype);
-  Type.prototype.constructor = Type;
   AdjacentSiblingRule.prototype = Object.create(Rule.prototype);
   AdjacentSiblingRule.prototype.constructor = AdjacentSiblingRule;
   AndRule.prototype = Object.create(Rule.prototype);
@@ -2175,7 +2171,7 @@ var elements = function (_, Kotlin) {
     this._displayBeforeHiding_gobymg$_0 = '';
     this.style$delegate = lazy(Element$style$lambda(this));
     this.layout$delegate = new LayoutDelegate();
-    this.renderBlocks$delegate = lazy(Element$renderBlocks$lambda);
+    this.renderBlocks_gobymg$_0 = Kotlin.kotlin.collections.ArrayList_init_ww73n8$();
   }
   Object.defineProperty(Element.prototype, 'renderCalled', {
     get: function () {
@@ -2268,13 +2264,6 @@ var elements = function (_, Kotlin) {
     },
     set: function (layout) {
       this.layout$delegate.setValue_9rddgb$(this, new Kotlin.PropertyMetadata('layout'), layout);
-    }
-  });
-  Object.defineProperty(Element.prototype, 'renderBlocks_gobymg$_0', {
-    get: function () {
-      var $receiver = this.renderBlocks$delegate;
-      new Kotlin.PropertyMetadata('renderBlocks');
-      return $receiver.value;
     }
   });
   Object.defineProperty(Element.prototype, 'clientWidth', {
@@ -2779,9 +2768,6 @@ var elements = function (_, Kotlin) {
     return function () {
       return new TypedStyle(this$Element);
     };
-  }
-  function Element$renderBlocks$lambda() {
-    return Kotlin.kotlin.collections.ArrayList_init_ww73n8$();
   }
   Element.$metadata$ = {
     kind: Kotlin.Kind.CLASS,
@@ -4586,6 +4572,175 @@ var elements = function (_, Kotlin) {
     }
     throw new IllegalArgumentException('Unknown align-items: ' + $receiver);
   }
+  function Border(width, style, color) {
+    Border$Companion_getInstance();
+    if (width === void 0)
+      width = null;
+    if (style === void 0)
+      style = null;
+    if (color === void 0)
+      color = null;
+    this.width = width;
+    this.style = style;
+    this.color = color;
+  }
+  function Border$Companion() {
+    Border$Companion_instance = this;
+  }
+  Border$Companion.prototype.from_54c9de$ = function (element) {
+    var widthAsString = element.w3cElement_gobymg$_0.style.getPropertyValue('border-width');
+    var width = !Kotlin.kotlin.text.isBlank_gw00vp$(widthAsString) ? toDimension(widthAsString) : null;
+    var styleAsString = element.w3cElement_gobymg$_0.style.getPropertyValue('border-style');
+    var style = !Kotlin.kotlin.text.isBlank_gw00vp$(styleAsString) ? BorderStyle$valueOf(styleAsString) : null;
+    var colorAsString = element.w3cElement_gobymg$_0.style.getPropertyValue('border-color');
+    var color = !Kotlin.kotlin.text.isBlank_gw00vp$(colorAsString) ? RgbColor$Factory_getInstance().from_61zpoe$(colorAsString) : null;
+    return new Border(width, style, color);
+  };
+  Border$Companion.$metadata$ = {
+    kind: Kotlin.Kind.OBJECT,
+    simpleName: 'Companion',
+    interfaces: []
+  };
+  var Border$Companion_instance = null;
+  function Border$Companion_getInstance() {
+    if (Border$Companion_instance === null) {
+      new Border$Companion();
+    }
+    return Border$Companion_instance;
+  }
+  Border.prototype.set_54c9de$ = function (element) {
+    var tmp$, tmp$_0, tmp$_1, tmp$_2, tmp$_3, tmp$_4;
+    if (this.width != null) {
+      var borderWidth = (tmp$_0 = (tmp$ = this.width) != null ? tmp$.toHtml() : null) != null ? tmp$_0 : '';
+      element.w3cElement_gobymg$_0.style.setProperty('border-width', borderWidth);
+    }
+     else {
+      element.w3cElement_gobymg$_0.style.removeProperty('border-width');
+    }
+    if (this.style != null) {
+      var styleName = (tmp$_2 = (tmp$_1 = this.style) != null ? tmp$_1.name : null) != null ? tmp$_2 : '';
+      element.w3cElement_gobymg$_0.style.setProperty('border-style', styleName);
+    }
+     else {
+      element.w3cElement_gobymg$_0.style.removeProperty('border-style');
+    }
+    if (this.color != null) {
+      var color = (tmp$_4 = (tmp$_3 = this.color) != null ? tmp$_3.toString() : null) != null ? tmp$_4 : '';
+      element.w3cElement_gobymg$_0.style.setProperty('border-color', color);
+    }
+     else {
+      element.w3cElement_gobymg$_0.style.removeProperty('border-color');
+    }
+  };
+  Border.$metadata$ = {
+    kind: Kotlin.Kind.CLASS,
+    simpleName: 'Border',
+    interfaces: []
+  };
+  function BorderStyle(name, ordinal) {
+    Enum.call(this);
+    this.name$ = name;
+    this.ordinal$ = ordinal;
+  }
+  function BorderStyle_initFields() {
+    BorderStyle_initFields = function () {
+    };
+    BorderStyle$dashed_instance = new BorderStyle('dashed', 0);
+    BorderStyle$double_instance = new BorderStyle('double', 1);
+    BorderStyle$dotted_instance = new BorderStyle('dotted', 2);
+    BorderStyle$groove_instance = new BorderStyle('groove', 3);
+    BorderStyle$ridge_instance = new BorderStyle('ridge', 4);
+    BorderStyle$inset_instance = new BorderStyle('inset', 5);
+    BorderStyle$outset_instance = new BorderStyle('outset', 6);
+    BorderStyle$hidden_instance = new BorderStyle('hidden', 7);
+    BorderStyle$solid_instance = new BorderStyle('solid', 8);
+    BorderStyle$none_instance = new BorderStyle('none', 9);
+  }
+  var BorderStyle$dashed_instance;
+  function BorderStyle$dashed_getInstance() {
+    BorderStyle_initFields();
+    return BorderStyle$dashed_instance;
+  }
+  var BorderStyle$double_instance;
+  function BorderStyle$double_getInstance() {
+    BorderStyle_initFields();
+    return BorderStyle$double_instance;
+  }
+  var BorderStyle$dotted_instance;
+  function BorderStyle$dotted_getInstance() {
+    BorderStyle_initFields();
+    return BorderStyle$dotted_instance;
+  }
+  var BorderStyle$groove_instance;
+  function BorderStyle$groove_getInstance() {
+    BorderStyle_initFields();
+    return BorderStyle$groove_instance;
+  }
+  var BorderStyle$ridge_instance;
+  function BorderStyle$ridge_getInstance() {
+    BorderStyle_initFields();
+    return BorderStyle$ridge_instance;
+  }
+  var BorderStyle$inset_instance;
+  function BorderStyle$inset_getInstance() {
+    BorderStyle_initFields();
+    return BorderStyle$inset_instance;
+  }
+  var BorderStyle$outset_instance;
+  function BorderStyle$outset_getInstance() {
+    BorderStyle_initFields();
+    return BorderStyle$outset_instance;
+  }
+  var BorderStyle$hidden_instance;
+  function BorderStyle$hidden_getInstance() {
+    BorderStyle_initFields();
+    return BorderStyle$hidden_instance;
+  }
+  var BorderStyle$solid_instance;
+  function BorderStyle$solid_getInstance() {
+    BorderStyle_initFields();
+    return BorderStyle$solid_instance;
+  }
+  var BorderStyle$none_instance;
+  function BorderStyle$none_getInstance() {
+    BorderStyle_initFields();
+    return BorderStyle$none_instance;
+  }
+  BorderStyle.$metadata$ = {
+    kind: Kotlin.Kind.CLASS,
+    simpleName: 'BorderStyle',
+    interfaces: [Enum]
+  };
+  function BorderStyle$values() {
+    return [BorderStyle$dashed_getInstance(), BorderStyle$double_getInstance(), BorderStyle$dotted_getInstance(), BorderStyle$groove_getInstance(), BorderStyle$ridge_getInstance(), BorderStyle$inset_getInstance(), BorderStyle$outset_getInstance(), BorderStyle$hidden_getInstance(), BorderStyle$solid_getInstance(), BorderStyle$none_getInstance()];
+  }
+  BorderStyle.values = BorderStyle$values;
+  function BorderStyle$valueOf(name) {
+    switch (name) {
+      case 'dashed':
+        return BorderStyle$dashed_getInstance();
+      case 'double':
+        return BorderStyle$double_getInstance();
+      case 'dotted':
+        return BorderStyle$dotted_getInstance();
+      case 'groove':
+        return BorderStyle$groove_getInstance();
+      case 'ridge':
+        return BorderStyle$ridge_getInstance();
+      case 'inset':
+        return BorderStyle$inset_getInstance();
+      case 'outset':
+        return BorderStyle$outset_getInstance();
+      case 'hidden':
+        return BorderStyle$hidden_getInstance();
+      case 'solid':
+        return BorderStyle$solid_getInstance();
+      case 'none':
+        return BorderStyle$none_getInstance();
+      default:Kotlin.throwISE('No enum constant fg.elements.style.typed.BorderStyle.' + name);
+    }
+  }
+  BorderStyle.valueOf_61zpoe$ = BorderStyle$valueOf;
   function Display(name, ordinal, asString) {
     Enum.call(this);
     this.asString = asString;
@@ -5483,6 +5638,7 @@ var elements = function (_, Kotlin) {
     this.paddingRight$delegate = new TypedStyle$DimensionDelegate();
     this.paddingTop$delegate = new TypedStyle$DimensionDelegate();
     this.paddingBottom$delegate = new TypedStyle$DimensionDelegate();
+    this.border$delegate = new TypedStyle$BorderDelegate();
     this.flexDirection$delegate = new TypedStyle$FlexDirectionDelegate();
     this.justifyContent$delegate = new TypedStyle$JustifyContentDelegate();
     this.alignItems$delegate = new TypedStyle$AlignItemsDelegate();
@@ -5668,6 +5824,14 @@ var elements = function (_, Kotlin) {
       this.paddingBottom$delegate.setValue_9rddgb$(this, new Kotlin.PropertyMetadata('paddingBottom'), paddingBottom);
     }
   });
+  Object.defineProperty(TypedStyle.prototype, 'border', {
+    get: function () {
+      return this.border$delegate.getValue_lrcp0p$(this, new Kotlin.PropertyMetadata('border'));
+    },
+    set: function (border) {
+      this.border$delegate.setValue_9rddgb$(this, new Kotlin.PropertyMetadata('border'), border);
+    }
+  });
   Object.defineProperty(TypedStyle.prototype, 'flexDirection', {
     get: function () {
       return this.flexDirection$delegate.getValue_lrcp0p$(this, new Kotlin.PropertyMetadata('flexDirection'));
@@ -5732,6 +5896,33 @@ var elements = function (_, Kotlin) {
       this.order$delegate.setValue_9rddgb$(this, new Kotlin.PropertyMetadata('order'), order);
     }
   });
+  function TypedStyle$AlignItemsDelegate() {
+    TypedStyle$TypedPropertyDelegate.call(this, void 0, Kotlin.getCallableRef('toAlignItems', function ($receiver) {
+      return toAlignItems($receiver);
+    }));
+  }
+  TypedStyle$AlignItemsDelegate.$metadata$ = {
+    kind: Kotlin.Kind.CLASS,
+    simpleName: 'AlignItemsDelegate',
+    interfaces: [TypedStyle$TypedPropertyDelegate]
+  };
+  function TypedStyle$BorderDelegate() {
+    TypedStyle$TypedPropertyDelegate2.call(this, TypedStyle$TypedStyle$BorderDelegate_init$lambda, TypedStyle$TypedStyle$BorderDelegate_init$lambda_0);
+  }
+  function TypedStyle$TypedStyle$BorderDelegate_init$lambda(it) {
+    return Border$Companion_getInstance().from_54c9de$(it);
+  }
+  function TypedStyle$TypedStyle$BorderDelegate_init$lambda_0(value, element) {
+    if (value != null)
+      value.set_54c9de$(element);
+    else
+      (new Border()).set_54c9de$(element);
+  }
+  TypedStyle$BorderDelegate.$metadata$ = {
+    kind: Kotlin.Kind.CLASS,
+    simpleName: 'BorderDelegate',
+    interfaces: [TypedStyle$TypedPropertyDelegate2]
+  };
   function TypedStyle$DisplayDelegate() {
     TypedStyle$TypedPropertyDelegate.call(this, void 0, Kotlin.getCallableRef('toDisplay', function ($receiver) {
       return toDisplay($receiver);
@@ -5740,16 +5931,6 @@ var elements = function (_, Kotlin) {
   TypedStyle$DisplayDelegate.$metadata$ = {
     kind: Kotlin.Kind.CLASS,
     simpleName: 'DisplayDelegate',
-    interfaces: [TypedStyle$TypedPropertyDelegate]
-  };
-  function TypedStyle$PositionDelegate() {
-    TypedStyle$TypedPropertyDelegate.call(this, void 0, Kotlin.getCallableRef('toPosition', function ($receiver) {
-      return toPosition($receiver);
-    }));
-  }
-  TypedStyle$PositionDelegate.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
-    simpleName: 'PositionDelegate',
     interfaces: [TypedStyle$TypedPropertyDelegate]
   };
   function TypedStyle$RgbColorDelegate(attributeName) {
@@ -5763,18 +5944,6 @@ var elements = function (_, Kotlin) {
   TypedStyle$RgbColorDelegate.$metadata$ = {
     kind: Kotlin.Kind.CLASS,
     simpleName: 'RgbColorDelegate',
-    interfaces: [TypedStyle$TypedPropertyDelegate]
-  };
-  function TypedStyle$IntDelegate(attributeName) {
-    if (attributeName === void 0)
-      attributeName = null;
-    TypedStyle$TypedPropertyDelegate.call(this, attributeName, Kotlin.getCallableRef('toInt', function ($receiver) {
-      return toInt($receiver);
-    }));
-  }
-  TypedStyle$IntDelegate.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
-    simpleName: 'IntDelegate',
     interfaces: [TypedStyle$TypedPropertyDelegate]
   };
   function TypedStyle$DimensionDelegate(attributeName) {
@@ -5799,26 +5968,6 @@ var elements = function (_, Kotlin) {
   TypedStyle$FlexDirectionDelegate.$metadata$ = {
     kind: Kotlin.Kind.CLASS,
     simpleName: 'FlexDirectionDelegate',
-    interfaces: [TypedStyle$TypedPropertyDelegate]
-  };
-  function TypedStyle$AlignItemsDelegate() {
-    TypedStyle$TypedPropertyDelegate.call(this, void 0, Kotlin.getCallableRef('toAlignItems', function ($receiver) {
-      return toAlignItems($receiver);
-    }));
-  }
-  TypedStyle$AlignItemsDelegate.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
-    simpleName: 'AlignItemsDelegate',
-    interfaces: [TypedStyle$TypedPropertyDelegate]
-  };
-  function TypedStyle$JustifyContentDelegate() {
-    TypedStyle$TypedPropertyDelegate.call(this, void 0, Kotlin.getCallableRef('toJustifyContent', function ($receiver) {
-      return toJustifyContent($receiver);
-    }));
-  }
-  TypedStyle$JustifyContentDelegate.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
-    simpleName: 'JustifyContentDelegate',
     interfaces: [TypedStyle$TypedPropertyDelegate]
   };
   function TypedStyle$FlexDelegate() {
@@ -5861,6 +6010,38 @@ var elements = function (_, Kotlin) {
     simpleName: 'FlexBasisDelegate',
     interfaces: [TypedStyle$TypedPropertyDelegate]
   };
+  function TypedStyle$IntDelegate(attributeName) {
+    if (attributeName === void 0)
+      attributeName = null;
+    TypedStyle$TypedPropertyDelegate.call(this, attributeName, Kotlin.getCallableRef('toInt', function ($receiver) {
+      return toInt($receiver);
+    }));
+  }
+  TypedStyle$IntDelegate.$metadata$ = {
+    kind: Kotlin.Kind.CLASS,
+    simpleName: 'IntDelegate',
+    interfaces: [TypedStyle$TypedPropertyDelegate]
+  };
+  function TypedStyle$JustifyContentDelegate() {
+    TypedStyle$TypedPropertyDelegate.call(this, void 0, Kotlin.getCallableRef('toJustifyContent', function ($receiver) {
+      return toJustifyContent($receiver);
+    }));
+  }
+  TypedStyle$JustifyContentDelegate.$metadata$ = {
+    kind: Kotlin.Kind.CLASS,
+    simpleName: 'JustifyContentDelegate',
+    interfaces: [TypedStyle$TypedPropertyDelegate]
+  };
+  function TypedStyle$PositionDelegate() {
+    TypedStyle$TypedPropertyDelegate.call(this, void 0, Kotlin.getCallableRef('toPosition', function ($receiver) {
+      return toPosition($receiver);
+    }));
+  }
+  TypedStyle$PositionDelegate.$metadata$ = {
+    kind: Kotlin.Kind.CLASS,
+    simpleName: 'PositionDelegate',
+    interfaces: [TypedStyle$TypedPropertyDelegate]
+  };
   function TypedStyle$TypedPropertyDelegate(attributeName, getFn) {
     if (attributeName === void 0)
       attributeName = null;
@@ -5887,6 +6068,21 @@ var elements = function (_, Kotlin) {
   TypedStyle$TypedPropertyDelegate.$metadata$ = {
     kind: Kotlin.Kind.CLASS,
     simpleName: 'TypedPropertyDelegate',
+    interfaces: [ReadWriteProperty]
+  };
+  function TypedStyle$TypedPropertyDelegate2(getFn, setFn) {
+    this.getFn = getFn;
+    this.setFn = setFn;
+  }
+  TypedStyle$TypedPropertyDelegate2.prototype.getValue_lrcp0p$ = function (thisRef, property) {
+    return this.getFn(thisRef.element_0);
+  };
+  TypedStyle$TypedPropertyDelegate2.prototype.setValue_9rddgb$ = function (thisRef, property, value) {
+    return this.setFn(value, thisRef.element_0);
+  };
+  TypedStyle$TypedPropertyDelegate2.$metadata$ = {
+    kind: Kotlin.Kind.CLASS,
+    simpleName: 'TypedPropertyDelegate2',
     interfaces: [ReadWriteProperty]
   };
   TypedStyle.$metadata$ = {
@@ -6221,416 +6417,6 @@ var elements = function (_, Kotlin) {
     }
     return W3cDelegates_instance;
   }
-  function Key(key, modifiers) {
-    Key$Factory_getInstance();
-    this.key = key;
-    this.modifiers = modifiers;
-  }
-  Key.prototype.equals = function (other) {
-    var tmp$;
-    if (this === other)
-      return true;
-    if (!Kotlin.isType(other, Key))
-      return false;
-    if (!Kotlin.equals(this.key, other.key))
-      return false;
-    if (!((tmp$ = this.modifiers) != null ? tmp$.equals(other.modifiers) : null))
-      return false;
-    return true;
-  };
-  Key.prototype.hashCode = function () {
-    var result = Kotlin.hashCode(this.key);
-    result = (31 * result | 0) + this.modifiers.hashCode() | 0;
-    return result;
-  };
-  Key.prototype.toString = function () {
-    if (this.modifiers.isNotEmpty()) {
-      return this.modifiers + '+' + this.key;
-    }
-     else {
-      return this.key;
-    }
-  };
-  function Key$Factory() {
-    Key$Factory_instance = this;
-  }
-  Key$Factory.prototype.from_61zpoe$ = function (str) {
-    var tmp$;
-    var splitted = split(str, ['+']);
-    var key = last(splitted);
-    var modifiers = Kotlin.kotlin.collections.ArrayList_init_ww73n8$();
-    if (splitted.size > 1) {
-      tmp$ = get_lastIndex(splitted) - 1 | 0;
-      for (var i_0 = 0; i_0 <= tmp$; i_0++) {
-        var modifierAsString = splitted.get_za3lpa$(i_0);
-        modifiers.add_11rb$(Modifier$valueOf(modifierAsString));
-      }
-    }
-    return new Key(key, new Modifiers(modifiers));
-  };
-  Key$Factory.prototype.from_tat4wc$ = function (key, modifiers) {
-    return new Key(key, modifiers);
-  };
-  Key$Factory.$metadata$ = {
-    kind: Kotlin.Kind.OBJECT,
-    simpleName: 'Factory',
-    interfaces: []
-  };
-  var Key$Factory_instance = null;
-  function Key$Factory_getInstance() {
-    if (Key$Factory_instance === null) {
-      new Key$Factory();
-    }
-    return Key$Factory_instance;
-  }
-  Key.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
-    simpleName: 'Key',
-    interfaces: []
-  };
-  function KeyBinding(keys, type, callback) {
-    if (type === void 0)
-      type = Type$keypress_getInstance();
-    this.keys = keys;
-    this.type = type;
-    this.callback = callback;
-  }
-  KeyBinding.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
-    simpleName: 'KeyBinding',
-    interfaces: []
-  };
-  KeyBinding.prototype.component1 = function () {
-    return this.keys;
-  };
-  KeyBinding.prototype.component2 = function () {
-    return this.type;
-  };
-  KeyBinding.prototype.component3 = function () {
-    return this.callback;
-  };
-  KeyBinding.prototype.copy_v8lbmn$ = function (keys, type, callback) {
-    return new KeyBinding(keys === void 0 ? this.keys : keys, type === void 0 ? this.type : type, callback === void 0 ? this.callback : callback);
-  };
-  KeyBinding.prototype.toString = function () {
-    return 'KeyBinding(keys=' + Kotlin.toString(this.keys) + (', type=' + Kotlin.toString(this.type)) + (', callback=' + Kotlin.toString(this.callback)) + ')';
-  };
-  KeyBinding.prototype.hashCode = function () {
-    var result = 0;
-    result = result * 31 + Kotlin.hashCode(this.keys) | 0;
-    result = result * 31 + Kotlin.hashCode(this.type) | 0;
-    result = result * 31 + Kotlin.hashCode(this.callback) | 0;
-    return result;
-  };
-  KeyBinding.prototype.equals = function (other) {
-    return this === other || (other !== null && (typeof other === 'object' && (Object.getPrototypeOf(this) === Object.getPrototypeOf(other) && (Kotlin.equals(this.keys, other.keys) && Kotlin.equals(this.type, other.type) && Kotlin.equals(this.callback, other.callback)))));
-  };
-  function Keyboard(element) {
-    Keyboard$Factory_getInstance();
-    if (element === void 0)
-      element = null;
-    this.element = element;
-    this.shelves_0 = Kotlin.kotlin.collections.ArrayList_init_ww73n8$();
-    this.keyBindings_0 = Kotlin.kotlin.collections.ArrayList_init_ww73n8$();
-    this.keyboardEventHandler_0 = Keyboard$keyboardEventHandler$lambda(this);
-    var tmp$, tmp$_0;
-    if (this.element != null) {
-      onKeyDown(this.element, this.keyboardEventHandler_0);
-      onKeyPress(this.element, this.keyboardEventHandler_0);
-      onKeyUp(this.element, this.keyboardEventHandler_0);
-    }
-     else {
-      tmp$_0 = typeof (tmp$ = this.keyboardEventHandler_0) === 'function' ? tmp$ : Kotlin.throwCCE();
-      document.addEventListener('keydown', tmp$_0);
-      document.addEventListener('keypress', this.keyboardEventHandler_0);
-      document.addEventListener('keyup', this.keyboardEventHandler_0);
-    }
-    this.pause = false;
-  }
-  Keyboard.prototype.character_0 = function (event, resolvedCharCode) {
-    var tmp$;
-    if (Kotlin.equals(event.type, 'keypress')) {
-      var character = String.fromCharCode(event.which);
-      if (!event.shiftKey) {
-        character = character.toLowerCase();
-      }
-      return character;
-    }
-    if (Keyboard$Factory_getInstance()._MAP_0.containsKey_11rb$(resolvedCharCode)) {
-      return Keyboard$Factory_getInstance()._MAP_0.get_11rb$(event.which);
-    }
-    if (Keyboard$Factory_getInstance()._KEYCODE_MAP_0.containsKey_11rb$(resolvedCharCode)) {
-      return (tmp$ = Kotlin.unboxChar(Keyboard$Factory_getInstance()._KEYCODE_MAP_0.get_11rb$(resolvedCharCode))) != null ? String.fromCharCode(Kotlin.toBoxedChar(tmp$)) : null;
-    }
-    var character_0 = String.fromCharCode(event.which);
-    return character_0.toLowerCase().toString();
-  };
-  Keyboard.prototype.resolveEventModifiers_0 = function (e) {
-    var modifiers = Kotlin.kotlin.collections.ArrayList_init_ww73n8$();
-    if (e.shiftKey) {
-      modifiers.add_11rb$(Modifier$shift_getInstance());
-    }
-    if (e.altKey) {
-      modifiers.add_11rb$(Modifier$alt_getInstance());
-    }
-    if (e.ctrlKey) {
-      modifiers.add_11rb$(Modifier$ctrl_getInstance());
-    }
-    if (e.metaKey) {
-      modifiers.add_11rb$(Modifier$meta_getInstance());
-    }
-    return new Modifiers(modifiers);
-  };
-  Keyboard.prototype.handleKey_0 = function (key, type, event) {
-    var tmp$;
-    console.info('Keyboard key: ' + Kotlin.toString(key) + ' @' + Kotlin.toString(type));
-    tmp$ = this.keyBindings_0.iterator();
-    while (tmp$.hasNext()) {
-      var keyBinding = tmp$.next();
-      if (keyBinding.keys.list.contains_11rb$(key)) {
-        keyBinding.callback();
-        event.preventDefault();
-      }
-    }
-  };
-  Keyboard.prototype.add_mwcglc$ = function (keyBinding) {
-    console.info('Adding KeyBinding: ' + keyBinding.toString());
-    this.keyBindings_0.add_11rb$(keyBinding);
-  };
-  Keyboard.prototype.clear = function () {
-    this.keyBindings_0.clear();
-  };
-  Keyboard.prototype.shelve = function () {
-    this.shelves_0.add_11rb$(this.keyBindings_0);
-    this.keyBindings_0.clear();
-  };
-  Keyboard.prototype.unshelve = function () {
-    this.keyBindings_0.clear();
-    this.keyBindings_0.addAll_brywnq$(last(this.shelves_0));
-    this.shelves_0.removeAt_za3lpa$(get_lastIndex(this.shelves_0));
-  };
-  function Keyboard$Factory() {
-    Keyboard$Factory_instance = this;
-    this._MAP_0 = mapOf_0([new Pair(8, 'backspace'), new Pair(9, 'tab'), new Pair(13, 'enter'), new Pair(16, 'shift'), new Pair(17, 'ctrl'), new Pair(18, 'alt'), new Pair(20, 'capslock'), new Pair(27, 'esc'), new Pair(32, 'space'), new Pair(33, 'pageup'), new Pair(34, 'pagedown'), new Pair(35, 'end'), new Pair(36, 'home'), new Pair(37, 'left'), new Pair(38, 'up'), new Pair(39, 'right'), new Pair(40, 'down'), new Pair(45, 'ins'), new Pair(46, 'del'), new Pair(91, 'meta'), new Pair(93, 'meta'), new Pair(96, '0'), new Pair(97, '1'), new Pair(98, '2'), new Pair(99, '4'), new Pair(100, '5'), new Pair(101, '6'), new Pair(102, '7'), new Pair(103, '8'), new Pair(104, '9'), new Pair(112, 'f1'), new Pair(113, 'f2'), new Pair(114, 'f3'), new Pair(115, 'f4'), new Pair(116, 'f5'), new Pair(117, 'f6'), new Pair(118, 'f7'), new Pair(119, 'f8'), new Pair(120, 'f8'), new Pair(121, 'f9'), new Pair(122, 'f10'), new Pair(123, 'f11'), new Pair(124, 'f12'), new Pair(125, 'f13'), new Pair(126, 'f14'), new Pair(127, 'f15'), new Pair(128, 'f16'), new Pair(129, 'f17'), new Pair(130, 'f18'), new Pair(131, 'f19'), new Pair(224, 'meta')]);
-    this._KEYCODE_MAP_0 = mapOf_0([new Pair(106, Kotlin.toBoxedChar(42)), new Pair(107, Kotlin.toBoxedChar(43)), new Pair(109, Kotlin.toBoxedChar(45)), new Pair(110, Kotlin.toBoxedChar(46)), new Pair(111, Kotlin.toBoxedChar(47)), new Pair(186, Kotlin.toBoxedChar(59)), new Pair(187, Kotlin.toBoxedChar(61)), new Pair(188, Kotlin.toBoxedChar(44)), new Pair(189, Kotlin.toBoxedChar(45)), new Pair(190, Kotlin.toBoxedChar(46)), new Pair(191, Kotlin.toBoxedChar(47)), new Pair(192, Kotlin.toBoxedChar(96)), new Pair(219, Kotlin.toBoxedChar(91)), new Pair(220, Kotlin.toBoxedChar(92)), new Pair(221, Kotlin.toBoxedChar(93)), new Pair(222, Kotlin.toBoxedChar(39))]);
-    this.DOCUMENT = new Keyboard();
-  }
-  Keyboard$Factory.$metadata$ = {
-    kind: Kotlin.Kind.OBJECT,
-    simpleName: 'Factory',
-    interfaces: []
-  };
-  var Keyboard$Factory_instance = null;
-  function Keyboard$Factory_getInstance() {
-    if (Keyboard$Factory_instance === null) {
-      new Keyboard$Factory();
-    }
-    return Keyboard$Factory_instance;
-  }
-  function Keyboard$keyboardEventHandler$lambda(this$Keyboard) {
-    return function (event) {
-      var type = Type$valueOf(event.type);
-      var resolvedCharCode = Kotlin.isNumber(event.which) ? event.which : event.keyCode;
-      var character = this$Keyboard.character_0(event, resolvedCharCode);
-      if (character != null) {
-        var modifiers = this$Keyboard.resolveEventModifiers_0(event);
-        var key = Key$Factory_getInstance().from_tat4wc$(character, modifiers);
-        if (!this$Keyboard.pause) {
-          this$Keyboard.handleKey_0(key, type, event);
-        }
-      }
-    };
-  }
-  Keyboard.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
-    simpleName: 'Keyboard',
-    interfaces: []
-  };
-  function Keys(list) {
-    Keys$Factory_getInstance();
-    this.list = list;
-  }
-  function Keys$Factory() {
-    Keys$Factory_instance = this;
-  }
-  Keys$Factory.prototype.from_tiy2pn$ = function (key) {
-    return new Keys(listOf_0(key));
-  };
-  Keys$Factory.prototype.from_61zpoe$ = function (str) {
-    var tmp$;
-    var keysList = Kotlin.kotlin.collections.ArrayList_init_ww73n8$();
-    var splitted = split(str, [' ']);
-    tmp$ = splitted.iterator();
-    while (tmp$.hasNext()) {
-      var keyAsString = tmp$.next();
-      keysList.add_11rb$(Key$Factory_getInstance().from_61zpoe$(keyAsString));
-    }
-    return new Keys(keysList);
-  };
-  Keys$Factory.$metadata$ = {
-    kind: Kotlin.Kind.OBJECT,
-    simpleName: 'Factory',
-    interfaces: []
-  };
-  var Keys$Factory_instance = null;
-  function Keys$Factory_getInstance() {
-    if (Keys$Factory_instance === null) {
-      new Keys$Factory();
-    }
-    return Keys$Factory_instance;
-  }
-  Keys.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
-    simpleName: 'Keys',
-    interfaces: []
-  };
-  Keys.prototype.component1 = function () {
-    return this.list;
-  };
-  Keys.prototype.copy_hnuf90$ = function (list) {
-    return new Keys(list === void 0 ? this.list : list);
-  };
-  Keys.prototype.toString = function () {
-    return 'Keys(list=' + Kotlin.toString(this.list) + ')';
-  };
-  Keys.prototype.hashCode = function () {
-    var result = 0;
-    result = result * 31 + Kotlin.hashCode(this.list) | 0;
-    return result;
-  };
-  Keys.prototype.equals = function (other) {
-    return this === other || (other !== null && (typeof other === 'object' && (Object.getPrototypeOf(this) === Object.getPrototypeOf(other) && Kotlin.equals(this.list, other.list))));
-  };
-  function Modifier(name, ordinal) {
-    Enum.call(this);
-    this.name$ = name;
-    this.ordinal$ = ordinal;
-  }
-  function Modifier_initFields() {
-    Modifier_initFields = function () {
-    };
-    Modifier$shift_instance = new Modifier('shift', 0);
-    Modifier$alt_instance = new Modifier('alt', 1);
-    Modifier$ctrl_instance = new Modifier('ctrl', 2);
-    Modifier$meta_instance = new Modifier('meta', 3);
-  }
-  var Modifier$shift_instance;
-  function Modifier$shift_getInstance() {
-    Modifier_initFields();
-    return Modifier$shift_instance;
-  }
-  var Modifier$alt_instance;
-  function Modifier$alt_getInstance() {
-    Modifier_initFields();
-    return Modifier$alt_instance;
-  }
-  var Modifier$ctrl_instance;
-  function Modifier$ctrl_getInstance() {
-    Modifier_initFields();
-    return Modifier$ctrl_instance;
-  }
-  var Modifier$meta_instance;
-  function Modifier$meta_getInstance() {
-    Modifier_initFields();
-    return Modifier$meta_instance;
-  }
-  Modifier.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
-    simpleName: 'Modifier',
-    interfaces: [Enum]
-  };
-  function Modifier$values() {
-    return [Modifier$shift_getInstance(), Modifier$alt_getInstance(), Modifier$ctrl_getInstance(), Modifier$meta_getInstance()];
-  }
-  Modifier.values = Modifier$values;
-  function Modifier$valueOf(name) {
-    switch (name) {
-      case 'shift':
-        return Modifier$shift_getInstance();
-      case 'alt':
-        return Modifier$alt_getInstance();
-      case 'ctrl':
-        return Modifier$ctrl_getInstance();
-      case 'meta':
-        return Modifier$meta_getInstance();
-      default:Kotlin.throwISE('No enum constant fg.keyboard.Modifier.' + name);
-    }
-  }
-  Modifier.valueOf_61zpoe$ = Modifier$valueOf;
-  function Modifiers(list) {
-    this.list = sorted(list);
-  }
-  Modifiers.prototype.isNotEmpty = function () {
-    return !this.list.isEmpty();
-  };
-  Modifiers.prototype.equals = function (other) {
-    if (this === other)
-      return true;
-    if (!Kotlin.isType(other, Modifiers))
-      return false;
-    if (!Kotlin.equals(this.list, other.list))
-      return false;
-    return true;
-  };
-  Modifiers.prototype.hashCode = function () {
-    return Kotlin.hashCode(this.list);
-  };
-  Modifiers.prototype.toString = function () {
-    return joinToString(this.list, '+');
-  };
-  Modifiers.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
-    simpleName: 'Modifiers',
-    interfaces: []
-  };
-  function Type(name, ordinal) {
-    Enum.call(this);
-    this.name$ = name;
-    this.ordinal$ = ordinal;
-  }
-  function Type_initFields() {
-    Type_initFields = function () {
-    };
-    Type$keydown_instance = new Type('keydown', 0);
-    Type$keypress_instance = new Type('keypress', 1);
-    Type$keyup_instance = new Type('keyup', 2);
-  }
-  var Type$keydown_instance;
-  function Type$keydown_getInstance() {
-    Type_initFields();
-    return Type$keydown_instance;
-  }
-  var Type$keypress_instance;
-  function Type$keypress_getInstance() {
-    Type_initFields();
-    return Type$keypress_instance;
-  }
-  var Type$keyup_instance;
-  function Type$keyup_getInstance() {
-    Type_initFields();
-    return Type$keyup_instance;
-  }
-  Type.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
-    simpleName: 'Type',
-    interfaces: [Enum]
-  };
-  function Type$values() {
-    return [Type$keydown_getInstance(), Type$keypress_getInstance(), Type$keyup_getInstance()];
-  }
-  Type.values = Type$values;
-  function Type$valueOf(name) {
-    switch (name) {
-      case 'keydown':
-        return Type$keydown_getInstance();
-      case 'keypress':
-        return Type$keypress_getInstance();
-      case 'keyup':
-        return Type$keyup_getInstance();
-      default:Kotlin.throwISE('No enum constant fg.keyboard.Type.' + name);
-    }
-  }
-  Type.valueOf_61zpoe$ = Type$valueOf;
   function AdjacentSiblingRule(selector) {
     Rule.call(this, selector);
   }
@@ -9927,6 +9713,41 @@ var elements = function (_, Kotlin) {
   var package$typed = package$style.typed || (package$style.typed = {});
   package$typed.AlignItems = AlignItems;
   package$typed.toAlignItems_pdl1vz$ = toAlignItems;
+  Object.defineProperty(Border, 'Companion', {
+    get: Border$Companion_getInstance
+  });
+  package$typed.Border = Border;
+  Object.defineProperty(BorderStyle, 'dashed', {
+    get: BorderStyle$dashed_getInstance
+  });
+  Object.defineProperty(BorderStyle, 'double', {
+    get: BorderStyle$double_getInstance
+  });
+  Object.defineProperty(BorderStyle, 'dotted', {
+    get: BorderStyle$dotted_getInstance
+  });
+  Object.defineProperty(BorderStyle, 'groove', {
+    get: BorderStyle$groove_getInstance
+  });
+  Object.defineProperty(BorderStyle, 'ridge', {
+    get: BorderStyle$ridge_getInstance
+  });
+  Object.defineProperty(BorderStyle, 'inset', {
+    get: BorderStyle$inset_getInstance
+  });
+  Object.defineProperty(BorderStyle, 'outset', {
+    get: BorderStyle$outset_getInstance
+  });
+  Object.defineProperty(BorderStyle, 'hidden', {
+    get: BorderStyle$hidden_getInstance
+  });
+  Object.defineProperty(BorderStyle, 'solid', {
+    get: BorderStyle$solid_getInstance
+  });
+  Object.defineProperty(BorderStyle, 'none', {
+    get: BorderStyle$none_getInstance
+  });
+  package$typed.BorderStyle = BorderStyle;
   Object.defineProperty(Display, 'none', {
     get: Display$none_getInstance
   });
@@ -10097,19 +9918,21 @@ var elements = function (_, Kotlin) {
   });
   package$typed.Position = Position;
   package$typed.toPosition_pdl1vz$ = toPosition;
+  TypedStyle.AlignItemsDelegate = TypedStyle$AlignItemsDelegate;
+  TypedStyle.BorderDelegate = TypedStyle$BorderDelegate;
   TypedStyle.DisplayDelegate = TypedStyle$DisplayDelegate;
-  TypedStyle.PositionDelegate = TypedStyle$PositionDelegate;
   TypedStyle.RgbColorDelegate = TypedStyle$RgbColorDelegate;
-  TypedStyle.IntDelegate = TypedStyle$IntDelegate;
   TypedStyle.DimensionDelegate = TypedStyle$DimensionDelegate;
   TypedStyle.FlexDirectionDelegate = TypedStyle$FlexDirectionDelegate;
-  TypedStyle.AlignItemsDelegate = TypedStyle$AlignItemsDelegate;
-  TypedStyle.JustifyContentDelegate = TypedStyle$JustifyContentDelegate;
   TypedStyle.FlexDelegate = TypedStyle$FlexDelegate;
   TypedStyle.FlexGrowDelegate = TypedStyle$FlexGrowDelegate;
   TypedStyle.FlexShrinkDelegate = TypedStyle$FlexShrinkDelegate;
   TypedStyle.FlexBasisDelegate = TypedStyle$FlexBasisDelegate;
+  TypedStyle.IntDelegate = TypedStyle$IntDelegate;
+  TypedStyle.JustifyContentDelegate = TypedStyle$JustifyContentDelegate;
+  TypedStyle.PositionDelegate = TypedStyle$PositionDelegate;
   TypedStyle.TypedPropertyDelegate = TypedStyle$TypedPropertyDelegate;
+  TypedStyle.TypedPropertyDelegate2 = TypedStyle$TypedPropertyDelegate2;
   package$typed.TypedStyle = TypedStyle;
   package$elements.StyledClass = StyledClass;
   package$elements.Table = Table;
@@ -10135,44 +9958,6 @@ var elements = function (_, Kotlin) {
   Object.defineProperty(package$elements, 'W3cDelegates', {
     get: W3cDelegates_getInstance
   });
-  Object.defineProperty(Key, 'Factory', {
-    get: Key$Factory_getInstance
-  });
-  var package$keyboard = package$fg.keyboard || (package$fg.keyboard = {});
-  package$keyboard.Key = Key;
-  package$keyboard.KeyBinding = KeyBinding;
-  Object.defineProperty(Keyboard, 'Factory', {
-    get: Keyboard$Factory_getInstance
-  });
-  package$keyboard.Keyboard = Keyboard;
-  Object.defineProperty(Keys, 'Factory', {
-    get: Keys$Factory_getInstance
-  });
-  package$keyboard.Keys = Keys;
-  Object.defineProperty(Modifier, 'shift', {
-    get: Modifier$shift_getInstance
-  });
-  Object.defineProperty(Modifier, 'alt', {
-    get: Modifier$alt_getInstance
-  });
-  Object.defineProperty(Modifier, 'ctrl', {
-    get: Modifier$ctrl_getInstance
-  });
-  Object.defineProperty(Modifier, 'meta', {
-    get: Modifier$meta_getInstance
-  });
-  package$keyboard.Modifier = Modifier;
-  package$keyboard.Modifiers = Modifiers;
-  Object.defineProperty(Type, 'keydown', {
-    get: Type$keydown_getInstance
-  });
-  Object.defineProperty(Type, 'keypress', {
-    get: Type$keypress_getInstance
-  });
-  Object.defineProperty(Type, 'keyup', {
-    get: Type$keyup_getInstance
-  });
-  package$keyboard.Type = Type;
   var package$style_0 = package$fg.style || (package$fg.style = {});
   package$style_0.AdjacentSiblingRule = AdjacentSiblingRule;
   package$style_0.AndRule = AndRule;

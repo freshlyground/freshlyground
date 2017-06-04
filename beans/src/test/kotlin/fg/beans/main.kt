@@ -3,13 +3,13 @@ package fg.beans
 import fg.base.URL
 import fg.beans.action.Action
 import fg.beans.action.ActionBean
-import fg.beans.button.Button
 import fg.beans.button.ToggleButton
 import fg.beans.drawer.Drawer
 import fg.beans.menu.Menu
 import fg.beans.menu.MenuBar
 import fg.elements.BODY
 import fg.elements.HTML
+import fg.elements.layout.Layout
 import fg.elements.with
 import fg.keyboard.Key
 import fg.keyboard.KeyBinding
@@ -30,13 +30,13 @@ fun main(vararg args: String) {
 
             menu("Components") {
                 menuItem(Action("Button", shortcut = Key.from("meta+b")) { window.location.href = currUrl.replaceParam("page", "Button").toString() }) {}
-                menuItem(Action("ToggleButton", shortcut = Key.from("meta+t")) { window.location.href = currUrl.replaceParam("page", "ToggleButton").toString() }) {}
-                menuItem(Action("Menu") { window.location.href = currUrl.replaceParam("page", "Menu").toString() }) {}
-                menuItem(Action("MenuBar", shortcut = Key.from("meta+m")) { window.location.href = currUrl.replaceParam("page", "MenuBar").toString() }) {}
+                menuItem(Action(ToggleButton::class.js.name, shortcut = Key.from("meta+t")) { window.location.href = currUrl.replaceParam("page", ToggleButton::class.js.name).toString() }) {}
+                menuItem(Action(Menu::class.js.name) { window.location.href = currUrl.replaceParam("page", Menu::class.js.name).toString() }) {}
+                menuItem(Action(MenuBar::class.js.name, shortcut = Key.from("meta+m")) { window.location.href = currUrl.replaceParam("page", MenuBar::class.js.name).toString() }) {}
             }
             menu("Layout") {
-                menuItem(Action("Drawer", shortcut = Key.from("meta+d"), perform = { window.location.href = currUrl.replaceParam("page", "Drawer").toString() })) {}
-                menuItem(Action("Layout", shortcut = Key.from("meta+l"), perform = { window.location.href = currUrl.replaceParam("page", "Layout").toString() })) {}
+                menuItem(Action(Drawer::class.js.name, shortcut = Key.from("meta+d"), perform = { window.location.href = currUrl.replaceParam("page", Drawer::class.js.name).toString() })) {}
+                menuItem(Action(Layout::class.js.name, shortcut = Key.from("meta+l"), perform = { window.location.href = currUrl.replaceParam("page", Layout::class.js.name).toString() })) {}
             }
         }
 
@@ -53,7 +53,7 @@ fun main(vararg args: String) {
 
     val page = currUrl.query.map["page"]
     when (page) {
-        Button::class.js.name -> {
+        "Button" -> {
             buttonPage.start()
         }
         ToggleButton::class.js.name -> {
@@ -68,7 +68,7 @@ fun main(vararg args: String) {
         Drawer::class.js.name -> {
             drawerPage.start()
         }
-        layoutPage.name -> {
+        Layout::class.js.name -> {
             layoutPage.start()
         }
     }

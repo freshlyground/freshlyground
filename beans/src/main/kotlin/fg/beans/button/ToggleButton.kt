@@ -54,7 +54,7 @@ open class ToggleButton(action: SelectableAction) : AbstractButton(action) {
         this.action.perform(this)
     }
 
-    companion object ToggleButton : StyledClass {
+    companion object : StyledClass {
 
         override val classSelector = "$pkg-toggle-button".toClassSelector()
 

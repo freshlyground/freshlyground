@@ -102,7 +102,7 @@ open class LabelledRadioButton(checked: Boolean,
     }
 
 
-    companion object LabelledRadioButton : StyledClass {
+    companion object : StyledClass {
 
         override val classSelector = "bn-labelled-radio-button".toClassSelector()
 
