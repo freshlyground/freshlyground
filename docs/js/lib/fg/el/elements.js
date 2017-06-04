@@ -7,9 +7,6 @@ var elements = function (_, Kotlin) {
   var Continuation = Kotlin.kotlin.coroutines.experimental.Continuation;
   var startCoroutine = Kotlin.kotlin.coroutines.experimental.startCoroutine_xtwlez$;
   var RuntimeException = Kotlin.kotlin.RuntimeException;
-  var Enum = Kotlin.kotlin.Enum;
-  var contains = Kotlin.kotlin.text.contains_li3zpu$;
-  var lazy = Kotlin.kotlin.lazy_klfg04$;
   var toMutableList = Kotlin.kotlin.collections.toMutableList_4c7yge$;
   var get_lastIndex = Kotlin.kotlin.collections.get_lastIndex_55thoc$;
   var IllegalArgumentException = Kotlin.kotlin.IllegalArgumentException;
@@ -25,16 +22,18 @@ var elements = function (_, Kotlin) {
   var substringAfter = Kotlin.kotlin.text.substringAfter_j4ogox$;
   var linkedMapOf = Kotlin.kotlin.collections.linkedMapOf_qfcya0$;
   var padEnd = Kotlin.kotlin.text.padEnd_vrc1nu$;
+  var Enum = Kotlin.kotlin.Enum;
   var substringBeforeLast = Kotlin.kotlin.text.substringBeforeLast_j4ogox$;
   var toDouble = Kotlin.kotlin.text.toDouble_pdl1vz$;
   var toInt = Kotlin.kotlin.text.toInt_pdl1vz$;
   var List = Kotlin.kotlin.collections.List;
   var IllegalStateException = Kotlin.kotlin.IllegalStateException;
   var downTo = Kotlin.kotlin.ranges.downTo_dqglrj$;
+  var lazy = Kotlin.kotlin.lazy_klfg04$;
   var properties_0 = Kotlin.kotlin.properties;
   var IntRange = Kotlin.kotlin.ranges.IntRange;
   var IntCompanionObject = Kotlin.kotlin.js.internal.IntCompanionObject;
-  var contains_0 = Kotlin.kotlin.ranges.contains_bupbvv$;
+  var contains = Kotlin.kotlin.ranges.contains_bupbvv$;
   var ReadWriteProperty = Kotlin.kotlin.properties.ReadWriteProperty;
   var first = Kotlin.kotlin.collections.first_2p1efm$;
   var Pair = Kotlin.kotlin.Pair;
@@ -46,8 +45,6 @@ var elements = function (_, Kotlin) {
   InternalServerErrorException.prototype.constructor = InternalServerErrorException;
   NotFoundException.prototype = Object.create(UnexpectedStatusException.prototype);
   NotFoundException.prototype.constructor = NotFoundException;
-  OS.prototype = Object.create(Enum.prototype);
-  OS.prototype.constructor = OS;
   Side.prototype = Object.create(Enum.prototype);
   Side.prototype.constructor = Side;
   Element.prototype = Object.create(Node.prototype);
@@ -495,116 +492,6 @@ var elements = function (_, Kotlin) {
       body = null;
     var block = send$lambda(request, body);
     return Kotlin.kotlin.coroutines.experimental.suspendCoroutine$f(block)(continuation.facade);
-  }
-  function OS(name, ordinal) {
-    Enum.call(this);
-    this.name$ = name;
-    this.ordinal$ = ordinal;
-  }
-  function OS_initFields() {
-    OS_initFields = function () {
-    };
-    OS$WINDOWS_instance = new OS('WINDOWS', 0);
-    OS$MAC_instance = new OS('MAC', 1);
-    OS$LINUX_instance = new OS('LINUX', 2);
-    OS$UNIX_instance = new OS('UNIX', 3);
-    OS$UNKNOWN_instance = new OS('UNKNOWN', 4);
-  }
-  var OS$WINDOWS_instance;
-  function OS$WINDOWS_getInstance() {
-    OS_initFields();
-    return OS$WINDOWS_instance;
-  }
-  var OS$MAC_instance;
-  function OS$MAC_getInstance() {
-    OS_initFields();
-    return OS$MAC_instance;
-  }
-  var OS$LINUX_instance;
-  function OS$LINUX_getInstance() {
-    OS_initFields();
-    return OS$LINUX_instance;
-  }
-  var OS$UNIX_instance;
-  function OS$UNIX_getInstance() {
-    OS_initFields();
-    return OS$UNIX_instance;
-  }
-  var OS$UNKNOWN_instance;
-  function OS$UNKNOWN_getInstance() {
-    OS_initFields();
-    return OS$UNKNOWN_instance;
-  }
-  OS.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
-    simpleName: 'OS',
-    interfaces: [Enum]
-  };
-  function OS$values() {
-    return [OS$WINDOWS_getInstance(), OS$MAC_getInstance(), OS$LINUX_getInstance(), OS$UNIX_getInstance(), OS$UNKNOWN_getInstance()];
-  }
-  OS.values = OS$values;
-  function OS$valueOf(name) {
-    switch (name) {
-      case 'WINDOWS':
-        return OS$WINDOWS_getInstance();
-      case 'MAC':
-        return OS$MAC_getInstance();
-      case 'LINUX':
-        return OS$LINUX_getInstance();
-      case 'UNIX':
-        return OS$UNIX_getInstance();
-      case 'UNKNOWN':
-        return OS$UNKNOWN_getInstance();
-      default:Kotlin.throwISE('No enum constant fg.base.OS.' + name);
-    }
-  }
-  OS.valueOf_61zpoe$ = OS$valueOf;
-  function OSDetector() {
-    OSDetector_instance = this;
-    this.detected$delegate = lazy(OSDetector$detected$lambda(this));
-  }
-  Object.defineProperty(OSDetector.prototype, 'detected', {
-    get: function () {
-      var $receiver = this.detected$delegate;
-      new Kotlin.PropertyMetadata('detected');
-      return $receiver.value;
-    }
-  });
-  OSDetector.prototype.detect_0 = function () {
-    var navigator = window.navigator;
-    if (contains(navigator.appVersion, 'Win')) {
-      return OS$WINDOWS_getInstance();
-    }
-     else if (contains(navigator.appVersion, 'Mac')) {
-      return OS$MAC_getInstance();
-    }
-     else if (contains(navigator.appVersion, 'X11')) {
-      return OS$UNIX_getInstance();
-    }
-     else if (contains(navigator.appVersion, 'Linux')) {
-      return OS$LINUX_getInstance();
-    }
-     else {
-      return OS$UNKNOWN_getInstance();
-    }
-  };
-  function OSDetector$detected$lambda(this$OSDetector) {
-    return function () {
-      return this$OSDetector.detect_0();
-    };
-  }
-  OSDetector.$metadata$ = {
-    kind: Kotlin.Kind.OBJECT,
-    simpleName: 'OSDetector',
-    interfaces: []
-  };
-  var OSDetector_instance = null;
-  function OSDetector_getInstance() {
-    if (OSDetector_instance === null) {
-      new OSDetector();
-    }
-    return OSDetector_instance;
   }
   function Path(absolute, trailingSlash, elements_0) {
     Path$Factory_getInstance();
@@ -3692,7 +3579,7 @@ var elements = function (_, Kotlin) {
     return DefaultBreakpoints$xlarge_instance;
   }
   DefaultBreakpoints.prototype.contains_14dthe$ = function (x) {
-    return contains_0(this.range, x);
+    return contains(this.range, x);
   };
   DefaultBreakpoints.$metadata$ = {
     kind: Kotlin.Kind.CLASS,
@@ -9339,25 +9226,6 @@ var elements = function (_, Kotlin) {
   package$http.UnexpectedStatusException = UnexpectedStatusException;
   package$http.await_t11jrl$ = await_0;
   package$http.send_98uf27$ = send;
-  Object.defineProperty(OS, 'WINDOWS', {
-    get: OS$WINDOWS_getInstance
-  });
-  Object.defineProperty(OS, 'MAC', {
-    get: OS$MAC_getInstance
-  });
-  Object.defineProperty(OS, 'LINUX', {
-    get: OS$LINUX_getInstance
-  });
-  Object.defineProperty(OS, 'UNIX', {
-    get: OS$UNIX_getInstance
-  });
-  Object.defineProperty(OS, 'UNKNOWN', {
-    get: OS$UNKNOWN_getInstance
-  });
-  package$base.OS = OS;
-  Object.defineProperty(package$base, 'OSDetector', {
-    get: OSDetector_getInstance
-  });
   Object.defineProperty(Path, 'Factory', {
     get: Path$Factory_getInstance
   });

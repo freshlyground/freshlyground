@@ -7,7 +7,10 @@ if (typeof elements === 'undefined') {
 if (typeof this['fg-keyboard'] === 'undefined') {
   throw new Error("Error loading module 'beans'. Its dependency 'fg-keyboard' was not found. Please, check whether 'fg-keyboard' is loaded prior to 'beans'.");
 }
-var beans = function (_, Kotlin, $module$elements, $module$fg_keyboard) {
+if (typeof this['fg-agent'] === 'undefined') {
+  throw new Error("Error loading module 'beans'. Its dependency 'fg-agent' was not found. Please, check whether 'fg-agent' is loaded prior to 'beans'.");
+}
+var beans = function (_, Kotlin, $module$elements, $module$fg_keyboard, $module$fg_agent) {
   'use strict';
   var properties_0 = Kotlin.kotlin.properties;
   var toClassSelector = $module$elements.fg.elements.toClassSelector_pdl1vz$;
@@ -55,7 +58,8 @@ var beans = function (_, Kotlin, $module$elements, $module$fg_keyboard) {
   var get_px = $module$elements.fg.elements.get_px_pdl1vz$;
   var child = $module$elements.fg.style.child_xmmih7$;
   var Modifier = $module$fg_keyboard.fg.keyboard.Modifier;
-  var OS = $module$elements.fg.base.OS;
+  var agent_0 = $module$fg_agent.fg.agent;
+  var OS = $module$fg_agent.fg.agent.OS;
   var child_0 = $module$elements.fg.style.child_7k7416$;
   var Label = $module$elements.fg.elements.Label;
   var InputRadio = $module$elements.fg.elements.InputRadio;
@@ -2235,7 +2239,7 @@ var beans = function (_, Kotlin, $module$elements, $module$fg_keyboard) {
       while (tmp$.hasNext()) {
         var modifier = tmp$.next();
         if (modifier === Modifier.meta) {
-          if (base_0.OSDetector.detected === OS.MAC) {
+          if (agent_0.OSDetector.detected === OS.MAC) {
             this.secondaryTextSpan_iiuj5$_0.appendChild_sr04hg$(new Text('\u2318'));
           }
            else {
@@ -2243,7 +2247,7 @@ var beans = function (_, Kotlin, $module$elements, $module$fg_keyboard) {
           }
         }
          else if (modifier === Modifier.shift) {
-          if (base_0.OSDetector.detected === OS.MAC) {
+          if (agent_0.OSDetector.detected === OS.MAC) {
             this.secondaryTextSpan_iiuj5$_0.appendChild_sr04hg$(new Text('\u21E7'));
           }
            else {
@@ -2251,7 +2255,7 @@ var beans = function (_, Kotlin, $module$elements, $module$fg_keyboard) {
           }
         }
          else if (modifier === Modifier.alt) {
-          if (base_0.OSDetector.detected === OS.MAC) {
+          if (agent_0.OSDetector.detected === OS.MAC) {
             this.secondaryTextSpan_iiuj5$_0.appendChild_sr04hg$(new Text('\u2325'));
           }
            else {
@@ -3099,6 +3103,6 @@ var beans = function (_, Kotlin, $module$elements, $module$fg_keyboard) {
   pkg_0 = 'fg-bn';
   Kotlin.defineModule('beans', _);
   return _;
-}(typeof beans === 'undefined' ? {} : beans, kotlin, elements, this['fg-keyboard']);
+}(typeof beans === 'undefined' ? {} : beans, kotlin, elements, this['fg-keyboard'], this['fg-agent']);
 
 //@ sourceMappingURL=beans.js.map

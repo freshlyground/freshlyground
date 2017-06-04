@@ -6,7 +6,14 @@ import com.google.gson.GsonBuilder
 import fg.query.json.QueryJson
 import fg.query.toJson
 import fg.query.toQuery
-import kotlinx.html.*
+import kotlinx.html.FlowContent
+import kotlinx.html.body
+import kotlinx.html.div
+import kotlinx.html.head
+import kotlinx.html.id
+import kotlinx.html.script
+import kotlinx.html.style
+import kotlinx.html.title
 import org.jetbrains.ktor.application.Application
 import org.jetbrains.ktor.application.ApplicationCallPipeline
 import org.jetbrains.ktor.application.call
@@ -78,6 +85,12 @@ fun Application.main() {
                     }
                     script {
                         src = "_resources/js/lib/query-kt-js.js"
+                    }
+                    script {
+                        src = "_resources/js/lib/fg-agent.js"
+                    }
+                    script {
+                        src = "_resources/js/lib/fg-keyboard.js"
                     }
                     script {
                         src = "_resources/js/lib/elements.js"

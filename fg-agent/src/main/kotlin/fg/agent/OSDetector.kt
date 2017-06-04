@@ -1,4 +1,4 @@
-package fg.base
+package fg.agent
 
 import kotlin.browser.window
 

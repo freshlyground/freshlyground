@@ -1,4 +1,4 @@
-package fg.base
+package fg.agent
 
 enum class OS {
     WINDOWS,

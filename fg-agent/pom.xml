@@ -10,7 +10,7 @@
         <version>0.0.1-SNAPSHOT</version>
     </parent>
 
-    <artifactId>elements</artifactId>
+    <artifactId>fg-agent</artifactId>
 
     <packaging>jar</packaging>
 
@@ -22,16 +22,6 @@
             <groupId>org.jetbrains.kotlin</groupId>
             <artifactId>kotlin-stdlib-js</artifactId>
             <version>${kotlin.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>freshlyground</groupId>
-            <artifactId>fg-agent</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>freshlyground</groupId>
-            <artifactId>fg-keyboard</artifactId>
-            <version>${project.version}</version>
         </dependency>
     </dependencies>
 

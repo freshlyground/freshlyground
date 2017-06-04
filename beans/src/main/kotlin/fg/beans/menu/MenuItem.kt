@@ -1,7 +1,7 @@
 package fg.beans.menu
 
-import fg.base.OS
-import fg.base.OSDetector
+import fg.agent.OS
+import fg.agent.OSDetector
 import fg.beans.ElementStyle
 import fg.beans.action.Action
 import fg.beans.action.ActionBean
@@ -97,7 +97,7 @@ open class MenuItem(action: Action) : Div(), ActionBean {
 
     private val clickHandler: (Event) -> Unit = { event ->
 
-        console.log("MenuItem.clicked", event )
+        console.log("MenuItem.clicked", event)
 
         beforePerformingActionListeners.forEach { it(action) }
 
