@@ -15,6 +15,7 @@
         <kotlin.compiler.incremental>true</kotlin.compiler.incremental>
         <dokka.version>0.9.13</dokka.version>
         <maven.jar.plugin>2.6</maven.jar.plugin>
+        <maven.dependency.plugin>2.10</maven.dependency.plugin>
     </properties>
 
     <modules>
