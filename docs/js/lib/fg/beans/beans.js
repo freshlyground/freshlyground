@@ -12,12 +12,13 @@ if (typeof this['fg-agent'] === 'undefined') {
 }
 var beans = function (_, Kotlin, $module$elements, $module$fg_keyboard, $module$fg_agent) {
   'use strict';
-  var properties_0 = Kotlin.kotlin.properties;
+  var initAndAppendNode = $module$elements.fg.elements.initAndAppendNode_n3qhgg$;
+  var properties = Kotlin.kotlin.properties;
   var toClassSelector = $module$elements.fg.elements.toClassSelector_pdl1vz$;
   var Div = $module$elements.fg.elements.Div;
   var Text = $module$elements.fg.elements.Text;
   var RgbColor = $module$elements.fg.style.colour.RgbColor;
-  var elements_0 = $module$elements.fg.elements;
+  var elements = $module$elements.fg.elements;
   var TypedStyledClass = $module$elements.fg.elements.TypedStyledClass;
   var lazy = Kotlin.kotlin.lazy_klfg04$;
   var Button = $module$elements.fg.elements.Button;
@@ -44,21 +45,20 @@ var beans = function (_, Kotlin, $module$elements, $module$fg_keyboard, $module$
   var Element = $module$elements.fg.elements.Element;
   var get_js = Kotlin.kotlin.js.get_js_1yb8b7$;
   var IllegalArgumentException = Kotlin.kotlin.IllegalArgumentException;
-  var Side = $module$elements.fg.base.Side;
   var Position = $module$elements.fg.elements.style.typed.Position;
-  var initAndAppendNode = $module$elements.fg.elements.initAndAppendNode_n3qhgg$;
+  var Side = $module$elements.fg.base.Side;
   var startsWith = Kotlin.kotlin.text.startsWith_7epoxm$;
   var I = $module$elements.fg.elements.I;
   var ClassSelector = $module$elements.fg.elements.ClassSelector;
   var Enum = Kotlin.kotlin.Enum;
   var A = $module$elements.fg.elements.A;
-  var base_0 = $module$elements.fg.base;
+  var base = $module$elements.fg.base;
   var Comparable = Kotlin.kotlin.Comparable;
   var get_computedStyle = $module$elements.fg.elements.get_computedStyle_gobym5$;
   var get_px = $module$elements.fg.elements.get_px_pdl1vz$;
   var child = $module$elements.fg.style.child_xmmih7$;
   var Modifier = $module$fg_keyboard.fg.keyboard.Modifier;
-  var agent_0 = $module$fg_agent.fg.agent;
+  var agent = $module$fg_agent.fg.agent;
   var OS = $module$fg_agent.fg.agent.OS;
   var child_0 = $module$elements.fg.style.child_7k7416$;
   var Label = $module$elements.fg.elements.Label;
@@ -123,6 +123,135 @@ var beans = function (_, Kotlin, $module$elements, $module$fg_keyboard, $module$
   LabelledRadioButton.prototype.constructor = LabelledRadioButton;
   RadioButton.prototype = Object.create(InputRadio.prototype);
   RadioButton.prototype.constructor = RadioButton;
+  function anchor($receiver, link, target, useDisplay, init) {
+    if (link === void 0)
+      link = null;
+    if (target === void 0)
+      target = '_blank';
+    if (useDisplay === void 0)
+      useDisplay = true;
+    return initAndAppendNode($receiver, new Anchor(link, target, useDisplay), init);
+  }
+  function button($receiver, action, init) {
+    return initAndAppendNode($receiver, new Button_0(action), init);
+  }
+  function deck($receiver, init) {
+    return initAndAppendNode($receiver, new Deck(), init);
+  }
+  function drawer($receiver, side, init) {
+    return initAndAppendNode($receiver, new Drawer(side), init);
+  }
+  function menuBar($receiver, init) {
+    return initAndAppendNode($receiver, new MenuBar(), init);
+  }
+  function menu($receiver, label, init) {
+    if (label === void 0)
+      label = null;
+    return initAndAppendNode($receiver, new Menu(label), init);
+  }
+  function menuItem($receiver, action, init) {
+    return initAndAppendNode($receiver, new MenuItem(action), init);
+  }
+  function toggleButton($receiver, action, init) {
+    return initAndAppendNode($receiver, new ToggleButton(action), init);
+  }
+  function ElementStyle() {
+    this.cursor_1bqtbn$_0 = null;
+    this.margin_1bqtbn$_0 = null;
+    this.backgroundColor_1bqtbn$_0 = null;
+    this.color_1bqtbn$_0 = null;
+    this.borderStyle_1bqtbn$_0 = null;
+    this.borderWidth_1bqtbn$_0 = null;
+    this.borderColor_1bqtbn$_0 = null;
+    this.borderRadius_1bqtbn$_0 = null;
+    this.boxShadow_1bqtbn$_0 = null;
+    this.outline_1bqtbn$_0 = null;
+  }
+  Object.defineProperty(ElementStyle.prototype, 'cursor', {
+    get: function () {
+      return this.cursor_1bqtbn$_0;
+    },
+    set: function (cursor) {
+      this.cursor_1bqtbn$_0 = cursor;
+    }
+  });
+  Object.defineProperty(ElementStyle.prototype, 'margin', {
+    get: function () {
+      return this.margin_1bqtbn$_0;
+    },
+    set: function (margin) {
+      this.margin_1bqtbn$_0 = margin;
+    }
+  });
+  Object.defineProperty(ElementStyle.prototype, 'backgroundColor', {
+    get: function () {
+      return this.backgroundColor_1bqtbn$_0;
+    },
+    set: function (backgroundColor) {
+      this.backgroundColor_1bqtbn$_0 = backgroundColor;
+    }
+  });
+  Object.defineProperty(ElementStyle.prototype, 'color', {
+    get: function () {
+      return this.color_1bqtbn$_0;
+    },
+    set: function (color) {
+      this.color_1bqtbn$_0 = color;
+    }
+  });
+  Object.defineProperty(ElementStyle.prototype, 'borderStyle', {
+    get: function () {
+      return this.borderStyle_1bqtbn$_0;
+    },
+    set: function (borderStyle) {
+      this.borderStyle_1bqtbn$_0 = borderStyle;
+    }
+  });
+  Object.defineProperty(ElementStyle.prototype, 'borderWidth', {
+    get: function () {
+      return this.borderWidth_1bqtbn$_0;
+    },
+    set: function (borderWidth) {
+      this.borderWidth_1bqtbn$_0 = borderWidth;
+    }
+  });
+  Object.defineProperty(ElementStyle.prototype, 'borderColor', {
+    get: function () {
+      return this.borderColor_1bqtbn$_0;
+    },
+    set: function (borderColor) {
+      this.borderColor_1bqtbn$_0 = borderColor;
+    }
+  });
+  Object.defineProperty(ElementStyle.prototype, 'borderRadius', {
+    get: function () {
+      return this.borderRadius_1bqtbn$_0;
+    },
+    set: function (borderRadius) {
+      this.borderRadius_1bqtbn$_0 = borderRadius;
+    }
+  });
+  Object.defineProperty(ElementStyle.prototype, 'boxShadow', {
+    get: function () {
+      return this.boxShadow_1bqtbn$_0;
+    },
+    set: function (boxShadow) {
+      this.boxShadow_1bqtbn$_0 = boxShadow;
+    }
+  });
+  Object.defineProperty(ElementStyle.prototype, 'outline', {
+    get: function () {
+      return this.outline_1bqtbn$_0;
+    },
+    set: function (outline) {
+      this.outline_1bqtbn$_0 = outline;
+    }
+  });
+  ElementStyle.$metadata$ = {
+    kind: Kotlin.Kind.CLASS,
+    simpleName: 'ElementStyle',
+    interfaces: []
+  };
   function Action(label, enabled, icon, shortcut, perform) {
     if (label === void 0)
       label = null;
@@ -136,15 +265,15 @@ var beans = function (_, Kotlin, $module$elements, $module$fg_keyboard, $module$
       perform = null;
     this.propertyChangedListeners = Kotlin.kotlin.collections.ArrayList_init_ww73n8$();
     var initialValue = perform;
-    this.perform$delegate = new Kotlin.kotlin.properties.Delegates.observable$f(Action$perform$lambda(this), initialValue);
+    this.perform$delegate = new Kotlin.kotlin.properties.Delegates.observable_2ulm9r$$f(Action$perform$lambda(this), initialValue);
     var initialValue_0 = label;
-    this.label$delegate = new Kotlin.kotlin.properties.Delegates.observable$f(Action$label$lambda(this), initialValue_0);
+    this.label$delegate = new Kotlin.kotlin.properties.Delegates.observable_2ulm9r$$f(Action$label$lambda(this), initialValue_0);
     var initialValue_1 = enabled;
-    this.enabled$delegate = new Kotlin.kotlin.properties.Delegates.observable$f(Action$enabled$lambda(this), initialValue_1);
+    this.enabled$delegate = new Kotlin.kotlin.properties.Delegates.observable_2ulm9r$$f(Action$enabled$lambda(this), initialValue_1);
     var initialValue_2 = icon;
-    this.icon$delegate = new Kotlin.kotlin.properties.Delegates.observable$f(Action$icon$lambda(this), initialValue_2);
+    this.icon$delegate = new Kotlin.kotlin.properties.Delegates.observable_2ulm9r$$f(Action$icon$lambda(this), initialValue_2);
     var initialValue_3 = shortcut;
-    this.shortcut$delegate = new Kotlin.kotlin.properties.Delegates.observable$f(Action$shortcut$lambda(this), initialValue_3);
+    this.shortcut$delegate = new Kotlin.kotlin.properties.Delegates.observable_2ulm9r$$f(Action$shortcut$lambda(this), initialValue_3);
   }
   Object.defineProperty(Action.prototype, 'perform', {
     get: function () {
@@ -191,7 +320,7 @@ var beans = function (_, Kotlin, $module$elements, $module$fg_keyboard, $module$
       this.shortcut$delegate.setValue_9rddgb$(this, new Kotlin.PropertyMetadata('shortcut'), shortcut);
     }
   });
-  Action.prototype.notifyPropertyChanged_dr91hu$_0 = function (property, old, new_0) {
+  Action.prototype.notifyPropertyChanged_oh08kn$ = function (property, old, new_0) {
     var tmp$;
     tmp$ = this.propertyChangedListeners.iterator();
     while (tmp$.hasNext()) {
@@ -213,27 +342,27 @@ var beans = function (_, Kotlin, $module$elements, $module$fg_keyboard, $module$
   };
   function Action$perform$lambda(this$Action) {
     return function (prop, old, new_0) {
-      this$Action.notifyPropertyChanged_dr91hu$_0(prop, old, new_0);
+      this$Action.notifyPropertyChanged_oh08kn$(prop, old, new_0);
     };
   }
   function Action$label$lambda(this$Action) {
     return function (prop, old, new_0) {
-      this$Action.notifyPropertyChanged_dr91hu$_0(prop, old, new_0);
+      this$Action.notifyPropertyChanged_oh08kn$(prop, old, new_0);
     };
   }
   function Action$enabled$lambda(this$Action) {
     return function (prop, old, new_0) {
-      this$Action.notifyPropertyChanged_dr91hu$_0(prop, old, new_0);
+      this$Action.notifyPropertyChanged_oh08kn$(prop, old, new_0);
     };
   }
   function Action$icon$lambda(this$Action) {
     return function (prop, old, new_0) {
-      this$Action.notifyPropertyChanged_dr91hu$_0(prop, old, new_0);
+      this$Action.notifyPropertyChanged_oh08kn$(prop, old, new_0);
     };
   }
   function Action$shortcut$lambda(this$Action) {
     return function (prop, old, new_0) {
-      this$Action.notifyPropertyChanged_dr91hu$_0(prop, old, new_0);
+      this$Action.notifyPropertyChanged_oh08kn$(prop, old, new_0);
     };
   }
   Action.$metadata$ = {
@@ -298,7 +427,7 @@ var beans = function (_, Kotlin, $module$elements, $module$fg_keyboard, $module$
     this.selectedIcon = selectedIcon;
     this.deselectedIcon = deselectedIcon;
     var initialValue = selected;
-    this.selected$delegate = new Kotlin.kotlin.properties.Delegates.observable$f(SelectableAction$selected$lambda(this), initialValue);
+    this.selected$delegate = new Kotlin.kotlin.properties.Delegates.observable_2ulm9r$$f(SelectableAction$selected$lambda(this), initialValue);
   }
   Object.defineProperty(SelectableAction.prototype, 'selected', {
     get: function () {
@@ -330,7 +459,7 @@ var beans = function (_, Kotlin, $module$elements, $module$fg_keyboard, $module$
   }
   function SelectableAction$selected$lambda(this$SelectableAction) {
     return function (prop, old, new_0) {
-      this$SelectableAction.notifyPropertyChanged_dr91hu$_0(prop, old, new_0);
+      this$SelectableAction.notifyPropertyChanged_oh08kn$(prop, old, new_0);
     };
   }
   SelectableAction.$metadata$ = {
@@ -351,7 +480,7 @@ var beans = function (_, Kotlin, $module$elements, $module$fg_keyboard, $module$
     AppBar$AppBar_instance = this;
     this.classSelector_1d6i5r$_0 = toClassSelector('fg-bn-app-appbar');
     this.rule_1d6i5r$_0 = AppBar$AppBar$rule$lambda;
-    elements_0.HTML.registerStyle_mpomjf$(this);
+    elements.HTML.registerStyle_mpomjf$(this);
   }
   Object.defineProperty(AppBar$AppBar.prototype, 'classSelector', {
     get: function () {
@@ -404,16 +533,16 @@ var beans = function (_, Kotlin, $module$elements, $module$fg_keyboard, $module$
     }
   });
   Application.prototype.start = function () {
-    elements_0.BODY.appendChild_sr04hg$(this.CONTENT);
-    elements_0.BODY.appendChild_sr04hg$(this.POPUPS);
-    elements_0.HTML.init_dqye30$();
+    elements.BODY.appendChild_sr04hg$(this.CONTENT);
+    elements.BODY.appendChild_sr04hg$(this.POPUPS);
+    elements.HTML.init_dqye30$();
     this.render();
   };
   Application.prototype.render = function () {
   };
   function Application$Statics() {
     Application$Statics_instance = this;
-    this.GET$delegate = properties_0.Delegates.notNull_30y1fr$();
+    this.GET$delegate = properties.Delegates.notNull_30y1fr$();
   }
   Object.defineProperty(Application$Statics.prototype, 'GET', {
     get: function () {
@@ -458,12 +587,12 @@ var beans = function (_, Kotlin, $module$elements, $module$fg_keyboard, $module$
     simpleName: 'Content',
     interfaces: [Div]
   };
-  function DrawerNavigation(icon, drawer_0, dockingStation, initialFloatState, menu_0) {
+  function DrawerNavigation(icon, drawer, dockingStation, initialFloatState, menu) {
     this.icon = icon;
-    this.drawer = drawer_0;
+    this.drawer = drawer;
     this.dockingStation = dockingStation;
-    this.menu = menu_0;
-    this.float$delegate = new Kotlin.kotlin.properties.Delegates.observable$f(DrawerNavigation$float$lambda(this), initialFloatState);
+    this.menu = menu;
+    this.float$delegate = new Kotlin.kotlin.properties.Delegates.observable_2ulm9r$$f(DrawerNavigation$float$lambda(this), initialFloatState);
     this.navAction$delegate = lazy(DrawerNavigation$navAction$lambda(this));
     this.dockingStationResizeHandler_0 = DrawerNavigation$dockingStationResizeHandler$lambda(this);
     this.menuHandler_0 = DrawerNavigation$menuHandler$lambda(this);
@@ -532,7 +661,7 @@ var beans = function (_, Kotlin, $module$elements, $module$fg_keyboard, $module$
     };
   }
   function DrawerNavigation$menuHandler$lambda(this$DrawerNavigation) {
-    return function (action, menu_0) {
+    return function (action, menu) {
       if (this$DrawerNavigation.float) {
         this$DrawerNavigation.drawer.hide();
       }
@@ -543,7 +672,6 @@ var beans = function (_, Kotlin, $module$elements, $module$fg_keyboard, $module$
     simpleName: 'DrawerNavigation',
     interfaces: []
   };
-  var pkg;
   function Popups() {
     Div.call(this);
   }
@@ -556,6 +684,7 @@ var beans = function (_, Kotlin, $module$elements, $module$fg_keyboard, $module$
     simpleName: 'Popups',
     interfaces: [Div]
   };
+  var pkg;
   function AbstractButton(action) {
     AbstractButton$AbstractButton_getInstance();
     Button.call(this);
@@ -970,7 +1099,7 @@ var beans = function (_, Kotlin, $module$elements, $module$fg_keyboard, $module$
     Button$Companion_instance = this;
     this.classSelector_uao8xm$_0 = toClassSelector('fg-bn-button');
     this.rule_uao8xm$_0 = Button$Companion$rule$lambda;
-    elements_0.HTML.registerStyle_78phyd$(this);
+    elements.HTML.registerStyle_78phyd$(this);
   }
   Object.defineProperty(Button$Companion.prototype, 'classSelector', {
     get: function () {
@@ -1068,7 +1197,7 @@ var beans = function (_, Kotlin, $module$elements, $module$fg_keyboard, $module$
     ToggleButton$Companion_instance = this;
     this.classSelector_66p8eq$_0 = toClassSelector('fg-bn-toggle-button');
     this.rule_66p8eq$_0 = ToggleButton$Companion$rule$lambda;
-    elements_0.HTML.registerStyle_78phyd$(this);
+    elements.HTML.registerStyle_78phyd$(this);
   }
   Object.defineProperty(ToggleButton$Companion.prototype, 'classSelector', {
     get: function () {
@@ -1143,29 +1272,29 @@ var beans = function (_, Kotlin, $module$elements, $module$fg_keyboard, $module$
     Div.call(this);
     this.deck_0 = Kotlin.kotlin.collections.ArrayList_init_ww73n8$();
   }
-  Deck.prototype.childAdded_sr04hg$ = function (child_1) {
-    Div.prototype.childAdded_sr04hg$.call(this, child_1);
-    if (!Kotlin.isType(child_1, Element)) {
-      throw new IllegalArgumentException('Only a Element can be added to a Deck: ' + get_js(Kotlin.getKClassFromExpression(child_1)).name);
+  Deck.prototype.childAdded_sr04hg$ = function (child) {
+    Div.prototype.childAdded_sr04hg$.call(this, child);
+    if (!Kotlin.isType(child, Element)) {
+      throw new IllegalArgumentException('Only a Element can be added to a Deck: ' + get_js(Kotlin.getKClassFromExpression(child)).name);
     }
-    this.deck_0.add_11rb$(child_1);
+    this.deck_0.add_11rb$(child);
     if (this.deck_0.size > 1) {
-      child_1.hide();
+      child.hide();
     }
      else {
-      child_1.show();
+      child.show();
     }
   };
   Deck.prototype.render = function () {
     Div.prototype.render.call(this);
     this.addClass_bx842b$(Deck$Companion_getInstance().classSelector);
   };
-  Deck.prototype.show_54c9de$ = function (child_1) {
+  Deck.prototype.show_54c9de$ = function (child) {
     var tmp$;
     tmp$ = this.childElements.iterator();
     while (tmp$.hasNext()) {
       var element = tmp$.next();
-      if (child_1 === element) {
+      if (child === element) {
         element.show();
       }
        else {
@@ -1177,7 +1306,7 @@ var beans = function (_, Kotlin, $module$elements, $module$fg_keyboard, $module$
     Deck$Companion_instance = this;
     this.classSelector_6abtzu$_0 = toClassSelector('fg-bn-deck');
     this.rule_6abtzu$_0 = Deck$Companion$rule$lambda;
-    elements_0.HTML.registerStyle_78phyd$(this);
+    elements.HTML.registerStyle_78phyd$(this);
   }
   Object.defineProperty(Deck$Companion.prototype, 'classSelector', {
     get: function () {
@@ -1208,24 +1337,12 @@ var beans = function (_, Kotlin, $module$elements, $module$fg_keyboard, $module$
     simpleName: 'Deck',
     interfaces: [Div]
   };
-  function dock($receiver, drawer_0) {
-    drawer_0.removeSelf();
-    $receiver.prependChild_sr04hg$(drawer_0);
-    drawer_0.undockedPositionValue_ahjj8c$_0 = drawer_0._style.position;
-    drawer_0.undockedCssFloatValue_ahjj8c$_0 = drawer_0._style.cssFloat;
-    drawer_0._style.position = 'static';
-    drawer_0._style.cssFloat = drawer_0.side === Side.LEFT ? 'left' : 'right';
-  }
-  function undock($receiver) {
-    $receiver._style.position = $receiver.undockedPositionValue_ahjj8c$_0;
-    $receiver._style.cssFloat = $receiver.undockedCssFloatValue_ahjj8c$_0;
-  }
   function Drawer(side) {
     Drawer$Companion_getInstance();
     Div.call(this);
-    this.undockedPositionValue_ahjj8c$_0 = '';
-    this.undockedCssFloatValue_ahjj8c$_0 = '';
-    this.side$delegate = new Kotlin.kotlin.properties.Delegates.observable$f(Drawer$side$lambda(this), side);
+    this.undockedPositionValue_8be2vx$ = '';
+    this.undockedCssFloatValue_8be2vx$ = '';
+    this.side$delegate = new Kotlin.kotlin.properties.Delegates.observable_2ulm9r$$f(Drawer$side$lambda(this), side);
   }
   Object.defineProperty(Drawer.prototype, 'side', {
     get: function () {
@@ -1255,7 +1372,7 @@ var beans = function (_, Kotlin, $module$elements, $module$fg_keyboard, $module$
     Drawer$Companion_instance = this;
     this.classSelector_gcygka$_0 = toClassSelector('drawer');
     this.rule_gcygka$_0 = Drawer$Companion$rule$lambda;
-    elements_0.HTML.registerStyle_78phyd$(this);
+    elements.HTML.registerStyle_78phyd$(this);
   }
   Object.defineProperty(Drawer$Companion.prototype, 'classSelector', {
     get: function () {
@@ -1296,135 +1413,18 @@ var beans = function (_, Kotlin, $module$elements, $module$fg_keyboard, $module$
     simpleName: 'Drawer',
     interfaces: [Div]
   };
-  function anchor($receiver, link, target, useDisplay, init) {
-    if (link === void 0)
-      link = null;
-    if (target === void 0)
-      target = '_blank';
-    if (useDisplay === void 0)
-      useDisplay = true;
-    return initAndAppendNode($receiver, new Anchor(link, target, useDisplay), init);
+  function dock($receiver, drawer) {
+    drawer.removeSelf();
+    $receiver.prependChild_sr04hg$(drawer);
+    drawer.undockedPositionValue_8be2vx$ = drawer._style.position;
+    drawer.undockedCssFloatValue_8be2vx$ = drawer._style.cssFloat;
+    drawer._style.position = 'static';
+    drawer._style.cssFloat = drawer.side === Side.LEFT ? 'left' : 'right';
   }
-  function button($receiver, action, init) {
-    return initAndAppendNode($receiver, new Button_0(action), init);
+  function undock($receiver) {
+    $receiver._style.position = $receiver.undockedPositionValue_8be2vx$;
+    $receiver._style.cssFloat = $receiver.undockedCssFloatValue_8be2vx$;
   }
-  function deck($receiver, init) {
-    return initAndAppendNode($receiver, new Deck(), init);
-  }
-  function drawer($receiver, side, init) {
-    return initAndAppendNode($receiver, new Drawer(side), init);
-  }
-  function menuBar($receiver, init) {
-    return initAndAppendNode($receiver, new MenuBar(), init);
-  }
-  function menu($receiver, label, init) {
-    if (label === void 0)
-      label = null;
-    return initAndAppendNode($receiver, new Menu(label), init);
-  }
-  function menuItem($receiver, action, init) {
-    return initAndAppendNode($receiver, new MenuItem(action), init);
-  }
-  function toggleButton($receiver, action, init) {
-    return initAndAppendNode($receiver, new ToggleButton(action), init);
-  }
-  function ElementStyle() {
-    this.cursor_1bqtbn$_0 = null;
-    this.margin_1bqtbn$_0 = null;
-    this.backgroundColor_1bqtbn$_0 = null;
-    this.color_1bqtbn$_0 = null;
-    this.borderStyle_1bqtbn$_0 = null;
-    this.borderWidth_1bqtbn$_0 = null;
-    this.borderColor_1bqtbn$_0 = null;
-    this.borderRadius_1bqtbn$_0 = null;
-    this.boxShadow_1bqtbn$_0 = null;
-    this.outline_1bqtbn$_0 = null;
-  }
-  Object.defineProperty(ElementStyle.prototype, 'cursor', {
-    get: function () {
-      return this.cursor_1bqtbn$_0;
-    },
-    set: function (cursor) {
-      this.cursor_1bqtbn$_0 = cursor;
-    }
-  });
-  Object.defineProperty(ElementStyle.prototype, 'margin', {
-    get: function () {
-      return this.margin_1bqtbn$_0;
-    },
-    set: function (margin) {
-      this.margin_1bqtbn$_0 = margin;
-    }
-  });
-  Object.defineProperty(ElementStyle.prototype, 'backgroundColor', {
-    get: function () {
-      return this.backgroundColor_1bqtbn$_0;
-    },
-    set: function (backgroundColor) {
-      this.backgroundColor_1bqtbn$_0 = backgroundColor;
-    }
-  });
-  Object.defineProperty(ElementStyle.prototype, 'color', {
-    get: function () {
-      return this.color_1bqtbn$_0;
-    },
-    set: function (color) {
-      this.color_1bqtbn$_0 = color;
-    }
-  });
-  Object.defineProperty(ElementStyle.prototype, 'borderStyle', {
-    get: function () {
-      return this.borderStyle_1bqtbn$_0;
-    },
-    set: function (borderStyle) {
-      this.borderStyle_1bqtbn$_0 = borderStyle;
-    }
-  });
-  Object.defineProperty(ElementStyle.prototype, 'borderWidth', {
-    get: function () {
-      return this.borderWidth_1bqtbn$_0;
-    },
-    set: function (borderWidth) {
-      this.borderWidth_1bqtbn$_0 = borderWidth;
-    }
-  });
-  Object.defineProperty(ElementStyle.prototype, 'borderColor', {
-    get: function () {
-      return this.borderColor_1bqtbn$_0;
-    },
-    set: function (borderColor) {
-      this.borderColor_1bqtbn$_0 = borderColor;
-    }
-  });
-  Object.defineProperty(ElementStyle.prototype, 'borderRadius', {
-    get: function () {
-      return this.borderRadius_1bqtbn$_0;
-    },
-    set: function (borderRadius) {
-      this.borderRadius_1bqtbn$_0 = borderRadius;
-    }
-  });
-  Object.defineProperty(ElementStyle.prototype, 'boxShadow', {
-    get: function () {
-      return this.boxShadow_1bqtbn$_0;
-    },
-    set: function (boxShadow) {
-      this.boxShadow_1bqtbn$_0 = boxShadow;
-    }
-  });
-  Object.defineProperty(ElementStyle.prototype, 'outline', {
-    get: function () {
-      return this.outline_1bqtbn$_0;
-    },
-    set: function (outline) {
-      this.outline_1bqtbn$_0 = outline;
-    }
-  });
-  ElementStyle.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
-    simpleName: 'ElementStyle',
-    interfaces: []
-  };
   function FontAwesomeIcon(name, size) {
     if (size === void 0)
       size = null;
@@ -1605,7 +1605,7 @@ var beans = function (_, Kotlin, $module$elements, $module$fg_keyboard, $module$
       icon = null;
     I.call(this);
     var initialValue = icon;
-    this.icon$delegate = new Kotlin.kotlin.properties.Delegates.observable$f(IconI$icon$lambda(this), initialValue);
+    this.icon$delegate = new Kotlin.kotlin.properties.Delegates.observable_2ulm9r$$f(IconI$icon$lambda(this), initialValue);
   }
   Object.defineProperty(IconI.prototype, 'icon', {
     get: function () {
@@ -1652,7 +1652,7 @@ var beans = function (_, Kotlin, $module$elements, $module$fg_keyboard, $module$
     A.call(this);
     this.useDisplay = useDisplay;
     var initialValue = link;
-    this.link$delegate = new Kotlin.kotlin.properties.Delegates.observable$f(Anchor$link$lambda(this), initialValue);
+    this.link$delegate = new Kotlin.kotlin.properties.Delegates.observable_2ulm9r$$f(Anchor$link$lambda(this), initialValue);
     this.iconI$delegate = lazy(Anchor$iconI$lambda);
     this.onClickHandler_0 = Anchor$onClickHandler$lambda;
     this._target = target;
@@ -1717,7 +1717,7 @@ var beans = function (_, Kotlin, $module$elements, $module$fg_keyboard, $module$
     Anchor$Companion_instance = this;
     this.classSelector_qhgsa3$_0 = toClassSelector('fg-bn-anchor');
     this.rule_qhgsa3$_0 = Anchor$Companion$rule$lambda;
-    elements_0.HTML.registerStyle_78phyd$(this);
+    elements.HTML.registerStyle_78phyd$(this);
   }
   Object.defineProperty(Anchor$Companion.prototype, 'classSelector', {
     get: function () {
@@ -1767,7 +1767,7 @@ var beans = function (_, Kotlin, $module$elements, $module$fg_keyboard, $module$
     this.url = url;
   }
   ExternalLink.prototype.compareTo_11rb$ = function (other) {
-    return base_0.CompareTo.nullSafe_oaftn8$(this.url, other.url);
+    return base.CompareTo.nullSafe_oaftn8$(this.url, other.url);
   };
   ExternalLink.$metadata$ = {
     kind: Kotlin.Kind.CLASS,
@@ -1790,7 +1790,7 @@ var beans = function (_, Kotlin, $module$elements, $module$fg_keyboard, $module$
     this.path = path;
   }
   LocalLink.prototype.compareTo_11rb$ = function (other) {
-    return base_0.CompareTo.nullSafe_oaftn8$(this.path, other.path);
+    return base.CompareTo.nullSafe_oaftn8$(this.path, other.path);
   };
   LocalLink.$metadata$ = {
     kind: Kotlin.Kind.CLASS,
@@ -1809,9 +1809,9 @@ var beans = function (_, Kotlin, $module$elements, $module$fg_keyboard, $module$
     this.beforePerformingMenuItemActionHandler_i0djac$_0 = Menu$beforePerformingMenuItemActionHandler$lambda(this);
     this.afterPerformingMenuItemActionHandler_i0djac$_0 = Menu$afterPerformingMenuItemActionHandler$lambda(this);
     var initialValue = label;
-    this.label$delegate = new Kotlin.kotlin.properties.Delegates.observable$f(Menu$label$lambda, initialValue);
+    this.label$delegate = new Kotlin.kotlin.properties.Delegates.observable_2ulm9r$$f(Menu$label$lambda, initialValue);
     var initialValue_0 = shortcut;
-    this.shortcut$delegate = new Kotlin.kotlin.properties.Delegates.observable$f(Menu$shortcut$lambda, initialValue_0);
+    this.shortcut$delegate = new Kotlin.kotlin.properties.Delegates.observable_2ulm9r$$f(Menu$shortcut$lambda, initialValue_0);
   }
   Object.defineProperty(Menu.prototype, 'label', {
     get: function () {
@@ -1845,18 +1845,18 @@ var beans = function (_, Kotlin, $module$elements, $module$fg_keyboard, $module$
     Div.prototype.render.call(this);
     this.addClass_bx842b$(Menu$Companion_getInstance().classSelector);
   };
-  Menu.prototype.childAdded_sr04hg$ = function (child_1) {
-    Div.prototype.childAdded_sr04hg$.call(this, child_1);
-    if (Kotlin.isType(child_1, MenuItem)) {
-      child_1.onBeforePerformingAction_xbm201$(this.beforePerformingMenuItemActionHandler_i0djac$_0);
-      child_1.onAfterPerformingAction_xbm201$(this.afterPerformingMenuItemActionHandler_i0djac$_0);
+  Menu.prototype.childAdded_sr04hg$ = function (child) {
+    Div.prototype.childAdded_sr04hg$.call(this, child);
+    if (Kotlin.isType(child, MenuItem)) {
+      child.onBeforePerformingAction_xbm201$(this.beforePerformingMenuItemActionHandler_i0djac$_0);
+      child.onAfterPerformingAction_xbm201$(this.afterPerformingMenuItemActionHandler_i0djac$_0);
     }
   };
   function Menu$Companion() {
     Menu$Companion_instance = this;
     this.classSelector_pl531i$_0 = new ClassSelector('fg-bn-menu');
     this.rule_pl531i$_0 = Menu$Companion$rule$lambda;
-    elements_0.HTML.registerStyle_78phyd$(this);
+    elements.HTML.registerStyle_78phyd$(this);
   }
   Object.defineProperty(Menu$Companion.prototype, 'classSelector', {
     get: function () {
@@ -1951,19 +1951,19 @@ var beans = function (_, Kotlin, $module$elements, $module$fg_keyboard, $module$
       }
     };
   }
-  MenuBar.prototype.childAdded_sr04hg$ = function (child_1) {
-    Div.prototype.childAdded_sr04hg$.call(this, child_1);
-    if (!(Kotlin.isType(child_1, Menu) || Kotlin.isType(child_1, MenuButton))) {
-      throw new IllegalArgumentException('Only a Menu can be added to a MenuBar: ' + get_js(Kotlin.getKClassFromExpression(child_1)).name);
+  MenuBar.prototype.childAdded_sr04hg$ = function (child) {
+    Div.prototype.childAdded_sr04hg$.call(this, child);
+    if (!(Kotlin.isType(child, Menu) || Kotlin.isType(child, MenuButton))) {
+      throw new IllegalArgumentException('Only a Menu can be added to a MenuBar: ' + get_js(Kotlin.getKClassFromExpression(child)).name);
     }
-    if (Kotlin.isType(child_1, Menu)) {
-      child_1.hide();
-      var menuButton = new MenuButton(new SelectableAction(child_1.label, void 0, void 0, void 0, void 0, void 0, MenuBar$childAdded$lambda(child_1, this)));
+    if (Kotlin.isType(child, Menu)) {
+      child.hide();
+      var menuButton = new MenuButton(new SelectableAction(child.label, void 0, void 0, void 0, void 0, void 0, MenuBar$childAdded$lambda(child, this)));
       Div.prototype.appendChild_sr04hg$.call(this, menuButton);
-      this.menuButtonByMenu_0.put_xwzc9p$(child_1, menuButton);
-      child_1.onBeforePerformingMenuItemAction_a8ajpl$(this.beforePerformingMenuItemActionHandler_0);
-      child_1.onAfterPerformingMenuItemAction_a8ajpl$(this.afterPerformingMenuItemActionHandler_0);
-      onMouseEnter(menuButton, MenuBar$childAdded$lambda_0(menuButton, this, child_1));
+      this.menuButtonByMenu_0.put_xwzc9p$(child, menuButton);
+      child.onBeforePerformingMenuItemAction_a8ajpl$(this.beforePerformingMenuItemActionHandler_0);
+      child.onAfterPerformingMenuItemAction_a8ajpl$(this.afterPerformingMenuItemActionHandler_0);
+      onMouseEnter(menuButton, MenuBar$childAdded$lambda_0(menuButton, this, child));
     }
   };
   MenuBar.prototype.anyMenuOpen_0 = function () {
@@ -1977,41 +1977,41 @@ var beans = function (_, Kotlin, $module$elements, $module$fg_keyboard, $module$
     }
     return false;
   };
-  MenuBar.prototype.childRemoved_sr04hg$ = function (child_1) {
-    Div.prototype.childRemoved_sr04hg$.call(this, child_1);
-    if (Kotlin.isType(child_1, Menu)) {
-      this.menuButtonByMenu_0.remove_11rb$(child_1);
+  MenuBar.prototype.childRemoved_sr04hg$ = function (child) {
+    Div.prototype.childRemoved_sr04hg$.call(this, child);
+    if (Kotlin.isType(child, Menu)) {
+      this.menuButtonByMenu_0.remove_11rb$(child);
     }
   };
   MenuBar.prototype.closeOthers_0 = function (exception) {
     var tmp$;
     tmp$ = this.childElements.iterator();
     while (tmp$.hasNext()) {
-      var child_1 = tmp$.next();
-      if (!Kotlin.equals(child_1, exception) && Kotlin.isType(child_1, Menu)) {
-        this.closeMenu_0(child_1);
+      var child = tmp$.next();
+      if (!Kotlin.equals(child, exception) && Kotlin.isType(child, Menu)) {
+        this.closeMenu_0(child);
       }
     }
   };
-  MenuBar.prototype.openMenu_0 = function (menu_0) {
+  MenuBar.prototype.openMenu_0 = function (menu) {
     var tmp$;
-    this.closeOthers_0(menu_0);
-    menu_0.show();
-    var menuButton = (tmp$ = this.menuButtonByMenu_0.get_11rb$(menu_0)) != null ? tmp$ : Kotlin.throwNPE();
-    var left = menuButton.boundingClientRect.left - get_px(get_computedStyle(elements_0.BODY).marginLeft).value;
-    menu_0._style.top = menuButton.boundingClientRect.height.toString() + 'px';
-    menu_0._style.left = left.toString() + 'px';
+    this.closeOthers_0(menu);
+    menu.show();
+    var menuButton = (tmp$ = this.menuButtonByMenu_0.get_11rb$(menu)) != null ? tmp$ : Kotlin.throwNPE();
+    var left = menuButton.boundingClientRect.left - get_px(get_computedStyle(elements.BODY).marginLeft).value;
+    menu._style.top = menuButton.boundingClientRect.height.toString() + 'px';
+    menu._style.left = left.toString() + 'px';
   };
-  MenuBar.prototype.closeMenu_0 = function (menu_0) {
+  MenuBar.prototype.closeMenu_0 = function (menu) {
     var tmp$, tmp$_0;
-    menu_0.hide();
-    (tmp$_0 = (tmp$ = this.menuButtonByMenu_0.get_11rb$(menu_0)) != null ? tmp$.action : null) != null ? (tmp$_0.selected = false) : null;
+    menu.hide();
+    (tmp$_0 = (tmp$ = this.menuButtonByMenu_0.get_11rb$(menu)) != null ? tmp$.action : null) != null ? (tmp$_0.selected = false) : null;
   };
   function MenuBar$Companion() {
     MenuBar$Companion_instance = this;
     this.classSelector_mdebi9$_0 = toClassSelector('fg-bn-menu-bar');
     this.rule_mdebi9$_0 = MenuBar$Companion$rule$lambda;
-    elements_0.HTML.registerStyle_78phyd$(this);
+    elements.HTML.registerStyle_78phyd$(this);
   }
   Object.defineProperty(MenuBar$Companion.prototype, 'classSelector', {
     get: function () {
@@ -2043,11 +2043,11 @@ var beans = function (_, Kotlin, $module$elements, $module$fg_keyboard, $module$
     }
     return MenuBar$Companion_instance;
   }
-  function MenuBar$beforePerformingMenuItemActionHandler$lambda(action, menu_0) {
+  function MenuBar$beforePerformingMenuItemActionHandler$lambda(action, menu) {
   }
   function MenuBar$afterPerformingMenuItemActionHandler$lambda(this$MenuBar) {
-    return function (action, menu_0) {
-      this$MenuBar.closeMenu_0(menu_0);
+    return function (action, menu) {
+      this$MenuBar.closeMenu_0(menu);
     };
   }
   MenuBar.$metadata$ = {
@@ -2067,7 +2067,7 @@ var beans = function (_, Kotlin, $module$elements, $module$fg_keyboard, $module$
     MenuButton$Companion_instance = this;
     this.classSelector_v2xnys$_0 = toClassSelector('fg-bn-menu-button');
     this.rule_v2xnys$_0 = MenuButton$Companion$rule$lambda;
-    elements_0.HTML.registerStyle_78phyd$(this);
+    elements.HTML.registerStyle_78phyd$(this);
   }
   Object.defineProperty(MenuButton$Companion.prototype, 'classSelector', {
     get: function () {
@@ -2239,7 +2239,7 @@ var beans = function (_, Kotlin, $module$elements, $module$fg_keyboard, $module$
       while (tmp$.hasNext()) {
         var modifier = tmp$.next();
         if (modifier === Modifier.meta) {
-          if (agent_0.OSDetector.detected === OS.MAC) {
+          if (agent.OSDetector.detected === OS.MAC) {
             this.secondaryTextSpan_iiuj5$_0.appendChild_sr04hg$(new Text('\u2318'));
           }
            else {
@@ -2247,7 +2247,7 @@ var beans = function (_, Kotlin, $module$elements, $module$fg_keyboard, $module$
           }
         }
          else if (modifier === Modifier.shift) {
-          if (agent_0.OSDetector.detected === OS.MAC) {
+          if (agent.OSDetector.detected === OS.MAC) {
             this.secondaryTextSpan_iiuj5$_0.appendChild_sr04hg$(new Text('\u21E7'));
           }
            else {
@@ -2255,7 +2255,7 @@ var beans = function (_, Kotlin, $module$elements, $module$fg_keyboard, $module$
           }
         }
          else if (modifier === Modifier.alt) {
-          if (agent_0.OSDetector.detected === OS.MAC) {
+          if (agent.OSDetector.detected === OS.MAC) {
             this.secondaryTextSpan_iiuj5$_0.appendChild_sr04hg$(new Text('\u2325'));
           }
            else {
@@ -2469,7 +2469,7 @@ var beans = function (_, Kotlin, $module$elements, $module$fg_keyboard, $module$
     this.DISABLED = toClassSelector('disabled');
     this.classSelector_jf1wt$_0 = new ClassSelector('fg-bn-menu-item');
     this.rule_jf1wt$_0 = MenuItem$Companion$rule$lambda(this);
-    elements_0.HTML.registerStyle_78phyd$(this);
+    elements.HTML.registerStyle_78phyd$(this);
   }
   Object.defineProperty(MenuItem$Companion.prototype, 'classSelector', {
     get: function () {
@@ -2694,12 +2694,12 @@ var beans = function (_, Kotlin, $module$elements, $module$fg_keyboard, $module$
     Div.call(this);
     this.radioButton$delegate = lazy(LabelledRadioButton$radioButton$lambda(checked));
     var initialValue = checkedIcon;
-    this.checkedIcon$delegate = new Kotlin.kotlin.properties.Delegates.observable$f(LabelledRadioButton$checkedIcon$lambda(this), initialValue);
+    this.checkedIcon$delegate = new Kotlin.kotlin.properties.Delegates.observable_2ulm9r$$f(LabelledRadioButton$checkedIcon$lambda(this), initialValue);
     var initialValue_0 = unCheckedIcon;
-    this.unCheckedIcon$delegate = new Kotlin.kotlin.properties.Delegates.observable$f(LabelledRadioButton$unCheckedIcon$lambda(this), initialValue_0);
+    this.unCheckedIcon$delegate = new Kotlin.kotlin.properties.Delegates.observable_2ulm9r$$f(LabelledRadioButton$unCheckedIcon$lambda(this), initialValue_0);
     this.iconI$delegate = lazy(LabelledRadioButton$iconI$lambda(unCheckedIcon));
     this.label$delegate = lazy(LabelledRadioButton$label$lambda);
-    this.labelText$delegate = new Kotlin.kotlin.properties.Delegates.observable$f(LabelledRadioButton$labelText$lambda(this), labelText);
+    this.labelText$delegate = new Kotlin.kotlin.properties.Delegates.observable_2ulm9r$$f(LabelledRadioButton$labelText$lambda(this), labelText);
     this.checkedHandler_ah20nj$_0 = LabelledRadioButton$checkedHandler$lambda(this);
     this.clickHandler_ah20nj$_0 = LabelledRadioButton$clickHandler$lambda(this);
   }
@@ -2786,7 +2786,7 @@ var beans = function (_, Kotlin, $module$elements, $module$fg_keyboard, $module$
     LabelledRadioButton$Companion_instance = this;
     this.classSelector_v713o1$_0 = toClassSelector('bn-labelled-radio-button');
     this.rule_v713o1$_0 = LabelledRadioButton$Companion$rule$lambda;
-    elements_0.HTML.registerStyle_78phyd$(this);
+    elements.HTML.registerStyle_78phyd$(this);
   }
   Object.defineProperty(LabelledRadioButton$Companion.prototype, 'classSelector', {
     get: function () {
@@ -2877,7 +2877,7 @@ var beans = function (_, Kotlin, $module$elements, $module$fg_keyboard, $module$
       checked = false;
     InputRadio.call(this);
     var initialValue = checked;
-    this.checked$delegate = new Kotlin.kotlin.properties.Delegates.observable$f(RadioButton$checked$lambda(this), initialValue);
+    this.checked$delegate = new Kotlin.kotlin.properties.Delegates.observable_2ulm9r$$f(RadioButton$checked$lambda(this), initialValue);
     this.checkedListeners_4r7lns$_0 = Kotlin.kotlin.collections.ArrayList_init_ww73n8$();
     this.clickHandler_4r7lns$_0 = RadioButton$clickHandler$lambda(this);
   }
@@ -2919,7 +2919,7 @@ var beans = function (_, Kotlin, $module$elements, $module$fg_keyboard, $module$
     RadioButton$Companion_instance = this;
     this.classSelector_utzb8m$_0 = toClassSelector('bn-radio-button');
     this.rule_utzb8m$_0 = RadioButton$Companion$rule$lambda;
-    elements_0.HTML.registerStyle_78phyd$(this);
+    elements.HTML.registerStyle_78phyd$(this);
   }
   Object.defineProperty(RadioButton$Companion.prototype, 'classSelector', {
     get: function () {
@@ -2970,6 +2970,15 @@ var beans = function (_, Kotlin, $module$elements, $module$fg_keyboard, $module$
   };
   var package$fg = _.fg || (_.fg = {});
   var package$beans = package$fg.beans || (package$fg.beans = {});
+  package$beans.anchor_q8vlpp$ = anchor;
+  package$beans.button_n102dk$ = button;
+  package$beans.deck_nx9pqc$ = deck;
+  package$beans.drawer_73qr15$ = drawer;
+  package$beans.menuBar_s1d2rz$ = menuBar;
+  package$beans.menu_poq3df$ = menu;
+  package$beans.menuItem_ve3aun$ = menuItem;
+  package$beans.toggleButton_432pze$ = toggleButton;
+  package$beans.ElementStyle = ElementStyle;
   var package$action = package$beans.action || (package$beans.action = {});
   package$action.Action = Action;
   package$action.ActionBean = ActionBean;
@@ -2989,12 +2998,12 @@ var beans = function (_, Kotlin, $module$elements, $module$fg_keyboard, $module$
   package$app.Application = Application;
   package$app.Content = Content;
   package$app.DrawerNavigation = DrawerNavigation;
+  package$app.Popups = Popups;
   Object.defineProperty(package$app, 'pkg', {
     get: function () {
       return pkg;
     }
   });
-  package$app.Popups = Popups;
   Object.defineProperty(AbstractButton, 'AbstractButton', {
     get: AbstractButton$AbstractButton_getInstance
   });
@@ -3016,22 +3025,13 @@ var beans = function (_, Kotlin, $module$elements, $module$fg_keyboard, $module$
   });
   var package$deck = package$beans.deck || (package$beans.deck = {});
   package$deck.Deck = Deck;
-  var package$drawer = package$beans.drawer || (package$beans.drawer = {});
-  package$drawer.dock_jdil3n$ = dock;
-  package$drawer.undock_ahjj8n$ = undock;
   Object.defineProperty(Drawer, 'Companion', {
     get: Drawer$Companion_getInstance
   });
+  var package$drawer = package$beans.drawer || (package$beans.drawer = {});
   package$drawer.Drawer = Drawer;
-  package$beans.anchor_q8vlpp$ = anchor;
-  package$beans.button_n102dk$ = button;
-  package$beans.deck_nx9pqc$ = deck;
-  package$beans.drawer_73qr15$ = drawer;
-  package$beans.menuBar_s1d2rz$ = menuBar;
-  package$beans.menu_poq3df$ = menu;
-  package$beans.menuItem_ve3aun$ = menuItem;
-  package$beans.toggleButton_432pze$ = toggleButton;
-  package$beans.ElementStyle = ElementStyle;
+  package$drawer.dock_jdil3n$ = dock;
+  package$drawer.undock_ahjj8n$ = undock;
   Object.defineProperty(FontAwesomeIcon$Size, 'NORMAL', {
     get: FontAwesomeIcon$Size$NORMAL_getInstance
   });
@@ -3105,4 +3105,4 @@ var beans = function (_, Kotlin, $module$elements, $module$fg_keyboard, $module$
   return _;
 }(typeof beans === 'undefined' ? {} : beans, kotlin, elements, this['fg-keyboard'], this['fg-agent']);
 
-//@ sourceMappingURL=beans.js.map
+//# sourceMappingURL=beans.js.map

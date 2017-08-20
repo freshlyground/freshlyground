@@ -27,12 +27,6 @@
             <groupId>org.jetbrains.kotlin</groupId>
             <artifactId>kotlin-test-js</artifactId>
             <version>${kotlin.version}</version>
-            <optional>true</optional>
-        </dependency>
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>4.12</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
@@ -154,7 +148,6 @@
                         <goals>
                             <goal>npm</goal>
                         </goals>
-                        <!-- Optional configuration which provides for running any npm command -->
                         <configuration>
                             <arguments>install</arguments>
                             <skip>${maven.test.skip}</skip>

@@ -21,11 +21,6 @@
         </dependency>
         <dependency>
             <groupId>freshlyground.query</groupId>
-            <artifactId>query-kt</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>freshlyground.query</groupId>
             <artifactId>query-kt-jvm</artifactId>
             <version>${project.version}</version>
         </dependency>

@@ -1,28 +1,29 @@
 if (typeof kotlin === 'undefined') {
   throw new Error("Error loading module 'material-design'. Its dependency 'kotlin' was not found. Please, check whether 'kotlin' is loaded prior to 'material-design'.");
 }
-if (typeof beans === 'undefined') {
-  throw new Error("Error loading module 'material-design'. Its dependency 'beans' was not found. Please, check whether 'beans' is loaded prior to 'material-design'.");
-}
 if (typeof elements === 'undefined') {
   throw new Error("Error loading module 'material-design'. Its dependency 'elements' was not found. Please, check whether 'elements' is loaded prior to 'material-design'.");
 }
-this['material-design'] = function (_, Kotlin, $module$beans, $module$elements) {
+if (typeof beans === 'undefined') {
+  throw new Error("Error loading module 'material-design'. Its dependency 'beans' was not found. Please, check whether 'beans' is loaded prior to 'material-design'.");
+}
+this['material-design'] = function (_, Kotlin, $module$elements, $module$beans) {
   'use strict';
+  var initAndAppendNode = $module$elements.fg.elements.initAndAppendNode_n3qhgg$;
+  var RgbColor = $module$elements.fg.style.colour.RgbColor;
   var AppBar = $module$beans.fg.beans.app.AppBar;
   var toClassSelector = $module$elements.fg.elements.toClassSelector_pdl1vz$;
-  var RgbColor = $module$elements.fg.style.colour.RgbColor;
   var get_px = $module$elements.fg.elements.get_px_s8ev3n$;
   var Display = $module$elements.fg.elements.style.typed.Display;
   var FlexDirection = $module$elements.fg.elements.style.typed.FlexDirection;
   var AlignItems = $module$elements.fg.elements.style.typed.AlignItems;
-  var elements_0 = $module$elements.fg.elements;
+  var elements = $module$elements.fg.elements;
   var TypedStyledClass = $module$elements.fg.elements.TypedStyledClass;
   var Button = $module$beans.fg.beans.button.Button;
   var AbstractButton = $module$beans.fg.beans.button.AbstractButton;
   var Enum = Kotlin.kotlin.Enum;
   var ElementStyle = $module$beans.fg.beans.ElementStyle;
-  var icon_0 = $module$beans.fg.beans.icon;
+  var icon = $module$beans.fg.beans.icon;
   var focus = $module$elements.fg.style.focus_dn1ps9$;
   var and = $module$elements.fg.style.and_xif9ow$;
   var active = $module$elements.fg.style.active_dn1ps9$;
@@ -38,7 +39,6 @@ this['material-design'] = function (_, Kotlin, $module$beans, $module$elements) 
   var toSelector = $module$elements.fg.elements.toSelector_pdl1vz$;
   var not = $module$elements.fg.style.not_xif9ow$;
   var Drawer = $module$beans.fg.beans.drawer.Drawer;
-  var initAndAppendNode = $module$elements.fg.elements.initAndAppendNode_n3qhgg$;
   var I = $module$elements.fg.elements.I;
   var IconProvider = $module$beans.fg.beans.icon.IconProvider;
   var LayoutBreakpoint = $module$elements.fg.elements.layout.LayoutBreakpoint;
@@ -61,7 +61,7 @@ this['material-design'] = function (_, Kotlin, $module$beans, $module$elements) 
   var debounce1 = $module$elements.fg.base.debounce1_5237lg$;
   var onMouseUp = $module$elements.fg.elements.onMouseUp_e96vkx$;
   var to = Kotlin.kotlin.to_ujzrz7$;
-  var kotlin_0 = Kotlin.kotlin;
+  var kotlin = Kotlin.kotlin;
   var classRule = $module$elements.fg.style.classRule_fprhdc$;
   var get_px_0 = $module$elements.fg.elements.get_px_yrwdxr$;
   var Span = $module$elements.fg.elements.Span;
@@ -153,6 +153,263 @@ this['material-design'] = function (_, Kotlin, $module$beans, $module$elements) 
   RippleInk.prototype.constructor = RippleInk;
   MDToolbar.prototype = Object.create(Div.prototype);
   MDToolbar.prototype.constructor = MDToolbar;
+  function Context() {
+    Context_instance = this;
+    this.theme = Theme$Statics_getInstance().LIGHT;
+  }
+  Context.$metadata$ = {
+    kind: Kotlin.Kind.OBJECT,
+    simpleName: 'Context',
+    interfaces: []
+  };
+  var Context_instance = null;
+  function Context_getInstance() {
+    if (Context_instance === null) {
+      new Context();
+    }
+    return Context_instance;
+  }
+  function mdButton($receiver, action, type, init) {
+    return initAndAppendNode($receiver, new MDButton(action, type), init);
+  }
+  function mdCard($receiver, init) {
+    return initAndAppendNode($receiver, new MDCard(), init);
+  }
+  function mdDrawer($receiver, side, init) {
+    return initAndAppendNode($receiver, new MDDrawer(side), init);
+  }
+  function mdExpansionPanel($receiver, init) {
+    return initAndAppendNode($receiver, new MDExpansionPanel(), init);
+  }
+  function mdIcon($receiver, init) {
+    return initAndAppendNode($receiver, new MDIcon(), init);
+  }
+  function mdMenu($receiver, label, shortcut, init) {
+    if (label === void 0)
+      label = null;
+    if (shortcut === void 0)
+      shortcut = null;
+    return initAndAppendNode($receiver, new MDMenu(label, shortcut), init);
+  }
+  function mdRadioButton($receiver, labelText, init) {
+    if (labelText === void 0)
+      labelText = null;
+    return initAndAppendNode($receiver, new MDRadioButton(void 0, labelText), init);
+  }
+  function mdToggleButton($receiver, action, init) {
+    return initAndAppendNode($receiver, new MDToggleButton(action), init);
+  }
+  function mdToolbar($receiver, init) {
+    return initAndAppendNode($receiver, new MDToolbar(), init);
+  }
+  function title($receiver, init) {
+    return initAndAppendNode($receiver, new MDCardTitle(), init);
+  }
+  function subtitle($receiver, init) {
+    return initAndAppendNode($receiver, new MDCardSubtitle(), init);
+  }
+  function header($receiver, init) {
+    return initAndAppendNode($receiver, new MDCardHeader(), init);
+  }
+  function image($receiver, src, init) {
+    return initAndAppendNode($receiver, new MDCardImage(src), init);
+  }
+  function content($receiver, init) {
+    return initAndAppendNode($receiver, new MDCardContent(), init);
+  }
+  function mdActions($receiver, init) {
+    return initAndAppendNode($receiver, new MDCardActions(), init);
+  }
+  function titleText($receiver, init) {
+    return initAndAppendNode($receiver, new MDCardTitleText(), init);
+  }
+  function text($receiver, init) {
+    return initAndAppendNode($receiver, new MDCardHeaderText(), init);
+  }
+  function title_0($receiver, init) {
+    return initAndAppendNode($receiver, new MDCardTitle(), init);
+  }
+  function subtitle_0($receiver, init) {
+    return initAndAppendNode($receiver, new MDCardSubtitle(), init);
+  }
+  function title_1($receiver, init) {
+    return initAndAppendNode($receiver, new MDCardTitle(), init);
+  }
+  function subtitle_1($receiver, init) {
+    return initAndAppendNode($receiver, new MDCardSubtitle(), init);
+  }
+  function avatar($receiver, src, init) {
+    return initAndAppendNode($receiver, new MDCardAvatar(src), init);
+  }
+  function title_2($receiver, init) {
+    return initAndAppendNode($receiver, new MDCardTitle(), init);
+  }
+  function subtitle_2($receiver, init) {
+    return initAndAppendNode($receiver, new MDCardSubtitle(), init);
+  }
+  function mdButton_0($receiver, action, init) {
+    return initAndAppendNode($receiver, new MDButton(action, MDButton$Type$FLAT_getInstance()), init);
+  }
+  function mdButton_1($receiver, action, type, init) {
+    return initAndAppendNode($receiver, new MDButton(action, type), init);
+  }
+  function mdMenuItem($receiver, action, init) {
+    return initAndAppendNode($receiver, new MDMenuItem(action), init);
+  }
+  function content_0($receiver, init) {
+    return initAndAppendNode($receiver, new MDCardContent(), init);
+  }
+  function content_1($receiver, init) {
+    return initAndAppendNode($receiver, new MDCardContent(), init);
+  }
+  function spacer$lambda($receiver) {
+  }
+  function spacer($receiver) {
+    return initAndAppendNode($receiver, MDToolbar$MDToolbar_getInstance().spacer(), spacer$lambda);
+  }
+  function Theme(primaryColor, accentColor, warnColor, statusBar, appBar, toolbar, background, cardsNdialogs, font) {
+    Theme$Statics_getInstance();
+    this.propertyChangedListeners_0 = Kotlin.kotlin.collections.ArrayList_init_ww73n8$();
+    this.primaryColor$delegate = new Kotlin.kotlin.properties.Delegates.observable_2ulm9r$$f(Theme$primaryColor$lambda, primaryColor);
+    this.accentColor$delegate = new Kotlin.kotlin.properties.Delegates.observable_2ulm9r$$f(Theme$accentColor$lambda, accentColor);
+    this.warnColor$delegate = new Kotlin.kotlin.properties.Delegates.observable_2ulm9r$$f(Theme$warnColor$lambda, warnColor);
+    this.statusBar$delegate = new Kotlin.kotlin.properties.Delegates.observable_2ulm9r$$f(Theme$statusBar$lambda, statusBar);
+    this.appBar$delegate = new Kotlin.kotlin.properties.Delegates.observable_2ulm9r$$f(Theme$appBar$lambda, appBar);
+    this.toolbar$delegate = new Kotlin.kotlin.properties.Delegates.observable_2ulm9r$$f(Theme$toolbar$lambda, toolbar);
+    this.background$delegate = new Kotlin.kotlin.properties.Delegates.observable_2ulm9r$$f(Theme$background$lambda, background);
+    this.cardsNdialogs$delegate = new Kotlin.kotlin.properties.Delegates.observable_2ulm9r$$f(Theme$cardsNdialogs$lambda, cardsNdialogs);
+    this.font = font;
+  }
+  Theme.prototype.notifyPropertyChanged_oh08kn$ = function (property, old, new_0) {
+    var tmp$;
+    tmp$ = this.propertyChangedListeners_0.iterator();
+    while (tmp$.hasNext()) {
+      var listener = tmp$.next();
+      listener(this, property, old, new_0);
+    }
+  };
+  Theme.prototype.onPropertyChanged_bdxxi9$ = function (listener) {
+    var tmp$;
+    this.propertyChangedListeners_0.add_11rb$(typeof (tmp$ = listener) === 'function' ? tmp$ : Kotlin.throwCCE());
+  };
+  Theme.prototype.unPropertyChanged_u2o7yy$ = function (listener) {
+    this.propertyChangedListeners_0.remove_11rb$(listener);
+  };
+  Object.defineProperty(Theme.prototype, 'primaryColor', {
+    get: function () {
+      return this.primaryColor$delegate.getValue_lrcp0p$(this, new Kotlin.PropertyMetadata('primaryColor'));
+    },
+    set: function (primaryColor) {
+      this.primaryColor$delegate.setValue_9rddgb$(this, new Kotlin.PropertyMetadata('primaryColor'), primaryColor);
+    }
+  });
+  Object.defineProperty(Theme.prototype, 'accentColor', {
+    get: function () {
+      return this.accentColor$delegate.getValue_lrcp0p$(this, new Kotlin.PropertyMetadata('accentColor'));
+    },
+    set: function (accentColor) {
+      this.accentColor$delegate.setValue_9rddgb$(this, new Kotlin.PropertyMetadata('accentColor'), accentColor);
+    }
+  });
+  Object.defineProperty(Theme.prototype, 'warnColor', {
+    get: function () {
+      return this.warnColor$delegate.getValue_lrcp0p$(this, new Kotlin.PropertyMetadata('warnColor'));
+    },
+    set: function (warnColor) {
+      this.warnColor$delegate.setValue_9rddgb$(this, new Kotlin.PropertyMetadata('warnColor'), warnColor);
+    }
+  });
+  Object.defineProperty(Theme.prototype, 'statusBar', {
+    get: function () {
+      return this.statusBar$delegate.getValue_lrcp0p$(this, new Kotlin.PropertyMetadata('statusBar'));
+    },
+    set: function (statusBar) {
+      this.statusBar$delegate.setValue_9rddgb$(this, new Kotlin.PropertyMetadata('statusBar'), statusBar);
+    }
+  });
+  Object.defineProperty(Theme.prototype, 'appBar', {
+    get: function () {
+      return this.appBar$delegate.getValue_lrcp0p$(this, new Kotlin.PropertyMetadata('appBar'));
+    },
+    set: function (appBar) {
+      this.appBar$delegate.setValue_9rddgb$(this, new Kotlin.PropertyMetadata('appBar'), appBar);
+    }
+  });
+  Object.defineProperty(Theme.prototype, 'toolbar', {
+    get: function () {
+      return this.toolbar$delegate.getValue_lrcp0p$(this, new Kotlin.PropertyMetadata('toolbar'));
+    },
+    set: function (toolbar) {
+      this.toolbar$delegate.setValue_9rddgb$(this, new Kotlin.PropertyMetadata('toolbar'), toolbar);
+    }
+  });
+  Object.defineProperty(Theme.prototype, 'background', {
+    get: function () {
+      return this.background$delegate.getValue_lrcp0p$(this, new Kotlin.PropertyMetadata('background'));
+    },
+    set: function (background) {
+      this.background$delegate.setValue_9rddgb$(this, new Kotlin.PropertyMetadata('background'), background);
+    }
+  });
+  Object.defineProperty(Theme.prototype, 'cardsNdialogs', {
+    get: function () {
+      return this.cardsNdialogs$delegate.getValue_lrcp0p$(this, new Kotlin.PropertyMetadata('cardsNdialogs'));
+    },
+    set: function (cardsNdialogs) {
+      this.cardsNdialogs$delegate.setValue_9rddgb$(this, new Kotlin.PropertyMetadata('cardsNdialogs'), cardsNdialogs);
+    }
+  });
+  Theme.prototype.color_6hl4m2$ = function (color, default_0) {
+    var tmp$;
+    if (Kotlin.equals(color, MDColor$DEFAULT_getInstance()))
+      tmp$ = default_0;
+    else if (Kotlin.equals(color, MDColor$PRIMARY_getInstance()))
+      tmp$ = this.primaryColor;
+    else if (Kotlin.equals(color, MDColor$ACCENT_getInstance()))
+      tmp$ = this.accentColor;
+    else if (Kotlin.equals(color, MDColor$WARN_getInstance()))
+      tmp$ = this.warnColor;
+    else
+      tmp$ = Kotlin.noWhenBranchMatched();
+    return tmp$;
+  };
+  function Theme$Statics() {
+    Theme$Statics_instance = this;
+    this.LIGHT = new Theme(MDGreenPalette_getInstance().p500, MDPurplePalette_getInstance().p500, MDRedPalette_getInstance().p500, MDGrayPalette_getInstance().p300, MDGrayPalette_getInstance().p100, RgbColor.Factory.WHITE, MDGrayPalette_getInstance().p50, RgbColor.Factory.WHITE, 'Roboto, sans-serif');
+  }
+  Theme$Statics.$metadata$ = {
+    kind: Kotlin.Kind.OBJECT,
+    simpleName: 'Statics',
+    interfaces: []
+  };
+  var Theme$Statics_instance = null;
+  function Theme$Statics_getInstance() {
+    if (Theme$Statics_instance === null) {
+      new Theme$Statics();
+    }
+    return Theme$Statics_instance;
+  }
+  function Theme$primaryColor$lambda(property, old, new_0) {
+  }
+  function Theme$accentColor$lambda(property, old, new_0) {
+  }
+  function Theme$warnColor$lambda(property, old, new_0) {
+  }
+  function Theme$statusBar$lambda(property, old, new_0) {
+  }
+  function Theme$appBar$lambda(property, old, new_0) {
+  }
+  function Theme$toolbar$lambda(property, old, new_0) {
+  }
+  function Theme$background$lambda(property, old, new_0) {
+  }
+  function Theme$cardsNdialogs$lambda(property, old, new_0) {
+  }
+  Theme.$metadata$ = {
+    kind: Kotlin.Kind.CLASS,
+    simpleName: 'Theme',
+    interfaces: []
+  };
   function MDAppBar() {
     MDAppBar$MDAppBar_getInstance();
     AppBar.call(this);
@@ -165,7 +422,7 @@ this['material-design'] = function (_, Kotlin, $module$beans, $module$elements) 
     MDAppBar$MDAppBar_instance = this;
     this.classSelector_90nc9v$_0 = toClassSelector('fg-md-appbar');
     this.rule_90nc9v$_0 = MDAppBar$MDAppBar$rule$lambda;
-    elements_0.HTML.registerStyle_mpomjf$(this);
+    elements.HTML.registerStyle_mpomjf$(this);
   }
   Object.defineProperty(MDAppBar$MDAppBar.prototype, 'classSelector', {
     get: function () {
@@ -201,7 +458,7 @@ this['material-design'] = function (_, Kotlin, $module$beans, $module$elements) 
     simpleName: 'MDAppBar',
     interfaces: [AppBar]
   };
-  function MDButton(action_0, type, color, margins) {
+  function MDButton(action, type, color, margins) {
     MDButton$MDButton_getInstance();
     if (type === void 0)
       type = MDButton$Type$FLAT_getInstance();
@@ -209,14 +466,14 @@ this['material-design'] = function (_, Kotlin, $module$beans, $module$elements) 
       color = MDColor$DEFAULT_getInstance();
     if (margins === void 0)
       margins = false;
-    Button.call(this, action_0);
+    Button.call(this, action);
     var initialValue = type;
     var onChange = MDButton$type$lambda(this, color);
-    this.type$delegate = new Kotlin.kotlin.properties.Delegates.observable$f(onChange, initialValue);
+    this.type$delegate = new Kotlin.kotlin.properties.Delegates.observable_2ulm9r$$f(onChange, initialValue);
     var initialValue_0 = color;
-    this.color$delegate = new Kotlin.kotlin.properties.Delegates.observable$f(MDButton$color$lambda(this), initialValue_0);
+    this.color$delegate = new Kotlin.kotlin.properties.Delegates.observable_2ulm9r$$f(MDButton$color$lambda(this), initialValue_0);
     var initialValue_1 = margins;
-    this.margins$delegate = new Kotlin.kotlin.properties.Delegates.observable$f(MDButton$margins$lambda(this), initialValue_1);
+    this.margins$delegate = new Kotlin.kotlin.properties.Delegates.observable_2ulm9r$$f(MDButton$margins$lambda(this), initialValue_1);
     this.ripples_0 = false;
     this.ripple$delegate = lazy(MDButton$ripple$lambda(this));
     this.flatStyle = new MDButton$FlatStyle();
@@ -663,10 +920,10 @@ this['material-design'] = function (_, Kotlin, $module$beans, $module$elements) 
     this.TYPE_FLAT_0 = toClassSelector('md-button-flat');
     this.TYPE_RAISED_0 = toClassSelector('md-button-raised');
     this.TYPE_FLOATING_0 = toClassSelector('md-button-floating');
-    this.plusIcon_0 = icon_0.FontAwesomeIcons.plus_p56ikg$();
+    this.plusIcon_0 = icon.FontAwesomeIcons.plus_p56ikg$();
     this.classSelector_r3ywte$_0 = toClassSelector('md-button');
     this.rule_r3ywte$_0 = MDButton$MDButton$rule$lambda(this);
-    elements_0.HTML.registerStyle_78phyd$(this);
+    elements.HTML.registerStyle_78phyd$(this);
   }
   Object.defineProperty(MDButton$MDButton.prototype, 'classSelector', {
     get: function () {
@@ -781,9 +1038,9 @@ this['material-design'] = function (_, Kotlin, $module$beans, $module$elements) 
     simpleName: 'MDButton',
     interfaces: [Button]
   };
-  function MDToggleButton(action_0) {
+  function MDToggleButton(action) {
     MDToggleButton$MDToggleButton_getInstance();
-    ToggleButton.call(this, action_0);
+    ToggleButton.call(this, action);
   }
   MDToggleButton.prototype.render = function () {
     ToggleButton.prototype.render.call(this);
@@ -793,7 +1050,7 @@ this['material-design'] = function (_, Kotlin, $module$beans, $module$elements) 
     MDToggleButton$MDToggleButton_instance = this;
     this.classSelector_axwc4i$_0 = toClassSelector('fg-bn-md-toggle-button');
     this.rule_axwc4i$_0 = MDToggleButton$MDToggleButton$rule$lambda;
-    elements_0.HTML.registerStyle_78phyd$(this);
+    elements.HTML.registerStyle_78phyd$(this);
   }
   Object.defineProperty(MDToggleButton$MDToggleButton.prototype, 'classSelector', {
     get: function () {
@@ -858,7 +1115,7 @@ this['material-design'] = function (_, Kotlin, $module$beans, $module$elements) 
     MDCard$MDCard_instance = this;
     this.classSelector_8qtykg$_0 = toClassSelector('md-card');
     this.rule_8qtykg$_0 = MDCard$MDCard$rule$lambda;
-    elements_0.HTML.registerStyle_78phyd$(this);
+    elements.HTML.registerStyle_78phyd$(this);
   }
   Object.defineProperty(MDCard$MDCard.prototype, 'classSelector', {
     get: function () {
@@ -917,7 +1174,7 @@ this['material-design'] = function (_, Kotlin, $module$beans, $module$elements) 
     MDCardActions$MDCardActions_instance = this;
     this.classSelector_7v4640$_0 = toClassSelector('md-card-actions');
     this.rule_7v4640$_0 = MDCardActions$MDCardActions$rule$lambda;
-    elements_0.HTML.registerStyle_78phyd$(this);
+    elements.HTML.registerStyle_78phyd$(this);
   }
   Object.defineProperty(MDCardActions$MDCardActions.prototype, 'classSelector', {
     get: function () {
@@ -961,7 +1218,7 @@ this['material-design'] = function (_, Kotlin, $module$beans, $module$elements) 
     MDCardAvatar$MDCardAvatar_instance = this;
     this.classSelector_jjnc68$_0 = toClassSelector('md-card-avatar');
     this.rule_jjnc68$_0 = MDCardAvatar$MDCardAvatar$rule$lambda;
-    elements_0.HTML.registerStyle_78phyd$(this);
+    elements.HTML.registerStyle_78phyd$(this);
   }
   Object.defineProperty(MDCardAvatar$MDCardAvatar.prototype, 'classSelector', {
     get: function () {
@@ -1007,7 +1264,7 @@ this['material-design'] = function (_, Kotlin, $module$beans, $module$elements) 
     MDCardContent$Statics_instance = this;
     this.classSelector_6a5kp1$_0 = toClassSelector('md-card-content');
     this.rule_6a5kp1$_0 = MDCardContent$Statics$rule$lambda;
-    elements_0.HTML.registerStyle_78phyd$(this);
+    elements.HTML.registerStyle_78phyd$(this);
   }
   Object.defineProperty(MDCardContent$Statics.prototype, 'classSelector', {
     get: function () {
@@ -1059,7 +1316,7 @@ this['material-design'] = function (_, Kotlin, $module$beans, $module$elements) 
     MDCardHeader$MDCardHeader_instance = this;
     this.classSelector_giknxc$_0 = toClassSelector('md-card-header');
     this.rule_giknxc$_0 = MDCardHeader$MDCardHeader$rule$lambda;
-    elements_0.HTML.registerStyle_78phyd$(this);
+    elements.HTML.registerStyle_78phyd$(this);
   }
   Object.defineProperty(MDCardHeader$MDCardHeader.prototype, 'classSelector', {
     get: function () {
@@ -1119,7 +1376,7 @@ this['material-design'] = function (_, Kotlin, $module$beans, $module$elements) 
     MDCardHeaderText$MDCardHeaderText_instance = this;
     this.classSelector_x6lcxs$_0 = toClassSelector('md-card-header-text');
     this.rule_x6lcxs$_0 = MDCardHeaderText$MDCardHeaderText$rule$lambda;
-    elements_0.HTML.registerStyle_78phyd$(this);
+    elements.HTML.registerStyle_78phyd$(this);
   }
   Object.defineProperty(MDCardHeaderText$MDCardHeaderText.prototype, 'classSelector', {
     get: function () {
@@ -1174,7 +1431,7 @@ this['material-design'] = function (_, Kotlin, $module$beans, $module$elements) 
     MDCardImage$MDCardImage_instance = this;
     this.classSelector_3xxefo$_0 = toClassSelector('md-card-image');
     this.rule_3xxefo$_0 = MDCardImage$MDCardImage$rule$lambda;
-    elements_0.HTML.registerStyle_78phyd$(this);
+    elements.HTML.registerStyle_78phyd$(this);
   }
   Object.defineProperty(MDCardImage$MDCardImage.prototype, 'classSelector', {
     get: function () {
@@ -1219,7 +1476,7 @@ this['material-design'] = function (_, Kotlin, $module$beans, $module$elements) 
     MDCardSubtitle$MDCardSubtitle_instance = this;
     this.classSelector_zal96o$_0 = toClassSelector('md-card-subtitle');
     this.rule_zal96o$_0 = MDCardSubtitle$MDCardSubtitle$rule$lambda;
-    elements_0.HTML.registerStyle_78phyd$(this);
+    elements.HTML.registerStyle_78phyd$(this);
   }
   Object.defineProperty(MDCardSubtitle$MDCardSubtitle.prototype, 'classSelector', {
     get: function () {
@@ -1265,7 +1522,7 @@ this['material-design'] = function (_, Kotlin, $module$beans, $module$elements) 
     MDCardTitle$MDCardTitle_instance = this;
     this.classSelector_dg9fja$_0 = toClassSelector('md-card-title');
     this.rule_dg9fja$_0 = MDCardTitle$MDCardTitle$rule$lambda;
-    elements_0.HTML.registerStyle_78phyd$(this);
+    elements.HTML.registerStyle_78phyd$(this);
   }
   Object.defineProperty(MDCardTitle$MDCardTitle.prototype, 'classSelector', {
     get: function () {
@@ -1314,7 +1571,7 @@ this['material-design'] = function (_, Kotlin, $module$beans, $module$elements) 
     MDCardTitleText$MDCardHeaderText_instance = this;
     this.classSelector_7iw2a3$_0 = toClassSelector('md-card-title-text');
     this.rule_7iw2a3$_0 = MDCardTitleText$MDCardHeaderText$rule$lambda;
-    elements_0.HTML.registerStyle_78phyd$(this);
+    elements.HTML.registerStyle_78phyd$(this);
   }
   Object.defineProperty(MDCardTitleText$MDCardHeaderText.prototype, 'classSelector', {
     get: function () {
@@ -1806,22 +2063,6 @@ this['material-design'] = function (_, Kotlin, $module$beans, $module$elements) 
     }
     return MDRedPalette_instance;
   }
-  function Context() {
-    Context_instance = this;
-    this.theme = Theme$Statics_getInstance().LIGHT;
-  }
-  Context.$metadata$ = {
-    kind: Kotlin.Kind.OBJECT,
-    simpleName: 'Context',
-    interfaces: []
-  };
-  var Context_instance = null;
-  function Context_getInstance() {
-    if (Context_instance === null) {
-      new Context();
-    }
-    return Context_instance;
-  }
   function MDDrawer(side) {
     MDDrawer$MDDrawer_getInstance();
     Drawer.call(this, side);
@@ -1834,7 +2075,7 @@ this['material-design'] = function (_, Kotlin, $module$beans, $module$elements) 
     MDDrawer$MDDrawer_instance = this;
     this.classSelector_3lx8pr$_0 = toClassSelector('md-drawer');
     this.rule_3lx8pr$_0 = MDDrawer$MDDrawer$rule$lambda;
-    elements_0.HTML.registerStyle_78phyd$(this);
+    elements.HTML.registerStyle_78phyd$(this);
   }
   Object.defineProperty(MDDrawer$MDDrawer.prototype, 'classSelector', {
     get: function () {
@@ -1866,108 +2107,10 @@ this['material-design'] = function (_, Kotlin, $module$beans, $module$elements) 
     simpleName: 'MDDrawer',
     interfaces: [Drawer]
   };
-  function mdButton($receiver, action_0, type, init) {
-    return initAndAppendNode($receiver, new MDButton(action_0, type), init);
-  }
-  function mdCard($receiver, init) {
-    return initAndAppendNode($receiver, new MDCard(), init);
-  }
-  function mdDrawer($receiver, side, init) {
-    return initAndAppendNode($receiver, new MDDrawer(side), init);
-  }
-  function mdExpansionPanel($receiver, init) {
-    return initAndAppendNode($receiver, new MDExpansionPanel(), init);
-  }
-  function mdIcon($receiver, init) {
-    return initAndAppendNode($receiver, new MDIcon(), init);
-  }
-  function mdMenu($receiver, label, shortcut, init) {
-    if (label === void 0)
-      label = null;
-    if (shortcut === void 0)
-      shortcut = null;
-    return initAndAppendNode($receiver, new MDMenu(label, shortcut), init);
-  }
-  function mdRadioButton($receiver, labelText, init) {
-    if (labelText === void 0)
-      labelText = null;
-    return initAndAppendNode($receiver, new MDRadioButton(void 0, labelText), init);
-  }
-  function mdToggleButton($receiver, action_0, init) {
-    return initAndAppendNode($receiver, new MDToggleButton(action_0), init);
-  }
-  function mdToolbar($receiver, init) {
-    return initAndAppendNode($receiver, new MDToolbar(), init);
-  }
-  function title($receiver, init) {
-    return initAndAppendNode($receiver, new MDCardTitle(), init);
-  }
-  function subtitle($receiver, init) {
-    return initAndAppendNode($receiver, new MDCardSubtitle(), init);
-  }
-  function header($receiver, init) {
-    return initAndAppendNode($receiver, new MDCardHeader(), init);
-  }
-  function image($receiver, src, init) {
-    return initAndAppendNode($receiver, new MDCardImage(src), init);
-  }
-  function content($receiver, init) {
-    return initAndAppendNode($receiver, new MDCardContent(), init);
-  }
-  function mdActions($receiver, init) {
-    return initAndAppendNode($receiver, new MDCardActions(), init);
-  }
-  function titleText($receiver, init) {
-    return initAndAppendNode($receiver, new MDCardTitleText(), init);
-  }
-  function text($receiver, init) {
-    return initAndAppendNode($receiver, new MDCardHeaderText(), init);
-  }
-  function title_0($receiver, init) {
-    return initAndAppendNode($receiver, new MDCardTitle(), init);
-  }
-  function subtitle_0($receiver, init) {
-    return initAndAppendNode($receiver, new MDCardSubtitle(), init);
-  }
-  function title_1($receiver, init) {
-    return initAndAppendNode($receiver, new MDCardTitle(), init);
-  }
-  function subtitle_1($receiver, init) {
-    return initAndAppendNode($receiver, new MDCardSubtitle(), init);
-  }
-  function avatar($receiver, src, init) {
-    return initAndAppendNode($receiver, new MDCardAvatar(src), init);
-  }
-  function title_2($receiver, init) {
-    return initAndAppendNode($receiver, new MDCardTitle(), init);
-  }
-  function subtitle_2($receiver, init) {
-    return initAndAppendNode($receiver, new MDCardSubtitle(), init);
-  }
-  function mdButton_0($receiver, action_0, init) {
-    return initAndAppendNode($receiver, new MDButton(action_0, MDButton$Type$FLAT_getInstance()), init);
-  }
-  function mdButton_1($receiver, action_0, type, init) {
-    return initAndAppendNode($receiver, new MDButton(action_0, type), init);
-  }
-  function mdMenuItem($receiver, action_0, init) {
-    return initAndAppendNode($receiver, new MDMenuItem(action_0), init);
-  }
-  function content_0($receiver, init) {
-    return initAndAppendNode($receiver, new MDCardContent(), init);
-  }
-  function content_1($receiver, init) {
-    return initAndAppendNode($receiver, new MDCardContent(), init);
-  }
-  function spacer$lambda($receiver) {
-  }
-  function spacer($receiver) {
-    return initAndAppendNode($receiver, MDToolbar$MDToolbar_getInstance().spacer(), spacer$lambda);
-  }
   function MDIcon() {
     MDIcon$MDIcon_getInstance();
     I.call(this);
-    this.size$delegate = new Kotlin.kotlin.properties.Delegates.observable$f(MDIcon$size$lambda(this), null);
+    this.size$delegate = new Kotlin.kotlin.properties.Delegates.observable_2ulm9r$$f(MDIcon$size$lambda(this), null);
   }
   Object.defineProperty(MDIcon.prototype, 'size', {
     get: function () {
@@ -2043,7 +2186,7 @@ this['material-design'] = function (_, Kotlin, $module$beans, $module$elements) 
     MDIcon$MDIcon_instance = this;
     this.classSelector_qh3r6f$_0 = toClassSelector('md-icon');
     this.rule_qh3r6f$_0 = MDIcon$MDIcon$rule$lambda;
-    elements_0.HTML.registerStyle_78phyd$(this);
+    elements.HTML.registerStyle_78phyd$(this);
   }
   Object.defineProperty(MDIcon$MDIcon.prototype, 'classSelector', {
     get: function () {
@@ -2245,7 +2388,7 @@ this['material-design'] = function (_, Kotlin, $module$beans, $module$elements) 
     MDMenu$MDMenu_instance = this;
     this.classSelector_pi48kx$_0 = toClassSelector('fg-md-menu');
     this.rule_pi48kx$_0 = MDMenu$MDMenu$rule$lambda;
-    elements_0.HTML.registerStyle_78phyd$(this);
+    elements.HTML.registerStyle_78phyd$(this);
   }
   Object.defineProperty(MDMenu$MDMenu.prototype, 'classSelector', {
     get: function () {
@@ -2280,9 +2423,9 @@ this['material-design'] = function (_, Kotlin, $module$beans, $module$elements) 
     simpleName: 'MDMenu',
     interfaces: [Menu]
   };
-  function MDMenuItem(action_0) {
+  function MDMenuItem(action) {
     MDMenuItem$MDMenuItem_getInstance();
-    MenuItem.call(this, action_0);
+    MenuItem.call(this, action);
     this.ripple$delegate = lazy(MDMenuItem$ripple$lambda(this));
   }
   Object.defineProperty(MDMenuItem.prototype, 'ripple_0', {
@@ -2305,7 +2448,7 @@ this['material-design'] = function (_, Kotlin, $module$beans, $module$elements) 
     MDMenuItem$MDMenuItem_instance = this;
     this.classSelector_p9hgvj$_0 = toClassSelector('fg-md-menu-item');
     this.rule_p9hgvj$_0 = MDMenuItem$MDMenuItem$rule$lambda;
-    elements_0.HTML.registerStyle_78phyd$(this);
+    elements.HTML.registerStyle_78phyd$(this);
   }
   Object.defineProperty(MDMenuItem$MDMenuItem.prototype, 'classSelector', {
     get: function () {
@@ -2366,7 +2509,7 @@ this['material-design'] = function (_, Kotlin, $module$beans, $module$elements) 
       return $receiver.value;
     }
   });
-  Object.defineProperty(MDCollapsedPanel.prototype, 'outerToolbar_0', {
+  Object.defineProperty(MDCollapsedPanel.prototype, 'outerToolbar_8be2vx$', {
     get: function () {
       var $receiver = this.outerToolbar$delegate;
       new Kotlin.PropertyMetadata('outerToolbar');
@@ -2383,9 +2526,9 @@ this['material-design'] = function (_, Kotlin, $module$beans, $module$elements) 
   MDCollapsedPanel.prototype.render = function () {
     Div.prototype.render.call(this);
     this.addClass_bx842b$(MDCollapsedPanel$MDCollapsedPanel_getInstance().classSelector);
-    this.appendChild_sr04hg$(this.outerToolbar_0);
-    this.outerToolbar_0.appendChild_sr04hg$(this.toolbar);
-    this.outerToolbar_0.appendChild_sr04hg$(this.expandButton_0);
+    this.appendChild_sr04hg$(this.outerToolbar_8be2vx$);
+    this.outerToolbar_8be2vx$.appendChild_sr04hg$(this.toolbar);
+    this.outerToolbar_8be2vx$.appendChild_sr04hg$(this.expandButton_0);
     this.style.backgroundColor = Context_getInstance().theme.cardsNdialogs;
   };
   MDCollapsedPanel.prototype.didMount = function () {
@@ -2396,7 +2539,7 @@ this['material-design'] = function (_, Kotlin, $module$beans, $module$elements) 
     MDCollapsedPanel$MDCollapsedPanel_instance = this;
     this.classSelector_7cc6v4$_0 = toClassSelector('fg-md-panel-collapsed-panel');
     this.rule_7cc6v4$_0 = MDCollapsedPanel$MDCollapsedPanel$rule$lambda;
-    elements_0.HTML.registerStyle_78phyd$(this);
+    elements.HTML.registerStyle_78phyd$(this);
   }
   Object.defineProperty(MDCollapsedPanel$MDCollapsedPanel.prototype, 'classSelector', {
     get: function () {
@@ -2462,9 +2605,9 @@ this['material-design'] = function (_, Kotlin, $module$beans, $module$elements) 
     simpleName: 'MDCollapsedPanel',
     interfaces: [Div]
   };
-  function MDExpandButton(action_0) {
+  function MDExpandButton(action) {
     MDExpandButton$MDExpandButton_getInstance();
-    MDToggleButton.call(this, action_0);
+    MDToggleButton.call(this, action);
   }
   MDExpandButton.prototype.render = function () {
     MDToggleButton.prototype.render.call(this);
@@ -2475,7 +2618,7 @@ this['material-design'] = function (_, Kotlin, $module$beans, $module$elements) 
     MDExpandButton$MDExpandButton_instance = this;
     this.classSelector_ihlpb4$_0 = toClassSelector('fg-md-panel-expand-button');
     this.rule_ihlpb4$_0 = MDExpandButton$MDExpandButton$rule$lambda;
-    elements_0.HTML.registerStyle_78phyd$(this);
+    elements.HTML.registerStyle_78phyd$(this);
   }
   Object.defineProperty(MDExpandButton$MDExpandButton.prototype, 'classSelector', {
     get: function () {
@@ -2519,7 +2662,7 @@ this['material-design'] = function (_, Kotlin, $module$beans, $module$elements) 
     MDExpandedContent$MDExpandedContent_instance = this;
     this.classSelector_8uui6i$_0 = toClassSelector('fg-md-panel-expanded-content');
     this.rule_8uui6i$_0 = MDExpandedContent$MDExpandedContent$rule$lambda;
-    elements_0.HTML.registerStyle_78phyd$(this);
+    elements.HTML.registerStyle_78phyd$(this);
   }
   Object.defineProperty(MDExpandedContent$MDExpandedContent.prototype, 'classSelector', {
     get: function () {
@@ -2571,7 +2714,7 @@ this['material-design'] = function (_, Kotlin, $module$beans, $module$elements) 
       return $receiver.value;
     }
   });
-  Object.defineProperty(MDExpandedPanel.prototype, 'outerToolbar_0', {
+  Object.defineProperty(MDExpandedPanel.prototype, 'outerToolbar_8be2vx$', {
     get: function () {
       var $receiver = this.outerToolbar$delegate;
       new Kotlin.PropertyMetadata('outerToolbar');
@@ -2595,9 +2738,9 @@ this['material-design'] = function (_, Kotlin, $module$beans, $module$elements) 
   MDExpandedPanel.prototype.render = function () {
     Div.prototype.render.call(this);
     this.addClass_bx842b$(MDExpandedPanel$MDExpandedPanel_getInstance().classSelector);
-    this.outerToolbar_0.appendChild_sr04hg$(this.toolbar);
-    this.outerToolbar_0.appendChild_sr04hg$(this.expandButton_0);
-    this.appendChild_sr04hg$(this.outerToolbar_0);
+    this.outerToolbar_8be2vx$.appendChild_sr04hg$(this.toolbar);
+    this.outerToolbar_8be2vx$.appendChild_sr04hg$(this.expandButton_0);
+    this.appendChild_sr04hg$(this.outerToolbar_8be2vx$);
     this.appendChild_sr04hg$(this.content);
     this.style.backgroundColor = Context_getInstance().theme.cardsNdialogs;
   };
@@ -2609,7 +2752,7 @@ this['material-design'] = function (_, Kotlin, $module$beans, $module$elements) 
     MDExpandedPanel$MDExpandedPanel_instance = this;
     this.classSelector_p43iwk$_0 = toClassSelector('fg-md-panel-expanded-panel');
     this.rule_p43iwk$_0 = MDExpandedPanel$MDExpandedPanel$rule$lambda;
-    elements_0.HTML.registerStyle_78phyd$(this);
+    elements.HTML.registerStyle_78phyd$(this);
   }
   Object.defineProperty(MDExpandedPanel$MDExpandedPanel.prototype, 'classSelector', {
     get: function () {
@@ -2683,7 +2826,7 @@ this['material-design'] = function (_, Kotlin, $module$beans, $module$elements) 
     Div.call(this);
     this.expandCollapseHandler_4n7l8q$_0 = MDExpansionPanel$expandCollapseHandler$lambda(this);
     var initialValue = MDExpansionPanel$State$COLLAPSED_getInstance();
-    this.state$delegate = new Kotlin.kotlin.properties.Delegates.observable$f(MDExpansionPanel$state$lambda(this), initialValue);
+    this.state$delegate = new Kotlin.kotlin.properties.Delegates.observable_2ulm9r$$f(MDExpansionPanel$state$lambda(this), initialValue);
     this.expandAction$delegate = lazy(MDExpansionPanel$expandAction$lambda(this));
     this.collapsed$delegate = lazy(MDExpansionPanel$collapsed$lambda(this));
     this.expanded$delegate = lazy(MDExpansionPanel$expanded$lambda(this));
@@ -2700,7 +2843,7 @@ this['material-design'] = function (_, Kotlin, $module$beans, $module$elements) 
       this.state$delegate.setValue_9rddgb$(this, new Kotlin.PropertyMetadata('state'), state);
     }
   });
-  Object.defineProperty(MDExpansionPanel.prototype, 'expandAction_4n7l8q$_0', {
+  Object.defineProperty(MDExpansionPanel.prototype, 'expandAction_8be2vx$', {
     get: function () {
       var $receiver = this.expandAction$delegate;
       new Kotlin.PropertyMetadata('expandAction');
@@ -2731,21 +2874,21 @@ this['material-design'] = function (_, Kotlin, $module$beans, $module$elements) 
   });
   MDExpansionPanel.prototype.onFocus = function () {
     if (this.isCollapsed()) {
-      this.collapsed.outerToolbar_0.style.backgroundColor = new RgbColor(238, 238, 238);
+      this.collapsed.outerToolbar_8be2vx$.style.backgroundColor = new RgbColor(238, 238, 238);
       this.collapsed.toolbar.style.backgroundColor = new RgbColor(238, 238, 238);
     }
      else {
-      this.expanded.outerToolbar_0.style.backgroundColor = new RgbColor(238, 238, 238);
+      this.expanded.outerToolbar_8be2vx$.style.backgroundColor = new RgbColor(238, 238, 238);
       this.expanded.toolbar.style.backgroundColor = new RgbColor(238, 238, 238);
     }
   };
   MDExpansionPanel.prototype.unFocus = function () {
     if (this.isCollapsed()) {
-      this.collapsed.outerToolbar_0.style.backgroundColor = RgbColor.Factory.WHITE;
+      this.collapsed.outerToolbar_8be2vx$.style.backgroundColor = RgbColor.Factory.WHITE;
       this.collapsed.toolbar.style.backgroundColor = RgbColor.Factory.WHITE;
     }
      else {
-      this.expanded.outerToolbar_0.style.backgroundColor = RgbColor.Factory.WHITE;
+      this.expanded.outerToolbar_8be2vx$.style.backgroundColor = RgbColor.Factory.WHITE;
       this.expanded.toolbar.style.backgroundColor = RgbColor.Factory.WHITE;
     }
   };
@@ -2756,7 +2899,7 @@ this['material-design'] = function (_, Kotlin, $module$beans, $module$elements) 
     return !this.collapsed.hidden;
   };
   MDExpansionPanel.prototype.toggle = function () {
-    this.expandAction_4n7l8q$_0.perform_54c9de$(this);
+    this.expandAction_8be2vx$.perform_54c9de$(this);
   };
   MDExpansionPanel.prototype.render = function () {
     Div.prototype.render.call(this);
@@ -2827,7 +2970,7 @@ this['material-design'] = function (_, Kotlin, $module$beans, $module$elements) 
     MDExpansionPanel$MDExpansionPanel_instance = this;
     this.classSelector_v3q4lc$_0 = toClassSelector('fg-md-panel-expansion-panel');
     this.rule_v3q4lc$_0 = MDExpansionPanel$MDExpansionPanel$rule$lambda(this);
-    elements_0.HTML.registerStyle_78phyd$(this);
+    elements.HTML.registerStyle_78phyd$(this);
   }
   Object.defineProperty(MDExpansionPanel$MDExpansionPanel.prototype, 'classSelector', {
     get: function () {
@@ -2880,12 +3023,12 @@ this['material-design'] = function (_, Kotlin, $module$beans, $module$elements) 
   }
   function MDExpansionPanel$collapsed$lambda(this$MDExpansionPanel) {
     return function () {
-      return new MDCollapsedPanel(this$MDExpansionPanel.expandAction_4n7l8q$_0);
+      return new MDCollapsedPanel(this$MDExpansionPanel.expandAction_8be2vx$);
     };
   }
   function MDExpansionPanel$expanded$lambda(this$MDExpansionPanel) {
     return function () {
-      return new MDExpandedPanel(this$MDExpansionPanel.expandAction_4n7l8q$_0);
+      return new MDExpandedPanel(this$MDExpansionPanel.expandAction_8be2vx$);
     };
   }
   function MDExpansionPanel$focusHandler$lambda(this$MDExpansionPanel) {
@@ -2943,10 +3086,10 @@ this['material-design'] = function (_, Kotlin, $module$beans, $module$elements) 
   function MDRadioButton$MDRadioButton() {
     MDRadioButton$MDRadioButton_instance = this;
     this.classSelector_udwazr$_0 = toClassSelector('md-radio-button');
-    this.checkedIcon_0 = icon_0.FontAwesomeIcons.dot_circle_o_p56ikg$();
-    this.unCheckedIcon_0 = icon_0.FontAwesomeIcons.circle_o_p56ikg$();
+    this.checkedIcon_0 = icon.FontAwesomeIcons.dot_circle_o_p56ikg$();
+    this.unCheckedIcon_0 = icon.FontAwesomeIcons.circle_o_p56ikg$();
     this.rule_udwazr$_0 = MDRadioButton$MDRadioButton$rule$lambda;
-    elements_0.HTML.registerStyle_78phyd$(this);
+    elements.HTML.registerStyle_78phyd$(this);
   }
   Object.defineProperty(MDRadioButton$MDRadioButton.prototype, 'classSelector', {
     get: function () {
@@ -3026,16 +3169,16 @@ this['material-design'] = function (_, Kotlin, $module$beans, $module$elements) 
     var x = pageX - pos.left - halfSize - window.scrollX;
     var y = pageY - pos.top - halfSize - window.scrollY;
     var rippleInk = new RippleInk(this.inkColor);
-    rippleInk.setPosition_0(to(x, y));
-    rippleInk.setSize_0(get_px(size));
+    rippleInk.setPosition_i08y1w$(to(x, y));
+    rippleInk.setSize_sfxhv0$(get_px(size));
     this.rippleContainer_0.appendChild_sr04hg$(rippleInk);
     this.rippleContainer_0._enforceStyleRecalculation();
   };
   function Ripple$Factory() {
     Ripple$Factory_instance = this;
     this.rippleTargetClass = toClassSelector('md-ripple-target');
-    this.rippleTarget = classRule(kotlin_0.Unit, this.rippleTargetClass, Ripple$Factory$rippleTarget$lambda);
-    elements_0.HTML.registerCSSRule_t83c1i$(this.rippleTarget);
+    this.rippleTarget = classRule(kotlin.Unit, this.rippleTargetClass, Ripple$Factory$rippleTarget$lambda);
+    elements.HTML.registerCSSRule_t83c1i$(this.rippleTarget);
   }
   function Ripple$Factory$rippleTarget$lambda($receiver) {
     $receiver._position = 'relative';
@@ -3097,7 +3240,7 @@ this['material-design'] = function (_, Kotlin, $module$beans, $module$elements) 
     RippleContainer$RippleContainer_instance = this;
     this.classSelector_n6hd2p$_0 = toClassSelector('md-ripple-container');
     this.rule_n6hd2p$_0 = RippleContainer$RippleContainer$rule$lambda;
-    elements_0.HTML.registerStyle_78phyd$(this);
+    elements.HTML.registerStyle_78phyd$(this);
   }
   Object.defineProperty(RippleContainer$RippleContainer.prototype, 'classSelector', {
     get: function () {
@@ -3136,7 +3279,7 @@ this['material-design'] = function (_, Kotlin, $module$beans, $module$elements) 
   function RippleInk(color) {
     RippleInk$RippleInk_getInstance();
     Span.call(this);
-    this.color$delegate = new Kotlin.kotlin.properties.Delegates.observable$f(RippleInk$color$lambda(this), color);
+    this.color$delegate = new Kotlin.kotlin.properties.Delegates.observable_2ulm9r$$f(RippleInk$color$lambda(this), color);
   }
   Object.defineProperty(RippleInk.prototype, 'color', {
     get: function () {
@@ -3146,11 +3289,11 @@ this['material-design'] = function (_, Kotlin, $module$beans, $module$elements) 
       this.color$delegate.setValue_9rddgb$(this, new Kotlin.PropertyMetadata('color'), color);
     }
   });
-  RippleInk.prototype.setSize_0 = function (size) {
+  RippleInk.prototype.setSize_sfxhv0$ = function (size) {
     this.style.width = size;
     this.style.height = size;
   };
-  RippleInk.prototype.setPosition_0 = function (position) {
+  RippleInk.prototype.setPosition_i08y1w$ = function (position) {
     this.style.left = get_px_0(position.first);
     this.style.top = get_px_0(position.second);
   };
@@ -3166,9 +3309,9 @@ this['material-design'] = function (_, Kotlin, $module$beans, $module$elements) 
     RippleInk$RippleInk_instance = this;
     this.classSelector_laepad$_0 = toClassSelector('md-ripple-ink');
     this.rule_laepad$_0 = RippleInk$RippleInk$rule$lambda;
-    elements_0.HTML.registerStyle_78phyd$(this);
-    var rule = keyframesRule(kotlin_0.Unit, 'ripple', RippleInk$RippleInk$RippleInk_init$lambda);
-    elements_0.HTML.registerCSSRule_t83c1i$(rule);
+    elements.HTML.registerStyle_78phyd$(this);
+    var rule = keyframesRule(kotlin.Unit, 'ripple', RippleInk$RippleInk$RippleInk_init$lambda);
+    elements.HTML.registerCSSRule_t83c1i$(rule);
   }
   Object.defineProperty(RippleInk$RippleInk.prototype, 'classSelector', {
     get: function () {
@@ -3217,149 +3360,6 @@ this['material-design'] = function (_, Kotlin, $module$beans, $module$elements) 
     simpleName: 'RippleInk',
     interfaces: [Span]
   };
-  function Theme(primaryColor, accentColor, warnColor, statusBar, appBar, toolbar, background, cardsNdialogs, font) {
-    Theme$Statics_getInstance();
-    this.propertyChangedListeners_0 = Kotlin.kotlin.collections.ArrayList_init_ww73n8$();
-    this.primaryColor$delegate = new Kotlin.kotlin.properties.Delegates.observable$f(Theme$primaryColor$lambda, primaryColor);
-    this.accentColor$delegate = new Kotlin.kotlin.properties.Delegates.observable$f(Theme$accentColor$lambda, accentColor);
-    this.warnColor$delegate = new Kotlin.kotlin.properties.Delegates.observable$f(Theme$warnColor$lambda, warnColor);
-    this.statusBar$delegate = new Kotlin.kotlin.properties.Delegates.observable$f(Theme$statusBar$lambda, statusBar);
-    this.appBar$delegate = new Kotlin.kotlin.properties.Delegates.observable$f(Theme$appBar$lambda, appBar);
-    this.toolbar$delegate = new Kotlin.kotlin.properties.Delegates.observable$f(Theme$toolbar$lambda, toolbar);
-    this.background$delegate = new Kotlin.kotlin.properties.Delegates.observable$f(Theme$background$lambda, background);
-    this.cardsNdialogs$delegate = new Kotlin.kotlin.properties.Delegates.observable$f(Theme$cardsNdialogs$lambda, cardsNdialogs);
-    this.font = font;
-  }
-  Theme.prototype.notifyPropertyChanged_0 = function (property, old, new_0) {
-    var tmp$;
-    tmp$ = this.propertyChangedListeners_0.iterator();
-    while (tmp$.hasNext()) {
-      var listener = tmp$.next();
-      listener(this, property, old, new_0);
-    }
-  };
-  Theme.prototype.onPropertyChanged_bdxxi9$ = function (listener) {
-    var tmp$;
-    this.propertyChangedListeners_0.add_11rb$(typeof (tmp$ = listener) === 'function' ? tmp$ : Kotlin.throwCCE());
-  };
-  Theme.prototype.unPropertyChanged_u2o7yy$ = function (listener) {
-    this.propertyChangedListeners_0.remove_11rb$(listener);
-  };
-  Object.defineProperty(Theme.prototype, 'primaryColor', {
-    get: function () {
-      return this.primaryColor$delegate.getValue_lrcp0p$(this, new Kotlin.PropertyMetadata('primaryColor'));
-    },
-    set: function (primaryColor) {
-      this.primaryColor$delegate.setValue_9rddgb$(this, new Kotlin.PropertyMetadata('primaryColor'), primaryColor);
-    }
-  });
-  Object.defineProperty(Theme.prototype, 'accentColor', {
-    get: function () {
-      return this.accentColor$delegate.getValue_lrcp0p$(this, new Kotlin.PropertyMetadata('accentColor'));
-    },
-    set: function (accentColor) {
-      this.accentColor$delegate.setValue_9rddgb$(this, new Kotlin.PropertyMetadata('accentColor'), accentColor);
-    }
-  });
-  Object.defineProperty(Theme.prototype, 'warnColor', {
-    get: function () {
-      return this.warnColor$delegate.getValue_lrcp0p$(this, new Kotlin.PropertyMetadata('warnColor'));
-    },
-    set: function (warnColor) {
-      this.warnColor$delegate.setValue_9rddgb$(this, new Kotlin.PropertyMetadata('warnColor'), warnColor);
-    }
-  });
-  Object.defineProperty(Theme.prototype, 'statusBar', {
-    get: function () {
-      return this.statusBar$delegate.getValue_lrcp0p$(this, new Kotlin.PropertyMetadata('statusBar'));
-    },
-    set: function (statusBar) {
-      this.statusBar$delegate.setValue_9rddgb$(this, new Kotlin.PropertyMetadata('statusBar'), statusBar);
-    }
-  });
-  Object.defineProperty(Theme.prototype, 'appBar', {
-    get: function () {
-      return this.appBar$delegate.getValue_lrcp0p$(this, new Kotlin.PropertyMetadata('appBar'));
-    },
-    set: function (appBar) {
-      this.appBar$delegate.setValue_9rddgb$(this, new Kotlin.PropertyMetadata('appBar'), appBar);
-    }
-  });
-  Object.defineProperty(Theme.prototype, 'toolbar', {
-    get: function () {
-      return this.toolbar$delegate.getValue_lrcp0p$(this, new Kotlin.PropertyMetadata('toolbar'));
-    },
-    set: function (toolbar) {
-      this.toolbar$delegate.setValue_9rddgb$(this, new Kotlin.PropertyMetadata('toolbar'), toolbar);
-    }
-  });
-  Object.defineProperty(Theme.prototype, 'background', {
-    get: function () {
-      return this.background$delegate.getValue_lrcp0p$(this, new Kotlin.PropertyMetadata('background'));
-    },
-    set: function (background) {
-      this.background$delegate.setValue_9rddgb$(this, new Kotlin.PropertyMetadata('background'), background);
-    }
-  });
-  Object.defineProperty(Theme.prototype, 'cardsNdialogs', {
-    get: function () {
-      return this.cardsNdialogs$delegate.getValue_lrcp0p$(this, new Kotlin.PropertyMetadata('cardsNdialogs'));
-    },
-    set: function (cardsNdialogs) {
-      this.cardsNdialogs$delegate.setValue_9rddgb$(this, new Kotlin.PropertyMetadata('cardsNdialogs'), cardsNdialogs);
-    }
-  });
-  Theme.prototype.color_6hl4m2$ = function (color, default_0) {
-    var tmp$;
-    if (Kotlin.equals(color, MDColor$DEFAULT_getInstance()))
-      tmp$ = default_0;
-    else if (Kotlin.equals(color, MDColor$PRIMARY_getInstance()))
-      tmp$ = this.primaryColor;
-    else if (Kotlin.equals(color, MDColor$ACCENT_getInstance()))
-      tmp$ = this.accentColor;
-    else if (Kotlin.equals(color, MDColor$WARN_getInstance()))
-      tmp$ = this.warnColor;
-    else
-      tmp$ = Kotlin.noWhenBranchMatched();
-    return tmp$;
-  };
-  function Theme$Statics() {
-    Theme$Statics_instance = this;
-    this.LIGHT = new Theme(MDGreenPalette_getInstance().p500, MDPurplePalette_getInstance().p500, MDRedPalette_getInstance().p500, MDGrayPalette_getInstance().p300, MDGrayPalette_getInstance().p100, RgbColor.Factory.WHITE, MDGrayPalette_getInstance().p50, RgbColor.Factory.WHITE, 'Roboto, sans-serif');
-  }
-  Theme$Statics.$metadata$ = {
-    kind: Kotlin.Kind.OBJECT,
-    simpleName: 'Statics',
-    interfaces: []
-  };
-  var Theme$Statics_instance = null;
-  function Theme$Statics_getInstance() {
-    if (Theme$Statics_instance === null) {
-      new Theme$Statics();
-    }
-    return Theme$Statics_instance;
-  }
-  function Theme$primaryColor$lambda(property, old, new_0) {
-  }
-  function Theme$accentColor$lambda(property, old, new_0) {
-  }
-  function Theme$warnColor$lambda(property, old, new_0) {
-  }
-  function Theme$statusBar$lambda(property, old, new_0) {
-  }
-  function Theme$appBar$lambda(property, old, new_0) {
-  }
-  function Theme$toolbar$lambda(property, old, new_0) {
-  }
-  function Theme$background$lambda(property, old, new_0) {
-  }
-  function Theme$cardsNdialogs$lambda(property, old, new_0) {
-  }
-  Theme.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
-    simpleName: 'Theme',
-    interfaces: []
-  };
   function MDToolbar() {
     MDToolbar$MDToolbar_getInstance();
     Div.call(this);
@@ -3373,7 +3373,7 @@ this['material-design'] = function (_, Kotlin, $module$beans, $module$elements) 
     MDToolbar$MDToolbar_instance = this;
     this.classSelector_z3ettp$_0 = toClassSelector('fg-md-toolbar');
     this.rule_z3ettp$_0 = MDToolbar$MDToolbar$rule$lambda;
-    elements_0.HTML.registerStyle_78phyd$(this);
+    elements.HTML.registerStyle_78phyd$(this);
   }
   function MDToolbar$MDToolbar$spacer$lambda($receiver) {
     $receiver.style.flex = new Flex(1);
@@ -3414,11 +3414,48 @@ this['material-design'] = function (_, Kotlin, $module$beans, $module$elements) 
     simpleName: 'MDToolbar',
     interfaces: [Div]
   };
+  var package$fg = _.fg || (_.fg = {});
+  var package$md = package$fg.md || (package$fg.md = {});
+  Object.defineProperty(package$md, 'Context', {
+    get: Context_getInstance
+  });
+  package$md.mdButton_nktyfw$ = mdButton;
+  package$md.mdCard_n9h7cj$ = mdCard;
+  package$md.mdDrawer_mzaxr2$ = mdDrawer;
+  package$md.mdExpansionPanel_hquep6$ = mdExpansionPanel;
+  package$md.mdIcon_g8v0bx$ = mdIcon;
+  package$md.mdMenu_altxie$ = mdMenu;
+  package$md.mdRadioButton_ijs2cm$ = mdRadioButton;
+  package$md.mdToggleButton_mkkesl$ = mdToggleButton;
+  package$md.mdToolbar_j7txd3$ = mdToolbar;
+  package$md.title_li3s0q$ = title;
+  package$md.subtitle_nfdrzi$ = subtitle;
+  package$md.header_lfnsbn$ = header;
+  package$md.image_x02q6j$ = image;
+  package$md.content_bjfsl7$ = content;
+  package$md.mdActions_r014vz$ = mdActions;
+  package$md.titleText_sxfp5z$ = titleText;
+  package$md.text_ngfx99$ = text;
+  package$md.title_5sgfbh$ = title_0;
+  package$md.subtitle_r3jm6z$ = subtitle_0;
+  package$md.title_p5w480$ = title_1;
+  package$md.subtitle_3xqp5k$ = subtitle_1;
+  package$md.avatar_v76fde$ = avatar;
+  package$md.title_ldiu17$ = title_2;
+  package$md.subtitle_3hgejn$ = subtitle_2;
+  package$md.mdButton_anbmdb$ = mdButton_0;
+  package$md.mdButton_dakcj0$ = mdButton_1;
+  package$md.mdMenuItem_de4751$ = mdMenuItem;
+  package$md.content_y02a8y$ = content_0;
+  package$md.content_gpxngq$ = content_1;
+  package$md.spacer_oaybh4$ = spacer;
+  Object.defineProperty(Theme, 'Statics', {
+    get: Theme$Statics_getInstance
+  });
+  package$md.Theme = Theme;
   Object.defineProperty(MDAppBar, 'MDAppBar', {
     get: MDAppBar$MDAppBar_getInstance
   });
-  var package$fg = _.fg || (_.fg = {});
-  var package$md = package$fg.md || (package$fg.md = {});
   var package$app = package$md.app || (package$md.app = {});
   package$app.MDAppBar = MDAppBar;
   Object.defineProperty(MDButton$Type, 'FLAT', {
@@ -3512,44 +3549,11 @@ this['material-design'] = function (_, Kotlin, $module$beans, $module$elements) 
   Object.defineProperty(package$colour, 'MDRedPalette', {
     get: MDRedPalette_getInstance
   });
-  Object.defineProperty(package$md, 'Context', {
-    get: Context_getInstance
-  });
   Object.defineProperty(MDDrawer, 'MDDrawer', {
     get: MDDrawer$MDDrawer_getInstance
   });
   var package$drawer = package$md.drawer || (package$md.drawer = {});
   package$drawer.MDDrawer = MDDrawer;
-  package$md.mdButton_nktyfw$ = mdButton;
-  package$md.mdCard_n9h7cj$ = mdCard;
-  package$md.mdDrawer_mzaxr2$ = mdDrawer;
-  package$md.mdExpansionPanel_hquep6$ = mdExpansionPanel;
-  package$md.mdIcon_g8v0bx$ = mdIcon;
-  package$md.mdMenu_altxie$ = mdMenu;
-  package$md.mdRadioButton_ijs2cm$ = mdRadioButton;
-  package$md.mdToggleButton_mkkesl$ = mdToggleButton;
-  package$md.mdToolbar_j7txd3$ = mdToolbar;
-  package$md.title_li3s0q$ = title;
-  package$md.subtitle_nfdrzi$ = subtitle;
-  package$md.header_lfnsbn$ = header;
-  package$md.image_x02q6j$ = image;
-  package$md.content_bjfsl7$ = content;
-  package$md.mdActions_r014vz$ = mdActions;
-  package$md.titleText_sxfp5z$ = titleText;
-  package$md.text_ngfx99$ = text;
-  package$md.title_5sgfbh$ = title_0;
-  package$md.subtitle_r3jm6z$ = subtitle_0;
-  package$md.title_p5w480$ = title_1;
-  package$md.subtitle_3xqp5k$ = subtitle_1;
-  package$md.avatar_v76fde$ = avatar;
-  package$md.title_ldiu17$ = title_2;
-  package$md.subtitle_3hgejn$ = subtitle_2;
-  package$md.mdButton_anbmdb$ = mdButton_0;
-  package$md.mdButton_dakcj0$ = mdButton_1;
-  package$md.mdMenuItem_de4751$ = mdMenuItem;
-  package$md.content_y02a8y$ = content_0;
-  package$md.content_gpxngq$ = content_1;
-  package$md.spacer_oaybh4$ = spacer;
   Object.defineProperty(MDIcon$Size, 's18px', {
     get: MDIcon$Size$s18px_getInstance
   });
@@ -3659,10 +3663,6 @@ this['material-design'] = function (_, Kotlin, $module$beans, $module$elements) 
     get: RippleInk$RippleInk_getInstance
   });
   package$support.RippleInk = RippleInk;
-  Object.defineProperty(Theme, 'Statics', {
-    get: Theme$Statics_getInstance
-  });
-  package$md.Theme = Theme;
   Object.defineProperty(MDToolbar, 'MDToolbar', {
     get: MDToolbar$MDToolbar_getInstance
   });
@@ -3672,6 +3672,6 @@ this['material-design'] = function (_, Kotlin, $module$beans, $module$elements) 
   pkg_0 = pkg + '-panel';
   Kotlin.defineModule('material-design', _);
   return _;
-}(typeof this['material-design'] === 'undefined' ? {} : this['material-design'], kotlin, beans, elements);
+}(typeof this['material-design'] === 'undefined' ? {} : this['material-design'], kotlin, elements, beans);
 
-//@ sourceMappingURL=material-design.js.map
+//# sourceMappingURL=material-design.js.map

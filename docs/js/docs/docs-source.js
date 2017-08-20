@@ -27,7 +27,7 @@ this['docs-source'] = function (_, Kotlin, $module$beans, $module$elements) {
   var toggleButton = $module$beans.fg.beans.toggleButton_432pze$;
   var div = $module$elements.fg.elements.div_lgqx1j$;
   var render = $module$elements.fg.elements.render_uy47cu$;
-  var elements_0 = $module$elements.fg.elements;
+  var elements = $module$elements.fg.elements;
   var h1 = $module$elements.fg.elements.h1_pgml15$;
   var p = $module$elements.fg.elements.p_ti2w4o$;
   var header = $module$elements.fg.elements.header_x8ulkt$;
@@ -36,8 +36,8 @@ this['docs-source'] = function (_, Kotlin, $module$beans, $module$elements) {
   var a = $module$elements.fg.elements.a_ya8tl$;
   var h3 = $module$elements.fg.elements.h3_4amnwb$;
   var menuItem = $module$beans.fg.beans.menuItem_ve3aun$;
-  var menu_0 = $module$beans.fg.beans.menu_poq3df$;
-  var icon_0 = $module$beans.fg.beans.icon;
+  var menu = $module$beans.fg.beans.menu_poq3df$;
+  var icon = $module$beans.fg.beans.icon;
   var li = $module$elements.fg.elements.li_wq8toz$;
   var ul = $module$elements.fg.elements.ul_xx7ant$;
   var AnyRule = $module$elements.fg.style.AnyRule;
@@ -179,7 +179,7 @@ this['docs-source'] = function (_, Kotlin, $module$beans, $module$elements) {
     menuItem($receiver, new SelectableAction('Menu Item 2', void 0, void 0, void 0, void 0, void 0, main$lambda$lambda$lambda$lambda_1), main$lambda$lambda$lambda$lambda_2);
   }
   function main$lambda$lambda_16($receiver) {
-    menu_0($receiver, void 0, main$lambda$lambda$lambda_9);
+    menu($receiver, void 0, main$lambda$lambda$lambda_9);
   }
   function main$lambda$lambda_17($receiver) {
     $receiver.unaryPlus_pdl1vz$('Button');
@@ -194,7 +194,7 @@ this['docs-source'] = function (_, Kotlin, $module$beans, $module$elements) {
   }
   function main$lambda$lambda_18($receiver) {
     button($receiver, new Action('Button 1', void 0, void 0, void 0, main$lambda$lambda$lambda_10), main$lambda$lambda$lambda_11);
-    button($receiver, new Action(void 0, void 0, icon_0.FontAwesomeIcons.camera_retro_p56ikg$(), void 0, main$lambda$lambda$lambda_12), main$lambda$lambda$lambda_13);
+    button($receiver, new Action(void 0, void 0, icon.FontAwesomeIcons.camera_retro_p56ikg$(), void 0, main$lambda$lambda$lambda_12), main$lambda$lambda$lambda_13);
   }
   function main$lambda$lambda_19($receiver) {
     $receiver._id = 'Resources';
@@ -276,19 +276,19 @@ this['docs-source'] = function (_, Kotlin, $module$beans, $module$elements) {
     collapseOn(beansContainer, beansAction);
     beansAction.selected = false;
     var rightDrawer = render(new Drawer(Side.RIGHT), main$lambda_0(beansAction, beansContainer));
-    with_0(elements_0.BODY, main$lambda_1(rightDrawer));
-    elements_0.HTML.addCSSRule_t83c1i$(with_0(new AnyRule(), main$lambda_2));
-    elements_0.HTML.addCSSRule_t83c1i$(with_0(new ClassRule(Menu.Companion.classSelector), main$lambda_3));
-    elements_0.HTML.addCSSRule_t83c1i$(with_0(new ClassRule(MenuItem.Companion.classSelector), main$lambda_4));
-    elements_0.HTML.init_dqye30$();
-    dock(elements_0.BODY, rightDrawer);
+    with_0(elements.BODY, main$lambda_1(rightDrawer));
+    elements.HTML.addCSSRule_t83c1i$(with_0(new AnyRule(), main$lambda_2));
+    elements.HTML.addCSSRule_t83c1i$(with_0(new ClassRule(Menu.Companion.classSelector), main$lambda_3));
+    elements.HTML.addCSSRule_t83c1i$(with_0(new ClassRule(MenuItem.Companion.classSelector), main$lambda_4));
+    elements.HTML.init_dqye30$();
+    dock(elements.BODY, rightDrawer);
   }
   var package$fg = _.fg || (_.fg = {});
   var package$docs = package$fg.docs || (package$fg.docs = {});
   package$docs.main_vqirvp$ = main;
-  Kotlin.defineModule('docs-source', _);
   main([]);
+  Kotlin.defineModule('docs-source', _);
   return _;
 }(typeof this['docs-source'] === 'undefined' ? {} : this['docs-source'], kotlin, beans, elements);
 
-//@ sourceMappingURL=docs-source.js.map
+//# sourceMappingURL=docs-source.js.map

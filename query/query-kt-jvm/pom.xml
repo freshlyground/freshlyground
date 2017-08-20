@@ -20,11 +20,6 @@
             <version>${kotlin.version}</version>
         </dependency>
         <dependency>
-            <groupId>freshlyground.query</groupId>
-            <artifactId>query-kt</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        <dependency>
             <groupId>com.beust</groupId>
             <artifactId>klaxon</artifactId>
             <version>0.31</version>

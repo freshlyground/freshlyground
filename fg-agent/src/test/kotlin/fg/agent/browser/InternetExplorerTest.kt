@@ -1,6 +1,6 @@
 package fg.agent.browser
 
-import org.junit.Test
+import kotlin.test.Test
 import kotlin.test.assertEquals
 
 class InternetExplorerTest {

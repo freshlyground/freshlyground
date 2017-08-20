@@ -19,11 +19,6 @@
             <artifactId>kotlin-stdlib-js</artifactId>
             <version>${kotlin.version}</version>
         </dependency>
-        <dependency>
-            <groupId>freshlyground.query</groupId>
-            <artifactId>query-kt</artifactId>
-            <version>${project.version}</version>
-        </dependency>
     </dependencies>
 
     <build>

@@ -15,7 +15,6 @@
     <packaging>pom</packaging>
 
     <modules>
-        <module>query-kt</module>
         <module>query-kt-js</module>
         <module>query-kt-jvm</module>
         <module>query-json-kt-jvm</module>

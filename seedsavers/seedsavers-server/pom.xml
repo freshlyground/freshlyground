@@ -110,6 +110,20 @@
                                 </artifactItem>
                                 <artifactItem>
                                     <groupId>freshlyground</groupId>
+                                    <artifactId>fg-agent</artifactId>
+                                    <version>${project.version}</version>
+                                    <outputDirectory>${project.build.directory}/classes/_resources/js/lib</outputDirectory>
+                                    <includes>*.js</includes>
+                                </artifactItem>
+                                <artifactItem>
+                                    <groupId>freshlyground</groupId>
+                                    <artifactId>fg-keyboard</artifactId>
+                                    <version>${project.version}</version>
+                                    <outputDirectory>${project.build.directory}/classes/_resources/js/lib</outputDirectory>
+                                    <includes>*.js</includes>
+                                </artifactItem>
+                                <artifactItem>
+                                    <groupId>freshlyground</groupId>
                                     <artifactId>elements</artifactId>
                                     <version>${project.version}</version>
                                     <outputDirectory>${project.build.directory}/classes/_resources/js/lib</outputDirectory>

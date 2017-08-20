@@ -3,10 +3,6 @@ if (typeof kotlin === 'undefined') {
 }
 var elements = function (_, Kotlin) {
   'use strict';
-  var experimental_0 = Kotlin.kotlin.coroutines.experimental;
-  var Continuation = Kotlin.kotlin.coroutines.experimental.Continuation;
-  var startCoroutine = Kotlin.kotlin.coroutines.experimental.startCoroutine_xtwlez$;
-  var RuntimeException = Kotlin.kotlin.RuntimeException;
   var toMutableList = Kotlin.kotlin.collections.toMutableList_4c7yge$;
   var get_lastIndex = Kotlin.kotlin.collections.get_lastIndex_55thoc$;
   var IllegalArgumentException = Kotlin.kotlin.IllegalArgumentException;
@@ -21,24 +17,28 @@ var elements = function (_, Kotlin) {
   var substringBefore = Kotlin.kotlin.text.substringBefore_j4ogox$;
   var substringAfter = Kotlin.kotlin.text.substringAfter_j4ogox$;
   var linkedMapOf = Kotlin.kotlin.collections.linkedMapOf_qfcya0$;
+  var experimental = Kotlin.kotlin.coroutines.experimental;
+  var Continuation = Kotlin.kotlin.coroutines.experimental.Continuation;
+  var startCoroutine = Kotlin.kotlin.coroutines.experimental.startCoroutine_xtwlez$;
+  var RuntimeException = Kotlin.kotlin.RuntimeException;
   var padEnd = Kotlin.kotlin.text.padEnd_vrc1nu$;
   var Enum = Kotlin.kotlin.Enum;
-  var substringBeforeLast = Kotlin.kotlin.text.substringBeforeLast_j4ogox$;
-  var toDouble = Kotlin.kotlin.text.toDouble_pdl1vz$;
-  var toInt = Kotlin.kotlin.text.toInt_pdl1vz$;
   var List = Kotlin.kotlin.collections.List;
   var IllegalStateException = Kotlin.kotlin.IllegalStateException;
   var downTo = Kotlin.kotlin.ranges.downTo_dqglrj$;
   var lazy = Kotlin.kotlin.lazy_klfg04$;
-  var properties_0 = Kotlin.kotlin.properties;
+  var first = Kotlin.kotlin.collections.first_2p1efm$;
+  var Pair = Kotlin.kotlin.Pair;
+  var ReadWriteProperty = Kotlin.kotlin.properties.ReadWriteProperty;
+  var substringBeforeLast = Kotlin.kotlin.text.substringBeforeLast_j4ogox$;
+  var toDouble = Kotlin.kotlin.text.toDouble_pdl1vz$;
+  var toInt = Kotlin.kotlin.text.toInt_pdl1vz$;
+  var properties = Kotlin.kotlin.properties;
   var IntRange = Kotlin.kotlin.ranges.IntRange;
   var IntCompanionObject = Kotlin.kotlin.js.internal.IntCompanionObject;
   var contains = Kotlin.kotlin.ranges.contains_bupbvv$;
-  var ReadWriteProperty = Kotlin.kotlin.properties.ReadWriteProperty;
-  var first = Kotlin.kotlin.collections.first_2p1efm$;
-  var Pair = Kotlin.kotlin.Pair;
   var toInt_0 = Kotlin.kotlin.text.toInt_6ic1pp$;
-  var iterator_0 = Kotlin.kotlin.text.iterator_gw00vp$;
+  var iterator = Kotlin.kotlin.text.iterator_gw00vp$;
   UnexpectedStatusException.prototype = Object.create(RuntimeException.prototype);
   UnexpectedStatusException.prototype.constructor = UnexpectedStatusException;
   InternalServerErrorException.prototype = Object.create(UnexpectedStatusException.prototype);
@@ -51,8 +51,6 @@ var elements = function (_, Kotlin) {
   Element.prototype.constructor = Element;
   Body.prototype = Object.create(Element.prototype);
   Body.prototype.constructor = Body;
-  DimensionType.prototype = Object.create(Enum.prototype);
-  DimensionType.prototype.constructor = DimensionType;
   Div.prototype = Object.create(Element.prototype);
   Div.prototype.constructor = Div;
   Element$ResizeSensor$Sensor.prototype = Object.create(Div.prototype);
@@ -61,6 +59,10 @@ var elements = function (_, Kotlin) {
   Element$ResizeSensor$SensorExpand.prototype.constructor = Element$ResizeSensor$SensorExpand;
   Element$ResizeSensor$SensorShrink.prototype = Object.create(Div.prototype);
   Element$ResizeSensor$SensorShrink.prototype.constructor = Element$ResizeSensor$SensorShrink;
+  Text_0.prototype = Object.create(Node.prototype);
+  Text_0.prototype.constructor = Text_0;
+  DimensionType.prototype = Object.create(Enum.prototype);
+  DimensionType.prototype.constructor = DimensionType;
   Img.prototype = Object.create(Element.prototype);
   Img.prototype.constructor = Img;
   Button.prototype = Object.create(Element.prototype);
@@ -243,8 +245,6 @@ var elements = function (_, Kotlin) {
   Span.prototype.constructor = Span;
   I.prototype = Object.create(Element.prototype);
   I.prototype.constructor = I;
-  Text_0.prototype = Object.create(Node.prototype);
-  Text_0.prototype.constructor = Text_0;
   AdjacentSiblingRule.prototype = Object.create(Rule.prototype);
   AdjacentSiblingRule.prototype.constructor = AdjacentSiblingRule;
   AndRule.prototype = Object.create(Rule.prototype);
@@ -261,6 +261,8 @@ var elements = function (_, Kotlin) {
   KeyFrameRule.prototype.constructor = KeyFrameRule;
   KeyframesRule.prototype = Object.create(Rule.prototype);
   KeyframesRule.prototype.constructor = KeyframesRule;
+  TypeRule.prototype = Object.create(Rule.prototype);
+  TypeRule.prototype.constructor = TypeRule;
   TypedRule.prototype = Object.create(Rule.prototype);
   TypedRule.prototype.constructor = TypedRule;
   TypedClassRule.prototype = Object.create(TypedRule.prototype);
@@ -289,8 +291,6 @@ var elements = function (_, Kotlin) {
   TypedRule$FlexShrinkDelegate.prototype.constructor = TypedRule$FlexShrinkDelegate;
   TypedRule$FlexBasisDelegate.prototype = Object.create(TypedRule$TypedPropertyDelegate.prototype);
   TypedRule$FlexBasisDelegate.prototype.constructor = TypedRule$FlexBasisDelegate;
-  TypeRule.prototype = Object.create(Rule.prototype);
-  TypeRule.prototype.constructor = TypeRule;
   function CompareTo() {
     CompareTo_instance = this;
   }
@@ -357,147 +357,11 @@ var elements = function (_, Kotlin) {
     }
     return CompareTo_instance;
   }
-  function launch$ObjectLiteral() {
-  }
-  Object.defineProperty(launch$ObjectLiteral.prototype, 'context', {
-    get: function () {
-      return experimental_0.EmptyCoroutineContext;
-    }
-  });
-  launch$ObjectLiteral.prototype.resume_11rb$ = function (value) {
-  };
-  launch$ObjectLiteral.prototype.resumeWithException_tcv7n7$ = function (e) {
-    console.error(toStacktrace(e));
-  };
-  launch$ObjectLiteral.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
-    interfaces: [Continuation]
-  };
-  function launch(block) {
-    startCoroutine(block, new launch$ObjectLiteral());
-  }
-  function launch$ObjectLiteral_0(closure$element) {
-    this.closure$element = closure$element;
-  }
-  Object.defineProperty(launch$ObjectLiteral_0.prototype, 'context', {
-    get: function () {
-      return experimental_0.EmptyCoroutineContext;
-    }
-  });
-  launch$ObjectLiteral_0.prototype.resume_11rb$ = function (value) {
-  };
-  function launch$ObjectLiteral$resumeWithException$lambda$lambda($receiver) {
-    $receiver.style.backgroundColor = RgbColor$Factory_getInstance().RED;
-    $receiver.style.color = RgbColor$Factory_getInstance().WHITE;
-    $receiver._style.fontFamily = 'monospace';
-    $receiver.unaryPlus_pdl1vz$('Unexpected error while executing');
-  }
-  function launch$ObjectLiteral$resumeWithException$lambda(closure$preEl) {
-    return function ($receiver) {
-      $receiver._style.border = '1px solid red';
-      $receiver._style.margin = '0.5em';
-      div($receiver, launch$ObjectLiteral$resumeWithException$lambda$lambda);
-      $receiver.appendChild_sr04hg$(closure$preEl);
-    };
-  }
-  launch$ObjectLiteral_0.prototype.resumeWithException_tcv7n7$ = function (e) {
-    var stacktrace = toStacktrace(e);
-    console.error(stacktrace);
-    var preEl = new Pre();
-    preEl._style.whiteSpace = 'pre-wrap';
-    preEl._style.margin = '0.5em';
-    preEl.appendChild_sr04hg$(new Text_0(stacktrace));
-    var errorContainerElement = with_0(new Div(), launch$ObjectLiteral$resumeWithException$lambda(preEl));
-    this.closure$element.appendChild_sr04hg$(errorContainerElement);
-  };
-  launch$ObjectLiteral_0.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
-    interfaces: [Continuation]
-  };
-  function launch_0(element, block) {
-    startCoroutine(block, new launch$ObjectLiteral_0(element));
-  }
-  function InternalServerErrorException(message) {
-    UnexpectedStatusException.call(this, 'Internal Server error: ' + message);
-    this.name = 'InternalServerErrorException';
-  }
-  InternalServerErrorException.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
-    simpleName: 'InternalServerErrorException',
-    interfaces: [UnexpectedStatusException]
-  };
-  function NotFoundException(message) {
-    UnexpectedStatusException.call(this, 'Not fond: ' + message);
-    this.name = 'NotFoundException';
-  }
-  NotFoundException.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
-    simpleName: 'NotFoundException',
-    interfaces: [UnexpectedStatusException]
-  };
-  function UnexpectedStatusException(message) {
-    RuntimeException.call(this, message);
-    this.name = 'UnexpectedStatusException';
-  }
-  UnexpectedStatusException.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
-    simpleName: 'UnexpectedStatusException',
-    interfaces: [RuntimeException]
-  };
-  function await$lambda$lambda(closure$cont) {
-    return function (it) {
-      closure$cont.resume_11rb$(it);
-    };
-  }
-  function await$lambda$lambda_0(closure$cont) {
-    return function (it) {
-      closure$cont.resumeWithException_tcv7n7$(it);
-    };
-  }
-  function await$lambda(this$await) {
-    return function (cont) {
-      this$await.then(await$lambda$lambda(cont), await$lambda$lambda_0(cont));
-    };
-  }
-  function await_0($receiver, continuation) {
-    return Kotlin.kotlin.coroutines.experimental.suspendCoroutine$f(await$lambda($receiver))(continuation.facade);
-  }
-  function send$lambda$lambda(closure$request, closure$cont) {
-    return function (event) {
-      var readyState = closure$request.readyState;
-      if (readyState === XMLHttpRequest.DONE) {
-        if (closure$request.status === Kotlin.toShort(200)) {
-          closure$cont.resume_11rb$(closure$request.responseText);
-        }
-         else if (closure$request.status === Kotlin.toShort(404)) {
-          closure$cont.resumeWithException_tcv7n7$(new NotFoundException(closure$request.responseText));
-        }
-         else if (closure$request.status === Kotlin.toShort(500)) {
-          closure$cont.resumeWithException_tcv7n7$(new InternalServerErrorException(closure$request.responseText));
-        }
-         else {
-          closure$cont.resumeWithException_tcv7n7$(new UnexpectedStatusException(closure$request.responseText));
-        }
-      }
-    };
-  }
-  function send$lambda(closure$request, closure$body) {
-    return function (cont) {
-      closure$request.onreadystatechange = send$lambda$lambda(closure$request, cont);
-      closure$request.send(closure$body);
-    };
-  }
-  function send(request, body, continuation) {
-    if (body === void 0)
-      body = null;
-    var block = send$lambda(request, body);
-    return Kotlin.kotlin.coroutines.experimental.suspendCoroutine$f(block)(continuation.facade);
-  }
-  function Path(absolute, trailingSlash, elements_0) {
+  function Path(absolute, trailingSlash, elements) {
     Path$Factory_getInstance();
     this.absolute = absolute;
     this.trailingSlash = trailingSlash;
-    this.elements = elements_0;
+    this.elements = elements;
     this.asString_v1kqyt$_0 = null;
     var string = joinToString(this.elements, '/', void 0, void 0, void 0, void 0, Path_init$lambda);
     if (this.absolute) {
@@ -509,21 +373,21 @@ var elements = function (_, Kotlin) {
     this.asString_v1kqyt$_0 = string;
   }
   Path.prototype.append_usdzdh$ = function (other) {
-    var elements_0 = toMutableList(this.elements);
-    elements_0.addAll_brywnq$(other.elements);
-    return new Path(this.absolute, other.trailingSlash, elements_0);
+    var elements = toMutableList(this.elements);
+    elements.addAll_brywnq$(other.elements);
+    return new Path(this.absolute, other.trailingSlash, elements);
   };
   Path.prototype.subPathAfter_usdzdh$ = function (other) {
     var tmp$;
     var fromIndex = 0;
     tmp$ = get_lastIndex(this.elements);
-    for (var i_0 = 0; i_0 <= tmp$; i_0++) {
-      if (i_0 >= other.size) {
-        fromIndex = i_0;
+    for (var i = 0; i <= tmp$; i++) {
+      if (i >= other.size) {
+        fromIndex = i;
         break;
       }
-      if (!this.elements.get_za3lpa$(i_0).equals(other.getElement_za3lpa$(i_0))) {
-        fromIndex = i_0 + 1 | 0;
+      if (!this.elements.get_za3lpa$(i).equals(other.getElement_za3lpa$(i))) {
+        fromIndex = i + 1 | 0;
       }
     }
     var elementsAfter = this.elements.subList_vux9f0$(fromIndex, this.elements.size);
@@ -595,15 +459,15 @@ var elements = function (_, Kotlin) {
     var absolute = startsWith(string, '/');
     var trailingSlash = endsWith(string, '/');
     var elementsAsString = split(string, ['/']);
-    var elements_0 = Kotlin.kotlin.collections.ArrayList_init_ww73n8$();
+    var elements = Kotlin.kotlin.collections.ArrayList_init_ww73n8$();
     tmp$ = elementsAsString.iterator();
     while (tmp$.hasNext()) {
       var elementAsString = tmp$.next();
       if (!Kotlin.kotlin.text.isBlank_gw00vp$(elementAsString)) {
-        elements_0.add_11rb$(new Path$Element(elementAsString));
+        elements.add_11rb$(new Path$Element(elementAsString));
       }
     }
-    return new Path(absolute, trailingSlash, elements_0);
+    return new Path(absolute, trailingSlash, elements);
   };
   Path$Factory.$metadata$ = {
     kind: Kotlin.Kind.OBJECT,
@@ -661,7 +525,7 @@ var elements = function (_, Kotlin) {
     if (thisError.stack != null) {
       stackTrace += thisError.stack;
       if ($receiver.cause != null) {
-        stackTrace += '\nCaused by: ' + toStacktrace((tmp$ = $receiver.cause) != null ? tmp$ : Kotlin.throwNPE());
+        stackTrace = stackTrace + ('\nCaused by: ' + toStacktrace((tmp$ = $receiver.cause) != null ? tmp$ : Kotlin.throwNPE()));
         return stackTrace;
       }
     }
@@ -803,16 +667,16 @@ var elements = function (_, Kotlin) {
     this.map = map;
   }
   URL$Query.prototype.toString = function () {
-    var tmp$_0;
+    var tmp$;
     if (this.map.isEmpty()) {
       return '';
     }
     var s = '?';
-    tmp$_0 = this.map.entries.iterator();
-    while (tmp$_0.hasNext()) {
-      var tmp$ = tmp$_0.next();
-      var key = tmp$.key;
-      var value = tmp$.value;
+    tmp$ = this.map.entries.iterator();
+    while (tmp$.hasNext()) {
+      var tmp$_0 = tmp$.next();
+      var key = tmp$_0.key;
+      var value = tmp$_0.value;
       if (s.length > 1) {
         s += '&';
       }
@@ -836,9 +700,9 @@ var elements = function (_, Kotlin) {
     var splitted = split(withoutQuestion, ['&']);
     var map = Kotlin.kotlin.collections.LinkedHashMap_init_q3lmfv$();
     tmp$ = get_lastIndex(splitted);
-    for (var i_0 = 0; i_0 <= tmp$; i_0++) {
-      var name = substringBefore(splitted.get_za3lpa$(i_0), '=');
-      var value = substringAfter(splitted.get_za3lpa$(i_0), '=');
+    for (var i = 0; i <= tmp$; i++) {
+      var name = substringBefore(splitted.get_za3lpa$(i), '=');
+      var value = substringAfter(splitted.get_za3lpa$(i), '=');
       if (!Kotlin.kotlin.text.isBlank_gw00vp$(name)) {
         map.put_xwzc9p$(name, value);
       }
@@ -881,6 +745,141 @@ var elements = function (_, Kotlin) {
     simpleName: 'URL',
     interfaces: [Comparable]
   };
+  function launch$ObjectLiteral() {
+  }
+  Object.defineProperty(launch$ObjectLiteral.prototype, 'context', {
+    get: function () {
+      return experimental.EmptyCoroutineContext;
+    }
+  });
+  launch$ObjectLiteral.prototype.resume_11rb$ = function (value) {
+  };
+  launch$ObjectLiteral.prototype.resumeWithException_tcv7n7$ = function (e) {
+    console.error(toStacktrace(e));
+  };
+  launch$ObjectLiteral.$metadata$ = {
+    kind: Kotlin.Kind.CLASS,
+    interfaces: [Continuation]
+  };
+  function launch(block) {
+    startCoroutine(block, new launch$ObjectLiteral());
+  }
+  function launch$ObjectLiteral_0(closure$element) {
+    this.closure$element = closure$element;
+  }
+  Object.defineProperty(launch$ObjectLiteral_0.prototype, 'context', {
+    get: function () {
+      return experimental.EmptyCoroutineContext;
+    }
+  });
+  launch$ObjectLiteral_0.prototype.resume_11rb$ = function (value) {
+  };
+  function launch$ObjectLiteral$resumeWithException$lambda$lambda($receiver) {
+    $receiver.style.backgroundColor = RgbColor$Factory_getInstance().RED;
+    $receiver.style.color = RgbColor$Factory_getInstance().WHITE;
+    $receiver._style.fontFamily = 'monospace';
+    $receiver.unaryPlus_pdl1vz$('Unexpected error while executing');
+  }
+  function launch$ObjectLiteral$resumeWithException$lambda(closure$preEl) {
+    return function ($receiver) {
+      $receiver._style.border = '1px solid red';
+      $receiver._style.margin = '0.5em';
+      div($receiver, launch$ObjectLiteral$resumeWithException$lambda$lambda);
+      $receiver.appendChild_sr04hg$(closure$preEl);
+    };
+  }
+  launch$ObjectLiteral_0.prototype.resumeWithException_tcv7n7$ = function (e) {
+    var stacktrace = toStacktrace(e);
+    console.error(stacktrace);
+    var preEl = new Pre();
+    preEl._style.whiteSpace = 'pre-wrap';
+    preEl._style.margin = '0.5em';
+    preEl.appendChild_sr04hg$(new Text_0(stacktrace));
+    var errorContainerElement = with_0(new Div(), launch$ObjectLiteral$resumeWithException$lambda(preEl));
+    this.closure$element.appendChild_sr04hg$(errorContainerElement);
+  };
+  launch$ObjectLiteral_0.$metadata$ = {
+    kind: Kotlin.Kind.CLASS,
+    interfaces: [Continuation]
+  };
+  function launch_0(element, block) {
+    startCoroutine(block, new launch$ObjectLiteral_0(element));
+  }
+  function InternalServerErrorException(message) {
+    UnexpectedStatusException.call(this, 'Internal Server error: ' + message);
+    this.name = 'InternalServerErrorException';
+  }
+  InternalServerErrorException.$metadata$ = {
+    kind: Kotlin.Kind.CLASS,
+    simpleName: 'InternalServerErrorException',
+    interfaces: [UnexpectedStatusException]
+  };
+  function NotFoundException(message) {
+    UnexpectedStatusException.call(this, 'Not fond: ' + message);
+    this.name = 'NotFoundException';
+  }
+  NotFoundException.$metadata$ = {
+    kind: Kotlin.Kind.CLASS,
+    simpleName: 'NotFoundException',
+    interfaces: [UnexpectedStatusException]
+  };
+  function UnexpectedStatusException(message) {
+    RuntimeException.call(this, message);
+    this.name = 'UnexpectedStatusException';
+  }
+  UnexpectedStatusException.$metadata$ = {
+    kind: Kotlin.Kind.CLASS,
+    simpleName: 'UnexpectedStatusException',
+    interfaces: [RuntimeException]
+  };
+  function await$lambda$lambda(closure$cont) {
+    return function (it) {
+      closure$cont.resume_11rb$(it);
+    };
+  }
+  function await$lambda$lambda_0(closure$cont) {
+    return function (it) {
+      closure$cont.resumeWithException_tcv7n7$(it);
+    };
+  }
+  function await$lambda(this$await) {
+    return function (cont) {
+      this$await.then(await$lambda$lambda(cont), await$lambda$lambda_0(cont));
+    };
+  }
+  function await_0($receiver, continuation) {
+    return Kotlin.kotlin.coroutines.experimental.suspendCoroutine$f(await$lambda($receiver))(continuation.facade);
+  }
+  function send$lambda$lambda(closure$request, closure$cont) {
+    return function (event) {
+      var readyState = closure$request.readyState;
+      if (readyState === XMLHttpRequest.DONE) {
+        if (closure$request.status === Kotlin.toShort(200)) {
+          closure$cont.resume_11rb$(closure$request.responseText);
+        }
+         else if (closure$request.status === Kotlin.toShort(404)) {
+          closure$cont.resumeWithException_tcv7n7$(new NotFoundException(closure$request.responseText));
+        }
+         else if (closure$request.status === Kotlin.toShort(500)) {
+          closure$cont.resumeWithException_tcv7n7$(new InternalServerErrorException(closure$request.responseText));
+        }
+         else {
+          closure$cont.resumeWithException_tcv7n7$(new UnexpectedStatusException(closure$request.responseText));
+        }
+      }
+    };
+  }
+  function send$lambda(closure$request, closure$body) {
+    return function (cont) {
+      closure$request.onreadystatechange = send$lambda$lambda(closure$request, cont);
+      closure$request.send(closure$body);
+    };
+  }
+  function send(request, body, continuation) {
+    if (body === void 0)
+      body = null;
+    return Kotlin.kotlin.coroutines.experimental.suspendCoroutine$f(send$lambda(request, body))(continuation.facade);
+  }
   var HEX_CHARS;
   function toHexString($receiver) {
     var char2 = Kotlin.unboxChar(HEX_CHARS[$receiver & 15]);
@@ -947,15 +946,14 @@ var elements = function (_, Kotlin) {
       side = Side$LEFT_getInstance();
     if (decimals === void 0)
       decimals = 2;
-    var tmp$, tmp$_0;
-    tmp$ = side;
-    if (Kotlin.equals(tmp$, Side$LEFT_getInstance()))
-      tmp$_0 = currency + ' ' + padEnd($receiver.toString(), decimals, 48);
-    else if (Kotlin.equals(tmp$, Side$RIGHT_getInstance()))
-      tmp$_0 = padEnd($receiver.toString(), decimals, 48) + ' ' + currency;
+    var tmp$;
+    if (Kotlin.equals(side, Side$LEFT_getInstance()))
+      tmp$ = currency + ' ' + padEnd($receiver.toString(), decimals, 48);
+    else if (Kotlin.equals(side, Side$RIGHT_getInstance()))
+      tmp$ = padEnd($receiver.toString(), decimals, 48) + ' ' + currency;
     else
-      tmp$_0 = Kotlin.noWhenBranchMatched();
-    return tmp$_0;
+      tmp$ = Kotlin.noWhenBranchMatched();
+    return tmp$;
   }
   function Side(name, ordinal) {
     Enum.call(this);
@@ -1007,16 +1005,1239 @@ var elements = function (_, Kotlin) {
       return this.mounted_vyrc26$_0;
     }
   });
-  Body.prototype.init_0 = function () {
+  Body.prototype.init_8be2vx$ = function () {
     this.render();
-    this.renderChildren_w5cupa$_0();
-    this.mountChildren_w5cupa$_0();
+    this.renderChildren_8be2vx$();
+    this.mountChildren_8be2vx$();
   };
   Body.$metadata$ = {
     kind: Kotlin.Kind.CLASS,
     simpleName: 'Body',
     interfaces: [Element]
   };
+  function br($receiver, init) {
+    return initAndAppendNode($receiver, new Br(), init);
+  }
+  function header($receiver, init) {
+    return initAndAppendNode($receiver, new Header(), init);
+  }
+  function main($receiver, init) {
+    return initAndAppendNode($receiver, new Main(), init);
+  }
+  function footer($receiver, init) {
+    return initAndAppendNode($receiver, new Footer(), init);
+  }
+  function h1($receiver, init) {
+    return initAndAppendNode($receiver, new H1(), init);
+  }
+  function h2($receiver, init) {
+    return initAndAppendNode($receiver, new H2(), init);
+  }
+  function h3($receiver, init) {
+    return initAndAppendNode($receiver, new H3(), init);
+  }
+  function h4($receiver, init) {
+    return initAndAppendNode($receiver, new H4(), init);
+  }
+  function h5($receiver, init) {
+    return initAndAppendNode($receiver, new H5(), init);
+  }
+  function h6($receiver, init) {
+    return initAndAppendNode($receiver, new H6(), init);
+  }
+  function p($receiver, init) {
+    return initAndAppendNode($receiver, new P(), init);
+  }
+  function span($receiver, init) {
+    return initAndAppendNode($receiver, new Span(), init);
+  }
+  function hr($receiver, init) {
+    return initAndAppendNode($receiver, new Hr(), init);
+  }
+  function ul($receiver, init) {
+    return initAndAppendNode($receiver, new Ul(), init);
+  }
+  function ol($receiver, init) {
+    return initAndAppendNode($receiver, new Ol(), init);
+  }
+  function li($receiver, init) {
+    return initAndAppendNode($receiver, new Li(), init);
+  }
+  function div($receiver, init) {
+    return initAndAppendNode($receiver, new Div(), init);
+  }
+  function pre($receiver, init) {
+    return initAndAppendNode($receiver, new Pre(), init);
+  }
+  function a$lambda(closure$href, closure$target) {
+    return function ($receiver) {
+      $receiver._href = closure$href;
+      $receiver._target = closure$target;
+    };
+  }
+  function a($receiver, href, target, init) {
+    if (href === void 0)
+      href = null;
+    if (target === void 0)
+      target = null;
+    return initAndAppendNode($receiver, with_0(new A(), a$lambda(href, target)), init);
+  }
+  function i($receiver, init) {
+    return initAndAppendNode($receiver, new I(), init);
+  }
+  function inputText($receiver, init) {
+    return initAndAppendNode($receiver, new InputText(), init);
+  }
+  function inputNumber($receiver, init) {
+    return initAndAppendNode($receiver, new InputNumber(), init);
+  }
+  function img($receiver, src, init) {
+    return initAndAppendNode($receiver, new Img(src), init);
+  }
+  function button($receiver, init) {
+    return initAndAppendNode($receiver, new Button(), init);
+  }
+  function label($receiver, init) {
+    return initAndAppendNode($receiver, new Label(), init);
+  }
+  function select($receiver, init) {
+    return initAndAppendNode($receiver, new Select(), init);
+  }
+  function table($receiver, init) {
+    return initAndAppendNode($receiver, new Table(), init);
+  }
+  function caption($receiver, init) {
+    return initAndAppendNode($receiver, new Caption(), init);
+  }
+  function colgroup($receiver, init) {
+    return initAndAppendNode($receiver, new Colgroup(), init);
+  }
+  function col($receiver, init) {
+    return initAndAppendNode($receiver, new Col(), init);
+  }
+  function tbody($receiver, init) {
+    return initAndAppendNode($receiver, new Tbody(), init);
+  }
+  function thead($receiver, init) {
+    return initAndAppendNode($receiver, new Thead(), init);
+  }
+  function tfoot($receiver, init) {
+    return initAndAppendNode($receiver, new Tfoot(), init);
+  }
+  function tr($receiver, init) {
+    return initAndAppendNode($receiver, new Tr(), init);
+  }
+  function td($receiver, init) {
+    return initAndAppendNode($receiver, new Td(), init);
+  }
+  function th($receiver, init) {
+    return initAndAppendNode($receiver, new Th(), init);
+  }
+  function initAndAppendNode($receiver, node, init) {
+    init(node);
+    $receiver.appendChild_sr04hg$(node);
+    return node;
+  }
+  function Element(name, existingElement, w3cElement) {
+    var tmp$;
+    if (name === void 0)
+      name = null;
+    if (existingElement === void 0)
+      existingElement = null;
+    if (w3cElement === void 0)
+      w3cElement = existingElement != null ? existingElement : Kotlin.isType(tmp$ = document.createElement(name != null ? name : Kotlin.throwNPE()), HTMLElement) ? tmp$ : Kotlin.throwCCE();
+    Node.call(this, w3cElement);
+    this.w3cElement_8be2vx$ = w3cElement;
+    this.renderCalled_gobymg$_0 = false;
+    this.didMountCalled_gobymg$_0 = false;
+    this.resizedListeners$delegate = lazy(Element$resizedListeners$lambda);
+    this.resizeSensor_gobymg$_0 = null;
+    this.hideOnBreakpoints$delegate = lazy(Element$hideOnBreakpoints$lambda);
+    this.resizedHandler_gobymg$_0 = Element$resizedHandler$lambda(this);
+    this._id$delegate = W3cDelegates_getInstance().nullableAttribute_61zpoe$('id');
+    this._tabindex$delegate = W3cDelegates_getInstance().nullableAttribute_61zpoe$('tabindex');
+    this._displayBeforeHiding_gobymg$_0 = '';
+    this.style$delegate = lazy(Element$style$lambda(this));
+    this.layout$delegate = new LayoutDelegate();
+    this.renderBlocks_8be2vx$ = Kotlin.kotlin.collections.ArrayList_init_ww73n8$();
+  }
+  Object.defineProperty(Element.prototype, 'renderCalled', {
+    get: function () {
+      return this.renderCalled_gobymg$_0;
+    },
+    set: function (renderCalled) {
+      this.renderCalled_gobymg$_0 = renderCalled;
+    }
+  });
+  Object.defineProperty(Element.prototype, 'didMountCalled', {
+    get: function () {
+      return this.didMountCalled_gobymg$_0;
+    },
+    set: function (didMountCalled) {
+      this.didMountCalled_gobymg$_0 = didMountCalled;
+    }
+  });
+  Object.defineProperty(Element.prototype, 'resizedListeners_gobymg$_0', {
+    get: function () {
+      var $receiver = this.resizedListeners$delegate;
+      new Kotlin.PropertyMetadata('resizedListeners');
+      return $receiver.value;
+    }
+  });
+  Object.defineProperty(Element.prototype, 'hideOnBreakpoints_gobymg$_0', {
+    get: function () {
+      var $receiver = this.hideOnBreakpoints$delegate;
+      new Kotlin.PropertyMetadata('hideOnBreakpoints');
+      return $receiver.value;
+    }
+  });
+  Object.defineProperty(Element.prototype, 'childElements', {
+    get: function () {
+      var tmp$;
+      var $receiver = this.childNodes;
+      var destination = Kotlin.kotlin.collections.ArrayList_init_ww73n8$();
+      var tmp$_0;
+      tmp$_0 = $receiver.iterator();
+      while (tmp$_0.hasNext()) {
+        var element = tmp$_0.next();
+        if (Kotlin.isType(element, Element))
+          destination.add_11rb$(element);
+      }
+      return Kotlin.isType(tmp$ = destination, List) ? tmp$ : Kotlin.throwCCE();
+    }
+  });
+  Object.defineProperty(Element.prototype, '_parentElement', {
+    get: function () {
+      var tmp$, tmp$_0;
+      return Kotlin.isType(tmp$_0 = (tmp$ = this._parentNode_8be2vx$) != null ? tmp$ : Kotlin.throwNPE(), Element) ? tmp$_0 : Kotlin.throwCCE();
+    }
+  });
+  Object.defineProperty(Element.prototype, '_id', {
+    get: function () {
+      return this._id$delegate.getValue_lrcp0p$(this, new Kotlin.PropertyMetadata('_id'));
+    },
+    set: function (_id) {
+      this._id$delegate.setValue_9rddgb$(this, new Kotlin.PropertyMetadata('_id'), _id);
+    }
+  });
+  Object.defineProperty(Element.prototype, '_tabindex', {
+    get: function () {
+      return this._tabindex$delegate.getValue_lrcp0p$(this, new Kotlin.PropertyMetadata('_tabindex'));
+    },
+    set: function (_tabindex) {
+      this._tabindex$delegate.setValue_9rddgb$(this, new Kotlin.PropertyMetadata('_tabindex'), _tabindex);
+    }
+  });
+  Object.defineProperty(Element.prototype, 'hidden', {
+    get: function () {
+      return Kotlin.equals(this._style.display, 'none');
+    }
+  });
+  Object.defineProperty(Element.prototype, '_style', {
+    get: function () {
+      return this.w3cElement_8be2vx$.style;
+    }
+  });
+  Object.defineProperty(Element.prototype, 'style', {
+    get: function () {
+      var $receiver = this.style$delegate;
+      new Kotlin.PropertyMetadata('style');
+      return $receiver.value;
+    }
+  });
+  Object.defineProperty(Element.prototype, 'layout', {
+    get: function () {
+      return this.layout$delegate.getValue_lrcp0p$(this, new Kotlin.PropertyMetadata('layout'));
+    },
+    set: function (layout) {
+      this.layout$delegate.setValue_9rddgb$(this, new Kotlin.PropertyMetadata('layout'), layout);
+    }
+  });
+  Object.defineProperty(Element.prototype, 'clientWidth', {
+    get: function () {
+      return this.w3cElement_8be2vx$.clientWidth;
+    }
+  });
+  Object.defineProperty(Element.prototype, 'clientHeight', {
+    get: function () {
+      return this.w3cElement_8be2vx$.clientHeight;
+    }
+  });
+  Object.defineProperty(Element.prototype, 'offsetWidth', {
+    get: function () {
+      return this.w3cElement_8be2vx$.offsetWidth;
+    }
+  });
+  Object.defineProperty(Element.prototype, 'offsetHeight', {
+    get: function () {
+      return this.w3cElement_8be2vx$.offsetHeight;
+    }
+  });
+  Object.defineProperty(Element.prototype, 'scrollWidth', {
+    get: function () {
+      return this.w3cElement_8be2vx$.scrollWidth;
+    }
+  });
+  Object.defineProperty(Element.prototype, 'scrollHeight', {
+    get: function () {
+      return this.w3cElement_8be2vx$.scrollHeight;
+    }
+  });
+  Object.defineProperty(Element.prototype, 'offsetTop', {
+    get: function () {
+      return this.w3cElement_8be2vx$.offsetTop;
+    }
+  });
+  Object.defineProperty(Element.prototype, 'offsetLeft', {
+    get: function () {
+      return this.w3cElement_8be2vx$.offsetLeft;
+    }
+  });
+  Object.defineProperty(Element.prototype, 'boundingClientRect', {
+    get: function () {
+      return this.w3cElement_8be2vx$.getBoundingClientRect();
+    }
+  });
+  Element.prototype.parentResized_8bxfur$ = function (event) {
+    var $receiver = this.hideOnBreakpoints_gobymg$_0;
+    var any$result;
+    any$break: do {
+      var tmp$;
+      tmp$ = $receiver.iterator();
+      while (tmp$.hasNext()) {
+        var element = tmp$.next();
+        if (element.contains_14dthe$(event.width)) {
+          any$result = true;
+          break any$break;
+        }
+      }
+      any$result = false;
+    }
+     while (false);
+    var hideOrShow = any$result;
+    if (hideOrShow) {
+      this.hide();
+    }
+     else {
+      this.show();
+    }
+  };
+  Element.prototype.callRender_8be2vx$ = function () {
+    if (this.renderCalled) {
+      throw new IllegalStateException('render has already been called for this element');
+    }
+    this.render();
+    var tmp$;
+    tmp$ = this.renderBlocks_8be2vx$.iterator();
+    while (tmp$.hasNext()) {
+      var element = tmp$.next();
+      element(this);
+    }
+    this.renderCalled = true;
+  };
+  Element.prototype.callDidMount_8be2vx$ = function () {
+    if (this.didMountCalled) {
+      throw new IllegalStateException('didMount has already been called for this element');
+    }
+    this.didMount();
+    this.didMountCalled = true;
+  };
+  Element.prototype.callWillUnMount_8be2vx$ = function () {
+    this.didMountCalled = false;
+    this.willUnMount();
+  };
+  Element.prototype.render = function () {
+  };
+  Element.prototype.didMount = function () {
+  };
+  Element.prototype.willUnMount = function () {
+  };
+  Element.prototype.callDidMountOnChildren_8be2vx$ = function () {
+    var tmp$;
+    tmp$ = this.childNodes.iterator();
+    while (tmp$.hasNext()) {
+      var child = tmp$.next();
+      if (Kotlin.isType(child, Element)) {
+        child.callDidMountOnChildren_8be2vx$();
+        child.callDidMount_8be2vx$();
+      }
+    }
+  };
+  Element.prototype.addClass_bx842b$ = function (selector) {
+    this.addClass_61zpoe$(selector.value);
+  };
+  Element.prototype.addClass_61zpoe$ = function (name) {
+    this.w3cElement_8be2vx$.classList.add(name);
+  };
+  Element.prototype.removeClass_bx842b$ = function (selector) {
+    this.removeClass_61zpoe$(selector.value);
+  };
+  Element.prototype.removeClass_61zpoe$ = function (name) {
+    this.w3cElement_8be2vx$.classList.remove(name);
+  };
+  Element.prototype.removeClasses = function () {
+    var tmp$;
+    while (this.w3cElement_8be2vx$.classList.length > 0) {
+      this.w3cElement_8be2vx$.classList.remove((tmp$ = this.w3cElement_8be2vx$.classList[0]) != null ? tmp$ : Kotlin.throwNPE());
+    }
+  };
+  Element.prototype.removeClasses_leuowt$ = function (predicate) {
+    var tmp$, tmp$_0;
+    if (this.w3cElement_8be2vx$.classList.length === 0) {
+      return;
+    }
+    tmp$ = downTo(Math.max(0, this.w3cElement_8be2vx$.classList.length - 1 | 0), 0).iterator();
+    while (tmp$.hasNext()) {
+      var i = tmp$.next();
+      var currClass = (tmp$_0 = this.w3cElement_8be2vx$.classList[i]) != null ? tmp$_0 : Kotlin.throwNPE();
+      if (predicate(currClass)) {
+        this.w3cElement_8be2vx$.classList.remove(currClass);
+      }
+    }
+  };
+  Element.prototype.toggleClass_ivxn3r$ = function (name, force) {
+    if (force === void 0)
+      force = false;
+    this.w3cElement_8be2vx$.classList.toggle(name, force);
+  };
+  Element.prototype.unaryPlus_pdl1vz$ = function ($receiver) {
+    this.appendChild_sr04hg$(new Text_0($receiver));
+  };
+  Element.prototype.show = function () {
+    if (this.hidden) {
+      this._style.display = this._displayBeforeHiding_gobymg$_0;
+    }
+  };
+  Element.prototype.hide = function () {
+    if (!this.hidden) {
+      this._displayBeforeHiding_gobymg$_0 = this._style.display;
+      this._style.display = 'none';
+    }
+  };
+  Element.prototype.focus = function () {
+    this.w3cElement_8be2vx$.focus();
+    return Kotlin.equals(document.activeElement, this.w3cElement_8be2vx$);
+  };
+  Element.prototype.traverseElements_pf9u9b$ = function (each) {
+    var tmp$;
+    tmp$ = this.childElements.iterator();
+    while (tmp$.hasNext()) {
+      var child = tmp$.next();
+      var continueTraversing = each(child);
+      if (!continueTraversing) {
+        break;
+      }
+      child.traverseElements_pf9u9b$(each);
+    }
+  };
+  Element.prototype.getComputedStyle_61zpoe$ = function (property) {
+    var htmlElementDynamic = this.w3cElement_8be2vx$;
+    if (htmlElementDynamic.currentStyle) {
+      return htmlElementDynamic.currentStyle[property];
+    }
+     else if (window.getComputedStyle) {
+      return window.getComputedStyle(this.w3cElement_8be2vx$).getPropertyValue(property);
+    }
+     else {
+      return htmlElementDynamic.style[property];
+    }
+  };
+  Element.prototype.onResized_sdolbl$ = function (listener) {
+    this.resizedListeners_gobymg$_0.add_11rb$(listener);
+    if (this.resizedListeners_gobymg$_0.size === 1 && this.resizeSensor_gobymg$_0 == null) {
+      this.resizedListeners_gobymg$_0.add_11rb$(this.resizedHandler_gobymg$_0);
+      var sensor = new Element$ResizeSensor(this, this, this.resizedListeners_gobymg$_0);
+      this.resizeSensor_gobymg$_0 = sensor;
+      sensor.init();
+    }
+  };
+  Element.prototype.unResized_sdolbl$ = function (listener) {
+    var tmp$;
+    this.resizedListeners_gobymg$_0.remove_11rb$(listener);
+    if (this.resizedListeners_gobymg$_0.size === 1 && Kotlin.equals(this.resizedListeners_gobymg$_0.get_za3lpa$(0), this.resizedHandler_gobymg$_0)) {
+      this.resizedListeners_gobymg$_0.remove_11rb$(this.resizedHandler_gobymg$_0);
+    }
+    if (this.resizedListeners_gobymg$_0.isEmpty()) {
+      (tmp$ = this.resizeSensor_gobymg$_0) != null ? tmp$.destroy() : null;
+    }
+  };
+  Element.prototype.hideOn_saaiy0$ = function (breakpoint) {
+    var tmp$;
+    for (tmp$ = 0; tmp$ !== breakpoint.length; ++tmp$) {
+      var element = breakpoint[tmp$];
+      this.hideOnBreakpoints_gobymg$_0.add_11rb$(element);
+    }
+  };
+  Element.prototype._enforceStyleRecalculation = function () {
+    window.getComputedStyle(this.w3cElement_8be2vx$).getPropertyValue('opacity');
+  };
+  function Element$ResizeSensor($outer, element, resizedListeners) {
+    this.$outer = $outer;
+    this.element = element;
+    this.resizedListeners = resizedListeners;
+    this.sensorStyle_0 = 'position: absolute; left: 0; top: 0; right: 0; bottom: 0; overflow: hidden; z-index: -1; visibility: hidden;';
+    this.initialized_0 = false;
+    this.sensor$delegate = lazy(Element$ResizeSensor$sensor$lambda(this));
+    this.dirtyHeight_0 = false;
+    this.dirtyWidth_0 = false;
+    this.cachedWidth_0 = -1.0;
+    this.cachedHeight_0 = -1.0;
+    this.lastWidth_0 = -1.0;
+    this.lastHeight_0 = -1.0;
+    this.scrollHandler_0 = Element$ResizeSensor$scrollHandler$lambda(this);
+    this.dirtyChecking_0 = Element$ResizeSensor$dirtyChecking$lambda(this);
+  }
+  Object.defineProperty(Element$ResizeSensor.prototype, 'sensor_0', {
+    get: function () {
+      var $receiver = this.sensor$delegate;
+      new Kotlin.PropertyMetadata('sensor');
+      return $receiver.value;
+    }
+  });
+  function Element$ResizeSensor$init$lambda(this$ResizeSensor) {
+    return function (it) {
+      this$ResizeSensor.initializeSensor_0();
+    };
+  }
+  Element$ResizeSensor.prototype.init = function () {
+    if (!this.initialized_0) {
+      this.initialized_0 = true;
+      console.log('ResizeSensor.init: sensor not initialized, initializing...');
+      window.requestAnimationFrame(Element$ResizeSensor$init$lambda(this));
+    }
+     else {
+      console.log('ResizeSensor.init: sensor already initialized');
+    }
+  };
+  Element$ResizeSensor.prototype.destroy = function () {
+    console.log('ResizeSensor.destroy');
+    this.sensor_0.removeSelf();
+  };
+  Element$ResizeSensor.prototype.notifyResizeListeners_0 = function (event) {
+    var tmp$;
+    tmp$ = this.resizedListeners.iterator();
+    while (tmp$.hasNext()) {
+      var element = tmp$.next();
+      element(event);
+    }
+  };
+  Element$ResizeSensor.prototype.runDirtyChecking_0 = function () {
+    window.requestAnimationFrame(this.dirtyChecking_0);
+  };
+  Element$ResizeSensor.prototype.initializeSensor_0 = function () {
+    this.element.appendChild_sr04hg$(this.sensor_0);
+    if (Kotlin.equals(this.getComputedPosition_0(), 'static')) {
+      this.element.style.position = Position$relative_getInstance();
+    }
+    this.sensor_0.reset();
+    this.runDirtyChecking_0();
+    onScroll(this.sensor_0.expandSensor, this.scrollHandler_0);
+    onScroll(this.sensor_0.shrinkSensor, this.scrollHandler_0);
+  };
+  Element$ResizeSensor.prototype.getComputedPosition_0 = function () {
+    return this.element.getComputedStyle_61zpoe$('position');
+  };
+  function Element$ResizeSensor$Sensor($outer) {
+    this.$outer = $outer;
+    Div.call(this);
+    this.expandSensor$delegate = lazy(Element$ResizeSensor$Sensor$expandSensor$lambda(this.$outer));
+    this.shrinkSensor$delegate = lazy(Element$ResizeSensor$Sensor$shrinkSensor$lambda(this.$outer));
+  }
+  Object.defineProperty(Element$ResizeSensor$Sensor.prototype, 'expandSensor', {
+    get: function () {
+      var $receiver = this.expandSensor$delegate;
+      new Kotlin.PropertyMetadata('expandSensor');
+      return $receiver.value;
+    }
+  });
+  Object.defineProperty(Element$ResizeSensor$Sensor.prototype, 'shrinkSensor', {
+    get: function () {
+      var $receiver = this.shrinkSensor$delegate;
+      new Kotlin.PropertyMetadata('shrinkSensor');
+      return $receiver.value;
+    }
+  });
+  Element$ResizeSensor$Sensor.prototype.render = function () {
+    Div.prototype.render.call(this);
+    this.addClass_61zpoe$('resize-sensor');
+    this._style.cssText = this.$outer.sensorStyle_0;
+    this.appendChild_sr04hg$(this.expandSensor);
+    this.appendChild_sr04hg$(this.shrinkSensor);
+  };
+  Element$ResizeSensor$Sensor.prototype.reset = function () {
+    this.expandSensor.reset();
+    this.shrinkSensor.reset();
+  };
+  function Element$ResizeSensor$Sensor$expandSensor$lambda(this$ResizeSensor) {
+    return function () {
+      return new Element$ResizeSensor$SensorExpand(this$ResizeSensor);
+    };
+  }
+  function Element$ResizeSensor$Sensor$shrinkSensor$lambda(this$ResizeSensor) {
+    return function () {
+      return new Element$ResizeSensor$SensorShrink(this$ResizeSensor);
+    };
+  }
+  Element$ResizeSensor$Sensor.$metadata$ = {
+    kind: Kotlin.Kind.CLASS,
+    simpleName: 'Sensor',
+    interfaces: [Div]
+  };
+  function Element$ResizeSensor$SensorExpand($outer) {
+    this.$outer = $outer;
+    Div.call(this);
+    this.sensorExpandChildSensorStyle_0 = 'position: absolute; left: 0px; top: 0px; transition: 0s; -webkit-transition: 0';
+    this.child$delegate = lazy(Element$ResizeSensor$SensorExpand$child$lambda(this));
+  }
+  Object.defineProperty(Element$ResizeSensor$SensorExpand.prototype, 'child', {
+    get: function () {
+      var $receiver = this.child$delegate;
+      new Kotlin.PropertyMetadata('child');
+      return $receiver.value;
+    }
+  });
+  Element$ResizeSensor$SensorExpand.prototype.render = function () {
+    Div.prototype.render.call(this);
+    this.addClass_61zpoe$('resize-sensor-expand');
+    this._style.cssText = this.$outer.sensorStyle_0;
+    this.appendChild_sr04hg$(this.child);
+  };
+  Element$ResizeSensor$SensorExpand.prototype.reset = function () {
+    this.child.style.width = get_px_0(100000);
+    this.child.style.height = get_px_0(100000);
+    this.w3cElement_8be2vx$.scrollLeft = 100000;
+    this.w3cElement_8be2vx$.scrollTop = 100000;
+  };
+  function Element$ResizeSensor$SensorExpand$child$lambda(this$SensorExpand) {
+    return function () {
+      var child = new Div();
+      child._style.cssText = this$SensorExpand.sensorExpandChildSensorStyle_0;
+      return child;
+    };
+  }
+  Element$ResizeSensor$SensorExpand.$metadata$ = {
+    kind: Kotlin.Kind.CLASS,
+    simpleName: 'SensorExpand',
+    interfaces: [Div]
+  };
+  function Element$ResizeSensor$SensorShrink($outer) {
+    this.$outer = $outer;
+    Div.call(this);
+    this.sensorShrinkChildSensorStyle_0 = 'position: absolute; left: 0; top: 0; transition: 0s;';
+    this.child$delegate = lazy(Element$ResizeSensor$SensorShrink$child$lambda(this));
+  }
+  Object.defineProperty(Element$ResizeSensor$SensorShrink.prototype, 'child', {
+    get: function () {
+      var $receiver = this.child$delegate;
+      new Kotlin.PropertyMetadata('child');
+      return $receiver.value;
+    }
+  });
+  Element$ResizeSensor$SensorShrink.prototype.render = function () {
+    Div.prototype.render.call(this);
+    this.addClass_61zpoe$('resize-sensor-shrink');
+    this._style.cssText = this.$outer.sensorStyle_0;
+    this.appendChild_sr04hg$(this.child);
+  };
+  Element$ResizeSensor$SensorShrink.prototype.reset = function () {
+    this.w3cElement_8be2vx$.scrollLeft = 100000;
+    this.w3cElement_8be2vx$.scrollTop = 100000;
+  };
+  function Element$ResizeSensor$SensorShrink$child$lambda(this$SensorShrink) {
+    return function () {
+      var child = new Div();
+      child._style.cssText = this$SensorShrink.sensorShrinkChildSensorStyle_0 + ' width: 200%; height: 200%';
+      return child;
+    };
+  }
+  Element$ResizeSensor$SensorShrink.$metadata$ = {
+    kind: Kotlin.Kind.CLASS,
+    simpleName: 'SensorShrink',
+    interfaces: [Div]
+  };
+  function Element$ResizeSensor$sensor$lambda(this$ResizeSensor) {
+    return function () {
+      return new Element$ResizeSensor$Sensor(this$ResizeSensor);
+    };
+  }
+  function Element$ResizeSensor$scrollHandler$lambda(this$ResizeSensor) {
+    return function (it) {
+      this$ResizeSensor.cachedWidth_0 = this$ResizeSensor.element.w3cElement_8be2vx$.offsetWidth;
+      this$ResizeSensor.cachedHeight_0 = this$ResizeSensor.element.w3cElement_8be2vx$.offsetHeight;
+      if (this$ResizeSensor.cachedWidth_0 !== this$ResizeSensor.lastWidth_0) {
+        this$ResizeSensor.dirtyWidth_0 = true;
+        this$ResizeSensor.lastWidth_0 = this$ResizeSensor.cachedWidth_0;
+      }
+      if (this$ResizeSensor.cachedHeight_0 !== this$ResizeSensor.lastHeight_0) {
+        this$ResizeSensor.dirtyHeight_0 = true;
+        this$ResizeSensor.lastHeight_0 = this$ResizeSensor.cachedHeight_0;
+      }
+      this$ResizeSensor.sensor_0.reset();
+    };
+  }
+  function Element$ResizeSensor$dirtyChecking$lambda(this$ResizeSensor) {
+    return function (it) {
+      if (!this$ResizeSensor.resizedListeners.isEmpty()) {
+        if (this$ResizeSensor.dirtyWidth_0 || this$ResizeSensor.dirtyHeight_0) {
+          this$ResizeSensor.notifyResizeListeners_0(new Element$ResizedEvent(this$ResizeSensor.dirtyWidth_0, this$ResizeSensor.lastWidth_0, this$ResizeSensor.dirtyHeight_0, this$ResizeSensor.lastHeight_0));
+          this$ResizeSensor.dirtyHeight_0 = false;
+          this$ResizeSensor.dirtyWidth_0 = false;
+        }
+        this$ResizeSensor.runDirtyChecking_0();
+      }
+    };
+  }
+  Element$ResizeSensor.$metadata$ = {
+    kind: Kotlin.Kind.CLASS,
+    simpleName: 'ResizeSensor',
+    interfaces: []
+  };
+  function Element$ResizedEvent(widthChanged, width, heightChanged, height) {
+    this.widthChanged = widthChanged;
+    this.width = width;
+    this.heightChanged = heightChanged;
+    this.height = height;
+  }
+  Element$ResizedEvent.$metadata$ = {
+    kind: Kotlin.Kind.CLASS,
+    simpleName: 'ResizedEvent',
+    interfaces: []
+  };
+  Element$ResizedEvent.prototype.component1 = function () {
+    return this.widthChanged;
+  };
+  Element$ResizedEvent.prototype.component2 = function () {
+    return this.width;
+  };
+  Element$ResizedEvent.prototype.component3 = function () {
+    return this.heightChanged;
+  };
+  Element$ResizedEvent.prototype.component4 = function () {
+    return this.height;
+  };
+  Element$ResizedEvent.prototype.copy_p2cfck$ = function (widthChanged, width, heightChanged, height) {
+    return new Element$ResizedEvent(widthChanged === void 0 ? this.widthChanged : widthChanged, width === void 0 ? this.width : width, heightChanged === void 0 ? this.heightChanged : heightChanged, height === void 0 ? this.height : height);
+  };
+  Element$ResizedEvent.prototype.toString = function () {
+    return 'ResizedEvent(widthChanged=' + Kotlin.toString(this.widthChanged) + (', width=' + Kotlin.toString(this.width)) + (', heightChanged=' + Kotlin.toString(this.heightChanged)) + (', height=' + Kotlin.toString(this.height)) + ')';
+  };
+  Element$ResizedEvent.prototype.hashCode = function () {
+    var result = 0;
+    result = result * 31 + Kotlin.hashCode(this.widthChanged) | 0;
+    result = result * 31 + Kotlin.hashCode(this.width) | 0;
+    result = result * 31 + Kotlin.hashCode(this.heightChanged) | 0;
+    result = result * 31 + Kotlin.hashCode(this.height) | 0;
+    return result;
+  };
+  Element$ResizedEvent.prototype.equals = function (other) {
+    return this === other || (other !== null && (typeof other === 'object' && (Object.getPrototypeOf(this) === Object.getPrototypeOf(other) && (Kotlin.equals(this.widthChanged, other.widthChanged) && Kotlin.equals(this.width, other.width) && Kotlin.equals(this.heightChanged, other.heightChanged) && Kotlin.equals(this.height, other.height)))));
+  };
+  function Element$resizedListeners$lambda() {
+    return Kotlin.kotlin.collections.ArrayList_init_ww73n8$();
+  }
+  function Element$hideOnBreakpoints$lambda() {
+    return Kotlin.kotlin.collections.ArrayList_init_ww73n8$();
+  }
+  function Element$resizedHandler$lambda(this$Element) {
+    return function (event) {
+      if (this$Element.layout != null) {
+        var tmp$;
+        tmp$ = this$Element.childNodes.iterator();
+        while (tmp$.hasNext()) {
+          var element = tmp$.next();
+          if (Kotlin.isType(element, Element)) {
+            element.parentResized_8bxfur$(event);
+          }
+        }
+      }
+    };
+  }
+  function Element$style$lambda(this$Element) {
+    return function () {
+      return new TypedStyle(this$Element);
+    };
+  }
+  Element.$metadata$ = {
+    kind: Kotlin.Kind.CLASS,
+    simpleName: 'Element',
+    interfaces: [Node]
+  };
+  var HTML;
+  function Html(w3cElement) {
+    Html$Html_getInstance();
+    var tmp$;
+    if (w3cElement === void 0)
+      w3cElement = (tmp$ = document.documentElement) != null ? tmp$ : Kotlin.throwNPE();
+    this.w3cElement = w3cElement;
+    this.stylesheet$delegate = lazy(Html$stylesheet$lambda);
+    this.registeredClassStyles_0 = Kotlin.kotlin.collections.HashMap_init_q3lmfv$();
+  }
+  Object.defineProperty(Html.prototype, 'stylesheet_0', {
+    get: function () {
+      var $receiver = this.stylesheet$delegate;
+      new Kotlin.PropertyMetadata('stylesheet');
+      return $receiver.value;
+    }
+  });
+  function Html$init$lambda($receiver) {
+    $receiver._boxSizing = 'border-box';
+  }
+  function Html$init$lambda_0($receiver) {
+    $receiver._height = '100%';
+  }
+  function Html$init$lambda_1($receiver) {
+    $receiver._height = '100%';
+  }
+  Html.prototype.init_dqye30$ = function (borderBox, height100percent) {
+    if (borderBox === void 0)
+      borderBox = true;
+    if (height100percent === void 0)
+      height100percent = true;
+    if (borderBox) {
+      this.addCSSRule_t83c1i$(with_0(new AnyRule(), Html$init$lambda));
+    }
+    if (height100percent) {
+      this.addCSSRule_t83c1i$(with_0(new TypeRule(new TypeSelector('html')), Html$init$lambda_0));
+      this.addCSSRule_t83c1i$(with_0(new TypeRule(new TypeSelector('body')), Html$init$lambda_1));
+    }
+    BODY.init_8be2vx$();
+  };
+  function Html$registerStyle$rule(styledClass, init) {
+    if (init === void 0)
+      init = styledClass.rule;
+    var style = new ClassRule(styledClass.classSelector);
+    init(style);
+    return style;
+  }
+  Html.prototype.registerStyle_78phyd$ = function (styledClass) {
+    var rule = Html$registerStyle$rule;
+    var rule_0 = rule(styledClass, styledClass.rule);
+    this.registerCSSRule_t83c1i$(rule_0);
+  };
+  function Html$registerStyle$rule_0(styledClass, init) {
+    if (init === void 0)
+      init = styledClass.rule;
+    var style = new TypedClassRule(styledClass.classSelector);
+    init(style);
+    return style;
+  }
+  Html.prototype.registerStyle_mpomjf$ = function (styledClass) {
+    var rule = Html$registerStyle$rule_0;
+    var rule_0 = rule(styledClass, styledClass.rule);
+    this.registerCSSRule_t83c1i$(rule_0);
+  };
+  Html.prototype.registerCSSRule_t83c1i$ = function (rule) {
+    var existing = this.registeredClassStyles_0.put_xwzc9p$(rule.selector.toString(), rule);
+    if (existing == null) {
+      this.addCSSRule_t83c1i$(rule);
+    }
+  };
+  Html.prototype.addCSSRule_t83c1i$ = function (rule) {
+    var ruleText = rule.cssText();
+    console.log(ruleText);
+    this.stylesheet_0.insertRule(ruleText, this.stylesheet_0.cssRules.length);
+    if (!Kotlin.isType(rule, KeyframesRule)) {
+      var tmp$;
+      tmp$ = rule._childStyles_8be2vx$.iterator();
+      while (tmp$.hasNext()) {
+        var element = tmp$.next();
+        this.registerCSSRule_t83c1i$(element);
+      }
+    }
+  };
+  function Html$Html() {
+    Html$Html_instance = this;
+  }
+  Html$Html.$metadata$ = {
+    kind: Kotlin.Kind.OBJECT,
+    simpleName: 'Html',
+    interfaces: []
+  };
+  var Html$Html_instance = null;
+  function Html$Html_getInstance() {
+    if (Html$Html_instance === null) {
+      new Html$Html();
+    }
+    return Html$Html_instance;
+  }
+  function Html$stylesheet$lambda() {
+    var tmp$;
+    return Kotlin.isType(tmp$ = document.styleSheets[0], CSSStyleSheet) ? tmp$ : Kotlin.throwCCE();
+  }
+  Html.$metadata$ = {
+    kind: Kotlin.Kind.CLASS,
+    simpleName: 'Html',
+    interfaces: []
+  };
+  function onDOMContentLoaded($receiver, listener) {
+    document.addEventListener('DOMContentLoaded', listener);
+  }
+  function onLoad($receiver, listener) {
+    $receiver.window.addEventListener('load', listener);
+  }
+  function Node(w3cNode) {
+    this.w3cNode_8be2vx$ = w3cNode;
+    this._childNodes_w5cupa$_0 = Kotlin.kotlin.collections.ArrayList_init_ww73n8$();
+    this._childrenMountInstructions_w5cupa$_0 = Kotlin.kotlin.collections.ArrayList_init_ww73n8$();
+    this.rendering_w5cupa$_0 = false;
+    this.rendered_w5cupa$_0 = false;
+    this._parentNode_8be2vx$ = null;
+  }
+  Object.defineProperty(Node.prototype, 'childNodes', {
+    get: function () {
+      return this._childNodes_w5cupa$_0;
+    }
+  });
+  Object.defineProperty(Node.prototype, 'rendering', {
+    get: function () {
+      return this.rendering_w5cupa$_0;
+    },
+    set: function (rendering) {
+      this.rendering_w5cupa$_0 = rendering;
+    }
+  });
+  Object.defineProperty(Node.prototype, 'rendered', {
+    get: function () {
+      return this.rendered_w5cupa$_0;
+    },
+    set: function (rendered) {
+      this.rendered_w5cupa$_0 = rendered;
+    }
+  });
+  Object.defineProperty(Node.prototype, '_nodeName', {
+    get: function () {
+      return this.w3cNode_8be2vx$.nodeName;
+    }
+  });
+  Object.defineProperty(Node.prototype, 'mounted', {
+    get: function () {
+      var tmp$, tmp$_0, tmp$_1;
+      return (tmp$_1 = (tmp$_0 = (tmp$ = this._parentNode_8be2vx$) != null ? tmp$.w3cNode_8be2vx$ : null) != null ? tmp$_0.contains(this.w3cNode_8be2vx$) : null) != null ? tmp$_1 : false;
+    }
+  });
+  Object.defineProperty(Node.prototype, 'textContent', {
+    get: function () {
+      return this.w3cNode_8be2vx$.textContent;
+    },
+    set: function (value) {
+      this.removeChildren();
+      if (value != null) {
+        this.w3cNode_8be2vx$.textContent = value;
+        this._childNodes_w5cupa$_0.addAll_brywnq$(this.parseChildrenFromDOM_w5cupa$_0());
+      }
+    }
+  });
+  Node.prototype.hasChild_sr04hg$ = function (child) {
+    return this._childNodes_w5cupa$_0.contains_11rb$(child);
+  };
+  Node.prototype.prependChild_sr04hg$ = function (node) {
+    if (this._childNodes_w5cupa$_0.isEmpty()) {
+      this.appendChild_sr04hg$(node);
+      return node;
+    }
+     else {
+      this.insertBefore_p937mc$(node, first(this._childNodes_w5cupa$_0));
+      return node;
+    }
+  };
+  function Node$insertBefore$lambda(this$Node, closure$child) {
+    return function (it) {
+      this$Node.w3cNode_8be2vx$.insertBefore(it.w3cNode_8be2vx$, closure$child.w3cNode_8be2vx$);
+    };
+  }
+  Node.prototype.insertBefore_p937mc$ = function (node, child) {
+    if (node._parentNode_8be2vx$ != null) {
+      throw new IllegalStateException("Node cannot be added. It's already added. Please remove it first.");
+    }
+    var childIndex = this._childNodes_w5cupa$_0.indexOf_11rb$(child);
+    if (childIndex === -1) {
+      throw new IllegalArgumentException('reference ' + child.w3cNode_8be2vx$.nodeName + ' is expected as child');
+    }
+    node._parentNode_8be2vx$ = this;
+    if (Kotlin.isType(node, Element) && (this.rendering || this.rendered) && !child.rendered) {
+      node.rendering = true;
+      node.callRender_8be2vx$();
+      node.rendered = true;
+      node.rendering = false;
+      node.renderChildren_8be2vx$();
+    }
+    var mountFn = Node$insertBefore$lambda(this, child);
+    if (this.mounted) {
+      this.mountChild_twsohh$_0(mountFn, node);
+      this.mountChildren_8be2vx$();
+    }
+     else {
+      this._childrenMountInstructions_w5cupa$_0.add_11rb$(new Pair(mountFn, node));
+    }
+    this._childNodes_w5cupa$_0.add_wxm5ur$(childIndex, node);
+    this.childAdded_sr04hg$(node);
+    return node;
+  };
+  function Node$appendChild$lambda(this$Node) {
+    return function (it) {
+      this$Node.w3cNode_8be2vx$.appendChild(it.w3cNode_8be2vx$);
+    };
+  }
+  Node.prototype.appendChild_sr04hg$ = function (node) {
+    if (node._parentNode_8be2vx$ != null) {
+      throw new IllegalStateException("Node cannot be added. It's already added. Please remove it first.");
+    }
+    node._parentNode_8be2vx$ = this;
+    if (Kotlin.isType(node, Element) && (this.rendering || this.rendered) && !node.rendered) {
+      node.rendering = true;
+      node.callRender_8be2vx$();
+      node.rendered = true;
+      node.rendering = false;
+      node.renderChildren_8be2vx$();
+    }
+    var mountFn = Node$appendChild$lambda(this);
+    if (this.mounted) {
+      this.mountChild_twsohh$_0(mountFn, node);
+      node.mountChildren_8be2vx$();
+    }
+     else {
+      this._childrenMountInstructions_w5cupa$_0.add_11rb$(new Pair(mountFn, node));
+    }
+    this._childNodes_w5cupa$_0.add_11rb$(node);
+    this.childAdded_sr04hg$(node);
+    return node;
+  };
+  Node.prototype.parseChildrenFromDOM_w5cupa$_0 = function () {
+    var tmp$;
+    var nodes = Kotlin.kotlin.collections.ArrayList_init_ww73n8$();
+    var childW3cNodes = this.w3cNode_8be2vx$.childNodes;
+    tmp$ = childW3cNodes.length - 1 | 0;
+    for (var i = 0; i <= tmp$; i++) {
+      var childNode = childW3cNodes[i];
+      if (Kotlin.isType(childNode, HTMLElement))
+        nodes.add_11rb$(new Element(void 0, childNode));
+      else if (Kotlin.isType(childNode, Text))
+        nodes.add_11rb$(new Text_0(void 0, childNode));
+    }
+    return nodes;
+  };
+  Node.prototype.renderChildren_8be2vx$ = function () {
+    var tmp$;
+    tmp$ = this._childNodes_w5cupa$_0.iterator();
+    while (tmp$.hasNext()) {
+      var child = tmp$.next();
+      if (Kotlin.isType(child, Element) && !child.rendered) {
+        child.callRender_8be2vx$();
+        child.rendered = true;
+      }
+      child.renderChildren_8be2vx$();
+    }
+  };
+  Node.prototype.mountChild_twsohh$_0 = function (mountFn, child) {
+    mountFn(child);
+    if (Kotlin.isType(child, Element)) {
+      child.callDidMount_8be2vx$();
+    }
+  };
+  Node.prototype.mountChildren_8be2vx$ = function () {
+    var tmp$, tmp$_0;
+    tmp$ = this._childrenMountInstructions_w5cupa$_0.iterator();
+    while (tmp$.hasNext()) {
+      var mountFn_n_child = tmp$.next();
+      this.mountChild_twsohh$_0(mountFn_n_child.first, mountFn_n_child.second);
+    }
+    this._childrenMountInstructions_w5cupa$_0.clear();
+    tmp$_0 = this._childNodes_w5cupa$_0.iterator();
+    while (tmp$_0.hasNext()) {
+      var child = tmp$_0.next();
+      child.mountChildren_8be2vx$();
+    }
+  };
+  Node.prototype.removeChildren = function () {
+    while (!this._childNodes_w5cupa$_0.isEmpty()) {
+      this.removeChild_sr04hg$(first(this._childNodes_w5cupa$_0));
+    }
+  };
+  Node.prototype.removeChild_sr04hg$ = function (node) {
+    if (Kotlin.isType(node, Element)) {
+      node.callWillUnMount_8be2vx$();
+    }
+    if (this.mounted) {
+      this.w3cNode_8be2vx$.removeChild(node.w3cNode_8be2vx$);
+    }
+    this._childNodes_w5cupa$_0.remove_11rb$(node);
+    node._parentNode_8be2vx$ = null;
+    this.childRemoved_sr04hg$(this);
+  };
+  Node.prototype.removeSelf = function () {
+    var tmp$;
+    (tmp$ = this._parentNode_8be2vx$) != null ? tmp$.removeChild_sr04hg$(this) : null;
+  };
+  Node.prototype.childAdded_sr04hg$ = function (child) {
+  };
+  Node.prototype.childRemoved_sr04hg$ = function (child) {
+  };
+  Node.$metadata$ = {
+    kind: Kotlin.Kind.CLASS,
+    simpleName: 'Node',
+    interfaces: []
+  };
+  function StyledClass() {
+  }
+  StyledClass.$metadata$ = {
+    kind: Kotlin.Kind.INTERFACE,
+    simpleName: 'StyledClass',
+    interfaces: []
+  };
+  function Text_0(text, existingNode) {
+    if (text === void 0)
+      text = null;
+    if (existingNode === void 0)
+      existingNode = null;
+    Node.call(this, existingNode != null ? existingNode : document.createTextNode(text != null ? text : Kotlin.throwNPE()));
+  }
+  Text_0.$metadata$ = {
+    kind: Kotlin.Kind.CLASS,
+    simpleName: 'Text',
+    interfaces: [Node]
+  };
+  function TypedStyledClass() {
+  }
+  TypedStyledClass.$metadata$ = {
+    kind: Kotlin.Kind.INTERFACE,
+    simpleName: 'TypedStyledClass',
+    interfaces: []
+  };
+  function W3cDelegates() {
+    W3cDelegates_instance = this;
+  }
+  W3cDelegates.prototype.attribute_o3qcra$ = function (receiver, initialValue, attributeName) {
+    return new W3cDelegates$Attribute(receiver, initialValue, attributeName);
+  };
+  W3cDelegates.prototype.nullableAttribute_61zpoe$ = function (attributeName) {
+    return new W3cDelegates$NullableAttribute(attributeName);
+  };
+  W3cDelegates.prototype.nullableBooleanAttribute_61zpoe$ = function (attributeName) {
+    return new W3cDelegates$NullableBooleanAttribute(attributeName);
+  };
+  W3cDelegates.prototype.nullableDimensionAttribute_61zpoe$ = function (attributeName) {
+    return new W3cDelegates$NullableDimensionAttribute(attributeName);
+  };
+  function W3cDelegates$Attribute(receiver, initialValue, attributeName) {
+    this.attributeName = attributeName;
+    receiver.w3cElement_8be2vx$.setAttribute(this.attributeName, initialValue);
+  }
+  W3cDelegates$Attribute.prototype.getValue_lrcp0p$ = function (thisRef, property) {
+    var tmp$;
+    var w3cElement = thisRef.w3cElement_8be2vx$;
+    var attributeName = this.attributeName;
+    return (tmp$ = w3cElement.getAttribute(attributeName)) != null ? tmp$ : Kotlin.throwNPE();
+  };
+  W3cDelegates$Attribute.prototype.setValue_9rddgb$ = function (thisRef, property, value) {
+    var w3cElement = thisRef.w3cElement_8be2vx$;
+    var attributeName = this.attributeName;
+    w3cElement.setAttribute(attributeName, value);
+  };
+  W3cDelegates$Attribute.$metadata$ = {
+    kind: Kotlin.Kind.CLASS,
+    simpleName: 'Attribute',
+    interfaces: [ReadWriteProperty]
+  };
+  function W3cDelegates$NullableAttribute(attributeName) {
+    if (attributeName === void 0)
+      attributeName = null;
+    this.attributeName = attributeName;
+  }
+  W3cDelegates$NullableAttribute.prototype.getValue_lrcp0p$ = function (thisRef, property) {
+    var tmp$;
+    var w3cElement = thisRef.w3cElement_8be2vx$;
+    var attributeName = (tmp$ = this.attributeName) != null ? tmp$ : property.callableName;
+    return w3cElement.getAttribute(attributeName);
+  };
+  W3cDelegates$NullableAttribute.prototype.setValue_9rddgb$ = function (thisRef, property, value) {
+    var tmp$;
+    var w3cElement = thisRef.w3cElement_8be2vx$;
+    var attributeName = (tmp$ = this.attributeName) != null ? tmp$ : property.callableName;
+    if (value != null) {
+      w3cElement.setAttribute(attributeName, value);
+    }
+     else {
+      if (w3cElement.hasAttribute(attributeName)) {
+        w3cElement.removeAttribute(attributeName);
+      }
+    }
+  };
+  W3cDelegates$NullableAttribute.$metadata$ = {
+    kind: Kotlin.Kind.CLASS,
+    simpleName: 'NullableAttribute',
+    interfaces: [ReadWriteProperty]
+  };
+  function W3cDelegates$NullableBooleanAttribute(attributeName) {
+    if (attributeName === void 0)
+      attributeName = null;
+    this.attributeName = attributeName;
+  }
+  W3cDelegates$NullableBooleanAttribute.prototype.getValue_lrcp0p$ = function (thisRef, property) {
+    var tmp$;
+    var w3cElement = thisRef.w3cElement_8be2vx$;
+    var attributeName = (tmp$ = this.attributeName) != null ? tmp$ : property.callableName;
+    var $receiver = w3cElement.getAttribute(attributeName);
+    return !($receiver == null || $receiver.length === 0);
+  };
+  W3cDelegates$NullableBooleanAttribute.prototype.setValue_9rddgb$ = function (thisRef, property, value) {
+    var tmp$;
+    var w3cElement = thisRef.w3cElement_8be2vx$;
+    var attributeName = (tmp$ = this.attributeName) != null ? tmp$ : property.callableName;
+    if (value != null && value) {
+      w3cElement.setAttribute(attributeName, attributeName);
+    }
+     else {
+      if (w3cElement.hasAttribute(attributeName)) {
+        w3cElement.removeAttribute(attributeName);
+      }
+    }
+  };
+  W3cDelegates$NullableBooleanAttribute.$metadata$ = {
+    kind: Kotlin.Kind.CLASS,
+    simpleName: 'NullableBooleanAttribute',
+    interfaces: [ReadWriteProperty]
+  };
+  function W3cDelegates$NullableDimensionAttribute(attributeName) {
+    if (attributeName === void 0)
+      attributeName = null;
+    this.attributeName = attributeName;
+  }
+  W3cDelegates$NullableDimensionAttribute.prototype.getValue_lrcp0p$ = function (thisRef, property) {
+    var tmp$;
+    var w3cElement = thisRef.w3cElement_8be2vx$;
+    var attributeName = (tmp$ = this.attributeName) != null ? tmp$ : property.callableName;
+    return toDimension(w3cElement.getAttribute(attributeName));
+  };
+  W3cDelegates$NullableDimensionAttribute.prototype.setValue_9rddgb$ = function (thisRef, property, value) {
+    var tmp$;
+    var w3cElement = thisRef.w3cElement_8be2vx$;
+    var attributeName = (tmp$ = this.attributeName) != null ? tmp$ : property.callableName;
+    if (value != null) {
+      w3cElement.setAttribute(attributeName, value.toHtml());
+    }
+     else {
+      if (w3cElement.hasAttribute(attributeName)) {
+        w3cElement.removeAttribute(attributeName);
+      }
+    }
+  };
+  W3cDelegates$NullableDimensionAttribute.$metadata$ = {
+    kind: Kotlin.Kind.CLASS,
+    simpleName: 'NullableDimensionAttribute',
+    interfaces: [ReadWriteProperty]
+  };
+  W3cDelegates.$metadata$ = {
+    kind: Kotlin.Kind.OBJECT,
+    simpleName: 'W3cDelegates',
+    interfaces: []
+  };
+  var W3cDelegates_instance = null;
+  function W3cDelegates_getInstance() {
+    if (W3cDelegates_instance === null) {
+      new W3cDelegates();
+    }
+    return W3cDelegates_instance;
+  }
   function toDimension($receiver) {
     var tmp$, tmp$_0;
     if ($receiver == null) {
@@ -1738,929 +2959,182 @@ var elements = function (_, Kotlin) {
   function get_vmax($receiver) {
     return new VMax($receiver);
   }
-  function br($receiver, init) {
-    return initAndAppendNode($receiver, new Br(), init);
-  }
-  function header($receiver, init) {
-    return initAndAppendNode($receiver, new Header(), init);
-  }
-  function main($receiver, init) {
-    return initAndAppendNode($receiver, new Main(), init);
-  }
-  function footer($receiver, init) {
-    return initAndAppendNode($receiver, new Footer(), init);
-  }
-  function h1($receiver, init) {
-    return initAndAppendNode($receiver, new H1(), init);
-  }
-  function h2($receiver, init) {
-    return initAndAppendNode($receiver, new H2(), init);
-  }
-  function h3($receiver, init) {
-    return initAndAppendNode($receiver, new H3(), init);
-  }
-  function h4($receiver, init) {
-    return initAndAppendNode($receiver, new H4(), init);
-  }
-  function h5($receiver, init) {
-    return initAndAppendNode($receiver, new H5(), init);
-  }
-  function h6($receiver, init) {
-    return initAndAppendNode($receiver, new H6(), init);
-  }
-  function p($receiver, init) {
-    return initAndAppendNode($receiver, new P(), init);
-  }
-  function span($receiver, init) {
-    return initAndAppendNode($receiver, new Span(), init);
-  }
-  function hr($receiver, init) {
-    return initAndAppendNode($receiver, new Hr(), init);
-  }
-  function ul($receiver, init) {
-    return initAndAppendNode($receiver, new Ul(), init);
-  }
-  function ol($receiver, init) {
-    return initAndAppendNode($receiver, new Ol(), init);
-  }
-  function li($receiver, init) {
-    return initAndAppendNode($receiver, new Li(), init);
-  }
-  function div($receiver, init) {
-    return initAndAppendNode($receiver, new Div(), init);
-  }
-  function pre($receiver, init) {
-    return initAndAppendNode($receiver, new Pre(), init);
-  }
-  function a$lambda(closure$href, closure$target) {
-    return function ($receiver) {
-      $receiver._href = closure$href;
-      $receiver._target = closure$target;
-    };
-  }
-  function a($receiver, href, target, init) {
-    if (href === void 0)
-      href = null;
-    if (target === void 0)
-      target = null;
-    return initAndAppendNode($receiver, with_0(new A(), a$lambda(href, target)), init);
-  }
-  function i($receiver, init) {
-    return initAndAppendNode($receiver, new I(), init);
-  }
-  function inputText($receiver, init) {
-    return initAndAppendNode($receiver, new InputText(), init);
-  }
-  function inputNumber($receiver, init) {
-    return initAndAppendNode($receiver, new InputNumber(), init);
-  }
-  function img($receiver, src, init) {
-    return initAndAppendNode($receiver, new Img(src), init);
-  }
-  function button($receiver, init) {
-    return initAndAppendNode($receiver, new Button(), init);
-  }
-  function label($receiver, init) {
-    return initAndAppendNode($receiver, new Label(), init);
-  }
-  function select($receiver, init) {
-    return initAndAppendNode($receiver, new Select(), init);
-  }
-  function table($receiver, init) {
-    return initAndAppendNode($receiver, new Table(), init);
-  }
-  function caption($receiver, init) {
-    return initAndAppendNode($receiver, new Caption(), init);
-  }
-  function colgroup($receiver, init) {
-    return initAndAppendNode($receiver, new Colgroup(), init);
-  }
-  function col($receiver, init) {
-    return initAndAppendNode($receiver, new Col(), init);
-  }
-  function tbody($receiver, init) {
-    return initAndAppendNode($receiver, new Tbody(), init);
-  }
-  function thead($receiver, init) {
-    return initAndAppendNode($receiver, new Thead(), init);
-  }
-  function tfoot($receiver, init) {
-    return initAndAppendNode($receiver, new Tfoot(), init);
-  }
-  function tr($receiver, init) {
-    return initAndAppendNode($receiver, new Tr(), init);
-  }
-  function td($receiver, init) {
-    return initAndAppendNode($receiver, new Td(), init);
-  }
-  function th($receiver, init) {
-    return initAndAppendNode($receiver, new Th(), init);
-  }
-  function initAndAppendNode($receiver, node, init) {
-    init(node);
-    $receiver.appendChild_sr04hg$(node);
-    return node;
-  }
   function with_0($receiver, init) {
     init($receiver);
     return $receiver;
   }
   function render($receiver, init) {
     var tmp$;
-    $receiver.renderBlocks_gobymg$_0.add_11rb$(typeof (tmp$ = init) === 'function' ? tmp$ : Kotlin.throwCCE());
+    $receiver.renderBlocks_8be2vx$.add_11rb$(typeof (tmp$ = init) === 'function' ? tmp$ : Kotlin.throwCCE());
     return $receiver;
   }
   function onClick($receiver, listener) {
-    $receiver.w3cElement_gobymg$_0.addEventListener('click', listener);
+    $receiver.w3cElement_8be2vx$.addEventListener('click', listener);
   }
   function unClick($receiver, listener) {
-    $receiver.w3cElement_gobymg$_0.removeEventListener('click', listener);
+    $receiver.w3cElement_8be2vx$.removeEventListener('click', listener);
   }
   function onFocus($receiver, listener) {
-    $receiver.w3cElement_gobymg$_0.addEventListener('focus', listener);
+    $receiver.w3cElement_8be2vx$.addEventListener('focus', listener);
   }
   function unFocus($receiver, listener) {
-    $receiver.w3cElement_gobymg$_0.removeEventListener('focus', listener);
+    $receiver.w3cElement_8be2vx$.removeEventListener('focus', listener);
   }
   function onBlur($receiver, listener) {
-    $receiver.w3cElement_gobymg$_0.addEventListener('blur', listener);
+    $receiver.w3cElement_8be2vx$.addEventListener('blur', listener);
   }
   function unBlur($receiver, listener) {
-    $receiver.w3cElement_gobymg$_0.removeEventListener('blur', listener);
+    $receiver.w3cElement_8be2vx$.removeEventListener('blur', listener);
   }
   function onInput($receiver, listener) {
-    $receiver.w3cElement_gobymg$_0.addEventListener('input', listener);
+    $receiver.w3cElement_8be2vx$.addEventListener('input', listener);
   }
   function unInput($receiver, listener) {
-    $receiver.w3cElement_gobymg$_0.removeEventListener('input', listener);
+    $receiver.w3cElement_8be2vx$.removeEventListener('input', listener);
   }
   function onChange($receiver, listener) {
-    $receiver.w3cElement_gobymg$_0.addEventListener('change', listener);
+    $receiver.w3cElement_8be2vx$.addEventListener('change', listener);
   }
   function unChange($receiver, listener) {
-    $receiver.w3cElement_gobymg$_0.removeEventListener('change', listener);
+    $receiver.w3cElement_8be2vx$.removeEventListener('change', listener);
   }
   function onDblClick($receiver, listener) {
-    $receiver.w3cElement_gobymg$_0.addEventListener('dlbclick', listener);
+    $receiver.w3cElement_8be2vx$.addEventListener('dlbclick', listener);
   }
   function unDblClick($receiver, listener) {
-    $receiver.w3cElement_gobymg$_0.removeEventListener('dblclick', listener);
+    $receiver.w3cElement_8be2vx$.removeEventListener('dblclick', listener);
   }
   function onMouseDown($receiver, listener) {
     var tmp$;
-    $receiver.w3cElement_gobymg$_0.addEventListener('mousedown', typeof (tmp$ = listener) === 'function' ? tmp$ : Kotlin.throwCCE());
+    $receiver.w3cElement_8be2vx$.addEventListener('mousedown', typeof (tmp$ = listener) === 'function' ? tmp$ : Kotlin.throwCCE());
   }
   function unMouseDown($receiver, listener) {
     var tmp$;
-    $receiver.w3cElement_gobymg$_0.removeEventListener('mousedown', typeof (tmp$ = listener) === 'function' ? tmp$ : Kotlin.throwCCE());
+    $receiver.w3cElement_8be2vx$.removeEventListener('mousedown', typeof (tmp$ = listener) === 'function' ? tmp$ : Kotlin.throwCCE());
   }
   function onMouseUp($receiver, listener) {
     var tmp$;
-    $receiver.w3cElement_gobymg$_0.addEventListener('mouseup', typeof (tmp$ = listener) === 'function' ? tmp$ : Kotlin.throwCCE());
+    $receiver.w3cElement_8be2vx$.addEventListener('mouseup', typeof (tmp$ = listener) === 'function' ? tmp$ : Kotlin.throwCCE());
   }
   function unMouseUp($receiver, listener) {
     var tmp$;
-    $receiver.w3cElement_gobymg$_0.removeEventListener('mouseup', typeof (tmp$ = listener) === 'function' ? tmp$ : Kotlin.throwCCE());
+    $receiver.w3cElement_8be2vx$.removeEventListener('mouseup', typeof (tmp$ = listener) === 'function' ? tmp$ : Kotlin.throwCCE());
   }
   function onMouseEnter($receiver, listener) {
     var tmp$;
-    $receiver.w3cElement_gobymg$_0.addEventListener('mouseenter', typeof (tmp$ = listener) === 'function' ? tmp$ : Kotlin.throwCCE());
+    $receiver.w3cElement_8be2vx$.addEventListener('mouseenter', typeof (tmp$ = listener) === 'function' ? tmp$ : Kotlin.throwCCE());
   }
   function unMouseEnter($receiver, listener) {
     var tmp$;
-    $receiver.w3cElement_gobymg$_0.removeEventListener('mouseenter', typeof (tmp$ = listener) === 'function' ? tmp$ : Kotlin.throwCCE());
+    $receiver.w3cElement_8be2vx$.removeEventListener('mouseenter', typeof (tmp$ = listener) === 'function' ? tmp$ : Kotlin.throwCCE());
   }
   function onMouseLeave($receiver, listener) {
     var tmp$;
-    $receiver.w3cElement_gobymg$_0.addEventListener('mouseleave', typeof (tmp$ = listener) === 'function' ? tmp$ : Kotlin.throwCCE());
+    $receiver.w3cElement_8be2vx$.addEventListener('mouseleave', typeof (tmp$ = listener) === 'function' ? tmp$ : Kotlin.throwCCE());
   }
   function unMouseLeave($receiver, listener) {
     var tmp$;
-    $receiver.w3cElement_gobymg$_0.removeEventListener('mouseleave', typeof (tmp$ = listener) === 'function' ? tmp$ : Kotlin.throwCCE());
+    $receiver.w3cElement_8be2vx$.removeEventListener('mouseleave', typeof (tmp$ = listener) === 'function' ? tmp$ : Kotlin.throwCCE());
   }
   function onMouseMove($receiver, listener) {
     var tmp$;
-    $receiver.w3cElement_gobymg$_0.addEventListener('mousemove', typeof (tmp$ = listener) === 'function' ? tmp$ : Kotlin.throwCCE());
+    $receiver.w3cElement_8be2vx$.addEventListener('mousemove', typeof (tmp$ = listener) === 'function' ? tmp$ : Kotlin.throwCCE());
   }
   function unMouseMove($receiver, listener) {
     var tmp$;
-    $receiver.w3cElement_gobymg$_0.removeEventListener('mousemove', typeof (tmp$ = listener) === 'function' ? tmp$ : Kotlin.throwCCE());
+    $receiver.w3cElement_8be2vx$.removeEventListener('mousemove', typeof (tmp$ = listener) === 'function' ? tmp$ : Kotlin.throwCCE());
   }
   function onMouseOut($receiver, listener) {
     var tmp$;
-    $receiver.w3cElement_gobymg$_0.addEventListener('mouseout', typeof (tmp$ = listener) === 'function' ? tmp$ : Kotlin.throwCCE());
+    $receiver.w3cElement_8be2vx$.addEventListener('mouseout', typeof (tmp$ = listener) === 'function' ? tmp$ : Kotlin.throwCCE());
   }
   function unMouseOut($receiver, listener) {
     var tmp$;
-    $receiver.w3cElement_gobymg$_0.removeEventListener('mouseout', typeof (tmp$ = listener) === 'function' ? tmp$ : Kotlin.throwCCE());
+    $receiver.w3cElement_8be2vx$.removeEventListener('mouseout', typeof (tmp$ = listener) === 'function' ? tmp$ : Kotlin.throwCCE());
   }
   function onMouseOver($receiver, listener) {
     var tmp$;
-    $receiver.w3cElement_gobymg$_0.addEventListener('mouseover', typeof (tmp$ = listener) === 'function' ? tmp$ : Kotlin.throwCCE());
+    $receiver.w3cElement_8be2vx$.addEventListener('mouseover', typeof (tmp$ = listener) === 'function' ? tmp$ : Kotlin.throwCCE());
   }
   function unMouseOver($receiver, listener) {
     var tmp$;
-    $receiver.w3cElement_gobymg$_0.removeEventListener('mouseover', typeof (tmp$ = listener) === 'function' ? tmp$ : Kotlin.throwCCE());
+    $receiver.w3cElement_8be2vx$.removeEventListener('mouseover', typeof (tmp$ = listener) === 'function' ? tmp$ : Kotlin.throwCCE());
   }
   function onScroll($receiver, listener) {
-    $receiver.w3cElement_gobymg$_0.addEventListener('scroll', listener);
+    $receiver.w3cElement_8be2vx$.addEventListener('scroll', listener);
   }
   function unScroll($receiver, listener) {
-    $receiver.w3cElement_gobymg$_0.removeEventListener('scroll', listener);
+    $receiver.w3cElement_8be2vx$.removeEventListener('scroll', listener);
   }
   function onKeyUp($receiver, listener) {
     var tmp$;
-    $receiver.w3cElement_gobymg$_0.addEventListener('keyup', typeof (tmp$ = listener) === 'function' ? tmp$ : Kotlin.throwCCE());
+    $receiver.w3cElement_8be2vx$.addEventListener('keyup', typeof (tmp$ = listener) === 'function' ? tmp$ : Kotlin.throwCCE());
   }
   function unKeyUp($receiver, listener) {
     var tmp$;
-    $receiver.w3cElement_gobymg$_0.removeEventListener('keyup', typeof (tmp$ = listener) === 'function' ? tmp$ : Kotlin.throwCCE());
+    $receiver.w3cElement_8be2vx$.removeEventListener('keyup', typeof (tmp$ = listener) === 'function' ? tmp$ : Kotlin.throwCCE());
   }
   function onKeyPress($receiver, listener) {
     var tmp$;
-    $receiver.w3cElement_gobymg$_0.addEventListener('keypress', typeof (tmp$ = listener) === 'function' ? tmp$ : Kotlin.throwCCE());
+    $receiver.w3cElement_8be2vx$.addEventListener('keypress', typeof (tmp$ = listener) === 'function' ? tmp$ : Kotlin.throwCCE());
   }
   function unKeyPress($receiver, listener) {
     var tmp$;
-    $receiver.w3cElement_gobymg$_0.removeEventListener('keypress', typeof (tmp$ = listener) === 'function' ? tmp$ : Kotlin.throwCCE());
+    $receiver.w3cElement_8be2vx$.removeEventListener('keypress', typeof (tmp$ = listener) === 'function' ? tmp$ : Kotlin.throwCCE());
   }
   function onKeyDown($receiver, listener) {
     var tmp$;
-    $receiver.w3cElement_gobymg$_0.addEventListener('keydown', typeof (tmp$ = listener) === 'function' ? tmp$ : Kotlin.throwCCE());
+    $receiver.w3cElement_8be2vx$.addEventListener('keydown', typeof (tmp$ = listener) === 'function' ? tmp$ : Kotlin.throwCCE());
   }
   function unKeyDown($receiver, listener) {
     var tmp$;
-    $receiver.w3cElement_gobymg$_0.removeEventListener('keydown', typeof (tmp$ = listener) === 'function' ? tmp$ : Kotlin.throwCCE());
+    $receiver.w3cElement_8be2vx$.removeEventListener('keydown', typeof (tmp$ = listener) === 'function' ? tmp$ : Kotlin.throwCCE());
   }
   function onDrag($receiver, listener) {
-    $receiver.w3cElement_gobymg$_0.addEventListener('drag', listener);
+    $receiver.w3cElement_8be2vx$.addEventListener('drag', listener);
   }
   function unDrag($receiver, listener) {
-    $receiver.w3cElement_gobymg$_0.removeEventListener('drag', listener);
+    $receiver.w3cElement_8be2vx$.removeEventListener('drag', listener);
   }
   function onDragEnd($receiver, listener) {
-    $receiver.w3cElement_gobymg$_0.addEventListener('dragend', listener);
+    $receiver.w3cElement_8be2vx$.addEventListener('dragend', listener);
   }
   function unDragEnd($receiver, listener) {
-    $receiver.w3cElement_gobymg$_0.removeEventListener('dragend', listener);
+    $receiver.w3cElement_8be2vx$.removeEventListener('dragend', listener);
   }
   function onDragEnter($receiver, listener) {
-    $receiver.w3cElement_gobymg$_0.addEventListener('dragenter', listener);
+    $receiver.w3cElement_8be2vx$.addEventListener('dragenter', listener);
   }
   function unDragEnter($receiver, listener) {
-    $receiver.w3cElement_gobymg$_0.removeEventListener('dragenter', listener);
+    $receiver.w3cElement_8be2vx$.removeEventListener('dragenter', listener);
   }
   function onDragLeave($receiver, listener) {
-    $receiver.w3cElement_gobymg$_0.addEventListener('dragleave', listener);
+    $receiver.w3cElement_8be2vx$.addEventListener('dragleave', listener);
   }
   function unDragLeave($receiver, listener) {
-    $receiver.w3cElement_gobymg$_0.removeEventListener('dragleave', listener);
+    $receiver.w3cElement_8be2vx$.removeEventListener('dragleave', listener);
   }
   function onDragOver($receiver, listener) {
-    $receiver.w3cElement_gobymg$_0.addEventListener('dragover', listener);
+    $receiver.w3cElement_8be2vx$.addEventListener('dragover', listener);
   }
   function unDragOver($receiver, listener) {
-    $receiver.w3cElement_gobymg$_0.removeEventListener('dragover', listener);
+    $receiver.w3cElement_8be2vx$.removeEventListener('dragover', listener);
   }
   function onDragStart($receiver, listener) {
-    $receiver.w3cElement_gobymg$_0.addEventListener('dragstart', listener);
+    $receiver.w3cElement_8be2vx$.addEventListener('dragstart', listener);
   }
   function unDragStart($receiver, listener) {
-    $receiver.w3cElement_gobymg$_0.removeEventListener('dragstart', listener);
+    $receiver.w3cElement_8be2vx$.removeEventListener('dragstart', listener);
   }
   function onDrop($receiver, listener) {
-    $receiver.w3cElement_gobymg$_0.addEventListener('drop', listener);
+    $receiver.w3cElement_8be2vx$.addEventListener('drop', listener);
   }
   function unDrop($receiver, listener) {
-    $receiver.w3cElement_gobymg$_0.removeEventListener('drop', listener);
+    $receiver.w3cElement_8be2vx$.removeEventListener('drop', listener);
   }
   function get_computedStyle($receiver) {
-    return window.getComputedStyle($receiver.w3cElement_gobymg$_0);
+    return window.getComputedStyle($receiver.w3cElement_8be2vx$);
   }
-  function Element(name, existingElement, w3cElement) {
-    var tmp$;
-    if (name === void 0)
-      name = null;
-    if (existingElement === void 0)
-      existingElement = null;
-    if (w3cElement === void 0)
-      w3cElement = existingElement != null ? existingElement : Kotlin.isType(tmp$ = document.createElement(name != null ? name : Kotlin.throwNPE()), HTMLElement) ? tmp$ : Kotlin.throwCCE();
-    Node.call(this, w3cElement);
-    this.w3cElement_gobymg$_0 = w3cElement;
-    this.renderCalled_gobymg$_0 = false;
-    this.didMountCalled_gobymg$_0 = false;
-    this.resizedListeners$delegate = lazy(Element$resizedListeners$lambda);
-    this.resizeSensor_gobymg$_0 = null;
-    this.hideOnBreakpoints$delegate = lazy(Element$hideOnBreakpoints$lambda);
-    this.resizedHandler_gobymg$_0 = Element$resizedHandler$lambda(this);
-    this._id$delegate = W3cDelegates_getInstance().nullableAttribute_61zpoe$('id');
-    this._tabindex$delegate = W3cDelegates_getInstance().nullableAttribute_61zpoe$('tabindex');
-    this._displayBeforeHiding_gobymg$_0 = '';
-    this.style$delegate = lazy(Element$style$lambda(this));
-    this.layout$delegate = new LayoutDelegate();
-    this.renderBlocks_gobymg$_0 = Kotlin.kotlin.collections.ArrayList_init_ww73n8$();
-  }
-  Object.defineProperty(Element.prototype, 'renderCalled', {
-    get: function () {
-      return this.renderCalled_gobymg$_0;
-    },
-    set: function (renderCalled) {
-      this.renderCalled_gobymg$_0 = renderCalled;
-    }
-  });
-  Object.defineProperty(Element.prototype, 'didMountCalled', {
-    get: function () {
-      return this.didMountCalled_gobymg$_0;
-    },
-    set: function (didMountCalled) {
-      this.didMountCalled_gobymg$_0 = didMountCalled;
-    }
-  });
-  Object.defineProperty(Element.prototype, 'resizedListeners_gobymg$_0', {
-    get: function () {
-      var $receiver = this.resizedListeners$delegate;
-      new Kotlin.PropertyMetadata('resizedListeners');
-      return $receiver.value;
-    }
-  });
-  Object.defineProperty(Element.prototype, 'hideOnBreakpoints_gobymg$_0', {
-    get: function () {
-      var $receiver = this.hideOnBreakpoints$delegate;
-      new Kotlin.PropertyMetadata('hideOnBreakpoints');
-      return $receiver.value;
-    }
-  });
-  Object.defineProperty(Element.prototype, 'childElements', {
-    get: function () {
-      var tmp$;
-      var $receiver = this.childNodes;
-      var destination = Kotlin.kotlin.collections.ArrayList_init_ww73n8$();
-      var tmp$_0;
-      tmp$_0 = $receiver.iterator();
-      while (tmp$_0.hasNext()) {
-        var element = tmp$_0.next();
-        if (Kotlin.isType(element, Element)) {
-          destination.add_11rb$(element);
-        }
-      }
-      return Kotlin.isType(tmp$ = destination, List) ? tmp$ : Kotlin.throwCCE();
-    }
-  });
-  Object.defineProperty(Element.prototype, '_parentElement', {
-    get: function () {
-      var tmp$, tmp$_0;
-      return Kotlin.isType(tmp$_0 = (tmp$ = this._parentNode_w5cupa$_0) != null ? tmp$ : Kotlin.throwNPE(), Element) ? tmp$_0 : Kotlin.throwCCE();
-    }
-  });
-  Object.defineProperty(Element.prototype, '_id', {
-    get: function () {
-      return this._id$delegate.getValue_lrcp0p$(this, new Kotlin.PropertyMetadata('_id'));
-    },
-    set: function (_id) {
-      this._id$delegate.setValue_9rddgb$(this, new Kotlin.PropertyMetadata('_id'), _id);
-    }
-  });
-  Object.defineProperty(Element.prototype, '_tabindex', {
-    get: function () {
-      return this._tabindex$delegate.getValue_lrcp0p$(this, new Kotlin.PropertyMetadata('_tabindex'));
-    },
-    set: function (_tabindex) {
-      this._tabindex$delegate.setValue_9rddgb$(this, new Kotlin.PropertyMetadata('_tabindex'), _tabindex);
-    }
-  });
-  Object.defineProperty(Element.prototype, 'hidden', {
-    get: function () {
-      return Kotlin.equals(this._style.display, 'none');
-    }
-  });
-  Object.defineProperty(Element.prototype, '_style', {
-    get: function () {
-      return this.w3cElement_gobymg$_0.style;
-    }
-  });
-  Object.defineProperty(Element.prototype, 'style', {
-    get: function () {
-      var $receiver = this.style$delegate;
-      new Kotlin.PropertyMetadata('style');
-      return $receiver.value;
-    }
-  });
-  Object.defineProperty(Element.prototype, 'layout', {
-    get: function () {
-      return this.layout$delegate.getValue_lrcp0p$(this, new Kotlin.PropertyMetadata('layout'));
-    },
-    set: function (layout) {
-      this.layout$delegate.setValue_9rddgb$(this, new Kotlin.PropertyMetadata('layout'), layout);
-    }
-  });
-  Object.defineProperty(Element.prototype, 'clientWidth', {
-    get: function () {
-      return this.w3cElement_gobymg$_0.clientWidth;
-    }
-  });
-  Object.defineProperty(Element.prototype, 'clientHeight', {
-    get: function () {
-      return this.w3cElement_gobymg$_0.clientHeight;
-    }
-  });
-  Object.defineProperty(Element.prototype, 'offsetWidth', {
-    get: function () {
-      return this.w3cElement_gobymg$_0.offsetWidth;
-    }
-  });
-  Object.defineProperty(Element.prototype, 'offsetHeight', {
-    get: function () {
-      return this.w3cElement_gobymg$_0.offsetHeight;
-    }
-  });
-  Object.defineProperty(Element.prototype, 'scrollWidth', {
-    get: function () {
-      return this.w3cElement_gobymg$_0.scrollWidth;
-    }
-  });
-  Object.defineProperty(Element.prototype, 'scrollHeight', {
-    get: function () {
-      return this.w3cElement_gobymg$_0.scrollHeight;
-    }
-  });
-  Object.defineProperty(Element.prototype, 'offsetTop', {
-    get: function () {
-      return this.w3cElement_gobymg$_0.offsetTop;
-    }
-  });
-  Object.defineProperty(Element.prototype, 'offsetLeft', {
-    get: function () {
-      return this.w3cElement_gobymg$_0.offsetLeft;
-    }
-  });
-  Object.defineProperty(Element.prototype, 'boundingClientRect', {
-    get: function () {
-      return this.w3cElement_gobymg$_0.getBoundingClientRect();
-    }
-  });
-  Element.prototype.parentResized_y9yt0u$_0 = function (event) {
-    var $receiver = this.hideOnBreakpoints_gobymg$_0;
-    var any$result;
-    any$break: {
-      var tmp$;
-      tmp$ = $receiver.iterator();
-      while (tmp$.hasNext()) {
-        var element = tmp$.next();
-        if (element.contains_14dthe$(event.width)) {
-          any$result = true;
-          break any$break;
-        }
-      }
-      any$result = false;
-    }
-    var hideOrShow = any$result;
-    if (hideOrShow) {
-      this.hide();
-    }
-     else {
-      this.show();
-    }
-  };
-  Element.prototype.callRender_gobymg$_0 = function () {
-    if (this.renderCalled) {
-      throw new IllegalStateException('render has already been called for this element');
-    }
-    this.render();
-    var tmp$;
-    tmp$ = this.renderBlocks_gobymg$_0.iterator();
-    while (tmp$.hasNext()) {
-      var element = tmp$.next();
-      element(this);
-    }
-    this.renderCalled = true;
-  };
-  Element.prototype.callDidMount_gobymg$_0 = function () {
-    if (this.didMountCalled) {
-      throw new IllegalStateException('didMount has already been called for this element');
-    }
-    this.didMount();
-    this.didMountCalled = true;
-  };
-  Element.prototype.callWillUnMount_gobymg$_0 = function () {
-    this.didMountCalled = false;
-    this.willUnMount();
-  };
-  Element.prototype.render = function () {
-  };
-  Element.prototype.didMount = function () {
-  };
-  Element.prototype.willUnMount = function () {
-  };
-  Element.prototype.callDidMountOnChildren_gobymg$_0 = function () {
-    var tmp$;
-    tmp$ = this.childNodes.iterator();
-    while (tmp$.hasNext()) {
-      var child_1 = tmp$.next();
-      if (Kotlin.isType(child_1, Element)) {
-        child_1.callDidMountOnChildren_gobymg$_0();
-        child_1.callDidMount_gobymg$_0();
-      }
-    }
-  };
-  Element.prototype.addClass_bx842b$ = function (selector) {
-    this.addClass_61zpoe$(selector.value);
-  };
-  Element.prototype.addClass_61zpoe$ = function (name) {
-    this.w3cElement_gobymg$_0.classList.add(name);
-  };
-  Element.prototype.removeClass_bx842b$ = function (selector) {
-    this.removeClass_61zpoe$(selector.value);
-  };
-  Element.prototype.removeClass_61zpoe$ = function (name) {
-    this.w3cElement_gobymg$_0.classList.remove(name);
-  };
-  Element.prototype.removeClasses = function () {
-    var tmp$;
-    while (this.w3cElement_gobymg$_0.classList.length > 0) {
-      this.w3cElement_gobymg$_0.classList.remove((tmp$ = this.w3cElement_gobymg$_0.classList[0]) != null ? tmp$ : Kotlin.throwNPE());
-    }
-  };
-  Element.prototype.removeClasses_leuowt$ = function (predicate) {
-    var tmp$, tmp$_0;
-    if (this.w3cElement_gobymg$_0.classList.length === 0) {
-      return;
-    }
-    tmp$ = downTo(Math.max(0, this.w3cElement_gobymg$_0.classList.length - 1 | 0), 0).iterator();
-    while (tmp$.hasNext()) {
-      var i_0 = tmp$.next();
-      var currClass = (tmp$_0 = this.w3cElement_gobymg$_0.classList[i_0]) != null ? tmp$_0 : Kotlin.throwNPE();
-      if (predicate(currClass)) {
-        this.w3cElement_gobymg$_0.classList.remove(currClass);
-      }
-    }
-  };
-  Element.prototype.toggleClass_ivxn3r$ = function (name, force) {
-    if (force === void 0)
-      force = false;
-    this.w3cElement_gobymg$_0.classList.toggle(name, force);
-  };
-  Element.prototype.unaryPlus_pdl1vz$ = function ($receiver) {
-    this.appendChild_sr04hg$(new Text_0($receiver));
-  };
-  Element.prototype.show = function () {
-    if (this.hidden) {
-      this._style.display = this._displayBeforeHiding_gobymg$_0;
-    }
-  };
-  Element.prototype.hide = function () {
-    if (!this.hidden) {
-      this._displayBeforeHiding_gobymg$_0 = this._style.display;
-      this._style.display = 'none';
-    }
-  };
-  Element.prototype.focus = function () {
-    this.w3cElement_gobymg$_0.focus();
-    return Kotlin.equals(document.activeElement, this.w3cElement_gobymg$_0);
-  };
-  Element.prototype.traverseElements_pf9u9b$ = function (each) {
-    var tmp$;
-    tmp$ = this.childElements.iterator();
-    while (tmp$.hasNext()) {
-      var child_1 = tmp$.next();
-      var continueTraversing = each(child_1);
-      if (!continueTraversing) {
-        break;
-      }
-      child_1.traverseElements_pf9u9b$(each);
-    }
-  };
-  Element.prototype.getComputedStyle_61zpoe$ = function (property) {
-    var htmlElementDynamic = this.w3cElement_gobymg$_0;
-    if (htmlElementDynamic.currentStyle) {
-      return htmlElementDynamic.currentStyle[property];
-    }
-     else if (window.getComputedStyle) {
-      return window.getComputedStyle(this.w3cElement_gobymg$_0).getPropertyValue(property);
-    }
-     else {
-      return htmlElementDynamic.style[property];
-    }
-  };
-  Element.prototype.onResized_sdolbl$ = function (listener) {
-    this.resizedListeners_gobymg$_0.add_11rb$(listener);
-    if (this.resizedListeners_gobymg$_0.size === 1 && this.resizeSensor_gobymg$_0 == null) {
-      this.resizedListeners_gobymg$_0.add_11rb$(this.resizedHandler_gobymg$_0);
-      var sensor = new Element$ResizeSensor(this, this, this.resizedListeners_gobymg$_0);
-      this.resizeSensor_gobymg$_0 = sensor;
-      sensor.init();
-    }
-  };
-  Element.prototype.unResized_sdolbl$ = function (listener) {
-    var tmp$;
-    this.resizedListeners_gobymg$_0.remove_11rb$(listener);
-    if (this.resizedListeners_gobymg$_0.size === 1 && Kotlin.equals(this.resizedListeners_gobymg$_0.get_za3lpa$(0), this.resizedHandler_gobymg$_0)) {
-      this.resizedListeners_gobymg$_0.remove_11rb$(this.resizedHandler_gobymg$_0);
-    }
-    if (this.resizedListeners_gobymg$_0.isEmpty()) {
-      (tmp$ = this.resizeSensor_gobymg$_0) != null ? tmp$.destroy() : null;
-    }
-  };
-  Element.prototype.hideOn_saaiy0$ = function (breakpoint) {
-    var tmp$;
-    for (tmp$ = 0; tmp$ !== breakpoint.length; ++tmp$) {
-      var element = breakpoint[tmp$];
-      this.hideOnBreakpoints_gobymg$_0.add_11rb$(element);
-    }
-  };
-  Element.prototype._enforceStyleRecalculation = function () {
-    window.getComputedStyle(this.w3cElement_gobymg$_0).getPropertyValue('opacity');
-  };
-  function Element$ResizeSensor($outer, element, resizedListeners) {
-    this.$outer = $outer;
-    this.element = element;
-    this.resizedListeners = resizedListeners;
-    this.sensorStyle_0 = 'position: absolute; left: 0; top: 0; right: 0; bottom: 0; overflow: hidden; z-index: -1; visibility: hidden;';
-    this.initialized_0 = false;
-    this.sensor$delegate = lazy(Element$ResizeSensor$sensor$lambda(this));
-    this.dirtyHeight_0 = false;
-    this.dirtyWidth_0 = false;
-    this.cachedWidth_0 = -1.0;
-    this.cachedHeight_0 = -1.0;
-    this.lastWidth_0 = -1.0;
-    this.lastHeight_0 = -1.0;
-    this.scrollHandler_0 = Element$ResizeSensor$scrollHandler$lambda(this);
-    this.dirtyChecking_0 = Element$ResizeSensor$dirtyChecking$lambda(this);
-  }
-  Object.defineProperty(Element$ResizeSensor.prototype, 'sensor_0', {
-    get: function () {
-      var $receiver = this.sensor$delegate;
-      new Kotlin.PropertyMetadata('sensor');
-      return $receiver.value;
-    }
-  });
-  function Element$ResizeSensor$init$lambda(this$ResizeSensor) {
-    return function (it) {
-      this$ResizeSensor.initializeSensor_0();
-    };
-  }
-  Element$ResizeSensor.prototype.init = function () {
-    if (!this.initialized_0) {
-      this.initialized_0 = true;
-      console.log('ResizeSensor.init: sensor not initialized, initializing...');
-      window.requestAnimationFrame(Element$ResizeSensor$init$lambda(this));
-    }
-     else {
-      console.log('ResizeSensor.init: sensor already initialized');
-    }
-  };
-  Element$ResizeSensor.prototype.destroy = function () {
-    console.log('ResizeSensor.destroy');
-    this.sensor_0.removeSelf();
-  };
-  Element$ResizeSensor.prototype.notifyResizeListeners_0 = function (event) {
-    var tmp$;
-    tmp$ = this.resizedListeners.iterator();
-    while (tmp$.hasNext()) {
-      var element = tmp$.next();
-      element(event);
-    }
-  };
-  Element$ResizeSensor.prototype.runDirtyChecking_0 = function () {
-    window.requestAnimationFrame(this.dirtyChecking_0);
-  };
-  Element$ResizeSensor.prototype.initializeSensor_0 = function () {
-    this.element.appendChild_sr04hg$(this.sensor_0);
-    if (Kotlin.equals(this.getComputedPosition_0(), 'static')) {
-      this.element.style.position = Position$relative_getInstance();
-    }
-    this.sensor_0.reset();
-    this.runDirtyChecking_0();
-    onScroll(this.sensor_0.expandSensor, this.scrollHandler_0);
-    onScroll(this.sensor_0.shrinkSensor, this.scrollHandler_0);
-  };
-  Element$ResizeSensor.prototype.getComputedPosition_0 = function () {
-    return this.element.getComputedStyle_61zpoe$('position');
-  };
-  function Element$ResizeSensor$Sensor($outer) {
-    this.$outer = $outer;
-    Div.call(this);
-    this.expandSensor$delegate = lazy(Element$ResizeSensor$Sensor$expandSensor$lambda(this.$outer));
-    this.shrinkSensor$delegate = lazy(Element$ResizeSensor$Sensor$shrinkSensor$lambda(this.$outer));
-  }
-  Object.defineProperty(Element$ResizeSensor$Sensor.prototype, 'expandSensor', {
-    get: function () {
-      var $receiver = this.expandSensor$delegate;
-      new Kotlin.PropertyMetadata('expandSensor');
-      return $receiver.value;
-    }
-  });
-  Object.defineProperty(Element$ResizeSensor$Sensor.prototype, 'shrinkSensor', {
-    get: function () {
-      var $receiver = this.shrinkSensor$delegate;
-      new Kotlin.PropertyMetadata('shrinkSensor');
-      return $receiver.value;
-    }
-  });
-  Element$ResizeSensor$Sensor.prototype.render = function () {
-    Div.prototype.render.call(this);
-    this.addClass_61zpoe$('resize-sensor');
-    this._style.cssText = this.$outer.sensorStyle_0;
-    this.appendChild_sr04hg$(this.expandSensor);
-    this.appendChild_sr04hg$(this.shrinkSensor);
-  };
-  Element$ResizeSensor$Sensor.prototype.reset = function () {
-    this.expandSensor.reset();
-    this.shrinkSensor.reset();
-  };
-  function Element$ResizeSensor$Sensor$expandSensor$lambda(this$ResizeSensor) {
-    return function () {
-      return new Element$ResizeSensor$SensorExpand(this$ResizeSensor);
-    };
-  }
-  function Element$ResizeSensor$Sensor$shrinkSensor$lambda(this$ResizeSensor) {
-    return function () {
-      return new Element$ResizeSensor$SensorShrink(this$ResizeSensor);
-    };
-  }
-  Element$ResizeSensor$Sensor.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
-    simpleName: 'Sensor',
-    interfaces: [Div]
-  };
-  function Element$ResizeSensor$SensorExpand($outer) {
-    this.$outer = $outer;
-    Div.call(this);
-    this.sensorExpandChildSensorStyle_0 = 'position: absolute; left: 0px; top: 0px; transition: 0s; -webkit-transition: 0';
-    this.child$delegate = lazy(Element$ResizeSensor$SensorExpand$child$lambda(this));
-  }
-  Object.defineProperty(Element$ResizeSensor$SensorExpand.prototype, 'child', {
-    get: function () {
-      var $receiver = this.child$delegate;
-      new Kotlin.PropertyMetadata('child');
-      return $receiver.value;
-    }
-  });
-  Element$ResizeSensor$SensorExpand.prototype.render = function () {
-    Div.prototype.render.call(this);
-    this.addClass_61zpoe$('resize-sensor-expand');
-    this._style.cssText = this.$outer.sensorStyle_0;
-    this.appendChild_sr04hg$(this.child);
-  };
-  Element$ResizeSensor$SensorExpand.prototype.reset = function () {
-    this.child.style.width = get_px_0(100000);
-    this.child.style.height = get_px_0(100000);
-    this.w3cElement_gobymg$_0.scrollLeft = 100000;
-    this.w3cElement_gobymg$_0.scrollTop = 100000;
-  };
-  function Element$ResizeSensor$SensorExpand$child$lambda(this$SensorExpand) {
-    return function () {
-      var child_1 = new Div();
-      child_1._style.cssText = this$SensorExpand.sensorExpandChildSensorStyle_0;
-      return child_1;
-    };
-  }
-  Element$ResizeSensor$SensorExpand.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
-    simpleName: 'SensorExpand',
-    interfaces: [Div]
-  };
-  function Element$ResizeSensor$SensorShrink($outer) {
-    this.$outer = $outer;
-    Div.call(this);
-    this.sensorShrinkChildSensorStyle_0 = 'position: absolute; left: 0; top: 0; transition: 0s;';
-    this.child$delegate = lazy(Element$ResizeSensor$SensorShrink$child$lambda(this));
-  }
-  Object.defineProperty(Element$ResizeSensor$SensorShrink.prototype, 'child', {
-    get: function () {
-      var $receiver = this.child$delegate;
-      new Kotlin.PropertyMetadata('child');
-      return $receiver.value;
-    }
-  });
-  Element$ResizeSensor$SensorShrink.prototype.render = function () {
-    Div.prototype.render.call(this);
-    this.addClass_61zpoe$('resize-sensor-shrink');
-    this._style.cssText = this.$outer.sensorStyle_0;
-    this.appendChild_sr04hg$(this.child);
-  };
-  Element$ResizeSensor$SensorShrink.prototype.reset = function () {
-    this.w3cElement_gobymg$_0.scrollLeft = 100000;
-    this.w3cElement_gobymg$_0.scrollTop = 100000;
-  };
-  function Element$ResizeSensor$SensorShrink$child$lambda(this$SensorShrink) {
-    return function () {
-      var child_1 = new Div();
-      child_1._style.cssText = this$SensorShrink.sensorShrinkChildSensorStyle_0 + ' width: 200%; height: 200%';
-      return child_1;
-    };
-  }
-  Element$ResizeSensor$SensorShrink.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
-    simpleName: 'SensorShrink',
-    interfaces: [Div]
-  };
-  function Element$ResizeSensor$sensor$lambda(this$ResizeSensor) {
-    return function () {
-      return new Element$ResizeSensor$Sensor(this$ResizeSensor);
-    };
-  }
-  function Element$ResizeSensor$scrollHandler$lambda(this$ResizeSensor) {
-    return function (it) {
-      this$ResizeSensor.cachedWidth_0 = this$ResizeSensor.element.w3cElement_gobymg$_0.offsetWidth;
-      this$ResizeSensor.cachedHeight_0 = this$ResizeSensor.element.w3cElement_gobymg$_0.offsetHeight;
-      if (this$ResizeSensor.cachedWidth_0 !== this$ResizeSensor.lastWidth_0) {
-        this$ResizeSensor.dirtyWidth_0 = true;
-        this$ResizeSensor.lastWidth_0 = this$ResizeSensor.cachedWidth_0;
-      }
-      if (this$ResizeSensor.cachedHeight_0 !== this$ResizeSensor.lastHeight_0) {
-        this$ResizeSensor.dirtyHeight_0 = true;
-        this$ResizeSensor.lastHeight_0 = this$ResizeSensor.cachedHeight_0;
-      }
-      this$ResizeSensor.sensor_0.reset();
-    };
-  }
-  function Element$ResizeSensor$dirtyChecking$lambda(this$ResizeSensor) {
-    return function (it) {
-      if (!this$ResizeSensor.resizedListeners.isEmpty()) {
-        if (this$ResizeSensor.dirtyWidth_0 || this$ResizeSensor.dirtyHeight_0) {
-          this$ResizeSensor.notifyResizeListeners_0(new Element$ResizedEvent(this$ResizeSensor.dirtyWidth_0, this$ResizeSensor.lastWidth_0, this$ResizeSensor.dirtyHeight_0, this$ResizeSensor.lastHeight_0));
-          this$ResizeSensor.dirtyHeight_0 = false;
-          this$ResizeSensor.dirtyWidth_0 = false;
-        }
-        this$ResizeSensor.runDirtyChecking_0();
-      }
-    };
-  }
-  Element$ResizeSensor.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
-    simpleName: 'ResizeSensor',
-    interfaces: []
-  };
-  function Element$ResizedEvent(widthChanged, width, heightChanged, height) {
-    this.widthChanged = widthChanged;
-    this.width = width;
-    this.heightChanged = heightChanged;
-    this.height = height;
-  }
-  Element$ResizedEvent.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
-    simpleName: 'ResizedEvent',
-    interfaces: []
-  };
-  Element$ResizedEvent.prototype.component1 = function () {
-    return this.widthChanged;
-  };
-  Element$ResizedEvent.prototype.component2 = function () {
-    return this.width;
-  };
-  Element$ResizedEvent.prototype.component3 = function () {
-    return this.heightChanged;
-  };
-  Element$ResizedEvent.prototype.component4 = function () {
-    return this.height;
-  };
-  Element$ResizedEvent.prototype.copy_p2cfck$ = function (widthChanged, width, heightChanged, height) {
-    return new Element$ResizedEvent(widthChanged === void 0 ? this.widthChanged : widthChanged, width === void 0 ? this.width : width, heightChanged === void 0 ? this.heightChanged : heightChanged, height === void 0 ? this.height : height);
-  };
-  Element$ResizedEvent.prototype.toString = function () {
-    return 'ResizedEvent(widthChanged=' + Kotlin.toString(this.widthChanged) + (', width=' + Kotlin.toString(this.width)) + (', heightChanged=' + Kotlin.toString(this.heightChanged)) + (', height=' + Kotlin.toString(this.height)) + ')';
-  };
-  Element$ResizedEvent.prototype.hashCode = function () {
-    var result = 0;
-    result = result * 31 + Kotlin.hashCode(this.widthChanged) | 0;
-    result = result * 31 + Kotlin.hashCode(this.width) | 0;
-    result = result * 31 + Kotlin.hashCode(this.heightChanged) | 0;
-    result = result * 31 + Kotlin.hashCode(this.height) | 0;
-    return result;
-  };
-  Element$ResizedEvent.prototype.equals = function (other) {
-    return this === other || (other !== null && (typeof other === 'object' && (Object.getPrototypeOf(this) === Object.getPrototypeOf(other) && (Kotlin.equals(this.widthChanged, other.widthChanged) && Kotlin.equals(this.width, other.width) && Kotlin.equals(this.heightChanged, other.heightChanged) && Kotlin.equals(this.height, other.height)))));
-  };
-  function Element$resizedListeners$lambda() {
-    return Kotlin.kotlin.collections.ArrayList_init_ww73n8$();
-  }
-  function Element$hideOnBreakpoints$lambda() {
-    return Kotlin.kotlin.collections.ArrayList_init_ww73n8$();
-  }
-  function Element$resizedHandler$lambda(this$Element) {
-    return function (event) {
-      if (this$Element.layout != null) {
-        var tmp$;
-        tmp$ = this$Element.childNodes.iterator();
-        while (tmp$.hasNext()) {
-          var element = tmp$.next();
-          if (Kotlin.isType(element, Element)) {
-            element.parentResized_y9yt0u$_0(event);
-          }
-        }
-      }
-    };
-  }
-  function Element$style$lambda(this$Element) {
-    return function () {
-      return new TypedStyle(this$Element);
-    };
-  }
-  Element.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
-    simpleName: 'Element',
-    interfaces: [Node]
-  };
   function Img(src) {
     Element.call(this, 'img');
     this._alt$delegate = W3cDelegates_getInstance().nullableAttribute_61zpoe$('alt');
@@ -2832,7 +3306,7 @@ var elements = function (_, Kotlin) {
   function Input(type) {
     Element.call(this, 'input');
     var tmp$;
-    this._inputElement = Kotlin.isType(tmp$ = this.w3cElement_gobymg$_0, HTMLInputElement) ? tmp$ : Kotlin.throwCCE();
+    this._inputElement = Kotlin.isType(tmp$ = this.w3cElement_8be2vx$, HTMLInputElement) ? tmp$ : Kotlin.throwCCE();
     this._type$delegate = W3cDelegates_getInstance().attribute_o3qcra$(this, type.name, 'type');
     this._accept$delegate = W3cDelegates_getInstance().nullableAttribute_61zpoe$('accept');
     this._alt$delegate = W3cDelegates_getInstance().nullableAttribute_61zpoe$('alt');
@@ -3366,126 +3840,9 @@ var elements = function (_, Kotlin) {
     simpleName: 'Main',
     interfaces: [Element]
   };
-  var HTML;
-  function Html(w3cElement) {
-    Html$Html_getInstance();
-    var tmp$;
-    if (w3cElement === void 0)
-      w3cElement = (tmp$ = document.documentElement) != null ? tmp$ : Kotlin.throwNPE();
-    this.w3cElement = w3cElement;
-    this.stylesheet$delegate = lazy(Html$stylesheet$lambda);
-    this.registeredClassStyles_0 = Kotlin.kotlin.collections.HashMap_init_q3lmfv$();
-  }
-  Object.defineProperty(Html.prototype, 'stylesheet_0', {
-    get: function () {
-      var $receiver = this.stylesheet$delegate;
-      new Kotlin.PropertyMetadata('stylesheet');
-      return $receiver.value;
-    }
-  });
-  function Html$init$lambda($receiver) {
-    $receiver._boxSizing = 'border-box';
-  }
-  function Html$init$lambda_0($receiver) {
-    $receiver._height = '100%';
-  }
-  function Html$init$lambda_1($receiver) {
-    $receiver._height = '100%';
-  }
-  Html.prototype.init_dqye30$ = function (borderBox, height100percent) {
-    if (borderBox === void 0)
-      borderBox = true;
-    if (height100percent === void 0)
-      height100percent = true;
-    if (borderBox) {
-      this.addCSSRule_t83c1i$(with_0(new AnyRule(), Html$init$lambda));
-    }
-    if (height100percent) {
-      this.addCSSRule_t83c1i$(with_0(new TypeRule(new TypeSelector('html')), Html$init$lambda_0));
-      this.addCSSRule_t83c1i$(with_0(new TypeRule(new TypeSelector('body')), Html$init$lambda_1));
-    }
-    BODY.init_0();
-  };
-  function Html$registerStyle$rule(closure$styledClass) {
-    return function (styledClass, init) {
-      if (init === void 0)
-        init = closure$styledClass.rule;
-      var style = new ClassRule(styledClass.classSelector);
-      init(style);
-      return style;
-    };
-  }
-  Html.prototype.registerStyle_78phyd$ = function (styledClass) {
-    var rule = Html$registerStyle$rule(styledClass);
-    var rule_2 = rule(styledClass, styledClass.rule);
-    this.registerCSSRule_t83c1i$(rule_2);
-  };
-  function Html$registerStyle$rule_0(closure$styledClass) {
-    return function (styledClass, init) {
-      if (init === void 0)
-        init = closure$styledClass.rule;
-      var style = new TypedClassRule(styledClass.classSelector);
-      init(style);
-      return style;
-    };
-  }
-  Html.prototype.registerStyle_mpomjf$ = function (styledClass) {
-    var rule_0 = Html$registerStyle$rule_0(styledClass);
-    var rule_2 = rule_0(styledClass, styledClass.rule);
-    this.registerCSSRule_t83c1i$(rule_2);
-  };
-  Html.prototype.registerCSSRule_t83c1i$ = function (rule_2) {
-    var existing = this.registeredClassStyles_0.put_xwzc9p$(rule_2.selector.toString(), rule_2);
-    if (existing == null) {
-      this.addCSSRule_t83c1i$(rule_2);
-    }
-  };
-  Html.prototype.addCSSRule_t83c1i$ = function (rule_2) {
-    var ruleText = rule_2.cssText();
-    console.log(ruleText);
-    this.stylesheet_0.insertRule(ruleText, this.stylesheet_0.cssRules.length);
-    if (!Kotlin.isType(rule_2, KeyframesRule)) {
-      var tmp$;
-      tmp$ = rule_2._childStyles_1851tg$_0.iterator();
-      while (tmp$.hasNext()) {
-        var element = tmp$.next();
-        this.registerCSSRule_t83c1i$(element);
-      }
-    }
-  };
-  function Html$Html() {
-    Html$Html_instance = this;
-  }
-  Html$Html.$metadata$ = {
-    kind: Kotlin.Kind.OBJECT,
-    simpleName: 'Html',
-    interfaces: []
-  };
-  var Html$Html_instance = null;
-  function Html$Html_getInstance() {
-    if (Html$Html_instance === null) {
-      new Html$Html();
-    }
-    return Html$Html_instance;
-  }
-  function Html$stylesheet$lambda() {
-    var tmp$;
-    return Kotlin.isType(tmp$ = document.styleSheets[0], CSSStyleSheet) ? tmp$ : Kotlin.throwCCE();
-  }
-  Html.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
-    simpleName: 'Html',
-    interfaces: []
-  };
-  function onDOMContentLoaded($receiver, listener) {
-    document.addEventListener('DOMContentLoaded', listener);
-  }
-  function onLoad($receiver, listener) {
-    $receiver.window.addEventListener('load', listener);
-  }
   function AbstractLayout(direction) {
     AbstractLayout$Statics_getInstance();
-    this.direction$delegate = new Kotlin.kotlin.properties.Delegates.observable$f(AbstractLayout$direction$lambda, direction);
+    this.direction$delegate = new Kotlin.kotlin.properties.Delegates.observable_2ulm9r$$f(AbstractLayout$direction$lambda, direction);
   }
   Object.defineProperty(AbstractLayout.prototype, 'direction', {
     get: function () {
@@ -3496,7 +3853,7 @@ var elements = function (_, Kotlin) {
     }
   });
   AbstractLayout.prototype.apply_54c9de$ = function (element) {
-    element.w3cElement_gobymg$_0.setAttribute('data-fg-layout', this.direction.name);
+    element.w3cElement_8be2vx$.setAttribute('data-fg-layout', this.direction.name);
     element.style.display = Display$flex_getInstance();
     element.style.flexDirection = this.direction.flex;
   };
@@ -3506,11 +3863,11 @@ var elements = function (_, Kotlin) {
     this.COLUMN = new Layout(Direction$COLUMN_getInstance());
   }
   AbstractLayout$Statics.prototype.from_54c9de$ = function (element) {
-    var layoutDir = Direction$Statics_getInstance().from_pdl1vj$(element.w3cElement_gobymg$_0.getAttribute('data-fg-layout'));
+    var layoutDir = Direction$Statics_getInstance().from_pdl1vj$(element.w3cElement_8be2vx$.getAttribute('data-fg-layout'));
     return toLayout(layoutDir);
   };
   AbstractLayout$Statics.prototype.remove_54c9de$ = function (element) {
-    element.w3cElement_gobymg$_0.removeAttribute('data-fg-layout');
+    element.w3cElement_8be2vx$.removeAttribute('data-fg-layout');
   };
   AbstractLayout$Statics.$metadata$ = {
     kind: Kotlin.Kind.OBJECT,
@@ -3538,6 +3895,36 @@ var elements = function (_, Kotlin) {
     simpleName: 'Breakpoint',
     interfaces: []
   };
+  function setLayout($receiver, direction, init) {
+    var layout = new Layout(direction);
+    init(layout);
+    $receiver.layout = layout;
+  }
+  function xsmall($receiver, direction, init) {
+    var breakpoint = new LayoutBreakpoint(direction, DefaultBreakpoints$xsmall_getInstance());
+    init(breakpoint);
+    $receiver.addBreakpoint_7i97bf$(breakpoint);
+  }
+  function small($receiver, direction, init) {
+    var breakpoint = new LayoutBreakpoint(direction, DefaultBreakpoints$small_getInstance());
+    init(breakpoint);
+    $receiver.addBreakpoint_7i97bf$(breakpoint);
+  }
+  function medium($receiver, direction, init) {
+    var breakpoint = new LayoutBreakpoint(direction, DefaultBreakpoints$medium_getInstance());
+    init(breakpoint);
+    $receiver.addBreakpoint_7i97bf$(breakpoint);
+  }
+  function large($receiver, direction, init) {
+    var breakpoint = new LayoutBreakpoint(direction, DefaultBreakpoints$large_getInstance());
+    init(breakpoint);
+    $receiver.addBreakpoint_7i97bf$(breakpoint);
+  }
+  function xlarge($receiver, direction, init) {
+    var breakpoint = new LayoutBreakpoint(direction, DefaultBreakpoints$xlarge_getInstance());
+    init(breakpoint);
+    $receiver.addBreakpoint_7i97bf$(breakpoint);
+  }
   function DefaultBreakpoints(name, ordinal, range) {
     Enum.call(this);
     this.range = range;
@@ -3607,7 +3994,6 @@ var elements = function (_, Kotlin) {
   }
   DefaultBreakpoints.valueOf_61zpoe$ = DefaultBreakpoints$valueOf;
   function Direction(name, ordinal, flex) {
-    Direction$Statics_getInstance();
     Enum.call(this);
     this.flex = flex;
     this.name$ = name;
@@ -3618,6 +4004,7 @@ var elements = function (_, Kotlin) {
     };
     Direction$ROW_instance = new Direction('ROW', 0, FlexDirection$row_getInstance());
     Direction$COLUMN_instance = new Direction('COLUMN', 1, FlexDirection$column_getInstance());
+    Direction$Statics_getInstance();
   }
   var Direction$ROW_instance;
   function Direction$ROW_getInstance() {
@@ -3645,6 +4032,7 @@ var elements = function (_, Kotlin) {
   };
   var Direction$Statics_instance = null;
   function Direction$Statics_getInstance() {
+    Direction_initFields();
     if (Direction$Statics_instance === null) {
       new Direction$Statics();
     }
@@ -3675,36 +4063,6 @@ var elements = function (_, Kotlin) {
     }
     return new Layout($receiver);
   }
-  function setLayout($receiver, direction, init) {
-    var layout = new Layout(direction);
-    init(layout);
-    $receiver.layout = layout;
-  }
-  function xsmall($receiver, direction, init) {
-    var breakpoint = new LayoutBreakpoint(direction, DefaultBreakpoints$xsmall_getInstance());
-    init(breakpoint);
-    $receiver.addBreakpoint_7i97bf$(breakpoint);
-  }
-  function small($receiver, direction, init) {
-    var breakpoint = new LayoutBreakpoint(direction, DefaultBreakpoints$small_getInstance());
-    init(breakpoint);
-    $receiver.addBreakpoint_7i97bf$(breakpoint);
-  }
-  function medium($receiver, direction, init) {
-    var breakpoint = new LayoutBreakpoint(direction, DefaultBreakpoints$medium_getInstance());
-    init(breakpoint);
-    $receiver.addBreakpoint_7i97bf$(breakpoint);
-  }
-  function large($receiver, direction, init) {
-    var breakpoint = new LayoutBreakpoint(direction, DefaultBreakpoints$large_getInstance());
-    init(breakpoint);
-    $receiver.addBreakpoint_7i97bf$(breakpoint);
-  }
-  function xlarge($receiver, direction, init) {
-    var breakpoint = new LayoutBreakpoint(direction, DefaultBreakpoints$xlarge_getInstance());
-    init(breakpoint);
-    $receiver.addBreakpoint_7i97bf$(breakpoint);
-  }
   function Layout(direction) {
     Layout$Statics_getInstance();
     AbstractLayout.call(this, direction);
@@ -3716,7 +4074,7 @@ var elements = function (_, Kotlin) {
   Layout.prototype.find_14dthe$ = function (width) {
     var $receiver = this.breakpoints_0;
     var firstOrNull_6jwkkr$result;
-    firstOrNull_6jwkkr$break: {
+    firstOrNull_6jwkkr$break: do {
       var tmp$;
       tmp$ = $receiver.iterator();
       while (tmp$.hasNext()) {
@@ -3728,17 +4086,18 @@ var elements = function (_, Kotlin) {
       }
       firstOrNull_6jwkkr$result = null;
     }
+     while (false);
     return firstOrNull_6jwkkr$result;
   };
   function Layout$Statics() {
     Layout$Statics_instance = this;
   }
   Layout$Statics.prototype.from_54c9de$ = function (element) {
-    var layoutDir = Direction$Statics_getInstance().from_pdl1vj$(element.w3cElement_gobymg$_0.getAttribute('data-fg-layout'));
+    var layoutDir = Direction$Statics_getInstance().from_pdl1vj$(element.w3cElement_8be2vx$.getAttribute('data-fg-layout'));
     return toLayout(layoutDir);
   };
   Layout$Statics.prototype.remove_54c9de$ = function (element) {
-    element.w3cElement_gobymg$_0.removeAttribute('data-fg-layout');
+    element.w3cElement_8be2vx$.removeAttribute('data-fg-layout');
   };
   Layout$Statics.$metadata$ = {
     kind: Kotlin.Kind.OBJECT,
@@ -3768,7 +4127,7 @@ var elements = function (_, Kotlin) {
   };
   function LayoutDelegate() {
     this._layout_0 = null;
-    this._element$delegate = properties_0.Delegates.notNull_30y1fr$();
+    this._element$delegate = properties.Delegates.notNull_30y1fr$();
     this.resizedHandler_0 = LayoutDelegate$resizedHandler$lambda(this);
   }
   Object.defineProperty(LayoutDelegate.prototype, '_element_0', {
@@ -3816,208 +4175,6 @@ var elements = function (_, Kotlin) {
     kind: Kotlin.Kind.CLASS,
     simpleName: 'LayoutDelegate',
     interfaces: [ReadWriteProperty]
-  };
-  function Node(w3cNode) {
-    this.w3cNode_w5cupa$_0 = w3cNode;
-    this._childNodes_w5cupa$_0 = Kotlin.kotlin.collections.ArrayList_init_ww73n8$();
-    this._childrenMountInstructions_w5cupa$_0 = Kotlin.kotlin.collections.ArrayList_init_ww73n8$();
-    this.rendering_w5cupa$_0 = false;
-    this.rendered_w5cupa$_0 = false;
-    this._parentNode_w5cupa$_0 = null;
-  }
-  Object.defineProperty(Node.prototype, 'childNodes', {
-    get: function () {
-      return this._childNodes_w5cupa$_0;
-    }
-  });
-  Object.defineProperty(Node.prototype, 'rendering', {
-    get: function () {
-      return this.rendering_w5cupa$_0;
-    },
-    set: function (rendering) {
-      this.rendering_w5cupa$_0 = rendering;
-    }
-  });
-  Object.defineProperty(Node.prototype, 'rendered', {
-    get: function () {
-      return this.rendered_w5cupa$_0;
-    },
-    set: function (rendered) {
-      this.rendered_w5cupa$_0 = rendered;
-    }
-  });
-  Object.defineProperty(Node.prototype, '_nodeName', {
-    get: function () {
-      return this.w3cNode_w5cupa$_0.nodeName;
-    }
-  });
-  Object.defineProperty(Node.prototype, 'mounted', {
-    get: function () {
-      var tmp$, tmp$_0, tmp$_1;
-      return (tmp$_1 = (tmp$_0 = (tmp$ = this._parentNode_w5cupa$_0) != null ? tmp$.w3cNode_w5cupa$_0 : null) != null ? tmp$_0.contains(this.w3cNode_w5cupa$_0) : null) != null ? tmp$_1 : false;
-    }
-  });
-  Object.defineProperty(Node.prototype, 'textContent', {
-    get: function () {
-      return this.w3cNode_w5cupa$_0.textContent;
-    },
-    set: function (value) {
-      this.removeChildren();
-      if (value != null) {
-        this.w3cNode_w5cupa$_0.textContent = value;
-        this._childNodes_w5cupa$_0.addAll_brywnq$(this.parseChildrenFromDOM_w5cupa$_0());
-      }
-    }
-  });
-  Node.prototype.hasChild_sr04hg$ = function (child_1) {
-    return this._childNodes_w5cupa$_0.contains_11rb$(child_1);
-  };
-  Node.prototype.prependChild_sr04hg$ = function (node) {
-    if (this._childNodes_w5cupa$_0.isEmpty()) {
-      this.appendChild_sr04hg$(node);
-      return node;
-    }
-     else {
-      this.insertBefore_p937mc$(node, first(this._childNodes_w5cupa$_0));
-      return node;
-    }
-  };
-  function Node$insertBefore$lambda(this$Node, closure$child) {
-    return function (it) {
-      this$Node.w3cNode_w5cupa$_0.insertBefore(it.w3cNode_w5cupa$_0, closure$child.w3cNode_w5cupa$_0);
-    };
-  }
-  Node.prototype.insertBefore_p937mc$ = function (node, child_1) {
-    if (node._parentNode_w5cupa$_0 != null) {
-      throw new IllegalStateException("Node cannot be added. It's already added. Please remove it first.");
-    }
-    var childIndex = this._childNodes_w5cupa$_0.indexOf_11rb$(child_1);
-    if (childIndex === -1) {
-      throw new IllegalArgumentException('reference ' + child_1.w3cNode_w5cupa$_0.nodeName + ' is expected as child');
-    }
-    node._parentNode_w5cupa$_0 = this;
-    if (Kotlin.isType(node, Element) && (this.rendering || this.rendered) && !child_1.rendered) {
-      node.rendering = true;
-      node.callRender_gobymg$_0();
-      node.rendered = true;
-      node.rendering = false;
-      node.renderChildren_w5cupa$_0();
-    }
-    var mountFn = Node$insertBefore$lambda(this, child_1);
-    if (this.mounted) {
-      this.mountChild_twsohh$_0(mountFn, node);
-      this.mountChildren_w5cupa$_0();
-    }
-     else {
-      this._childrenMountInstructions_w5cupa$_0.add_11rb$(new Pair(mountFn, node));
-    }
-    this._childNodes_w5cupa$_0.add_wxm5ur$(childIndex, node);
-    this.childAdded_sr04hg$(node);
-    return node;
-  };
-  function Node$appendChild$lambda(this$Node) {
-    return function (it) {
-      this$Node.w3cNode_w5cupa$_0.appendChild(it.w3cNode_w5cupa$_0);
-    };
-  }
-  Node.prototype.appendChild_sr04hg$ = function (node) {
-    if (node._parentNode_w5cupa$_0 != null) {
-      throw new IllegalStateException("Node cannot be added. It's already added. Please remove it first.");
-    }
-    node._parentNode_w5cupa$_0 = this;
-    if (Kotlin.isType(node, Element) && (this.rendering || this.rendered) && !node.rendered) {
-      node.rendering = true;
-      node.callRender_gobymg$_0();
-      node.rendered = true;
-      node.rendering = false;
-      node.renderChildren_w5cupa$_0();
-    }
-    var mountFn = Node$appendChild$lambda(this);
-    if (this.mounted) {
-      this.mountChild_twsohh$_0(mountFn, node);
-      node.mountChildren_w5cupa$_0();
-    }
-     else {
-      this._childrenMountInstructions_w5cupa$_0.add_11rb$(new Pair(mountFn, node));
-    }
-    this._childNodes_w5cupa$_0.add_11rb$(node);
-    this.childAdded_sr04hg$(node);
-    return node;
-  };
-  Node.prototype.parseChildrenFromDOM_w5cupa$_0 = function () {
-    var tmp$;
-    var nodes = Kotlin.kotlin.collections.ArrayList_init_ww73n8$();
-    var childW3cNodes = this.w3cNode_w5cupa$_0.childNodes;
-    tmp$ = childW3cNodes.length - 1 | 0;
-    for (var i_0 = 0; i_0 <= tmp$; i_0++) {
-      var childNode = childW3cNodes[i_0];
-      if (Kotlin.isType(childNode, HTMLElement))
-        nodes.add_11rb$(new Element(void 0, childNode));
-      else if (Kotlin.isType(childNode, Text))
-        nodes.add_11rb$(new Text_0(void 0, childNode));
-    }
-    return nodes;
-  };
-  Node.prototype.renderChildren_w5cupa$_0 = function () {
-    var tmp$;
-    tmp$ = this._childNodes_w5cupa$_0.iterator();
-    while (tmp$.hasNext()) {
-      var child_1 = tmp$.next();
-      if (Kotlin.isType(child_1, Element) && !child_1.rendered) {
-        child_1.callRender_gobymg$_0();
-        child_1.rendered = true;
-      }
-      child_1.renderChildren_w5cupa$_0();
-    }
-  };
-  Node.prototype.mountChild_twsohh$_0 = function (mountFn, child_1) {
-    mountFn(child_1);
-    if (Kotlin.isType(child_1, Element)) {
-      child_1.callDidMount_gobymg$_0();
-    }
-  };
-  Node.prototype.mountChildren_w5cupa$_0 = function () {
-    var tmp$, tmp$_0;
-    tmp$ = this._childrenMountInstructions_w5cupa$_0.iterator();
-    while (tmp$.hasNext()) {
-      var mountFn_n_child = tmp$.next();
-      this.mountChild_twsohh$_0(mountFn_n_child.first, mountFn_n_child.second);
-    }
-    this._childrenMountInstructions_w5cupa$_0.clear();
-    tmp$_0 = this._childNodes_w5cupa$_0.iterator();
-    while (tmp$_0.hasNext()) {
-      var child_1 = tmp$_0.next();
-      child_1.mountChildren_w5cupa$_0();
-    }
-  };
-  Node.prototype.removeChildren = function () {
-    while (!this._childNodes_w5cupa$_0.isEmpty()) {
-      this.removeChild_sr04hg$(first(this._childNodes_w5cupa$_0));
-    }
-  };
-  Node.prototype.removeChild_sr04hg$ = function (node) {
-    if (Kotlin.isType(node, Element)) {
-      node.callWillUnMount_gobymg$_0();
-    }
-    if (this.mounted) {
-      this.w3cNode_w5cupa$_0.removeChild(node.w3cNode_w5cupa$_0);
-    }
-    this._childNodes_w5cupa$_0.remove_11rb$(node);
-    node._parentNode_w5cupa$_0 = null;
-    this.childRemoved_sr04hg$(this);
-  };
-  Node.prototype.removeSelf = function () {
-    var tmp$;
-    (tmp$ = this._parentNode_w5cupa$_0) != null ? tmp$.removeChild_sr04hg$(this) : null;
-  };
-  Node.prototype.childAdded_sr04hg$ = function (child_1) {
-  };
-  Node.prototype.childRemoved_sr04hg$ = function (child_1) {
-  };
-  Node.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
-    simpleName: 'Node',
-    interfaces: []
   };
   function Article() {
     Element.call(this, 'article');
@@ -4259,9 +4416,9 @@ var elements = function (_, Kotlin) {
     simpleName: 'PseudoClassSelector',
     interfaces: [Selector]
   };
-  function CompositeSelector(a_0, combinator, b) {
+  function CompositeSelector(a, combinator, b) {
     Selector.call(this);
-    this.a = a_0;
+    this.a = a;
     this.combinator = combinator;
     this.b = b;
   }
@@ -4273,32 +4430,32 @@ var elements = function (_, Kotlin) {
     simpleName: 'CompositeSelector',
     interfaces: [Selector]
   };
-  function ChildSelector(a_0, b) {
-    CompositeSelector.call(this, a_0, '>', b);
+  function ChildSelector(a, b) {
+    CompositeSelector.call(this, a, '>', b);
   }
   ChildSelector.$metadata$ = {
     kind: Kotlin.Kind.CLASS,
     simpleName: 'ChildSelector',
     interfaces: [CompositeSelector]
   };
-  function AdjacentSiblingSelector(a_0, b) {
-    CompositeSelector.call(this, a_0, '+', b);
+  function AdjacentSiblingSelector(a, b) {
+    CompositeSelector.call(this, a, '+', b);
   }
   AdjacentSiblingSelector.$metadata$ = {
     kind: Kotlin.Kind.CLASS,
     simpleName: 'AdjacentSiblingSelector',
     interfaces: [CompositeSelector]
   };
-  function GeneralSiblingSelector(a_0, b) {
-    CompositeSelector.call(this, a_0, '~', b);
+  function GeneralSiblingSelector(a, b) {
+    CompositeSelector.call(this, a, '~', b);
   }
   GeneralSiblingSelector.$metadata$ = {
     kind: Kotlin.Kind.CLASS,
     simpleName: 'GeneralSiblingSelector',
     interfaces: [CompositeSelector]
   };
-  function DescendantSelector(a_0, b) {
-    CompositeSelector.call(this, a_0, '', b);
+  function DescendantSelector(a, b) {
+    CompositeSelector.call(this, a, '', b);
   }
   DescendantSelector.prototype.toString = function () {
     return this.a.toString() + ' ' + this.b.toString();
@@ -4308,8 +4465,8 @@ var elements = function (_, Kotlin) {
     simpleName: 'DescendantSelector',
     interfaces: [CompositeSelector]
   };
-  function AndSelector(a_0, b) {
-    CompositeSelector.call(this, a_0, '', b);
+  function AndSelector(a, b) {
+    CompositeSelector.call(this, a, '', b);
   }
   AndSelector.prototype.toString = function () {
     return this.a.toString() + this.b.toString();
@@ -4475,11 +4632,11 @@ var elements = function (_, Kotlin) {
     Border$Companion_instance = this;
   }
   Border$Companion.prototype.from_54c9de$ = function (element) {
-    var widthAsString = element.w3cElement_gobymg$_0.style.getPropertyValue('border-width');
+    var widthAsString = element.w3cElement_8be2vx$.style.getPropertyValue('border-width');
     var width = !Kotlin.kotlin.text.isBlank_gw00vp$(widthAsString) ? toDimension(widthAsString) : null;
-    var styleAsString = element.w3cElement_gobymg$_0.style.getPropertyValue('border-style');
+    var styleAsString = element.w3cElement_8be2vx$.style.getPropertyValue('border-style');
     var style = !Kotlin.kotlin.text.isBlank_gw00vp$(styleAsString) ? BorderStyle$valueOf(styleAsString) : null;
-    var colorAsString = element.w3cElement_gobymg$_0.style.getPropertyValue('border-color');
+    var colorAsString = element.w3cElement_8be2vx$.style.getPropertyValue('border-color');
     var color = !Kotlin.kotlin.text.isBlank_gw00vp$(colorAsString) ? RgbColor$Factory_getInstance().from_61zpoe$(colorAsString) : null;
     return new Border(width, style, color);
   };
@@ -4499,24 +4656,24 @@ var elements = function (_, Kotlin) {
     var tmp$, tmp$_0, tmp$_1, tmp$_2, tmp$_3, tmp$_4;
     if (this.width != null) {
       var borderWidth = (tmp$_0 = (tmp$ = this.width) != null ? tmp$.toHtml() : null) != null ? tmp$_0 : '';
-      element.w3cElement_gobymg$_0.style.setProperty('border-width', borderWidth);
+      element.w3cElement_8be2vx$.style.setProperty('border-width', borderWidth);
     }
      else {
-      element.w3cElement_gobymg$_0.style.removeProperty('border-width');
+      element.w3cElement_8be2vx$.style.removeProperty('border-width');
     }
     if (this.style != null) {
       var styleName = (tmp$_2 = (tmp$_1 = this.style) != null ? tmp$_1.name : null) != null ? tmp$_2 : '';
-      element.w3cElement_gobymg$_0.style.setProperty('border-style', styleName);
+      element.w3cElement_8be2vx$.style.setProperty('border-style', styleName);
     }
      else {
-      element.w3cElement_gobymg$_0.style.removeProperty('border-style');
+      element.w3cElement_8be2vx$.style.removeProperty('border-style');
     }
     if (this.color != null) {
       var color = (tmp$_4 = (tmp$_3 = this.color) != null ? tmp$_3.toString() : null) != null ? tmp$_4 : '';
-      element.w3cElement_gobymg$_0.style.setProperty('border-color', color);
+      element.w3cElement_8be2vx$.style.setProperty('border-color', color);
     }
      else {
-      element.w3cElement_gobymg$_0.style.removeProperty('border-color');
+      element.w3cElement_8be2vx$.style.removeProperty('border-color');
     }
   };
   Border.$metadata$ = {
@@ -4811,7 +4968,7 @@ var elements = function (_, Kotlin) {
   function toFlex($receiver) {
     var $receiver_0 = Flex$Keyword$values();
     var firstOrNull_sfx99b$result;
-    firstOrNull_sfx99b$break: {
+    firstOrNull_sfx99b$break: do {
       var tmp$;
       for (tmp$ = 0; tmp$ !== $receiver_0.length; ++tmp$) {
         var element = $receiver_0[tmp$];
@@ -4822,6 +4979,7 @@ var elements = function (_, Kotlin) {
       }
       firstOrNull_sfx99b$result = null;
     }
+     while (false);
     var keyword = firstOrNull_sfx99b$result;
     if (keyword != null) {
       return new Flex(null, keyword);
@@ -4977,7 +5135,7 @@ var elements = function (_, Kotlin) {
   function toFlexBasis($receiver) {
     var $receiver_0 = FlexBasis$Keyword$values();
     var firstOrNull_sfx99b$result;
-    firstOrNull_sfx99b$break: {
+    firstOrNull_sfx99b$break: do {
       var tmp$;
       for (tmp$ = 0; tmp$ !== $receiver_0.length; ++tmp$) {
         var element = $receiver_0[tmp$];
@@ -4988,6 +5146,7 @@ var elements = function (_, Kotlin) {
       }
       firstOrNull_sfx99b$result = null;
     }
+     while (false);
     var keyword = firstOrNull_sfx99b$result;
     if (keyword != null) {
       return new FlexBasis(null, keyword);
@@ -5159,7 +5318,7 @@ var elements = function (_, Kotlin) {
   function toFlexGrow($receiver) {
     var $receiver_0 = FlexGrow$Keyword$values();
     var firstOrNull_sfx99b$result;
-    firstOrNull_sfx99b$break: {
+    firstOrNull_sfx99b$break: do {
       var tmp$;
       for (tmp$ = 0; tmp$ !== $receiver_0.length; ++tmp$) {
         var element = $receiver_0[tmp$];
@@ -5170,6 +5329,7 @@ var elements = function (_, Kotlin) {
       }
       firstOrNull_sfx99b$result = null;
     }
+     while (false);
     var keyword = firstOrNull_sfx99b$result;
     if (keyword != null) {
       return new FlexGrow(null, keyword);
@@ -5269,7 +5429,7 @@ var elements = function (_, Kotlin) {
   function toFlexShrink($receiver) {
     var $receiver_0 = FlexShrink$Keyword$values();
     var firstOrNull_sfx99b$result;
-    firstOrNull_sfx99b$break: {
+    firstOrNull_sfx99b$break: do {
       var tmp$;
       for (tmp$ = 0; tmp$ !== $receiver_0.length; ++tmp$) {
         var element = $receiver_0[tmp$];
@@ -5280,6 +5440,7 @@ var elements = function (_, Kotlin) {
       }
       firstOrNull_sfx99b$result = null;
     }
+     while (false);
     var keyword = firstOrNull_sfx99b$result;
     if (keyword != null) {
       return new FlexShrink(null, keyword);
@@ -5571,8 +5732,8 @@ var elements = function (_, Kotlin) {
     get: function () {
       return this.left$delegate.getValue_lrcp0p$(this, new Kotlin.PropertyMetadata('left'));
     },
-    set: function (left_0) {
-      this.left$delegate.setValue_9rddgb$(this, new Kotlin.PropertyMetadata('left'), left_0);
+    set: function (left) {
+      this.left$delegate.setValue_9rddgb$(this, new Kotlin.PropertyMetadata('left'), left);
     }
   });
   Object.defineProperty(TypedStyle.prototype, 'right', {
@@ -5938,7 +6099,7 @@ var elements = function (_, Kotlin) {
   TypedStyle$TypedPropertyDelegate.prototype.getValue_lrcp0p$ = function (thisRef, property) {
     var tmp$;
     var attributeName = (tmp$ = this.attributeName) != null ? tmp$ : camelsToDashes(property.callableName);
-    var stringValue = thisRef.element_0.w3cElement_gobymg$_0.style.getPropertyValue(attributeName);
+    var stringValue = thisRef.element_0.w3cElement_8be2vx$.style.getPropertyValue(attributeName);
     return stringValue.length > 0 ? this.getFn(stringValue) : null;
   };
   TypedStyle$TypedPropertyDelegate.prototype.setValue_9rddgb$ = function (thisRef, property, value) {
@@ -5946,10 +6107,10 @@ var elements = function (_, Kotlin) {
     var attributeName = (tmp$ = this.attributeName) != null ? tmp$ : camelsToDashes(property.callableName);
     if (value != null) {
       var valueAsString = value.toString();
-      thisRef.element_0.w3cElement_gobymg$_0.style.setProperty(attributeName, valueAsString);
+      thisRef.element_0.w3cElement_8be2vx$.style.setProperty(attributeName, valueAsString);
     }
      else {
-      thisRef.element_0.w3cElement_gobymg$_0.style.removeProperty(attributeName);
+      thisRef.element_0.w3cElement_8be2vx$.style.removeProperty(attributeName);
     }
   };
   TypedStyle$TypedPropertyDelegate.$metadata$ = {
@@ -5975,13 +6136,6 @@ var elements = function (_, Kotlin) {
   TypedStyle.$metadata$ = {
     kind: Kotlin.Kind.CLASS,
     simpleName: 'TypedStyle',
-    interfaces: []
-  };
-  function StyledClass() {
-  }
-  StyledClass.$metadata$ = {
-    kind: Kotlin.Kind.INTERFACE,
-    simpleName: 'StyledClass',
     interfaces: []
   };
   function Table() {
@@ -6150,165 +6304,11 @@ var elements = function (_, Kotlin) {
     simpleName: 'I',
     interfaces: [Element]
   };
-  function Text_0(text_0, existingNode) {
-    if (text_0 === void 0)
-      text_0 = null;
-    if (existingNode === void 0)
-      existingNode = null;
-    Node.call(this, existingNode != null ? existingNode : document.createTextNode(text_0 != null ? text_0 : Kotlin.throwNPE()));
-  }
-  Text_0.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
-    simpleName: 'Text',
-    interfaces: [Node]
-  };
-  function TypedStyledClass() {
-  }
-  TypedStyledClass.$metadata$ = {
-    kind: Kotlin.Kind.INTERFACE,
-    simpleName: 'TypedStyledClass',
-    interfaces: []
-  };
-  function W3cDelegates() {
-    W3cDelegates_instance = this;
-  }
-  W3cDelegates.prototype.attribute_o3qcra$ = function (receiver, initialValue, attributeName) {
-    return new W3cDelegates$Attribute(receiver, initialValue, attributeName);
-  };
-  W3cDelegates.prototype.nullableAttribute_61zpoe$ = function (attributeName) {
-    return new W3cDelegates$NullableAttribute(attributeName);
-  };
-  W3cDelegates.prototype.nullableBooleanAttribute_61zpoe$ = function (attributeName) {
-    return new W3cDelegates$NullableBooleanAttribute(attributeName);
-  };
-  W3cDelegates.prototype.nullableDimensionAttribute_61zpoe$ = function (attributeName) {
-    return new W3cDelegates$NullableDimensionAttribute(attributeName);
-  };
-  function W3cDelegates$Attribute(receiver, initialValue, attributeName) {
-    this.attributeName = attributeName;
-    receiver.w3cElement_gobymg$_0.setAttribute(this.attributeName, initialValue);
-  }
-  W3cDelegates$Attribute.prototype.getValue_lrcp0p$ = function (thisRef, property) {
-    var tmp$;
-    var w3cElement = thisRef.w3cElement_gobymg$_0;
-    var attributeName = this.attributeName;
-    return (tmp$ = w3cElement.getAttribute(attributeName)) != null ? tmp$ : Kotlin.throwNPE();
-  };
-  W3cDelegates$Attribute.prototype.setValue_9rddgb$ = function (thisRef, property, value) {
-    var w3cElement = thisRef.w3cElement_gobymg$_0;
-    var attributeName = this.attributeName;
-    w3cElement.setAttribute(attributeName, value);
-  };
-  W3cDelegates$Attribute.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
-    simpleName: 'Attribute',
-    interfaces: [ReadWriteProperty]
-  };
-  function W3cDelegates$NullableAttribute(attributeName) {
-    if (attributeName === void 0)
-      attributeName = null;
-    this.attributeName = attributeName;
-  }
-  W3cDelegates$NullableAttribute.prototype.getValue_lrcp0p$ = function (thisRef, property) {
-    var tmp$;
-    var w3cElement = thisRef.w3cElement_gobymg$_0;
-    var attributeName = (tmp$ = this.attributeName) != null ? tmp$ : property.callableName;
-    return w3cElement.getAttribute(attributeName);
-  };
-  W3cDelegates$NullableAttribute.prototype.setValue_9rddgb$ = function (thisRef, property, value) {
-    var tmp$;
-    var w3cElement = thisRef.w3cElement_gobymg$_0;
-    var attributeName = (tmp$ = this.attributeName) != null ? tmp$ : property.callableName;
-    if (value != null) {
-      w3cElement.setAttribute(attributeName, value);
-    }
-     else {
-      if (w3cElement.hasAttribute(attributeName)) {
-        w3cElement.removeAttribute(attributeName);
-      }
-    }
-  };
-  W3cDelegates$NullableAttribute.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
-    simpleName: 'NullableAttribute',
-    interfaces: [ReadWriteProperty]
-  };
-  function W3cDelegates$NullableBooleanAttribute(attributeName) {
-    if (attributeName === void 0)
-      attributeName = null;
-    this.attributeName = attributeName;
-  }
-  W3cDelegates$NullableBooleanAttribute.prototype.getValue_lrcp0p$ = function (thisRef, property) {
-    var tmp$;
-    var w3cElement = thisRef.w3cElement_gobymg$_0;
-    var attributeName = (tmp$ = this.attributeName) != null ? tmp$ : property.callableName;
-    var $receiver = w3cElement.getAttribute(attributeName);
-    return !($receiver == null || $receiver.length === 0);
-  };
-  W3cDelegates$NullableBooleanAttribute.prototype.setValue_9rddgb$ = function (thisRef, property, value) {
-    var tmp$;
-    var w3cElement = thisRef.w3cElement_gobymg$_0;
-    var attributeName = (tmp$ = this.attributeName) != null ? tmp$ : property.callableName;
-    if (value != null && value) {
-      w3cElement.setAttribute(attributeName, attributeName);
-    }
-     else {
-      if (w3cElement.hasAttribute(attributeName)) {
-        w3cElement.removeAttribute(attributeName);
-      }
-    }
-  };
-  W3cDelegates$NullableBooleanAttribute.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
-    simpleName: 'NullableBooleanAttribute',
-    interfaces: [ReadWriteProperty]
-  };
-  function W3cDelegates$NullableDimensionAttribute(attributeName) {
-    if (attributeName === void 0)
-      attributeName = null;
-    this.attributeName = attributeName;
-  }
-  W3cDelegates$NullableDimensionAttribute.prototype.getValue_lrcp0p$ = function (thisRef, property) {
-    var tmp$;
-    var w3cElement = thisRef.w3cElement_gobymg$_0;
-    var attributeName = (tmp$ = this.attributeName) != null ? tmp$ : property.callableName;
-    return toDimension(w3cElement.getAttribute(attributeName));
-  };
-  W3cDelegates$NullableDimensionAttribute.prototype.setValue_9rddgb$ = function (thisRef, property, value) {
-    var tmp$;
-    var w3cElement = thisRef.w3cElement_gobymg$_0;
-    var attributeName = (tmp$ = this.attributeName) != null ? tmp$ : property.callableName;
-    if (value != null) {
-      w3cElement.setAttribute(attributeName, value.toHtml());
-    }
-     else {
-      if (w3cElement.hasAttribute(attributeName)) {
-        w3cElement.removeAttribute(attributeName);
-      }
-    }
-  };
-  W3cDelegates$NullableDimensionAttribute.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
-    simpleName: 'NullableDimensionAttribute',
-    interfaces: [ReadWriteProperty]
-  };
-  W3cDelegates.$metadata$ = {
-    kind: Kotlin.Kind.OBJECT,
-    simpleName: 'W3cDelegates',
-    interfaces: []
-  };
-  var W3cDelegates_instance = null;
-  function W3cDelegates_getInstance() {
-    if (W3cDelegates_instance === null) {
-      new W3cDelegates();
-    }
-    return W3cDelegates_instance;
-  }
   function AdjacentSiblingRule(selector) {
     Rule.call(this, selector);
   }
   AdjacentSiblingRule.prototype.cssText = function () {
-    return this.cssText_y57xct$_0(this.selector);
+    return this.cssText_zbbjui$(this.selector);
   };
   AdjacentSiblingRule.$metadata$ = {
     kind: Kotlin.Kind.CLASS,
@@ -6319,7 +6319,7 @@ var elements = function (_, Kotlin) {
     Rule.call(this, selector);
   }
   AndRule.prototype.cssText = function () {
-    return this.cssText_y57xct$_0(this.selector);
+    return this.cssText_zbbjui$(this.selector);
   };
   AndRule.$metadata$ = {
     kind: Kotlin.Kind.CLASS,
@@ -6330,7 +6330,7 @@ var elements = function (_, Kotlin) {
     Rule.call(this, AnySelector$Statics_getInstance().GET);
   }
   AnyRule.prototype.cssText = function () {
-    return Rule.prototype.cssText_y57xct$_0.call(this, this.selector);
+    return Rule.prototype.cssText_zbbjui$.call(this, this.selector);
   };
   AnyRule.$metadata$ = {
     kind: Kotlin.Kind.CLASS,
@@ -6341,7 +6341,7 @@ var elements = function (_, Kotlin) {
     Rule.call(this, selector);
   }
   ChildRule.prototype.cssText = function () {
-    return this.cssText_y57xct$_0(this.selector);
+    return this.cssText_zbbjui$(this.selector);
   };
   ChildRule.$metadata$ = {
     kind: Kotlin.Kind.CLASS,
@@ -6357,221 +6357,11 @@ var elements = function (_, Kotlin) {
     }
   });
   ClassRule.prototype.cssText = function () {
-    return Rule.prototype.cssText_y57xct$_0.call(this, this.selector);
+    return Rule.prototype.cssText_zbbjui$.call(this, this.selector);
   };
   ClassRule.$metadata$ = {
     kind: Kotlin.Kind.CLASS,
     simpleName: 'ClassRule',
-    interfaces: [Rule]
-  };
-  function Colour() {
-  }
-  Colour.$metadata$ = {
-    kind: Kotlin.Kind.INTERFACE,
-    simpleName: 'Colour',
-    interfaces: []
-  };
-  function Hsl(h, s, l, a_0) {
-    Hsl$Statics_getInstance();
-    if (a_0 === void 0)
-      a_0 = null;
-    this.h = h;
-    this.s = s;
-    this.l = l;
-    this.a = a_0;
-  }
-  Hsl.prototype.toHtml = function () {
-    if (this.a != null) {
-      return 'hsl(' + this.h + ', ' + this.s + '%, ' + this.l + '%, ' + Kotlin.toString(this.a) + ')';
-    }
-     else {
-      return 'hsl(' + this.h + ', ' + this.s + '%, ' + this.l + '%)';
-    }
-  };
-  Hsl.prototype.toRgb = function () {
-    if (this.s === 0) {
-      return new RgbColor(1, 1, 1, this.a);
-    }
-    var q = this.l < 0.5 ? Kotlin.imul(this.l, 1 + this.s | 0) : this.l + this.s - Kotlin.imul(this.l, this.s) | 0;
-    var p_0 = (2 * this.l | 0) - q | 0;
-    return new RgbColor(hueToRgb(p_0, q, this.h + (1 / 3 | 0) | 0), hueToRgb(p_0, q, this.h), hueToRgb(p_0, q, this.h - (1 / 3 | 0) | 0), this.a);
-  };
-  function Hsl$Statics() {
-    Hsl$Statics_instance = this;
-    this.RED = new Hsl(0, 100, 50);
-    this.GREEN = new Hsl(120, 100, 50);
-    this.BLUE = new Hsl(240, 100, 50);
-  }
-  Hsl$Statics.$metadata$ = {
-    kind: Kotlin.Kind.OBJECT,
-    simpleName: 'Statics',
-    interfaces: []
-  };
-  var Hsl$Statics_instance = null;
-  function Hsl$Statics_getInstance() {
-    if (Hsl$Statics_instance === null) {
-      new Hsl$Statics();
-    }
-    return Hsl$Statics_instance;
-  }
-  Hsl.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
-    simpleName: 'Hsl',
-    interfaces: [Colour]
-  };
-  function hueToRgb(pIn, qIn, tIn) {
-    var t = tIn;
-    if (t < 0) {
-      t = t + 1 | 0;
-    }
-    if (t > 1) {
-      t = t - 1 | 0;
-    }
-    if (t < (1 / 6 | 0)) {
-      return pIn + Kotlin.imul((qIn - pIn | 0) * 6 | 0, t) | 0;
-    }
-    if (t < (1 / 2 | 0)) {
-      return qIn;
-    }
-    if (t < (2 / 3 | 0)) {
-      return pIn + (Kotlin.imul(qIn - pIn | 0, (2 / 3 | 0) - t | 0) * 6 | 0) | 0;
-    }
-    return pIn;
-  }
-  function RgbColor(r, g, b, a_0) {
-    RgbColor$Factory_getInstance();
-    if (a_0 === void 0)
-      a_0 = null;
-    this.r = r;
-    this.g = g;
-    this.b = b;
-    this.a = a_0;
-  }
-  RgbColor.prototype.toHtml = function () {
-    return this.toHexString();
-  };
-  RgbColor.prototype.toHexString = function () {
-    var rx = toHexString(this.r);
-    var gx = toHexString(this.g);
-    var bx = toHexString(this.b);
-    return '#' + rx + gx + bx;
-  };
-  RgbColor.prototype.toHsl = function () {
-    var max = Math.max(this.r, this.g, this.b);
-    var min = Math.min(this.r, this.g, this.b);
-    var h = (max + min | 0) / 2 | 0;
-    var s = h;
-    var l = h;
-    if (max === min) {
-      h = 0;
-      s = 0;
-    }
-     else {
-      var d = max - min | 0;
-      s = l > 0.5 ? d / (2 - max - min | 0) | 0 : d / (max + min | 0) | 0;
-      if (max === this.r) {
-        h = ((this.g - this.b | 0) / d | 0) + (this.g < this.b ? 6 : 0) | 0;
-      }
-       else if (max === this.g) {
-        h = ((this.b - this.r | 0) / d | 0) + 2 | 0;
-      }
-       else {
-        h = ((this.r - this.g | 0) / d | 0) + 4 | 0;
-      }
-      h = h / 6 | 0;
-    }
-    return new Hsl(h, s, l, this.a);
-  };
-  RgbColor.prototype.toString = function () {
-    if (this.a != null) {
-      return 'rgba(' + this.r + ',' + this.g + ',' + this.b + ',' + Kotlin.toString(this.a) + ')';
-    }
-     else {
-      return 'rgb(' + this.r + ',' + this.g + ',' + this.b + ')';
-    }
-  };
-  RgbColor.prototype.withAlfa_14dthe$ = function (alpha) {
-    return new RgbColor(this.r, this.g, this.b, alpha);
-  };
-  RgbColor.prototype.equals = function (other) {
-    if (this === other)
-      return true;
-    if (!Kotlin.isType(other, RgbColor))
-      return false;
-    if (this.r !== other.r)
-      return false;
-    if (this.g !== other.g)
-      return false;
-    if (this.b !== other.b)
-      return false;
-    if (this.a !== other.a)
-      return false;
-    return true;
-  };
-  RgbColor.prototype.hashCode = function () {
-    var tmp$, tmp$_0;
-    var result = this.r;
-    result = (31 * result | 0) + this.g | 0;
-    result = (31 * result | 0) + this.b | 0;
-    result = (31 * result | 0) + ((tmp$_0 = (tmp$ = this.a) != null ? Kotlin.hashCode(tmp$) : null) != null ? tmp$_0 : 0) | 0;
-    return result;
-  };
-  function RgbColor$Factory() {
-    RgbColor$Factory_instance = this;
-    this.TRANSPARENT = new RgbColor(0, 0, 0, 0.0);
-    this.WHITE = new RgbColor(255, 255, 255);
-    this.BLACK = new RgbColor(0, 0, 0);
-    this.RED = new RgbColor(255, 0, 0);
-    this.GREEN = new RgbColor(0, 255, 0);
-    this.BLUE = new RgbColor(0, 0, 255);
-  }
-  RgbColor$Factory.prototype.from_61zpoe$ = function (string) {
-    var stringWithoutHash = startsWith(string, '#') ? string.substring(1) : string;
-    if (stringWithoutHash.length === 6) {
-      var rs = stringWithoutHash.substring(0, 2);
-      var gs = stringWithoutHash.substring(2, 4);
-      var bs = stringWithoutHash.substring(4, 6);
-      var r = toInt_0(rs, 16);
-      var g = toInt_0(gs, 16);
-      var b = toInt_0(bs, 16);
-      return new RgbColor(r, g, b);
-    }
-     else {
-      var rs_0 = stringWithoutHash.substring(0, 1);
-      var gs_0 = stringWithoutHash.substring(1, 2);
-      var bs_0 = stringWithoutHash.substring(2, 3);
-      var r_0 = toInt_0(rs_0, 16);
-      var g_0 = toInt_0(gs_0, 16);
-      var b_0 = toInt_0(bs_0, 16);
-      return new RgbColor(r_0, g_0, b_0);
-    }
-  };
-  RgbColor$Factory.$metadata$ = {
-    kind: Kotlin.Kind.OBJECT,
-    simpleName: 'Factory',
-    interfaces: []
-  };
-  var RgbColor$Factory_instance = null;
-  function RgbColor$Factory_getInstance() {
-    if (RgbColor$Factory_instance === null) {
-      new RgbColor$Factory();
-    }
-    return RgbColor$Factory_instance;
-  }
-  RgbColor.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
-    simpleName: 'RgbColor',
-    interfaces: [Colour]
-  };
-  function DescendantRule(selector) {
-    Rule.call(this, selector);
-  }
-  DescendantRule.prototype.cssText = function () {
-    return this.cssText_y57xct$_0(this.selector);
-  };
-  DescendantRule.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
-    simpleName: 'DescendantRule',
     interfaces: [Rule]
   };
   function keyframesRule($receiver, selector, init) {
@@ -6584,7 +6374,7 @@ var elements = function (_, Kotlin) {
     init(style);
     return style;
   }
-  function rule_1($receiver, styledClass, init) {
+  function rule($receiver, styledClass, init) {
     if (init === void 0)
       init = styledClass.rule;
     var style = new ClassRule(styledClass.classSelector);
@@ -6594,157 +6384,157 @@ var elements = function (_, Kotlin) {
   function and($receiver, selector, init) {
     var style = new AndRule(new AndSelector($receiver.selector, toSelector(selector)));
     init(style);
-    $receiver._childStyles_1851tg$_0.add_11rb$(style);
+    $receiver._childStyles_8be2vx$.add_11rb$(style);
     return style;
   }
   function and_0($receiver, selector, init) {
     var style = new AndRule(new AndSelector($receiver.selector, selector));
     init(style);
-    $receiver._childStyles_1851tg$_0.add_11rb$(style);
+    $receiver._childStyles_8be2vx$.add_11rb$(style);
     return style;
   }
   function adjacentSibling($receiver, selector, init) {
     var style = new AdjacentSiblingRule(new AdjacentSiblingSelector($receiver.selector, toSelector(selector)));
     init(style);
-    $receiver._childStyles_1851tg$_0.add_11rb$(style);
+    $receiver._childStyles_8be2vx$.add_11rb$(style);
     return style;
   }
   function adjacentSibling_0($receiver, selector, init) {
     var style = new AdjacentSiblingRule(new AdjacentSiblingSelector($receiver.selector, selector));
     init(style);
-    $receiver._childStyles_1851tg$_0.add_11rb$(style);
+    $receiver._childStyles_8be2vx$.add_11rb$(style);
     return style;
   }
   function desc($receiver, selector, init) {
     var style = new DescendantRule(new DescendantSelector($receiver.selector, toSelector(selector)));
     init(style);
-    $receiver._childStyles_1851tg$_0.add_11rb$(style);
+    $receiver._childStyles_8be2vx$.add_11rb$(style);
     return style;
   }
   function desc_0($receiver, selector, init) {
     var style = new DescendantRule(new DescendantSelector($receiver.selector, selector));
     init(style);
-    $receiver._childStyles_1851tg$_0.add_11rb$(style);
+    $receiver._childStyles_8be2vx$.add_11rb$(style);
     return style;
   }
   function child($receiver, selector, init) {
     var style = new ChildRule(new ChildSelector($receiver.selector, toSelector(selector)));
     init(style);
-    $receiver._childStyles_1851tg$_0.add_11rb$(style);
+    $receiver._childStyles_8be2vx$.add_11rb$(style);
     return style;
   }
   function child_0($receiver, selector, init) {
     var style = new ChildRule(new ChildSelector($receiver.selector, selector));
     init(style);
-    $receiver._childStyles_1851tg$_0.add_11rb$(style);
+    $receiver._childStyles_8be2vx$.add_11rb$(style);
     return style;
   }
   function active($receiver, init) {
     var style = new AndRule(new AndSelector($receiver.selector, new PseudoClassSelector('active')));
     init(style);
-    $receiver._childStyles_1851tg$_0.add_11rb$(style);
+    $receiver._childStyles_8be2vx$.add_11rb$(style);
     return style;
   }
   function checked($receiver, init) {
     var style = new AndRule(new AndSelector($receiver.selector, new PseudoClassSelector('checked')));
     init(style);
-    $receiver._childStyles_1851tg$_0.add_11rb$(style);
+    $receiver._childStyles_8be2vx$.add_11rb$(style);
     return style;
   }
   function empty($receiver, init) {
     var style = new AndRule(new AndSelector($receiver.selector, new PseudoClassSelector('empty')));
     init(style);
-    $receiver._childStyles_1851tg$_0.add_11rb$(style);
+    $receiver._childStyles_8be2vx$.add_11rb$(style);
     return style;
   }
   function enabled($receiver, init) {
     var style = new AndRule(new AndSelector($receiver.selector, new PseudoClassSelector('enabled')));
     init(style);
-    $receiver._childStyles_1851tg$_0.add_11rb$(style);
+    $receiver._childStyles_8be2vx$.add_11rb$(style);
     return style;
   }
   function first_0($receiver, init) {
     var style = new AndRule(new AndSelector($receiver.selector, new PseudoClassSelector('first')));
     init(style);
-    $receiver._childStyles_1851tg$_0.add_11rb$(style);
+    $receiver._childStyles_8be2vx$.add_11rb$(style);
     return style;
   }
   function firstChild($receiver, init) {
     var style = new AndRule(new AndSelector($receiver.selector, new PseudoClassSelector('first-child')));
     init(style);
-    $receiver._childStyles_1851tg$_0.add_11rb$(style);
+    $receiver._childStyles_8be2vx$.add_11rb$(style);
     return style;
   }
   function firstOfType($receiver, init) {
     var style = new AndRule(new AndSelector($receiver.selector, new PseudoClassSelector('first-of-type')));
     init(style);
-    $receiver._childStyles_1851tg$_0.add_11rb$(style);
+    $receiver._childStyles_8be2vx$.add_11rb$(style);
     return style;
   }
   function focus($receiver, init) {
     var style = new AndRule(new AndSelector($receiver.selector, new PseudoClassSelector('focus')));
     init(style);
-    $receiver._childStyles_1851tg$_0.add_11rb$(style);
+    $receiver._childStyles_8be2vx$.add_11rb$(style);
     return style;
   }
   function hover($receiver, init) {
     var style = new AndRule(new AndSelector($receiver.selector, new PseudoClassSelector('hover')));
     init(style);
-    $receiver._childStyles_1851tg$_0.add_11rb$(style);
+    $receiver._childStyles_8be2vx$.add_11rb$(style);
     return style;
   }
   function indeterminate($receiver, init) {
     var style = new AndRule(new AndSelector($receiver.selector, new PseudoClassSelector('indeterminate')));
     init(style);
-    $receiver._childStyles_1851tg$_0.add_11rb$(style);
+    $receiver._childStyles_8be2vx$.add_11rb$(style);
     return style;
   }
   function inRange($receiver, init) {
     var style = new AndRule(new AndSelector($receiver.selector, new PseudoClassSelector('in-range')));
     init(style);
-    $receiver._childStyles_1851tg$_0.add_11rb$(style);
+    $receiver._childStyles_8be2vx$.add_11rb$(style);
     return style;
   }
   function invalid($receiver, init) {
     var style = new AndRule(new AndSelector($receiver.selector, new PseudoClassSelector('invalid')));
     init(style);
-    $receiver._childStyles_1851tg$_0.add_11rb$(style);
+    $receiver._childStyles_8be2vx$.add_11rb$(style);
     return style;
   }
   function lang($receiver, init) {
     var style = new AndRule(new AndSelector($receiver.selector, new PseudoClassSelector('lang')));
     init(style);
-    $receiver._childStyles_1851tg$_0.add_11rb$(style);
+    $receiver._childStyles_8be2vx$.add_11rb$(style);
     return style;
   }
   function lastChild($receiver, init) {
     var style = new AndRule(new AndSelector($receiver.selector, new PseudoClassSelector('last-child')));
     init(style);
-    $receiver._childStyles_1851tg$_0.add_11rb$(style);
+    $receiver._childStyles_8be2vx$.add_11rb$(style);
     return style;
   }
   function lastOfType($receiver, init) {
     var style = new AndRule(new AndSelector($receiver.selector, new PseudoClassSelector('last-of-type')));
     init(style);
-    $receiver._childStyles_1851tg$_0.add_11rb$(style);
+    $receiver._childStyles_8be2vx$.add_11rb$(style);
     return style;
   }
   function left($receiver, init) {
     var style = new AndRule(new AndSelector($receiver.selector, new PseudoClassSelector('left')));
     init(style);
-    $receiver._childStyles_1851tg$_0.add_11rb$(style);
+    $receiver._childStyles_8be2vx$.add_11rb$(style);
     return style;
   }
   function link($receiver, init) {
     var style = new AndRule(new AndSelector($receiver.selector, new PseudoClassSelector('link')));
     init(style);
-    $receiver._childStyles_1851tg$_0.add_11rb$(style);
+    $receiver._childStyles_8be2vx$.add_11rb$(style);
     return style;
   }
   function not($receiver, selector, init) {
     var style = new AndRule(new AndSelector($receiver.selector, new NotSelector(selector)));
     init(style);
-    $receiver._childStyles_1851tg$_0.add_11rb$(style);
+    $receiver._childStyles_8be2vx$.add_11rb$(style);
     return style;
   }
   function keyframesRule_0($receiver, selector, init) {
@@ -6753,26 +6543,37 @@ var elements = function (_, Kotlin) {
   function keyframe($receiver, value, init) {
     var style = new KeyFrameRule(new KeyframeSelector(value));
     init(style);
-    $receiver._childStyles_1851tg$_0.add_11rb$(style);
+    $receiver._childStyles_8be2vx$.add_11rb$(style);
     return style;
   }
   function kfrom($receiver, init) {
     var style = new KeyFrameRule(new KeyframeSelector('from'));
     init(style);
-    $receiver._childStyles_1851tg$_0.add_11rb$(style);
+    $receiver._childStyles_8be2vx$.add_11rb$(style);
     return style;
   }
   function kto($receiver, init) {
     var style = new KeyFrameRule(new KeyframeSelector('to'));
     init(style);
-    $receiver._childStyles_1851tg$_0.add_11rb$(style);
+    $receiver._childStyles_8be2vx$.add_11rb$(style);
     return style;
   }
+  function DescendantRule(selector) {
+    Rule.call(this, selector);
+  }
+  DescendantRule.prototype.cssText = function () {
+    return this.cssText_zbbjui$(this.selector);
+  };
+  DescendantRule.$metadata$ = {
+    kind: Kotlin.Kind.CLASS,
+    simpleName: 'DescendantRule',
+    interfaces: [Rule]
+  };
   function KeyFrameRule(selector) {
     Rule.call(this, selector);
   }
   KeyFrameRule.prototype.cssText = function () {
-    return this.cssText_y57xct$_0(this.selector);
+    return this.cssText_zbbjui$(this.selector);
   };
   KeyFrameRule.$metadata$ = {
     kind: Kotlin.Kind.CLASS,
@@ -6783,19 +6584,19 @@ var elements = function (_, Kotlin) {
     Rule.call(this, selector);
   }
   KeyframesRule.prototype.cssText = function () {
-    var tmp$_0;
+    var tmp$;
     var s = {v: '@keyframes '};
     s.v += this.selector.toString();
     s.v += ' { ';
-    tmp$_0 = this._map.entries.iterator();
-    while (tmp$_0.hasNext()) {
-      var tmp$ = tmp$_0.next();
-      var key = tmp$.key;
-      var value = tmp$.value;
+    tmp$ = this._map.entries.iterator();
+    while (tmp$.hasNext()) {
+      var tmp$_0 = tmp$.next();
+      var key = tmp$_0.key;
+      var value = tmp$_0.value;
       s.v += key + ': ' + value + '; ';
     }
     var tmp$_1;
-    tmp$_1 = this._childStyles_1851tg$_0.iterator();
+    tmp$_1 = this._childStyles_8be2vx$.iterator();
     while (tmp$_1.hasNext()) {
       var element = tmp$_1.next();
       s.v += element.cssText();
@@ -6811,7 +6612,7 @@ var elements = function (_, Kotlin) {
   function Rule(selector) {
     this.selector = selector;
     this._map = Kotlin.kotlin.collections.LinkedHashMap_init_q3lmfv$();
-    this._childStyles_1851tg$_0 = Kotlin.kotlin.collections.ArrayList_init_ww73n8$();
+    this._childStyles_8be2vx$ = Kotlin.kotlin.collections.ArrayList_init_ww73n8$();
     this._cssFloat$delegate = new Rule$Property(this);
     this._dashed_attribute$delegate = new Rule$Property(this);
     this._camel_cased_attribute$delegate = new Rule$Property(this);
@@ -7039,16 +6840,16 @@ var elements = function (_, Kotlin) {
     this._writingMode$delegate = new Rule$Property(this);
     this._zIndex$delegate = new Rule$Property(this);
   }
-  Rule.prototype.cssText_y57xct$_0 = function (selector) {
-    var tmp$_0;
+  Rule.prototype.cssText_zbbjui$ = function (selector) {
+    var tmp$;
     var s = '';
     s += selector.toString();
     s += ' { ';
-    tmp$_0 = this._map.entries.iterator();
-    while (tmp$_0.hasNext()) {
-      var tmp$ = tmp$_0.next();
-      var key = tmp$.key;
-      var value = tmp$.value;
+    tmp$ = this._map.entries.iterator();
+    while (tmp$.hasNext()) {
+      var tmp$_0 = tmp$.next();
+      var key = tmp$_0.key;
+      var value = tmp$_0.value;
       s += key + ': ' + value + '; ';
     }
     s += '}';
@@ -8868,12 +8669,12 @@ var elements = function (_, Kotlin) {
       name = null;
     this.name = name;
   }
-  Rule$Property.prototype.getValue_4hb8sp$ = function (rule_2, prop) {
+  Rule$Property.prototype.getValue_4hb8sp$ = function (rule, prop) {
     var tmp$, tmp$_0;
     var styleName = (tmp$ = this.name) != null ? tmp$ : this.$outer.resolveRuleName_fvkj3u$_0(prop);
     return (tmp$_0 = this.$outer._map.get_11rb$(styleName)) != null ? tmp$_0 : '';
   };
-  Rule$Property.prototype.setValue_8ibblj$ = function (rule_2, prop, value) {
+  Rule$Property.prototype.setValue_8ibblj$ = function (rule, prop, value) {
     var tmp$;
     var styleName = (tmp$ = this.name) != null ? tmp$ : this.$outer.resolveRuleName_fvkj3u$_0(prop);
     if (value.length > 0) {
@@ -8894,12 +8695,12 @@ var elements = function (_, Kotlin) {
       name = null;
     this.name = name;
   }
-  Rule$NullableProperty.prototype.getValue_4hb8sp$ = function (rule_2, prop) {
+  Rule$NullableProperty.prototype.getValue_4hb8sp$ = function (rule, prop) {
     var tmp$;
     var styleName = (tmp$ = this.name) != null ? tmp$ : this.$outer.resolveRuleName_fvkj3u$_0(prop);
     return this.$outer._map.get_11rb$(styleName);
   };
-  Rule$NullableProperty.prototype.setValue_kcp8eu$ = function (rule_2, prop, value) {
+  Rule$NullableProperty.prototype.setValue_kcp8eu$ = function (rule, prop, value) {
     var tmp$;
     var styleName = (tmp$ = this.name) != null ? tmp$ : this.$outer.resolveRuleName_fvkj3u$_0(prop);
     var tmp$_0 = value != null;
@@ -8926,6 +8727,17 @@ var elements = function (_, Kotlin) {
     simpleName: 'Rule',
     interfaces: []
   };
+  function TypeRule(selector) {
+    Rule.call(this, selector);
+  }
+  TypeRule.prototype.cssText = function () {
+    return Rule.prototype.cssText_zbbjui$.call(this, this.selector);
+  };
+  TypeRule.$metadata$ = {
+    kind: Kotlin.Kind.CLASS,
+    simpleName: 'TypeRule',
+    interfaces: [Rule]
+  };
   function TypedClassRule(selector) {
     TypedRule.call(this, selector);
   }
@@ -8935,7 +8747,7 @@ var elements = function (_, Kotlin) {
     }
   });
   TypedClassRule.prototype.cssText = function () {
-    return TypedRule.prototype.cssText_y57xct$_0.call(this, this.selector);
+    return TypedRule.prototype.cssText_zbbjui$.call(this, this.selector);
   };
   TypedClassRule.$metadata$ = {
     kind: Kotlin.Kind.CLASS,
@@ -9168,21 +8980,209 @@ var elements = function (_, Kotlin) {
     simpleName: 'TypedRule',
     interfaces: [Rule]
   };
-  function TypeRule(selector) {
-    Rule.call(this, selector);
+  function Colour() {
   }
-  TypeRule.prototype.cssText = function () {
-    return Rule.prototype.cssText_y57xct$_0.call(this, this.selector);
+  Colour.$metadata$ = {
+    kind: Kotlin.Kind.INTERFACE,
+    simpleName: 'Colour',
+    interfaces: []
   };
-  TypeRule.$metadata$ = {
+  function Hsl(h, s, l, a) {
+    Hsl$Statics_getInstance();
+    if (a === void 0)
+      a = null;
+    this.h = h;
+    this.s = s;
+    this.l = l;
+    this.a = a;
+  }
+  Hsl.prototype.toHtml = function () {
+    if (this.a != null) {
+      return 'hsl(' + this.h + ', ' + this.s + '%, ' + this.l + '%, ' + Kotlin.toString(this.a) + ')';
+    }
+     else {
+      return 'hsl(' + this.h + ', ' + this.s + '%, ' + this.l + '%)';
+    }
+  };
+  Hsl.prototype.toRgb = function () {
+    if (this.s === 0) {
+      return new RgbColor(1, 1, 1, this.a);
+    }
+    var q = this.l < 0.5 ? Kotlin.imul(this.l, 1 + this.s | 0) : this.l + this.s - Kotlin.imul(this.l, this.s) | 0;
+    var p = (2 * this.l | 0) - q | 0;
+    return new RgbColor(hueToRgb(p, q, this.h + (1 / 3 | 0) | 0), hueToRgb(p, q, this.h), hueToRgb(p, q, this.h - (1 / 3 | 0) | 0), this.a);
+  };
+  function Hsl$Statics() {
+    Hsl$Statics_instance = this;
+    this.RED = new Hsl(0, 100, 50);
+    this.GREEN = new Hsl(120, 100, 50);
+    this.BLUE = new Hsl(240, 100, 50);
+  }
+  Hsl$Statics.$metadata$ = {
+    kind: Kotlin.Kind.OBJECT,
+    simpleName: 'Statics',
+    interfaces: []
+  };
+  var Hsl$Statics_instance = null;
+  function Hsl$Statics_getInstance() {
+    if (Hsl$Statics_instance === null) {
+      new Hsl$Statics();
+    }
+    return Hsl$Statics_instance;
+  }
+  Hsl.$metadata$ = {
     kind: Kotlin.Kind.CLASS,
-    simpleName: 'TypeRule',
-    interfaces: [Rule]
+    simpleName: 'Hsl',
+    interfaces: [Colour]
   };
+  function RgbColor(r, g, b, a) {
+    RgbColor$Factory_getInstance();
+    if (a === void 0)
+      a = null;
+    this.r = r;
+    this.g = g;
+    this.b = b;
+    this.a = a;
+  }
+  RgbColor.prototype.toHtml = function () {
+    return this.toHexString();
+  };
+  RgbColor.prototype.toHexString = function () {
+    var rx = toHexString(this.r);
+    var gx = toHexString(this.g);
+    var bx = toHexString(this.b);
+    return '#' + rx + gx + bx;
+  };
+  RgbColor.prototype.toHsl = function () {
+    var max = Math.max(this.r, this.g, this.b);
+    var min = Math.min(this.r, this.g, this.b);
+    var h = (max + min | 0) / 2 | 0;
+    var s = h;
+    var l = h;
+    if (max === min) {
+      h = 0;
+      s = 0;
+    }
+     else {
+      var d = max - min | 0;
+      s = l > 0.5 ? d / (2 - max - min | 0) | 0 : d / (max + min | 0) | 0;
+      if (max === this.r) {
+        h = ((this.g - this.b | 0) / d | 0) + (this.g < this.b ? 6 : 0) | 0;
+      }
+       else if (max === this.g) {
+        h = ((this.b - this.r | 0) / d | 0) + 2 | 0;
+      }
+       else {
+        h = ((this.r - this.g | 0) / d | 0) + 4 | 0;
+      }
+      h = h / 6 | 0;
+    }
+    return new Hsl(h, s, l, this.a);
+  };
+  RgbColor.prototype.toString = function () {
+    if (this.a != null) {
+      return 'rgba(' + this.r + ',' + this.g + ',' + this.b + ',' + Kotlin.toString(this.a) + ')';
+    }
+     else {
+      return 'rgb(' + this.r + ',' + this.g + ',' + this.b + ')';
+    }
+  };
+  RgbColor.prototype.withAlfa_14dthe$ = function (alpha) {
+    return new RgbColor(this.r, this.g, this.b, alpha);
+  };
+  RgbColor.prototype.equals = function (other) {
+    if (this === other)
+      return true;
+    if (!Kotlin.isType(other, RgbColor))
+      return false;
+    if (this.r !== other.r)
+      return false;
+    if (this.g !== other.g)
+      return false;
+    if (this.b !== other.b)
+      return false;
+    if (this.a !== other.a)
+      return false;
+    return true;
+  };
+  RgbColor.prototype.hashCode = function () {
+    var tmp$, tmp$_0;
+    var result = this.r;
+    result = (31 * result | 0) + this.g | 0;
+    result = (31 * result | 0) + this.b | 0;
+    result = (31 * result | 0) + ((tmp$_0 = (tmp$ = this.a) != null ? Kotlin.hashCode(tmp$) : null) != null ? tmp$_0 : 0) | 0;
+    return result;
+  };
+  function RgbColor$Factory() {
+    RgbColor$Factory_instance = this;
+    this.TRANSPARENT = new RgbColor(0, 0, 0, 0.0);
+    this.WHITE = new RgbColor(255, 255, 255);
+    this.BLACK = new RgbColor(0, 0, 0);
+    this.RED = new RgbColor(255, 0, 0);
+    this.GREEN = new RgbColor(0, 255, 0);
+    this.BLUE = new RgbColor(0, 0, 255);
+  }
+  RgbColor$Factory.prototype.from_61zpoe$ = function (string) {
+    var stringWithoutHash = startsWith(string, '#') ? string.substring(1) : string;
+    if (stringWithoutHash.length === 6) {
+      var rs = stringWithoutHash.substring(0, 2);
+      var gs = stringWithoutHash.substring(2, 4);
+      var bs = stringWithoutHash.substring(4, 6);
+      var r = toInt_0(rs, 16);
+      var g = toInt_0(gs, 16);
+      var b = toInt_0(bs, 16);
+      return new RgbColor(r, g, b);
+    }
+     else {
+      var rs_0 = stringWithoutHash.substring(0, 1);
+      var gs_0 = stringWithoutHash.substring(1, 2);
+      var bs_0 = stringWithoutHash.substring(2, 3);
+      var r_0 = toInt_0(rs_0, 16);
+      var g_0 = toInt_0(gs_0, 16);
+      var b_0 = toInt_0(bs_0, 16);
+      return new RgbColor(r_0, g_0, b_0);
+    }
+  };
+  RgbColor$Factory.$metadata$ = {
+    kind: Kotlin.Kind.OBJECT,
+    simpleName: 'Factory',
+    interfaces: []
+  };
+  var RgbColor$Factory_instance = null;
+  function RgbColor$Factory_getInstance() {
+    if (RgbColor$Factory_instance === null) {
+      new RgbColor$Factory();
+    }
+    return RgbColor$Factory_instance;
+  }
+  RgbColor.$metadata$ = {
+    kind: Kotlin.Kind.CLASS,
+    simpleName: 'RgbColor',
+    interfaces: [Colour]
+  };
+  function hueToRgb(pIn, qIn, tIn) {
+    var t = tIn;
+    if (t < 0) {
+      t = t + 1 | 0;
+    }
+    if (t > 1) {
+      t = t - 1 | 0;
+    }
+    if (t < (1 / 6 | 0)) {
+      return pIn + Kotlin.imul((qIn - pIn | 0) * 6 | 0, t) | 0;
+    }
+    if (t < (1 / 2 | 0)) {
+      return qIn;
+    }
+    if (t < (2 / 3 | 0)) {
+      return pIn + (Kotlin.imul(qIn - pIn | 0, (2 / 3 | 0) - t | 0) * 6 | 0) | 0;
+    }
+    return pIn;
+  }
   function camelsToDashes($receiver) {
     var tmp$;
     var s = '';
-    tmp$ = iterator_0($receiver);
+    tmp$ = iterator($receiver);
     while (tmp$.hasNext()) {
       var c = tmp$.next();
       var $receiver_0 = Kotlin.unboxChar(c);
@@ -9190,7 +9190,7 @@ var elements = function (_, Kotlin) {
         var tmp$_0 = String;
         var tmp$_1 = tmp$_0.fromCharCode;
         var $receiver_1 = Kotlin.unboxChar(c);
-        s += '-' + tmp$_1.call(tmp$_0, Kotlin.unboxChar(String.fromCharCode(Kotlin.toBoxedChar($receiver_1)).toLowerCase().charCodeAt(0)));
+        s += '-' + tmp$_1.call(tmp$_0, Kotlin.toBoxedChar(String.fromCharCode(Kotlin.toBoxedChar($receiver_1)).toLowerCase().charCodeAt(0)));
       }
        else {
         s += String.fromCharCode(Kotlin.unboxChar(c));
@@ -9198,34 +9198,11 @@ var elements = function (_, Kotlin) {
     }
     return s;
   }
-  Percent.prototype.toHtml = Dimension.prototype.toHtml;
-  Pixels.prototype.toHtml = Dimension.prototype.toHtml;
-  Mm.prototype.toHtml = Dimension.prototype.toHtml;
-  Cm.prototype.toHtml = Dimension.prototype.toHtml;
-  In.prototype.toHtml = Dimension.prototype.toHtml;
-  Pt.prototype.toHtml = Dimension.prototype.toHtml;
-  Pc.prototype.toHtml = Dimension.prototype.toHtml;
-  Em.prototype.toHtml = Dimension.prototype.toHtml;
-  Rem.prototype.toHtml = Dimension.prototype.toHtml;
-  Vh.prototype.toHtml = Dimension.prototype.toHtml;
-  Vw.prototype.toHtml = Dimension.prototype.toHtml;
-  VMin.prototype.toHtml = Dimension.prototype.toHtml;
-  VMax.prototype.toHtml = Dimension.prototype.toHtml;
   var package$fg = _.fg || (_.fg = {});
   var package$base = package$fg.base || (package$fg.base = {});
   Object.defineProperty(package$base, 'CompareTo', {
     get: CompareTo_getInstance
   });
-  var package$experimental = package$base.experimental || (package$base.experimental = {});
-  var package$coroutines = package$experimental.coroutines || (package$experimental.coroutines = {});
-  package$coroutines.launch_g2bo5h$ = launch;
-  package$coroutines.launch_zhpfat$ = launch_0;
-  var package$http = package$base.http || (package$base.http = {});
-  package$http.InternalServerErrorException = InternalServerErrorException;
-  package$http.NotFoundException = NotFoundException;
-  package$http.UnexpectedStatusException = UnexpectedStatusException;
-  package$http.await_t11jrl$ = await_0;
-  package$http.send_98uf27$ = send;
   Object.defineProperty(Path, 'Factory', {
     get: Path$Factory_getInstance
   });
@@ -9240,6 +9217,16 @@ var elements = function (_, Kotlin) {
   });
   URL.Query = URL$Query;
   package$base.URL = URL;
+  var package$experimental = package$base.experimental || (package$base.experimental = {});
+  var package$coroutines = package$experimental.coroutines || (package$experimental.coroutines = {});
+  package$coroutines.launch_g2bo5h$ = launch;
+  package$coroutines.launch_zhpfat$ = launch_0;
+  var package$http = package$base.http || (package$base.http = {});
+  package$http.InternalServerErrorException = InternalServerErrorException;
+  package$http.NotFoundException = NotFoundException;
+  package$http.UnexpectedStatusException = UnexpectedStatusException;
+  package$http.await_t11jrl$ = await_0;
+  package$http.send_98uf27$ = send;
   package$base.toHexString_s8ev3n$ = toHexString;
   package$base.debounce0_ir971p$ = debounce0;
   package$base.debounce1_5237lg$ = debounce1;
@@ -9259,6 +9246,67 @@ var elements = function (_, Kotlin) {
     }
   });
   package$elements.Body = Body;
+  package$elements.br_8138w0$ = br;
+  package$elements.header_x8ulkt$ = header;
+  package$elements.main_ikvv8p$ = main;
+  package$elements.footer_ycnwaz$ = footer;
+  package$elements.h1_pgml15$ = h1;
+  package$elements.h2_kmxeiu$ = h2;
+  package$elements.h3_4amnwb$ = h3;
+  package$elements.h4_t86qbg$ = h4;
+  package$elements.h5_gvd98j$ = h5;
+  package$elements.h6_826t6m$ = h6;
+  package$elements.p_ti2w4o$ = p;
+  package$elements.span_w8wq4m$ = span;
+  package$elements.hr_cc9oxm$ = hr;
+  package$elements.ul_xx7ant$ = ul;
+  package$elements.ol_gqjthp$ = ol;
+  package$elements.li_wq8toz$ = li;
+  package$elements.div_lgqx1j$ = div;
+  package$elements.pre_veaytn$ = pre;
+  package$elements.a_ya8tl$ = a;
+  package$elements.i_92csup$ = i;
+  package$elements.inputText_sqgf27$ = inputText;
+  package$elements.inputNumber_glhjj9$ = inputNumber;
+  package$elements.img_cipz99$ = img;
+  package$elements.button_4vwmzi$ = button;
+  package$elements.label_biljks$ = label;
+  package$elements.select_8ogc18$ = select;
+  package$elements.table_lbc0c6$ = table;
+  package$elements.caption_kqfnwu$ = caption;
+  package$elements.colgroup_an2rhr$ = colgroup;
+  package$elements.col_bbrg14$ = col;
+  package$elements.tbody_9llqf2$ = tbody;
+  package$elements.thead_u212ro$ = thead;
+  package$elements.tfoot_a870sq$ = tfoot;
+  package$elements.tr_hy4hea$ = tr;
+  package$elements.td_bud5eo$ = td;
+  package$elements.th_gur2as$ = th;
+  package$elements.initAndAppendNode_n3qhgg$ = initAndAppendNode;
+  Element.ResizedEvent = Element$ResizedEvent;
+  package$elements.Element = Element;
+  Object.defineProperty(package$elements, 'HTML', {
+    get: function () {
+      return HTML;
+    }
+  });
+  Object.defineProperty(Html, 'Html', {
+    get: Html$Html_getInstance
+  });
+  package$elements.Html = Html;
+  package$elements.onDOMContentLoaded_4bdym6$ = onDOMContentLoaded;
+  package$elements.onLoad_nvde5v$ = onLoad;
+  package$elements.Node = Node;
+  package$elements.StyledClass = StyledClass;
+  package$elements.Text = Text_0;
+  package$elements.TypedStyledClass = TypedStyledClass;
+  W3cDelegates.prototype.Attribute = W3cDelegates$Attribute;
+  W3cDelegates.prototype.NullableAttribute = W3cDelegates$NullableAttribute;
+  W3cDelegates.prototype.NullableBooleanAttribute = W3cDelegates$NullableBooleanAttribute;
+  W3cDelegates.prototype.NullableDimensionAttribute = W3cDelegates$NullableDimensionAttribute;
+  Object.defineProperty(package$elements, 'W3cDelegates', {
+    get: W3cDelegates_getInstance
+  });
   package$elements.toDimension_5cw0du$ = toDimension;
   package$elements.Dimension = Dimension;
   Object.defineProperty(DimensionType, 'percent', {
@@ -9334,43 +9382,6 @@ var elements = function (_, Kotlin) {
   package$elements.get_vmin_s8ev3n$ = get_vmin;
   package$elements.VMax = VMax;
   package$elements.get_vmax_s8ev3n$ = get_vmax;
-  package$elements.br_8138w0$ = br;
-  package$elements.header_x8ulkt$ = header;
-  package$elements.main_ikvv8p$ = main;
-  package$elements.footer_ycnwaz$ = footer;
-  package$elements.h1_pgml15$ = h1;
-  package$elements.h2_kmxeiu$ = h2;
-  package$elements.h3_4amnwb$ = h3;
-  package$elements.h4_t86qbg$ = h4;
-  package$elements.h5_gvd98j$ = h5;
-  package$elements.h6_826t6m$ = h6;
-  package$elements.p_ti2w4o$ = p;
-  package$elements.span_w8wq4m$ = span;
-  package$elements.hr_cc9oxm$ = hr;
-  package$elements.ul_xx7ant$ = ul;
-  package$elements.ol_gqjthp$ = ol;
-  package$elements.li_wq8toz$ = li;
-  package$elements.div_lgqx1j$ = div;
-  package$elements.pre_veaytn$ = pre;
-  package$elements.a_ya8tl$ = a;
-  package$elements.i_92csup$ = i;
-  package$elements.inputText_sqgf27$ = inputText;
-  package$elements.inputNumber_glhjj9$ = inputNumber;
-  package$elements.img_cipz99$ = img;
-  package$elements.button_4vwmzi$ = button;
-  package$elements.label_biljks$ = label;
-  package$elements.select_8ogc18$ = select;
-  package$elements.table_lbc0c6$ = table;
-  package$elements.caption_kqfnwu$ = caption;
-  package$elements.colgroup_an2rhr$ = colgroup;
-  package$elements.col_bbrg14$ = col;
-  package$elements.tbody_9llqf2$ = tbody;
-  package$elements.thead_u212ro$ = thead;
-  package$elements.tfoot_a870sq$ = tfoot;
-  package$elements.tr_hy4hea$ = tr;
-  package$elements.td_bud5eo$ = td;
-  package$elements.th_gur2as$ = th;
-  package$elements.initAndAppendNode_n3qhgg$ = initAndAppendNode;
   package$elements.with_9bxh2u$ = with_0;
   package$elements.render_uy47cu$ = render;
   package$elements.onClick_8l2ll4$ = onClick;
@@ -9422,8 +9433,6 @@ var elements = function (_, Kotlin) {
   package$elements.onDrop_8l2ll4$ = onDrop;
   package$elements.unDrop_8l2ll4$ = unDrop;
   package$elements.get_computedStyle_gobym5$ = get_computedStyle;
-  Element.ResizedEvent = Element$ResizedEvent;
-  package$elements.Element = Element;
   package$elements.Img = Img;
   package$elements.Button = Button;
   package$elements.Select = Select;
@@ -9459,23 +9468,18 @@ var elements = function (_, Kotlin) {
   package$elements.Figcaption = Figcaption;
   package$elements.Div = Div;
   package$elements.Main = Main;
-  Object.defineProperty(package$elements, 'HTML', {
-    get: function () {
-      return HTML;
-    }
-  });
-  Object.defineProperty(Html, 'Html', {
-    get: Html$Html_getInstance
-  });
-  package$elements.Html = Html;
-  package$elements.onDOMContentLoaded_4bdym6$ = onDOMContentLoaded;
-  package$elements.onLoad_nvde5v$ = onLoad;
   Object.defineProperty(AbstractLayout, 'Statics', {
     get: AbstractLayout$Statics_getInstance
   });
   var package$layout = package$elements.layout || (package$elements.layout = {});
   package$layout.AbstractLayout = AbstractLayout;
   package$layout.Breakpoint = Breakpoint;
+  package$layout.setLayout_co3piv$ = setLayout;
+  package$layout.xsmall_i3h8o8$ = xsmall;
+  package$layout.small_i3h8o8$ = small;
+  package$layout.medium_i3h8o8$ = medium;
+  package$layout.large_i3h8o8$ = large;
+  package$layout.xlarge_i3h8o8$ = xlarge;
   Object.defineProperty(DefaultBreakpoints, 'xsmall', {
     get: DefaultBreakpoints$xsmall_getInstance
   });
@@ -9503,19 +9507,12 @@ var elements = function (_, Kotlin) {
   });
   package$layout.Direction = Direction;
   package$layout.toLayout_uzd6sr$ = toLayout;
-  package$layout.setLayout_co3piv$ = setLayout;
-  package$layout.xsmall_i3h8o8$ = xsmall;
-  package$layout.small_i3h8o8$ = small;
-  package$layout.medium_i3h8o8$ = medium;
-  package$layout.large_i3h8o8$ = large;
-  package$layout.xlarge_i3h8o8$ = xlarge;
   Object.defineProperty(Layout, 'Statics', {
     get: Layout$Statics_getInstance
   });
   package$layout.Layout = Layout;
   package$layout.LayoutBreakpoint = LayoutBreakpoint;
   package$layout.LayoutDelegate = LayoutDelegate;
-  package$elements.Node = Node;
   package$elements.Article = Article;
   package$elements.Section = Section;
   package$elements.Nav = Nav;
@@ -9802,7 +9799,6 @@ var elements = function (_, Kotlin) {
   TypedStyle.TypedPropertyDelegate = TypedStyle$TypedPropertyDelegate;
   TypedStyle.TypedPropertyDelegate2 = TypedStyle$TypedPropertyDelegate2;
   package$typed.TypedStyle = TypedStyle;
-  package$elements.StyledClass = StyledClass;
   package$elements.Table = Table;
   package$elements.Caption = Caption;
   package$elements.Colgroup = Colgroup;
@@ -9817,36 +9813,15 @@ var elements = function (_, Kotlin) {
   package$elements.Br = Br;
   package$elements.Span = Span;
   package$elements.I = I;
-  package$elements.Text = Text_0;
-  package$elements.TypedStyledClass = TypedStyledClass;
-  W3cDelegates.prototype.Attribute = W3cDelegates$Attribute;
-  W3cDelegates.prototype.NullableAttribute = W3cDelegates$NullableAttribute;
-  W3cDelegates.prototype.NullableBooleanAttribute = W3cDelegates$NullableBooleanAttribute;
-  W3cDelegates.prototype.NullableDimensionAttribute = W3cDelegates$NullableDimensionAttribute;
-  Object.defineProperty(package$elements, 'W3cDelegates', {
-    get: W3cDelegates_getInstance
-  });
   var package$style_0 = package$fg.style || (package$fg.style = {});
   package$style_0.AdjacentSiblingRule = AdjacentSiblingRule;
   package$style_0.AndRule = AndRule;
   package$style_0.AnyRule = AnyRule;
   package$style_0.ChildRule = ChildRule;
   package$style_0.ClassRule = ClassRule;
-  var package$colour = package$style_0.colour || (package$style_0.colour = {});
-  package$colour.Colour = Colour;
-  Object.defineProperty(Hsl, 'Statics', {
-    get: Hsl$Statics_getInstance
-  });
-  package$colour.Hsl = Hsl;
-  package$colour.hueToRgb_qt1dr2$ = hueToRgb;
-  Object.defineProperty(RgbColor, 'Factory', {
-    get: RgbColor$Factory_getInstance
-  });
-  package$colour.RgbColor = RgbColor;
-  package$style_0.DescendantRule = DescendantRule;
   package$style_0.keyframesRule_c5g61y$ = keyframesRule;
   package$style_0.classRule_fprhdc$ = classRule;
-  package$style_0.rule_79mggx$ = rule_1;
+  package$style_0.rule_79mggx$ = rule;
   package$style_0.and_yogg4l$ = and;
   package$style_0.and_xif9ow$ = and_0;
   package$style_0.adjacentSibling_rmxh02$ = adjacentSibling;
@@ -9877,11 +9852,13 @@ var elements = function (_, Kotlin) {
   package$style_0.keyframe_iwusm5$ = keyframe;
   package$style_0.kfrom_yovo6t$ = kfrom;
   package$style_0.kto_yovo6t$ = kto;
+  package$style_0.DescendantRule = DescendantRule;
   package$style_0.KeyFrameRule = KeyFrameRule;
   package$style_0.KeyframesRule = KeyframesRule;
   Rule.Property = Rule$Property;
   Rule.NullableProperty = Rule$NullableProperty;
   package$style_0.Rule = Rule;
+  package$style_0.TypeRule = TypeRule;
   package$style_0.TypedClassRule = TypedClassRule;
   TypedRule.DisplayDelegate = TypedRule$DisplayDelegate;
   TypedRule.PositionDelegate = TypedRule$PositionDelegate;
@@ -9897,8 +9874,31 @@ var elements = function (_, Kotlin) {
   TypedRule.FlexBasisDelegate = TypedRule$FlexBasisDelegate;
   TypedRule.TypedPropertyDelegate = TypedRule$TypedPropertyDelegate;
   package$style_0.TypedRule = TypedRule;
-  package$style_0.TypeRule = TypeRule;
+  var package$colour = package$style_0.colour || (package$style_0.colour = {});
+  package$colour.Colour = Colour;
+  Object.defineProperty(Hsl, 'Statics', {
+    get: Hsl$Statics_getInstance
+  });
+  package$colour.Hsl = Hsl;
+  Object.defineProperty(RgbColor, 'Factory', {
+    get: RgbColor$Factory_getInstance
+  });
+  package$colour.RgbColor = RgbColor;
+  package$colour.hueToRgb_qt1dr2$ = hueToRgb;
   package$style_0.camelsToDashes_pdl1vz$ = camelsToDashes;
+  Percent.prototype.toHtml = Dimension.prototype.toHtml;
+  Pixels.prototype.toHtml = Dimension.prototype.toHtml;
+  Mm.prototype.toHtml = Dimension.prototype.toHtml;
+  Cm.prototype.toHtml = Dimension.prototype.toHtml;
+  In.prototype.toHtml = Dimension.prototype.toHtml;
+  Pt.prototype.toHtml = Dimension.prototype.toHtml;
+  Pc.prototype.toHtml = Dimension.prototype.toHtml;
+  Em.prototype.toHtml = Dimension.prototype.toHtml;
+  Rem.prototype.toHtml = Dimension.prototype.toHtml;
+  Vh.prototype.toHtml = Dimension.prototype.toHtml;
+  Vw.prototype.toHtml = Dimension.prototype.toHtml;
+  VMin.prototype.toHtml = Dimension.prototype.toHtml;
+  VMax.prototype.toHtml = Dimension.prototype.toHtml;
   HEX_CHARS = [Kotlin.toBoxedChar(48), Kotlin.toBoxedChar(49), Kotlin.toBoxedChar(50), Kotlin.toBoxedChar(51), Kotlin.toBoxedChar(52), Kotlin.toBoxedChar(53), Kotlin.toBoxedChar(54), Kotlin.toBoxedChar(55), Kotlin.toBoxedChar(56), Kotlin.toBoxedChar(57), Kotlin.toBoxedChar(97), Kotlin.toBoxedChar(98), Kotlin.toBoxedChar(99), Kotlin.toBoxedChar(100), Kotlin.toBoxedChar(101), Kotlin.toBoxedChar(102)];
   BODY = new Body();
   HTML = new Html();
@@ -9906,4 +9906,4 @@ var elements = function (_, Kotlin) {
   return _;
 }(typeof elements === 'undefined' ? {} : elements, kotlin);
 
-//@ sourceMappingURL=elements.js.map
+//# sourceMappingURL=elements.js.map
