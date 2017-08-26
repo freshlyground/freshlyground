@@ -29,14 +29,14 @@ fun main(vararg args: String) {
             _style.textAlign = "center"
 
             menu("Components") {
-                menuItem(Action("Button", shortcut = Key.from("meta+b")) { window.location.href = currUrl.replaceParam("page", "Button").toString() }) {}
-                menuItem(Action(ToggleButton::class.js.name, shortcut = Key.from("meta+t")) { window.location.href = currUrl.replaceParam("page", ToggleButton::class.js.name).toString() }) {}
+                menuItem(Action("Button", shortcut = Key.from("ctrl+b")) { window.location.href = currUrl.replaceParam("page", "Button").toString() }) {}
+                menuItem(Action(ToggleButton::class.js.name, shortcut = Key.from("ctrl+t")) { window.location.href = currUrl.replaceParam("page", ToggleButton::class.js.name).toString() }) {}
                 menuItem(Action(Menu::class.js.name) { window.location.href = currUrl.replaceParam("page", Menu::class.js.name).toString() }) {}
-                menuItem(Action(MenuBar::class.js.name, shortcut = Key.from("meta+m")) { window.location.href = currUrl.replaceParam("page", MenuBar::class.js.name).toString() }) {}
+                menuItem(Action(MenuBar::class.js.name, shortcut = Key.from("ctrl+m")) { window.location.href = currUrl.replaceParam("page", MenuBar::class.js.name).toString() }) {}
             }
             menu("Layout") {
-                menuItem(Action(Drawer::class.js.name, shortcut = Key.from("meta+d"), perform = { window.location.href = currUrl.replaceParam("page", Drawer::class.js.name).toString() })) {}
-                menuItem(Action(Layout::class.js.name, shortcut = Key.from("meta+l"), perform = { window.location.href = currUrl.replaceParam("page", Layout::class.js.name).toString() })) {}
+                menuItem(Action(Drawer::class.js.name, shortcut = Key.from("ctrl+d"), perform = { window.location.href = currUrl.replaceParam("page", Drawer::class.js.name).toString() })) {}
+                menuItem(Action(Layout::class.js.name, shortcut = Key.from("ctrl+l"), perform = { window.location.href = currUrl.replaceParam("page", Layout::class.js.name).toString() })) {}
             }
         }
 

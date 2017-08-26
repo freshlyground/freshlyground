@@ -12,9 +12,6 @@ fun main(vararg args: String) {
     console.log(page)
 
     when (page) {
-        "Keyboard" -> {
-            mainKeyboard.start()
-        }
         "Selector" -> {
             mainSelector.start()
         }

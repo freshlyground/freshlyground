@@ -29,6 +29,7 @@ class Keyboard private constructor(val element: Element? = null) {
             val key = Key.from(character, modifiers)
 
             if (!pause) {
+                console.log("$type $key ")
                 handleKey(key, type, event)
             }
         }
@@ -112,12 +113,18 @@ class Keyboard private constructor(val element: Element? = null) {
 
     private fun handleKey(key: Key, type: Type, event: KeyboardEvent) {
 
-        console.info("Keyboard key: " + key + " @" + type)
-
         for (keyBinding in keyBindings) {
+            //console.info("Checking keyBinding: $keyBinding" )
+            if (key.modifiers.isNotEmpty() && key.key != "ctrl") {
+                //console.log("has modifiers")
+                //console.log("keys: ${keyBinding.keys.list}")
+            }
             if (keyBinding.keys.list.contains(key)) {
-                keyBinding.callback()
-                event.preventDefault()
+                //console.log("key match")
+                if (keyBinding.type == type) {
+                    keyBinding.callback()
+                    //event.preventDefault()
+                }
             }
         }
     }

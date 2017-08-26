@@ -2,7 +2,9 @@ package fg.keyboard
 
 data class Keys(val list: List<Key>) {
 
-    companion object Factory {
+    constructor(vararg key: Key) : this(key.toList())
+
+    companion object {
 
         fun from(key: Key): Keys {
             return Keys(listOf(key))
