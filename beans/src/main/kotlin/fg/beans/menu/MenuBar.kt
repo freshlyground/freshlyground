@@ -61,9 +61,7 @@ class MenuBar : Div() {
 
             menuButton.onMouseEnter {
 
-                console.log("MenuButton[${menuButton.action.label}].onMouseEnter")
                 val anyMenuOpen = anyMenuOpen()
-                console.log("MenuButton[${menuButton.action.label}] anyMenuOpen = " + anyMenuOpen)
 
                 if (anyMenuOpen) {
                     openMenu(child)
