@@ -4,6 +4,7 @@ import fg.beans.ElementStyle
 import fg.beans.action.Action
 import fg.beans.button.Button
 import fg.beans.icon.FontAwesomeIcons
+import fg.elements.ClassRuleBuilder
 import fg.elements.ClassSelector
 import fg.elements.HTML
 import fg.elements.StyledClass
@@ -11,7 +12,6 @@ import fg.elements.toClassSelector
 import fg.md.Context
 import fg.md.colour.MDColor
 import fg.md.support.Ripple
-import fg.style.ClassRule
 import fg.style.active
 import fg.style.and
 import fg.style.colour.RgbColor
@@ -254,7 +254,7 @@ class MDButton(action: Action, type: Type = Type.FLAT,
 
     }
 
-    companion object MDButton : StyledClass {
+    companion object : StyledClass {
 
         private val TYPE_FLAT = "md-button-flat".toClassSelector()
         private val TYPE_RAISED = "md-button-raised".toClassSelector()
@@ -263,60 +263,62 @@ class MDButton(action: Action, type: Type = Type.FLAT,
 
         override val classSelector = "md-button".toClassSelector()
 
-        override val rule: ClassRule.() -> Unit = {
+        override val rule: ClassRuleBuilder = {
 
-            _borderRadius = "2px"
-            _marginLeft = "8px"
-            _marginRight = "8px"
-            _fontFamily = Context.theme.font
-            _fontSize = "14px"
-            _fontWeight = "500"
+            and(Button) {
+                _borderRadius = "2px"
+                _marginLeft = "8px"
+                _marginRight = "8px"
+                _fontFamily = Context.theme.font
+                _fontSize = "14px"
+                _fontWeight = "500"
+                _borderRadius = "0"
 
-            focus {
-                _outline = "none"
-            }
-
-            and(TYPE_FLAT) {
-                _minWidth = "88px"
-                _width = ""
-                _height = "36px"
-                _boxShadow = "none"
-                _border = "none"
-            }
-
-            and(TYPE_RAISED) {
-                _minWidth = "88px"
-                _width = ""
-                _height = "36px"
-                _border = "none"
-                _boxShadow = "rgba(0, 0, 0, 0.117647) 0px 1px 6px, rgba(0, 0, 0, 0.117647) 0px 1px 4px"
-
-                active {
-                    _boxShadow = "0 4px 8px 0 rgba(0,0,0,.4)"
+                focus {
+                    _outline = "none"
                 }
 
-                and(DISABLED) {
+                and(TYPE_FLAT) {
+                    _minWidth = "88px"
+                    _width = ""
+                    _height = "36px"
                     _boxShadow = "none"
+                    _border = "none"
+                }
+
+                and(TYPE_RAISED) {
+                    _minWidth = "88px"
+                    _width = ""
+                    _height = "36px"
+                    _border = "none"
+                    _boxShadow = "rgba(0, 0, 0, 0.117647) 0px 1px 6px, rgba(0, 0, 0, 0.117647) 0px 1px 4px"
+
+                    active {
+                        _boxShadow = "0 4px 8px 0 rgba(0,0,0,.4)"
+                    }
+
+                    and(DISABLED) {
+                        _boxShadow = "none"
+                    }
+                }
+
+
+                and(TYPE_FLOATING) {
+                    _width = "40px"
+                    _height = "40px"
+                    _border = "none"
+                    _boxShadow = "rgba(0, 0, 0, 0.117647) 0px 1px 6px, rgba(0, 0, 0, 0.117647) 0px 1px 4px"
+                    _borderRadius = "50%"
+
+                    active {
+                        _boxShadow = "0 4px 8px 0 rgba(0,0,0,.4)"
+                    }
+
+                    and(DISABLED) {
+                        _boxShadow = "none"
+                    }
                 }
             }
-
-
-            and(TYPE_FLOATING) {
-                _width = "40px"
-                _height = "40px"
-                _border = "none"
-                _boxShadow = "rgba(0, 0, 0, 0.117647) 0px 1px 6px, rgba(0, 0, 0, 0.117647) 0px 1px 4px"
-                _borderRadius = "50%"
-
-                active {
-                    _boxShadow = "0 4px 8px 0 rgba(0,0,0,.4)"
-                }
-
-                and(DISABLED) {
-                    _boxShadow = "none"
-                }
-            }
-
         }
 
         init {
