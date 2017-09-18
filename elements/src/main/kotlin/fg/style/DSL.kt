@@ -33,18 +33,19 @@ fun Element.rule(styledClass: StyledClass, init: ClassRule.() -> Unit = styledCl
     return style
 }
 
-fun Rule<*>.and(selector: String, init: AndRule.() -> Unit): AndRule {
-    val style = AndRule(AndSelector(this.selector, selector.toSelector()))
-    style.init()
-    this._childStyles.add(style)
-    return style
-}
-
 fun Rule<*>.and(selector: Selector, init: AndRule.() -> Unit): AndRule {
     val style = AndRule(AndSelector(this.selector, selector))
     style.init()
     this._childStyles.add(style)
     return style
+}
+
+fun Rule<*>.and(selector: String, init: AndRule.() -> Unit): AndRule {
+    return and(selector.toSelector(), init)
+}
+
+fun Rule<*>.and(styledClass: StyledClass, init: AndRule.() -> Unit): AndRule {
+    return and(styledClass.classSelector, init)
 }
 
 fun Rule<*>.adjacentSibling(selector: String, init: AdjacentSiblingRule.() -> Unit): AdjacentSiblingRule {

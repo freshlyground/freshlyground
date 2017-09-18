@@ -12,6 +12,3 @@ class ClassRule(selector: ClassSelector) :
         return super.cssText(selector)
     }
 }
-
-
-
