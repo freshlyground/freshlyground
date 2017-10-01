@@ -18,6 +18,9 @@ fun main(vararg args: String) {
         "FlexLayout" -> {
             mainFlexLayout.start()
         }
+        "Layout" -> {
+            mainLayout.start()
+        }
         "Element_performance" -> {
             mainElement_performance.start()
         }
@@ -54,6 +57,15 @@ fun main(vararg args: String) {
                     +"FlexLayout"
                     onClick {
                         window.location.href = currUrl.replaceParam("page", "FlexLayout").toString()
+                    }
+
+                }
+            }
+            li {
+                a("#") {
+                    +"Layout"
+                    onClick {
+                        window.location.href = currUrl.replaceParam("page", "Layout").toString()
                     }
 
                 }

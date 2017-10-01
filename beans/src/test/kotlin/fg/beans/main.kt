@@ -36,6 +36,7 @@ fun main(vararg args: String) {
             }
             menu("Layout") {
                 menuItem(Action(Drawer::class.js.name, shortcut = Key.from("ctrl+d"), perform = { window.location.href = currUrl.replaceParam("page", Drawer::class.js.name).toString() })) {}
+                menuItem(Action("Drag n Drop", perform = { window.location.href = currUrl.replaceParam("page", "DnD").toString() })) {}
                 menuItem(Action(Layout::class.js.name, shortcut = Key.from("ctrl+l"), perform = { window.location.href = currUrl.replaceParam("page", Layout::class.js.name).toString() })) {}
             }
         }
@@ -64,6 +65,9 @@ fun main(vararg args: String) {
         }
         Menu::class.js.name -> {
             menuPage.start()
+        }
+        "DnD" -> {
+            dragNdropPage.start()
         }
         Drawer::class.js.name -> {
             drawerPage.start()

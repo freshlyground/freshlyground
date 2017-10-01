@@ -1,8 +1,8 @@
 package fg.elements
 
 import fg.elements.layout.Breakpoint
-import fg.elements.layout.Layout
-import fg.elements.layout.LayoutDelegate
+import fg.elements.layout.LayoutApi
+import fg.elements.layout.LayoutApiDelegate
 import fg.elements.style.typed.Position
 import fg.elements.style.typed.TypedStyle
 import org.w3c.dom.DOMRect
@@ -16,7 +16,7 @@ import kotlin.js.Math
 
 open class Element(name: String? = null,
                    existingElement: HTMLElement? = null,
-                   internal val w3cElement: HTMLElement = existingElement ?: document.createElement(name!!) as HTMLElement) :
+                   val w3cElement: HTMLElement = existingElement ?: document.createElement(name!!) as HTMLElement) :
         Node(w3cElement) {
 
     var renderCalled = false
@@ -31,17 +31,6 @@ open class Element(name: String? = null,
     private var resizeSensor: ResizeSensor? = null
 
     private val hideOnBreakpoints: MutableList<Breakpoint> by lazy { arrayListOf<Breakpoint>() }
-
-    private val resizedHandler: (ResizedEvent) -> Unit = { event ->
-
-        if (layout != null) {
-            childNodes.forEach {
-                if (it is Element) {
-                    it.parentResized(event)
-                }
-            }
-        }
-    }
 
     val childElements: List<Element>
         get() {
@@ -64,7 +53,7 @@ open class Element(name: String? = null,
 
     val style: TypedStyle by lazy { TypedStyle(this) }
 
-    var layout: Layout? by LayoutDelegate()
+    var _layout: LayoutApi by LayoutApiDelegate(this)
 
     internal val renderBlocks: MutableList<Element.() -> Unit> = arrayListOf()
 
@@ -102,16 +91,6 @@ open class Element(name: String? = null,
     val boundingClientRect: DOMRect
         get() = w3cElement.getBoundingClientRect()
 
-
-    internal fun parentResized(event: ResizedEvent) {
-
-        val hideOrShow = hideOnBreakpoints.any { it.contains(event.width) }
-        if (hideOrShow) {
-            hide()
-        } else {
-            show()
-        }
-    }
 
     internal fun callRender() {
         if (renderCalled) {
@@ -255,7 +234,6 @@ open class Element(name: String? = null,
         resizedListeners.add(listener)
 
         if (resizedListeners.size == 1 && resizeSensor == null) {
-            resizedListeners.add(resizedHandler)
             val sensor = ResizeSensor(this, resizedListeners)
             resizeSensor = sensor
             sensor.init()
@@ -265,17 +243,10 @@ open class Element(name: String? = null,
     fun unResized(listener: (ResizedEvent) -> Unit) {
         resizedListeners.remove(listener)
 
-        if (resizedListeners.size == 1 && resizedListeners[0] == resizedHandler) {
-            resizedListeners.remove(resizedHandler)
-        }
-
         if (resizedListeners.isEmpty()) {
             resizeSensor?.destroy()
+            resizeSensor = null
         }
-    }
-
-    fun hideOn(vararg breakpoint: Breakpoint) {
-        breakpoint.forEach { hideOnBreakpoints.add(it) }
     }
 
     // https://github.com/angular/material2/blob/master/src/lib/core/ripple/ripple-renderer.ts

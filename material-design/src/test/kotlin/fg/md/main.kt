@@ -18,8 +18,8 @@ import fg.elements.h2
 import fg.elements.hr
 import fg.elements.inputText
 import fg.elements.layout.Direction
-import fg.elements.layout.Layout
-import fg.elements.layout.setLayout
+import fg.elements.layout.direction
+import fg.elements.layout.layout
 import fg.elements.p
 import fg.elements.render
 import fg.elements.span
@@ -99,14 +99,14 @@ class Main() {
 
 
     val button: Div = Div() with {
-        setLayout(direction = Direction.COLUMN) {}
+        layout { direction(Direction.COLUMN) {} }
         h2 {
             +"Button"
         }
         div {
-            setLayout(direction = Direction.COLUMN) {}
+            layout { direction(Direction.COLUMN) {} }
             div {
-                setLayout(direction = Direction.ROW) {}
+                layout { direction(Direction.ROW) {} }
 
                 span { +"Flat: " }
 
@@ -117,14 +117,14 @@ class Main() {
                 mdButton(Action(label = "FLAT", enabled = false, perform = {}), MDButton.Type.FLAT) {}
             }
             div {
-                setLayout(direction = Direction.ROW) {}
+                layout { direction(Direction.ROW) {} }
 
                 span { +"Raised: " }
                 mdButton(Action(label = "RAISED", perform = {}), MDButton.Type.RAISED) {}
                 mdButton(Action(label = "RAISED", enabled = false, perform = {}), MDButton.Type.RAISED) {}
             }
             div {
-                setLayout(direction = Direction.ROW) {}
+                layout { direction(Direction.ROW) {} }
 
                 span { +"Floating: " }
                 mdButton(Action(label = "ACCENT", perform = {}), MDButton.Type.FLOATING) {
@@ -141,7 +141,7 @@ class Main() {
                 }
             }
             div {
-                setLayout(direction = Direction.ROW) {}
+                layout { direction(Direction.ROW) {} }
 
                 span { +"Toggle: " }
                 mdToggleButton(SelectableAction("Toggle") {}) {}
@@ -169,7 +169,7 @@ class Main() {
             }
         }
         p {
-            mdMenu() {
+            mdMenu {
                 mdMenuItem(Action("Undo", shortcut = Key.from("meta+z")) {}) {}
                 mdMenuItem(Action("Redo", shortcut = Key.from("shift+meta+z")) {}) {}
                 mdMenuItem(SelectableAction("Column Mode", shortcut = Key.from("shift+meta+8")) {}) {}
@@ -473,7 +473,7 @@ class Main() {
 
         BODY with {
             _style.backgroundColor = "#ededed"
-            layout = Layout(direction = Direction.ROW)
+            //layout { direction(direction = Direction.ROW) {} }
 
             BODY.dock(leftDrawer)
             leftDrawer.style.backgroundColor = RgbColor.TRANSPARENT

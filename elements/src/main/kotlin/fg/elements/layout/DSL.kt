@@ -2,7 +2,23 @@ package fg.elements.layout
 
 import fg.elements.Element
 
-fun Element.setLayout(direction: Direction, init: Layout.() -> Unit) {
+fun Element.hideOn(vararg breakpoint: Breakpoint) {
+    this._layout.hideOn(*breakpoint)
+}
+
+fun Element.layout(init: LayoutApi.() -> Unit) {
+    val layoutApi = LayoutApi(this)
+    layoutApi.init()
+    this._layout = layoutApi
+}
+
+fun Element.layout(direction: Direction, init: Layout.() -> Unit) {
+    val layout = Layout(direction)
+    layout.init()
+    this._layout.layout = layout
+}
+
+fun LayoutApi.direction(direction: Direction, init: Layout.() -> Unit) {
     val layout = Layout(direction)
     layout.init()
     this.layout = layout

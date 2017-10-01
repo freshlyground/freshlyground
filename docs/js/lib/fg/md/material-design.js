@@ -10,6 +10,7 @@ if (typeof beans === 'undefined') {
 this['material-design'] = function (_, Kotlin, $module$elements, $module$beans) {
   'use strict';
   var initAndAppendNode = $module$elements.fg.elements.initAndAppendNode_n3qhgg$;
+  var Unit = Kotlin.kotlin.Unit;
   var RgbColor = $module$elements.fg.style.colour.RgbColor;
   var AppBar = $module$beans.fg.beans.app.AppBar;
   var toClassSelector = $module$elements.fg.elements.toClassSelector_pdl1vz$;
@@ -27,10 +28,11 @@ this['material-design'] = function (_, Kotlin, $module$elements, $module$beans) 
   var focus = $module$elements.fg.style.focus_dn1ps9$;
   var and = $module$elements.fg.style.and_xif9ow$;
   var active = $module$elements.fg.style.active_dn1ps9$;
+  var and_0 = $module$elements.fg.style.and_sszkdk$;
   var StyledClass = $module$elements.fg.elements.StyledClass;
   var lazy = Kotlin.kotlin.lazy_klfg04$;
   var ToggleButton = $module$beans.fg.beans.button.ToggleButton;
-  var and_0 = $module$elements.fg.style.and_yogg4l$;
+  var and_1 = $module$elements.fg.style.and_yogg4l$;
   var Div = $module$elements.fg.elements.Div;
   var Img = $module$elements.fg.elements.Img;
   var Selector = $module$elements.fg.elements.Selector;
@@ -41,11 +43,6 @@ this['material-design'] = function (_, Kotlin, $module$elements, $module$beans) 
   var Drawer = $module$beans.fg.beans.drawer.Drawer;
   var I = $module$elements.fg.elements.I;
   var IconProvider = $module$beans.fg.beans.icon.IconProvider;
-  var LayoutBreakpoint = $module$elements.fg.elements.layout.LayoutBreakpoint;
-  var IntRange = Kotlin.kotlin.ranges.IntRange;
-  var IntCompanionObject = Kotlin.kotlin.js.internal.IntCompanionObject;
-  var contains = Kotlin.kotlin.ranges.contains_bupbvv$;
-  var Breakpoint = $module$elements.fg.elements.layout.Breakpoint;
   var Menu = $module$beans.fg.beans.menu.Menu;
   var MenuItem = $module$beans.fg.beans.menu.MenuItem;
   var JustifyContent = $module$elements.fg.elements.style.typed.JustifyContent;
@@ -61,7 +58,6 @@ this['material-design'] = function (_, Kotlin, $module$elements, $module$beans) 
   var debounce1 = $module$elements.fg.base.debounce1_5237lg$;
   var onMouseUp = $module$elements.fg.elements.onMouseUp_e96vkx$;
   var to = Kotlin.kotlin.to_ujzrz7$;
-  var kotlin = Kotlin.kotlin;
   var classRule = $module$elements.fg.style.classRule_fprhdc$;
   var get_px_0 = $module$elements.fg.elements.get_px_yrwdxr$;
   var Span = $module$elements.fg.elements.Span;
@@ -127,8 +123,6 @@ this['material-design'] = function (_, Kotlin, $module$elements, $module$beans) 
   MDIcon$Size.prototype.constructor = MDIcon$Size;
   MDIcon.prototype = Object.create(I.prototype);
   MDIcon.prototype.constructor = MDIcon;
-  MDBreakpoints.prototype = Object.create(Enum.prototype);
-  MDBreakpoints.prototype.constructor = MDBreakpoints;
   MDMenu.prototype = Object.create(Menu.prototype);
   MDMenu.prototype.constructor = MDMenu;
   MDMenuItem.prototype = Object.create(MenuItem.prototype);
@@ -263,21 +257,104 @@ this['material-design'] = function (_, Kotlin, $module$elements, $module$beans) 
     return initAndAppendNode($receiver, new MDCardContent(), init);
   }
   function spacer$lambda($receiver) {
+    return Unit;
   }
   function spacer($receiver) {
     return initAndAppendNode($receiver, MDToolbar$MDToolbar_getInstance().spacer(), spacer$lambda);
   }
+  var ArrayList_init = Kotlin.kotlin.collections.ArrayList_init_ww73n8$;
+  var ObservableProperty = Kotlin.kotlin.properties.ObservableProperty;
+  Delegates$observable$ObjectLiteral.prototype = Object.create(ObservableProperty.prototype);
+  Delegates$observable$ObjectLiteral.prototype.constructor = Delegates$observable$ObjectLiteral;
+  function Delegates$observable$ObjectLiteral(closure$onChange, initialValue_0) {
+    this.closure$onChange = closure$onChange;
+    ObservableProperty.call(this, initialValue_0);
+  }
+  Delegates$observable$ObjectLiteral.prototype.afterChange_jxtfl0$ = function (property, oldValue, newValue) {
+    this.closure$onChange(property, oldValue, newValue);
+  };
+  Delegates$observable$ObjectLiteral.$metadata$ = {kind: Kotlin.Kind.CLASS, interfaces: [ObservableProperty]};
+  Delegates$observable$ObjectLiteral_0.prototype = Object.create(ObservableProperty.prototype);
+  Delegates$observable$ObjectLiteral_0.prototype.constructor = Delegates$observable$ObjectLiteral_0;
+  function Delegates$observable$ObjectLiteral_0(closure$onChange, initialValue_0) {
+    this.closure$onChange = closure$onChange;
+    ObservableProperty.call(this, initialValue_0);
+  }
+  Delegates$observable$ObjectLiteral_0.prototype.afterChange_jxtfl0$ = function (property, oldValue, newValue) {
+    this.closure$onChange(property, oldValue, newValue);
+  };
+  Delegates$observable$ObjectLiteral_0.$metadata$ = {kind: Kotlin.Kind.CLASS, interfaces: [ObservableProperty]};
+  Delegates$observable$ObjectLiteral_1.prototype = Object.create(ObservableProperty.prototype);
+  Delegates$observable$ObjectLiteral_1.prototype.constructor = Delegates$observable$ObjectLiteral_1;
+  function Delegates$observable$ObjectLiteral_1(closure$onChange, initialValue_0) {
+    this.closure$onChange = closure$onChange;
+    ObservableProperty.call(this, initialValue_0);
+  }
+  Delegates$observable$ObjectLiteral_1.prototype.afterChange_jxtfl0$ = function (property, oldValue, newValue) {
+    this.closure$onChange(property, oldValue, newValue);
+  };
+  Delegates$observable$ObjectLiteral_1.$metadata$ = {kind: Kotlin.Kind.CLASS, interfaces: [ObservableProperty]};
+  Delegates$observable$ObjectLiteral_2.prototype = Object.create(ObservableProperty.prototype);
+  Delegates$observable$ObjectLiteral_2.prototype.constructor = Delegates$observable$ObjectLiteral_2;
+  function Delegates$observable$ObjectLiteral_2(closure$onChange, initialValue_0) {
+    this.closure$onChange = closure$onChange;
+    ObservableProperty.call(this, initialValue_0);
+  }
+  Delegates$observable$ObjectLiteral_2.prototype.afterChange_jxtfl0$ = function (property, oldValue, newValue) {
+    this.closure$onChange(property, oldValue, newValue);
+  };
+  Delegates$observable$ObjectLiteral_2.$metadata$ = {kind: Kotlin.Kind.CLASS, interfaces: [ObservableProperty]};
+  Delegates$observable$ObjectLiteral_3.prototype = Object.create(ObservableProperty.prototype);
+  Delegates$observable$ObjectLiteral_3.prototype.constructor = Delegates$observable$ObjectLiteral_3;
+  function Delegates$observable$ObjectLiteral_3(closure$onChange, initialValue_0) {
+    this.closure$onChange = closure$onChange;
+    ObservableProperty.call(this, initialValue_0);
+  }
+  Delegates$observable$ObjectLiteral_3.prototype.afterChange_jxtfl0$ = function (property, oldValue, newValue) {
+    this.closure$onChange(property, oldValue, newValue);
+  };
+  Delegates$observable$ObjectLiteral_3.$metadata$ = {kind: Kotlin.Kind.CLASS, interfaces: [ObservableProperty]};
+  Delegates$observable$ObjectLiteral_4.prototype = Object.create(ObservableProperty.prototype);
+  Delegates$observable$ObjectLiteral_4.prototype.constructor = Delegates$observable$ObjectLiteral_4;
+  function Delegates$observable$ObjectLiteral_4(closure$onChange, initialValue_0) {
+    this.closure$onChange = closure$onChange;
+    ObservableProperty.call(this, initialValue_0);
+  }
+  Delegates$observable$ObjectLiteral_4.prototype.afterChange_jxtfl0$ = function (property, oldValue, newValue) {
+    this.closure$onChange(property, oldValue, newValue);
+  };
+  Delegates$observable$ObjectLiteral_4.$metadata$ = {kind: Kotlin.Kind.CLASS, interfaces: [ObservableProperty]};
+  Delegates$observable$ObjectLiteral_5.prototype = Object.create(ObservableProperty.prototype);
+  Delegates$observable$ObjectLiteral_5.prototype.constructor = Delegates$observable$ObjectLiteral_5;
+  function Delegates$observable$ObjectLiteral_5(closure$onChange, initialValue_0) {
+    this.closure$onChange = closure$onChange;
+    ObservableProperty.call(this, initialValue_0);
+  }
+  Delegates$observable$ObjectLiteral_5.prototype.afterChange_jxtfl0$ = function (property, oldValue, newValue) {
+    this.closure$onChange(property, oldValue, newValue);
+  };
+  Delegates$observable$ObjectLiteral_5.$metadata$ = {kind: Kotlin.Kind.CLASS, interfaces: [ObservableProperty]};
+  Delegates$observable$ObjectLiteral_6.prototype = Object.create(ObservableProperty.prototype);
+  Delegates$observable$ObjectLiteral_6.prototype.constructor = Delegates$observable$ObjectLiteral_6;
+  function Delegates$observable$ObjectLiteral_6(closure$onChange, initialValue_0) {
+    this.closure$onChange = closure$onChange;
+    ObservableProperty.call(this, initialValue_0);
+  }
+  Delegates$observable$ObjectLiteral_6.prototype.afterChange_jxtfl0$ = function (property, oldValue, newValue) {
+    this.closure$onChange(property, oldValue, newValue);
+  };
+  Delegates$observable$ObjectLiteral_6.$metadata$ = {kind: Kotlin.Kind.CLASS, interfaces: [ObservableProperty]};
   function Theme(primaryColor, accentColor, warnColor, statusBar, appBar, toolbar, background, cardsNdialogs, font) {
     Theme$Statics_getInstance();
-    this.propertyChangedListeners_0 = Kotlin.kotlin.collections.ArrayList_init_ww73n8$();
-    this.primaryColor$delegate = new Kotlin.kotlin.properties.Delegates.observable_2ulm9r$$f(Theme$primaryColor$lambda, primaryColor);
-    this.accentColor$delegate = new Kotlin.kotlin.properties.Delegates.observable_2ulm9r$$f(Theme$accentColor$lambda, accentColor);
-    this.warnColor$delegate = new Kotlin.kotlin.properties.Delegates.observable_2ulm9r$$f(Theme$warnColor$lambda, warnColor);
-    this.statusBar$delegate = new Kotlin.kotlin.properties.Delegates.observable_2ulm9r$$f(Theme$statusBar$lambda, statusBar);
-    this.appBar$delegate = new Kotlin.kotlin.properties.Delegates.observable_2ulm9r$$f(Theme$appBar$lambda, appBar);
-    this.toolbar$delegate = new Kotlin.kotlin.properties.Delegates.observable_2ulm9r$$f(Theme$toolbar$lambda, toolbar);
-    this.background$delegate = new Kotlin.kotlin.properties.Delegates.observable_2ulm9r$$f(Theme$background$lambda, background);
-    this.cardsNdialogs$delegate = new Kotlin.kotlin.properties.Delegates.observable_2ulm9r$$f(Theme$cardsNdialogs$lambda, cardsNdialogs);
+    this.propertyChangedListeners_0 = ArrayList_init();
+    this.primaryColor_g7oxmy$_0 = new Delegates$observable$ObjectLiteral(Theme$primaryColor$lambda, primaryColor);
+    this.accentColor_iok4cw$_0 = new Delegates$observable$ObjectLiteral_0(Theme$accentColor$lambda, accentColor);
+    this.warnColor_lqidn0$_0 = new Delegates$observable$ObjectLiteral_1(Theme$warnColor$lambda, warnColor);
+    this.statusBar_bzbd1k$_0 = new Delegates$observable$ObjectLiteral_2(Theme$statusBar$lambda, statusBar);
+    this.appBar_qsaohl$_0 = new Delegates$observable$ObjectLiteral_3(Theme$appBar$lambda, appBar);
+    this.toolbar_dwktu6$_0 = new Delegates$observable$ObjectLiteral_4(Theme$toolbar$lambda, toolbar);
+    this.background_c9ntdv$_0 = new Delegates$observable$ObjectLiteral_5(Theme$background$lambda, background);
+    this.cardsNdialogs_q3sind$_0 = new Delegates$observable$ObjectLiteral_6(Theme$cardsNdialogs$lambda, cardsNdialogs);
     this.font = font;
   }
   Theme.prototype.notifyPropertyChanged_oh08kn$ = function (property, old, new_0) {
@@ -297,66 +374,66 @@ this['material-design'] = function (_, Kotlin, $module$elements, $module$beans) 
   };
   Object.defineProperty(Theme.prototype, 'primaryColor', {
     get: function () {
-      return this.primaryColor$delegate.getValue_lrcp0p$(this, new Kotlin.PropertyMetadata('primaryColor'));
+      return this.primaryColor_g7oxmy$_0.getValue_lrcp0p$(this, new Kotlin.PropertyMetadata('primaryColor'));
     },
     set: function (primaryColor) {
-      this.primaryColor$delegate.setValue_9rddgb$(this, new Kotlin.PropertyMetadata('primaryColor'), primaryColor);
+      this.primaryColor_g7oxmy$_0.setValue_9rddgb$(this, new Kotlin.PropertyMetadata('primaryColor'), primaryColor);
     }
   });
   Object.defineProperty(Theme.prototype, 'accentColor', {
     get: function () {
-      return this.accentColor$delegate.getValue_lrcp0p$(this, new Kotlin.PropertyMetadata('accentColor'));
+      return this.accentColor_iok4cw$_0.getValue_lrcp0p$(this, new Kotlin.PropertyMetadata('accentColor'));
     },
     set: function (accentColor) {
-      this.accentColor$delegate.setValue_9rddgb$(this, new Kotlin.PropertyMetadata('accentColor'), accentColor);
+      this.accentColor_iok4cw$_0.setValue_9rddgb$(this, new Kotlin.PropertyMetadata('accentColor'), accentColor);
     }
   });
   Object.defineProperty(Theme.prototype, 'warnColor', {
     get: function () {
-      return this.warnColor$delegate.getValue_lrcp0p$(this, new Kotlin.PropertyMetadata('warnColor'));
+      return this.warnColor_lqidn0$_0.getValue_lrcp0p$(this, new Kotlin.PropertyMetadata('warnColor'));
     },
     set: function (warnColor) {
-      this.warnColor$delegate.setValue_9rddgb$(this, new Kotlin.PropertyMetadata('warnColor'), warnColor);
+      this.warnColor_lqidn0$_0.setValue_9rddgb$(this, new Kotlin.PropertyMetadata('warnColor'), warnColor);
     }
   });
   Object.defineProperty(Theme.prototype, 'statusBar', {
     get: function () {
-      return this.statusBar$delegate.getValue_lrcp0p$(this, new Kotlin.PropertyMetadata('statusBar'));
+      return this.statusBar_bzbd1k$_0.getValue_lrcp0p$(this, new Kotlin.PropertyMetadata('statusBar'));
     },
     set: function (statusBar) {
-      this.statusBar$delegate.setValue_9rddgb$(this, new Kotlin.PropertyMetadata('statusBar'), statusBar);
+      this.statusBar_bzbd1k$_0.setValue_9rddgb$(this, new Kotlin.PropertyMetadata('statusBar'), statusBar);
     }
   });
   Object.defineProperty(Theme.prototype, 'appBar', {
     get: function () {
-      return this.appBar$delegate.getValue_lrcp0p$(this, new Kotlin.PropertyMetadata('appBar'));
+      return this.appBar_qsaohl$_0.getValue_lrcp0p$(this, new Kotlin.PropertyMetadata('appBar'));
     },
     set: function (appBar) {
-      this.appBar$delegate.setValue_9rddgb$(this, new Kotlin.PropertyMetadata('appBar'), appBar);
+      this.appBar_qsaohl$_0.setValue_9rddgb$(this, new Kotlin.PropertyMetadata('appBar'), appBar);
     }
   });
   Object.defineProperty(Theme.prototype, 'toolbar', {
     get: function () {
-      return this.toolbar$delegate.getValue_lrcp0p$(this, new Kotlin.PropertyMetadata('toolbar'));
+      return this.toolbar_dwktu6$_0.getValue_lrcp0p$(this, new Kotlin.PropertyMetadata('toolbar'));
     },
     set: function (toolbar) {
-      this.toolbar$delegate.setValue_9rddgb$(this, new Kotlin.PropertyMetadata('toolbar'), toolbar);
+      this.toolbar_dwktu6$_0.setValue_9rddgb$(this, new Kotlin.PropertyMetadata('toolbar'), toolbar);
     }
   });
   Object.defineProperty(Theme.prototype, 'background', {
     get: function () {
-      return this.background$delegate.getValue_lrcp0p$(this, new Kotlin.PropertyMetadata('background'));
+      return this.background_c9ntdv$_0.getValue_lrcp0p$(this, new Kotlin.PropertyMetadata('background'));
     },
     set: function (background) {
-      this.background$delegate.setValue_9rddgb$(this, new Kotlin.PropertyMetadata('background'), background);
+      this.background_c9ntdv$_0.setValue_9rddgb$(this, new Kotlin.PropertyMetadata('background'), background);
     }
   });
   Object.defineProperty(Theme.prototype, 'cardsNdialogs', {
     get: function () {
-      return this.cardsNdialogs$delegate.getValue_lrcp0p$(this, new Kotlin.PropertyMetadata('cardsNdialogs'));
+      return this.cardsNdialogs_q3sind$_0.getValue_lrcp0p$(this, new Kotlin.PropertyMetadata('cardsNdialogs'));
     },
     set: function (cardsNdialogs) {
-      this.cardsNdialogs$delegate.setValue_9rddgb$(this, new Kotlin.PropertyMetadata('cardsNdialogs'), cardsNdialogs);
+      this.cardsNdialogs_q3sind$_0.setValue_9rddgb$(this, new Kotlin.PropertyMetadata('cardsNdialogs'), cardsNdialogs);
     }
   });
   Theme.prototype.color_6hl4m2$ = function (color, default_0) {
@@ -390,20 +467,28 @@ this['material-design'] = function (_, Kotlin, $module$elements, $module$beans) 
     return Theme$Statics_instance;
   }
   function Theme$primaryColor$lambda(property, old, new_0) {
+    return Unit;
   }
   function Theme$accentColor$lambda(property, old, new_0) {
+    return Unit;
   }
   function Theme$warnColor$lambda(property, old, new_0) {
+    return Unit;
   }
   function Theme$statusBar$lambda(property, old, new_0) {
+    return Unit;
   }
   function Theme$appBar$lambda(property, old, new_0) {
+    return Unit;
   }
   function Theme$toolbar$lambda(property, old, new_0) {
+    return Unit;
   }
   function Theme$background$lambda(property, old, new_0) {
+    return Unit;
   }
   function Theme$cardsNdialogs$lambda(property, old, new_0) {
+    return Unit;
   }
   Theme.$metadata$ = {
     kind: Kotlin.Kind.CLASS,
@@ -420,18 +505,18 @@ this['material-design'] = function (_, Kotlin, $module$elements, $module$beans) 
   };
   function MDAppBar$MDAppBar() {
     MDAppBar$MDAppBar_instance = this;
-    this.classSelector_90nc9v$_0 = toClassSelector('fg-md-appbar');
-    this.rule_90nc9v$_0 = MDAppBar$MDAppBar$rule$lambda;
+    this.classSelector_ullw6y$_0 = toClassSelector('fg-md-appbar');
+    this.rule_bx0x8n$_0 = MDAppBar$MDAppBar$rule$lambda;
     elements.HTML.registerStyle_mpomjf$(this);
   }
   Object.defineProperty(MDAppBar$MDAppBar.prototype, 'classSelector', {
     get: function () {
-      return this.classSelector_90nc9v$_0;
+      return this.classSelector_ullw6y$_0;
     }
   });
   Object.defineProperty(MDAppBar$MDAppBar.prototype, 'rule', {
     get: function () {
-      return this.rule_90nc9v$_0;
+      return this.rule_bx0x8n$_0;
     }
   });
   function MDAppBar$MDAppBar$rule$lambda($receiver) {
@@ -440,6 +525,7 @@ this['material-design'] = function (_, Kotlin, $module$elements, $module$beans) 
     $receiver.display = Display.flex;
     $receiver.flexDirection = FlexDirection.row;
     $receiver.alignItems = AlignItems.center;
+    return Unit;
   }
   MDAppBar$MDAppBar.$metadata$ = {
     kind: Kotlin.Kind.OBJECT,
@@ -458,8 +544,38 @@ this['material-design'] = function (_, Kotlin, $module$elements, $module$beans) 
     simpleName: 'MDAppBar',
     interfaces: [AppBar]
   };
+  Delegates$observable$ObjectLiteral_7.prototype = Object.create(ObservableProperty.prototype);
+  Delegates$observable$ObjectLiteral_7.prototype.constructor = Delegates$observable$ObjectLiteral_7;
+  function Delegates$observable$ObjectLiteral_7(closure$onChange, initialValue_0) {
+    this.closure$onChange = closure$onChange;
+    ObservableProperty.call(this, initialValue_0);
+  }
+  Delegates$observable$ObjectLiteral_7.prototype.afterChange_jxtfl0$ = function (property, oldValue, newValue) {
+    this.closure$onChange(property, oldValue, newValue);
+  };
+  Delegates$observable$ObjectLiteral_7.$metadata$ = {kind: Kotlin.Kind.CLASS, interfaces: [ObservableProperty]};
+  Delegates$observable$ObjectLiteral_8.prototype = Object.create(ObservableProperty.prototype);
+  Delegates$observable$ObjectLiteral_8.prototype.constructor = Delegates$observable$ObjectLiteral_8;
+  function Delegates$observable$ObjectLiteral_8(closure$onChange, initialValue_0) {
+    this.closure$onChange = closure$onChange;
+    ObservableProperty.call(this, initialValue_0);
+  }
+  Delegates$observable$ObjectLiteral_8.prototype.afterChange_jxtfl0$ = function (property, oldValue, newValue) {
+    this.closure$onChange(property, oldValue, newValue);
+  };
+  Delegates$observable$ObjectLiteral_8.$metadata$ = {kind: Kotlin.Kind.CLASS, interfaces: [ObservableProperty]};
+  Delegates$observable$ObjectLiteral_9.prototype = Object.create(ObservableProperty.prototype);
+  Delegates$observable$ObjectLiteral_9.prototype.constructor = Delegates$observable$ObjectLiteral_9;
+  function Delegates$observable$ObjectLiteral_9(closure$onChange, initialValue_0) {
+    this.closure$onChange = closure$onChange;
+    ObservableProperty.call(this, initialValue_0);
+  }
+  Delegates$observable$ObjectLiteral_9.prototype.afterChange_jxtfl0$ = function (property, oldValue, newValue) {
+    this.closure$onChange(property, oldValue, newValue);
+  };
+  Delegates$observable$ObjectLiteral_9.$metadata$ = {kind: Kotlin.Kind.CLASS, interfaces: [ObservableProperty]};
   function MDButton(action, type, color, margins) {
-    MDButton$MDButton_getInstance();
+    MDButton$Companion_getInstance();
     if (type === void 0)
       type = MDButton$Type$FLAT_getInstance();
     if (color === void 0)
@@ -467,53 +583,49 @@ this['material-design'] = function (_, Kotlin, $module$elements, $module$beans) 
     if (margins === void 0)
       margins = false;
     Button.call(this, action);
-    var initialValue = type;
-    var onChange = MDButton$type$lambda(this, color);
-    this.type$delegate = new Kotlin.kotlin.properties.Delegates.observable_2ulm9r$$f(onChange, initialValue);
-    var initialValue_0 = color;
-    this.color$delegate = new Kotlin.kotlin.properties.Delegates.observable_2ulm9r$$f(MDButton$color$lambda(this), initialValue_0);
-    var initialValue_1 = margins;
-    this.margins$delegate = new Kotlin.kotlin.properties.Delegates.observable_2ulm9r$$f(MDButton$margins$lambda(this), initialValue_1);
+    this.type_62b4vh$_0 = new Delegates$observable$ObjectLiteral_7(MDButton$type$lambda(this, color), type);
+    this.color_xb2sly$_0 = new Delegates$observable$ObjectLiteral_8(MDButton$color$lambda(this), color);
+    this.margins_udljaw$_0 = new Delegates$observable$ObjectLiteral_9(MDButton$margins$lambda(this), margins);
     this.ripples_0 = false;
-    this.ripple$delegate = lazy(MDButton$ripple$lambda(this));
+    this.ripple_xt9s7d$_0 = lazy(MDButton$ripple$lambda(this));
     this.flatStyle = new MDButton$FlatStyle();
     this.raisedStyle = new MDButton$RaisedStyle();
     this.floatingStyle = new MDButton$FloatingStyle();
   }
   Object.defineProperty(MDButton.prototype, 'type', {
     get: function () {
-      return this.type$delegate.getValue_lrcp0p$(this, new Kotlin.PropertyMetadata('type'));
+      return this.type_62b4vh$_0.getValue_lrcp0p$(this, new Kotlin.PropertyMetadata('type'));
     },
     set: function (type) {
-      this.type$delegate.setValue_9rddgb$(this, new Kotlin.PropertyMetadata('type'), type);
+      this.type_62b4vh$_0.setValue_9rddgb$(this, new Kotlin.PropertyMetadata('type'), type);
     }
   });
   Object.defineProperty(MDButton.prototype, 'color', {
     get: function () {
-      return this.color$delegate.getValue_lrcp0p$(this, new Kotlin.PropertyMetadata('color'));
+      return this.color_xb2sly$_0.getValue_lrcp0p$(this, new Kotlin.PropertyMetadata('color'));
     },
     set: function (color) {
-      this.color$delegate.setValue_9rddgb$(this, new Kotlin.PropertyMetadata('color'), color);
+      this.color_xb2sly$_0.setValue_9rddgb$(this, new Kotlin.PropertyMetadata('color'), color);
     }
   });
   Object.defineProperty(MDButton.prototype, 'margins', {
     get: function () {
-      return this.margins$delegate.getValue_lrcp0p$(this, new Kotlin.PropertyMetadata('margins'));
+      return this.margins_udljaw$_0.getValue_lrcp0p$(this, new Kotlin.PropertyMetadata('margins'));
     },
     set: function (margins) {
-      this.margins$delegate.setValue_9rddgb$(this, new Kotlin.PropertyMetadata('margins'), margins);
+      this.margins_udljaw$_0.setValue_9rddgb$(this, new Kotlin.PropertyMetadata('margins'), margins);
     }
   });
   Object.defineProperty(MDButton.prototype, 'ripple_0', {
     get: function () {
-      var $receiver = this.ripple$delegate;
+      var $receiver = this.ripple_xt9s7d$_0;
       new Kotlin.PropertyMetadata('ripple');
       return $receiver.value;
     }
   });
   MDButton.prototype.render = function () {
     Button.prototype.render.call(this);
-    this.addClass_bx842b$(MDButton$MDButton_getInstance().classSelector);
+    this.addClass_bx842b$(MDButton$Companion_getInstance().classSelector);
     this.renderType_0(this.type);
     this.renderColor_0(this.color);
     this.renderMargins_0(this.margins);
@@ -572,7 +684,7 @@ this['material-design'] = function (_, Kotlin, $module$elements, $module$beans) 
       this.label.hide();
       this.label.textContent = null;
       this.iconI.show();
-      this.iconI.icon = MDButton$MDButton_getInstance().plusIcon_0;
+      this.iconI.icon = MDButton$Companion_getInstance().plusIcon_0;
     }
   };
   MDButton.prototype.renderColor_0 = function (color) {
@@ -643,9 +755,9 @@ this['material-design'] = function (_, Kotlin, $module$elements, $module$beans) 
   function MDButton$Type_initFields() {
     MDButton$Type_initFields = function () {
     };
-    MDButton$Type$FLAT_instance = new MDButton$Type('FLAT', 0, MDButton$MDButton_getInstance().TYPE_FLAT_0);
-    MDButton$Type$RAISED_instance = new MDButton$Type('RAISED', 1, MDButton$MDButton_getInstance().TYPE_RAISED_0);
-    MDButton$Type$FLOATING_instance = new MDButton$Type('FLOATING', 2, MDButton$MDButton_getInstance().TYPE_FLOATING_0);
+    MDButton$Type$FLAT_instance = new MDButton$Type('FLAT', 0, MDButton$Companion_getInstance().TYPE_FLAT_0);
+    MDButton$Type$RAISED_instance = new MDButton$Type('RAISED', 1, MDButton$Companion_getInstance().TYPE_RAISED_0);
+    MDButton$Type$FLOATING_instance = new MDButton$Type('FLOATING', 2, MDButton$Companion_getInstance().TYPE_FLOATING_0);
   }
   var MDButton$Type$FLAT_instance;
   function MDButton$Type$FLAT_getInstance() {
@@ -685,8 +797,8 @@ this['material-design'] = function (_, Kotlin, $module$elements, $module$beans) 
   MDButton$Type.valueOf_61zpoe$ = MDButton$Type$valueOf;
   function MDButton$FlatStyle() {
     ElementStyle.call(this);
-    this.color_dn38mj$_0 = RgbColor.Factory.BLACK;
-    this.backgroundColor_dn38mj$_0 = RgbColor.Factory.TRANSPARENT;
+    this.color_vufmdc$_0 = RgbColor.Factory.BLACK;
+    this.backgroundColor_t03ywi$_0 = RgbColor.Factory.TRANSPARENT;
     this.hovered = new MDButton$FlatStyle$hovered$ObjectLiteral();
     this.pressed = new MDButton$FlatStyle$pressed$ObjectLiteral();
     this.focused = new MDButton$FlatStyle$focused$ObjectLiteral();
@@ -694,30 +806,30 @@ this['material-design'] = function (_, Kotlin, $module$elements, $module$beans) 
   }
   Object.defineProperty(MDButton$FlatStyle.prototype, 'color', {
     get: function () {
-      return this.color_dn38mj$_0;
+      return this.color_vufmdc$_0;
     },
     set: function (color) {
-      this.color_dn38mj$_0 = color;
+      this.color_vufmdc$_0 = color;
     }
   });
   Object.defineProperty(MDButton$FlatStyle.prototype, 'backgroundColor', {
     get: function () {
-      return this.backgroundColor_dn38mj$_0;
+      return this.backgroundColor_t03ywi$_0;
     },
     set: function (backgroundColor) {
-      this.backgroundColor_dn38mj$_0 = backgroundColor;
+      this.backgroundColor_t03ywi$_0 = backgroundColor;
     }
   });
   function MDButton$FlatStyle$hovered$ObjectLiteral() {
     ElementStyle.call(this);
-    this.backgroundColor_qfcnkb$_0 = new RgbColor(153, 153, 153, 0.2);
+    this.backgroundColor_aptsxa$_0 = new RgbColor(153, 153, 153, 0.2);
   }
   Object.defineProperty(MDButton$FlatStyle$hovered$ObjectLiteral.prototype, 'backgroundColor', {
     get: function () {
-      return this.backgroundColor_qfcnkb$_0;
+      return this.backgroundColor_aptsxa$_0;
     },
     set: function (backgroundColor) {
-      this.backgroundColor_qfcnkb$_0 = backgroundColor;
+      this.backgroundColor_aptsxa$_0 = backgroundColor;
     }
   });
   MDButton$FlatStyle$hovered$ObjectLiteral.$metadata$ = {
@@ -726,14 +838,14 @@ this['material-design'] = function (_, Kotlin, $module$elements, $module$beans) 
   };
   function MDButton$FlatStyle$pressed$ObjectLiteral() {
     ElementStyle.call(this);
-    this.backgroundColor_iw54ec$_0 = new RgbColor(204, 204, 204);
+    this.backgroundColor_ri9daj$_0 = new RgbColor(204, 204, 204);
   }
   Object.defineProperty(MDButton$FlatStyle$pressed$ObjectLiteral.prototype, 'backgroundColor', {
     get: function () {
-      return this.backgroundColor_iw54ec$_0;
+      return this.backgroundColor_ri9daj$_0;
     },
     set: function (backgroundColor) {
-      this.backgroundColor_iw54ec$_0 = backgroundColor;
+      this.backgroundColor_ri9daj$_0 = backgroundColor;
     }
   });
   MDButton$FlatStyle$pressed$ObjectLiteral.$metadata$ = {
@@ -742,14 +854,14 @@ this['material-design'] = function (_, Kotlin, $module$elements, $module$beans) 
   };
   function MDButton$FlatStyle$focused$ObjectLiteral() {
     ElementStyle.call(this);
-    this.backgroundColor_t34dox$_0 = new RgbColor(221, 221, 221);
+    this.backgroundColor_aul4cq$_0 = new RgbColor(221, 221, 221);
   }
   Object.defineProperty(MDButton$FlatStyle$focused$ObjectLiteral.prototype, 'backgroundColor', {
     get: function () {
-      return this.backgroundColor_t34dox$_0;
+      return this.backgroundColor_aul4cq$_0;
     },
     set: function (backgroundColor) {
-      this.backgroundColor_t34dox$_0 = backgroundColor;
+      this.backgroundColor_aul4cq$_0 = backgroundColor;
     }
   });
   MDButton$FlatStyle$focused$ObjectLiteral.$metadata$ = {
@@ -758,23 +870,23 @@ this['material-design'] = function (_, Kotlin, $module$elements, $module$beans) 
   };
   function MDButton$FlatStyle$disabled$ObjectLiteral() {
     ElementStyle.call(this);
-    this.color_1plbzs$_0 = RgbColor.Factory.BLACK.withAlfa_14dthe$(0.26);
-    this.backgroundColor_1plbzs$_0 = RgbColor.Factory.TRANSPARENT;
+    this.color_drynyl$_0 = RgbColor.Factory.BLACK.withAlfa_14dthe$(0.26);
+    this.backgroundColor_1pregx$_0 = RgbColor.Factory.TRANSPARENT;
   }
   Object.defineProperty(MDButton$FlatStyle$disabled$ObjectLiteral.prototype, 'color', {
     get: function () {
-      return this.color_1plbzs$_0;
+      return this.color_drynyl$_0;
     },
     set: function (color) {
-      this.color_1plbzs$_0 = color;
+      this.color_drynyl$_0 = color;
     }
   });
   Object.defineProperty(MDButton$FlatStyle$disabled$ObjectLiteral.prototype, 'backgroundColor', {
     get: function () {
-      return this.backgroundColor_1plbzs$_0;
+      return this.backgroundColor_1pregx$_0;
     },
     set: function (backgroundColor) {
-      this.backgroundColor_1plbzs$_0 = backgroundColor;
+      this.backgroundColor_1pregx$_0 = backgroundColor;
     }
   });
   MDButton$FlatStyle$disabled$ObjectLiteral.$metadata$ = {
@@ -788,8 +900,8 @@ this['material-design'] = function (_, Kotlin, $module$elements, $module$beans) 
   };
   function MDButton$RaisedStyle() {
     ElementStyle.call(this);
-    this.color_el3hn8$_0 = RgbColor.Factory.BLACK;
-    this.backgroundColor_el3hn8$_0 = RgbColor.Factory.TRANSPARENT;
+    this.color_6hgt33$_0 = RgbColor.Factory.BLACK;
+    this.backgroundColor_7am3ub$_0 = RgbColor.Factory.TRANSPARENT;
     this.hovered = new MDButton$RaisedStyle$hovered$ObjectLiteral();
     this.pressed = new MDButton$RaisedStyle$pressed$ObjectLiteral();
     this.focused = new MDButton$RaisedStyle$focused$ObjectLiteral();
@@ -797,30 +909,30 @@ this['material-design'] = function (_, Kotlin, $module$elements, $module$beans) 
   }
   Object.defineProperty(MDButton$RaisedStyle.prototype, 'color', {
     get: function () {
-      return this.color_el3hn8$_0;
+      return this.color_6hgt33$_0;
     },
     set: function (color) {
-      this.color_el3hn8$_0 = color;
+      this.color_6hgt33$_0 = color;
     }
   });
   Object.defineProperty(MDButton$RaisedStyle.prototype, 'backgroundColor', {
     get: function () {
-      return this.backgroundColor_el3hn8$_0;
+      return this.backgroundColor_7am3ub$_0;
     },
     set: function (backgroundColor) {
-      this.backgroundColor_el3hn8$_0 = backgroundColor;
+      this.backgroundColor_7am3ub$_0 = backgroundColor;
     }
   });
   function MDButton$RaisedStyle$hovered$ObjectLiteral() {
     ElementStyle.call(this);
-    this.backgroundColor_pxaxg6$_0 = new RgbColor(153, 153, 153, 0.2);
+    this.backgroundColor_wi84wf$_0 = new RgbColor(153, 153, 153, 0.2);
   }
   Object.defineProperty(MDButton$RaisedStyle$hovered$ObjectLiteral.prototype, 'backgroundColor', {
     get: function () {
-      return this.backgroundColor_pxaxg6$_0;
+      return this.backgroundColor_wi84wf$_0;
     },
     set: function (backgroundColor) {
-      this.backgroundColor_pxaxg6$_0 = backgroundColor;
+      this.backgroundColor_wi84wf$_0 = backgroundColor;
     }
   });
   MDButton$RaisedStyle$hovered$ObjectLiteral.$metadata$ = {
@@ -829,14 +941,14 @@ this['material-design'] = function (_, Kotlin, $module$elements, $module$beans) 
   };
   function MDButton$RaisedStyle$pressed$ObjectLiteral() {
     ElementStyle.call(this);
-    this.backgroundColor_xgigm5$_0 = new RgbColor(204, 204, 204);
+    this.backgroundColor_5pv1be$_0 = new RgbColor(204, 204, 204);
   }
   Object.defineProperty(MDButton$RaisedStyle$pressed$ObjectLiteral.prototype, 'backgroundColor', {
     get: function () {
-      return this.backgroundColor_xgigm5$_0;
+      return this.backgroundColor_5pv1be$_0;
     },
     set: function (backgroundColor) {
-      this.backgroundColor_xgigm5$_0 = backgroundColor;
+      this.backgroundColor_5pv1be$_0 = backgroundColor;
     }
   });
   MDButton$RaisedStyle$pressed$ObjectLiteral.$metadata$ = {
@@ -845,14 +957,14 @@ this['material-design'] = function (_, Kotlin, $module$elements, $module$beans) 
   };
   function MDButton$RaisedStyle$focused$ObjectLiteral() {
     ElementStyle.call(this);
-    this.backgroundColor_aenwqa$_0 = new RgbColor(221, 221, 221);
+    this.backgroundColor_wmzgbv$_0 = new RgbColor(221, 221, 221);
   }
   Object.defineProperty(MDButton$RaisedStyle$focused$ObjectLiteral.prototype, 'backgroundColor', {
     get: function () {
-      return this.backgroundColor_aenwqa$_0;
+      return this.backgroundColor_wmzgbv$_0;
     },
     set: function (backgroundColor) {
-      this.backgroundColor_aenwqa$_0 = backgroundColor;
+      this.backgroundColor_wmzgbv$_0 = backgroundColor;
     }
   });
   MDButton$RaisedStyle$focused$ObjectLiteral.$metadata$ = {
@@ -861,23 +973,23 @@ this['material-design'] = function (_, Kotlin, $module$elements, $module$beans) 
   };
   function MDButton$RaisedStyle$disabled$ObjectLiteral() {
     ElementStyle.call(this);
-    this.color_civi0p$_0 = RgbColor.Factory.BLACK.withAlfa_14dthe$(0.26);
-    this.backgroundColor_civi0p$_0 = new RgbColor(0, 0, 0, 0.12);
+    this.color_l4u3n6$_0 = RgbColor.Factory.BLACK.withAlfa_14dthe$(0.26);
+    this.backgroundColor_x50u0w$_0 = new RgbColor(0, 0, 0, 0.12);
   }
   Object.defineProperty(MDButton$RaisedStyle$disabled$ObjectLiteral.prototype, 'color', {
     get: function () {
-      return this.color_civi0p$_0;
+      return this.color_l4u3n6$_0;
     },
     set: function (color) {
-      this.color_civi0p$_0 = color;
+      this.color_l4u3n6$_0 = color;
     }
   });
   Object.defineProperty(MDButton$RaisedStyle$disabled$ObjectLiteral.prototype, 'backgroundColor', {
     get: function () {
-      return this.backgroundColor_civi0p$_0;
+      return this.backgroundColor_x50u0w$_0;
     },
     set: function (backgroundColor) {
-      this.backgroundColor_civi0p$_0 = backgroundColor;
+      this.backgroundColor_x50u0w$_0 = backgroundColor;
     }
   });
   MDButton$RaisedStyle$disabled$ObjectLiteral.$metadata$ = {
@@ -891,23 +1003,23 @@ this['material-design'] = function (_, Kotlin, $module$elements, $module$beans) 
   };
   function MDButton$FloatingStyle() {
     ElementStyle.call(this);
-    this.color_4bdmvy$_0 = RgbColor.Factory.BLACK;
-    this.backgroundColor_4bdmvy$_0 = RgbColor.Factory.WHITE;
+    this.color_bgm2z1$_0 = RgbColor.Factory.BLACK;
+    this.backgroundColor_c9gij$_0 = RgbColor.Factory.WHITE;
   }
   Object.defineProperty(MDButton$FloatingStyle.prototype, 'color', {
     get: function () {
-      return this.color_4bdmvy$_0;
+      return this.color_bgm2z1$_0;
     },
     set: function (color) {
-      this.color_4bdmvy$_0 = color;
+      this.color_bgm2z1$_0 = color;
     }
   });
   Object.defineProperty(MDButton$FloatingStyle.prototype, 'backgroundColor', {
     get: function () {
-      return this.backgroundColor_4bdmvy$_0;
+      return this.backgroundColor_c9gij$_0;
     },
     set: function (backgroundColor) {
-      this.backgroundColor_4bdmvy$_0 = backgroundColor;
+      this.backgroundColor_c9gij$_0 = backgroundColor;
     }
   });
   MDButton$FloatingStyle.$metadata$ = {
@@ -915,67 +1027,75 @@ this['material-design'] = function (_, Kotlin, $module$elements, $module$beans) 
     simpleName: 'FloatingStyle',
     interfaces: [ElementStyle]
   };
-  function MDButton$MDButton() {
-    MDButton$MDButton_instance = this;
+  function MDButton$Companion() {
+    MDButton$Companion_instance = this;
     this.TYPE_FLAT_0 = toClassSelector('md-button-flat');
     this.TYPE_RAISED_0 = toClassSelector('md-button-raised');
     this.TYPE_FLOATING_0 = toClassSelector('md-button-floating');
     this.plusIcon_0 = icon.FontAwesomeIcons.plus_p56ikg$();
-    this.classSelector_r3ywte$_0 = toClassSelector('md-button');
-    this.rule_r3ywte$_0 = MDButton$MDButton$rule$lambda(this);
+    this.classSelector_2cqq94$_0 = toClassSelector('md-button');
+    this.rule_y2t0kp$_0 = MDButton$Companion$rule$lambda(this);
     elements.HTML.registerStyle_78phyd$(this);
   }
-  Object.defineProperty(MDButton$MDButton.prototype, 'classSelector', {
+  Object.defineProperty(MDButton$Companion.prototype, 'classSelector', {
     get: function () {
-      return this.classSelector_r3ywte$_0;
+      return this.classSelector_2cqq94$_0;
     }
   });
-  Object.defineProperty(MDButton$MDButton.prototype, 'rule', {
+  Object.defineProperty(MDButton$Companion.prototype, 'rule', {
     get: function () {
-      return this.rule_r3ywte$_0;
+      return this.rule_y2t0kp$_0;
     }
   });
-  function MDButton$MDButton$rule$lambda$lambda($receiver) {
+  function MDButton$Companion$rule$lambda$lambda$lambda($receiver) {
     $receiver._outline = 'none';
+    return Unit;
   }
-  function MDButton$MDButton$rule$lambda$lambda_0($receiver) {
+  function MDButton$Companion$rule$lambda$lambda$lambda_0($receiver) {
     $receiver._minWidth = '88px';
     $receiver._width = '';
     $receiver._height = '36px';
     $receiver._boxShadow = 'none';
     $receiver._border = 'none';
+    return Unit;
   }
-  function MDButton$MDButton$rule$lambda$lambda$lambda($receiver) {
+  function MDButton$Companion$rule$lambda$lambda$lambda$lambda($receiver) {
     $receiver._boxShadow = '0 4px 8px 0 rgba(0,0,0,.4)';
+    return Unit;
   }
-  function MDButton$MDButton$rule$lambda$lambda$lambda_0($receiver) {
+  function MDButton$Companion$rule$lambda$lambda$lambda$lambda_0($receiver) {
     $receiver._boxShadow = 'none';
+    return Unit;
   }
-  function MDButton$MDButton$rule$lambda$lambda_1($receiver) {
+  function MDButton$Companion$rule$lambda$lambda$lambda_1($receiver) {
     $receiver._minWidth = '88px';
     $receiver._width = '';
     $receiver._height = '36px';
     $receiver._border = 'none';
     $receiver._boxShadow = 'rgba(0, 0, 0, 0.117647) 0px 1px 6px, rgba(0, 0, 0, 0.117647) 0px 1px 4px';
-    active($receiver, MDButton$MDButton$rule$lambda$lambda$lambda);
-    and($receiver, AbstractButton.AbstractButton.DISABLED, MDButton$MDButton$rule$lambda$lambda$lambda_0);
+    active($receiver, MDButton$Companion$rule$lambda$lambda$lambda$lambda);
+    and($receiver, AbstractButton.AbstractButton.DISABLED, MDButton$Companion$rule$lambda$lambda$lambda$lambda_0);
+    return Unit;
   }
-  function MDButton$MDButton$rule$lambda$lambda$lambda_1($receiver) {
+  function MDButton$Companion$rule$lambda$lambda$lambda$lambda_1($receiver) {
     $receiver._boxShadow = '0 4px 8px 0 rgba(0,0,0,.4)';
+    return Unit;
   }
-  function MDButton$MDButton$rule$lambda$lambda$lambda_2($receiver) {
+  function MDButton$Companion$rule$lambda$lambda$lambda$lambda_2($receiver) {
     $receiver._boxShadow = 'none';
+    return Unit;
   }
-  function MDButton$MDButton$rule$lambda$lambda_2($receiver) {
+  function MDButton$Companion$rule$lambda$lambda$lambda_2($receiver) {
     $receiver._width = '40px';
     $receiver._height = '40px';
     $receiver._border = 'none';
     $receiver._boxShadow = 'rgba(0, 0, 0, 0.117647) 0px 1px 6px, rgba(0, 0, 0, 0.117647) 0px 1px 4px';
     $receiver._borderRadius = '50%';
-    active($receiver, MDButton$MDButton$rule$lambda$lambda$lambda_1);
-    and($receiver, AbstractButton.AbstractButton.DISABLED, MDButton$MDButton$rule$lambda$lambda$lambda_2);
+    active($receiver, MDButton$Companion$rule$lambda$lambda$lambda$lambda_1);
+    and($receiver, AbstractButton.AbstractButton.DISABLED, MDButton$Companion$rule$lambda$lambda$lambda$lambda_2);
+    return Unit;
   }
-  function MDButton$MDButton$rule$lambda(this$MDButton$) {
+  function MDButton$Companion$rule$lambda$lambda(this$MDButton$) {
     return function ($receiver) {
       $receiver._borderRadius = '2px';
       $receiver._marginLeft = '8px';
@@ -983,49 +1103,62 @@ this['material-design'] = function (_, Kotlin, $module$elements, $module$beans) 
       $receiver._fontFamily = Context_getInstance().theme.font;
       $receiver._fontSize = '14px';
       $receiver._fontWeight = '500';
-      focus($receiver, MDButton$MDButton$rule$lambda$lambda);
-      and($receiver, this$MDButton$.TYPE_FLAT_0, MDButton$MDButton$rule$lambda$lambda_0);
-      and($receiver, this$MDButton$.TYPE_RAISED_0, MDButton$MDButton$rule$lambda$lambda_1);
-      and($receiver, this$MDButton$.TYPE_FLOATING_0, MDButton$MDButton$rule$lambda$lambda_2);
+      $receiver._borderRadius = '0';
+      focus($receiver, MDButton$Companion$rule$lambda$lambda$lambda);
+      and($receiver, this$MDButton$.TYPE_FLAT_0, MDButton$Companion$rule$lambda$lambda$lambda_0);
+      and($receiver, this$MDButton$.TYPE_RAISED_0, MDButton$Companion$rule$lambda$lambda$lambda_1);
+      and($receiver, this$MDButton$.TYPE_FLOATING_0, MDButton$Companion$rule$lambda$lambda$lambda_2);
+      return Unit;
     };
   }
-  MDButton$MDButton.$metadata$ = {
+  function MDButton$Companion$rule$lambda(this$MDButton$) {
+    return function ($receiver) {
+      and_0($receiver, Button.Companion, MDButton$Companion$rule$lambda$lambda(this$MDButton$));
+      return Unit;
+    };
+  }
+  MDButton$Companion.$metadata$ = {
     kind: Kotlin.Kind.OBJECT,
-    simpleName: 'MDButton',
+    simpleName: 'Companion',
     interfaces: [StyledClass]
   };
-  var MDButton$MDButton_instance = null;
-  function MDButton$MDButton_getInstance() {
-    if (MDButton$MDButton_instance === null) {
-      new MDButton$MDButton();
+  var MDButton$Companion_instance = null;
+  function MDButton$Companion_getInstance() {
+    if (MDButton$Companion_instance === null) {
+      new MDButton$Companion();
     }
-    return MDButton$MDButton_instance;
+    return MDButton$Companion_instance;
   }
   function MDButton$type$lambda(this$MDButton, closure$color) {
     return function (property, old, new_0) {
       this$MDButton.renderType_0(new_0);
       this$MDButton.renderColor_0(closure$color);
+      return Unit;
     };
   }
   function MDButton$color$lambda(this$MDButton) {
     return function (property, old, new_0) {
       this$MDButton.renderColor_0(new_0);
+      return Unit;
     };
   }
   function MDButton$margins$lambda(this$MDButton) {
     return function (property, old, new_0) {
       this$MDButton.renderMargins_0(new_0);
+      return Unit;
     };
   }
   function MDButton$ripple$lambda$lambda(this$MDButton) {
     return function () {
       this$MDButton.ripples_0 = true;
+      return Unit;
     };
   }
   function MDButton$ripple$lambda$lambda_0(this$MDButton) {
     return function () {
       this$MDButton.ripples_0 = false;
       this$MDButton.renderColor_0();
+      return Unit;
     };
   }
   function MDButton$ripple$lambda(this$MDButton) {
@@ -1039,58 +1172,65 @@ this['material-design'] = function (_, Kotlin, $module$elements, $module$beans) 
     interfaces: [Button]
   };
   function MDToggleButton(action) {
-    MDToggleButton$MDToggleButton_getInstance();
+    MDToggleButton$Companion_getInstance();
     ToggleButton.call(this, action);
   }
   MDToggleButton.prototype.render = function () {
     ToggleButton.prototype.render.call(this);
-    this.addClass_bx842b$(MDToggleButton$MDToggleButton_getInstance().classSelector);
+    this.addClass_bx842b$(MDToggleButton$Companion_getInstance().classSelector);
   };
-  function MDToggleButton$MDToggleButton() {
-    MDToggleButton$MDToggleButton_instance = this;
-    this.classSelector_axwc4i$_0 = toClassSelector('fg-bn-md-toggle-button');
-    this.rule_axwc4i$_0 = MDToggleButton$MDToggleButton$rule$lambda;
+  function MDToggleButton$Companion() {
+    MDToggleButton$Companion_instance = this;
+    this.classSelector_ky4mu4$_0 = toClassSelector('fg-md-md-toggle-button');
+    this.rule_jicnj7$_0 = MDToggleButton$Companion$rule$lambda;
     elements.HTML.registerStyle_78phyd$(this);
   }
-  Object.defineProperty(MDToggleButton$MDToggleButton.prototype, 'classSelector', {
+  Object.defineProperty(MDToggleButton$Companion.prototype, 'classSelector', {
     get: function () {
-      return this.classSelector_axwc4i$_0;
+      return this.classSelector_ky4mu4$_0;
     }
   });
-  Object.defineProperty(MDToggleButton$MDToggleButton.prototype, 'rule', {
+  Object.defineProperty(MDToggleButton$Companion.prototype, 'rule', {
     get: function () {
-      return this.rule_axwc4i$_0;
+      return this.rule_jicnj7$_0;
     }
   });
-  function MDToggleButton$MDToggleButton$rule$lambda$lambda($receiver) {
+  function MDToggleButton$Companion$rule$lambda$lambda$lambda($receiver) {
     $receiver._boxShadow = 'none';
     $receiver._border = 'none';
     $receiver._backgroundColor = RgbColor.Factory.TRANSPARENT.toString();
+    return Unit;
   }
-  function MDToggleButton$MDToggleButton$rule$lambda$lambda_0($receiver) {
+  function MDToggleButton$Companion$rule$lambda$lambda$lambda_0($receiver) {
     $receiver._boxShadow = 'none';
     $receiver._border = 'none';
     $receiver._backgroundColor = RgbColor.Factory.TRANSPARENT.toString();
+    return Unit;
   }
-  function MDToggleButton$MDToggleButton$rule$lambda($receiver) {
+  function MDToggleButton$Companion$rule$lambda$lambda($receiver) {
     $receiver._height = '36px';
     $receiver._boxShadow = 'none';
     $receiver._border = 'none';
     $receiver._backgroundColor = RgbColor.Factory.TRANSPARENT.toString();
-    and_0($receiver, '.selected', MDToggleButton$MDToggleButton$rule$lambda$lambda);
-    and_0($receiver, '.focused', MDToggleButton$MDToggleButton$rule$lambda$lambda_0);
+    and_1($receiver, '.selected', MDToggleButton$Companion$rule$lambda$lambda$lambda);
+    and_1($receiver, '.focused', MDToggleButton$Companion$rule$lambda$lambda$lambda_0);
+    return Unit;
   }
-  MDToggleButton$MDToggleButton.$metadata$ = {
+  function MDToggleButton$Companion$rule$lambda($receiver) {
+    and_0($receiver, ToggleButton.Companion, MDToggleButton$Companion$rule$lambda$lambda);
+    return Unit;
+  }
+  MDToggleButton$Companion.$metadata$ = {
     kind: Kotlin.Kind.OBJECT,
-    simpleName: 'MDToggleButton',
+    simpleName: 'Companion',
     interfaces: [StyledClass]
   };
-  var MDToggleButton$MDToggleButton_instance = null;
-  function MDToggleButton$MDToggleButton_getInstance() {
-    if (MDToggleButton$MDToggleButton_instance === null) {
-      new MDToggleButton$MDToggleButton();
+  var MDToggleButton$Companion_instance = null;
+  function MDToggleButton$Companion_getInstance() {
+    if (MDToggleButton$Companion_instance === null) {
+      new MDToggleButton$Companion();
     }
-    return MDToggleButton$MDToggleButton_instance;
+    return MDToggleButton$Companion_instance;
   }
   MDToggleButton.$metadata$ = {
     kind: Kotlin.Kind.CLASS,
@@ -1100,7 +1240,7 @@ this['material-design'] = function (_, Kotlin, $module$elements, $module$beans) 
   function MDCard() {
     MDCard$MDCard_getInstance();
     Div.call(this);
-    this.themeChangedHandler_esihj5$_0 = MDCard$themeChangedHandler$lambda(this);
+    this.themeChangedHandler_rs1r1q$_0 = MDCard$themeChangedHandler$lambda(this);
   }
   MDCard.prototype.render = function () {
     Div.prototype.render.call(this);
@@ -1109,22 +1249,22 @@ this['material-design'] = function (_, Kotlin, $module$elements, $module$beans) 
   };
   MDCard.prototype.didMount = function () {
     Div.prototype.didMount.call(this);
-    Context_getInstance().theme.onPropertyChanged_bdxxi9$(this.themeChangedHandler_esihj5$_0);
+    Context_getInstance().theme.onPropertyChanged_bdxxi9$(this.themeChangedHandler_rs1r1q$_0);
   };
   function MDCard$MDCard() {
     MDCard$MDCard_instance = this;
-    this.classSelector_8qtykg$_0 = toClassSelector('md-card');
-    this.rule_8qtykg$_0 = MDCard$MDCard$rule$lambda;
+    this.classSelector_mq4ko9$_0 = toClassSelector('md-card');
+    this.rule_36wryi$_0 = MDCard$MDCard$rule$lambda;
     elements.HTML.registerStyle_78phyd$(this);
   }
   Object.defineProperty(MDCard$MDCard.prototype, 'classSelector', {
     get: function () {
-      return this.classSelector_8qtykg$_0;
+      return this.classSelector_mq4ko9$_0;
     }
   });
   Object.defineProperty(MDCard$MDCard.prototype, 'rule', {
     get: function () {
-      return this.rule_8qtykg$_0;
+      return this.rule_36wryi$_0;
     }
   });
   function MDCard$MDCard$rule$lambda($receiver) {
@@ -1134,6 +1274,7 @@ this['material-design'] = function (_, Kotlin, $module$elements, $module$beans) 
     $receiver._boxShadow = '0 2px 5px 0 rgba(0, 0, 0, 0.26)';
     $receiver._fontFamily = "Roboto, 'Helvetica Neue', sans-serif";
     $receiver._backgroundSize = 'cover';
+    return Unit;
   }
   MDCard$MDCard.$metadata$ = {
     kind: Kotlin.Kind.OBJECT,
@@ -1155,6 +1296,7 @@ this['material-design'] = function (_, Kotlin, $module$elements, $module$beans) 
         $receiver.cardsNdialogs = value;
       }).callableName))
         this$MDCard.style.backgroundColor = Context_getInstance().theme.background;
+      return Unit;
     };
   }
   MDCard.$metadata$ = {
@@ -1172,22 +1314,23 @@ this['material-design'] = function (_, Kotlin, $module$elements, $module$beans) 
   };
   function MDCardActions$MDCardActions() {
     MDCardActions$MDCardActions_instance = this;
-    this.classSelector_7v4640$_0 = toClassSelector('md-card-actions');
-    this.rule_7v4640$_0 = MDCardActions$MDCardActions$rule$lambda;
+    this.classSelector_ylwh47$_0 = toClassSelector('md-card-actions');
+    this.rule_r3hn3u$_0 = MDCardActions$MDCardActions$rule$lambda;
     elements.HTML.registerStyle_78phyd$(this);
   }
   Object.defineProperty(MDCardActions$MDCardActions.prototype, 'classSelector', {
     get: function () {
-      return this.classSelector_7v4640$_0;
+      return this.classSelector_ylwh47$_0;
     }
   });
   Object.defineProperty(MDCardActions$MDCardActions.prototype, 'rule', {
     get: function () {
-      return this.rule_7v4640$_0;
+      return this.rule_r3hn3u$_0;
     }
   });
   function MDCardActions$MDCardActions$rule$lambda($receiver) {
     $receiver._padding = '8px';
+    return Unit;
   }
   MDCardActions$MDCardActions.$metadata$ = {
     kind: Kotlin.Kind.OBJECT,
@@ -1216,24 +1359,25 @@ this['material-design'] = function (_, Kotlin, $module$elements, $module$beans) 
   };
   function MDCardAvatar$MDCardAvatar() {
     MDCardAvatar$MDCardAvatar_instance = this;
-    this.classSelector_jjnc68$_0 = toClassSelector('md-card-avatar');
-    this.rule_jjnc68$_0 = MDCardAvatar$MDCardAvatar$rule$lambda;
+    this.classSelector_9fxseh$_0 = toClassSelector('md-card-avatar');
+    this.rule_ypj4yy$_0 = MDCardAvatar$MDCardAvatar$rule$lambda;
     elements.HTML.registerStyle_78phyd$(this);
   }
   Object.defineProperty(MDCardAvatar$MDCardAvatar.prototype, 'classSelector', {
     get: function () {
-      return this.classSelector_jjnc68$_0;
+      return this.classSelector_9fxseh$_0;
     }
   });
   Object.defineProperty(MDCardAvatar$MDCardAvatar.prototype, 'rule', {
     get: function () {
-      return this.rule_jjnc68$_0;
+      return this.rule_ypj4yy$_0;
     }
   });
   function MDCardAvatar$MDCardAvatar$rule$lambda($receiver) {
     $receiver._width = '40px';
     $receiver._height = '40px';
     $receiver._borderRadius = '50%';
+    return Unit;
   }
   MDCardAvatar$MDCardAvatar.$metadata$ = {
     kind: Kotlin.Kind.OBJECT,
@@ -1262,30 +1406,33 @@ this['material-design'] = function (_, Kotlin, $module$elements, $module$beans) 
   };
   function MDCardContent$Statics() {
     MDCardContent$Statics_instance = this;
-    this.classSelector_6a5kp1$_0 = toClassSelector('md-card-content');
-    this.rule_6a5kp1$_0 = MDCardContent$Statics$rule$lambda;
+    this.classSelector_42nwt8$_0 = toClassSelector('md-card-content');
+    this.rule_ffbv6j$_0 = MDCardContent$Statics$rule$lambda;
     elements.HTML.registerStyle_78phyd$(this);
   }
   Object.defineProperty(MDCardContent$Statics.prototype, 'classSelector', {
     get: function () {
-      return this.classSelector_6a5kp1$_0;
+      return this.classSelector_42nwt8$_0;
     }
   });
   Object.defineProperty(MDCardContent$Statics.prototype, 'rule', {
     get: function () {
-      return this.rule_6a5kp1$_0;
+      return this.rule_ffbv6j$_0;
     }
   });
   function MDCardContent$Statics$rule$lambda$lambda$lambda($receiver) {
     $receiver._marginTop = '0';
+    return Unit;
   }
   function MDCardContent$Statics$rule$lambda$lambda($receiver) {
     firstChild($receiver, MDCardContent$Statics$rule$lambda$lambda$lambda);
+    return Unit;
   }
   function MDCardContent$Statics$rule$lambda($receiver) {
     $receiver._fontSize = '14px';
     $receiver._padding = '16px';
     child($receiver, Selector.Statics.ANY, MDCardContent$Statics$rule$lambda$lambda);
+    return Unit;
   }
   MDCardContent$Statics.$metadata$ = {
     kind: Kotlin.Kind.OBJECT,
@@ -1314,30 +1461,34 @@ this['material-design'] = function (_, Kotlin, $module$elements, $module$beans) 
   };
   function MDCardHeader$MDCardHeader() {
     MDCardHeader$MDCardHeader_instance = this;
-    this.classSelector_giknxc$_0 = toClassSelector('md-card-header');
-    this.rule_giknxc$_0 = MDCardHeader$MDCardHeader$rule$lambda;
+    this.classSelector_cl6bnt$_0 = toClassSelector('md-card-header');
+    this.rule_bkz6ae$_0 = MDCardHeader$MDCardHeader$rule$lambda;
     elements.HTML.registerStyle_78phyd$(this);
   }
   Object.defineProperty(MDCardHeader$MDCardHeader.prototype, 'classSelector', {
     get: function () {
-      return this.classSelector_giknxc$_0;
+      return this.classSelector_cl6bnt$_0;
     }
   });
   Object.defineProperty(MDCardHeader$MDCardHeader.prototype, 'rule', {
     get: function () {
-      return this.rule_giknxc$_0;
+      return this.rule_bkz6ae$_0;
     }
   });
   function MDCardHeader$MDCardHeader$rule$lambda$lambda($receiver) {
     $receiver._fontSize = '14px';
+    return Unit;
   }
   function MDCardHeader$MDCardHeader$rule$lambda$lambda_0($receiver) {
     $receiver._marginRight = '12px';
+    return Unit;
   }
   function MDCardHeader$MDCardHeader$rule$lambda$lambda$lambda($receiver) {
+    return Unit;
   }
   function MDCardHeader$MDCardHeader$rule$lambda$lambda_1($receiver) {
     not($receiver, toSelector(':first-child'), MDCardHeader$MDCardHeader$rule$lambda$lambda$lambda);
+    return Unit;
   }
   function MDCardHeader$MDCardHeader$rule$lambda($receiver) {
     $receiver._display = 'flex';
@@ -1346,6 +1497,7 @@ this['material-design'] = function (_, Kotlin, $module$elements, $module$beans) 
     child($receiver, MDCardTitle$MDCardTitle_getInstance().classSelector, MDCardHeader$MDCardHeader$rule$lambda$lambda);
     child($receiver, MDCardAvatar$MDCardAvatar_getInstance().classSelector, MDCardHeader$MDCardHeader$rule$lambda$lambda_0);
     child($receiver, MDCardSubtitle$MDCardSubtitle_getInstance().classSelector, MDCardHeader$MDCardHeader$rule$lambda$lambda_1);
+    return Unit;
   }
   MDCardHeader$MDCardHeader.$metadata$ = {
     kind: Kotlin.Kind.OBJECT,
@@ -1374,33 +1526,36 @@ this['material-design'] = function (_, Kotlin, $module$elements, $module$beans) 
   };
   function MDCardHeaderText$MDCardHeaderText() {
     MDCardHeaderText$MDCardHeaderText_instance = this;
-    this.classSelector_x6lcxs$_0 = toClassSelector('md-card-header-text');
-    this.rule_x6lcxs$_0 = MDCardHeaderText$MDCardHeaderText$rule$lambda;
+    this.classSelector_38a3hl$_0 = toClassSelector('md-card-header-text');
+    this.rule_3zz5yu$_0 = MDCardHeaderText$MDCardHeaderText$rule$lambda;
     elements.HTML.registerStyle_78phyd$(this);
   }
   Object.defineProperty(MDCardHeaderText$MDCardHeaderText.prototype, 'classSelector', {
     get: function () {
-      return this.classSelector_x6lcxs$_0;
+      return this.classSelector_38a3hl$_0;
     }
   });
   Object.defineProperty(MDCardHeaderText$MDCardHeaderText.prototype, 'rule', {
     get: function () {
-      return this.rule_x6lcxs$_0;
+      return this.rule_3zz5yu$_0;
     }
   });
   function MDCardHeaderText$MDCardHeaderText$rule$lambda$lambda($receiver) {
     $receiver._padding = '0';
     $receiver._fontSize = '14px';
     $receiver._fontWeight = '500';
+    return Unit;
   }
   function MDCardHeaderText$MDCardHeaderText$rule$lambda$lambda_0($receiver) {
     $receiver._flex = '1';
+    return Unit;
   }
   function MDCardHeaderText$MDCardHeaderText$rule$lambda($receiver) {
     $receiver._display = 'flex';
     $receiver._flexDirection = 'column';
     child($receiver, MDCardTitle$MDCardTitle_getInstance().classSelector, MDCardHeaderText$MDCardHeaderText$rule$lambda$lambda);
     child($receiver, Selector.Statics.ANY, MDCardHeaderText$MDCardHeaderText$rule$lambda$lambda_0);
+    return Unit;
   }
   MDCardHeaderText$MDCardHeaderText.$metadata$ = {
     kind: Kotlin.Kind.OBJECT,
@@ -1429,23 +1584,24 @@ this['material-design'] = function (_, Kotlin, $module$elements, $module$beans) 
   };
   function MDCardImage$MDCardImage() {
     MDCardImage$MDCardImage_instance = this;
-    this.classSelector_3xxefo$_0 = toClassSelector('md-card-image');
-    this.rule_3xxefo$_0 = MDCardImage$MDCardImage$rule$lambda;
+    this.classSelector_cludcl$_0 = toClassSelector('md-card-image');
+    this.rule_fppxm$_0 = MDCardImage$MDCardImage$rule$lambda;
     elements.HTML.registerStyle_78phyd$(this);
   }
   Object.defineProperty(MDCardImage$MDCardImage.prototype, 'classSelector', {
     get: function () {
-      return this.classSelector_3xxefo$_0;
+      return this.classSelector_cludcl$_0;
     }
   });
   Object.defineProperty(MDCardImage$MDCardImage.prototype, 'rule', {
     get: function () {
-      return this.rule_3xxefo$_0;
+      return this.rule_fppxm$_0;
     }
   });
   function MDCardImage$MDCardImage$rule$lambda($receiver) {
     $receiver._height = '100%';
     $receiver._width = '100%';
+    return Unit;
   }
   MDCardImage$MDCardImage.$metadata$ = {
     kind: Kotlin.Kind.OBJECT,
@@ -1474,24 +1630,25 @@ this['material-design'] = function (_, Kotlin, $module$elements, $module$beans) 
   };
   function MDCardSubtitle$MDCardSubtitle() {
     MDCardSubtitle$MDCardSubtitle_instance = this;
-    this.classSelector_zal96o$_0 = toClassSelector('md-card-subtitle');
-    this.rule_zal96o$_0 = MDCardSubtitle$MDCardSubtitle$rule$lambda;
+    this.classSelector_vjue6v$_0 = toClassSelector('md-card-subtitle');
+    this.rule_a23gqy$_0 = MDCardSubtitle$MDCardSubtitle$rule$lambda;
     elements.HTML.registerStyle_78phyd$(this);
   }
   Object.defineProperty(MDCardSubtitle$MDCardSubtitle.prototype, 'classSelector', {
     get: function () {
-      return this.classSelector_zal96o$_0;
+      return this.classSelector_vjue6v$_0;
     }
   });
   Object.defineProperty(MDCardSubtitle$MDCardSubtitle.prototype, 'rule', {
     get: function () {
-      return this.rule_zal96o$_0;
+      return this.rule_a23gqy$_0;
     }
   });
   function MDCardSubtitle$MDCardSubtitle$rule$lambda($receiver) {
     $receiver._fontSize = '14px';
     $receiver._fontWeight = '400';
     $receiver._color = MDGrayPalette_getInstance().p600.toHtml();
+    return Unit;
   }
   MDCardSubtitle$MDCardSubtitle.$metadata$ = {
     kind: Kotlin.Kind.OBJECT,
@@ -1520,18 +1677,18 @@ this['material-design'] = function (_, Kotlin, $module$elements, $module$beans) 
   };
   function MDCardTitle$MDCardTitle() {
     MDCardTitle$MDCardTitle_instance = this;
-    this.classSelector_dg9fja$_0 = toClassSelector('md-card-title');
-    this.rule_dg9fja$_0 = MDCardTitle$MDCardTitle$rule$lambda;
+    this.classSelector_7ptcmp$_0 = toClassSelector('md-card-title');
+    this.rule_auxu28$_0 = MDCardTitle$MDCardTitle$rule$lambda;
     elements.HTML.registerStyle_78phyd$(this);
   }
   Object.defineProperty(MDCardTitle$MDCardTitle.prototype, 'classSelector', {
     get: function () {
-      return this.classSelector_dg9fja$_0;
+      return this.classSelector_7ptcmp$_0;
     }
   });
   Object.defineProperty(MDCardTitle$MDCardTitle.prototype, 'rule', {
     get: function () {
-      return this.rule_dg9fja$_0;
+      return this.rule_auxu28$_0;
     }
   });
   function MDCardTitle$MDCardTitle$rule$lambda($receiver) {
@@ -1541,6 +1698,7 @@ this['material-design'] = function (_, Kotlin, $module$elements, $module$beans) 
     $receiver._paddingBottom = '16px';
     $receiver._paddingLeft = '16px';
     $receiver._paddingRight = '16px';
+    return Unit;
   }
   MDCardTitle$MDCardTitle.$metadata$ = {
     kind: Kotlin.Kind.OBJECT,
@@ -1569,32 +1727,36 @@ this['material-design'] = function (_, Kotlin, $module$elements, $module$beans) 
   };
   function MDCardTitleText$MDCardHeaderText() {
     MDCardTitleText$MDCardHeaderText_instance = this;
-    this.classSelector_7iw2a3$_0 = toClassSelector('md-card-title-text');
-    this.rule_7iw2a3$_0 = MDCardTitleText$MDCardHeaderText$rule$lambda;
+    this.classSelector_jj3h3g$_0 = toClassSelector('md-card-title-text');
+    this.rule_9552b9$_0 = MDCardTitleText$MDCardHeaderText$rule$lambda;
     elements.HTML.registerStyle_78phyd$(this);
   }
   Object.defineProperty(MDCardTitleText$MDCardHeaderText.prototype, 'classSelector', {
     get: function () {
-      return this.classSelector_7iw2a3$_0;
+      return this.classSelector_jj3h3g$_0;
     }
   });
   Object.defineProperty(MDCardTitleText$MDCardHeaderText.prototype, 'rule', {
     get: function () {
-      return this.rule_7iw2a3$_0;
+      return this.rule_9552b9$_0;
     }
   });
   function MDCardTitleText$MDCardHeaderText$rule$lambda$lambda$lambda($receiver) {
     $receiver._paddingTop = '12px';
+    return Unit;
   }
   function MDCardTitleText$MDCardHeaderText$rule$lambda$lambda($receiver) {
     $receiver._padding = '0';
     not($receiver, toSelector(':first-child'), MDCardTitleText$MDCardHeaderText$rule$lambda$lambda$lambda);
+    return Unit;
   }
   function MDCardTitleText$MDCardHeaderText$rule$lambda$lambda$lambda_0($receiver) {
     $receiver._paddingTop = '12px';
+    return Unit;
   }
   function MDCardTitleText$MDCardHeaderText$rule$lambda$lambda_0($receiver) {
     not($receiver, toSelector(':first-child'), MDCardTitleText$MDCardHeaderText$rule$lambda$lambda$lambda_0);
+    return Unit;
   }
   function MDCardTitleText$MDCardHeaderText$rule$lambda($receiver) {
     $receiver._paddingTop = '24px';
@@ -1603,6 +1765,7 @@ this['material-design'] = function (_, Kotlin, $module$elements, $module$beans) 
     $receiver._paddingBottom = '16px';
     child($receiver, MDCardTitle$MDCardTitle_getInstance().classSelector, MDCardTitleText$MDCardHeaderText$rule$lambda$lambda);
     child($receiver, MDCardSubtitle$MDCardSubtitle_getInstance().classSelector, MDCardTitleText$MDCardHeaderText$rule$lambda$lambda_0);
+    return Unit;
   }
   MDCardTitleText$MDCardHeaderText.$metadata$ = {
     kind: Kotlin.Kind.OBJECT,
@@ -1679,65 +1842,65 @@ this['material-design'] = function (_, Kotlin, $module$elements, $module$beans) 
   MDColor.valueOf_61zpoe$ = MDColor$valueOf;
   function MDGrayPalette() {
     MDGrayPalette_instance = this;
-    this.p50_c1sckx$_0 = RgbColor.Factory.from_61zpoe$('#FAFAFA');
-    this.p100_c1sckx$_0 = RgbColor.Factory.from_61zpoe$('#F5F5F5');
-    this.p200_c1sckx$_0 = RgbColor.Factory.from_61zpoe$('#EEEEEE');
-    this.p300_c1sckx$_0 = RgbColor.Factory.from_61zpoe$('#E0E0E0');
-    this.p400_c1sckx$_0 = RgbColor.Factory.from_61zpoe$('#BDBDBD');
-    this.p500_c1sckx$_0 = RgbColor.Factory.from_61zpoe$('#9E9E9E');
-    this.p600_c1sckx$_0 = RgbColor.Factory.from_61zpoe$('#757575');
-    this.p700_c1sckx$_0 = RgbColor.Factory.from_61zpoe$('#616161');
-    this.p800_c1sckx$_0 = RgbColor.Factory.from_61zpoe$('#424242');
-    this.p900_c1sckx$_0 = RgbColor.Factory.from_61zpoe$('#212121');
+    this.p50_l4fozw$_0 = RgbColor.Factory.from_61zpoe$('#FAFAFA');
+    this.p100_fjkl9o$_0 = RgbColor.Factory.from_61zpoe$('#F5F5F5');
+    this.p200_fjjya5$_0 = RgbColor.Factory.from_61zpoe$('#EEEEEE');
+    this.p300_fjjbam$_0 = RgbColor.Factory.from_61zpoe$('#E0E0E0');
+    this.p400_fjiob3$_0 = RgbColor.Factory.from_61zpoe$('#BDBDBD');
+    this.p500_fji1bk$_0 = RgbColor.Factory.from_61zpoe$('#9E9E9E');
+    this.p600_fjhec1$_0 = RgbColor.Factory.from_61zpoe$('#757575');
+    this.p700_fjgrci$_0 = RgbColor.Factory.from_61zpoe$('#616161');
+    this.p800_fjg4cz$_0 = RgbColor.Factory.from_61zpoe$('#424242');
+    this.p900_fjfhdg$_0 = RgbColor.Factory.from_61zpoe$('#212121');
   }
   Object.defineProperty(MDGrayPalette.prototype, 'p50', {
     get: function () {
-      return this.p50_c1sckx$_0;
+      return this.p50_l4fozw$_0;
     }
   });
   Object.defineProperty(MDGrayPalette.prototype, 'p100', {
     get: function () {
-      return this.p100_c1sckx$_0;
+      return this.p100_fjkl9o$_0;
     }
   });
   Object.defineProperty(MDGrayPalette.prototype, 'p200', {
     get: function () {
-      return this.p200_c1sckx$_0;
+      return this.p200_fjjya5$_0;
     }
   });
   Object.defineProperty(MDGrayPalette.prototype, 'p300', {
     get: function () {
-      return this.p300_c1sckx$_0;
+      return this.p300_fjjbam$_0;
     }
   });
   Object.defineProperty(MDGrayPalette.prototype, 'p400', {
     get: function () {
-      return this.p400_c1sckx$_0;
+      return this.p400_fjiob3$_0;
     }
   });
   Object.defineProperty(MDGrayPalette.prototype, 'p500', {
     get: function () {
-      return this.p500_c1sckx$_0;
+      return this.p500_fji1bk$_0;
     }
   });
   Object.defineProperty(MDGrayPalette.prototype, 'p600', {
     get: function () {
-      return this.p600_c1sckx$_0;
+      return this.p600_fjhec1$_0;
     }
   });
   Object.defineProperty(MDGrayPalette.prototype, 'p700', {
     get: function () {
-      return this.p700_c1sckx$_0;
+      return this.p700_fjgrci$_0;
     }
   });
   Object.defineProperty(MDGrayPalette.prototype, 'p800', {
     get: function () {
-      return this.p800_c1sckx$_0;
+      return this.p800_fjg4cz$_0;
     }
   });
   Object.defineProperty(MDGrayPalette.prototype, 'p900', {
     get: function () {
-      return this.p900_c1sckx$_0;
+      return this.p900_fjfhdg$_0;
     }
   });
   MDGrayPalette.$metadata$ = {
@@ -1754,89 +1917,89 @@ this['material-design'] = function (_, Kotlin, $module$elements, $module$beans) 
   }
   function MDGreenPalette() {
     MDGreenPalette_instance = this;
-    this.p50_hxdkvh$_0 = RgbColor.Factory.from_61zpoe$('#E8F5E9');
-    this.p100_hxdkvh$_0 = RgbColor.Factory.from_61zpoe$('#C8E6C9');
-    this.p200_hxdkvh$_0 = RgbColor.Factory.from_61zpoe$('#A5D6A7');
-    this.p300_hxdkvh$_0 = RgbColor.Factory.from_61zpoe$('#81C784');
-    this.p400_hxdkvh$_0 = RgbColor.Factory.from_61zpoe$('#66BB6A');
-    this.p500_hxdkvh$_0 = RgbColor.Factory.from_61zpoe$('#4CAF50');
-    this.p600_hxdkvh$_0 = RgbColor.Factory.from_61zpoe$('#43A047');
-    this.p700_hxdkvh$_0 = RgbColor.Factory.from_61zpoe$('#388E3C');
-    this.p800_hxdkvh$_0 = RgbColor.Factory.from_61zpoe$('#2E7D32');
-    this.p900_hxdkvh$_0 = RgbColor.Factory.from_61zpoe$('#1B5E20');
-    this.a100_hxdkvh$_0 = RgbColor.Factory.from_61zpoe$('#B9F6CA');
-    this.a200_hxdkvh$_0 = RgbColor.Factory.from_61zpoe$('#69F0AE');
-    this.a400_hxdkvh$_0 = RgbColor.Factory.from_61zpoe$('#00E676');
-    this.a700_hxdkvh$_0 = RgbColor.Factory.from_61zpoe$('#00C853');
+    this.p50_1u96hi$_0 = RgbColor.Factory.from_61zpoe$('#E8F5E9');
+    this.p100_dza11q$_0 = RgbColor.Factory.from_61zpoe$('#C8E6C9');
+    this.p200_dz9e27$_0 = RgbColor.Factory.from_61zpoe$('#A5D6A7');
+    this.p300_dz8r2o$_0 = RgbColor.Factory.from_61zpoe$('#81C784');
+    this.p400_dz8435$_0 = RgbColor.Factory.from_61zpoe$('#66BB6A');
+    this.p500_dz7h3m$_0 = RgbColor.Factory.from_61zpoe$('#4CAF50');
+    this.p600_dz6u43$_0 = RgbColor.Factory.from_61zpoe$('#43A047');
+    this.p700_dz674k$_0 = RgbColor.Factory.from_61zpoe$('#388E3C');
+    this.p800_dz5k51$_0 = RgbColor.Factory.from_61zpoe$('#2E7D32');
+    this.p900_dz4x5i$_0 = RgbColor.Factory.from_61zpoe$('#1B5E20');
+    this.a100_e7ixy5$_0 = RgbColor.Factory.from_61zpoe$('#B9F6CA');
+    this.a200_e7iaym$_0 = RgbColor.Factory.from_61zpoe$('#69F0AE');
+    this.a400_e7h0zk$_0 = RgbColor.Factory.from_61zpoe$('#00E676');
+    this.a700_e7f40z$_0 = RgbColor.Factory.from_61zpoe$('#00C853');
   }
   Object.defineProperty(MDGreenPalette.prototype, 'p50', {
     get: function () {
-      return this.p50_hxdkvh$_0;
+      return this.p50_1u96hi$_0;
     }
   });
   Object.defineProperty(MDGreenPalette.prototype, 'p100', {
     get: function () {
-      return this.p100_hxdkvh$_0;
+      return this.p100_dza11q$_0;
     }
   });
   Object.defineProperty(MDGreenPalette.prototype, 'p200', {
     get: function () {
-      return this.p200_hxdkvh$_0;
+      return this.p200_dz9e27$_0;
     }
   });
   Object.defineProperty(MDGreenPalette.prototype, 'p300', {
     get: function () {
-      return this.p300_hxdkvh$_0;
+      return this.p300_dz8r2o$_0;
     }
   });
   Object.defineProperty(MDGreenPalette.prototype, 'p400', {
     get: function () {
-      return this.p400_hxdkvh$_0;
+      return this.p400_dz8435$_0;
     }
   });
   Object.defineProperty(MDGreenPalette.prototype, 'p500', {
     get: function () {
-      return this.p500_hxdkvh$_0;
+      return this.p500_dz7h3m$_0;
     }
   });
   Object.defineProperty(MDGreenPalette.prototype, 'p600', {
     get: function () {
-      return this.p600_hxdkvh$_0;
+      return this.p600_dz6u43$_0;
     }
   });
   Object.defineProperty(MDGreenPalette.prototype, 'p700', {
     get: function () {
-      return this.p700_hxdkvh$_0;
+      return this.p700_dz674k$_0;
     }
   });
   Object.defineProperty(MDGreenPalette.prototype, 'p800', {
     get: function () {
-      return this.p800_hxdkvh$_0;
+      return this.p800_dz5k51$_0;
     }
   });
   Object.defineProperty(MDGreenPalette.prototype, 'p900', {
     get: function () {
-      return this.p900_hxdkvh$_0;
+      return this.p900_dz4x5i$_0;
     }
   });
   Object.defineProperty(MDGreenPalette.prototype, 'a100', {
     get: function () {
-      return this.a100_hxdkvh$_0;
+      return this.a100_e7ixy5$_0;
     }
   });
   Object.defineProperty(MDGreenPalette.prototype, 'a200', {
     get: function () {
-      return this.a200_hxdkvh$_0;
+      return this.a200_e7iaym$_0;
     }
   });
   Object.defineProperty(MDGreenPalette.prototype, 'a400', {
     get: function () {
-      return this.a400_hxdkvh$_0;
+      return this.a400_e7h0zk$_0;
     }
   });
   Object.defineProperty(MDGreenPalette.prototype, 'a700', {
     get: function () {
-      return this.a700_hxdkvh$_0;
+      return this.a700_e7f40z$_0;
     }
   });
   MDGreenPalette.$metadata$ = {
@@ -1867,89 +2030,89 @@ this['material-design'] = function (_, Kotlin, $module$elements, $module$beans) 
   };
   function MDPurplePalette() {
     MDPurplePalette_instance = this;
-    this.p50_cbtzg6$_0 = RgbColor.Factory.from_61zpoe$('#F3E5F5');
-    this.p100_cbtzg6$_0 = RgbColor.Factory.from_61zpoe$('#E1BEE7');
-    this.p200_cbtzg6$_0 = RgbColor.Factory.from_61zpoe$('#CE93D8');
-    this.p300_cbtzg6$_0 = RgbColor.Factory.from_61zpoe$('#BA68C8');
-    this.p400_cbtzg6$_0 = RgbColor.Factory.from_61zpoe$('#AB47BC');
-    this.p500_cbtzg6$_0 = RgbColor.Factory.from_61zpoe$('#9C27B0');
-    this.p600_cbtzg6$_0 = RgbColor.Factory.from_61zpoe$('#8E24AA');
-    this.p700_cbtzg6$_0 = RgbColor.Factory.from_61zpoe$('#7B1FA2');
-    this.p800_cbtzg6$_0 = RgbColor.Factory.from_61zpoe$('#6A1B9A');
-    this.p900_cbtzg6$_0 = RgbColor.Factory.from_61zpoe$('#4A148C');
-    this.a100_cbtzg6$_0 = RgbColor.Factory.from_61zpoe$('#EA80FC');
-    this.a200_cbtzg6$_0 = RgbColor.Factory.from_61zpoe$('#E040FB');
-    this.a400_cbtzg6$_0 = RgbColor.Factory.from_61zpoe$('#D500F9');
-    this.a700_cbtzg6$_0 = RgbColor.Factory.from_61zpoe$('#AA00FF');
+    this.p50_m4xhot$_0 = RgbColor.Factory.from_61zpoe$('#F3E5F5');
+    this.p100_o2cvj9$_0 = RgbColor.Factory.from_61zpoe$('#E1BEE7');
+    this.p200_o2c8jq$_0 = RgbColor.Factory.from_61zpoe$('#CE93D8');
+    this.p300_o2blk7$_0 = RgbColor.Factory.from_61zpoe$('#BA68C8');
+    this.p400_o2ayko$_0 = RgbColor.Factory.from_61zpoe$('#AB47BC');
+    this.p500_o2abl5$_0 = RgbColor.Factory.from_61zpoe$('#9C27B0');
+    this.p600_o29olm$_0 = RgbColor.Factory.from_61zpoe$('#8E24AA');
+    this.p700_o291m3$_0 = RgbColor.Factory.from_61zpoe$('#7B1FA2');
+    this.p800_o28emk$_0 = RgbColor.Factory.from_61zpoe$('#6A1B9A');
+    this.p900_o27rn1$_0 = RgbColor.Factory.from_61zpoe$('#4A148C');
+    this.a100_oalsfo$_0 = RgbColor.Factory.from_61zpoe$('#EA80FC');
+    this.a200_oal5g5$_0 = RgbColor.Factory.from_61zpoe$('#E040FB');
+    this.a400_oajvh3$_0 = RgbColor.Factory.from_61zpoe$('#D500F9');
+    this.a700_oahyii$_0 = RgbColor.Factory.from_61zpoe$('#AA00FF');
   }
   Object.defineProperty(MDPurplePalette.prototype, 'p50', {
     get: function () {
-      return this.p50_cbtzg6$_0;
+      return this.p50_m4xhot$_0;
     }
   });
   Object.defineProperty(MDPurplePalette.prototype, 'p100', {
     get: function () {
-      return this.p100_cbtzg6$_0;
+      return this.p100_o2cvj9$_0;
     }
   });
   Object.defineProperty(MDPurplePalette.prototype, 'p200', {
     get: function () {
-      return this.p200_cbtzg6$_0;
+      return this.p200_o2c8jq$_0;
     }
   });
   Object.defineProperty(MDPurplePalette.prototype, 'p300', {
     get: function () {
-      return this.p300_cbtzg6$_0;
+      return this.p300_o2blk7$_0;
     }
   });
   Object.defineProperty(MDPurplePalette.prototype, 'p400', {
     get: function () {
-      return this.p400_cbtzg6$_0;
+      return this.p400_o2ayko$_0;
     }
   });
   Object.defineProperty(MDPurplePalette.prototype, 'p500', {
     get: function () {
-      return this.p500_cbtzg6$_0;
+      return this.p500_o2abl5$_0;
     }
   });
   Object.defineProperty(MDPurplePalette.prototype, 'p600', {
     get: function () {
-      return this.p600_cbtzg6$_0;
+      return this.p600_o29olm$_0;
     }
   });
   Object.defineProperty(MDPurplePalette.prototype, 'p700', {
     get: function () {
-      return this.p700_cbtzg6$_0;
+      return this.p700_o291m3$_0;
     }
   });
   Object.defineProperty(MDPurplePalette.prototype, 'p800', {
     get: function () {
-      return this.p800_cbtzg6$_0;
+      return this.p800_o28emk$_0;
     }
   });
   Object.defineProperty(MDPurplePalette.prototype, 'p900', {
     get: function () {
-      return this.p900_cbtzg6$_0;
+      return this.p900_o27rn1$_0;
     }
   });
   Object.defineProperty(MDPurplePalette.prototype, 'a100', {
     get: function () {
-      return this.a100_cbtzg6$_0;
+      return this.a100_oalsfo$_0;
     }
   });
   Object.defineProperty(MDPurplePalette.prototype, 'a200', {
     get: function () {
-      return this.a200_cbtzg6$_0;
+      return this.a200_oal5g5$_0;
     }
   });
   Object.defineProperty(MDPurplePalette.prototype, 'a400', {
     get: function () {
-      return this.a400_cbtzg6$_0;
+      return this.a400_oajvh3$_0;
     }
   });
   Object.defineProperty(MDPurplePalette.prototype, 'a700', {
     get: function () {
-      return this.a700_cbtzg6$_0;
+      return this.a700_oahyii$_0;
     }
   });
   MDPurplePalette.$metadata$ = {
@@ -1966,89 +2129,89 @@ this['material-design'] = function (_, Kotlin, $module$elements, $module$beans) 
   }
   function MDRedPalette() {
     MDRedPalette_instance = this;
-    this.p50_1vbi8v$_0 = RgbColor.Factory.from_61zpoe$('#FFEBEE');
-    this.p100_1vbi8v$_0 = RgbColor.Factory.from_61zpoe$('#FFCDD2');
-    this.p200_1vbi8v$_0 = RgbColor.Factory.from_61zpoe$('#EF9A9A');
-    this.p300_1vbi8v$_0 = RgbColor.Factory.from_61zpoe$('#E57373');
-    this.p400_1vbi8v$_0 = RgbColor.Factory.from_61zpoe$('#EF5350');
-    this.p500_1vbi8v$_0 = RgbColor.Factory.from_61zpoe$('#F44336');
-    this.p600_1vbi8v$_0 = RgbColor.Factory.from_61zpoe$('#E53935');
-    this.p700_1vbi8v$_0 = RgbColor.Factory.from_61zpoe$('#D32F2F');
-    this.p800_1vbi8v$_0 = RgbColor.Factory.from_61zpoe$('#C62828');
-    this.p900_1vbi8v$_0 = RgbColor.Factory.from_61zpoe$('#B71C1C');
-    this.a100_1vbi8v$_0 = RgbColor.Factory.from_61zpoe$('#FF8A80');
-    this.a200_1vbi8v$_0 = RgbColor.Factory.from_61zpoe$('#FF5252');
-    this.a400_1vbi8v$_0 = RgbColor.Factory.from_61zpoe$('#FF1744');
-    this.a700_1vbi8v$_0 = RgbColor.Factory.from_61zpoe$('#D50000');
+    this.p50_l4pp8$_0 = RgbColor.Factory.from_61zpoe$('#FFEBEE');
+    this.p100_i74ov0$_0 = RgbColor.Factory.from_61zpoe$('#FFCDD2');
+    this.p200_i741vh$_0 = RgbColor.Factory.from_61zpoe$('#EF9A9A');
+    this.p300_i73evy$_0 = RgbColor.Factory.from_61zpoe$('#E57373');
+    this.p400_i72rwf$_0 = RgbColor.Factory.from_61zpoe$('#EF5350');
+    this.p500_i724ww$_0 = RgbColor.Factory.from_61zpoe$('#F44336');
+    this.p600_i71hxd$_0 = RgbColor.Factory.from_61zpoe$('#E53935');
+    this.p700_i70uxu$_0 = RgbColor.Factory.from_61zpoe$('#D32F2F');
+    this.p800_i707yb$_0 = RgbColor.Factory.from_61zpoe$('#C62828');
+    this.p900_i6zkys$_0 = RgbColor.Factory.from_61zpoe$('#B71C1C');
+    this.a100_ifdlrf$_0 = RgbColor.Factory.from_61zpoe$('#FF8A80');
+    this.a200_ifcyrw$_0 = RgbColor.Factory.from_61zpoe$('#FF5252');
+    this.a400_ifbosu$_0 = RgbColor.Factory.from_61zpoe$('#FF1744');
+    this.a700_if9ru9$_0 = RgbColor.Factory.from_61zpoe$('#D50000');
   }
   Object.defineProperty(MDRedPalette.prototype, 'p50', {
     get: function () {
-      return this.p50_1vbi8v$_0;
+      return this.p50_l4pp8$_0;
     }
   });
   Object.defineProperty(MDRedPalette.prototype, 'p100', {
     get: function () {
-      return this.p100_1vbi8v$_0;
+      return this.p100_i74ov0$_0;
     }
   });
   Object.defineProperty(MDRedPalette.prototype, 'p200', {
     get: function () {
-      return this.p200_1vbi8v$_0;
+      return this.p200_i741vh$_0;
     }
   });
   Object.defineProperty(MDRedPalette.prototype, 'p300', {
     get: function () {
-      return this.p300_1vbi8v$_0;
+      return this.p300_i73evy$_0;
     }
   });
   Object.defineProperty(MDRedPalette.prototype, 'p400', {
     get: function () {
-      return this.p400_1vbi8v$_0;
+      return this.p400_i72rwf$_0;
     }
   });
   Object.defineProperty(MDRedPalette.prototype, 'p500', {
     get: function () {
-      return this.p500_1vbi8v$_0;
+      return this.p500_i724ww$_0;
     }
   });
   Object.defineProperty(MDRedPalette.prototype, 'p600', {
     get: function () {
-      return this.p600_1vbi8v$_0;
+      return this.p600_i71hxd$_0;
     }
   });
   Object.defineProperty(MDRedPalette.prototype, 'p700', {
     get: function () {
-      return this.p700_1vbi8v$_0;
+      return this.p700_i70uxu$_0;
     }
   });
   Object.defineProperty(MDRedPalette.prototype, 'p800', {
     get: function () {
-      return this.p800_1vbi8v$_0;
+      return this.p800_i707yb$_0;
     }
   });
   Object.defineProperty(MDRedPalette.prototype, 'p900', {
     get: function () {
-      return this.p900_1vbi8v$_0;
+      return this.p900_i6zkys$_0;
     }
   });
   Object.defineProperty(MDRedPalette.prototype, 'a100', {
     get: function () {
-      return this.a100_1vbi8v$_0;
+      return this.a100_ifdlrf$_0;
     }
   });
   Object.defineProperty(MDRedPalette.prototype, 'a200', {
     get: function () {
-      return this.a200_1vbi8v$_0;
+      return this.a200_ifcyrw$_0;
     }
   });
   Object.defineProperty(MDRedPalette.prototype, 'a400', {
     get: function () {
-      return this.a400_1vbi8v$_0;
+      return this.a400_ifbosu$_0;
     }
   });
   Object.defineProperty(MDRedPalette.prototype, 'a700', {
     get: function () {
-      return this.a700_1vbi8v$_0;
+      return this.a700_if9ru9$_0;
     }
   });
   MDRedPalette.$metadata$ = {
@@ -2073,22 +2236,23 @@ this['material-design'] = function (_, Kotlin, $module$elements, $module$beans) 
   };
   function MDDrawer$MDDrawer() {
     MDDrawer$MDDrawer_instance = this;
-    this.classSelector_3lx8pr$_0 = toClassSelector('md-drawer');
-    this.rule_3lx8pr$_0 = MDDrawer$MDDrawer$rule$lambda;
+    this.classSelector_tdsmuu$_0 = toClassSelector('md-drawer');
+    this.rule_6sjlbp$_0 = MDDrawer$MDDrawer$rule$lambda;
     elements.HTML.registerStyle_78phyd$(this);
   }
   Object.defineProperty(MDDrawer$MDDrawer.prototype, 'classSelector', {
     get: function () {
-      return this.classSelector_3lx8pr$_0;
+      return this.classSelector_tdsmuu$_0;
     }
   });
   Object.defineProperty(MDDrawer$MDDrawer.prototype, 'rule', {
     get: function () {
-      return this.rule_3lx8pr$_0;
+      return this.rule_6sjlbp$_0;
     }
   });
   function MDDrawer$MDDrawer$rule$lambda($receiver) {
     $receiver._backgroundColor = 'white';
+    return Unit;
   }
   MDDrawer$MDDrawer.$metadata$ = {
     kind: Kotlin.Kind.OBJECT,
@@ -2107,17 +2271,27 @@ this['material-design'] = function (_, Kotlin, $module$elements, $module$beans) 
     simpleName: 'MDDrawer',
     interfaces: [Drawer]
   };
+  Delegates$observable$ObjectLiteral_10.prototype = Object.create(ObservableProperty.prototype);
+  Delegates$observable$ObjectLiteral_10.prototype.constructor = Delegates$observable$ObjectLiteral_10;
+  function Delegates$observable$ObjectLiteral_10(closure$onChange, initialValue_0) {
+    this.closure$onChange = closure$onChange;
+    ObservableProperty.call(this, initialValue_0);
+  }
+  Delegates$observable$ObjectLiteral_10.prototype.afterChange_jxtfl0$ = function (property, oldValue, newValue) {
+    this.closure$onChange(property, oldValue, newValue);
+  };
+  Delegates$observable$ObjectLiteral_10.$metadata$ = {kind: Kotlin.Kind.CLASS, interfaces: [ObservableProperty]};
   function MDIcon() {
     MDIcon$MDIcon_getInstance();
     I.call(this);
-    this.size$delegate = new Kotlin.kotlin.properties.Delegates.observable_2ulm9r$$f(MDIcon$size$lambda(this), null);
+    this.size_rggzty$_0 = new Delegates$observable$ObjectLiteral_10(MDIcon$size$lambda(this), null);
   }
   Object.defineProperty(MDIcon.prototype, 'size', {
     get: function () {
-      return this.size$delegate.getValue_lrcp0p$(this, new Kotlin.PropertyMetadata('size'));
+      return this.size_rggzty$_0.getValue_lrcp0p$(this, new Kotlin.PropertyMetadata('size'));
     },
     set: function (size) {
-      this.size$delegate.setValue_9rddgb$(this, new Kotlin.PropertyMetadata('size'), size);
+      this.size_rggzty$_0.setValue_9rddgb$(this, new Kotlin.PropertyMetadata('size'), size);
     }
   });
   MDIcon.prototype.render = function () {
@@ -2184,37 +2358,42 @@ this['material-design'] = function (_, Kotlin, $module$elements, $module$beans) 
   MDIcon$Size.valueOf_61zpoe$ = MDIcon$Size$valueOf;
   function MDIcon$MDIcon() {
     MDIcon$MDIcon_instance = this;
-    this.classSelector_qh3r6f$_0 = toClassSelector('md-icon');
-    this.rule_qh3r6f$_0 = MDIcon$MDIcon$rule$lambda;
+    this.classSelector_k1fgwi$_0 = toClassSelector('md-icon');
+    this.rule_s99771$_0 = MDIcon$MDIcon$rule$lambda;
     elements.HTML.registerStyle_78phyd$(this);
   }
   Object.defineProperty(MDIcon$MDIcon.prototype, 'classSelector', {
     get: function () {
-      return this.classSelector_qh3r6f$_0;
+      return this.classSelector_k1fgwi$_0;
     }
   });
   Object.defineProperty(MDIcon$MDIcon.prototype, 'rule', {
     get: function () {
-      return this.rule_qh3r6f$_0;
+      return this.rule_s99771$_0;
     }
   });
   function MDIcon$MDIcon$rule$lambda$lambda($receiver) {
     $receiver._fontSize = '18px';
+    return Unit;
   }
   function MDIcon$MDIcon$rule$lambda$lambda_0($receiver) {
     $receiver._fontSize = '24px';
+    return Unit;
   }
   function MDIcon$MDIcon$rule$lambda$lambda_1($receiver) {
     $receiver._fontSize = '36px';
+    return Unit;
   }
   function MDIcon$MDIcon$rule$lambda$lambda_2($receiver) {
     $receiver._fontSize = '48px';
+    return Unit;
   }
   function MDIcon$MDIcon$rule$lambda($receiver) {
     and($receiver, MDIcon$Size$s18px_getInstance().cssClassName, MDIcon$MDIcon$rule$lambda$lambda);
     and($receiver, MDIcon$Size$s24px_getInstance().cssClassName, MDIcon$MDIcon$rule$lambda$lambda_0);
     and($receiver, MDIcon$Size$s36px_getInstance().cssClassName, MDIcon$MDIcon$rule$lambda$lambda_1);
     and($receiver, MDIcon$Size$s48px_getInstance().cssClassName, MDIcon$MDIcon$rule$lambda$lambda_2);
+    return Unit;
   }
   MDIcon$MDIcon.$metadata$ = {
     kind: Kotlin.Kind.OBJECT,
@@ -2236,6 +2415,7 @@ this['material-design'] = function (_, Kotlin, $module$elements, $module$beans) 
       if (new_0 != null) {
         this$MDIcon.addClass_bx842b$(new_0.cssClassName);
       }
+      return Unit;
     };
   }
   MDIcon.$metadata$ = {
@@ -2279,99 +2459,6 @@ this['material-design'] = function (_, Kotlin, $module$elements, $module$beans) 
     simpleName: 'MDIconProvider',
     interfaces: [IconProvider]
   };
-  function mdXsmall($receiver, direction, init) {
-    var breakpoint = new LayoutBreakpoint(direction, MDBreakpoints$xsmall_getInstance());
-    init(breakpoint);
-    $receiver.addBreakpoint_7i97bf$(breakpoint);
-  }
-  function mdSmall($receiver, direction, init) {
-    var breakpoint = new LayoutBreakpoint(direction, MDBreakpoints$small_getInstance());
-    init(breakpoint);
-    $receiver.addBreakpoint_7i97bf$(breakpoint);
-  }
-  function mdMedium($receiver, direction, init) {
-    var breakpoint = new LayoutBreakpoint(direction, MDBreakpoints$medium_getInstance());
-    init(breakpoint);
-    $receiver.addBreakpoint_7i97bf$(breakpoint);
-  }
-  function mdLarge($receiver, direction, init) {
-    var breakpoint = new LayoutBreakpoint(direction, MDBreakpoints$large_getInstance());
-    init(breakpoint);
-    $receiver.addBreakpoint_7i97bf$(breakpoint);
-  }
-  function mdXlarge($receiver, direction, init) {
-    var breakpoint = new LayoutBreakpoint(direction, MDBreakpoints$xlarge_getInstance());
-    init(breakpoint);
-    $receiver.addBreakpoint_7i97bf$(breakpoint);
-  }
-  function MDBreakpoints(name, ordinal, range) {
-    Enum.call(this);
-    this.range = range;
-    this.name$ = name;
-    this.ordinal$ = ordinal;
-  }
-  function MDBreakpoints_initFields() {
-    MDBreakpoints_initFields = function () {
-    };
-    MDBreakpoints$xsmall_instance = new MDBreakpoints('xsmall', 0, new IntRange(0, 599));
-    MDBreakpoints$small_instance = new MDBreakpoints('small', 1, new IntRange(600, 959));
-    MDBreakpoints$medium_instance = new MDBreakpoints('medium', 2, new IntRange(960, 1279));
-    MDBreakpoints$large_instance = new MDBreakpoints('large', 3, new IntRange(1280, 1919));
-    MDBreakpoints$xlarge_instance = new MDBreakpoints('xlarge', 4, new IntRange(1920, IntCompanionObject.MAX_VALUE));
-  }
-  var MDBreakpoints$xsmall_instance;
-  function MDBreakpoints$xsmall_getInstance() {
-    MDBreakpoints_initFields();
-    return MDBreakpoints$xsmall_instance;
-  }
-  var MDBreakpoints$small_instance;
-  function MDBreakpoints$small_getInstance() {
-    MDBreakpoints_initFields();
-    return MDBreakpoints$small_instance;
-  }
-  var MDBreakpoints$medium_instance;
-  function MDBreakpoints$medium_getInstance() {
-    MDBreakpoints_initFields();
-    return MDBreakpoints$medium_instance;
-  }
-  var MDBreakpoints$large_instance;
-  function MDBreakpoints$large_getInstance() {
-    MDBreakpoints_initFields();
-    return MDBreakpoints$large_instance;
-  }
-  var MDBreakpoints$xlarge_instance;
-  function MDBreakpoints$xlarge_getInstance() {
-    MDBreakpoints_initFields();
-    return MDBreakpoints$xlarge_instance;
-  }
-  MDBreakpoints.prototype.contains_14dthe$ = function (x) {
-    return contains(this.range, x);
-  };
-  MDBreakpoints.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
-    simpleName: 'MDBreakpoints',
-    interfaces: [Breakpoint, Enum]
-  };
-  function MDBreakpoints$values() {
-    return [MDBreakpoints$xsmall_getInstance(), MDBreakpoints$small_getInstance(), MDBreakpoints$medium_getInstance(), MDBreakpoints$large_getInstance(), MDBreakpoints$xlarge_getInstance()];
-  }
-  MDBreakpoints.values = MDBreakpoints$values;
-  function MDBreakpoints$valueOf(name) {
-    switch (name) {
-      case 'xsmall':
-        return MDBreakpoints$xsmall_getInstance();
-      case 'small':
-        return MDBreakpoints$small_getInstance();
-      case 'medium':
-        return MDBreakpoints$medium_getInstance();
-      case 'large':
-        return MDBreakpoints$large_getInstance();
-      case 'xlarge':
-        return MDBreakpoints$xlarge_getInstance();
-      default:Kotlin.throwISE('No enum constant fg.md.layout.MDBreakpoints.' + name);
-    }
-  }
-  MDBreakpoints.valueOf_61zpoe$ = MDBreakpoints$valueOf;
   function MDMenu(label, shortcut) {
     MDMenu$MDMenu_getInstance();
     if (label === void 0)
@@ -2386,18 +2473,18 @@ this['material-design'] = function (_, Kotlin, $module$elements, $module$beans) 
   };
   function MDMenu$MDMenu() {
     MDMenu$MDMenu_instance = this;
-    this.classSelector_pi48kx$_0 = toClassSelector('fg-md-menu');
-    this.rule_pi48kx$_0 = MDMenu$MDMenu$rule$lambda;
+    this.classSelector_rwpzd4$_0 = toClassSelector('fg-md-menu');
+    this.rule_e24e4n$_0 = MDMenu$MDMenu$rule$lambda;
     elements.HTML.registerStyle_78phyd$(this);
   }
   Object.defineProperty(MDMenu$MDMenu.prototype, 'classSelector', {
     get: function () {
-      return this.classSelector_pi48kx$_0;
+      return this.classSelector_rwpzd4$_0;
     }
   });
   Object.defineProperty(MDMenu$MDMenu.prototype, 'rule', {
     get: function () {
-      return this.rule_pi48kx$_0;
+      return this.rule_e24e4n$_0;
     }
   });
   function MDMenu$MDMenu$rule$lambda($receiver) {
@@ -2405,6 +2492,7 @@ this['material-design'] = function (_, Kotlin, $module$elements, $module$beans) 
     $receiver._paddingBottom = '16px';
     $receiver._backgroundColor = 'white';
     $receiver._boxShadow = '0 2px 4px -1px rgba(0,0,0,.2),0 4px 5px 0 rgba(0,0,0,.14),0 1px 10px 0 rgba(0,0,0,.12)';
+    return Unit;
   }
   MDMenu$MDMenu.$metadata$ = {
     kind: Kotlin.Kind.OBJECT,
@@ -2426,11 +2514,11 @@ this['material-design'] = function (_, Kotlin, $module$elements, $module$beans) 
   function MDMenuItem(action) {
     MDMenuItem$MDMenuItem_getInstance();
     MenuItem.call(this, action);
-    this.ripple$delegate = lazy(MDMenuItem$ripple$lambda(this));
+    this.ripple_jocyiy$_0 = lazy(MDMenuItem$ripple$lambda(this));
   }
   Object.defineProperty(MDMenuItem.prototype, 'ripple_0', {
     get: function () {
-      var $receiver = this.ripple$delegate;
+      var $receiver = this.ripple_jocyiy$_0;
       new Kotlin.PropertyMetadata('ripple');
       return $receiver.value;
     }
@@ -2446,18 +2534,18 @@ this['material-design'] = function (_, Kotlin, $module$elements, $module$beans) 
   };
   function MDMenuItem$MDMenuItem() {
     MDMenuItem$MDMenuItem_instance = this;
-    this.classSelector_p9hgvj$_0 = toClassSelector('fg-md-menu-item');
-    this.rule_p9hgvj$_0 = MDMenuItem$MDMenuItem$rule$lambda;
+    this.classSelector_v39dm0$_0 = toClassSelector('fg-md-menu-item');
+    this.rule_y0tbq1$_0 = MDMenuItem$MDMenuItem$rule$lambda;
     elements.HTML.registerStyle_78phyd$(this);
   }
   Object.defineProperty(MDMenuItem$MDMenuItem.prototype, 'classSelector', {
     get: function () {
-      return this.classSelector_p9hgvj$_0;
+      return this.classSelector_v39dm0$_0;
     }
   });
   Object.defineProperty(MDMenuItem$MDMenuItem.prototype, 'rule', {
     get: function () {
-      return this.rule_p9hgvj$_0;
+      return this.rule_y0tbq1$_0;
     }
   });
   function MDMenuItem$MDMenuItem$rule$lambda($receiver) {
@@ -2465,6 +2553,7 @@ this['material-design'] = function (_, Kotlin, $module$elements, $module$beans) 
     $receiver._height = '32px';
     $receiver._paddingLeft = '24px';
     $receiver._paddingRight = '24px';
+    return Unit;
   }
   MDMenuItem$MDMenuItem.$metadata$ = {
     kind: Kotlin.Kind.OBJECT,
@@ -2479,8 +2568,10 @@ this['material-design'] = function (_, Kotlin, $module$elements, $module$beans) 
     return MDMenuItem$MDMenuItem_instance;
   }
   function MDMenuItem$ripple$lambda$lambda() {
+    return Unit;
   }
   function MDMenuItem$ripple$lambda$lambda_0() {
+    return Unit;
   }
   function MDMenuItem$ripple$lambda(this$MDMenuItem) {
     return function () {
@@ -2497,28 +2588,28 @@ this['material-design'] = function (_, Kotlin, $module$elements, $module$beans) 
     MDCollapsedPanel$MDCollapsedPanel_getInstance();
     Div.call(this);
     this.expandAction = expandAction;
-    this.expandButton$delegate = lazy(MDCollapsedPanel$expandButton$lambda(this));
-    this.outerToolbar$delegate = lazy(MDCollapsedPanel$outerToolbar$lambda);
-    this.toolbar$delegate = lazy(MDCollapsedPanel$toolbar$lambda);
+    this.expandButton_iv2288$_0 = lazy(MDCollapsedPanel$expandButton$lambda(this));
+    this.outerToolbar_8be2vx$_8glako$_0 = lazy(MDCollapsedPanel$outerToolbar$lambda);
+    this.toolbar_qe22ob$_0 = lazy(MDCollapsedPanel$toolbar$lambda);
     this.themeChangedHandler_0 = MDCollapsedPanel$themeChangedHandler$lambda(this);
   }
   Object.defineProperty(MDCollapsedPanel.prototype, 'expandButton_0', {
     get: function () {
-      var $receiver = this.expandButton$delegate;
+      var $receiver = this.expandButton_iv2288$_0;
       new Kotlin.PropertyMetadata('expandButton');
       return $receiver.value;
     }
   });
   Object.defineProperty(MDCollapsedPanel.prototype, 'outerToolbar_8be2vx$', {
     get: function () {
-      var $receiver = this.outerToolbar$delegate;
+      var $receiver = this.outerToolbar_8be2vx$_8glako$_0;
       new Kotlin.PropertyMetadata('outerToolbar');
       return $receiver.value;
     }
   });
   Object.defineProperty(MDCollapsedPanel.prototype, 'toolbar', {
     get: function () {
-      var $receiver = this.toolbar$delegate;
+      var $receiver = this.toolbar_qe22ob$_0;
       new Kotlin.PropertyMetadata('toolbar');
       return $receiver.value;
     }
@@ -2537,18 +2628,18 @@ this['material-design'] = function (_, Kotlin, $module$elements, $module$beans) 
   };
   function MDCollapsedPanel$MDCollapsedPanel() {
     MDCollapsedPanel$MDCollapsedPanel_instance = this;
-    this.classSelector_7cc6v4$_0 = toClassSelector('fg-md-panel-collapsed-panel');
-    this.rule_7cc6v4$_0 = MDCollapsedPanel$MDCollapsedPanel$rule$lambda;
+    this.classSelector_iefphz$_0 = toClassSelector('fg-md-panel-collapsed-panel');
+    this.rule_dw4mwm$_0 = MDCollapsedPanel$MDCollapsedPanel$rule$lambda;
     elements.HTML.registerStyle_78phyd$(this);
   }
   Object.defineProperty(MDCollapsedPanel$MDCollapsedPanel.prototype, 'classSelector', {
     get: function () {
-      return this.classSelector_7cc6v4$_0;
+      return this.classSelector_iefphz$_0;
     }
   });
   Object.defineProperty(MDCollapsedPanel$MDCollapsedPanel.prototype, 'rule', {
     get: function () {
-      return this.rule_7cc6v4$_0;
+      return this.rule_dw4mwm$_0;
     }
   });
   function MDCollapsedPanel$MDCollapsedPanel$rule$lambda($receiver) {
@@ -2558,6 +2649,7 @@ this['material-design'] = function (_, Kotlin, $module$elements, $module$beans) 
     $receiver._boxShadow = '0 2px 5px 0 rgba(0, 0, 0, 0.26)';
     $receiver._fontFamily = "Roboto, 'Helvetica Neue', sans-serif";
     $receiver._backgroundSize = 'cover';
+    return Unit;
   }
   MDCollapsedPanel$MDCollapsedPanel.$metadata$ = {
     kind: Kotlin.Kind.OBJECT,
@@ -2598,6 +2690,7 @@ this['material-design'] = function (_, Kotlin, $module$elements, $module$beans) 
         $receiver.cardsNdialogs = value;
       }).callableName))
         this$MDCollapsedPanel.style.backgroundColor = Context_getInstance().theme.background;
+      return Unit;
     };
   }
   MDCollapsedPanel.$metadata$ = {
@@ -2616,22 +2709,23 @@ this['material-design'] = function (_, Kotlin, $module$elements, $module$beans) 
   };
   function MDExpandButton$MDExpandButton() {
     MDExpandButton$MDExpandButton_instance = this;
-    this.classSelector_ihlpb4$_0 = toClassSelector('fg-md-panel-expand-button');
-    this.rule_ihlpb4$_0 = MDExpandButton$MDExpandButton$rule$lambda;
+    this.classSelector_hswilz$_0 = toClassSelector('fg-md-panel-expand-button');
+    this.rule_jeuu6u$_0 = MDExpandButton$MDExpandButton$rule$lambda;
     elements.HTML.registerStyle_78phyd$(this);
   }
   Object.defineProperty(MDExpandButton$MDExpandButton.prototype, 'classSelector', {
     get: function () {
-      return this.classSelector_ihlpb4$_0;
+      return this.classSelector_hswilz$_0;
     }
   });
   Object.defineProperty(MDExpandButton$MDExpandButton.prototype, 'rule', {
     get: function () {
-      return this.rule_ihlpb4$_0;
+      return this.rule_jeuu6u$_0;
     }
   });
   function MDExpandButton$MDExpandButton$rule$lambda($receiver) {
     $receiver._paddingLeft = '16px';
+    return Unit;
   }
   MDExpandButton$MDExpandButton.$metadata$ = {
     kind: Kotlin.Kind.OBJECT,
@@ -2660,18 +2754,18 @@ this['material-design'] = function (_, Kotlin, $module$elements, $module$beans) 
   };
   function MDExpandedContent$MDExpandedContent() {
     MDExpandedContent$MDExpandedContent_instance = this;
-    this.classSelector_8uui6i$_0 = toClassSelector('fg-md-panel-expanded-content');
-    this.rule_8uui6i$_0 = MDExpandedContent$MDExpandedContent$rule$lambda;
+    this.classSelector_ofdh29$_0 = toClassSelector('fg-md-panel-expanded-content');
+    this.rule_brdk3k$_0 = MDExpandedContent$MDExpandedContent$rule$lambda;
     elements.HTML.registerStyle_78phyd$(this);
   }
   Object.defineProperty(MDExpandedContent$MDExpandedContent.prototype, 'classSelector', {
     get: function () {
-      return this.classSelector_8uui6i$_0;
+      return this.classSelector_ofdh29$_0;
     }
   });
   Object.defineProperty(MDExpandedContent$MDExpandedContent.prototype, 'rule', {
     get: function () {
-      return this.rule_8uui6i$_0;
+      return this.rule_brdk3k$_0;
     }
   });
   function MDExpandedContent$MDExpandedContent$rule$lambda($receiver) {
@@ -2679,6 +2773,7 @@ this['material-design'] = function (_, Kotlin, $module$elements, $module$beans) 
     $receiver._paddingLeft = '16px';
     $receiver._paddingRight = '16px';
     $receiver._paddingBottom = '16px';
+    return Unit;
   }
   MDExpandedContent$MDExpandedContent.$metadata$ = {
     kind: Kotlin.Kind.OBJECT,
@@ -2701,36 +2796,36 @@ this['material-design'] = function (_, Kotlin, $module$elements, $module$beans) 
     MDExpandedPanel$MDExpandedPanel_getInstance();
     Div.call(this);
     this.expandAction = expandAction;
-    this.expandButton$delegate = lazy(MDExpandedPanel$expandButton$lambda(this));
-    this.outerToolbar$delegate = lazy(MDExpandedPanel$outerToolbar$lambda);
-    this.toolbar$delegate = lazy(MDExpandedPanel$toolbar$lambda);
-    this.content$delegate = lazy(MDExpandedPanel$content$lambda);
+    this.expandButton_3pib4w$_0 = lazy(MDExpandedPanel$expandButton$lambda(this));
+    this.outerToolbar_8be2vx$_al57vk$_0 = lazy(MDExpandedPanel$outerToolbar$lambda);
+    this.toolbar_j3rgb1$_0 = lazy(MDExpandedPanel$toolbar$lambda);
+    this.content_pzcp3j$_0 = lazy(MDExpandedPanel$content$lambda);
     this.themeChangedHandler_0 = MDExpandedPanel$themeChangedHandler$lambda(this);
   }
   Object.defineProperty(MDExpandedPanel.prototype, 'expandButton_0', {
     get: function () {
-      var $receiver = this.expandButton$delegate;
+      var $receiver = this.expandButton_3pib4w$_0;
       new Kotlin.PropertyMetadata('expandButton');
       return $receiver.value;
     }
   });
   Object.defineProperty(MDExpandedPanel.prototype, 'outerToolbar_8be2vx$', {
     get: function () {
-      var $receiver = this.outerToolbar$delegate;
+      var $receiver = this.outerToolbar_8be2vx$_al57vk$_0;
       new Kotlin.PropertyMetadata('outerToolbar');
       return $receiver.value;
     }
   });
   Object.defineProperty(MDExpandedPanel.prototype, 'toolbar', {
     get: function () {
-      var $receiver = this.toolbar$delegate;
+      var $receiver = this.toolbar_j3rgb1$_0;
       new Kotlin.PropertyMetadata('toolbar');
       return $receiver.value;
     }
   });
   Object.defineProperty(MDExpandedPanel.prototype, 'content', {
     get: function () {
-      var $receiver = this.content$delegate;
+      var $receiver = this.content_pzcp3j$_0;
       new Kotlin.PropertyMetadata('content');
       return $receiver.value;
     }
@@ -2750,18 +2845,18 @@ this['material-design'] = function (_, Kotlin, $module$elements, $module$beans) 
   };
   function MDExpandedPanel$MDExpandedPanel() {
     MDExpandedPanel$MDExpandedPanel_instance = this;
-    this.classSelector_p43iwk$_0 = toClassSelector('fg-md-panel-expanded-panel');
-    this.rule_p43iwk$_0 = MDExpandedPanel$MDExpandedPanel$rule$lambda;
+    this.classSelector_8xmuph$_0 = toClassSelector('fg-md-panel-expanded-panel');
+    this.rule_xct8kq$_0 = MDExpandedPanel$MDExpandedPanel$rule$lambda;
     elements.HTML.registerStyle_78phyd$(this);
   }
   Object.defineProperty(MDExpandedPanel$MDExpandedPanel.prototype, 'classSelector', {
     get: function () {
-      return this.classSelector_p43iwk$_0;
+      return this.classSelector_8xmuph$_0;
     }
   });
   Object.defineProperty(MDExpandedPanel$MDExpandedPanel.prototype, 'rule', {
     get: function () {
-      return this.rule_p43iwk$_0;
+      return this.rule_xct8kq$_0;
     }
   });
   function MDExpandedPanel$MDExpandedPanel$rule$lambda($receiver) {
@@ -2771,6 +2866,7 @@ this['material-design'] = function (_, Kotlin, $module$elements, $module$beans) 
     $receiver._boxShadow = '0 2px 5px 0 rgba(0, 0, 0, 0.26)';
     $receiver._fontFamily = "Roboto, 'Helvetica Neue', sans-serif";
     $receiver._backgroundSize = 'cover';
+    return Unit;
   }
   MDExpandedPanel$MDExpandedPanel.$metadata$ = {
     kind: Kotlin.Kind.OBJECT,
@@ -2814,6 +2910,7 @@ this['material-design'] = function (_, Kotlin, $module$elements, $module$beans) 
         $receiver.cardsNdialogs = value;
       }).callableName))
         this$MDExpandedPanel.style.backgroundColor = Context_getInstance().theme.background;
+      return Unit;
     };
   }
   MDExpandedPanel.$metadata$ = {
@@ -2821,55 +2918,64 @@ this['material-design'] = function (_, Kotlin, $module$elements, $module$beans) 
     simpleName: 'MDExpandedPanel',
     interfaces: [Div]
   };
+  Delegates$observable$ObjectLiteral_11.prototype = Object.create(ObservableProperty.prototype);
+  Delegates$observable$ObjectLiteral_11.prototype.constructor = Delegates$observable$ObjectLiteral_11;
+  function Delegates$observable$ObjectLiteral_11(closure$onChange, initialValue_0) {
+    this.closure$onChange = closure$onChange;
+    ObservableProperty.call(this, initialValue_0);
+  }
+  Delegates$observable$ObjectLiteral_11.prototype.afterChange_jxtfl0$ = function (property, oldValue, newValue) {
+    this.closure$onChange(property, oldValue, newValue);
+  };
+  Delegates$observable$ObjectLiteral_11.$metadata$ = {kind: Kotlin.Kind.CLASS, interfaces: [ObservableProperty]};
   function MDExpansionPanel() {
     MDExpansionPanel$MDExpansionPanel_getInstance();
     Div.call(this);
-    this.expandCollapseHandler_4n7l8q$_0 = MDExpansionPanel$expandCollapseHandler$lambda(this);
-    var initialValue = MDExpansionPanel$State$COLLAPSED_getInstance();
-    this.state$delegate = new Kotlin.kotlin.properties.Delegates.observable_2ulm9r$$f(MDExpansionPanel$state$lambda(this), initialValue);
-    this.expandAction$delegate = lazy(MDExpansionPanel$expandAction$lambda(this));
-    this.collapsed$delegate = lazy(MDExpansionPanel$collapsed$lambda(this));
-    this.expanded$delegate = lazy(MDExpansionPanel$expanded$lambda(this));
-    this.focused_4n7l8q$_0 = false;
-    this.focusHandler_4n7l8q$_0 = MDExpansionPanel$focusHandler$lambda(this);
-    this.blurHandler_4n7l8q$_0 = MDExpansionPanel$blurHandler$lambda(this);
-    this.keyUpHandler_4n7l8q$_0 = MDExpansionPanel$keyUpHandler$lambda(this);
+    this.expandCollapseHandler_5rqnij$_0 = MDExpansionPanel$expandCollapseHandler$lambda(this);
+    this.state_o55093$_0 = new Delegates$observable$ObjectLiteral_11(MDExpansionPanel$state$lambda(this), MDExpansionPanel$State$COLLAPSED_getInstance());
+    this.expandAction_8be2vx$_9ukp9c$_0 = lazy(MDExpansionPanel$expandAction$lambda(this));
+    this.collapsed_4rzhj3$_0 = lazy(MDExpansionPanel$collapsed$lambda(this));
+    this.expanded_ckoe8z$_0 = lazy(MDExpansionPanel$expanded$lambda(this));
+    this.focused_o6fizl$_0 = false;
+    this.focusHandler_gwcyy$_0 = MDExpansionPanel$focusHandler$lambda(this);
+    this.blurHandler_qplomt$_0 = MDExpansionPanel$blurHandler$lambda(this);
+    this.keyUpHandler_81ua50$_0 = MDExpansionPanel$keyUpHandler$lambda(this);
   }
   Object.defineProperty(MDExpansionPanel.prototype, 'state', {
     get: function () {
-      return this.state$delegate.getValue_lrcp0p$(this, new Kotlin.PropertyMetadata('state'));
+      return this.state_o55093$_0.getValue_lrcp0p$(this, new Kotlin.PropertyMetadata('state'));
     },
     set: function (state) {
-      this.state$delegate.setValue_9rddgb$(this, new Kotlin.PropertyMetadata('state'), state);
+      this.state_o55093$_0.setValue_9rddgb$(this, new Kotlin.PropertyMetadata('state'), state);
     }
   });
   Object.defineProperty(MDExpansionPanel.prototype, 'expandAction_8be2vx$', {
     get: function () {
-      var $receiver = this.expandAction$delegate;
+      var $receiver = this.expandAction_8be2vx$_9ukp9c$_0;
       new Kotlin.PropertyMetadata('expandAction');
       return $receiver.value;
     }
   });
   Object.defineProperty(MDExpansionPanel.prototype, 'collapsed', {
     get: function () {
-      var $receiver = this.collapsed$delegate;
+      var $receiver = this.collapsed_4rzhj3$_0;
       new Kotlin.PropertyMetadata('collapsed');
       return $receiver.value;
     }
   });
   Object.defineProperty(MDExpansionPanel.prototype, 'expanded', {
     get: function () {
-      var $receiver = this.expanded$delegate;
+      var $receiver = this.expanded_ckoe8z$_0;
       new Kotlin.PropertyMetadata('expanded');
       return $receiver.value;
     }
   });
   Object.defineProperty(MDExpansionPanel.prototype, 'focused', {
     get: function () {
-      return this.focused_4n7l8q$_0;
+      return this.focused_o6fizl$_0;
     },
     set: function (focused) {
-      this.focused_4n7l8q$_0 = focused;
+      this.focused_o6fizl$_0 = focused;
     }
   });
   MDExpansionPanel.prototype.onFocus = function () {
@@ -2912,11 +3018,11 @@ this['material-design'] = function (_, Kotlin, $module$elements, $module$beans) 
   };
   MDExpansionPanel.prototype.didMount = function () {
     Div.prototype.didMount.call(this);
-    onFocus(this, this.focusHandler_4n7l8q$_0);
-    onBlur(this, this.blurHandler_4n7l8q$_0);
-    onKeyUp(this, this.keyUpHandler_4n7l8q$_0);
+    onFocus(this, this.focusHandler_gwcyy$_0);
+    onBlur(this, this.blurHandler_qplomt$_0);
+    onKeyUp(this, this.keyUpHandler_81ua50$_0);
   };
-  MDExpansionPanel.prototype.renderState_zedosd$_0 = function (state) {
+  MDExpansionPanel.prototype.renderState_2lble8$_0 = function (state) {
     if (Kotlin.equals(state, MDExpansionPanel$State$COLLAPSED_getInstance())) {
       this.expanded.hide();
       this.collapsed.show();
@@ -2968,30 +3074,33 @@ this['material-design'] = function (_, Kotlin, $module$elements, $module$beans) 
   MDExpansionPanel$State.valueOf_61zpoe$ = MDExpansionPanel$State$valueOf;
   function MDExpansionPanel$MDExpansionPanel() {
     MDExpansionPanel$MDExpansionPanel_instance = this;
-    this.classSelector_v3q4lc$_0 = toClassSelector('fg-md-panel-expansion-panel');
-    this.rule_v3q4lc$_0 = MDExpansionPanel$MDExpansionPanel$rule$lambda(this);
+    this.classSelector_izwrhl$_0 = toClassSelector('fg-md-panel-expansion-panel');
+    this.rule_ffi6t2$_0 = MDExpansionPanel$MDExpansionPanel$rule$lambda(this);
     elements.HTML.registerStyle_78phyd$(this);
   }
   Object.defineProperty(MDExpansionPanel$MDExpansionPanel.prototype, 'classSelector', {
     get: function () {
-      return this.classSelector_v3q4lc$_0;
+      return this.classSelector_izwrhl$_0;
     }
   });
   Object.defineProperty(MDExpansionPanel$MDExpansionPanel.prototype, 'rule', {
     get: function () {
-      return this.rule_v3q4lc$_0;
+      return this.rule_ffi6t2$_0;
     }
   });
   function MDExpansionPanel$MDExpansionPanel$rule$lambda$lambda($receiver) {
     $receiver._marginTop = '1px';
+    return Unit;
   }
   function MDExpansionPanel$MDExpansionPanel$rule$lambda$lambda_0($receiver) {
     $receiver._outline = 'none';
+    return Unit;
   }
   function MDExpansionPanel$MDExpansionPanel$rule$lambda(this$MDExpansionPanel$) {
     return function ($receiver) {
       adjacentSibling($receiver, this$MDExpansionPanel$.classSelector, MDExpansionPanel$MDExpansionPanel$rule$lambda$lambda);
       focus($receiver, MDExpansionPanel$MDExpansionPanel$rule$lambda$lambda_0);
+      return Unit;
     };
   }
   MDExpansionPanel$MDExpansionPanel.$metadata$ = {
@@ -3009,16 +3118,18 @@ this['material-design'] = function (_, Kotlin, $module$elements, $module$beans) 
   function MDExpansionPanel$expandCollapseHandler$lambda(this$MDExpansionPanel) {
     return function (it) {
       this$MDExpansionPanel.state = this$MDExpansionPanel.state === MDExpansionPanel$State$EXPANDED_getInstance() ? MDExpansionPanel$State$COLLAPSED_getInstance() : MDExpansionPanel$State$EXPANDED_getInstance();
+      return Unit;
     };
   }
   function MDExpansionPanel$state$lambda(this$MDExpansionPanel) {
     return function (property, old, new_0) {
-      this$MDExpansionPanel.renderState_zedosd$_0(new_0);
+      this$MDExpansionPanel.renderState_2lble8$_0(new_0);
+      return Unit;
     };
   }
   function MDExpansionPanel$expandAction$lambda(this$MDExpansionPanel) {
     return function () {
-      return new SelectableAction(void 0, void 0, MDIconProvider$Statics_getInstance().expand_less, MDIconProvider$Statics_getInstance().expand_more, void 0, void 0, this$MDExpansionPanel.expandCollapseHandler_4n7l8q$_0);
+      return new SelectableAction(void 0, void 0, MDIconProvider$Statics_getInstance().expand_less, MDIconProvider$Statics_getInstance().expand_more, void 0, void 0, this$MDExpansionPanel.expandCollapseHandler_5rqnij$_0);
     };
   }
   function MDExpansionPanel$collapsed$lambda(this$MDExpansionPanel) {
@@ -3036,6 +3147,7 @@ this['material-design'] = function (_, Kotlin, $module$elements, $module$beans) 
       this$MDExpansionPanel.focused = true;
       this$MDExpansionPanel.toggleClass_ivxn3r$('focused', true);
       this$MDExpansionPanel.onFocus();
+      return Unit;
     };
   }
   function MDExpansionPanel$blurHandler$lambda(this$MDExpansionPanel) {
@@ -3043,6 +3155,7 @@ this['material-design'] = function (_, Kotlin, $module$elements, $module$beans) 
       this$MDExpansionPanel.focused = false;
       this$MDExpansionPanel.toggleClass_ivxn3r$('focused');
       this$MDExpansionPanel.unFocus();
+      return Unit;
     };
   }
   function MDExpansionPanel$keyUpHandler$lambda(this$MDExpansionPanel) {
@@ -3050,6 +3163,7 @@ this['material-design'] = function (_, Kotlin, $module$elements, $module$beans) 
       if (event.which === 13) {
         this$MDExpansionPanel.toggle();
       }
+      return Unit;
     };
   }
   MDExpansionPanel.$metadata$ = {
@@ -3065,11 +3179,11 @@ this['material-design'] = function (_, Kotlin, $module$elements, $module$beans) 
     if (labelText === void 0)
       labelText = null;
     LabelledRadioButton.call(this, checked, labelText);
-    this.ripple$delegate = lazy(MDRadioButton$ripple$lambda(this));
+    this.ripple_rhxzrp$_0 = lazy(MDRadioButton$ripple$lambda(this));
   }
   Object.defineProperty(MDRadioButton.prototype, 'ripple_0', {
     get: function () {
-      var $receiver = this.ripple$delegate;
+      var $receiver = this.ripple_rhxzrp$_0;
       new Kotlin.PropertyMetadata('ripple');
       return $receiver.value;
     }
@@ -3085,24 +3199,25 @@ this['material-design'] = function (_, Kotlin, $module$elements, $module$beans) 
   };
   function MDRadioButton$MDRadioButton() {
     MDRadioButton$MDRadioButton_instance = this;
-    this.classSelector_udwazr$_0 = toClassSelector('md-radio-button');
+    this.classSelector_tbnps$_0 = toClassSelector('md-radio-button');
     this.checkedIcon_0 = icon.FontAwesomeIcons.dot_circle_o_p56ikg$();
     this.unCheckedIcon_0 = icon.FontAwesomeIcons.circle_o_p56ikg$();
-    this.rule_udwazr$_0 = MDRadioButton$MDRadioButton$rule$lambda;
+    this.rule_pidze7$_0 = MDRadioButton$MDRadioButton$rule$lambda;
     elements.HTML.registerStyle_78phyd$(this);
   }
   Object.defineProperty(MDRadioButton$MDRadioButton.prototype, 'classSelector', {
     get: function () {
-      return this.classSelector_udwazr$_0;
+      return this.classSelector_tbnps$_0;
     }
   });
   Object.defineProperty(MDRadioButton$MDRadioButton.prototype, 'rule', {
     get: function () {
-      return this.rule_udwazr$_0;
+      return this.rule_pidze7$_0;
     }
   });
   function MDRadioButton$MDRadioButton$rule$lambda($receiver) {
     $receiver._fontFamily = Context_getInstance().theme.font;
+    return Unit;
   }
   MDRadioButton$MDRadioButton.$metadata$ = {
     kind: Kotlin.Kind.OBJECT,
@@ -3117,8 +3232,10 @@ this['material-design'] = function (_, Kotlin, $module$elements, $module$beans) 
     return MDRadioButton$MDRadioButton_instance;
   }
   function MDRadioButton$ripple$lambda$lambda() {
+    return Unit;
   }
   function MDRadioButton$ripple$lambda$lambda_0() {
+    return Unit;
   }
   function MDRadioButton$ripple$lambda(this$MDRadioButton) {
     return function () {
@@ -3143,14 +3260,14 @@ this['material-design'] = function (_, Kotlin, $module$elements, $module$beans) 
     this.startedCallback = startedCallback;
     this.doneCallback = doneCallback;
     this.started_0 = false;
-    this.rippleContainer$delegate = lazy(Ripple$rippleContainer$lambda);
+    this.rippleContainer_k9xg4e$_0 = lazy(Ripple$rippleContainer$lambda);
     this.handleMouseDown_0 = Ripple$handleMouseDown$lambda(this);
     this.handleMouseDown_rippleDone_0 = Ripple$handleMouseDown_rippleDone$lambda(this);
     this.cleanUp_0 = Ripple$cleanUp$lambda(this);
   }
   Object.defineProperty(Ripple.prototype, 'rippleContainer_0', {
     get: function () {
-      var $receiver = this.rippleContainer$delegate;
+      var $receiver = this.rippleContainer_k9xg4e$_0;
       new Kotlin.PropertyMetadata('rippleContainer');
       return $receiver.value;
     }
@@ -3177,13 +3294,14 @@ this['material-design'] = function (_, Kotlin, $module$elements, $module$beans) 
   function Ripple$Factory() {
     Ripple$Factory_instance = this;
     this.rippleTargetClass = toClassSelector('md-ripple-target');
-    this.rippleTarget = classRule(kotlin.Unit, this.rippleTargetClass, Ripple$Factory$rippleTarget$lambda);
+    this.rippleTarget = classRule(Unit, this.rippleTargetClass, Ripple$Factory$rippleTarget$lambda);
     elements.HTML.registerCSSRule_t83c1i$(this.rippleTarget);
   }
   function Ripple$Factory$rippleTarget$lambda($receiver) {
     $receiver._position = 'relative';
     $receiver._overflowX = 'hidden';
     $receiver._overflowY = 'hidden';
+    return Unit;
   }
   Ripple$Factory.$metadata$ = {
     kind: Kotlin.Kind.OBJECT,
@@ -3208,6 +3326,7 @@ this['material-design'] = function (_, Kotlin, $module$elements, $module$beans) 
         (tmp$ = this$Ripple.startedCallback) != null ? tmp$() : null;
         this$Ripple.started_0 = true;
       }
+      return Unit;
     };
   }
   function Ripple$handleMouseDown_rippleDone$lambda(this$Ripple) {
@@ -3215,12 +3334,14 @@ this['material-design'] = function (_, Kotlin, $module$elements, $module$beans) 
       var tmp$;
       console.log('Ripple done, invoking doneCallback');
       (tmp$ = this$Ripple.doneCallback) != null ? tmp$() : null;
+      return Unit;
     };
   }
   function Ripple$cleanUp$lambda(this$Ripple) {
     return function (it) {
       this$Ripple.rippleContainer_0.removeChildren();
       this$Ripple.started_0 = false;
+      return Unit;
     };
   }
   Ripple.$metadata$ = {
@@ -3238,18 +3359,18 @@ this['material-design'] = function (_, Kotlin, $module$elements, $module$beans) 
   };
   function RippleContainer$RippleContainer() {
     RippleContainer$RippleContainer_instance = this;
-    this.classSelector_n6hd2p$_0 = toClassSelector('md-ripple-container');
-    this.rule_n6hd2p$_0 = RippleContainer$RippleContainer$rule$lambda;
+    this.classSelector_5949gm$_0 = toClassSelector('md-ripple-container');
+    this.rule_2y45y3$_0 = RippleContainer$RippleContainer$rule$lambda;
     elements.HTML.registerStyle_78phyd$(this);
   }
   Object.defineProperty(RippleContainer$RippleContainer.prototype, 'classSelector', {
     get: function () {
-      return this.classSelector_n6hd2p$_0;
+      return this.classSelector_5949gm$_0;
     }
   });
   Object.defineProperty(RippleContainer$RippleContainer.prototype, 'rule', {
     get: function () {
-      return this.rule_n6hd2p$_0;
+      return this.rule_2y45y3$_0;
     }
   });
   function RippleContainer$RippleContainer$rule$lambda($receiver) {
@@ -3258,6 +3379,7 @@ this['material-design'] = function (_, Kotlin, $module$elements, $module$beans) 
     $receiver._right = '0';
     $receiver._bottom = '0';
     $receiver._left = '0';
+    return Unit;
   }
   RippleContainer$RippleContainer.$metadata$ = {
     kind: Kotlin.Kind.OBJECT,
@@ -3276,17 +3398,27 @@ this['material-design'] = function (_, Kotlin, $module$elements, $module$beans) 
     simpleName: 'RippleContainer',
     interfaces: [Div]
   };
+  Delegates$observable$ObjectLiteral_12.prototype = Object.create(ObservableProperty.prototype);
+  Delegates$observable$ObjectLiteral_12.prototype.constructor = Delegates$observable$ObjectLiteral_12;
+  function Delegates$observable$ObjectLiteral_12(closure$onChange, initialValue_0) {
+    this.closure$onChange = closure$onChange;
+    ObservableProperty.call(this, initialValue_0);
+  }
+  Delegates$observable$ObjectLiteral_12.prototype.afterChange_jxtfl0$ = function (property, oldValue, newValue) {
+    this.closure$onChange(property, oldValue, newValue);
+  };
+  Delegates$observable$ObjectLiteral_12.$metadata$ = {kind: Kotlin.Kind.CLASS, interfaces: [ObservableProperty]};
   function RippleInk(color) {
     RippleInk$RippleInk_getInstance();
     Span.call(this);
-    this.color$delegate = new Kotlin.kotlin.properties.Delegates.observable_2ulm9r$$f(RippleInk$color$lambda(this), color);
+    this.color_oiswxk$_0 = new Delegates$observable$ObjectLiteral_12(RippleInk$color$lambda(this), color);
   }
   Object.defineProperty(RippleInk.prototype, 'color', {
     get: function () {
-      return this.color$delegate.getValue_lrcp0p$(this, new Kotlin.PropertyMetadata('color'));
+      return this.color_oiswxk$_0.getValue_lrcp0p$(this, new Kotlin.PropertyMetadata('color'));
     },
     set: function (color) {
-      this.color$delegate.setValue_9rddgb$(this, new Kotlin.PropertyMetadata('color'), color);
+      this.color_oiswxk$_0.setValue_9rddgb$(this, new Kotlin.PropertyMetadata('color'), color);
     }
   });
   RippleInk.prototype.setSize_sfxhv0$ = function (size) {
@@ -3307,20 +3439,20 @@ this['material-design'] = function (_, Kotlin, $module$elements, $module$beans) 
   };
   function RippleInk$RippleInk() {
     RippleInk$RippleInk_instance = this;
-    this.classSelector_laepad$_0 = toClassSelector('md-ripple-ink');
-    this.rule_laepad$_0 = RippleInk$RippleInk$rule$lambda;
+    this.classSelector_262z6s$_0 = toClassSelector('md-ripple-ink');
+    this.rule_9m85qz$_0 = RippleInk$RippleInk$rule$lambda;
     elements.HTML.registerStyle_78phyd$(this);
-    var rule = keyframesRule(kotlin.Unit, 'ripple', RippleInk$RippleInk$RippleInk_init$lambda);
+    var rule = keyframesRule(Unit, 'ripple', RippleInk$RippleInk$RippleInk_init$lambda);
     elements.HTML.registerCSSRule_t83c1i$(rule);
   }
   Object.defineProperty(RippleInk$RippleInk.prototype, 'classSelector', {
     get: function () {
-      return this.classSelector_laepad$_0;
+      return this.classSelector_262z6s$_0;
     }
   });
   Object.defineProperty(RippleInk$RippleInk.prototype, 'rule', {
     get: function () {
-      return this.rule_laepad$_0;
+      return this.rule_9m85qz$_0;
     }
   });
   function RippleInk$RippleInk$rule$lambda($receiver) {
@@ -3330,13 +3462,16 @@ this['material-design'] = function (_, Kotlin, $module$elements, $module$beans) 
     $receiver._padding = '24px';
     $receiver._borderRadius = '100%';
     $receiver._animation = 'ripple 1000ms';
+    return Unit;
   }
   function RippleInk$RippleInk$RippleInk_init$lambda$lambda($receiver) {
     $receiver._opacity = '0';
     $receiver._transform = 'scale(2)';
+    return Unit;
   }
   function RippleInk$RippleInk$RippleInk_init$lambda($receiver) {
     kto($receiver, RippleInk$RippleInk$RippleInk_init$lambda$lambda);
+    return Unit;
   }
   RippleInk$RippleInk.$metadata$ = {
     kind: Kotlin.Kind.OBJECT,
@@ -3353,6 +3488,7 @@ this['material-design'] = function (_, Kotlin, $module$elements, $module$beans) 
   function RippleInk$color$lambda(this$RippleInk) {
     return function (property, old, new_0) {
       this$RippleInk.renderColor_0(new_0);
+      return Unit;
     };
   }
   RippleInk.$metadata$ = {
@@ -3371,12 +3507,13 @@ this['material-design'] = function (_, Kotlin, $module$elements, $module$beans) 
   };
   function MDToolbar$MDToolbar() {
     MDToolbar$MDToolbar_instance = this;
-    this.classSelector_z3ettp$_0 = toClassSelector('fg-md-toolbar');
-    this.rule_z3ettp$_0 = MDToolbar$MDToolbar$rule$lambda;
+    this.classSelector_lcjfsc$_0 = toClassSelector('fg-md-toolbar');
+    this.rule_gugx65$_0 = MDToolbar$MDToolbar$rule$lambda;
     elements.HTML.registerStyle_78phyd$(this);
   }
   function MDToolbar$MDToolbar$spacer$lambda($receiver) {
     $receiver.style.flex = new Flex(1);
+    return Unit;
   }
   MDToolbar$MDToolbar.prototype.spacer = function () {
     var span = with_0(new Span(), MDToolbar$MDToolbar$spacer$lambda);
@@ -3384,18 +3521,19 @@ this['material-design'] = function (_, Kotlin, $module$elements, $module$beans) 
   };
   Object.defineProperty(MDToolbar$MDToolbar.prototype, 'classSelector', {
     get: function () {
-      return this.classSelector_z3ettp$_0;
+      return this.classSelector_lcjfsc$_0;
     }
   });
   Object.defineProperty(MDToolbar$MDToolbar.prototype, 'rule', {
     get: function () {
-      return this.rule_z3ettp$_0;
+      return this.rule_gugx65$_0;
     }
   });
   function MDToolbar$MDToolbar$rule$lambda($receiver) {
     $receiver._display = 'flex';
     $receiver._flexDirection = 'row';
     $receiver._alignItems = 'center';
+    return Unit;
   }
   MDToolbar$MDToolbar.$metadata$ = {
     kind: Kotlin.Kind.OBJECT,
@@ -3471,13 +3609,13 @@ this['material-design'] = function (_, Kotlin, $module$elements, $module$beans) 
   MDButton.FlatStyle = MDButton$FlatStyle;
   MDButton.RaisedStyle = MDButton$RaisedStyle;
   MDButton.FloatingStyle = MDButton$FloatingStyle;
-  Object.defineProperty(MDButton, 'MDButton', {
-    get: MDButton$MDButton_getInstance
+  Object.defineProperty(MDButton, 'Companion', {
+    get: MDButton$Companion_getInstance
   });
   var package$button = package$md.button || (package$md.button = {});
   package$button.MDButton = MDButton;
-  Object.defineProperty(MDToggleButton, 'MDToggleButton', {
-    get: MDToggleButton$MDToggleButton_getInstance
+  Object.defineProperty(MDToggleButton, 'Companion', {
+    get: MDToggleButton$Companion_getInstance
   });
   package$button.MDToggleButton = MDToggleButton;
   Object.defineProperty(MDCard, 'MDCard', {
@@ -3576,28 +3714,6 @@ this['material-design'] = function (_, Kotlin, $module$elements, $module$beans) 
     get: MDIconProvider$Statics_getInstance
   });
   package$icon.MDIconProvider = MDIconProvider;
-  var package$layout = package$md.layout || (package$md.layout = {});
-  package$layout.mdXsmall_i3h8o8$ = mdXsmall;
-  package$layout.mdSmall_i3h8o8$ = mdSmall;
-  package$layout.mdMedium_i3h8o8$ = mdMedium;
-  package$layout.mdLarge_i3h8o8$ = mdLarge;
-  package$layout.mdXlarge_i3h8o8$ = mdXlarge;
-  Object.defineProperty(MDBreakpoints, 'xsmall', {
-    get: MDBreakpoints$xsmall_getInstance
-  });
-  Object.defineProperty(MDBreakpoints, 'small', {
-    get: MDBreakpoints$small_getInstance
-  });
-  Object.defineProperty(MDBreakpoints, 'medium', {
-    get: MDBreakpoints$medium_getInstance
-  });
-  Object.defineProperty(MDBreakpoints, 'large', {
-    get: MDBreakpoints$large_getInstance
-  });
-  Object.defineProperty(MDBreakpoints, 'xlarge', {
-    get: MDBreakpoints$xlarge_getInstance
-  });
-  package$layout.MDBreakpoints = MDBreakpoints;
   Object.defineProperty(MDMenu, 'MDMenu', {
     get: MDMenu$MDMenu_getInstance
   });

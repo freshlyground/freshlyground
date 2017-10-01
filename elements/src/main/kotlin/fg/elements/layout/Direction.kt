@@ -6,7 +6,7 @@ enum class Direction(val flex: FlexDirection) {
     ROW(FlexDirection.row),
     COLUMN(FlexDirection.column);
 
-    companion object Statics {
+    companion object {
         fun from(string: String?): Direction? {
             if (string == null) {
                 return null

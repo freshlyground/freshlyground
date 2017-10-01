@@ -1,12 +1,15 @@
 package fg.beans
 
 import fg.elements.BODY
+import fg.elements.Div
 import fg.elements.div
 import fg.elements.h1
 import fg.elements.h2
 import fg.elements.layout.DefaultBreakpoints
 import fg.elements.layout.Direction
-import fg.elements.layout.setLayout
+import fg.elements.layout.direction
+import fg.elements.layout.hideOn
+import fg.elements.layout.layout
 import fg.elements.layout.xsmall
 import fg.elements.style.typed.Flex
 import fg.elements.style.typed.FlexGrow
@@ -24,9 +27,13 @@ object layoutPage {
             }
             h2 { +"Containers" }
             div {
-                setLayout(Direction.ROW) {}
+                layout {
+                    direction(Direction.ROW) { }
+                }
                 div {
-                    setLayout(Direction.ROW) {}
+                    layout {
+                        direction(Direction.ROW) { }
+                    }
                     div {
                         +"First item in row"
                         _style.padding = "8px"
@@ -42,17 +49,18 @@ object layoutPage {
                     }
                 }
                 div {
-                    setLayout(Direction.COLUMN) {
-                        div {
-                            +"First item in column"
-                            _style.padding = "8px"
-                            style.backgroundColor = FGColors.cinnamon
-                        }
-                        div {
-                            +"Second item in column"
-                            _style.padding = "8px"
-                            style.backgroundColor = FGColors.brightYellow
-                        }
+                    layout {
+                        direction(Direction.COLUMN) { }
+                    }
+                    div {
+                        +"First item in column"
+                        _style.padding = "8px"
+                        style.backgroundColor = FGColors.cinnamon
+                    }
+                    div {
+                        +"Second item in column"
+                        _style.padding = "8px"
+                        style.backgroundColor = FGColors.brightYellow
                     }
                 }
             }
@@ -60,8 +68,10 @@ object layoutPage {
                 +"Responsive"
             }
             div {
-                setLayout(Direction.ROW) {
-                    xsmall(Direction.COLUMN) {}
+                layout {
+                    direction(Direction.ROW) {
+                        xsmall(Direction.COLUMN) {}
+                    }
                 }
                 div {
                     +" I'm above on mobile, and to the left on larger devices."
@@ -77,15 +87,20 @@ object layoutPage {
                 div {
                     +"Im hidden, when not wide enough"
                     hideOn(DefaultBreakpoints.small, DefaultBreakpoints.xsmall)
+                    val d = Div()
                 }
             }
             h2 {
                 +"Responsive - keywords"
             }
             div {
-                setLayout(Direction.COLUMN) { }
+                layout {
+                    direction(Direction.COLUMN) {}
+                }
                 div {
-                    setLayout(Direction.ROW) { }
+                    layout {
+                        direction(Direction.ROW) {}
+                    }
                     div {
                         +"flex: none"
                         style.flex = Flex.none
