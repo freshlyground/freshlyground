@@ -2,54 +2,38 @@ package fg.elements.layout
 
 import fg.elements.Element
 
-fun Element.hideOn(vararg breakpoint: Breakpoint) {
-    this._layout.hideOn(*breakpoint)
-}
-
-fun Element.layout(init: LayoutApi.() -> Unit) {
-    val layoutApi = LayoutApi(this)
+fun Element.layout(init: Layout.() -> Unit) {
+    val layoutApi = Layout(this)
     layoutApi.init()
     this._layout = layoutApi
 }
 
-fun Element.layout(direction: Direction, init: Layout.() -> Unit) {
-    val layout = Layout(direction)
-    layout.init()
-    this._layout.layout = layout
-}
-
-fun LayoutApi.direction(direction: Direction, init: Layout.() -> Unit) {
-    val layout = Layout(direction)
-    layout.init()
-    this.layout = layout
-}
-
-fun Layout.xsmall(direction: Direction, init: LayoutBreakpoint.() -> Unit) {
-    val breakpoint = LayoutBreakpoint(direction, DefaultBreakpoints.xsmall)
+fun Layout.xsmall(init: BreakpointLayout.() -> Unit) {
+    val breakpoint = BreakpointLayout(DefaultBreakpoints.xsmall)
     breakpoint.init()
     this.addBreakpoint(breakpoint)
 }
 
-fun Layout.small(direction: Direction, init: LayoutBreakpoint.() -> Unit) {
-    val breakpoint = LayoutBreakpoint(direction, DefaultBreakpoints.small)
+fun Layout.small(init: BreakpointLayout.() -> Unit) {
+    val breakpoint = BreakpointLayout(DefaultBreakpoints.small)
     breakpoint.init()
     this.addBreakpoint(breakpoint)
 }
 
-fun Layout.medium(direction: Direction, init: LayoutBreakpoint.() -> Unit) {
-    val breakpoint = LayoutBreakpoint(direction, DefaultBreakpoints.medium)
+fun Layout.medium(init: BreakpointLayout.() -> Unit) {
+    val breakpoint = BreakpointLayout(DefaultBreakpoints.medium)
     breakpoint.init()
     this.addBreakpoint(breakpoint)
 }
 
-fun Layout.large(direction: Direction, init: LayoutBreakpoint.() -> Unit) {
-    val breakpoint = LayoutBreakpoint(direction, DefaultBreakpoints.large)
+fun Layout.large(init: BreakpointLayout.() -> Unit) {
+    val breakpoint = BreakpointLayout(DefaultBreakpoints.large)
     breakpoint.init()
     this.addBreakpoint(breakpoint)
 }
 
-fun Layout.xlarge(direction: Direction, init: LayoutBreakpoint.() -> Unit) {
-    val breakpoint = LayoutBreakpoint(direction, DefaultBreakpoints.xlarge)
+fun Layout.xlarge(init: BreakpointLayout.() -> Unit) {
+    val breakpoint = BreakpointLayout(DefaultBreakpoints.xlarge)
     breakpoint.init()
     this.addBreakpoint(breakpoint)
 }

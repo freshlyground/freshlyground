@@ -1,17 +1,18 @@
 package fg.elements
 
-import fg.elements.layout.DefaultBreakpoints
-import fg.elements.layout.Direction
-import fg.elements.layout.direction
 import fg.elements.layout.layout
+import fg.elements.layout.medium
 import fg.elements.layout.small
 import fg.elements.layout.xsmall
+import fg.elements.style.typed.Flex
+import fg.elements.style.typed.FlexDirection
 import fg.elements.style.typed.FlexGrow
 import fg.style.colour.RgbColor
 
 object mainLayout {
 
     fun start() {
+
 
         BODY with {
 
@@ -24,9 +25,13 @@ object mainLayout {
             }
             div {
                 layout {
-                    direction(Direction.ROW) {
-                        small(Direction.COLUMN) {}
-                        xsmall(Direction.COLUMN) {}
+                    style.flexDirection = FlexDirection.row
+
+                    xsmall {
+                        style.flexDirection = FlexDirection.column
+                    }
+                    small {
+                        style.flexDirection = FlexDirection.column
                     }
                 }
                 div {
@@ -48,14 +53,15 @@ object mainLayout {
             }
             div {
                 layout {
-                    direction(Direction.ROW) {
-
-                    }
+                    style.flexDirection = FlexDirection.row
                 }
                 div {
+                    style.flexGrow = FlexGrow(1.0)
                     layout {
-                        direction(Direction.ROW) {
-                            hideOn(DefaultBreakpoints.medium)
+                        style.flexDirection = FlexDirection.row
+                        medium {
+                            onActivated { hide() }
+                            onDeactivated { show() }
                         }
                     }
                     div {
@@ -68,13 +74,13 @@ object mainLayout {
                         +"Col #1 Second item in row"
                         style.backgroundColor = RgbColor.RED.withAlfa(0.3)
                         _style.padding = "8px"
+                        style.flexGrow = FlexGrow(1.0)
                     }
                 }
                 div {
+                    style.flexGrow = FlexGrow(1.0)
                     layout {
-                        direction(Direction.COLUMN) {
-
-                        }
+                        style.flexDirection = FlexDirection.column
                     }
                     div {
                         +"Col #2 First item in column"
@@ -86,11 +92,76 @@ object mainLayout {
                         +"Col #2 Second item in column"
                         style.backgroundColor = RgbColor.RED.withAlfa(0.3)
                         _style.padding = "8px"
+                        style.flexGrow = FlexGrow(1.0)
                     }
                 }
             }
 
+            h2 {
+                +"Responsive Show & Hide"
+            }
+            div {
+                layout {
+                    style.flexDirection = FlexDirection.row
+                }
+                _id = "showNhide-outer-div"
 
+                div {
+                    layout {
+                        xsmall {
+                            onActivated { hide() }
+                            onDeactivated { show() }
+                        }
+                    }
+                    +"hide on xsmall and small"
+                    style.backgroundColor = RgbColor.BLUE.withAlfa(0.3)
+                    _style.padding = "8px"
+                    style.flexGrow = FlexGrow(1.0)
+                    _id = "showNhide-main-div"
+
+                }
+                div {
+                    +"Always show"
+                    style.backgroundColor = RgbColor.RED.withAlfa(0.3)
+                    _style.padding = "8px"
+                    style.flexGrow = FlexGrow(1.0)
+                }
+            }
+
+            h2 {
+                +"Responsive Typed Style"
+            }
+            div {
+                layout {
+                    style.flexDirection = FlexDirection.row
+
+                    xsmall {
+                        style.flexDirection = FlexDirection.column
+                    }
+                    small {
+                        style.flexDirection = FlexDirection.column
+                    }
+                }
+
+                div {
+                    +"A"
+                    style.backgroundColor = RgbColor.BLUE.withAlfa(0.3)
+                    _style.padding = "8px"
+                    style.flexGrow = FlexGrow(1.0)
+
+                    layout {
+                        small {
+                            style.flex = Flex(1)
+                        }
+                    }
+                }
+                div {
+                    +"B"
+                    style.backgroundColor = RgbColor.RED.withAlfa(0.3)
+                    _style.padding = "8px"
+                    style.flexGrow = FlexGrow(1.0)
+                }
+            }
         }
 
     }

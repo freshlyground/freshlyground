@@ -1,17 +1,14 @@
 package fg.beans
 
 import fg.elements.BODY
-import fg.elements.Div
 import fg.elements.div
 import fg.elements.h1
 import fg.elements.h2
-import fg.elements.layout.DefaultBreakpoints
-import fg.elements.layout.Direction
-import fg.elements.layout.direction
-import fg.elements.layout.hideOn
 import fg.elements.layout.layout
+import fg.elements.layout.small
 import fg.elements.layout.xsmall
 import fg.elements.style.typed.Flex
+import fg.elements.style.typed.FlexDirection
 import fg.elements.style.typed.FlexGrow
 import fg.elements.with
 import fg.style.colour.RgbColor
@@ -28,11 +25,11 @@ object layoutPage {
             h2 { +"Containers" }
             div {
                 layout {
-                    direction(Direction.ROW) { }
+                    style.flexDirection = FlexDirection.row
                 }
                 div {
                     layout {
-                        direction(Direction.ROW) { }
+                        style.flexDirection = FlexDirection.row
                     }
                     div {
                         +"First item in row"
@@ -50,7 +47,7 @@ object layoutPage {
                 }
                 div {
                     layout {
-                        direction(Direction.COLUMN) { }
+                        style.flexDirection = FlexDirection.column
                     }
                     div {
                         +"First item in column"
@@ -69,8 +66,9 @@ object layoutPage {
             }
             div {
                 layout {
-                    direction(Direction.ROW) {
-                        xsmall(Direction.COLUMN) {}
+                    style.flexDirection = FlexDirection.row
+                    xsmall {
+                        style.flexDirection = FlexDirection.column
                     }
                 }
                 div {
@@ -86,8 +84,21 @@ object layoutPage {
                 }
                 div {
                     +"Im hidden, when not wide enough"
-                    hideOn(DefaultBreakpoints.small, DefaultBreakpoints.xsmall)
-                    val d = Div()
+                    layout {
+                        onActivated {
+                            show()
+                        }
+                        small {
+                            onActivated {
+                                hide()
+                            }
+                        }
+                        xsmall {
+                            onActivated {
+                                hide()
+                            }
+                        }
+                    }
                 }
             }
             h2 {
@@ -95,11 +106,11 @@ object layoutPage {
             }
             div {
                 layout {
-                    direction(Direction.COLUMN) {}
+                    style.flexDirection = FlexDirection.column
                 }
                 div {
                     layout {
-                        direction(Direction.ROW) {}
+                        style.flexDirection = FlexDirection.row
                     }
                     div {
                         +"flex: none"

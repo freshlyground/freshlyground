@@ -9,7 +9,7 @@ import fg.beans.menu.Menu
 import fg.beans.menu.MenuBar
 import fg.elements.BODY
 import fg.elements.HTML
-import fg.elements.layout.Layout
+import fg.elements.layout.BreakpointLayout
 import fg.elements.with
 import fg.keyboard.Key
 import fg.keyboard.KeyBinding
@@ -37,7 +37,7 @@ fun main(vararg args: String) {
             menu("Layout") {
                 menuItem(Action(Drawer::class.js.name, shortcut = Key.from("ctrl+d"), perform = { window.location.href = currUrl.replaceParam("page", Drawer::class.js.name).toString() })) {}
                 menuItem(Action("Drag n Drop", perform = { window.location.href = currUrl.replaceParam("page", "DnD").toString() })) {}
-                menuItem(Action(Layout::class.js.name, shortcut = Key.from("ctrl+l"), perform = { window.location.href = currUrl.replaceParam("page", Layout::class.js.name).toString() })) {}
+                menuItem(Action(BreakpointLayout::class.js.name, shortcut = Key.from("ctrl+l"), perform = { window.location.href = currUrl.replaceParam("page", BreakpointLayout::class.js.name).toString() })) {}
             }
         }
 
@@ -72,7 +72,7 @@ fun main(vararg args: String) {
         Drawer::class.js.name -> {
             drawerPage.start()
         }
-        Layout::class.js.name -> {
+        BreakpointLayout::class.js.name -> {
             layoutPage.start()
         }
     }

@@ -1,8 +1,8 @@
 package fg.elements
 
 import fg.elements.layout.Breakpoint
-import fg.elements.layout.LayoutApi
-import fg.elements.layout.LayoutApiDelegate
+import fg.elements.layout.Layout
+import fg.elements.style.typed.BoundedTypedStyle
 import fg.elements.style.typed.Position
 import fg.elements.style.typed.TypedStyle
 import org.w3c.dom.DOMRect
@@ -51,9 +51,9 @@ open class Element(name: String? = null,
     val _style: CSSStyleDeclaration
         get() = w3cElement.style
 
-    val style: TypedStyle by lazy { TypedStyle(this) }
+    val style: TypedStyle by lazy { BoundedTypedStyle(this) }
 
-    var _layout: LayoutApi by LayoutApiDelegate(this)
+    var _layout: Layout? = null
 
     internal val renderBlocks: MutableList<Element.() -> Unit> = arrayListOf()
 
@@ -96,6 +96,7 @@ open class Element(name: String? = null,
         if (renderCalled) {
             throw  IllegalStateException("render has already been called for this element")
         }
+        _layout?.run { this.initialize() }
         render()
         renderBlocks.forEach { it.invoke(this) }
         renderCalled = true

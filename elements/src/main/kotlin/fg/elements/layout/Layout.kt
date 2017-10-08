@@ -1,46 +1,111 @@
 package fg.elements.layout
 
 import fg.elements.Element
+import fg.elements.style.typed.DeferredTypedStyle
+import fg.elements.style.typed.Display
+import fg.elements.style.typed.TypedStyle
+import org.w3c.dom.events.Event
+import kotlin.browser.window
 
-class Layout(direction: Direction,
-             internal val none: Boolean = false) : AbstractLayout(direction) {
+class Layout(private val element: Element) {
 
+    private val breakpointLayouts: MutableList<BreakpointLayout> = arrayListOf()
+    private var currentBreakpointLayout: BreakpointLayout? = null
+    private var currentIsDefaultLayout: Boolean = false
+    private var defaultActivated: Boolean = false
+    private var defaultDeactivated: Boolean = false
 
-    private constructor() : this(direction = Direction.ROW, none = true)
+    val style: TypedStyle by lazy { DeferredTypedStyle() }
+    private val deferredTypedStyle: DeferredTypedStyle by lazy {
+        style.unsafeCast<DeferredTypedStyle>()
+    }
+    private val onActivatedListeners: MutableList<() -> Unit> = arrayListOf()
+    private val onDeactivatedListeners: MutableList<() -> Unit> = arrayListOf()
 
+    private var registeredWindowResizedListener: Boolean = false
 
-    private val breakpoints: MutableList<LayoutBreakpoint> = arrayListOf()
+    private val windowResizedListener: (Event) -> Unit = {
+        this.windowResized(window.innerWidth)
+    }
 
-    internal fun doHandleResize(element: Element, resizedEvent: Element.ResizedEvent) {
+    private fun windowResized(windowWidth: Int) {
 
-        val breakpoint = find(resizedEvent.width)
+        val breakpointLayout = find(windowWidth.toDouble())
 
-        if (breakpoint != null) {
-            breakpoint.apply(element)
+        if (breakpointLayout != null) {
+            if (breakpointLayout !== currentBreakpointLayout) {
+                breakpointLayout.apply(this.element)
+                currentIsDefaultLayout = false
+                currentBreakpointLayout?.run {
+                    this.handleOnDeactivated()
+                }
+                currentBreakpointLayout = breakpointLayout
+                if (!defaultDeactivated) {
+                    for (l in onDeactivatedListeners) {
+                        l.invoke()
+                    }
+                    defaultDeactivated = true
+                    defaultActivated = false
+                }
+            }
         } else {
-            apply(element)
+            if (!currentIsDefaultLayout) {
+                deferredTypedStyle.apply(this.element)
+                if (!defaultActivated) {
+                    for (l in onActivatedListeners) {
+                        l.invoke()
+                    }
+                    defaultActivated = true
+                    defaultDeactivated = false
+                }
+                currentIsDefaultLayout = true
+                currentBreakpointLayout?.run {
+                    this.handleOnDeactivated()
+                }
+                currentBreakpointLayout = null
+            }
         }
     }
 
-    private fun find(width: Double): LayoutBreakpoint? {
-        return breakpoints.find { it.breakpoint.contains(width) }
+    fun initialize() {
+        this.element.style.display = Display.flex
+        deferredTypedStyle.apply(this.element)
+        currentIsDefaultLayout = true
     }
 
-    fun addBreakpoint(breakpoint: LayoutBreakpoint) {
-        breakpoints.add(breakpoint)
+    fun addBreakpoint(breakpoint: BreakpointLayout) {
+
+        breakpointLayouts.add(breakpoint)
+
+        if (!registeredWindowResizedListener) {
+            registeredWindowResizedListener = true
+            window.addEventListener("resize", windowResizedListener)
+        }
     }
 
-    companion object {
+    fun onActivated(listener: () -> Unit) {
+        onActivatedListeners.add(listener)
+    }
 
-        val NONE: Layout = Layout(direction = Direction.ROW, none = true)
+    fun unActivated(listener: () -> Unit) {
+        onActivatedListeners.remove(listener)
+    }
 
-        fun from(element: Element): Layout? {
-            val layoutDir = Direction.from(element.w3cElement.getAttribute("data-fg-layout"))
-            return layoutDir.toLayout()
+    fun onDeactivated(listener: () -> Unit) {
+        onDeactivatedListeners.add(listener)
+    }
+
+    fun unDeactivated(listener: () -> Unit) {
+        onDeactivatedListeners.remove(listener)
+    }
+
+    internal fun unregister() {
+        if (registeredWindowResizedListener) {
+            window.removeEventListener("resize", windowResizedListener)
         }
+    }
 
-        fun remove(element: Element) {
-            element.w3cElement.removeAttribute("data-fg-layout")
-        }
+    private fun find(width: Double): BreakpointLayout? {
+        return breakpointLayouts.find { it.breakpoint.contains(width) }
     }
 }

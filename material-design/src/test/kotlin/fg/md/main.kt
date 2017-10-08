@@ -17,12 +17,11 @@ import fg.elements.h1
 import fg.elements.h2
 import fg.elements.hr
 import fg.elements.inputText
-import fg.elements.layout.Direction
-import fg.elements.layout.direction
 import fg.elements.layout.layout
 import fg.elements.p
 import fg.elements.render
 import fg.elements.span
+import fg.elements.style.typed.FlexDirection
 import fg.elements.with
 import fg.keyboard.Key
 import fg.md.button.MDButton
@@ -99,14 +98,14 @@ class Main() {
 
 
     val button: Div = Div() with {
-        layout { direction(Direction.COLUMN) {} }
+        layout { style.flexDirection = FlexDirection.column }
         h2 {
             +"Button"
         }
         div {
-            layout { direction(Direction.COLUMN) {} }
+            layout { style.flexDirection = FlexDirection.column }
             div {
-                layout { direction(Direction.ROW) {} }
+                layout { style.flexDirection = FlexDirection.row }
 
                 span { +"Flat: " }
 
@@ -117,14 +116,14 @@ class Main() {
                 mdButton(Action(label = "FLAT", enabled = false, perform = {}), MDButton.Type.FLAT) {}
             }
             div {
-                layout { direction(Direction.ROW) {} }
+                layout { style.flexDirection = FlexDirection.row }
 
                 span { +"Raised: " }
                 mdButton(Action(label = "RAISED", perform = {}), MDButton.Type.RAISED) {}
                 mdButton(Action(label = "RAISED", enabled = false, perform = {}), MDButton.Type.RAISED) {}
             }
             div {
-                layout { direction(Direction.ROW) {} }
+                layout { style.flexDirection = FlexDirection.row }
 
                 span { +"Floating: " }
                 mdButton(Action(label = "ACCENT", perform = {}), MDButton.Type.FLOATING) {
@@ -141,7 +140,7 @@ class Main() {
                 }
             }
             div {
-                layout { direction(Direction.ROW) {} }
+                layout { style.flexDirection = FlexDirection.row }
 
                 span { +"Toggle: " }
                 mdToggleButton(SelectableAction("Toggle") {}) {}
