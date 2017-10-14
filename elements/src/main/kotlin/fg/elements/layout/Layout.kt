@@ -1,6 +1,7 @@
 package fg.elements.layout
 
 import fg.elements.Element
+import fg.elements.onResize
 import fg.elements.style.typed.DeferredTypedStyle
 import fg.elements.style.typed.Display
 import fg.elements.style.typed.TypedStyle
@@ -79,7 +80,7 @@ class Layout(private val element: Element) {
 
         if (!registeredWindowResizedListener) {
             registeredWindowResizedListener = true
-            window.addEventListener("resize", windowResizedListener)
+            window.onResize(windowResizedListener)
         }
     }
 
