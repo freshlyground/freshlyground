@@ -8,15 +8,16 @@
 <a href="../../../index.html">elements</a>&nbsp;/&nbsp;<a href="../../index.html">fg.style</a>&nbsp;/&nbsp;<a href="../index.html">TypedRule</a>&nbsp;/&nbsp;<a href=".">TypedPropertyDelegate</a><br/>
 <br/>
 <h1>TypedPropertyDelegate</h1>
-<code><span class="keyword">abstract</span> <span class="keyword">class </span><span class="identifier">TypedPropertyDelegate</span><span class="symbol">&lt;</span><span class="identifier">T</span>&nbsp;<span class="symbol">:</span>&nbsp;<span class="identifier">Any</span><span class="symbol">&gt;</span></code>
+<code><span class="keyword">abstract</span> <span class="keyword">class </span><span class="identifier">TypedPropertyDelegate</span><span class="symbol">&lt;</span><span class="identifier">T</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">&gt;</span></code>
 <h3>Constructors</h3>
 <table>
 <tbody>
 <tr>
 <td>
-<a href="-init-.html">&lt;init&gt;</a></td>
+<p><a href="-init-.html">&lt;init&gt;</a></p>
+</td>
 <td>
-<code><span class="identifier">TypedPropertyDelegate</span><span class="symbol">(</span><span class="identifier" id="fg.style.TypedRule.TypedPropertyDelegate$<init>(kotlin.String, kotlin.Function1((kotlin.String, fg.style.TypedRule.TypedPropertyDelegate.T)))/attributeName">attributeName</span><span class="symbol">:</span>&nbsp;<span class="identifier">String</span><span class="symbol">?</span>&nbsp;<span class="symbol">=</span>&nbsp;null<span class="symbol">, </span><span class="identifier" id="fg.style.TypedRule.TypedPropertyDelegate$<init>(kotlin.String, kotlin.Function1((kotlin.String, fg.style.TypedRule.TypedPropertyDelegate.T)))/getFn">getFn</span><span class="symbol">:</span>&nbsp;<span class="symbol">(</span><span class="identifier">String</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<span class="identifier">T</span><span class="symbol">)</span></code></td>
+<code><span class="identifier">TypedPropertyDelegate</span><span class="symbol">(</span><span class="identifier" id="fg.style.TypedRule.TypedPropertyDelegate$<init>(kotlin.String, kotlin.Function1((kotlin.String, fg.style.TypedRule.TypedPropertyDelegate.T)))/attributeName">attributeName</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">?</span>&nbsp;<span class="symbol">=</span>&nbsp;null<span class="symbol">, </span><span class="identifier" id="fg.style.TypedRule.TypedPropertyDelegate$<init>(kotlin.String, kotlin.Function1((kotlin.String, fg.style.TypedRule.TypedPropertyDelegate.T)))/getFn">getFn</span><span class="symbol">:</span>&nbsp;<span class="symbol">(</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<span class="identifier">T</span><span class="symbol">)</span></code></td>
 </tr>
 </tbody>
 </table>
@@ -25,15 +26,17 @@
 <tbody>
 <tr>
 <td>
-<a href="attribute-name.html">attributeName</a></td>
+<p><a href="attribute-name.html">attributeName</a></p>
+</td>
 <td>
-<code><span class="keyword">val </span><span class="identifier">attributeName</span><span class="symbol">: </span><span class="identifier">String</span><span class="symbol">?</span></code></td>
+<code><span class="keyword">val </span><span class="identifier">attributeName</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">?</span></code></td>
 </tr>
 <tr>
 <td>
-<a href="get-fn.html">getFn</a></td>
+<p><a href="get-fn.html">getFn</a></p>
+</td>
 <td>
-<code><span class="keyword">val </span><span class="identifier">getFn</span><span class="symbol">: </span><span class="symbol">(</span><span class="identifier">String</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<span class="identifier">T</span></code></td>
+<code><span class="keyword">val </span><span class="identifier">getFn</span><span class="symbol">: </span><span class="symbol">(</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<span class="identifier">T</span></code></td>
 </tr>
 </tbody>
 </table>
@@ -42,15 +45,17 @@
 <tbody>
 <tr>
 <td>
-<a href="get-value.html">getValue</a></td>
+<p><a href="get-value.html">getValue</a></p>
+</td>
 <td>
-<code><span class="keyword">open</span> <span class="keyword">operator</span> <span class="keyword">fun </span><span class="identifier">getValue</span><span class="symbol">(</span><span class="identifier" id="fg.style.TypedRule.TypedPropertyDelegate$getValue(fg.style.TypedRule((fg.elements.Selector)), kotlin.reflect.KProperty((kotlin.Any)))/thisRef">thisRef</span><span class="symbol">:</span>&nbsp;<a href="../index.html"><span class="identifier">TypedRule</span></a><span class="symbol">&lt;</span><span class="identifier">*</span><span class="symbol">&gt;</span><span class="symbol">, </span><span class="identifier" id="fg.style.TypedRule.TypedPropertyDelegate$getValue(fg.style.TypedRule((fg.elements.Selector)), kotlin.reflect.KProperty((kotlin.Any)))/property">property</span><span class="symbol">:</span>&nbsp;<span class="identifier">KProperty</span><span class="symbol">&lt;</span><span class="identifier">*</span><span class="symbol">&gt;</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">T</span><span class="symbol">?</span></code></td>
+<code><span class="keyword">open</span> <span class="keyword">operator</span> <span class="keyword">fun </span><span class="identifier">getValue</span><span class="symbol">(</span><span class="identifier" id="fg.style.TypedRule.TypedPropertyDelegate$getValue(fg.style.TypedRule((fg.elements.Selector)), kotlin.reflect.KProperty((kotlin.Any)))/thisRef">thisRef</span><span class="symbol">:</span>&nbsp;<a href="../index.html"><span class="identifier">TypedRule</span></a><span class="symbol">&lt;</span><span class="identifier">*</span><span class="symbol">&gt;</span><span class="symbol">, </span><span class="identifier" id="fg.style.TypedRule.TypedPropertyDelegate$getValue(fg.style.TypedRule((fg.elements.Selector)), kotlin.reflect.KProperty((kotlin.Any)))/property">property</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.reflect/-k-property/index.html"><span class="identifier">KProperty</span></a><span class="symbol">&lt;</span><span class="identifier">*</span><span class="symbol">&gt;</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">T</span><span class="symbol">?</span></code></td>
 </tr>
 <tr>
 <td>
-<a href="set-value.html">setValue</a></td>
+<p><a href="set-value.html">setValue</a></p>
+</td>
 <td>
-<code><span class="keyword">open</span> <span class="keyword">operator</span> <span class="keyword">fun </span><span class="identifier">setValue</span><span class="symbol">(</span><span class="identifier" id="fg.style.TypedRule.TypedPropertyDelegate$setValue(fg.style.TypedRule((fg.elements.Selector)), kotlin.reflect.KProperty((kotlin.Any)), fg.style.TypedRule.TypedPropertyDelegate.T)/thisRef">thisRef</span><span class="symbol">:</span>&nbsp;<a href="../index.html"><span class="identifier">TypedRule</span></a><span class="symbol">&lt;</span><span class="identifier">*</span><span class="symbol">&gt;</span><span class="symbol">, </span><span class="identifier" id="fg.style.TypedRule.TypedPropertyDelegate$setValue(fg.style.TypedRule((fg.elements.Selector)), kotlin.reflect.KProperty((kotlin.Any)), fg.style.TypedRule.TypedPropertyDelegate.T)/property">property</span><span class="symbol">:</span>&nbsp;<span class="identifier">KProperty</span><span class="symbol">&lt;</span><span class="identifier">*</span><span class="symbol">&gt;</span><span class="symbol">, </span><span class="identifier" id="fg.style.TypedRule.TypedPropertyDelegate$setValue(fg.style.TypedRule((fg.elements.Selector)), kotlin.reflect.KProperty((kotlin.Any)), fg.style.TypedRule.TypedPropertyDelegate.T)/value">value</span><span class="symbol">:</span>&nbsp;<span class="identifier">T</span><span class="symbol">?</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">Unit</span></code></td>
+<code><span class="keyword">open</span> <span class="keyword">operator</span> <span class="keyword">fun </span><span class="identifier">setValue</span><span class="symbol">(</span><span class="identifier" id="fg.style.TypedRule.TypedPropertyDelegate$setValue(fg.style.TypedRule((fg.elements.Selector)), kotlin.reflect.KProperty((kotlin.Any)), fg.style.TypedRule.TypedPropertyDelegate.T)/thisRef">thisRef</span><span class="symbol">:</span>&nbsp;<a href="../index.html"><span class="identifier">TypedRule</span></a><span class="symbol">&lt;</span><span class="identifier">*</span><span class="symbol">&gt;</span><span class="symbol">, </span><span class="identifier" id="fg.style.TypedRule.TypedPropertyDelegate$setValue(fg.style.TypedRule((fg.elements.Selector)), kotlin.reflect.KProperty((kotlin.Any)), fg.style.TypedRule.TypedPropertyDelegate.T)/property">property</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.reflect/-k-property/index.html"><span class="identifier">KProperty</span></a><span class="symbol">&lt;</span><span class="identifier">*</span><span class="symbol">&gt;</span><span class="symbol">, </span><span class="identifier" id="fg.style.TypedRule.TypedPropertyDelegate$setValue(fg.style.TypedRule((fg.elements.Selector)), kotlin.reflect.KProperty((kotlin.Any)), fg.style.TypedRule.TypedPropertyDelegate.T)/value">value</span><span class="symbol">:</span>&nbsp;<span class="identifier">T</span><span class="symbol">?</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
 </tr>
 </tbody>
 </table>
@@ -59,73 +64,85 @@
 <tbody>
 <tr>
 <td>
-<a href="../-align-items-delegate/index.html">AlignItemsDelegate</a></td>
+<p><a href="../-align-items-delegate/index.html">AlignItemsDelegate</a></p>
+</td>
 <td>
 <code><span class="keyword">class </span><span class="identifier">AlignItemsDelegate</span>&nbsp;<span class="symbol">:</span>&nbsp;<span class="identifier">TypedPropertyDelegate</span><span class="symbol">&lt;</span><a href="../../../fg.elements.style.typed/-align-items/index.html"><span class="identifier">AlignItems</span></a><span class="symbol">&gt;</span></code></td>
 </tr>
 <tr>
 <td>
-<a href="../-dimension-delegate/index.html">DimensionDelegate</a></td>
+<p><a href="../-dimension-delegate/index.html">DimensionDelegate</a></p>
+</td>
 <td>
 <code><span class="keyword">class </span><span class="identifier">DimensionDelegate</span>&nbsp;<span class="symbol">:</span>&nbsp;<span class="identifier">TypedPropertyDelegate</span><span class="symbol">&lt;</span><a href="../../../fg.elements/-dimension/index.html"><span class="identifier">Dimension</span></a><span class="symbol">&gt;</span></code></td>
 </tr>
 <tr>
 <td>
-<a href="../-display-delegate/index.html">DisplayDelegate</a></td>
+<p><a href="../-display-delegate/index.html">DisplayDelegate</a></p>
+</td>
 <td>
 <code><span class="keyword">class </span><span class="identifier">DisplayDelegate</span>&nbsp;<span class="symbol">:</span>&nbsp;<span class="identifier">TypedPropertyDelegate</span><span class="symbol">&lt;</span><a href="../../../fg.elements.style.typed/-display/index.html"><span class="identifier">Display</span></a><span class="symbol">&gt;</span></code></td>
 </tr>
 <tr>
 <td>
-<a href="../-flex-basis-delegate/index.html">FlexBasisDelegate</a></td>
+<p><a href="../-flex-basis-delegate/index.html">FlexBasisDelegate</a></p>
+</td>
 <td>
 <code><span class="keyword">class </span><span class="identifier">FlexBasisDelegate</span>&nbsp;<span class="symbol">:</span>&nbsp;<span class="identifier">TypedPropertyDelegate</span><span class="symbol">&lt;</span><a href="../../../fg.elements.style.typed/-flex-basis/index.html"><span class="identifier">FlexBasis</span></a><span class="symbol">&gt;</span></code></td>
 </tr>
 <tr>
 <td>
-<a href="../-flex-delegate/index.html">FlexDelegate</a></td>
+<p><a href="../-flex-delegate/index.html">FlexDelegate</a></p>
+</td>
 <td>
 <code><span class="keyword">class </span><span class="identifier">FlexDelegate</span>&nbsp;<span class="symbol">:</span>&nbsp;<span class="identifier">TypedPropertyDelegate</span><span class="symbol">&lt;</span><a href="../../../fg.elements.style.typed/-flex/index.html"><span class="identifier">Flex</span></a><span class="symbol">&gt;</span></code></td>
 </tr>
 <tr>
 <td>
-<a href="../-flex-direction-delegate/index.html">FlexDirectionDelegate</a></td>
+<p><a href="../-flex-direction-delegate/index.html">FlexDirectionDelegate</a></p>
+</td>
 <td>
 <code><span class="keyword">class </span><span class="identifier">FlexDirectionDelegate</span>&nbsp;<span class="symbol">:</span>&nbsp;<span class="identifier">TypedPropertyDelegate</span><span class="symbol">&lt;</span><a href="../../../fg.elements.style.typed/-flex-direction/index.html"><span class="identifier">FlexDirection</span></a><span class="symbol">&gt;</span></code></td>
 </tr>
 <tr>
 <td>
-<a href="../-flex-grow-delegate/index.html">FlexGrowDelegate</a></td>
+<p><a href="../-flex-grow-delegate/index.html">FlexGrowDelegate</a></p>
+</td>
 <td>
 <code><span class="keyword">class </span><span class="identifier">FlexGrowDelegate</span>&nbsp;<span class="symbol">:</span>&nbsp;<span class="identifier">TypedPropertyDelegate</span><span class="symbol">&lt;</span><a href="../../../fg.elements.style.typed/-flex-grow/index.html"><span class="identifier">FlexGrow</span></a><span class="symbol">&gt;</span></code></td>
 </tr>
 <tr>
 <td>
-<a href="../-flex-shrink-delegate/index.html">FlexShrinkDelegate</a></td>
+<p><a href="../-flex-shrink-delegate/index.html">FlexShrinkDelegate</a></p>
+</td>
 <td>
 <code><span class="keyword">class </span><span class="identifier">FlexShrinkDelegate</span>&nbsp;<span class="symbol">:</span>&nbsp;<span class="identifier">TypedPropertyDelegate</span><span class="symbol">&lt;</span><a href="../../../fg.elements.style.typed/-flex-shrink/index.html"><span class="identifier">FlexShrink</span></a><span class="symbol">&gt;</span></code></td>
 </tr>
 <tr>
 <td>
-<a href="../-int-delegate/index.html">IntDelegate</a></td>
+<p><a href="../-int-delegate/index.html">IntDelegate</a></p>
+</td>
 <td>
-<code><span class="keyword">class </span><span class="identifier">IntDelegate</span>&nbsp;<span class="symbol">:</span>&nbsp;<span class="identifier">TypedPropertyDelegate</span><span class="symbol">&lt;</span><span class="identifier">Int</span><span class="symbol">&gt;</span></code></td>
+<code><span class="keyword">class </span><span class="identifier">IntDelegate</span>&nbsp;<span class="symbol">:</span>&nbsp;<span class="identifier">TypedPropertyDelegate</span><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a><span class="symbol">&gt;</span></code></td>
 </tr>
 <tr>
 <td>
-<a href="../-justify-content-delegate/index.html">JustifyContentDelegate</a></td>
+<p><a href="../-justify-content-delegate/index.html">JustifyContentDelegate</a></p>
+</td>
 <td>
 <code><span class="keyword">class </span><span class="identifier">JustifyContentDelegate</span>&nbsp;<span class="symbol">:</span>&nbsp;<span class="identifier">TypedPropertyDelegate</span><span class="symbol">&lt;</span><a href="../../../fg.elements.style.typed/-justify-content/index.html"><span class="identifier">JustifyContent</span></a><span class="symbol">&gt;</span></code></td>
 </tr>
 <tr>
 <td>
-<a href="../-position-delegate/index.html">PositionDelegate</a></td>
+<p><a href="../-position-delegate/index.html">PositionDelegate</a></p>
+</td>
 <td>
 <code><span class="keyword">class </span><span class="identifier">PositionDelegate</span>&nbsp;<span class="symbol">:</span>&nbsp;<span class="identifier">TypedPropertyDelegate</span><span class="symbol">&lt;</span><a href="../../../fg.elements.style.typed/-position/index.html"><span class="identifier">Position</span></a><span class="symbol">&gt;</span></code></td>
 </tr>
 <tr>
 <td>
-<a href="../-rgb-color-delegate/index.html">RgbColorDelegate</a></td>
+<p><a href="../-rgb-color-delegate/index.html">RgbColorDelegate</a></p>
+</td>
 <td>
 <code><span class="keyword">class </span><span class="identifier">RgbColorDelegate</span>&nbsp;<span class="symbol">:</span>&nbsp;<span class="identifier">TypedPropertyDelegate</span><span class="symbol">&lt;</span><a href="../../../fg.style.colour/-rgb-color/index.html"><span class="identifier">RgbColor</span></a><span class="symbol">&gt;</span></code></td>
 </tr>

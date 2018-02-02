@@ -13,15 +13,20 @@ if (typeof this['fg-agent'] === 'undefined') {
 var beans = function (_, Kotlin, $module$elements, $module$fg_keyboard, $module$fg_agent) {
   'use strict';
   var initAndAppendNode = $module$elements.fg.elements.initAndAppendNode_n3qhgg$;
+  var Kind_CLASS = Kotlin.Kind.CLASS;
+  var PropertyMetadata = Kotlin.PropertyMetadata;
   var properties = Kotlin.kotlin.properties;
   var Unit = Kotlin.kotlin.Unit;
+  var Kind_INTERFACE = Kotlin.Kind.INTERFACE;
   var toClassSelector = $module$elements.fg.elements.toClassSelector_pdl1vz$;
+  var Kind_OBJECT = Kotlin.Kind.OBJECT;
   var Div = $module$elements.fg.elements.Div;
   var Text = $module$elements.fg.elements.Text;
   var RgbColor = $module$elements.fg.style.colour.RgbColor;
   var elements = $module$elements.fg.elements;
   var TypedStyledClass = $module$elements.fg.elements.TypedStyledClass;
   var lazy = Kotlin.kotlin.lazy_klfg04$;
+  var throwCCE = Kotlin.throwCCE;
   var Button = $module$elements.fg.elements.Button;
   var onClick = $module$elements.fg.elements.onClick_8l2ll4$;
   var onMouseEnter = $module$elements.fg.elements.onMouseEnter_e96vkx$;
@@ -37,6 +42,8 @@ var beans = function (_, Kotlin, $module$elements, $module$fg_keyboard, $module$
   var unMouseDown = $module$elements.fg.elements.unMouseDown_e96vkx$;
   var unMouseUp = $module$elements.fg.elements.unMouseUp_e96vkx$;
   var Span = $module$elements.fg.elements.Span;
+  var getPropertyCallableRef = Kotlin.getPropertyCallableRef;
+  var equals = Kotlin.equals;
   var Pixels = $module$elements.fg.elements.Pixels;
   var and = $module$elements.fg.style.and_xif9ow$;
   var hover = $module$elements.fg.style.hover_dn1ps9$;
@@ -45,16 +52,19 @@ var beans = function (_, Kotlin, $module$elements, $module$fg_keyboard, $module$
   var StyledClass = $module$elements.fg.elements.StyledClass;
   var Element = $module$elements.fg.elements.Element;
   var get_js = Kotlin.kotlin.js.get_js_1yb8b7$;
-  var IllegalArgumentException = Kotlin.kotlin.IllegalArgumentException;
+  var IllegalArgumentException_init = Kotlin.kotlin.IllegalArgumentException_init_pdl1vj$;
   var Position = $module$elements.fg.elements.style.typed.Position;
   var Side = $module$elements.fg.base.Side;
   var startsWith = Kotlin.kotlin.text.startsWith_7epoxm$;
+  var toString = Kotlin.toString;
   var I = $module$elements.fg.elements.I;
   var ClassSelector = $module$elements.fg.elements.ClassSelector;
   var Enum = Kotlin.kotlin.Enum;
+  var throwISE = Kotlin.throwISE;
   var A = $module$elements.fg.elements.A;
   var base = $module$elements.fg.base;
   var Comparable = Kotlin.kotlin.Comparable;
+  var ensureNotNull = Kotlin.ensureNotNull;
   var get_computedStyle = $module$elements.fg.elements.get_computedStyle_gobym5$;
   var get_px = $module$elements.fg.elements.get_px_pdl1vz$;
   var child = $module$elements.fg.style.child_xmmih7$;
@@ -249,7 +259,7 @@ var beans = function (_, Kotlin, $module$elements, $module$fg_keyboard, $module$
     }
   });
   ElementStyle.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     simpleName: 'ElementStyle',
     interfaces: []
   };
@@ -264,7 +274,7 @@ var beans = function (_, Kotlin, $module$elements, $module$fg_keyboard, $module$
   Delegates$observable$ObjectLiteral.prototype.afterChange_jxtfl0$ = function (property, oldValue, newValue) {
     this.closure$onChange(property, oldValue, newValue);
   };
-  Delegates$observable$ObjectLiteral.$metadata$ = {kind: Kotlin.Kind.CLASS, interfaces: [ObservableProperty]};
+  Delegates$observable$ObjectLiteral.$metadata$ = {kind: Kind_CLASS, interfaces: [ObservableProperty]};
   Delegates$observable$ObjectLiteral_0.prototype = Object.create(ObservableProperty.prototype);
   Delegates$observable$ObjectLiteral_0.prototype.constructor = Delegates$observable$ObjectLiteral_0;
   function Delegates$observable$ObjectLiteral_0(closure$onChange, initialValue_0) {
@@ -274,7 +284,7 @@ var beans = function (_, Kotlin, $module$elements, $module$fg_keyboard, $module$
   Delegates$observable$ObjectLiteral_0.prototype.afterChange_jxtfl0$ = function (property, oldValue, newValue) {
     this.closure$onChange(property, oldValue, newValue);
   };
-  Delegates$observable$ObjectLiteral_0.$metadata$ = {kind: Kotlin.Kind.CLASS, interfaces: [ObservableProperty]};
+  Delegates$observable$ObjectLiteral_0.$metadata$ = {kind: Kind_CLASS, interfaces: [ObservableProperty]};
   Delegates$observable$ObjectLiteral_1.prototype = Object.create(ObservableProperty.prototype);
   Delegates$observable$ObjectLiteral_1.prototype.constructor = Delegates$observable$ObjectLiteral_1;
   function Delegates$observable$ObjectLiteral_1(closure$onChange, initialValue_0) {
@@ -284,7 +294,7 @@ var beans = function (_, Kotlin, $module$elements, $module$fg_keyboard, $module$
   Delegates$observable$ObjectLiteral_1.prototype.afterChange_jxtfl0$ = function (property, oldValue, newValue) {
     this.closure$onChange(property, oldValue, newValue);
   };
-  Delegates$observable$ObjectLiteral_1.$metadata$ = {kind: Kotlin.Kind.CLASS, interfaces: [ObservableProperty]};
+  Delegates$observable$ObjectLiteral_1.$metadata$ = {kind: Kind_CLASS, interfaces: [ObservableProperty]};
   Delegates$observable$ObjectLiteral_2.prototype = Object.create(ObservableProperty.prototype);
   Delegates$observable$ObjectLiteral_2.prototype.constructor = Delegates$observable$ObjectLiteral_2;
   function Delegates$observable$ObjectLiteral_2(closure$onChange, initialValue_0) {
@@ -294,7 +304,7 @@ var beans = function (_, Kotlin, $module$elements, $module$fg_keyboard, $module$
   Delegates$observable$ObjectLiteral_2.prototype.afterChange_jxtfl0$ = function (property, oldValue, newValue) {
     this.closure$onChange(property, oldValue, newValue);
   };
-  Delegates$observable$ObjectLiteral_2.$metadata$ = {kind: Kotlin.Kind.CLASS, interfaces: [ObservableProperty]};
+  Delegates$observable$ObjectLiteral_2.$metadata$ = {kind: Kind_CLASS, interfaces: [ObservableProperty]};
   Delegates$observable$ObjectLiteral_3.prototype = Object.create(ObservableProperty.prototype);
   Delegates$observable$ObjectLiteral_3.prototype.constructor = Delegates$observable$ObjectLiteral_3;
   function Delegates$observable$ObjectLiteral_3(closure$onChange, initialValue_0) {
@@ -304,7 +314,7 @@ var beans = function (_, Kotlin, $module$elements, $module$fg_keyboard, $module$
   Delegates$observable$ObjectLiteral_3.prototype.afterChange_jxtfl0$ = function (property, oldValue, newValue) {
     this.closure$onChange(property, oldValue, newValue);
   };
-  Delegates$observable$ObjectLiteral_3.$metadata$ = {kind: Kotlin.Kind.CLASS, interfaces: [ObservableProperty]};
+  Delegates$observable$ObjectLiteral_3.$metadata$ = {kind: Kind_CLASS, interfaces: [ObservableProperty]};
   function Action(label, enabled, icon, shortcut, perform) {
     if (label === void 0)
       label = null;
@@ -323,28 +333,31 @@ var beans = function (_, Kotlin, $module$elements, $module$fg_keyboard, $module$
     this.icon_sx3vrr$_0 = new Delegates$observable$ObjectLiteral_2(Action$icon$lambda(this), icon);
     this.shortcut_kibx6s$_0 = new Delegates$observable$ObjectLiteral_3(Action$shortcut$lambda(this), shortcut);
   }
+  var Action$perform_metadata = new PropertyMetadata('perform');
   Object.defineProperty(Action.prototype, 'perform', {
     get: function () {
-      return this.perform_7jtrht$_0.getValue_lrcp0p$(this, new Kotlin.PropertyMetadata('perform'));
+      return this.perform_7jtrht$_0.getValue_lrcp0p$(this, Action$perform_metadata);
     },
     set: function (perform) {
-      this.perform_7jtrht$_0.setValue_9rddgb$(this, new Kotlin.PropertyMetadata('perform'), perform);
+      this.perform_7jtrht$_0.setValue_9rddgb$(this, Action$perform_metadata, perform);
     }
   });
+  var Action$label_metadata = new PropertyMetadata('label');
   Object.defineProperty(Action.prototype, 'label', {
     get: function () {
-      return this.label_s9x6im$_0.getValue_lrcp0p$(this, new Kotlin.PropertyMetadata('label'));
+      return this.label_s9x6im$_0.getValue_lrcp0p$(this, Action$label_metadata);
     },
     set: function (label) {
-      this.label_s9x6im$_0.setValue_9rddgb$(this, new Kotlin.PropertyMetadata('label'), label);
+      this.label_s9x6im$_0.setValue_9rddgb$(this, Action$label_metadata, label);
     }
   });
+  var Action$enabled_metadata = new PropertyMetadata('enabled');
   Object.defineProperty(Action.prototype, 'enabled', {
     get: function () {
-      return this.enabled_rkubv5$_0.getValue_lrcp0p$(this, new Kotlin.PropertyMetadata('enabled'));
+      return this.enabled_rkubv5$_0.getValue_lrcp0p$(this, Action$enabled_metadata);
     },
     set: function (enabled) {
-      this.enabled_rkubv5$_0.setValue_9rddgb$(this, new Kotlin.PropertyMetadata('enabled'), enabled);
+      this.enabled_rkubv5$_0.setValue_9rddgb$(this, Action$enabled_metadata, enabled);
     }
   });
   Object.defineProperty(Action.prototype, 'disabled', {
@@ -352,20 +365,22 @@ var beans = function (_, Kotlin, $module$elements, $module$fg_keyboard, $module$
       return !this.enabled;
     }
   });
+  var Action$icon_metadata = new PropertyMetadata('icon');
   Object.defineProperty(Action.prototype, 'icon', {
     get: function () {
-      return this.icon_sx3vrr$_0.getValue_lrcp0p$(this, new Kotlin.PropertyMetadata('icon'));
+      return this.icon_sx3vrr$_0.getValue_lrcp0p$(this, Action$icon_metadata);
     },
     set: function (icon) {
-      this.icon_sx3vrr$_0.setValue_9rddgb$(this, new Kotlin.PropertyMetadata('icon'), icon);
+      this.icon_sx3vrr$_0.setValue_9rddgb$(this, Action$icon_metadata, icon);
     }
   });
+  var Action$shortcut_metadata = new PropertyMetadata('shortcut');
   Object.defineProperty(Action.prototype, 'shortcut', {
     get: function () {
-      return this.shortcut_kibx6s$_0.getValue_lrcp0p$(this, new Kotlin.PropertyMetadata('shortcut'));
+      return this.shortcut_kibx6s$_0.getValue_lrcp0p$(this, Action$shortcut_metadata);
     },
     set: function (shortcut) {
-      this.shortcut_kibx6s$_0.setValue_9rddgb$(this, new Kotlin.PropertyMetadata('shortcut'), shortcut);
+      this.shortcut_kibx6s$_0.setValue_9rddgb$(this, Action$shortcut_metadata, shortcut);
     }
   });
   Action.prototype.notifyPropertyChanged_oh08kn$ = function (property, old, new_0) {
@@ -419,14 +434,14 @@ var beans = function (_, Kotlin, $module$elements, $module$fg_keyboard, $module$
     };
   }
   Action.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     simpleName: 'Action',
     interfaces: []
   };
   function ActionBean() {
   }
   ActionBean.$metadata$ = {
-    kind: Kotlin.Kind.INTERFACE,
+    kind: Kind_INTERFACE,
     simpleName: 'ActionBean',
     interfaces: []
   };
@@ -435,7 +450,7 @@ var beans = function (_, Kotlin, $module$elements, $module$fg_keyboard, $module$
     this.source = source;
   }
   ActionPerform.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     simpleName: 'ActionPerform',
     interfaces: []
   };
@@ -469,7 +484,7 @@ var beans = function (_, Kotlin, $module$elements, $module$fg_keyboard, $module$
   Delegates$observable$ObjectLiteral_4.prototype.afterChange_jxtfl0$ = function (property, oldValue, newValue) {
     this.closure$onChange(property, oldValue, newValue);
   };
-  Delegates$observable$ObjectLiteral_4.$metadata$ = {kind: Kotlin.Kind.CLASS, interfaces: [ObservableProperty]};
+  Delegates$observable$ObjectLiteral_4.$metadata$ = {kind: Kind_CLASS, interfaces: [ObservableProperty]};
   function SelectableAction(label, enabled, selectedIcon, deselectedIcon, selected, shortcut, perform) {
     SelectableAction$Statics_getInstance();
     if (label === void 0)
@@ -491,12 +506,13 @@ var beans = function (_, Kotlin, $module$elements, $module$fg_keyboard, $module$
     this.deselectedIcon = deselectedIcon;
     this.selected_fi76d9$_0 = new Delegates$observable$ObjectLiteral_4(SelectableAction$selected$lambda(this), selected);
   }
+  var SelectableAction$selected_metadata = new PropertyMetadata('selected');
   Object.defineProperty(SelectableAction.prototype, 'selected', {
     get: function () {
-      return this.selected_fi76d9$_0.getValue_lrcp0p$(this, new Kotlin.PropertyMetadata('selected'));
+      return this.selected_fi76d9$_0.getValue_lrcp0p$(this, SelectableAction$selected_metadata);
     },
     set: function (selected) {
-      this.selected_fi76d9$_0.setValue_9rddgb$(this, new Kotlin.PropertyMetadata('selected'), selected);
+      this.selected_fi76d9$_0.setValue_9rddgb$(this, SelectableAction$selected_metadata, selected);
     }
   });
   SelectableAction.prototype.perform_54c9de$ = function (source) {
@@ -508,7 +524,7 @@ var beans = function (_, Kotlin, $module$elements, $module$fg_keyboard, $module$
     this.selectedSelector = toClassSelector('.action-selected');
   }
   SelectableAction$Statics.$metadata$ = {
-    kind: Kotlin.Kind.OBJECT,
+    kind: Kind_OBJECT,
     simpleName: 'Statics',
     interfaces: []
   };
@@ -526,7 +542,7 @@ var beans = function (_, Kotlin, $module$elements, $module$fg_keyboard, $module$
     };
   }
   SelectableAction.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     simpleName: 'SelectableAction',
     interfaces: [Action]
   };
@@ -560,7 +576,7 @@ var beans = function (_, Kotlin, $module$elements, $module$fg_keyboard, $module$
     return Unit;
   }
   AppBar$AppBar.$metadata$ = {
-    kind: Kotlin.Kind.OBJECT,
+    kind: Kind_OBJECT,
     simpleName: 'AppBar',
     interfaces: [TypedStyledClass]
   };
@@ -572,7 +588,7 @@ var beans = function (_, Kotlin, $module$elements, $module$fg_keyboard, $module$
     return AppBar$AppBar_instance;
   }
   AppBar.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     simpleName: 'AppBar',
     interfaces: [Div]
   };
@@ -584,16 +600,12 @@ var beans = function (_, Kotlin, $module$elements, $module$fg_keyboard, $module$
   }
   Object.defineProperty(Application.prototype, 'CONTENT', {
     get: function () {
-      var $receiver = this.CONTENT_7o3gzg$_0;
-      new Kotlin.PropertyMetadata('CONTENT');
-      return $receiver.value;
+      return this.CONTENT_7o3gzg$_0.value;
     }
   });
   Object.defineProperty(Application.prototype, 'POPUPS', {
     get: function () {
-      var $receiver = this.POPUPS_4zvygg$_0;
-      new Kotlin.PropertyMetadata('POPUPS');
-      return $receiver.value;
+      return this.POPUPS_4zvygg$_0.value;
     }
   });
   Application.prototype.start = function () {
@@ -608,16 +620,17 @@ var beans = function (_, Kotlin, $module$elements, $module$fg_keyboard, $module$
     Application$Statics_instance = this;
     this.GET_w6lr8w$_0 = properties.Delegates.notNull_30y1fr$();
   }
+  var Application$Statics$GET_metadata = new PropertyMetadata('GET');
   Object.defineProperty(Application$Statics.prototype, 'GET', {
     get: function () {
-      return this.GET_w6lr8w$_0.getValue_lrcp0p$(this, new Kotlin.PropertyMetadata('GET'));
+      return this.GET_w6lr8w$_0.getValue_lrcp0p$(this, Application$Statics$GET_metadata);
     },
     set: function (GET) {
-      this.GET_w6lr8w$_0.setValue_9rddgb$(this, new Kotlin.PropertyMetadata('GET'), GET);
+      this.GET_w6lr8w$_0.setValue_9rddgb$(this, Application$Statics$GET_metadata, GET);
     }
   });
   Application$Statics.$metadata$ = {
-    kind: Kotlin.Kind.OBJECT,
+    kind: Kind_OBJECT,
     simpleName: 'Statics',
     interfaces: []
   };
@@ -635,7 +648,7 @@ var beans = function (_, Kotlin, $module$elements, $module$fg_keyboard, $module$
     return new Popups();
   }
   Application.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     simpleName: 'Application',
     interfaces: []
   };
@@ -647,7 +660,7 @@ var beans = function (_, Kotlin, $module$elements, $module$fg_keyboard, $module$
     this.addClass_61zpoe$('fg-bn-app-content');
   };
   Content.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     simpleName: 'Content',
     interfaces: [Div]
   };
@@ -660,7 +673,7 @@ var beans = function (_, Kotlin, $module$elements, $module$fg_keyboard, $module$
   Delegates$observable$ObjectLiteral_5.prototype.afterChange_jxtfl0$ = function (property, oldValue, newValue) {
     this.closure$onChange(property, oldValue, newValue);
   };
-  Delegates$observable$ObjectLiteral_5.$metadata$ = {kind: Kotlin.Kind.CLASS, interfaces: [ObservableProperty]};
+  Delegates$observable$ObjectLiteral_5.$metadata$ = {kind: Kind_CLASS, interfaces: [ObservableProperty]};
   function DrawerNavigation(icon, drawer, dockingStation, initialFloatState, menu) {
     this.icon = icon;
     this.drawer = drawer;
@@ -674,19 +687,18 @@ var beans = function (_, Kotlin, $module$elements, $module$fg_keyboard, $module$
     this.dockingStation.onResized_sdolbl$(this.dockingStationResizeHandler_0);
     this.menu.onAfterPerformingMenuItemAction_a8ajpl$(this.menuHandler_0);
   }
+  var DrawerNavigation$float_metadata = new PropertyMetadata('float');
   Object.defineProperty(DrawerNavigation.prototype, 'float', {
     get: function () {
-      return this.float_fbhxby$_0.getValue_lrcp0p$(this, new Kotlin.PropertyMetadata('float'));
+      return this.float_fbhxby$_0.getValue_lrcp0p$(this, DrawerNavigation$float_metadata);
     },
     set: function (float) {
-      this.float_fbhxby$_0.setValue_9rddgb$(this, new Kotlin.PropertyMetadata('float'), float);
+      this.float_fbhxby$_0.setValue_9rddgb$(this, DrawerNavigation$float_metadata, float);
     }
   });
   Object.defineProperty(DrawerNavigation.prototype, 'navAction', {
     get: function () {
-      var $receiver = this.navAction_p6u14r$_0;
-      new Kotlin.PropertyMetadata('navAction');
-      return $receiver.value;
+      return this.navAction_p6u14r$_0.value;
     }
   });
   DrawerNavigation.prototype.renderFloat_0 = function (float) {
@@ -711,7 +723,7 @@ var beans = function (_, Kotlin, $module$elements, $module$fg_keyboard, $module$
   function DrawerNavigation$navAction$lambda$lambda(this$DrawerNavigation) {
     return function (actionPerform) {
       var tmp$;
-      var selectableAction = Kotlin.isType(tmp$ = actionPerform.action, SelectableAction) ? tmp$ : Kotlin.throwCCE();
+      var selectableAction = Kotlin.isType(tmp$ = actionPerform.action, SelectableAction) ? tmp$ : throwCCE();
       if (this$DrawerNavigation.drawer.hidden) {
         this$DrawerNavigation.drawer.show();
       }
@@ -746,7 +758,7 @@ var beans = function (_, Kotlin, $module$elements, $module$fg_keyboard, $module$
     };
   }
   DrawerNavigation.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     simpleName: 'DrawerNavigation',
     interfaces: []
   };
@@ -758,7 +770,7 @@ var beans = function (_, Kotlin, $module$elements, $module$fg_keyboard, $module$
     this.addClass_61zpoe$('fg-bn-app-popups');
   };
   Popups.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     simpleName: 'Popups',
     interfaces: [Div]
   };
@@ -812,16 +824,12 @@ var beans = function (_, Kotlin, $module$elements, $module$fg_keyboard, $module$
   });
   Object.defineProperty(AbstractButton.prototype, 'label', {
     get: function () {
-      var $receiver = this.label_2lqqpo$_0;
-      new Kotlin.PropertyMetadata('label');
-      return $receiver.value;
+      return this.label_2lqqpo$_0.value;
     }
   });
   Object.defineProperty(AbstractButton.prototype, 'iconI', {
     get: function () {
-      var $receiver = this.iconI_17xxds$_0;
-      new Kotlin.PropertyMetadata('iconI');
-      return $receiver.value;
+      return this.iconI_17xxds$_0.value;
     }
   });
   AbstractButton.prototype.onHover = function () {
@@ -901,7 +909,7 @@ var beans = function (_, Kotlin, $module$elements, $module$fg_keyboard, $module$
     this.DISABLED = toClassSelector('disabled');
   }
   AbstractButton$AbstractButton.$metadata$ = {
-    kind: Kotlin.Kind.OBJECT,
+    kind: Kind_OBJECT,
     simpleName: 'AbstractButton',
     interfaces: []
   };
@@ -928,19 +936,19 @@ var beans = function (_, Kotlin, $module$elements, $module$fg_keyboard, $module$
     return function (action, property, old, new_0) {
       var tmp$;
       tmp$ = property.callableName;
-      if (Kotlin.equals(tmp$, Kotlin.getPropertyCallableRef('label', 1, function ($receiver) {
+      if (equals(tmp$, getPropertyCallableRef('label', 1, function ($receiver) {
         return $receiver.label;
       }, function ($receiver, value) {
         $receiver.label = value;
       }).callableName))
         this$AbstractButton.renderLabel_xko9ir$_0(action.label);
-      else if (Kotlin.equals(tmp$, Kotlin.getPropertyCallableRef('icon', 1, function ($receiver) {
+      else if (equals(tmp$, getPropertyCallableRef('icon', 1, function ($receiver) {
         return $receiver.icon;
       }, function ($receiver, value) {
         $receiver.icon = value;
       }).callableName))
         this$AbstractButton.renderIcon_z5553x$_0(action.icon);
-      else if (Kotlin.equals(tmp$, Kotlin.getPropertyCallableRef('enabled', 1, function ($receiver) {
+      else if (equals(tmp$, getPropertyCallableRef('enabled', 1, function ($receiver) {
         return $receiver.enabled;
       }, function ($receiver, value) {
         $receiver.enabled = value;
@@ -1013,7 +1021,7 @@ var beans = function (_, Kotlin, $module$elements, $module$fg_keyboard, $module$
     };
   }
   AbstractButton.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     simpleName: 'AbstractButton',
     interfaces: [ActionBean, Button]
   };
@@ -1109,7 +1117,7 @@ var beans = function (_, Kotlin, $module$elements, $module$fg_keyboard, $module$
     }
   });
   Button$ButtonStyle$hovered$ObjectLiteral.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     interfaces: [ElementStyle]
   };
   function Button$ButtonStyle$disabled$ObjectLiteral() {
@@ -1125,7 +1133,7 @@ var beans = function (_, Kotlin, $module$elements, $module$fg_keyboard, $module$
     }
   });
   Button$ButtonStyle$disabled$ObjectLiteral.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     interfaces: [ElementStyle]
   };
   function Button$ButtonStyle$pressed$ObjectLiteral() {
@@ -1141,7 +1149,7 @@ var beans = function (_, Kotlin, $module$elements, $module$fg_keyboard, $module$
     }
   });
   Button$ButtonStyle$pressed$ObjectLiteral.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     interfaces: [ElementStyle]
   };
   function Button$ButtonStyle$focused$ObjectLiteral() {
@@ -1166,11 +1174,11 @@ var beans = function (_, Kotlin, $module$elements, $module$fg_keyboard, $module$
     }
   });
   Button$ButtonStyle$focused$ObjectLiteral.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     interfaces: [ElementStyle]
   };
   Button$ButtonStyle.$metadata$ = {
-    kind: Kotlin.Kind.OBJECT,
+    kind: Kind_OBJECT,
     simpleName: 'ButtonStyle',
     interfaces: [ElementStyle]
   };
@@ -1234,7 +1242,7 @@ var beans = function (_, Kotlin, $module$elements, $module$fg_keyboard, $module$
     return Unit;
   }
   Button$Companion.$metadata$ = {
-    kind: Kotlin.Kind.OBJECT,
+    kind: Kind_OBJECT,
     simpleName: 'Companion',
     interfaces: [StyledClass]
   };
@@ -1246,7 +1254,7 @@ var beans = function (_, Kotlin, $module$elements, $module$fg_keyboard, $module$
     return Button$Companion_instance;
   }
   Button_0.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     simpleName: 'Button',
     interfaces: [AbstractButton]
   };
@@ -1338,7 +1346,7 @@ var beans = function (_, Kotlin, $module$elements, $module$fg_keyboard, $module$
     return Unit;
   }
   ToggleButton$Companion.$metadata$ = {
-    kind: Kotlin.Kind.OBJECT,
+    kind: Kind_OBJECT,
     simpleName: 'Companion',
     interfaces: [StyledClass]
   };
@@ -1351,7 +1359,7 @@ var beans = function (_, Kotlin, $module$elements, $module$fg_keyboard, $module$
   }
   function ToggleButton$actionPropertyChangedHandler$lambda(this$ToggleButton) {
     return function (action, property, old, new_0) {
-      if (Kotlin.equals(property.callableName, Kotlin.getPropertyCallableRef('selected', 1, function ($receiver) {
+      if (equals(property.callableName, getPropertyCallableRef('selected', 1, function ($receiver) {
         return $receiver.selected;
       }, function ($receiver, value) {
         $receiver.selected = value;
@@ -1361,7 +1369,7 @@ var beans = function (_, Kotlin, $module$elements, $module$fg_keyboard, $module$
     };
   }
   ToggleButton.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     simpleName: 'ToggleButton',
     interfaces: [AbstractButton]
   };
@@ -1373,7 +1381,7 @@ var beans = function (_, Kotlin, $module$elements, $module$fg_keyboard, $module$
   Deck.prototype.childAdded_sr04hg$ = function (child) {
     Div.prototype.childAdded_sr04hg$.call(this, child);
     if (!Kotlin.isType(child, Element)) {
-      throw new IllegalArgumentException('Only a Element can be added to a Deck: ' + get_js(Kotlin.getKClassFromExpression(child)).name);
+      throw IllegalArgumentException_init('Only a Element can be added to a Deck: ' + get_js(Kotlin.getKClassFromExpression(child)).name);
     }
     this.deck_0.add_11rb$(child);
     if (this.deck_0.size > 1) {
@@ -1420,7 +1428,7 @@ var beans = function (_, Kotlin, $module$elements, $module$fg_keyboard, $module$
     return Unit;
   }
   Deck$Companion.$metadata$ = {
-    kind: Kotlin.Kind.OBJECT,
+    kind: Kind_OBJECT,
     simpleName: 'Companion',
     interfaces: [StyledClass]
   };
@@ -1432,7 +1440,7 @@ var beans = function (_, Kotlin, $module$elements, $module$fg_keyboard, $module$
     return Deck$Companion_instance;
   }
   Deck.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     simpleName: 'Deck',
     interfaces: [Div]
   };
@@ -1445,7 +1453,7 @@ var beans = function (_, Kotlin, $module$elements, $module$fg_keyboard, $module$
   Delegates$observable$ObjectLiteral_6.prototype.afterChange_jxtfl0$ = function (property, oldValue, newValue) {
     this.closure$onChange(property, oldValue, newValue);
   };
-  Delegates$observable$ObjectLiteral_6.$metadata$ = {kind: Kotlin.Kind.CLASS, interfaces: [ObservableProperty]};
+  Delegates$observable$ObjectLiteral_6.$metadata$ = {kind: Kind_CLASS, interfaces: [ObservableProperty]};
   function Drawer(side) {
     Drawer$Companion_getInstance();
     Div.call(this);
@@ -1453,12 +1461,13 @@ var beans = function (_, Kotlin, $module$elements, $module$fg_keyboard, $module$
     this.undockedCssFloatValue_8be2vx$ = '';
     this.side_w3utwr$_0 = new Delegates$observable$ObjectLiteral_6(Drawer$side$lambda(this), side);
   }
+  var Drawer$side_metadata = new PropertyMetadata('side');
   Object.defineProperty(Drawer.prototype, 'side', {
     get: function () {
-      return this.side_w3utwr$_0.getValue_lrcp0p$(this, new Kotlin.PropertyMetadata('side'));
+      return this.side_w3utwr$_0.getValue_lrcp0p$(this, Drawer$side_metadata);
     },
     set: function (side) {
-      this.side_w3utwr$_0.setValue_9rddgb$(this, new Kotlin.PropertyMetadata('side'), side);
+      this.side_w3utwr$_0.setValue_9rddgb$(this, Drawer$side_metadata, side);
     }
   });
   Drawer.prototype.render = function () {
@@ -1472,10 +1481,14 @@ var beans = function (_, Kotlin, $module$elements, $module$fg_keyboard, $module$
     this.style.position = Position.absolute;
   };
   Drawer.prototype.renderSide_u6e5ms$_0 = function (side) {
-    if (Kotlin.equals(side, Side.LEFT))
-      this._style.left = '0';
-    else if (Kotlin.equals(side, Side.RIGHT))
-      this._style.right = '0';
+    switch (side.name) {
+      case 'LEFT':
+        this._style.left = '0';
+        break;
+      case 'RIGHT':
+        this._style.right = '0';
+        break;
+    }
   };
   function Drawer$Companion() {
     Drawer$Companion_instance = this;
@@ -1502,7 +1515,7 @@ var beans = function (_, Kotlin, $module$elements, $module$fg_keyboard, $module$
     return Unit;
   }
   Drawer$Companion.$metadata$ = {
-    kind: Kotlin.Kind.OBJECT,
+    kind: Kind_OBJECT,
     simpleName: 'Companion',
     interfaces: [StyledClass]
   };
@@ -1520,7 +1533,7 @@ var beans = function (_, Kotlin, $module$elements, $module$fg_keyboard, $module$
     };
   }
   Drawer.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     simpleName: 'Drawer',
     interfaces: [Div]
   };
@@ -1549,8 +1562,8 @@ var beans = function (_, Kotlin, $module$elements, $module$fg_keyboard, $module$
     element.removeClasses_leuowt$(FontAwesomeIcon$apply$lambda);
     element.addClass_61zpoe$('fa');
     element.addClass_61zpoe$('fa-' + this.name);
-    if (this.size != null && !Kotlin.equals(this.size, FontAwesomeIcon$Size$NORMAL_getInstance())) {
-      element.addClass_61zpoe$(Kotlin.toString(this.size.selector));
+    if (this.size != null && !equals(this.size, FontAwesomeIcon$Size$NORMAL_getInstance())) {
+      element.addClass_61zpoe$(toString(this.size.selector));
     }
   };
   FontAwesomeIcon.prototype.toI = function () {
@@ -1605,7 +1618,7 @@ var beans = function (_, Kotlin, $module$elements, $module$fg_keyboard, $module$
     return FontAwesomeIcon$Size$X5_instance;
   }
   FontAwesomeIcon$Size.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     simpleName: 'Size',
     interfaces: [Enum]
   };
@@ -1627,12 +1640,12 @@ var beans = function (_, Kotlin, $module$elements, $module$fg_keyboard, $module$
         return FontAwesomeIcon$Size$X4_getInstance();
       case 'X5':
         return FontAwesomeIcon$Size$X5_getInstance();
-      default:Kotlin.throwISE('No enum constant fg.beans.icon.FontAwesomeIcon.Size.' + name);
+      default:throwISE('No enum constant fg.beans.icon.FontAwesomeIcon.Size.' + name);
     }
   }
   FontAwesomeIcon$Size.valueOf_61zpoe$ = FontAwesomeIcon$Size$valueOf;
   FontAwesomeIcon.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     simpleName: 'FontAwesomeIcon',
     interfaces: [IconProvider]
   };
@@ -1700,7 +1713,7 @@ var beans = function (_, Kotlin, $module$elements, $module$fg_keyboard, $module$
     return new FontAwesomeIcon('windows', size);
   };
   FontAwesomeIcons.$metadata$ = {
-    kind: Kotlin.Kind.OBJECT,
+    kind: Kind_OBJECT,
     simpleName: 'FontAwesomeIcons',
     interfaces: []
   };
@@ -1720,19 +1733,20 @@ var beans = function (_, Kotlin, $module$elements, $module$fg_keyboard, $module$
   Delegates$observable$ObjectLiteral_7.prototype.afterChange_jxtfl0$ = function (property, oldValue, newValue) {
     this.closure$onChange(property, oldValue, newValue);
   };
-  Delegates$observable$ObjectLiteral_7.$metadata$ = {kind: Kotlin.Kind.CLASS, interfaces: [ObservableProperty]};
+  Delegates$observable$ObjectLiteral_7.$metadata$ = {kind: Kind_CLASS, interfaces: [ObservableProperty]};
   function IconI(icon) {
     if (icon === void 0)
       icon = null;
     I.call(this);
     this.icon_9gxyau$_0 = new Delegates$observable$ObjectLiteral_7(IconI$icon$lambda(this), icon);
   }
+  var IconI$icon_metadata = new PropertyMetadata('icon');
   Object.defineProperty(IconI.prototype, 'icon', {
     get: function () {
-      return this.icon_9gxyau$_0.getValue_lrcp0p$(this, new Kotlin.PropertyMetadata('icon'));
+      return this.icon_9gxyau$_0.getValue_lrcp0p$(this, IconI$icon_metadata);
     },
     set: function (icon) {
-      this.icon_9gxyau$_0.setValue_9rddgb$(this, new Kotlin.PropertyMetadata('icon'), icon);
+      this.icon_9gxyau$_0.setValue_9rddgb$(this, IconI$icon_metadata, icon);
     }
   });
   IconI.prototype.render = function () {
@@ -1751,14 +1765,14 @@ var beans = function (_, Kotlin, $module$elements, $module$fg_keyboard, $module$
     };
   }
   IconI.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     simpleName: 'IconI',
     interfaces: [I]
   };
   function IconProvider() {
   }
   IconProvider.$metadata$ = {
-    kind: Kotlin.Kind.INTERFACE,
+    kind: Kind_INTERFACE,
     simpleName: 'IconProvider',
     interfaces: []
   };
@@ -1771,7 +1785,7 @@ var beans = function (_, Kotlin, $module$elements, $module$fg_keyboard, $module$
   Delegates$observable$ObjectLiteral_8.prototype.afterChange_jxtfl0$ = function (property, oldValue, newValue) {
     this.closure$onChange(property, oldValue, newValue);
   };
-  Delegates$observable$ObjectLiteral_8.$metadata$ = {kind: Kotlin.Kind.CLASS, interfaces: [ObservableProperty]};
+  Delegates$observable$ObjectLiteral_8.$metadata$ = {kind: Kind_CLASS, interfaces: [ObservableProperty]};
   function Anchor(link, target, useDisplay) {
     Anchor$Companion_getInstance();
     if (link === void 0)
@@ -1787,19 +1801,18 @@ var beans = function (_, Kotlin, $module$elements, $module$fg_keyboard, $module$
     this.onClickHandler_0 = Anchor$onClickHandler$lambda;
     this._target = target;
   }
+  var Anchor$link_metadata = new PropertyMetadata('link');
   Object.defineProperty(Anchor.prototype, 'link', {
     get: function () {
-      return this.link_mu86bh$_0.getValue_lrcp0p$(this, new Kotlin.PropertyMetadata('link'));
+      return this.link_mu86bh$_0.getValue_lrcp0p$(this, Anchor$link_metadata);
     },
     set: function (link) {
-      this.link_mu86bh$_0.setValue_9rddgb$(this, new Kotlin.PropertyMetadata('link'), link);
+      this.link_mu86bh$_0.setValue_9rddgb$(this, Anchor$link_metadata, link);
     }
   });
   Object.defineProperty(Anchor.prototype, 'iconI', {
     get: function () {
-      var $receiver = this.iconI_ro6qv$_0;
-      new Kotlin.PropertyMetadata('iconI');
-      return $receiver.value;
+      return this.iconI_ro6qv$_0.value;
     }
   });
   Anchor.prototype.render = function () {
@@ -1863,7 +1876,7 @@ var beans = function (_, Kotlin, $module$elements, $module$fg_keyboard, $module$
     return Unit;
   }
   Anchor$Companion.$metadata$ = {
-    kind: Kotlin.Kind.OBJECT,
+    kind: Kind_OBJECT,
     simpleName: 'Companion',
     interfaces: [StyledClass]
   };
@@ -1887,7 +1900,7 @@ var beans = function (_, Kotlin, $module$elements, $module$fg_keyboard, $module$
     return Unit;
   }
   Anchor.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     simpleName: 'Anchor',
     interfaces: [A]
   };
@@ -1903,7 +1916,7 @@ var beans = function (_, Kotlin, $module$elements, $module$fg_keyboard, $module$
     return base.CompareTo.nullSafe_oaftn8$(this.url, other.url);
   };
   ExternalLink.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     simpleName: 'ExternalLink',
     interfaces: [Link]
   };
@@ -1912,7 +1925,7 @@ var beans = function (_, Kotlin, $module$elements, $module$fg_keyboard, $module$
     this.icon = icon;
   }
   Link.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     simpleName: 'Link',
     interfaces: [Comparable]
   };
@@ -1926,7 +1939,7 @@ var beans = function (_, Kotlin, $module$elements, $module$fg_keyboard, $module$
     return base.CompareTo.nullSafe_oaftn8$(this.path, other.path);
   };
   LocalLink.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     simpleName: 'LocalLink',
     interfaces: [Link]
   };
@@ -1939,7 +1952,7 @@ var beans = function (_, Kotlin, $module$elements, $module$fg_keyboard, $module$
   Delegates$observable$ObjectLiteral_9.prototype.afterChange_jxtfl0$ = function (property, oldValue, newValue) {
     this.closure$onChange(property, oldValue, newValue);
   };
-  Delegates$observable$ObjectLiteral_9.$metadata$ = {kind: Kotlin.Kind.CLASS, interfaces: [ObservableProperty]};
+  Delegates$observable$ObjectLiteral_9.$metadata$ = {kind: Kind_CLASS, interfaces: [ObservableProperty]};
   Delegates$observable$ObjectLiteral_10.prototype = Object.create(ObservableProperty.prototype);
   Delegates$observable$ObjectLiteral_10.prototype.constructor = Delegates$observable$ObjectLiteral_10;
   function Delegates$observable$ObjectLiteral_10(closure$onChange, initialValue_0) {
@@ -1949,7 +1962,7 @@ var beans = function (_, Kotlin, $module$elements, $module$fg_keyboard, $module$
   Delegates$observable$ObjectLiteral_10.prototype.afterChange_jxtfl0$ = function (property, oldValue, newValue) {
     this.closure$onChange(property, oldValue, newValue);
   };
-  Delegates$observable$ObjectLiteral_10.$metadata$ = {kind: Kotlin.Kind.CLASS, interfaces: [ObservableProperty]};
+  Delegates$observable$ObjectLiteral_10.$metadata$ = {kind: Kind_CLASS, interfaces: [ObservableProperty]};
   function Menu(label, shortcut) {
     Menu$Companion_getInstance();
     if (label === void 0)
@@ -1964,20 +1977,22 @@ var beans = function (_, Kotlin, $module$elements, $module$fg_keyboard, $module$
     this.label_nal31a$_0 = new Delegates$observable$ObjectLiteral_9(Menu$label$lambda, label);
     this.shortcut_sjpqe4$_0 = new Delegates$observable$ObjectLiteral_10(Menu$shortcut$lambda, shortcut);
   }
+  var Menu$label_metadata = new PropertyMetadata('label');
   Object.defineProperty(Menu.prototype, 'label', {
     get: function () {
-      return this.label_nal31a$_0.getValue_lrcp0p$(this, new Kotlin.PropertyMetadata('label'));
+      return this.label_nal31a$_0.getValue_lrcp0p$(this, Menu$label_metadata);
     },
     set: function (label) {
-      this.label_nal31a$_0.setValue_9rddgb$(this, new Kotlin.PropertyMetadata('label'), label);
+      this.label_nal31a$_0.setValue_9rddgb$(this, Menu$label_metadata, label);
     }
   });
+  var Menu$shortcut_metadata = new PropertyMetadata('shortcut');
   Object.defineProperty(Menu.prototype, 'shortcut', {
     get: function () {
-      return this.shortcut_sjpqe4$_0.getValue_lrcp0p$(this, new Kotlin.PropertyMetadata('shortcut'));
+      return this.shortcut_sjpqe4$_0.getValue_lrcp0p$(this, Menu$shortcut_metadata);
     },
     set: function (shortcut) {
-      this.shortcut_sjpqe4$_0.setValue_9rddgb$(this, new Kotlin.PropertyMetadata('shortcut'), shortcut);
+      this.shortcut_sjpqe4$_0.setValue_9rddgb$(this, Menu$shortcut_metadata, shortcut);
     }
   });
   Menu.prototype.onBeforePerformingMenuItemAction_a8ajpl$ = function (listener) {
@@ -2027,7 +2042,7 @@ var beans = function (_, Kotlin, $module$elements, $module$fg_keyboard, $module$
     return Unit;
   }
   Menu$Companion.$metadata$ = {
-    kind: Kotlin.Kind.OBJECT,
+    kind: Kind_OBJECT,
     simpleName: 'Companion',
     interfaces: [StyledClass]
   };
@@ -2069,7 +2084,7 @@ var beans = function (_, Kotlin, $module$elements, $module$fg_keyboard, $module$
     return Unit;
   }
   Menu.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     simpleName: 'Menu',
     interfaces: [Div]
   };
@@ -2088,7 +2103,7 @@ var beans = function (_, Kotlin, $module$elements, $module$fg_keyboard, $module$
   function MenuBar$childAdded$lambda(closure$child, this$MenuBar) {
     return function (actionPerform) {
       var tmp$;
-      Kotlin.isType(tmp$ = actionPerform.action, SelectableAction) ? tmp$ : Kotlin.throwCCE();
+      Kotlin.isType(tmp$ = actionPerform.action, SelectableAction) ? tmp$ : throwCCE();
       if (actionPerform.action.selected) {
         this$MenuBar.openMenu_0(closure$child);
       }
@@ -2111,7 +2126,7 @@ var beans = function (_, Kotlin, $module$elements, $module$fg_keyboard, $module$
   MenuBar.prototype.childAdded_sr04hg$ = function (child) {
     Div.prototype.childAdded_sr04hg$.call(this, child);
     if (!(Kotlin.isType(child, Menu) || Kotlin.isType(child, MenuButton))) {
-      throw new IllegalArgumentException('Only a Menu can be added to a MenuBar: ' + get_js(Kotlin.getKClassFromExpression(child)).name);
+      throw IllegalArgumentException_init('Only a Menu can be added to a MenuBar: ' + get_js(Kotlin.getKClassFromExpression(child)).name);
     }
     if (Kotlin.isType(child, Menu)) {
       child.hide();
@@ -2145,16 +2160,15 @@ var beans = function (_, Kotlin, $module$elements, $module$fg_keyboard, $module$
     tmp$ = this.childElements.iterator();
     while (tmp$.hasNext()) {
       var child = tmp$.next();
-      if (!Kotlin.equals(child, exception) && Kotlin.isType(child, Menu)) {
+      if (!equals(child, exception) && Kotlin.isType(child, Menu)) {
         this.closeMenu_0(child);
       }
     }
   };
   MenuBar.prototype.openMenu_0 = function (menu) {
-    var tmp$;
     this.closeOthers_0(menu);
     menu.show();
-    var menuButton = (tmp$ = this.menuButtonByMenu_0.get_11rb$(menu)) != null ? tmp$ : Kotlin.throwNPE();
+    var menuButton = ensureNotNull(this.menuButtonByMenu_0.get_11rb$(menu));
     var left = menuButton.boundingClientRect.left - get_px(get_computedStyle(elements.BODY).marginLeft).value;
     menu._style.top = menuButton.boundingClientRect.height.toString() + 'px';
     menu._style.left = left.toString() + 'px';
@@ -2191,7 +2205,7 @@ var beans = function (_, Kotlin, $module$elements, $module$fg_keyboard, $module$
     return Unit;
   }
   MenuBar$Companion.$metadata$ = {
-    kind: Kotlin.Kind.OBJECT,
+    kind: Kind_OBJECT,
     simpleName: 'Companion',
     interfaces: [StyledClass]
   };
@@ -2212,7 +2226,7 @@ var beans = function (_, Kotlin, $module$elements, $module$fg_keyboard, $module$
     };
   }
   MenuBar.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     simpleName: 'MenuBar',
     interfaces: [Div]
   };
@@ -2259,7 +2273,7 @@ var beans = function (_, Kotlin, $module$elements, $module$fg_keyboard, $module$
     return Unit;
   }
   MenuButton$Companion.$metadata$ = {
-    kind: Kotlin.Kind.OBJECT,
+    kind: Kind_OBJECT,
     simpleName: 'Companion',
     interfaces: [StyledClass]
   };
@@ -2271,7 +2285,7 @@ var beans = function (_, Kotlin, $module$elements, $module$fg_keyboard, $module$
     return MenuButton$Companion_instance;
   }
   MenuButton.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     simpleName: 'MenuButton',
     interfaces: [ToggleButton]
   };
@@ -2329,30 +2343,22 @@ var beans = function (_, Kotlin, $module$elements, $module$fg_keyboard, $module$
   });
   Object.defineProperty(MenuItem.prototype, 'selectedIcon_e3tgin$_0', {
     get: function () {
-      var $receiver = this.selectedIcon_e3tgin$_ea2gf6$_0;
-      new Kotlin.PropertyMetadata('selectedIcon');
-      return $receiver.value;
+      return this.selectedIcon_e3tgin$_ea2gf6$_0.value;
     }
   });
   Object.defineProperty(MenuItem.prototype, 'primaryText_c96t00$_0', {
     get: function () {
-      var $receiver = this.primaryText_c96t00$_10huwv$_0;
-      new Kotlin.PropertyMetadata('primaryText');
-      return $receiver.value;
+      return this.primaryText_c96t00$_10huwv$_0.value;
     }
   });
   Object.defineProperty(MenuItem.prototype, 'secondaryTextSpan_htk1x0$_0', {
     get: function () {
-      var $receiver = this.secondaryTextSpan_htk1x0$_ywld47$_0;
-      new Kotlin.PropertyMetadata('secondaryTextSpan');
-      return $receiver.value;
+      return this.secondaryTextSpan_htk1x0$_ywld47$_0.value;
     }
   });
   Object.defineProperty(MenuItem.prototype, 'secondaryText_embahq$_0', {
     get: function () {
-      var $receiver = this.secondaryText_embahq$_cp922x$_0;
-      new Kotlin.PropertyMetadata('secondaryText');
-      return $receiver.value;
+      return this.secondaryText_embahq$_cp922x$_0.value;
     }
   });
   MenuItem.prototype.onHover = function () {
@@ -2385,7 +2391,7 @@ var beans = function (_, Kotlin, $module$elements, $module$fg_keyboard, $module$
     this.addClass_bx842b$(MenuItem$Companion_getInstance().classSelector);
     this._tabindex = '0';
     if (Kotlin.isType(this.action, SelectableAction)) {
-      var action = Kotlin.isType(tmp$ = this.action, SelectableAction) ? tmp$ : Kotlin.throwCCE();
+      var action = Kotlin.isType(tmp$ = this.action, SelectableAction) ? tmp$ : throwCCE();
       this.appendChild_sr04hg$(this.selectedIcon_e3tgin$_0);
       this.renderSelected_fe4o73$_0(action.selected);
     }
@@ -2545,7 +2551,7 @@ var beans = function (_, Kotlin, $module$elements, $module$fg_keyboard, $module$
     }
   });
   MenuItem$Style$pressed$ObjectLiteral.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     interfaces: [ElementStyle]
   };
   function MenuItem$Style$hovered$ObjectLiteral() {
@@ -2570,7 +2576,7 @@ var beans = function (_, Kotlin, $module$elements, $module$fg_keyboard, $module$
     }
   });
   MenuItem$Style$hovered$ObjectLiteral.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     interfaces: [ElementStyle]
   };
   function MenuItem$Style$focused$ObjectLiteral() {
@@ -2595,7 +2601,7 @@ var beans = function (_, Kotlin, $module$elements, $module$fg_keyboard, $module$
     }
   });
   MenuItem$Style$focused$ObjectLiteral.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     interfaces: [ElementStyle]
   };
   function MenuItem$Style$disabled$ObjectLiteral() {
@@ -2620,11 +2626,11 @@ var beans = function (_, Kotlin, $module$elements, $module$fg_keyboard, $module$
     }
   });
   MenuItem$Style$disabled$ObjectLiteral.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     interfaces: [ElementStyle]
   };
   MenuItem$Style.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     simpleName: 'Style',
     interfaces: [ElementStyle]
   };
@@ -2688,7 +2694,7 @@ var beans = function (_, Kotlin, $module$elements, $module$fg_keyboard, $module$
     };
   }
   MenuItem$Companion.$metadata$ = {
-    kind: Kotlin.Kind.OBJECT,
+    kind: Kind_OBJECT,
     simpleName: 'Companion',
     interfaces: [StyledClass]
   };
@@ -2724,21 +2730,21 @@ var beans = function (_, Kotlin, $module$elements, $module$fg_keyboard, $module$
   }
   function MenuItem$actionPropertyChangedHandler$lambda(this$MenuItem) {
     return function (action, property, old, new_0) {
-      if (Kotlin.equals(property.callableName, Kotlin.getPropertyCallableRef('label', 1, function ($receiver) {
+      if (equals(property.callableName, getPropertyCallableRef('label', 1, function ($receiver) {
         return $receiver.label;
       }, function ($receiver, value) {
         $receiver.label = value;
       }).callableName)) {
         this$MenuItem.primaryText_c96t00$_0.textContent = action.label;
       }
-       else if (Kotlin.equals(property.callableName, Kotlin.getPropertyCallableRef('shortcut', 1, function ($receiver) {
+       else if (equals(property.callableName, getPropertyCallableRef('shortcut', 1, function ($receiver) {
         return $receiver.shortcut;
       }, function ($receiver, value) {
         $receiver.shortcut = value;
       }).callableName)) {
         this$MenuItem.renderShortcut_ucgt2r$_0(action.shortcut);
       }
-       else if (Kotlin.equals(property.callableName, Kotlin.getPropertyCallableRef('enabled', 1, function ($receiver) {
+       else if (equals(property.callableName, getPropertyCallableRef('enabled', 1, function ($receiver) {
         return $receiver.enabled;
       }, function ($receiver, value) {
         $receiver.enabled = value;
@@ -2752,7 +2758,7 @@ var beans = function (_, Kotlin, $module$elements, $module$fg_keyboard, $module$
         }
       }
       if (Kotlin.isType(action, SelectableAction)) {
-        if (Kotlin.equals(property.callableName, Kotlin.getPropertyCallableRef('selected', 1, function ($receiver) {
+        if (equals(property.callableName, getPropertyCallableRef('selected', 1, function ($receiver) {
           return $receiver.selected;
         }, function ($receiver, value) {
           $receiver.selected = value;
@@ -2840,14 +2846,14 @@ var beans = function (_, Kotlin, $module$elements, $module$fg_keyboard, $module$
     };
   }
   MenuItem.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     simpleName: 'MenuItem',
     interfaces: [ActionBean, Div]
   };
   var pkg_0;
   function collapseOn$lambda(closure$action, this$collapseOn) {
     return function (f, property, f_0, f_1) {
-      if (Kotlin.equals(property.callableName, Kotlin.getPropertyCallableRef('selected', 1, function ($receiver) {
+      if (equals(property.callableName, getPropertyCallableRef('selected', 1, function ($receiver) {
         return $receiver.selected;
       }, function ($receiver, value) {
         $receiver.selected = value;
@@ -2873,7 +2879,7 @@ var beans = function (_, Kotlin, $module$elements, $module$fg_keyboard, $module$
   Delegates$observable$ObjectLiteral_11.prototype.afterChange_jxtfl0$ = function (property, oldValue, newValue) {
     this.closure$onChange(property, oldValue, newValue);
   };
-  Delegates$observable$ObjectLiteral_11.$metadata$ = {kind: Kotlin.Kind.CLASS, interfaces: [ObservableProperty]};
+  Delegates$observable$ObjectLiteral_11.$metadata$ = {kind: Kind_CLASS, interfaces: [ObservableProperty]};
   Delegates$observable$ObjectLiteral_12.prototype = Object.create(ObservableProperty.prototype);
   Delegates$observable$ObjectLiteral_12.prototype.constructor = Delegates$observable$ObjectLiteral_12;
   function Delegates$observable$ObjectLiteral_12(closure$onChange, initialValue_0) {
@@ -2883,7 +2889,7 @@ var beans = function (_, Kotlin, $module$elements, $module$fg_keyboard, $module$
   Delegates$observable$ObjectLiteral_12.prototype.afterChange_jxtfl0$ = function (property, oldValue, newValue) {
     this.closure$onChange(property, oldValue, newValue);
   };
-  Delegates$observable$ObjectLiteral_12.$metadata$ = {kind: Kotlin.Kind.CLASS, interfaces: [ObservableProperty]};
+  Delegates$observable$ObjectLiteral_12.$metadata$ = {kind: Kind_CLASS, interfaces: [ObservableProperty]};
   Delegates$observable$ObjectLiteral_13.prototype = Object.create(ObservableProperty.prototype);
   Delegates$observable$ObjectLiteral_13.prototype.constructor = Delegates$observable$ObjectLiteral_13;
   function Delegates$observable$ObjectLiteral_13(closure$onChange, initialValue_0) {
@@ -2893,7 +2899,7 @@ var beans = function (_, Kotlin, $module$elements, $module$fg_keyboard, $module$
   Delegates$observable$ObjectLiteral_13.prototype.afterChange_jxtfl0$ = function (property, oldValue, newValue) {
     this.closure$onChange(property, oldValue, newValue);
   };
-  Delegates$observable$ObjectLiteral_13.$metadata$ = {kind: Kotlin.Kind.CLASS, interfaces: [ObservableProperty]};
+  Delegates$observable$ObjectLiteral_13.$metadata$ = {kind: Kind_CLASS, interfaces: [ObservableProperty]};
   function LabelledRadioButton(checked, labelText, checkedIcon, unCheckedIcon) {
     LabelledRadioButton$Companion_getInstance();
     if (checkedIcon === void 0)
@@ -2912,47 +2918,44 @@ var beans = function (_, Kotlin, $module$elements, $module$fg_keyboard, $module$
   }
   Object.defineProperty(LabelledRadioButton.prototype, 'radioButton', {
     get: function () {
-      var $receiver = this.radioButton_ornwgg$_0;
-      new Kotlin.PropertyMetadata('radioButton');
-      return $receiver.value;
+      return this.radioButton_ornwgg$_0.value;
     }
   });
+  var LabelledRadioButton$checkedIcon_metadata = new PropertyMetadata('checkedIcon');
   Object.defineProperty(LabelledRadioButton.prototype, 'checkedIcon', {
     get: function () {
-      return this.checkedIcon_4mcfnn$_0.getValue_lrcp0p$(this, new Kotlin.PropertyMetadata('checkedIcon'));
+      return this.checkedIcon_4mcfnn$_0.getValue_lrcp0p$(this, LabelledRadioButton$checkedIcon_metadata);
     },
     set: function (checkedIcon) {
-      this.checkedIcon_4mcfnn$_0.setValue_9rddgb$(this, new Kotlin.PropertyMetadata('checkedIcon'), checkedIcon);
+      this.checkedIcon_4mcfnn$_0.setValue_9rddgb$(this, LabelledRadioButton$checkedIcon_metadata, checkedIcon);
     }
   });
+  var LabelledRadioButton$unCheckedIcon_metadata = new PropertyMetadata('unCheckedIcon');
   Object.defineProperty(LabelledRadioButton.prototype, 'unCheckedIcon', {
     get: function () {
-      return this.unCheckedIcon_tl1pe2$_0.getValue_lrcp0p$(this, new Kotlin.PropertyMetadata('unCheckedIcon'));
+      return this.unCheckedIcon_tl1pe2$_0.getValue_lrcp0p$(this, LabelledRadioButton$unCheckedIcon_metadata);
     },
     set: function (unCheckedIcon) {
-      this.unCheckedIcon_tl1pe2$_0.setValue_9rddgb$(this, new Kotlin.PropertyMetadata('unCheckedIcon'), unCheckedIcon);
+      this.unCheckedIcon_tl1pe2$_0.setValue_9rddgb$(this, LabelledRadioButton$unCheckedIcon_metadata, unCheckedIcon);
     }
   });
   Object.defineProperty(LabelledRadioButton.prototype, 'iconI', {
     get: function () {
-      var $receiver = this.iconI_4y1vzn$_0;
-      new Kotlin.PropertyMetadata('iconI');
-      return $receiver.value;
+      return this.iconI_4y1vzn$_0.value;
     }
   });
   Object.defineProperty(LabelledRadioButton.prototype, 'label', {
     get: function () {
-      var $receiver = this.label_3k92nr$_0;
-      new Kotlin.PropertyMetadata('label');
-      return $receiver.value;
+      return this.label_3k92nr$_0.value;
     }
   });
+  var LabelledRadioButton$labelText_metadata = new PropertyMetadata('labelText');
   Object.defineProperty(LabelledRadioButton.prototype, 'labelText', {
     get: function () {
-      return this.labelText_f78m3o$_0.getValue_lrcp0p$(this, new Kotlin.PropertyMetadata('labelText'));
+      return this.labelText_f78m3o$_0.getValue_lrcp0p$(this, LabelledRadioButton$labelText_metadata);
     },
     set: function (labelText) {
-      this.labelText_f78m3o$_0.setValue_9rddgb$(this, new Kotlin.PropertyMetadata('labelText'), labelText);
+      this.labelText_f78m3o$_0.setValue_9rddgb$(this, LabelledRadioButton$labelText_metadata, labelText);
     }
   });
   LabelledRadioButton.prototype.render = function () {
@@ -3023,7 +3026,7 @@ var beans = function (_, Kotlin, $module$elements, $module$fg_keyboard, $module$
     return Unit;
   }
   LabelledRadioButton$Companion.$metadata$ = {
-    kind: Kotlin.Kind.OBJECT,
+    kind: Kind_OBJECT,
     simpleName: 'Companion',
     interfaces: [StyledClass]
   };
@@ -3083,7 +3086,7 @@ var beans = function (_, Kotlin, $module$elements, $module$fg_keyboard, $module$
     };
   }
   LabelledRadioButton.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     simpleName: 'LabelledRadioButton',
     interfaces: [Div]
   };
@@ -3096,7 +3099,7 @@ var beans = function (_, Kotlin, $module$elements, $module$fg_keyboard, $module$
   Delegates$observable$ObjectLiteral_14.prototype.afterChange_jxtfl0$ = function (property, oldValue, newValue) {
     this.closure$onChange(property, oldValue, newValue);
   };
-  Delegates$observable$ObjectLiteral_14.$metadata$ = {kind: Kotlin.Kind.CLASS, interfaces: [ObservableProperty]};
+  Delegates$observable$ObjectLiteral_14.$metadata$ = {kind: Kind_CLASS, interfaces: [ObservableProperty]};
   function RadioButton(checked) {
     RadioButton$Companion_getInstance();
     if (checked === void 0)
@@ -3106,12 +3109,13 @@ var beans = function (_, Kotlin, $module$elements, $module$fg_keyboard, $module$
     this.checkedListeners_6t6vo6$_0 = ArrayList_init();
     this.clickHandler_ajhh3g$_0 = RadioButton$clickHandler$lambda(this);
   }
+  var RadioButton$checked_metadata = new PropertyMetadata('checked');
   Object.defineProperty(RadioButton.prototype, 'checked', {
     get: function () {
-      return this.checked_kwjwg1$_0.getValue_lrcp0p$(this, new Kotlin.PropertyMetadata('checked'));
+      return this.checked_kwjwg1$_0.getValue_lrcp0p$(this, RadioButton$checked_metadata);
     },
     set: function (checked) {
-      this.checked_kwjwg1$_0.setValue_9rddgb$(this, new Kotlin.PropertyMetadata('checked'), checked);
+      this.checked_kwjwg1$_0.setValue_9rddgb$(this, RadioButton$checked_metadata, checked);
     }
   });
   RadioButton.prototype.notifyCheckedListeners_8e2cbs$_0 = function (checked) {
@@ -3166,7 +3170,7 @@ var beans = function (_, Kotlin, $module$elements, $module$fg_keyboard, $module$
     return Unit;
   }
   RadioButton$Companion.$metadata$ = {
-    kind: Kotlin.Kind.OBJECT,
+    kind: Kind_OBJECT,
     simpleName: 'Companion',
     interfaces: [StyledClass]
   };
@@ -3186,14 +3190,13 @@ var beans = function (_, Kotlin, $module$elements, $module$fg_keyboard, $module$
   }
   function RadioButton$clickHandler$lambda(this$RadioButton) {
     return function (it) {
-      var tmp$;
-      var newState = !((tmp$ = this$RadioButton._checked) != null ? tmp$ : Kotlin.throwNPE());
+      var newState = !ensureNotNull(this$RadioButton._checked);
       this$RadioButton._checked = newState;
       return Unit;
     };
   }
   RadioButton.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     simpleName: 'RadioButton',
     interfaces: [InputRadio]
   };

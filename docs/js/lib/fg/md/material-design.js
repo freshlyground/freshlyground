@@ -9,9 +9,13 @@ if (typeof beans === 'undefined') {
 }
 this['material-design'] = function (_, Kotlin, $module$elements, $module$beans) {
   'use strict';
+  var Kind_OBJECT = Kotlin.Kind.OBJECT;
   var initAndAppendNode = $module$elements.fg.elements.initAndAppendNode_n3qhgg$;
   var Unit = Kotlin.kotlin.Unit;
+  var throwCCE = Kotlin.throwCCE;
+  var PropertyMetadata = Kotlin.PropertyMetadata;
   var RgbColor = $module$elements.fg.style.colour.RgbColor;
+  var Kind_CLASS = Kotlin.Kind.CLASS;
   var AppBar = $module$beans.fg.beans.app.AppBar;
   var toClassSelector = $module$elements.fg.elements.toClassSelector_pdl1vz$;
   var get_px = $module$elements.fg.elements.get_px_s8ev3n$;
@@ -23,6 +27,7 @@ this['material-design'] = function (_, Kotlin, $module$elements, $module$beans) 
   var Button = $module$beans.fg.beans.button.Button;
   var AbstractButton = $module$beans.fg.beans.button.AbstractButton;
   var Enum = Kotlin.kotlin.Enum;
+  var throwISE = Kotlin.throwISE;
   var ElementStyle = $module$beans.fg.beans.ElementStyle;
   var icon = $module$beans.fg.beans.icon;
   var focus = $module$elements.fg.style.focus_dn1ps9$;
@@ -34,12 +39,15 @@ this['material-design'] = function (_, Kotlin, $module$elements, $module$beans) 
   var ToggleButton = $module$beans.fg.beans.button.ToggleButton;
   var and_1 = $module$elements.fg.style.and_yogg4l$;
   var Div = $module$elements.fg.elements.Div;
+  var getPropertyCallableRef = Kotlin.getPropertyCallableRef;
+  var equals = Kotlin.equals;
   var Img = $module$elements.fg.elements.Img;
   var Selector = $module$elements.fg.elements.Selector;
   var firstChild = $module$elements.fg.style.firstChild_dn1ps9$;
   var child = $module$elements.fg.style.child_xmmih7$;
   var toSelector = $module$elements.fg.elements.toSelector_pdl1vz$;
   var not = $module$elements.fg.style.not_xif9ow$;
+  var Kind_INTERFACE = Kotlin.Kind.INTERFACE;
   var Drawer = $module$beans.fg.beans.drawer.Drawer;
   var I = $module$elements.fg.elements.I;
   var IconProvider = $module$beans.fg.beans.icon.IconProvider;
@@ -152,7 +160,7 @@ this['material-design'] = function (_, Kotlin, $module$elements, $module$beans) 
     this.theme = Theme$Statics_getInstance().LIGHT;
   }
   Context.$metadata$ = {
-    kind: Kotlin.Kind.OBJECT,
+    kind: Kind_OBJECT,
     simpleName: 'Context',
     interfaces: []
   };
@@ -273,7 +281,7 @@ this['material-design'] = function (_, Kotlin, $module$elements, $module$beans) 
   Delegates$observable$ObjectLiteral.prototype.afterChange_jxtfl0$ = function (property, oldValue, newValue) {
     this.closure$onChange(property, oldValue, newValue);
   };
-  Delegates$observable$ObjectLiteral.$metadata$ = {kind: Kotlin.Kind.CLASS, interfaces: [ObservableProperty]};
+  Delegates$observable$ObjectLiteral.$metadata$ = {kind: Kind_CLASS, interfaces: [ObservableProperty]};
   Delegates$observable$ObjectLiteral_0.prototype = Object.create(ObservableProperty.prototype);
   Delegates$observable$ObjectLiteral_0.prototype.constructor = Delegates$observable$ObjectLiteral_0;
   function Delegates$observable$ObjectLiteral_0(closure$onChange, initialValue_0) {
@@ -283,7 +291,7 @@ this['material-design'] = function (_, Kotlin, $module$elements, $module$beans) 
   Delegates$observable$ObjectLiteral_0.prototype.afterChange_jxtfl0$ = function (property, oldValue, newValue) {
     this.closure$onChange(property, oldValue, newValue);
   };
-  Delegates$observable$ObjectLiteral_0.$metadata$ = {kind: Kotlin.Kind.CLASS, interfaces: [ObservableProperty]};
+  Delegates$observable$ObjectLiteral_0.$metadata$ = {kind: Kind_CLASS, interfaces: [ObservableProperty]};
   Delegates$observable$ObjectLiteral_1.prototype = Object.create(ObservableProperty.prototype);
   Delegates$observable$ObjectLiteral_1.prototype.constructor = Delegates$observable$ObjectLiteral_1;
   function Delegates$observable$ObjectLiteral_1(closure$onChange, initialValue_0) {
@@ -293,7 +301,7 @@ this['material-design'] = function (_, Kotlin, $module$elements, $module$beans) 
   Delegates$observable$ObjectLiteral_1.prototype.afterChange_jxtfl0$ = function (property, oldValue, newValue) {
     this.closure$onChange(property, oldValue, newValue);
   };
-  Delegates$observable$ObjectLiteral_1.$metadata$ = {kind: Kotlin.Kind.CLASS, interfaces: [ObservableProperty]};
+  Delegates$observable$ObjectLiteral_1.$metadata$ = {kind: Kind_CLASS, interfaces: [ObservableProperty]};
   Delegates$observable$ObjectLiteral_2.prototype = Object.create(ObservableProperty.prototype);
   Delegates$observable$ObjectLiteral_2.prototype.constructor = Delegates$observable$ObjectLiteral_2;
   function Delegates$observable$ObjectLiteral_2(closure$onChange, initialValue_0) {
@@ -303,7 +311,7 @@ this['material-design'] = function (_, Kotlin, $module$elements, $module$beans) 
   Delegates$observable$ObjectLiteral_2.prototype.afterChange_jxtfl0$ = function (property, oldValue, newValue) {
     this.closure$onChange(property, oldValue, newValue);
   };
-  Delegates$observable$ObjectLiteral_2.$metadata$ = {kind: Kotlin.Kind.CLASS, interfaces: [ObservableProperty]};
+  Delegates$observable$ObjectLiteral_2.$metadata$ = {kind: Kind_CLASS, interfaces: [ObservableProperty]};
   Delegates$observable$ObjectLiteral_3.prototype = Object.create(ObservableProperty.prototype);
   Delegates$observable$ObjectLiteral_3.prototype.constructor = Delegates$observable$ObjectLiteral_3;
   function Delegates$observable$ObjectLiteral_3(closure$onChange, initialValue_0) {
@@ -313,7 +321,7 @@ this['material-design'] = function (_, Kotlin, $module$elements, $module$beans) 
   Delegates$observable$ObjectLiteral_3.prototype.afterChange_jxtfl0$ = function (property, oldValue, newValue) {
     this.closure$onChange(property, oldValue, newValue);
   };
-  Delegates$observable$ObjectLiteral_3.$metadata$ = {kind: Kotlin.Kind.CLASS, interfaces: [ObservableProperty]};
+  Delegates$observable$ObjectLiteral_3.$metadata$ = {kind: Kind_CLASS, interfaces: [ObservableProperty]};
   Delegates$observable$ObjectLiteral_4.prototype = Object.create(ObservableProperty.prototype);
   Delegates$observable$ObjectLiteral_4.prototype.constructor = Delegates$observable$ObjectLiteral_4;
   function Delegates$observable$ObjectLiteral_4(closure$onChange, initialValue_0) {
@@ -323,7 +331,7 @@ this['material-design'] = function (_, Kotlin, $module$elements, $module$beans) 
   Delegates$observable$ObjectLiteral_4.prototype.afterChange_jxtfl0$ = function (property, oldValue, newValue) {
     this.closure$onChange(property, oldValue, newValue);
   };
-  Delegates$observable$ObjectLiteral_4.$metadata$ = {kind: Kotlin.Kind.CLASS, interfaces: [ObservableProperty]};
+  Delegates$observable$ObjectLiteral_4.$metadata$ = {kind: Kind_CLASS, interfaces: [ObservableProperty]};
   Delegates$observable$ObjectLiteral_5.prototype = Object.create(ObservableProperty.prototype);
   Delegates$observable$ObjectLiteral_5.prototype.constructor = Delegates$observable$ObjectLiteral_5;
   function Delegates$observable$ObjectLiteral_5(closure$onChange, initialValue_0) {
@@ -333,7 +341,7 @@ this['material-design'] = function (_, Kotlin, $module$elements, $module$beans) 
   Delegates$observable$ObjectLiteral_5.prototype.afterChange_jxtfl0$ = function (property, oldValue, newValue) {
     this.closure$onChange(property, oldValue, newValue);
   };
-  Delegates$observable$ObjectLiteral_5.$metadata$ = {kind: Kotlin.Kind.CLASS, interfaces: [ObservableProperty]};
+  Delegates$observable$ObjectLiteral_5.$metadata$ = {kind: Kind_CLASS, interfaces: [ObservableProperty]};
   Delegates$observable$ObjectLiteral_6.prototype = Object.create(ObservableProperty.prototype);
   Delegates$observable$ObjectLiteral_6.prototype.constructor = Delegates$observable$ObjectLiteral_6;
   function Delegates$observable$ObjectLiteral_6(closure$onChange, initialValue_0) {
@@ -343,7 +351,7 @@ this['material-design'] = function (_, Kotlin, $module$elements, $module$beans) 
   Delegates$observable$ObjectLiteral_6.prototype.afterChange_jxtfl0$ = function (property, oldValue, newValue) {
     this.closure$onChange(property, oldValue, newValue);
   };
-  Delegates$observable$ObjectLiteral_6.$metadata$ = {kind: Kotlin.Kind.CLASS, interfaces: [ObservableProperty]};
+  Delegates$observable$ObjectLiteral_6.$metadata$ = {kind: Kind_CLASS, interfaces: [ObservableProperty]};
   function Theme(primaryColor, accentColor, warnColor, statusBar, appBar, toolbar, background, cardsNdialogs, font) {
     Theme$Statics_getInstance();
     this.propertyChangedListeners_0 = ArrayList_init();
@@ -367,87 +375,101 @@ this['material-design'] = function (_, Kotlin, $module$elements, $module$beans) 
   };
   Theme.prototype.onPropertyChanged_bdxxi9$ = function (listener) {
     var tmp$;
-    this.propertyChangedListeners_0.add_11rb$(typeof (tmp$ = listener) === 'function' ? tmp$ : Kotlin.throwCCE());
+    this.propertyChangedListeners_0.add_11rb$(typeof (tmp$ = listener) === 'function' ? tmp$ : throwCCE());
   };
   Theme.prototype.unPropertyChanged_u2o7yy$ = function (listener) {
     this.propertyChangedListeners_0.remove_11rb$(listener);
   };
+  var Theme$primaryColor_metadata = new PropertyMetadata('primaryColor');
   Object.defineProperty(Theme.prototype, 'primaryColor', {
     get: function () {
-      return this.primaryColor_g7oxmy$_0.getValue_lrcp0p$(this, new Kotlin.PropertyMetadata('primaryColor'));
+      return this.primaryColor_g7oxmy$_0.getValue_lrcp0p$(this, Theme$primaryColor_metadata);
     },
     set: function (primaryColor) {
-      this.primaryColor_g7oxmy$_0.setValue_9rddgb$(this, new Kotlin.PropertyMetadata('primaryColor'), primaryColor);
+      this.primaryColor_g7oxmy$_0.setValue_9rddgb$(this, Theme$primaryColor_metadata, primaryColor);
     }
   });
+  var Theme$accentColor_metadata = new PropertyMetadata('accentColor');
   Object.defineProperty(Theme.prototype, 'accentColor', {
     get: function () {
-      return this.accentColor_iok4cw$_0.getValue_lrcp0p$(this, new Kotlin.PropertyMetadata('accentColor'));
+      return this.accentColor_iok4cw$_0.getValue_lrcp0p$(this, Theme$accentColor_metadata);
     },
     set: function (accentColor) {
-      this.accentColor_iok4cw$_0.setValue_9rddgb$(this, new Kotlin.PropertyMetadata('accentColor'), accentColor);
+      this.accentColor_iok4cw$_0.setValue_9rddgb$(this, Theme$accentColor_metadata, accentColor);
     }
   });
+  var Theme$warnColor_metadata = new PropertyMetadata('warnColor');
   Object.defineProperty(Theme.prototype, 'warnColor', {
     get: function () {
-      return this.warnColor_lqidn0$_0.getValue_lrcp0p$(this, new Kotlin.PropertyMetadata('warnColor'));
+      return this.warnColor_lqidn0$_0.getValue_lrcp0p$(this, Theme$warnColor_metadata);
     },
     set: function (warnColor) {
-      this.warnColor_lqidn0$_0.setValue_9rddgb$(this, new Kotlin.PropertyMetadata('warnColor'), warnColor);
+      this.warnColor_lqidn0$_0.setValue_9rddgb$(this, Theme$warnColor_metadata, warnColor);
     }
   });
+  var Theme$statusBar_metadata = new PropertyMetadata('statusBar');
   Object.defineProperty(Theme.prototype, 'statusBar', {
     get: function () {
-      return this.statusBar_bzbd1k$_0.getValue_lrcp0p$(this, new Kotlin.PropertyMetadata('statusBar'));
+      return this.statusBar_bzbd1k$_0.getValue_lrcp0p$(this, Theme$statusBar_metadata);
     },
     set: function (statusBar) {
-      this.statusBar_bzbd1k$_0.setValue_9rddgb$(this, new Kotlin.PropertyMetadata('statusBar'), statusBar);
+      this.statusBar_bzbd1k$_0.setValue_9rddgb$(this, Theme$statusBar_metadata, statusBar);
     }
   });
+  var Theme$appBar_metadata = new PropertyMetadata('appBar');
   Object.defineProperty(Theme.prototype, 'appBar', {
     get: function () {
-      return this.appBar_qsaohl$_0.getValue_lrcp0p$(this, new Kotlin.PropertyMetadata('appBar'));
+      return this.appBar_qsaohl$_0.getValue_lrcp0p$(this, Theme$appBar_metadata);
     },
     set: function (appBar) {
-      this.appBar_qsaohl$_0.setValue_9rddgb$(this, new Kotlin.PropertyMetadata('appBar'), appBar);
+      this.appBar_qsaohl$_0.setValue_9rddgb$(this, Theme$appBar_metadata, appBar);
     }
   });
+  var Theme$toolbar_metadata = new PropertyMetadata('toolbar');
   Object.defineProperty(Theme.prototype, 'toolbar', {
     get: function () {
-      return this.toolbar_dwktu6$_0.getValue_lrcp0p$(this, new Kotlin.PropertyMetadata('toolbar'));
+      return this.toolbar_dwktu6$_0.getValue_lrcp0p$(this, Theme$toolbar_metadata);
     },
     set: function (toolbar) {
-      this.toolbar_dwktu6$_0.setValue_9rddgb$(this, new Kotlin.PropertyMetadata('toolbar'), toolbar);
+      this.toolbar_dwktu6$_0.setValue_9rddgb$(this, Theme$toolbar_metadata, toolbar);
     }
   });
+  var Theme$background_metadata = new PropertyMetadata('background');
   Object.defineProperty(Theme.prototype, 'background', {
     get: function () {
-      return this.background_c9ntdv$_0.getValue_lrcp0p$(this, new Kotlin.PropertyMetadata('background'));
+      return this.background_c9ntdv$_0.getValue_lrcp0p$(this, Theme$background_metadata);
     },
     set: function (background) {
-      this.background_c9ntdv$_0.setValue_9rddgb$(this, new Kotlin.PropertyMetadata('background'), background);
+      this.background_c9ntdv$_0.setValue_9rddgb$(this, Theme$background_metadata, background);
     }
   });
+  var Theme$cardsNdialogs_metadata = new PropertyMetadata('cardsNdialogs');
   Object.defineProperty(Theme.prototype, 'cardsNdialogs', {
     get: function () {
-      return this.cardsNdialogs_q3sind$_0.getValue_lrcp0p$(this, new Kotlin.PropertyMetadata('cardsNdialogs'));
+      return this.cardsNdialogs_q3sind$_0.getValue_lrcp0p$(this, Theme$cardsNdialogs_metadata);
     },
     set: function (cardsNdialogs) {
-      this.cardsNdialogs_q3sind$_0.setValue_9rddgb$(this, new Kotlin.PropertyMetadata('cardsNdialogs'), cardsNdialogs);
+      this.cardsNdialogs_q3sind$_0.setValue_9rddgb$(this, Theme$cardsNdialogs_metadata, cardsNdialogs);
     }
   });
   Theme.prototype.color_6hl4m2$ = function (color, default_0) {
     var tmp$;
-    if (Kotlin.equals(color, MDColor$DEFAULT_getInstance()))
-      tmp$ = default_0;
-    else if (Kotlin.equals(color, MDColor$PRIMARY_getInstance()))
-      tmp$ = this.primaryColor;
-    else if (Kotlin.equals(color, MDColor$ACCENT_getInstance()))
-      tmp$ = this.accentColor;
-    else if (Kotlin.equals(color, MDColor$WARN_getInstance()))
-      tmp$ = this.warnColor;
-    else
-      tmp$ = Kotlin.noWhenBranchMatched();
+    switch (color.name) {
+      case 'DEFAULT':
+        tmp$ = default_0;
+        break;
+      case 'PRIMARY':
+        tmp$ = this.primaryColor;
+        break;
+      case 'ACCENT':
+        tmp$ = this.accentColor;
+        break;
+      case 'WARN':
+        tmp$ = this.warnColor;
+        break;
+      default:tmp$ = Kotlin.noWhenBranchMatched();
+        break;
+    }
     return tmp$;
   };
   function Theme$Statics() {
@@ -455,7 +477,7 @@ this['material-design'] = function (_, Kotlin, $module$elements, $module$beans) 
     this.LIGHT = new Theme(MDGreenPalette_getInstance().p500, MDPurplePalette_getInstance().p500, MDRedPalette_getInstance().p500, MDGrayPalette_getInstance().p300, MDGrayPalette_getInstance().p100, RgbColor.Factory.WHITE, MDGrayPalette_getInstance().p50, RgbColor.Factory.WHITE, 'Roboto, sans-serif');
   }
   Theme$Statics.$metadata$ = {
-    kind: Kotlin.Kind.OBJECT,
+    kind: Kind_OBJECT,
     simpleName: 'Statics',
     interfaces: []
   };
@@ -491,7 +513,7 @@ this['material-design'] = function (_, Kotlin, $module$elements, $module$beans) 
     return Unit;
   }
   Theme.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     simpleName: 'Theme',
     interfaces: []
   };
@@ -528,7 +550,7 @@ this['material-design'] = function (_, Kotlin, $module$elements, $module$beans) 
     return Unit;
   }
   MDAppBar$MDAppBar.$metadata$ = {
-    kind: Kotlin.Kind.OBJECT,
+    kind: Kind_OBJECT,
     simpleName: 'MDAppBar',
     interfaces: [TypedStyledClass]
   };
@@ -540,7 +562,7 @@ this['material-design'] = function (_, Kotlin, $module$elements, $module$beans) 
     return MDAppBar$MDAppBar_instance;
   }
   MDAppBar.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     simpleName: 'MDAppBar',
     interfaces: [AppBar]
   };
@@ -553,7 +575,7 @@ this['material-design'] = function (_, Kotlin, $module$elements, $module$beans) 
   Delegates$observable$ObjectLiteral_7.prototype.afterChange_jxtfl0$ = function (property, oldValue, newValue) {
     this.closure$onChange(property, oldValue, newValue);
   };
-  Delegates$observable$ObjectLiteral_7.$metadata$ = {kind: Kotlin.Kind.CLASS, interfaces: [ObservableProperty]};
+  Delegates$observable$ObjectLiteral_7.$metadata$ = {kind: Kind_CLASS, interfaces: [ObservableProperty]};
   Delegates$observable$ObjectLiteral_8.prototype = Object.create(ObservableProperty.prototype);
   Delegates$observable$ObjectLiteral_8.prototype.constructor = Delegates$observable$ObjectLiteral_8;
   function Delegates$observable$ObjectLiteral_8(closure$onChange, initialValue_0) {
@@ -563,7 +585,7 @@ this['material-design'] = function (_, Kotlin, $module$elements, $module$beans) 
   Delegates$observable$ObjectLiteral_8.prototype.afterChange_jxtfl0$ = function (property, oldValue, newValue) {
     this.closure$onChange(property, oldValue, newValue);
   };
-  Delegates$observable$ObjectLiteral_8.$metadata$ = {kind: Kotlin.Kind.CLASS, interfaces: [ObservableProperty]};
+  Delegates$observable$ObjectLiteral_8.$metadata$ = {kind: Kind_CLASS, interfaces: [ObservableProperty]};
   Delegates$observable$ObjectLiteral_9.prototype = Object.create(ObservableProperty.prototype);
   Delegates$observable$ObjectLiteral_9.prototype.constructor = Delegates$observable$ObjectLiteral_9;
   function Delegates$observable$ObjectLiteral_9(closure$onChange, initialValue_0) {
@@ -573,7 +595,7 @@ this['material-design'] = function (_, Kotlin, $module$elements, $module$beans) 
   Delegates$observable$ObjectLiteral_9.prototype.afterChange_jxtfl0$ = function (property, oldValue, newValue) {
     this.closure$onChange(property, oldValue, newValue);
   };
-  Delegates$observable$ObjectLiteral_9.$metadata$ = {kind: Kotlin.Kind.CLASS, interfaces: [ObservableProperty]};
+  Delegates$observable$ObjectLiteral_9.$metadata$ = {kind: Kind_CLASS, interfaces: [ObservableProperty]};
   function MDButton(action, type, color, margins) {
     MDButton$Companion_getInstance();
     if (type === void 0)
@@ -592,35 +614,36 @@ this['material-design'] = function (_, Kotlin, $module$elements, $module$beans) 
     this.raisedStyle = new MDButton$RaisedStyle();
     this.floatingStyle = new MDButton$FloatingStyle();
   }
+  var MDButton$type_metadata = new PropertyMetadata('type');
   Object.defineProperty(MDButton.prototype, 'type', {
     get: function () {
-      return this.type_62b4vh$_0.getValue_lrcp0p$(this, new Kotlin.PropertyMetadata('type'));
+      return this.type_62b4vh$_0.getValue_lrcp0p$(this, MDButton$type_metadata);
     },
     set: function (type) {
-      this.type_62b4vh$_0.setValue_9rddgb$(this, new Kotlin.PropertyMetadata('type'), type);
+      this.type_62b4vh$_0.setValue_9rddgb$(this, MDButton$type_metadata, type);
     }
   });
+  var MDButton$color_metadata = new PropertyMetadata('color');
   Object.defineProperty(MDButton.prototype, 'color', {
     get: function () {
-      return this.color_xb2sly$_0.getValue_lrcp0p$(this, new Kotlin.PropertyMetadata('color'));
+      return this.color_xb2sly$_0.getValue_lrcp0p$(this, MDButton$color_metadata);
     },
     set: function (color) {
-      this.color_xb2sly$_0.setValue_9rddgb$(this, new Kotlin.PropertyMetadata('color'), color);
+      this.color_xb2sly$_0.setValue_9rddgb$(this, MDButton$color_metadata, color);
     }
   });
+  var MDButton$margins_metadata = new PropertyMetadata('margins');
   Object.defineProperty(MDButton.prototype, 'margins', {
     get: function () {
-      return this.margins_udljaw$_0.getValue_lrcp0p$(this, new Kotlin.PropertyMetadata('margins'));
+      return this.margins_udljaw$_0.getValue_lrcp0p$(this, MDButton$margins_metadata);
     },
     set: function (margins) {
-      this.margins_udljaw$_0.setValue_9rddgb$(this, new Kotlin.PropertyMetadata('margins'), margins);
+      this.margins_udljaw$_0.setValue_9rddgb$(this, MDButton$margins_metadata, margins);
     }
   });
   Object.defineProperty(MDButton.prototype, 'ripple_0', {
     get: function () {
-      var $receiver = this.ripple_xt9s7d$_0;
-      new Kotlin.PropertyMetadata('ripple');
-      return $receiver.value;
+      return this.ripple_xt9s7d$_0.value;
     }
   });
   MDButton.prototype.render = function () {
@@ -670,73 +693,81 @@ this['material-design'] = function (_, Kotlin, $module$elements, $module$beans) 
       }
     }
     this.addClass_bx842b$(type.selector);
-    if (Kotlin.equals(type, MDButton$Type$FLAT_getInstance())) {
-      this.iconI.hide();
-      this.label.textContent = this.action.label;
-      this.label.show();
-    }
-     else if (Kotlin.equals(type, MDButton$Type$RAISED_getInstance())) {
-      this.iconI.hide();
-      this.label.textContent = this.action.label;
-      this.label.show();
-    }
-     else if (Kotlin.equals(type, MDButton$Type$FLOATING_getInstance())) {
-      this.label.hide();
-      this.label.textContent = null;
-      this.iconI.show();
-      this.iconI.icon = MDButton$Companion_getInstance().plusIcon_0;
+    switch (type.name) {
+      case 'FLAT':
+        this.iconI.hide();
+        this.label.textContent = this.action.label;
+        this.label.show();
+        break;
+      case 'RAISED':
+        this.iconI.hide();
+        this.label.textContent = this.action.label;
+        this.label.show();
+        break;
+      case 'FLOATING':
+        this.label.hide();
+        this.label.textContent = null;
+        this.iconI.show();
+        this.iconI.icon = MDButton$Companion_getInstance().plusIcon_0;
+        break;
     }
   };
   MDButton.prototype.renderColor_0 = function (color) {
     if (color === void 0)
       color = this.color;
-    var tmp$;
-    tmp$ = this.type;
-    if (Kotlin.equals(tmp$, MDButton$Type$FLAT_getInstance()))
-      if (this.action.enabled) {
-        if (this.pressed) {
-          this.style.backgroundColor = this.flatStyle.pressed.backgroundColor;
-        }
-         else if (this.focused) {
-          this.style.backgroundColor = this.flatStyle.focused.backgroundColor;
-        }
-         else if (this.hovered) {
-          this.style.backgroundColor = this.flatStyle.hovered.backgroundColor;
-        }
-         else {
-          this.style.backgroundColor = this.flatStyle.backgroundColor;
-        }
-        this.style.color = Context_getInstance().theme.color_6hl4m2$(color, RgbColor.Factory.BLACK);
-      }
-       else {
-        this.style.backgroundColor = this.flatStyle.disabled.backgroundColor;
-        this.style.color = this.flatStyle.disabled.color;
-      }
-     else if (Kotlin.equals(tmp$, MDButton$Type$RAISED_getInstance()))
-      if (this.action.enabled) {
-        if (this.pressed) {
-          this.style.backgroundColor = this.raisedStyle.pressed.backgroundColor;
-        }
-         else if (this.focused) {
-          this.style.backgroundColor = this.raisedStyle.focused.backgroundColor;
-        }
-         else if (this.hovered) {
-          this.style.backgroundColor = this.raisedStyle.hovered.backgroundColor;
+    switch (this.type.name) {
+      case 'FLAT':
+        if (this.action.enabled) {
+          if (this.pressed) {
+            this.style.backgroundColor = this.flatStyle.pressed.backgroundColor;
+          }
+           else if (this.focused) {
+            this.style.backgroundColor = this.flatStyle.focused.backgroundColor;
+          }
+           else if (this.hovered) {
+            this.style.backgroundColor = this.flatStyle.hovered.backgroundColor;
+          }
+           else {
+            this.style.backgroundColor = this.flatStyle.backgroundColor;
+          }
+          this.style.color = Context_getInstance().theme.color_6hl4m2$(color, RgbColor.Factory.BLACK);
         }
          else {
-          this.style.backgroundColor = Context_getInstance().theme.color_6hl4m2$(color, RgbColor.Factory.TRANSPARENT);
+          this.style.backgroundColor = this.flatStyle.disabled.backgroundColor;
+          this.style.color = this.flatStyle.disabled.color;
         }
-        this.style.color = this.raisedStyle.color;
-      }
-       else {
-        this.style.color = this.raisedStyle.disabled.color;
-        this.style.backgroundColor = this.raisedStyle.disabled.backgroundColor;
-      }
-     else if (Kotlin.equals(tmp$, MDButton$Type$FLOATING_getInstance()))
-      if (this.action.enabled) {
-        this.style.backgroundColor = Context_getInstance().theme.color_6hl4m2$(color, RgbColor.Factory.WHITE);
-        this.style.color = RgbColor.Factory.BLACK;
-      }
+
+        break;
+      case 'RAISED':
+        if (this.action.enabled) {
+          if (this.pressed) {
+            this.style.backgroundColor = this.raisedStyle.pressed.backgroundColor;
+          }
+           else if (this.focused) {
+            this.style.backgroundColor = this.raisedStyle.focused.backgroundColor;
+          }
+           else if (this.hovered) {
+            this.style.backgroundColor = this.raisedStyle.hovered.backgroundColor;
+          }
+           else {
+            this.style.backgroundColor = Context_getInstance().theme.color_6hl4m2$(color, RgbColor.Factory.TRANSPARENT);
+          }
+          this.style.color = this.raisedStyle.color;
+        }
+         else {
+          this.style.color = this.raisedStyle.disabled.color;
+          this.style.backgroundColor = this.raisedStyle.disabled.backgroundColor;
+        }
+
+        break;
+      case 'FLOATING':
+        if (this.action.enabled) {
+          this.style.backgroundColor = Context_getInstance().theme.color_6hl4m2$(color, RgbColor.Factory.WHITE);
+          this.style.color = RgbColor.Factory.BLACK;
+        }
+
+        break;
+    }
   };
   MDButton.prototype.renderMargins_0 = function (enabled) {
     if (enabled) {
@@ -775,7 +806,7 @@ this['material-design'] = function (_, Kotlin, $module$elements, $module$beans) 
     return MDButton$Type$FLOATING_instance;
   }
   MDButton$Type.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     simpleName: 'Type',
     interfaces: [Enum]
   };
@@ -791,7 +822,7 @@ this['material-design'] = function (_, Kotlin, $module$elements, $module$beans) 
         return MDButton$Type$RAISED_getInstance();
       case 'FLOATING':
         return MDButton$Type$FLOATING_getInstance();
-      default:Kotlin.throwISE('No enum constant fg.md.button.MDButton.Type.' + name);
+      default:throwISE('No enum constant fg.md.button.MDButton.Type.' + name);
     }
   }
   MDButton$Type.valueOf_61zpoe$ = MDButton$Type$valueOf;
@@ -833,7 +864,7 @@ this['material-design'] = function (_, Kotlin, $module$elements, $module$beans) 
     }
   });
   MDButton$FlatStyle$hovered$ObjectLiteral.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     interfaces: [ElementStyle]
   };
   function MDButton$FlatStyle$pressed$ObjectLiteral() {
@@ -849,7 +880,7 @@ this['material-design'] = function (_, Kotlin, $module$elements, $module$beans) 
     }
   });
   MDButton$FlatStyle$pressed$ObjectLiteral.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     interfaces: [ElementStyle]
   };
   function MDButton$FlatStyle$focused$ObjectLiteral() {
@@ -865,7 +896,7 @@ this['material-design'] = function (_, Kotlin, $module$elements, $module$beans) 
     }
   });
   MDButton$FlatStyle$focused$ObjectLiteral.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     interfaces: [ElementStyle]
   };
   function MDButton$FlatStyle$disabled$ObjectLiteral() {
@@ -890,11 +921,11 @@ this['material-design'] = function (_, Kotlin, $module$elements, $module$beans) 
     }
   });
   MDButton$FlatStyle$disabled$ObjectLiteral.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     interfaces: [ElementStyle]
   };
   MDButton$FlatStyle.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     simpleName: 'FlatStyle',
     interfaces: [ElementStyle]
   };
@@ -936,7 +967,7 @@ this['material-design'] = function (_, Kotlin, $module$elements, $module$beans) 
     }
   });
   MDButton$RaisedStyle$hovered$ObjectLiteral.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     interfaces: [ElementStyle]
   };
   function MDButton$RaisedStyle$pressed$ObjectLiteral() {
@@ -952,7 +983,7 @@ this['material-design'] = function (_, Kotlin, $module$elements, $module$beans) 
     }
   });
   MDButton$RaisedStyle$pressed$ObjectLiteral.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     interfaces: [ElementStyle]
   };
   function MDButton$RaisedStyle$focused$ObjectLiteral() {
@@ -968,7 +999,7 @@ this['material-design'] = function (_, Kotlin, $module$elements, $module$beans) 
     }
   });
   MDButton$RaisedStyle$focused$ObjectLiteral.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     interfaces: [ElementStyle]
   };
   function MDButton$RaisedStyle$disabled$ObjectLiteral() {
@@ -993,11 +1024,11 @@ this['material-design'] = function (_, Kotlin, $module$elements, $module$beans) 
     }
   });
   MDButton$RaisedStyle$disabled$ObjectLiteral.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     interfaces: [ElementStyle]
   };
   MDButton$RaisedStyle.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     simpleName: 'RaisedStyle',
     interfaces: [ElementStyle]
   };
@@ -1023,7 +1054,7 @@ this['material-design'] = function (_, Kotlin, $module$elements, $module$beans) 
     }
   });
   MDButton$FloatingStyle.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     simpleName: 'FloatingStyle',
     interfaces: [ElementStyle]
   };
@@ -1118,7 +1149,7 @@ this['material-design'] = function (_, Kotlin, $module$elements, $module$beans) 
     };
   }
   MDButton$Companion.$metadata$ = {
-    kind: Kotlin.Kind.OBJECT,
+    kind: Kind_OBJECT,
     simpleName: 'Companion',
     interfaces: [StyledClass]
   };
@@ -1167,7 +1198,7 @@ this['material-design'] = function (_, Kotlin, $module$elements, $module$beans) 
     };
   }
   MDButton.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     simpleName: 'MDButton',
     interfaces: [Button]
   };
@@ -1221,7 +1252,7 @@ this['material-design'] = function (_, Kotlin, $module$elements, $module$beans) 
     return Unit;
   }
   MDToggleButton$Companion.$metadata$ = {
-    kind: Kotlin.Kind.OBJECT,
+    kind: Kind_OBJECT,
     simpleName: 'Companion',
     interfaces: [StyledClass]
   };
@@ -1233,7 +1264,7 @@ this['material-design'] = function (_, Kotlin, $module$elements, $module$beans) 
     return MDToggleButton$Companion_instance;
   }
   MDToggleButton.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     simpleName: 'MDToggleButton',
     interfaces: [ToggleButton]
   };
@@ -1277,7 +1308,7 @@ this['material-design'] = function (_, Kotlin, $module$elements, $module$beans) 
     return Unit;
   }
   MDCard$MDCard.$metadata$ = {
-    kind: Kotlin.Kind.OBJECT,
+    kind: Kind_OBJECT,
     simpleName: 'MDCard',
     interfaces: [StyledClass]
   };
@@ -1290,7 +1321,7 @@ this['material-design'] = function (_, Kotlin, $module$elements, $module$beans) 
   }
   function MDCard$themeChangedHandler$lambda(this$MDCard) {
     return function (theme, property, old, new_0) {
-      if (Kotlin.equals(property.callableName, Kotlin.getPropertyCallableRef('cardsNdialogs', 1, function ($receiver) {
+      if (equals(property.callableName, getPropertyCallableRef('cardsNdialogs', 1, function ($receiver) {
         return $receiver.cardsNdialogs;
       }, function ($receiver, value) {
         $receiver.cardsNdialogs = value;
@@ -1300,7 +1331,7 @@ this['material-design'] = function (_, Kotlin, $module$elements, $module$beans) 
     };
   }
   MDCard.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     simpleName: 'MDCard',
     interfaces: [Div]
   };
@@ -1333,7 +1364,7 @@ this['material-design'] = function (_, Kotlin, $module$elements, $module$beans) 
     return Unit;
   }
   MDCardActions$MDCardActions.$metadata$ = {
-    kind: Kotlin.Kind.OBJECT,
+    kind: Kind_OBJECT,
     simpleName: 'MDCardActions',
     interfaces: [StyledClass]
   };
@@ -1345,7 +1376,7 @@ this['material-design'] = function (_, Kotlin, $module$elements, $module$beans) 
     return MDCardActions$MDCardActions_instance;
   }
   MDCardActions.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     simpleName: 'MDCardActions',
     interfaces: [Div]
   };
@@ -1380,7 +1411,7 @@ this['material-design'] = function (_, Kotlin, $module$elements, $module$beans) 
     return Unit;
   }
   MDCardAvatar$MDCardAvatar.$metadata$ = {
-    kind: Kotlin.Kind.OBJECT,
+    kind: Kind_OBJECT,
     simpleName: 'MDCardAvatar',
     interfaces: [StyledClass]
   };
@@ -1392,7 +1423,7 @@ this['material-design'] = function (_, Kotlin, $module$elements, $module$beans) 
     return MDCardAvatar$MDCardAvatar_instance;
   }
   MDCardAvatar.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     simpleName: 'MDCardAvatar',
     interfaces: [Img]
   };
@@ -1435,7 +1466,7 @@ this['material-design'] = function (_, Kotlin, $module$elements, $module$beans) 
     return Unit;
   }
   MDCardContent$Statics.$metadata$ = {
-    kind: Kotlin.Kind.OBJECT,
+    kind: Kind_OBJECT,
     simpleName: 'Statics',
     interfaces: [StyledClass]
   };
@@ -1447,7 +1478,7 @@ this['material-design'] = function (_, Kotlin, $module$elements, $module$beans) 
     return MDCardContent$Statics_instance;
   }
   MDCardContent.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     simpleName: 'MDCardContent',
     interfaces: [Div]
   };
@@ -1500,7 +1531,7 @@ this['material-design'] = function (_, Kotlin, $module$elements, $module$beans) 
     return Unit;
   }
   MDCardHeader$MDCardHeader.$metadata$ = {
-    kind: Kotlin.Kind.OBJECT,
+    kind: Kind_OBJECT,
     simpleName: 'MDCardHeader',
     interfaces: [StyledClass]
   };
@@ -1512,7 +1543,7 @@ this['material-design'] = function (_, Kotlin, $module$elements, $module$beans) 
     return MDCardHeader$MDCardHeader_instance;
   }
   MDCardHeader.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     simpleName: 'MDCardHeader',
     interfaces: [Div]
   };
@@ -1558,7 +1589,7 @@ this['material-design'] = function (_, Kotlin, $module$elements, $module$beans) 
     return Unit;
   }
   MDCardHeaderText$MDCardHeaderText.$metadata$ = {
-    kind: Kotlin.Kind.OBJECT,
+    kind: Kind_OBJECT,
     simpleName: 'MDCardHeaderText',
     interfaces: [StyledClass]
   };
@@ -1570,7 +1601,7 @@ this['material-design'] = function (_, Kotlin, $module$elements, $module$beans) 
     return MDCardHeaderText$MDCardHeaderText_instance;
   }
   MDCardHeaderText.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     simpleName: 'MDCardHeaderText',
     interfaces: [Div]
   };
@@ -1604,7 +1635,7 @@ this['material-design'] = function (_, Kotlin, $module$elements, $module$beans) 
     return Unit;
   }
   MDCardImage$MDCardImage.$metadata$ = {
-    kind: Kotlin.Kind.OBJECT,
+    kind: Kind_OBJECT,
     simpleName: 'MDCardImage',
     interfaces: [StyledClass]
   };
@@ -1616,7 +1647,7 @@ this['material-design'] = function (_, Kotlin, $module$elements, $module$beans) 
     return MDCardImage$MDCardImage_instance;
   }
   MDCardImage.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     simpleName: 'MDCardImage',
     interfaces: [Img]
   };
@@ -1651,7 +1682,7 @@ this['material-design'] = function (_, Kotlin, $module$elements, $module$beans) 
     return Unit;
   }
   MDCardSubtitle$MDCardSubtitle.$metadata$ = {
-    kind: Kotlin.Kind.OBJECT,
+    kind: Kind_OBJECT,
     simpleName: 'MDCardSubtitle',
     interfaces: [StyledClass]
   };
@@ -1663,7 +1694,7 @@ this['material-design'] = function (_, Kotlin, $module$elements, $module$beans) 
     return MDCardSubtitle$MDCardSubtitle_instance;
   }
   MDCardSubtitle.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     simpleName: 'MDCardSubtitle',
     interfaces: [Div]
   };
@@ -1701,7 +1732,7 @@ this['material-design'] = function (_, Kotlin, $module$elements, $module$beans) 
     return Unit;
   }
   MDCardTitle$MDCardTitle.$metadata$ = {
-    kind: Kotlin.Kind.OBJECT,
+    kind: Kind_OBJECT,
     simpleName: 'MDCardTitle',
     interfaces: [StyledClass]
   };
@@ -1713,7 +1744,7 @@ this['material-design'] = function (_, Kotlin, $module$elements, $module$beans) 
     return MDCardTitle$MDCardTitle_instance;
   }
   MDCardTitle.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     simpleName: 'MDCardTitle',
     interfaces: [Div]
   };
@@ -1768,7 +1799,7 @@ this['material-design'] = function (_, Kotlin, $module$elements, $module$beans) 
     return Unit;
   }
   MDCardTitleText$MDCardHeaderText.$metadata$ = {
-    kind: Kotlin.Kind.OBJECT,
+    kind: Kind_OBJECT,
     simpleName: 'MDCardHeaderText',
     interfaces: [StyledClass]
   };
@@ -1780,7 +1811,7 @@ this['material-design'] = function (_, Kotlin, $module$elements, $module$beans) 
     return MDCardTitleText$MDCardHeaderText_instance;
   }
   MDCardTitleText.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     simpleName: 'MDCardTitleText',
     interfaces: [Div]
   };
@@ -1818,7 +1849,7 @@ this['material-design'] = function (_, Kotlin, $module$elements, $module$beans) 
     return MDColor$WARN_instance;
   }
   MDColor.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     simpleName: 'MDColor',
     interfaces: [Enum]
   };
@@ -1836,7 +1867,7 @@ this['material-design'] = function (_, Kotlin, $module$elements, $module$beans) 
         return MDColor$ACCENT_getInstance();
       case 'WARN':
         return MDColor$WARN_getInstance();
-      default:Kotlin.throwISE('No enum constant fg.md.colour.MDColor.' + name);
+      default:throwISE('No enum constant fg.md.colour.MDColor.' + name);
     }
   }
   MDColor.valueOf_61zpoe$ = MDColor$valueOf;
@@ -1904,7 +1935,7 @@ this['material-design'] = function (_, Kotlin, $module$elements, $module$beans) 
     }
   });
   MDGrayPalette.$metadata$ = {
-    kind: Kotlin.Kind.OBJECT,
+    kind: Kind_OBJECT,
     simpleName: 'MDGrayPalette',
     interfaces: [MDPrimaryPalette]
   };
@@ -2003,7 +2034,7 @@ this['material-design'] = function (_, Kotlin, $module$elements, $module$beans) 
     }
   });
   MDGreenPalette.$metadata$ = {
-    kind: Kotlin.Kind.OBJECT,
+    kind: Kind_OBJECT,
     simpleName: 'MDGreenPalette',
     interfaces: [MDAccentPalette, MDPrimaryPalette]
   };
@@ -2017,14 +2048,14 @@ this['material-design'] = function (_, Kotlin, $module$elements, $module$beans) 
   function MDPrimaryPalette() {
   }
   MDPrimaryPalette.$metadata$ = {
-    kind: Kotlin.Kind.INTERFACE,
+    kind: Kind_INTERFACE,
     simpleName: 'MDPrimaryPalette',
     interfaces: []
   };
   function MDAccentPalette() {
   }
   MDAccentPalette.$metadata$ = {
-    kind: Kotlin.Kind.INTERFACE,
+    kind: Kind_INTERFACE,
     simpleName: 'MDAccentPalette',
     interfaces: []
   };
@@ -2116,7 +2147,7 @@ this['material-design'] = function (_, Kotlin, $module$elements, $module$beans) 
     }
   });
   MDPurplePalette.$metadata$ = {
-    kind: Kotlin.Kind.OBJECT,
+    kind: Kind_OBJECT,
     simpleName: 'MDPurplePalette',
     interfaces: [MDAccentPalette, MDPrimaryPalette]
   };
@@ -2215,7 +2246,7 @@ this['material-design'] = function (_, Kotlin, $module$elements, $module$beans) 
     }
   });
   MDRedPalette.$metadata$ = {
-    kind: Kotlin.Kind.OBJECT,
+    kind: Kind_OBJECT,
     simpleName: 'MDRedPalette',
     interfaces: [MDAccentPalette, MDPrimaryPalette]
   };
@@ -2255,7 +2286,7 @@ this['material-design'] = function (_, Kotlin, $module$elements, $module$beans) 
     return Unit;
   }
   MDDrawer$MDDrawer.$metadata$ = {
-    kind: Kotlin.Kind.OBJECT,
+    kind: Kind_OBJECT,
     simpleName: 'MDDrawer',
     interfaces: [StyledClass]
   };
@@ -2267,7 +2298,7 @@ this['material-design'] = function (_, Kotlin, $module$elements, $module$beans) 
     return MDDrawer$MDDrawer_instance;
   }
   MDDrawer.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     simpleName: 'MDDrawer',
     interfaces: [Drawer]
   };
@@ -2280,18 +2311,19 @@ this['material-design'] = function (_, Kotlin, $module$elements, $module$beans) 
   Delegates$observable$ObjectLiteral_10.prototype.afterChange_jxtfl0$ = function (property, oldValue, newValue) {
     this.closure$onChange(property, oldValue, newValue);
   };
-  Delegates$observable$ObjectLiteral_10.$metadata$ = {kind: Kotlin.Kind.CLASS, interfaces: [ObservableProperty]};
+  Delegates$observable$ObjectLiteral_10.$metadata$ = {kind: Kind_CLASS, interfaces: [ObservableProperty]};
   function MDIcon() {
     MDIcon$MDIcon_getInstance();
     I.call(this);
     this.size_rggzty$_0 = new Delegates$observable$ObjectLiteral_10(MDIcon$size$lambda(this), null);
   }
+  var MDIcon$size_metadata = new PropertyMetadata('size');
   Object.defineProperty(MDIcon.prototype, 'size', {
     get: function () {
-      return this.size_rggzty$_0.getValue_lrcp0p$(this, new Kotlin.PropertyMetadata('size'));
+      return this.size_rggzty$_0.getValue_lrcp0p$(this, MDIcon$size_metadata);
     },
     set: function (size) {
-      this.size_rggzty$_0.setValue_9rddgb$(this, new Kotlin.PropertyMetadata('size'), size);
+      this.size_rggzty$_0.setValue_9rddgb$(this, MDIcon$size_metadata, size);
     }
   });
   MDIcon.prototype.render = function () {
@@ -2334,7 +2366,7 @@ this['material-design'] = function (_, Kotlin, $module$elements, $module$beans) 
     return MDIcon$Size$s48px_instance;
   }
   MDIcon$Size.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     simpleName: 'Size',
     interfaces: [Enum]
   };
@@ -2352,7 +2384,7 @@ this['material-design'] = function (_, Kotlin, $module$elements, $module$beans) 
         return MDIcon$Size$s36px_getInstance();
       case 's48px':
         return MDIcon$Size$s48px_getInstance();
-      default:Kotlin.throwISE('No enum constant fg.md.icon.MDIcon.Size.' + name);
+      default:throwISE('No enum constant fg.md.icon.MDIcon.Size.' + name);
     }
   }
   MDIcon$Size.valueOf_61zpoe$ = MDIcon$Size$valueOf;
@@ -2396,7 +2428,7 @@ this['material-design'] = function (_, Kotlin, $module$elements, $module$beans) 
     return Unit;
   }
   MDIcon$MDIcon.$metadata$ = {
-    kind: Kotlin.Kind.OBJECT,
+    kind: Kind_OBJECT,
     simpleName: 'MDIcon',
     interfaces: [StyledClass]
   };
@@ -2419,7 +2451,7 @@ this['material-design'] = function (_, Kotlin, $module$elements, $module$beans) 
     };
   }
   MDIcon.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     simpleName: 'MDIcon',
     interfaces: [I]
   };
@@ -2443,7 +2475,7 @@ this['material-design'] = function (_, Kotlin, $module$elements, $module$beans) 
     this.search = new MDIconProvider('search');
   }
   MDIconProvider$Statics.$metadata$ = {
-    kind: Kotlin.Kind.OBJECT,
+    kind: Kind_OBJECT,
     simpleName: 'Statics',
     interfaces: []
   };
@@ -2455,7 +2487,7 @@ this['material-design'] = function (_, Kotlin, $module$elements, $module$beans) 
     return MDIconProvider$Statics_instance;
   }
   MDIconProvider.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     simpleName: 'MDIconProvider',
     interfaces: [IconProvider]
   };
@@ -2495,7 +2527,7 @@ this['material-design'] = function (_, Kotlin, $module$elements, $module$beans) 
     return Unit;
   }
   MDMenu$MDMenu.$metadata$ = {
-    kind: Kotlin.Kind.OBJECT,
+    kind: Kind_OBJECT,
     simpleName: 'MDMenu',
     interfaces: [StyledClass]
   };
@@ -2507,7 +2539,7 @@ this['material-design'] = function (_, Kotlin, $module$elements, $module$beans) 
     return MDMenu$MDMenu_instance;
   }
   MDMenu.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     simpleName: 'MDMenu',
     interfaces: [Menu]
   };
@@ -2518,9 +2550,7 @@ this['material-design'] = function (_, Kotlin, $module$elements, $module$beans) 
   }
   Object.defineProperty(MDMenuItem.prototype, 'ripple_0', {
     get: function () {
-      var $receiver = this.ripple_jocyiy$_0;
-      new Kotlin.PropertyMetadata('ripple');
-      return $receiver.value;
+      return this.ripple_jocyiy$_0.value;
     }
   });
   MDMenuItem.prototype.render = function () {
@@ -2556,7 +2586,7 @@ this['material-design'] = function (_, Kotlin, $module$elements, $module$beans) 
     return Unit;
   }
   MDMenuItem$MDMenuItem.$metadata$ = {
-    kind: Kotlin.Kind.OBJECT,
+    kind: Kind_OBJECT,
     simpleName: 'MDMenuItem',
     interfaces: [StyledClass]
   };
@@ -2579,7 +2609,7 @@ this['material-design'] = function (_, Kotlin, $module$elements, $module$beans) 
     };
   }
   MDMenuItem.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     simpleName: 'MDMenuItem',
     interfaces: [MenuItem]
   };
@@ -2595,23 +2625,17 @@ this['material-design'] = function (_, Kotlin, $module$elements, $module$beans) 
   }
   Object.defineProperty(MDCollapsedPanel.prototype, 'expandButton_0', {
     get: function () {
-      var $receiver = this.expandButton_iv2288$_0;
-      new Kotlin.PropertyMetadata('expandButton');
-      return $receiver.value;
+      return this.expandButton_iv2288$_0.value;
     }
   });
   Object.defineProperty(MDCollapsedPanel.prototype, 'outerToolbar_8be2vx$', {
     get: function () {
-      var $receiver = this.outerToolbar_8be2vx$_8glako$_0;
-      new Kotlin.PropertyMetadata('outerToolbar');
-      return $receiver.value;
+      return this.outerToolbar_8be2vx$_8glako$_0.value;
     }
   });
   Object.defineProperty(MDCollapsedPanel.prototype, 'toolbar', {
     get: function () {
-      var $receiver = this.toolbar_qe22ob$_0;
-      new Kotlin.PropertyMetadata('toolbar');
-      return $receiver.value;
+      return this.toolbar_qe22ob$_0.value;
     }
   });
   MDCollapsedPanel.prototype.render = function () {
@@ -2652,7 +2676,7 @@ this['material-design'] = function (_, Kotlin, $module$elements, $module$beans) 
     return Unit;
   }
   MDCollapsedPanel$MDCollapsedPanel.$metadata$ = {
-    kind: Kotlin.Kind.OBJECT,
+    kind: Kind_OBJECT,
     simpleName: 'MDCollapsedPanel',
     interfaces: [StyledClass]
   };
@@ -2684,7 +2708,7 @@ this['material-design'] = function (_, Kotlin, $module$elements, $module$beans) 
   }
   function MDCollapsedPanel$themeChangedHandler$lambda(this$MDCollapsedPanel) {
     return function (theme, property, old, new_0) {
-      if (Kotlin.equals(property.callableName, Kotlin.getPropertyCallableRef('cardsNdialogs', 1, function ($receiver) {
+      if (equals(property.callableName, getPropertyCallableRef('cardsNdialogs', 1, function ($receiver) {
         return $receiver.cardsNdialogs;
       }, function ($receiver, value) {
         $receiver.cardsNdialogs = value;
@@ -2694,7 +2718,7 @@ this['material-design'] = function (_, Kotlin, $module$elements, $module$beans) 
     };
   }
   MDCollapsedPanel.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     simpleName: 'MDCollapsedPanel',
     interfaces: [Div]
   };
@@ -2728,7 +2752,7 @@ this['material-design'] = function (_, Kotlin, $module$elements, $module$beans) 
     return Unit;
   }
   MDExpandButton$MDExpandButton.$metadata$ = {
-    kind: Kotlin.Kind.OBJECT,
+    kind: Kind_OBJECT,
     simpleName: 'MDExpandButton',
     interfaces: [StyledClass]
   };
@@ -2740,7 +2764,7 @@ this['material-design'] = function (_, Kotlin, $module$elements, $module$beans) 
     return MDExpandButton$MDExpandButton_instance;
   }
   MDExpandButton.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     simpleName: 'MDExpandButton',
     interfaces: [MDToggleButton]
   };
@@ -2776,7 +2800,7 @@ this['material-design'] = function (_, Kotlin, $module$elements, $module$beans) 
     return Unit;
   }
   MDExpandedContent$MDExpandedContent.$metadata$ = {
-    kind: Kotlin.Kind.OBJECT,
+    kind: Kind_OBJECT,
     simpleName: 'MDExpandedContent',
     interfaces: [StyledClass]
   };
@@ -2788,7 +2812,7 @@ this['material-design'] = function (_, Kotlin, $module$elements, $module$beans) 
     return MDExpandedContent$MDExpandedContent_instance;
   }
   MDExpandedContent.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     simpleName: 'MDExpandedContent',
     interfaces: [Div]
   };
@@ -2804,30 +2828,22 @@ this['material-design'] = function (_, Kotlin, $module$elements, $module$beans) 
   }
   Object.defineProperty(MDExpandedPanel.prototype, 'expandButton_0', {
     get: function () {
-      var $receiver = this.expandButton_3pib4w$_0;
-      new Kotlin.PropertyMetadata('expandButton');
-      return $receiver.value;
+      return this.expandButton_3pib4w$_0.value;
     }
   });
   Object.defineProperty(MDExpandedPanel.prototype, 'outerToolbar_8be2vx$', {
     get: function () {
-      var $receiver = this.outerToolbar_8be2vx$_al57vk$_0;
-      new Kotlin.PropertyMetadata('outerToolbar');
-      return $receiver.value;
+      return this.outerToolbar_8be2vx$_al57vk$_0.value;
     }
   });
   Object.defineProperty(MDExpandedPanel.prototype, 'toolbar', {
     get: function () {
-      var $receiver = this.toolbar_j3rgb1$_0;
-      new Kotlin.PropertyMetadata('toolbar');
-      return $receiver.value;
+      return this.toolbar_j3rgb1$_0.value;
     }
   });
   Object.defineProperty(MDExpandedPanel.prototype, 'content', {
     get: function () {
-      var $receiver = this.content_pzcp3j$_0;
-      new Kotlin.PropertyMetadata('content');
-      return $receiver.value;
+      return this.content_pzcp3j$_0.value;
     }
   });
   MDExpandedPanel.prototype.render = function () {
@@ -2869,7 +2885,7 @@ this['material-design'] = function (_, Kotlin, $module$elements, $module$beans) 
     return Unit;
   }
   MDExpandedPanel$MDExpandedPanel.$metadata$ = {
-    kind: Kotlin.Kind.OBJECT,
+    kind: Kind_OBJECT,
     simpleName: 'MDExpandedPanel',
     interfaces: [StyledClass]
   };
@@ -2904,7 +2920,7 @@ this['material-design'] = function (_, Kotlin, $module$elements, $module$beans) 
   }
   function MDExpandedPanel$themeChangedHandler$lambda(this$MDExpandedPanel) {
     return function (theme, property, old, new_0) {
-      if (Kotlin.equals(property.callableName, Kotlin.getPropertyCallableRef('cardsNdialogs', 1, function ($receiver) {
+      if (equals(property.callableName, getPropertyCallableRef('cardsNdialogs', 1, function ($receiver) {
         return $receiver.cardsNdialogs;
       }, function ($receiver, value) {
         $receiver.cardsNdialogs = value;
@@ -2914,7 +2930,7 @@ this['material-design'] = function (_, Kotlin, $module$elements, $module$beans) 
     };
   }
   MDExpandedPanel.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     simpleName: 'MDExpandedPanel',
     interfaces: [Div]
   };
@@ -2927,7 +2943,7 @@ this['material-design'] = function (_, Kotlin, $module$elements, $module$beans) 
   Delegates$observable$ObjectLiteral_11.prototype.afterChange_jxtfl0$ = function (property, oldValue, newValue) {
     this.closure$onChange(property, oldValue, newValue);
   };
-  Delegates$observable$ObjectLiteral_11.$metadata$ = {kind: Kotlin.Kind.CLASS, interfaces: [ObservableProperty]};
+  Delegates$observable$ObjectLiteral_11.$metadata$ = {kind: Kind_CLASS, interfaces: [ObservableProperty]};
   function MDExpansionPanel() {
     MDExpansionPanel$MDExpansionPanel_getInstance();
     Div.call(this);
@@ -2941,33 +2957,28 @@ this['material-design'] = function (_, Kotlin, $module$elements, $module$beans) 
     this.blurHandler_qplomt$_0 = MDExpansionPanel$blurHandler$lambda(this);
     this.keyUpHandler_81ua50$_0 = MDExpansionPanel$keyUpHandler$lambda(this);
   }
+  var MDExpansionPanel$state_metadata = new PropertyMetadata('state');
   Object.defineProperty(MDExpansionPanel.prototype, 'state', {
     get: function () {
-      return this.state_o55093$_0.getValue_lrcp0p$(this, new Kotlin.PropertyMetadata('state'));
+      return this.state_o55093$_0.getValue_lrcp0p$(this, MDExpansionPanel$state_metadata);
     },
     set: function (state) {
-      this.state_o55093$_0.setValue_9rddgb$(this, new Kotlin.PropertyMetadata('state'), state);
+      this.state_o55093$_0.setValue_9rddgb$(this, MDExpansionPanel$state_metadata, state);
     }
   });
   Object.defineProperty(MDExpansionPanel.prototype, 'expandAction_8be2vx$', {
     get: function () {
-      var $receiver = this.expandAction_8be2vx$_9ukp9c$_0;
-      new Kotlin.PropertyMetadata('expandAction');
-      return $receiver.value;
+      return this.expandAction_8be2vx$_9ukp9c$_0.value;
     }
   });
   Object.defineProperty(MDExpansionPanel.prototype, 'collapsed', {
     get: function () {
-      var $receiver = this.collapsed_4rzhj3$_0;
-      new Kotlin.PropertyMetadata('collapsed');
-      return $receiver.value;
+      return this.collapsed_4rzhj3$_0.value;
     }
   });
   Object.defineProperty(MDExpansionPanel.prototype, 'expanded', {
     get: function () {
-      var $receiver = this.expanded_ckoe8z$_0;
-      new Kotlin.PropertyMetadata('expanded');
-      return $receiver.value;
+      return this.expanded_ckoe8z$_0.value;
     }
   });
   Object.defineProperty(MDExpansionPanel.prototype, 'focused', {
@@ -3023,13 +3034,15 @@ this['material-design'] = function (_, Kotlin, $module$elements, $module$beans) 
     onKeyUp(this, this.keyUpHandler_81ua50$_0);
   };
   MDExpansionPanel.prototype.renderState_2lble8$_0 = function (state) {
-    if (Kotlin.equals(state, MDExpansionPanel$State$COLLAPSED_getInstance())) {
-      this.expanded.hide();
-      this.collapsed.show();
-    }
-     else if (Kotlin.equals(state, MDExpansionPanel$State$EXPANDED_getInstance())) {
-      this.collapsed.hide();
-      this.expanded.show();
+    switch (state.name) {
+      case 'COLLAPSED':
+        this.expanded.hide();
+        this.collapsed.show();
+        break;
+      case 'EXPANDED':
+        this.collapsed.hide();
+        this.expanded.show();
+        break;
     }
   };
   function MDExpansionPanel$State(name, ordinal) {
@@ -3054,7 +3067,7 @@ this['material-design'] = function (_, Kotlin, $module$elements, $module$beans) 
     return MDExpansionPanel$State$EXPANDED_instance;
   }
   MDExpansionPanel$State.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     simpleName: 'State',
     interfaces: [Enum]
   };
@@ -3068,7 +3081,7 @@ this['material-design'] = function (_, Kotlin, $module$elements, $module$beans) 
         return MDExpansionPanel$State$COLLAPSED_getInstance();
       case 'EXPANDED':
         return MDExpansionPanel$State$EXPANDED_getInstance();
-      default:Kotlin.throwISE('No enum constant fg.md.panel.MDExpansionPanel.State.' + name);
+      default:throwISE('No enum constant fg.md.panel.MDExpansionPanel.State.' + name);
     }
   }
   MDExpansionPanel$State.valueOf_61zpoe$ = MDExpansionPanel$State$valueOf;
@@ -3104,7 +3117,7 @@ this['material-design'] = function (_, Kotlin, $module$elements, $module$beans) 
     };
   }
   MDExpansionPanel$MDExpansionPanel.$metadata$ = {
-    kind: Kotlin.Kind.OBJECT,
+    kind: Kind_OBJECT,
     simpleName: 'MDExpansionPanel',
     interfaces: [StyledClass]
   };
@@ -3167,7 +3180,7 @@ this['material-design'] = function (_, Kotlin, $module$elements, $module$beans) 
     };
   }
   MDExpansionPanel.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     simpleName: 'MDExpansionPanel',
     interfaces: [Div]
   };
@@ -3183,9 +3196,7 @@ this['material-design'] = function (_, Kotlin, $module$elements, $module$beans) 
   }
   Object.defineProperty(MDRadioButton.prototype, 'ripple_0', {
     get: function () {
-      var $receiver = this.ripple_rhxzrp$_0;
-      new Kotlin.PropertyMetadata('ripple');
-      return $receiver.value;
+      return this.ripple_rhxzrp$_0.value;
     }
   });
   MDRadioButton.prototype.render = function () {
@@ -3220,7 +3231,7 @@ this['material-design'] = function (_, Kotlin, $module$elements, $module$beans) 
     return Unit;
   }
   MDRadioButton$MDRadioButton.$metadata$ = {
-    kind: Kotlin.Kind.OBJECT,
+    kind: Kind_OBJECT,
     simpleName: 'MDRadioButton',
     interfaces: [StyledClass]
   };
@@ -3243,7 +3254,7 @@ this['material-design'] = function (_, Kotlin, $module$elements, $module$beans) 
     };
   }
   MDRadioButton.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     simpleName: 'MDRadioButton',
     interfaces: [LabelledRadioButton]
   };
@@ -3267,9 +3278,7 @@ this['material-design'] = function (_, Kotlin, $module$elements, $module$beans) 
   }
   Object.defineProperty(Ripple.prototype, 'rippleContainer_0', {
     get: function () {
-      var $receiver = this.rippleContainer_k9xg4e$_0;
-      new Kotlin.PropertyMetadata('rippleContainer');
-      return $receiver.value;
+      return this.rippleContainer_k9xg4e$_0.value;
     }
   });
   Ripple.prototype.init = function () {
@@ -3304,7 +3313,7 @@ this['material-design'] = function (_, Kotlin, $module$elements, $module$beans) 
     return Unit;
   }
   Ripple$Factory.$metadata$ = {
-    kind: Kotlin.Kind.OBJECT,
+    kind: Kind_OBJECT,
     simpleName: 'Factory',
     interfaces: []
   };
@@ -3345,7 +3354,7 @@ this['material-design'] = function (_, Kotlin, $module$elements, $module$beans) 
     };
   }
   Ripple.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     simpleName: 'Ripple',
     interfaces: []
   };
@@ -3382,7 +3391,7 @@ this['material-design'] = function (_, Kotlin, $module$elements, $module$beans) 
     return Unit;
   }
   RippleContainer$RippleContainer.$metadata$ = {
-    kind: Kotlin.Kind.OBJECT,
+    kind: Kind_OBJECT,
     simpleName: 'RippleContainer',
     interfaces: [StyledClass]
   };
@@ -3394,7 +3403,7 @@ this['material-design'] = function (_, Kotlin, $module$elements, $module$beans) 
     return RippleContainer$RippleContainer_instance;
   }
   RippleContainer.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     simpleName: 'RippleContainer',
     interfaces: [Div]
   };
@@ -3407,18 +3416,19 @@ this['material-design'] = function (_, Kotlin, $module$elements, $module$beans) 
   Delegates$observable$ObjectLiteral_12.prototype.afterChange_jxtfl0$ = function (property, oldValue, newValue) {
     this.closure$onChange(property, oldValue, newValue);
   };
-  Delegates$observable$ObjectLiteral_12.$metadata$ = {kind: Kotlin.Kind.CLASS, interfaces: [ObservableProperty]};
+  Delegates$observable$ObjectLiteral_12.$metadata$ = {kind: Kind_CLASS, interfaces: [ObservableProperty]};
   function RippleInk(color) {
     RippleInk$RippleInk_getInstance();
     Span.call(this);
     this.color_oiswxk$_0 = new Delegates$observable$ObjectLiteral_12(RippleInk$color$lambda(this), color);
   }
+  var RippleInk$color_metadata = new PropertyMetadata('color');
   Object.defineProperty(RippleInk.prototype, 'color', {
     get: function () {
-      return this.color_oiswxk$_0.getValue_lrcp0p$(this, new Kotlin.PropertyMetadata('color'));
+      return this.color_oiswxk$_0.getValue_lrcp0p$(this, RippleInk$color_metadata);
     },
     set: function (color) {
-      this.color_oiswxk$_0.setValue_9rddgb$(this, new Kotlin.PropertyMetadata('color'), color);
+      this.color_oiswxk$_0.setValue_9rddgb$(this, RippleInk$color_metadata, color);
     }
   });
   RippleInk.prototype.setSize_sfxhv0$ = function (size) {
@@ -3474,7 +3484,7 @@ this['material-design'] = function (_, Kotlin, $module$elements, $module$beans) 
     return Unit;
   }
   RippleInk$RippleInk.$metadata$ = {
-    kind: Kotlin.Kind.OBJECT,
+    kind: Kind_OBJECT,
     simpleName: 'RippleInk',
     interfaces: [StyledClass]
   };
@@ -3492,7 +3502,7 @@ this['material-design'] = function (_, Kotlin, $module$elements, $module$beans) 
     };
   }
   RippleInk.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     simpleName: 'RippleInk',
     interfaces: [Span]
   };
@@ -3536,7 +3546,7 @@ this['material-design'] = function (_, Kotlin, $module$elements, $module$beans) 
     return Unit;
   }
   MDToolbar$MDToolbar.$metadata$ = {
-    kind: Kotlin.Kind.OBJECT,
+    kind: Kind_OBJECT,
     simpleName: 'MDToolbar',
     interfaces: [StyledClass]
   };
@@ -3548,7 +3558,7 @@ this['material-design'] = function (_, Kotlin, $module$elements, $module$beans) 
     return MDToolbar$MDToolbar_instance;
   }
   MDToolbar.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     simpleName: 'MDToolbar',
     interfaces: [Div]
   };

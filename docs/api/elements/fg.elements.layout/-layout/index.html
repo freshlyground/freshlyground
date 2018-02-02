@@ -8,26 +8,28 @@
 <a href="../../index.html">elements</a>&nbsp;/&nbsp;<a href="../index.html">fg.elements.layout</a>&nbsp;/&nbsp;<a href=".">Layout</a><br/>
 <br/>
 <h1>Layout</h1>
-<code><span class="keyword">class </span><span class="identifier">Layout</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="../-abstract-layout/index.html"><span class="identifier">AbstractLayout</span></a></code>
+<code><span class="keyword">class </span><span class="identifier">Layout</span></code>
 <h3>Constructors</h3>
 <table>
 <tbody>
 <tr>
 <td>
-<a href="-init-.html">&lt;init&gt;</a></td>
+<p><a href="-init-.html">&lt;init&gt;</a></p>
+</td>
 <td>
-<code><span class="identifier">Layout</span><span class="symbol">(</span><span class="identifier" id="fg.elements.layout.Layout$<init>(fg.elements.layout.Direction)/direction">direction</span><span class="symbol">:</span>&nbsp;<a href="../-direction/index.html"><span class="identifier">Direction</span></a><span class="symbol">)</span></code></td>
+<code><span class="identifier">Layout</span><span class="symbol">(</span><span class="identifier" id="fg.elements.layout.Layout$<init>(fg.elements.Element)/element">element</span><span class="symbol">:</span>&nbsp;<a href="../../fg.elements/-element/index.html"><span class="identifier">Element</span></a><span class="symbol">)</span></code></td>
 </tr>
 </tbody>
 </table>
-<h3>Inherited Properties</h3>
+<h3>Properties</h3>
 <table>
 <tbody>
 <tr>
 <td>
-<a href="../-abstract-layout/direction.html">direction</a></td>
+<p><a href="style.html">style</a></p>
+</td>
 <td>
-<code><span class="keyword">var </span><span class="identifier">direction</span><span class="symbol">: </span><a href="../-direction/index.html"><span class="identifier">Direction</span></a></code></td>
+<code><span class="keyword">val </span><span class="identifier">style</span><span class="symbol">: </span><a href="../../fg.elements.style.typed/-typed-style/index.html"><span class="identifier">TypedStyle</span></a></code></td>
 </tr>
 </tbody>
 </table>
@@ -36,43 +38,45 @@
 <tbody>
 <tr>
 <td>
-<a href="add-breakpoint.html">addBreakpoint</a></td>
+<p><a href="add-breakpoint.html">addBreakpoint</a></p>
+</td>
 <td>
-<code><span class="keyword">fun </span><span class="identifier">addBreakpoint</span><span class="symbol">(</span><span class="identifier" id="fg.elements.layout.Layout$addBreakpoint(fg.elements.layout.LayoutBreakpoint)/breakpoint">breakpoint</span><span class="symbol">:</span>&nbsp;<a href="../-layout-breakpoint/index.html"><span class="identifier">LayoutBreakpoint</span></a><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">Unit</span></code></td>
+<code><span class="keyword">fun </span><span class="identifier">addBreakpoint</span><span class="symbol">(</span><span class="identifier" id="fg.elements.layout.Layout$addBreakpoint(fg.elements.layout.BreakpointLayout)/breakpoint">breakpoint</span><span class="symbol">:</span>&nbsp;<a href="../-breakpoint-layout/index.html"><span class="identifier">BreakpointLayout</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
 </tr>
 <tr>
 <td>
-<a href="find.html">find</a></td>
+<p><a href="initialize.html">initialize</a></p>
+</td>
 <td>
-<code><span class="keyword">fun </span><span class="identifier">find</span><span class="symbol">(</span><span class="identifier" id="fg.elements.layout.Layout$find(kotlin.Double)/width">width</span><span class="symbol">:</span>&nbsp;<span class="identifier">Double</span><span class="symbol">)</span><span class="symbol">: </span><a href="../-layout-breakpoint/index.html"><span class="identifier">LayoutBreakpoint</span></a><span class="symbol">?</span></code></td>
-</tr>
-</tbody>
-</table>
-<h3>Inherited Functions</h3>
-<table>
-<tbody>
-<tr>
-<td>
-<a href="../-abstract-layout/apply.html">apply</a></td>
-<td>
-<code><span class="keyword">fun </span><span class="identifier">apply</span><span class="symbol">(</span><span class="identifier" id="fg.elements.layout.AbstractLayout$apply(fg.elements.Element)/element">element</span><span class="symbol">:</span>&nbsp;<a href="../../fg.elements/-element/index.html"><span class="identifier">Element</span></a><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">Unit</span></code></td>
-</tr>
-</tbody>
-</table>
-<h3>Companion Object Functions</h3>
-<table>
-<tbody>
-<tr>
-<td>
-<a href="from.html">from</a></td>
-<td>
-<code><span class="keyword">fun </span><span class="identifier">from</span><span class="symbol">(</span><span class="identifier" id="fg.elements.layout.Layout.Statics$from(fg.elements.Element)/element">element</span><span class="symbol">:</span>&nbsp;<a href="../../fg.elements/-element/index.html"><span class="identifier">Element</span></a><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">Layout</span><span class="symbol">?</span></code></td>
+<code><span class="keyword">fun </span><span class="identifier">initialize</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
 </tr>
 <tr>
 <td>
-<a href="remove.html">remove</a></td>
+<p><a href="on-activated.html">onActivated</a></p>
+</td>
 <td>
-<code><span class="keyword">fun </span><span class="identifier">remove</span><span class="symbol">(</span><span class="identifier" id="fg.elements.layout.Layout.Statics$remove(fg.elements.Element)/element">element</span><span class="symbol">:</span>&nbsp;<a href="../../fg.elements/-element/index.html"><span class="identifier">Element</span></a><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">Unit</span></code></td>
+<code><span class="keyword">fun </span><span class="identifier">onActivated</span><span class="symbol">(</span><span class="identifier" id="fg.elements.layout.Layout$onActivated(kotlin.Function0((kotlin.Unit)))/listener">listener</span><span class="symbol">:</span>&nbsp;<span class="symbol">(</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="on-deactivated.html">onDeactivated</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">onDeactivated</span><span class="symbol">(</span><span class="identifier" id="fg.elements.layout.Layout$onDeactivated(kotlin.Function0((kotlin.Unit)))/listener">listener</span><span class="symbol">:</span>&nbsp;<span class="symbol">(</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="un-activated.html">unActivated</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">unActivated</span><span class="symbol">(</span><span class="identifier" id="fg.elements.layout.Layout$unActivated(kotlin.Function0((kotlin.Unit)))/listener">listener</span><span class="symbol">:</span>&nbsp;<span class="symbol">(</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+<p><a href="un-deactivated.html">unDeactivated</a></p>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">unDeactivated</span><span class="symbol">(</span><span class="identifier" id="fg.elements.layout.Layout$unDeactivated(kotlin.Function0((kotlin.Unit)))/listener">listener</span><span class="symbol">:</span>&nbsp;<span class="symbol">(</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
 </tr>
 </tbody>
 </table>
@@ -81,33 +85,38 @@
 <tbody>
 <tr>
 <td>
-<a href="../large.html">large</a></td>
+<p><a href="../large.html">large</a></p>
+</td>
 <td>
-<code><span class="keyword">fun </span><span class="identifier">Layout</span><span class="symbol">.</span><span class="identifier">large</span><span class="symbol">(</span><span class="identifier" id="fg.elements.layout$large(fg.elements.layout.Layout, fg.elements.layout.Direction, kotlin.Function1((fg.elements.layout.LayoutBreakpoint, kotlin.Unit)))/direction">direction</span><span class="symbol">:</span>&nbsp;<a href="../-direction/index.html"><span class="identifier">Direction</span></a><span class="symbol">, </span><span class="identifier" id="fg.elements.layout$large(fg.elements.layout.Layout, fg.elements.layout.Direction, kotlin.Function1((fg.elements.layout.LayoutBreakpoint, kotlin.Unit)))/init">init</span><span class="symbol">:</span>&nbsp;<a href="../-layout-breakpoint/index.html"><span class="identifier">LayoutBreakpoint</span></a><span class="symbol">.</span><span class="symbol">(</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<span class="identifier">Unit</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">Unit</span></code></td>
+<code><span class="keyword">fun </span><span class="identifier">Layout</span><span class="symbol">.</span><span class="identifier">large</span><span class="symbol">(</span><span class="identifier" id="fg.elements.layout$large(fg.elements.layout.Layout, kotlin.Function1((fg.elements.layout.BreakpointLayout, kotlin.Unit)))/init">init</span><span class="symbol">:</span>&nbsp;<a href="../-breakpoint-layout/index.html"><span class="identifier">BreakpointLayout</span></a><span class="symbol">.</span><span class="symbol">(</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
 </tr>
 <tr>
 <td>
-<a href="../medium.html">medium</a></td>
+<p><a href="../medium.html">medium</a></p>
+</td>
 <td>
-<code><span class="keyword">fun </span><span class="identifier">Layout</span><span class="symbol">.</span><span class="identifier">medium</span><span class="symbol">(</span><span class="identifier" id="fg.elements.layout$medium(fg.elements.layout.Layout, fg.elements.layout.Direction, kotlin.Function1((fg.elements.layout.LayoutBreakpoint, kotlin.Unit)))/direction">direction</span><span class="symbol">:</span>&nbsp;<a href="../-direction/index.html"><span class="identifier">Direction</span></a><span class="symbol">, </span><span class="identifier" id="fg.elements.layout$medium(fg.elements.layout.Layout, fg.elements.layout.Direction, kotlin.Function1((fg.elements.layout.LayoutBreakpoint, kotlin.Unit)))/init">init</span><span class="symbol">:</span>&nbsp;<a href="../-layout-breakpoint/index.html"><span class="identifier">LayoutBreakpoint</span></a><span class="symbol">.</span><span class="symbol">(</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<span class="identifier">Unit</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">Unit</span></code></td>
+<code><span class="keyword">fun </span><span class="identifier">Layout</span><span class="symbol">.</span><span class="identifier">medium</span><span class="symbol">(</span><span class="identifier" id="fg.elements.layout$medium(fg.elements.layout.Layout, kotlin.Function1((fg.elements.layout.BreakpointLayout, kotlin.Unit)))/init">init</span><span class="symbol">:</span>&nbsp;<a href="../-breakpoint-layout/index.html"><span class="identifier">BreakpointLayout</span></a><span class="symbol">.</span><span class="symbol">(</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
 </tr>
 <tr>
 <td>
-<a href="../small.html">small</a></td>
+<p><a href="../small.html">small</a></p>
+</td>
 <td>
-<code><span class="keyword">fun </span><span class="identifier">Layout</span><span class="symbol">.</span><span class="identifier">small</span><span class="symbol">(</span><span class="identifier" id="fg.elements.layout$small(fg.elements.layout.Layout, fg.elements.layout.Direction, kotlin.Function1((fg.elements.layout.LayoutBreakpoint, kotlin.Unit)))/direction">direction</span><span class="symbol">:</span>&nbsp;<a href="../-direction/index.html"><span class="identifier">Direction</span></a><span class="symbol">, </span><span class="identifier" id="fg.elements.layout$small(fg.elements.layout.Layout, fg.elements.layout.Direction, kotlin.Function1((fg.elements.layout.LayoutBreakpoint, kotlin.Unit)))/init">init</span><span class="symbol">:</span>&nbsp;<a href="../-layout-breakpoint/index.html"><span class="identifier">LayoutBreakpoint</span></a><span class="symbol">.</span><span class="symbol">(</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<span class="identifier">Unit</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">Unit</span></code></td>
+<code><span class="keyword">fun </span><span class="identifier">Layout</span><span class="symbol">.</span><span class="identifier">small</span><span class="symbol">(</span><span class="identifier" id="fg.elements.layout$small(fg.elements.layout.Layout, kotlin.Function1((fg.elements.layout.BreakpointLayout, kotlin.Unit)))/init">init</span><span class="symbol">:</span>&nbsp;<a href="../-breakpoint-layout/index.html"><span class="identifier">BreakpointLayout</span></a><span class="symbol">.</span><span class="symbol">(</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
 </tr>
 <tr>
 <td>
-<a href="../xlarge.html">xlarge</a></td>
+<p><a href="../xlarge.html">xlarge</a></p>
+</td>
 <td>
-<code><span class="keyword">fun </span><span class="identifier">Layout</span><span class="symbol">.</span><span class="identifier">xlarge</span><span class="symbol">(</span><span class="identifier" id="fg.elements.layout$xlarge(fg.elements.layout.Layout, fg.elements.layout.Direction, kotlin.Function1((fg.elements.layout.LayoutBreakpoint, kotlin.Unit)))/direction">direction</span><span class="symbol">:</span>&nbsp;<a href="../-direction/index.html"><span class="identifier">Direction</span></a><span class="symbol">, </span><span class="identifier" id="fg.elements.layout$xlarge(fg.elements.layout.Layout, fg.elements.layout.Direction, kotlin.Function1((fg.elements.layout.LayoutBreakpoint, kotlin.Unit)))/init">init</span><span class="symbol">:</span>&nbsp;<a href="../-layout-breakpoint/index.html"><span class="identifier">LayoutBreakpoint</span></a><span class="symbol">.</span><span class="symbol">(</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<span class="identifier">Unit</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">Unit</span></code></td>
+<code><span class="keyword">fun </span><span class="identifier">Layout</span><span class="symbol">.</span><span class="identifier">xlarge</span><span class="symbol">(</span><span class="identifier" id="fg.elements.layout$xlarge(fg.elements.layout.Layout, kotlin.Function1((fg.elements.layout.BreakpointLayout, kotlin.Unit)))/init">init</span><span class="symbol">:</span>&nbsp;<a href="../-breakpoint-layout/index.html"><span class="identifier">BreakpointLayout</span></a><span class="symbol">.</span><span class="symbol">(</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
 </tr>
 <tr>
 <td>
-<a href="../xsmall.html">xsmall</a></td>
+<p><a href="../xsmall.html">xsmall</a></p>
+</td>
 <td>
-<code><span class="keyword">fun </span><span class="identifier">Layout</span><span class="symbol">.</span><span class="identifier">xsmall</span><span class="symbol">(</span><span class="identifier" id="fg.elements.layout$xsmall(fg.elements.layout.Layout, fg.elements.layout.Direction, kotlin.Function1((fg.elements.layout.LayoutBreakpoint, kotlin.Unit)))/direction">direction</span><span class="symbol">:</span>&nbsp;<a href="../-direction/index.html"><span class="identifier">Direction</span></a><span class="symbol">, </span><span class="identifier" id="fg.elements.layout$xsmall(fg.elements.layout.Layout, fg.elements.layout.Direction, kotlin.Function1((fg.elements.layout.LayoutBreakpoint, kotlin.Unit)))/init">init</span><span class="symbol">:</span>&nbsp;<a href="../-layout-breakpoint/index.html"><span class="identifier">LayoutBreakpoint</span></a><span class="symbol">.</span><span class="symbol">(</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<span class="identifier">Unit</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">Unit</span></code></td>
+<code><span class="keyword">fun </span><span class="identifier">Layout</span><span class="symbol">.</span><span class="identifier">xsmall</span><span class="symbol">(</span><span class="identifier" id="fg.elements.layout$xsmall(fg.elements.layout.Layout, kotlin.Function1((fg.elements.layout.BreakpointLayout, kotlin.Unit)))/init">init</span><span class="symbol">:</span>&nbsp;<a href="../-breakpoint-layout/index.html"><span class="identifier">BreakpointLayout</span></a><span class="symbol">.</span><span class="symbol">(</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
 </tr>
 </tbody>
 </table>

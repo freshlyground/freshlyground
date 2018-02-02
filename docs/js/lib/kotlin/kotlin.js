@@ -11,34 +11,6 @@
   }
 }(this, function (Kotlin) {
   var _ = Kotlin;
-  Kotlin.compareTo = function (a, b) {
-    var typeA = typeof a;
-    var typeB = typeof a;
-    if (Kotlin.isChar(a) && typeB === 'number') {
-      return Kotlin.primitiveCompareTo(a.charCodeAt(0), b);
-    }
-    if (typeA === 'number' && Kotlin.isChar(b)) {
-      return Kotlin.primitiveCompareTo(a, b.charCodeAt(0));
-    }
-    if (typeA === 'number' || typeA === 'string' || typeA === 'boolean') {
-      return Kotlin.primitiveCompareTo(a, b);
-    }
-    return a.compareTo_11rb$(b);
-  };
-  Kotlin.primitiveCompareTo = function (a, b) {
-    return a < b ? -1 : a > b ? 1 : 0;
-  };
-  Kotlin.charInc = function (value) {
-    return Kotlin.toChar(value + 1);
-  };
-  Kotlin.charDec = function (value) {
-    return Kotlin.toChar(value - 1);
-  };
-  Kotlin.imul = Math.imul || imul;
-  Kotlin.imulEmulated = imul;
-  function imul(a, b) {
-    return (a & 4.29490176E9) * (b & 65535) + (a & 65535) * (b | 0) | 0;
-  }
   Kotlin.isBooleanArray = function (a) {
     return (Array.isArray(a) || a instanceof Int8Array) && a.$type$ === 'BooleanArray';
   };
@@ -141,6 +113,373 @@
   Kotlin.primitiveArraySort = function (array) {
     array.sort(Kotlin.primitiveCompareTo);
   };
+  Kotlin.equals = function (obj1, obj2) {
+    if (obj1 == null) {
+      return obj2 == null;
+    }
+    if (obj2 == null) {
+      return false;
+    }
+    if (obj1 !== obj1) {
+      return obj2 !== obj2;
+    }
+    if (typeof obj1 === 'object' && typeof obj1.equals === 'function') {
+      return obj1.equals(obj2);
+    }
+    return obj1 === obj2;
+  };
+  Kotlin.hashCode = function (obj) {
+    if (obj == null) {
+      return 0;
+    }
+    var objType = typeof obj;
+    if ('object' === objType) {
+      return 'function' === typeof obj.hashCode ? obj.hashCode() : getObjectHashCode(obj);
+    }
+    if ('function' === objType) {
+      return getObjectHashCode(obj);
+    }
+    if ('number' === objType) {
+      return Kotlin.numberHashCode(obj);
+    }
+    if ('boolean' === objType) {
+      return Number(obj);
+    }
+    var str = String(obj);
+    return getStringHashCode(str);
+  };
+  Kotlin.toString = function (o) {
+    if (o == null) {
+      return 'null';
+    }
+     else if (Kotlin.isArrayish(o)) {
+      return '[...]';
+    }
+     else {
+      return o.toString();
+    }
+  };
+  var POW_2_32 = 4.294967296E9;
+  var OBJECT_HASH_CODE_PROPERTY_NAME = 'kotlinHashCodeValue$';
+  function getObjectHashCode(obj) {
+    if (!(OBJECT_HASH_CODE_PROPERTY_NAME in obj)) {
+      var hash = Math.random() * POW_2_32 | 0;
+      Object.defineProperty(obj, OBJECT_HASH_CODE_PROPERTY_NAME, {value: hash, enumerable: false});
+    }
+    return obj[OBJECT_HASH_CODE_PROPERTY_NAME];
+  }
+  function getStringHashCode(str) {
+    var hash = 0;
+    for (var i = 0; i < str.length; i++) {
+      var code = str.charCodeAt(i);
+      hash = hash * 31 + code | 0;
+    }
+    return hash;
+  }
+  Kotlin.identityHashCode = getObjectHashCode;
+  Kotlin.toShort = function (a) {
+    return (a & 65535) << 16 >> 16;
+  };
+  Kotlin.toByte = function (a) {
+    return (a & 255) << 24 >> 24;
+  };
+  Kotlin.toChar = function (a) {
+    return a & 65535;
+  };
+  Kotlin.numberToLong = function (a) {
+    return a instanceof Kotlin.Long ? a : Kotlin.Long.fromNumber(a);
+  };
+  Kotlin.numberToInt = function (a) {
+    return a instanceof Kotlin.Long ? a.toInt() : Kotlin.doubleToInt(a);
+  };
+  Kotlin.numberToShort = function (a) {
+    return Kotlin.toShort(Kotlin.numberToInt(a));
+  };
+  Kotlin.numberToByte = function (a) {
+    return Kotlin.toByte(Kotlin.numberToInt(a));
+  };
+  Kotlin.numberToDouble = function (a) {
+    return +a;
+  };
+  Kotlin.numberToChar = function (a) {
+    return Kotlin.toChar(Kotlin.numberToInt(a));
+  };
+  Kotlin.doubleToInt = function (a) {
+    if (a > 2147483647)
+      return 2147483647;
+    if (a < -2147483648)
+      return -2147483648;
+    return a | 0;
+  };
+  Kotlin.toBoxedChar = function (a) {
+    if (a == null)
+      return a;
+    if (a instanceof Kotlin.BoxedChar)
+      return a;
+    return new Kotlin.BoxedChar(a);
+  };
+  Kotlin.unboxChar = function (a) {
+    if (a == null)
+      return a;
+    return Kotlin.toChar(a);
+  };
+  Kotlin.getCallableRef = function (name, f) {
+    f.callableName = name;
+    return f;
+  };
+  Kotlin.getPropertyCallableRef = function (name, paramCount, getter, setter) {
+    getter.get = getter;
+    getter.set = setter;
+    getter.callableName = name;
+    return getPropertyRefClass(getter, setter, propertyRefClassMetadataCache[paramCount]);
+  };
+  function getPropertyRefClass(obj, setter, cache) {
+    obj.$metadata$ = getPropertyRefMetadata(typeof setter === 'function' ? cache.mutable : cache.immutable);
+    obj.constructor = obj;
+    return obj;
+  }
+  var propertyRefClassMetadataCache = [{mutable: {value: null, implementedInterface: function () {
+    return Kotlin.kotlin.reflect.KMutableProperty0;
+  }}, immutable: {value: null, implementedInterface: function () {
+    return Kotlin.kotlin.reflect.KProperty0;
+  }}}, {mutable: {value: null, implementedInterface: function () {
+    return Kotlin.kotlin.reflect.KMutableProperty1;
+  }}, immutable: {value: null, implementedInterface: function () {
+    return Kotlin.kotlin.reflect.KProperty1;
+  }}}];
+  function getPropertyRefMetadata(cache) {
+    if (cache.value === null) {
+      cache.value = {interfaces: [cache.implementedInterface()], baseClass: null, functions: {}, properties: {}, types: {}, staticMembers: {}};
+    }
+    return cache.value;
+  }
+  Kotlin.defineModule = function (id, declaration) {
+  };
+  Kotlin.defineInlineFunction = function (tag, fun) {
+    return fun;
+  };
+  Kotlin.wrapFunction = function (fun) {
+    var f = function () {
+      f = fun();
+      return f.apply(this, arguments);
+    };
+    return function () {
+      return f.apply(this, arguments);
+    };
+  };
+  Kotlin.isTypeOf = function (type) {
+    return function (object) {
+      return typeof object === type;
+    };
+  };
+  Kotlin.isInstanceOf = function (klass) {
+    return function (object) {
+      return Kotlin.isType(object, klass);
+    };
+  };
+  Kotlin.orNull = function (fn) {
+    return function (object) {
+      return object == null || fn(object);
+    };
+  };
+  Kotlin.andPredicate = function (a, b) {
+    return function (object) {
+      return a(object) && b(object);
+    };
+  };
+  Kotlin.kotlinModuleMetadata = function (abiVersion, moduleName, data) {
+  };
+  Kotlin.suspendCall = function (value) {
+    return value;
+  };
+  Kotlin.coroutineResult = function (qualifier) {
+    throwMarkerError();
+  };
+  Kotlin.coroutineController = function (qualifier) {
+    throwMarkerError();
+  };
+  Kotlin.coroutineReceiver = function (qualifier) {
+    throwMarkerError();
+  };
+  Kotlin.setCoroutineResult = function (value, qualifier) {
+    throwMarkerError();
+  };
+  function throwMarkerError() {
+    throw new Error('This marker function should never been called. ' + 'Looks like compiler did not eliminate it properly. ' + 'Please, report an issue if you caught this exception.');
+  }
+  Kotlin.getFunctionById = function (id, defaultValue) {
+    return function () {
+      return defaultValue;
+    };
+  };
+  Kotlin.compareTo = function (a, b) {
+    var typeA = typeof a;
+    var typeB = typeof a;
+    if (Kotlin.isChar(a) && typeB === 'number') {
+      return Kotlin.primitiveCompareTo(a.charCodeAt(0), b);
+    }
+    if (typeA === 'number' && Kotlin.isChar(b)) {
+      return Kotlin.primitiveCompareTo(a, b.charCodeAt(0));
+    }
+    if (typeA === 'number' || typeA === 'string' || typeA === 'boolean') {
+      return Kotlin.primitiveCompareTo(a, b);
+    }
+    return a.compareTo_11rb$(b);
+  };
+  Kotlin.primitiveCompareTo = function (a, b) {
+    return a < b ? -1 : a > b ? 1 : 0;
+  };
+  Kotlin.charInc = function (value) {
+    return Kotlin.toChar(value + 1);
+  };
+  Kotlin.charDec = function (value) {
+    return Kotlin.toChar(value - 1);
+  };
+  Kotlin.imul = Math.imul || imul;
+  Kotlin.imulEmulated = imul;
+  function imul(a, b) {
+    return (a & 4.29490176E9) * (b & 65535) + (a & 65535) * (b | 0) | 0;
+  }
+  (function () {
+    var buf = new ArrayBuffer(8);
+    var bufFloat64 = new Float64Array(buf);
+    var bufFloat32 = new Float32Array(buf);
+    var bufInt32 = new Int32Array(buf);
+    var lowIndex = 0;
+    var highIndex = 1;
+    bufFloat64[0] = -1;
+    if (bufInt32[lowIndex] !== 0) {
+      lowIndex = 1;
+      highIndex = 0;
+    }
+    Kotlin.doubleToBits = function (value) {
+      return Kotlin.doubleToRawBits(isNaN(value) ? NaN : value);
+    };
+    Kotlin.doubleToRawBits = function (value) {
+      bufFloat64[0] = value;
+      return Kotlin.Long.fromBits(bufInt32[lowIndex], bufInt32[highIndex]);
+    };
+    Kotlin.doubleFromBits = function (value) {
+      bufInt32[lowIndex] = value.low_;
+      bufInt32[highIndex] = value.high_;
+      return bufFloat64[0];
+    };
+    Kotlin.floatToBits = function (value) {
+      return Kotlin.floatToRawBits(isNaN(value) ? NaN : value);
+    };
+    Kotlin.floatToRawBits = function (value) {
+      bufFloat32[0] = value;
+      return bufInt32[0];
+    };
+    Kotlin.floatFromBits = function (value) {
+      bufInt32[0] = value;
+      return bufFloat32[0];
+    };
+    Kotlin.doubleSignBit = function (value) {
+      bufFloat64[0] = value;
+      return bufInt32[highIndex] & 2.147483648E9;
+    };
+    Kotlin.numberHashCode = function (obj) {
+      if ((obj | 0) === obj) {
+        return obj | 0;
+      }
+       else {
+        bufFloat64[0] = obj;
+        return (bufInt32[highIndex] * 31 | 0) + bufInt32[lowIndex] | 0;
+      }
+    };
+  }());
+  Kotlin.ensureNotNull = function (x) {
+    return x != null ? x : Kotlin.throwNPE();
+  };
+  Kotlin.Kind = {CLASS: 'class', INTERFACE: 'interface', OBJECT: 'object'};
+  Kotlin.callGetter = function (thisObject, klass, propertyName) {
+    var propertyDescriptor = Object.getOwnPropertyDescriptor(klass, propertyName);
+    if (propertyDescriptor != null && propertyDescriptor.get != null) {
+      return propertyDescriptor.get.call(thisObject);
+    }
+    propertyDescriptor = Object.getOwnPropertyDescriptor(thisObject, propertyName);
+    if (propertyDescriptor != null && 'value' in propertyDescriptor) {
+      return thisObject[propertyName];
+    }
+    return Kotlin.callGetter(thisObject, Object.getPrototypeOf(klass), propertyName);
+  };
+  Kotlin.callSetter = function (thisObject, klass, propertyName, value) {
+    var propertyDescriptor = Object.getOwnPropertyDescriptor(klass, propertyName);
+    if (propertyDescriptor != null && propertyDescriptor.set != null) {
+      propertyDescriptor.set.call(thisObject, value);
+      return;
+    }
+    propertyDescriptor = Object.getOwnPropertyDescriptor(thisObject, propertyName);
+    if (propertyDescriptor != null && 'value' in propertyDescriptor) {
+      thisObject[propertyName] = value;
+      return;
+    }
+    Kotlin.callSetter(thisObject, Object.getPrototypeOf(klass), propertyName, value);
+  };
+  function isInheritanceFromInterface(ctor, iface) {
+    if (ctor === iface)
+      return true;
+    var metadata = ctor.$metadata$;
+    if (metadata != null) {
+      var interfaces = metadata.interfaces;
+      for (var i = 0; i < interfaces.length; i++) {
+        if (isInheritanceFromInterface(interfaces[i], iface)) {
+          return true;
+        }
+      }
+    }
+    var superPrototype = ctor.prototype != null ? Object.getPrototypeOf(ctor.prototype) : null;
+    var superConstructor = superPrototype != null ? superPrototype.constructor : null;
+    return superConstructor != null && isInheritanceFromInterface(superConstructor, iface);
+  }
+  Kotlin.isType = function (object, klass) {
+    if (klass === Object) {
+      switch (typeof object) {
+        case 'string':
+        case 'number':
+        case 'boolean':
+        case 'function':
+          return true;
+        default:return object instanceof Object;
+      }
+    }
+    if (object == null || klass == null || (typeof object !== 'object' && typeof object !== 'function')) {
+      return false;
+    }
+    if (typeof klass === 'function' && object instanceof klass) {
+      return true;
+    }
+    var proto = Object.getPrototypeOf(klass);
+    var constructor = proto != null ? proto.constructor : null;
+    if (constructor != null && '$metadata$' in constructor) {
+      var metadata = constructor.$metadata$;
+      if (metadata.kind === Kotlin.Kind.OBJECT) {
+        return object === klass;
+      }
+    }
+    var klassMetadata = klass.$metadata$;
+    if (klassMetadata == null) {
+      return object instanceof klass;
+    }
+    if (klassMetadata.kind === Kotlin.Kind.INTERFACE && object.constructor != null) {
+      return isInheritanceFromInterface(object.constructor, klass);
+    }
+    return false;
+  };
+  Kotlin.isNumber = function (a) {
+    return typeof a == 'number' || a instanceof Kotlin.Long;
+  };
+  Kotlin.isChar = function (value) {
+    return value instanceof Kotlin.BoxedChar;
+  };
+  Kotlin.isComparable = function (value) {
+    var type = typeof value;
+    return type === 'string' || type === 'boolean' || Kotlin.isNumber(value) || Kotlin.isType(value, Kotlin.kotlin.Comparable);
+  };
+  Kotlin.isCharSequence = function (value) {
+    return typeof value === 'string' || Kotlin.isType(value, Kotlin.kotlin.CharSequence);
+  };
   if (typeof String.prototype.startsWith === 'undefined') {
     String.prototype.startsWith = function (searchString, position) {
       position = position || 0;
@@ -158,12 +497,193 @@
       return lastIndex !== -1 && lastIndex === position;
     };
   }
+  if (typeof Math.sign === 'undefined') {
+    Math.sign = function (x) {
+      x = +x;
+      if (x === 0 || isNaN(x)) {
+        return Number(x);
+      }
+      return x > 0 ? 1 : -1;
+    };
+  }
+  if (typeof Math.trunc === 'undefined') {
+    Math.trunc = function (x) {
+      if (isNaN(x)) {
+        return NaN;
+      }
+      if (x > 0) {
+        return Math.floor(x);
+      }
+      return Math.ceil(x);
+    };
+  }
   (function () {
-    if (typeof ArrayBuffer.isView === 'undefined') {
-      ArrayBuffer.isView = function (a) {
-        return a != null && a.__proto__ != null && a.__proto__.__proto__ === Int8Array.prototype.__proto__;
+    var epsilon = 2.220446049250313E-16;
+    var taylor_2_bound = Math.sqrt(epsilon);
+    var taylor_n_bound = Math.sqrt(taylor_2_bound);
+    var upper_taylor_2_bound = 1 / taylor_2_bound;
+    var upper_taylor_n_bound = 1 / taylor_n_bound;
+    if (typeof Math.sinh === 'undefined') {
+      Math.sinh = function (x) {
+        if (Math.abs(x) < taylor_n_bound) {
+          var result = x;
+          if (Math.abs(x) > taylor_2_bound) {
+            result += x * x * x / 6;
+          }
+          return result;
+        }
+         else {
+          var y = Math.exp(x);
+          var y1 = 1 / y;
+          if (!isFinite(y))
+            return Math.exp(x - Math.LN2);
+          if (!isFinite(y1))
+            return -Math.exp(-x - Math.LN2);
+          return (y - y1) / 2;
+        }
       };
     }
+    if (typeof Math.cosh === 'undefined') {
+      Math.cosh = function (x) {
+        var y = Math.exp(x);
+        var y1 = 1 / y;
+        if (!isFinite(y) || !isFinite(y1))
+          return Math.exp(Math.abs(x) - Math.LN2);
+        return (y + y1) / 2;
+      };
+    }
+    if (typeof Math.tanh === 'undefined') {
+      Math.tanh = function (x) {
+        if (Math.abs(x) < taylor_n_bound) {
+          var result = x;
+          if (Math.abs(x) > taylor_2_bound) {
+            result -= x * x * x / 3;
+          }
+          return result;
+        }
+         else {
+          var a = Math.exp(+x), b = Math.exp(-x);
+          return a === Infinity ? 1 : b === Infinity ? -1 : (a - b) / (a + b);
+        }
+      };
+    }
+    if (typeof Math.asinh === 'undefined') {
+      var asinh = function (x) {
+        if (x >= +taylor_n_bound) {
+          if (x > upper_taylor_n_bound) {
+            if (x > upper_taylor_2_bound) {
+              return Math.log(x) + Math.LN2;
+            }
+             else {
+              return Math.log(x * 2 + 1 / (x * 2));
+            }
+          }
+           else {
+            return Math.log(x + Math.sqrt(x * x + 1));
+          }
+        }
+         else if (x <= -taylor_n_bound) {
+          return -asinh(-x);
+        }
+         else {
+          var result = x;
+          if (Math.abs(x) >= taylor_2_bound) {
+            var x3 = x * x * x;
+            result -= x3 / 6;
+          }
+          return result;
+        }
+      };
+      Math.asinh = asinh;
+    }
+    if (typeof Math.acosh === 'undefined') {
+      Math.acosh = function (x) {
+        if (x < 1) {
+          return NaN;
+        }
+         else if (x - 1 >= taylor_n_bound) {
+          if (x > upper_taylor_2_bound) {
+            return Math.log(x) + Math.LN2;
+          }
+           else {
+            return Math.log(x + Math.sqrt(x * x - 1));
+          }
+        }
+         else {
+          var y = Math.sqrt(x - 1);
+          var result = y;
+          if (y >= taylor_2_bound) {
+            var y3 = y * y * y;
+            result -= y3 / 12;
+          }
+          return Math.sqrt(2) * result;
+        }
+      };
+    }
+    if (typeof Math.atanh === 'undefined') {
+      Math.atanh = function (x) {
+        if (Math.abs(x) < taylor_n_bound) {
+          var result = x;
+          if (Math.abs(x) > taylor_2_bound) {
+            result += x * x * x / 3;
+          }
+          return result;
+        }
+        return Math.log((1 + x) / (1 - x)) / 2;
+      };
+    }
+    if (typeof Math.log1p === 'undefined') {
+      Math.log1p = function (x) {
+        if (Math.abs(x) < taylor_n_bound) {
+          var x2 = x * x;
+          var x3 = x2 * x;
+          var x4 = x3 * x;
+          return -x4 / 4 + x3 / 3 - x2 / 2 + x;
+        }
+        return Math.log(x + 1);
+      };
+    }
+    if (typeof Math.expm1 === 'undefined') {
+      Math.expm1 = function (x) {
+        if (Math.abs(x) < taylor_n_bound) {
+          var x2 = x * x;
+          var x3 = x2 * x;
+          var x4 = x3 * x;
+          return x4 / 24 + x3 / 6 + x2 / 2 + x;
+        }
+        return Math.exp(x) - 1;
+      };
+    }
+  }());
+  if (typeof Math.hypot === 'undefined') {
+    Math.hypot = function () {
+      var y = 0;
+      var length = arguments.length;
+      for (var i = 0; i < length; i++) {
+        if (arguments[i] === Infinity || arguments[i] === -Infinity) {
+          return Infinity;
+        }
+        y += arguments[i] * arguments[i];
+      }
+      return Math.sqrt(y);
+    };
+  }
+  if (typeof Math.log10 === 'undefined') {
+    Math.log10 = function (x) {
+      return Math.log(x) * Math.LOG10E;
+    };
+  }
+  if (typeof Math.log2 === 'undefined') {
+    Math.log2 = function (x) {
+      return Math.log(x) * Math.LOG2E;
+    };
+  }
+  if (typeof ArrayBuffer.isView === 'undefined') {
+    ArrayBuffer.isView = function (a) {
+      return a != null && a.__proto__ != null && a.__proto__.__proto__ === Int8Array.prototype.__proto__;
+    };
+  }
+  (function () {
     function normalizeOffset(offset, length) {
       if (offset < 0)
         return Math.max(0, offset + length);
@@ -198,7 +718,7 @@
       var TypedArray = arrays[i];
       if (typeof TypedArray.prototype.map === 'undefined') {
         Object.defineProperty(TypedArray.prototype, 'map', {value: function (callback, self) {
-          return typedArraySlice.call([].map.call(this, callback, self));
+          return [].slice.call(this).map(callback, self);
         }});
       }
     }
@@ -211,45 +731,6 @@
       }
     }
   }());
-  Kotlin.toShort = function (a) {
-    return (a & 65535) << 16 >> 16;
-  };
-  Kotlin.toByte = function (a) {
-    return (a & 255) << 24 >> 24;
-  };
-  Kotlin.toChar = function (a) {
-    return a & 65535;
-  };
-  Kotlin.numberToLong = function (a) {
-    return a instanceof Kotlin.Long ? a : Kotlin.Long.fromNumber(a);
-  };
-  Kotlin.numberToInt = function (a) {
-    return a instanceof Kotlin.Long ? a.toInt() : a | 0;
-  };
-  Kotlin.numberToShort = function (a) {
-    return Kotlin.toShort(Kotlin.numberToInt(a));
-  };
-  Kotlin.numberToByte = function (a) {
-    return Kotlin.toByte(Kotlin.numberToInt(a));
-  };
-  Kotlin.numberToDouble = function (a) {
-    return +a;
-  };
-  Kotlin.numberToChar = function (a) {
-    return Kotlin.toChar(Kotlin.numberToInt(a));
-  };
-  Kotlin.toBoxedChar = function (a) {
-    if (a == null)
-      return a;
-    if (a instanceof Kotlin.BoxedChar)
-      return a;
-    return new Kotlin.BoxedChar(a);
-  };
-  Kotlin.unboxChar = function (a) {
-    if (a == null)
-      return a;
-    return Kotlin.toChar(a);
-  };
   Kotlin.Long = function (low, high) {
     this.low_ = low | 0;
     this.high_ = high | 0;
@@ -694,266 +1175,14 @@
   Kotlin.Long.prototype.rangeTo = function (other) {
     return new Kotlin.kotlin.ranges.LongRange(this, other);
   };
-  Kotlin.defineModule = function (id, declaration) {
-  };
-  Kotlin.defineInlineFunction = function (tag, fun) {
-    return fun;
-  };
-  Kotlin.wrapFunction = function (fun) {
-    var f = function () {
-      f = fun();
-      return f.apply(this, arguments);
-    };
-    return function () {
-      return f.apply(this, arguments);
-    };
-  };
-  Kotlin.isTypeOf = function (type) {
-    return function (object) {
-      return typeof object === type;
-    };
-  };
-  Kotlin.isInstanceOf = function (klass) {
-    return function (object) {
-      return Kotlin.isType(object, klass);
-    };
-  };
-  Kotlin.orNull = function (fn) {
-    return function (object) {
-      return object == null || fn(object);
-    };
-  };
-  Kotlin.andPredicate = function (a, b) {
-    return function (object) {
-      return a(object) && b(object);
-    };
-  };
-  Kotlin.kotlinModuleMetadata = function (abiVersion, moduleName, data) {
-  };
-  Kotlin.getCallableRef = function (name, f) {
-    f.callableName = name;
-    return f;
-  };
-  Kotlin.getPropertyCallableRef = function (name, paramCount, getter, setter) {
-    getter.get = getter;
-    getter.set = setter;
-    getter.callableName = name;
-    return getPropertyRefClass(getter, setter, propertyRefClassMetadataCache[paramCount]);
-  };
-  function getPropertyRefClass(obj, setter, cache) {
-    obj.$metadata$ = getPropertyRefMetadata(typeof setter === 'function' ? cache.mutable : cache.immutable);
-    obj.constructor = obj;
-    return obj;
-  }
-  var propertyRefClassMetadataCache = [{mutable: {value: null, implementedInterface: function () {
-    return Kotlin.kotlin.reflect.KMutableProperty0;
-  }}, immutable: {value: null, implementedInterface: function () {
-    return Kotlin.kotlin.reflect.KProperty0;
-  }}}, {mutable: {value: null, implementedInterface: function () {
-    return Kotlin.kotlin.reflect.KMutableProperty1;
-  }}, immutable: {value: null, implementedInterface: function () {
-    return Kotlin.kotlin.reflect.KProperty1;
-  }}}];
-  function getPropertyRefMetadata(cache) {
-    if (cache.value === null) {
-      cache.value = {interfaces: [cache.implementedInterface()], baseClass: null, functions: {}, properties: {}, types: {}, staticMembers: {}};
-    }
-    return cache.value;
-  }
-  Kotlin.equals = function (obj1, obj2) {
-    if (obj1 == null) {
-      return obj2 == null;
-    }
-    if (obj2 == null) {
-      return false;
-    }
-    if (obj1 !== obj1) {
-      return obj2 !== obj2;
-    }
-    if (typeof obj1 === 'object' && typeof obj1.equals === 'function') {
-      return obj1.equals(obj2);
-    }
-    return obj1 === obj2;
-  };
-  Kotlin.hashCode = function (obj) {
-    if (obj == null) {
-      return 0;
-    }
-    var objType = typeof obj;
-    if ('object' === objType) {
-      return 'function' === typeof obj.hashCode ? obj.hashCode() : getObjectHashCode(obj);
-    }
-    if ('function' === objType) {
-      return getObjectHashCode(obj);
-    }
-    if ('number' === objType) {
-      return numberHashCode(obj);
-    }
-    if ('boolean' === objType) {
-      return Number(obj);
-    }
-    var str = String(obj);
-    return getStringHashCode(str);
-  };
-  var numberHashCode;
-  if (typeof ArrayBuffer === 'function') {
-    var bufferForNumberConversion = new ArrayBuffer(8);
-    var arrayForDoubleConversion = new Float64Array(bufferForNumberConversion);
-    var arrayForIntegerConversion = new Int32Array(bufferForNumberConversion);
-    var lowerIntegerIndex = 0;
-    var upperIntegerIndex = 1;
-    (function () {
-      arrayForDoubleConversion[0] = 1.2;
-      if (arrayForIntegerConversion[0] !== 1072902963) {
-        lowerIntegerIndex = 1;
-        upperIntegerIndex = 0;
-      }
-    }());
-    numberHashCode = function (obj) {
-      if ((obj | 0) === obj) {
-        return obj | 0;
-      }
-       else {
-        arrayForDoubleConversion[0] = obj;
-        return (arrayForIntegerConversion[lowerIntegerIndex] * 31 | 0) + arrayForIntegerConversion[upperIntegerIndex] | 0;
-      }
-    };
-  }
-   else {
-    numberHashCode = function (obj) {
-      return obj | 0;
-    };
-  }
-  Kotlin.toString = function (o) {
-    if (o == null) {
-      return 'null';
-    }
-     else if (Kotlin.isArrayish(o)) {
-      return '[...]';
-    }
-     else {
-      return o.toString();
-    }
-  };
-  var POW_2_32 = 4.294967296E9;
-  var OBJECT_HASH_CODE_PROPERTY_NAME = 'kotlinHashCodeValue$';
-  function getObjectHashCode(obj) {
-    if (!(OBJECT_HASH_CODE_PROPERTY_NAME in obj)) {
-      var hash = Math.random() * POW_2_32 | 0;
-      Object.defineProperty(obj, OBJECT_HASH_CODE_PROPERTY_NAME, {value: hash, enumerable: false});
-    }
-    return obj[OBJECT_HASH_CODE_PROPERTY_NAME];
-  }
-  function getStringHashCode(str) {
-    var hash = 0;
-    for (var i = 0; i < str.length; i++) {
-      var code = str.charCodeAt(i);
-      hash = hash * 31 + code | 0;
-    }
-    return hash;
-  }
-  Kotlin.identityHashCode = getObjectHashCode;
-  Kotlin.Kind = {CLASS: 'class', INTERFACE: 'interface', OBJECT: 'object'};
-  Kotlin.callGetter = function (thisObject, klass, propertyName) {
-    var propertyDescriptor = Object.getOwnPropertyDescriptor(klass, propertyName);
-    if (propertyDescriptor != null) {
-      if (propertyDescriptor.get != null) {
-        return propertyDescriptor.get.call(thisObject);
-      }
-       else if ('value' in propertyDescriptor) {
-        return propertyDescriptor.value;
-      }
-    }
-     else {
-      return Kotlin.callGetter(thisObject, Object.getPrototypeOf(klass), propertyName);
-    }
-    return null;
-  };
-  Kotlin.callSetter = function (thisObject, klass, propertyName, value) {
-    var propertyDescriptor = Object.getOwnPropertyDescriptor(klass, propertyName);
-    if (propertyDescriptor != null) {
-      if (propertyDescriptor.set != null) {
-        propertyDescriptor.set.call(thisObject, value);
-      }
-       else if ('value' in propertyDescriptor) {
-        throw new Error('Assertion failed: Kotlin compiler should not generate simple JavaScript properties for overridable ' + 'Kotlin properties.');
-      }
-    }
-     else {
-      return Kotlin.callSetter(thisObject, Object.getPrototypeOf(klass), propertyName, value);
-    }
-  };
-  function isInheritanceFromInterface(metadata, iface) {
-    if (metadata == null)
-      return false;
-    var interfaces = metadata.interfaces;
-    var i;
-    for (i = 0; i < interfaces.length; i++) {
-      if (interfaces[i] === iface) {
-        return true;
-      }
-    }
-    for (i = 0; i < interfaces.length; i++) {
-      if (isInheritanceFromInterface(interfaces[i].$metadata$, iface)) {
-        return true;
-      }
-    }
-    return false;
-  }
-  Kotlin.isType = function (object, klass) {
-    if (klass === Object) {
-      switch (typeof object) {
-        case 'string':
-        case 'number':
-        case 'boolean':
-        case 'function':
-          return true;
-        default:return object instanceof Object;
-      }
-    }
-    if (object == null || klass == null || (typeof object !== 'object' && typeof object !== 'function')) {
-      return false;
-    }
-    if (typeof klass === 'function' && object instanceof klass) {
-      return true;
-    }
-    var proto = Object.getPrototypeOf(klass);
-    var constructor = proto != null ? proto.constructor : null;
-    if (constructor != null && '$metadata$' in constructor) {
-      var metadata = constructor.$metadata$;
-      if (metadata.kind === Kotlin.Kind.OBJECT) {
-        return object === klass;
-      }
-    }
-    var klassMetadata = klass.$metadata$;
-    if (klassMetadata == null) {
-      return object instanceof klass;
-    }
-    if (klassMetadata.kind === Kotlin.Kind.INTERFACE && object.constructor != null) {
-      metadata = object.constructor.$metadata$;
-      if (metadata != null) {
-        return isInheritanceFromInterface(metadata, klass);
-      }
-    }
-    return false;
-  };
-  Kotlin.isNumber = function (a) {
-    return typeof a == 'number' || a instanceof Kotlin.Long;
-  };
-  Kotlin.isChar = function (value) {
-    return value instanceof Kotlin.BoxedChar;
-  };
-  Kotlin.isComparable = function (value) {
-    var type = typeof value;
-    return type === 'string' || type === 'boolean' || Kotlin.isNumber(value) || Kotlin.isType(value, Kotlin.kotlin.Comparable);
-  };
-  Kotlin.isCharSequence = function (value) {
-    return typeof value === 'string' || Kotlin.isType(value, Kotlin.kotlin.CharSequence);
-  };
   (function() {
     'use strict';
+    var Kind_OBJECT = Kotlin.Kind.OBJECT;
+    var Kind_CLASS = Kotlin.Kind.CLASS;
     var defineInlineFunction = Kotlin.defineInlineFunction;
     var wrapFunction = Kotlin.wrapFunction;
+    var equals = Kotlin.equals;
+    var Kind_INTERFACE = Kotlin.Kind.INTERFACE;
     function Enum() {
       Enum$Companion_getInstance();
       this.name$ = '';
@@ -980,7 +1209,7 @@
     function Enum$Companion() {
       Enum$Companion_instance = this;
     }
-    Enum$Companion.$metadata$ = {kind: Kotlin.Kind.OBJECT, simpleName: 'Companion', interfaces: []};
+    Enum$Companion.$metadata$ = {kind: Kind_OBJECT, simpleName: 'Companion', interfaces: []};
     var Enum$Companion_instance = null;
     function Enum$Companion_getInstance() {
       if (Enum$Companion_instance === null) {
@@ -988,7 +1217,7 @@
       }
       return Enum$Companion_instance;
     }
-    Enum.$metadata$ = {kind: Kotlin.Kind.CLASS, simpleName: 'Enum', interfaces: [Comparable]};
+    Enum.$metadata$ = {kind: Kind_CLASS, simpleName: 'Enum', interfaces: [Comparable]};
     function newArray(size, initValue) {
       return fillArrayVal(Array(size), initValue);
     }
@@ -1016,9 +1245,9 @@
       var tmp$;
       var result = Array(size);
       result.$type$ = 'BooleanArray';
-      if (init == null || Kotlin.equals(init, true))
+      if (init == null || equals(init, true))
         tmp$ = fillArrayVal(result, false);
-      else if (Kotlin.equals(init, false))
+      else if (equals(init, false))
         tmp$ = result;
       else {
         var tmp$_0;
@@ -1046,7 +1275,7 @@
       var tmp$;
       var result = new Uint16Array(size);
       result.$type$ = 'CharArray';
-      if (init == null || Kotlin.equals(init, true) || Kotlin.equals(init, false))
+      if (init == null || equals(init, true) || equals(init, false))
         tmp$ = result;
       else {
         var tmp$_0;
@@ -1090,9 +1319,9 @@
       var tmp$;
       var result = Array(size);
       result.$type$ = 'LongArray';
-      if (init == null || Kotlin.equals(init, true))
+      if (init == null || equals(init, true))
         tmp$ = fillArrayVal(result, Kotlin.Long.ZERO);
-      else if (Kotlin.equals(init, false))
+      else if (equals(init, false))
         tmp$ = result;
       else {
         var tmp$_0;
@@ -1132,7 +1361,7 @@
       this.NEGATIVE_INFINITY = Number.NEGATIVE_INFINITY;
       this.NaN = Number.NaN;
     }
-    DoubleCompanionObject.$metadata$ = {kind: Kotlin.Kind.OBJECT, simpleName: 'DoubleCompanionObject', interfaces: []};
+    DoubleCompanionObject.$metadata$ = {kind: Kind_OBJECT, simpleName: 'DoubleCompanionObject', interfaces: []};
     var DoubleCompanionObject_instance = null;
     function DoubleCompanionObject_getInstance() {
       if (DoubleCompanionObject_instance === null) {
@@ -1148,7 +1377,7 @@
       this.NEGATIVE_INFINITY = Number.NEGATIVE_INFINITY;
       this.NaN = Number.NaN;
     }
-    FloatCompanionObject.$metadata$ = {kind: Kotlin.Kind.OBJECT, simpleName: 'FloatCompanionObject', interfaces: []};
+    FloatCompanionObject.$metadata$ = {kind: Kind_OBJECT, simpleName: 'FloatCompanionObject', interfaces: []};
     var FloatCompanionObject_instance = null;
     function FloatCompanionObject_getInstance() {
       if (FloatCompanionObject_instance === null) {
@@ -1161,7 +1390,7 @@
       this.MIN_VALUE = -2147483647 - 1 | 0;
       this.MAX_VALUE = 2147483647;
     }
-    IntCompanionObject.$metadata$ = {kind: Kotlin.Kind.OBJECT, simpleName: 'IntCompanionObject', interfaces: []};
+    IntCompanionObject.$metadata$ = {kind: Kind_OBJECT, simpleName: 'IntCompanionObject', interfaces: []};
     var IntCompanionObject_instance = null;
     function IntCompanionObject_getInstance() {
       if (IntCompanionObject_instance === null) {
@@ -1174,7 +1403,7 @@
       this.MIN_VALUE = Kotlin.Long.MIN_VALUE;
       this.MAX_VALUE = Kotlin.Long.MAX_VALUE;
     }
-    LongCompanionObject.$metadata$ = {kind: Kotlin.Kind.OBJECT, simpleName: 'LongCompanionObject', interfaces: []};
+    LongCompanionObject.$metadata$ = {kind: Kind_OBJECT, simpleName: 'LongCompanionObject', interfaces: []};
     var LongCompanionObject_instance = null;
     function LongCompanionObject_getInstance() {
       if (LongCompanionObject_instance === null) {
@@ -1184,10 +1413,10 @@
     }
     function ShortCompanionObject() {
       ShortCompanionObject_instance = this;
-      this.MIN_VALUE = -32768;
+      this.MIN_VALUE = -32768 | 0;
       this.MAX_VALUE = 32767;
     }
-    ShortCompanionObject.$metadata$ = {kind: Kotlin.Kind.OBJECT, simpleName: 'ShortCompanionObject', interfaces: []};
+    ShortCompanionObject.$metadata$ = {kind: Kind_OBJECT, simpleName: 'ShortCompanionObject', interfaces: []};
     var ShortCompanionObject_instance = null;
     function ShortCompanionObject_getInstance() {
       if (ShortCompanionObject_instance === null) {
@@ -1197,10 +1426,10 @@
     }
     function ByteCompanionObject() {
       ByteCompanionObject_instance = this;
-      this.MIN_VALUE = -128;
+      this.MIN_VALUE = -128 | 0;
       this.MAX_VALUE = 127;
     }
-    ByteCompanionObject.$metadata$ = {kind: Kotlin.Kind.OBJECT, simpleName: 'ByteCompanionObject', interfaces: []};
+    ByteCompanionObject.$metadata$ = {kind: Kind_OBJECT, simpleName: 'ByteCompanionObject', interfaces: []};
     var ByteCompanionObject_instance = null;
     function ByteCompanionObject_getInstance() {
       if (ByteCompanionObject_instance === null) {
@@ -1217,7 +1446,7 @@
       this.MIN_SURROGATE = this.MIN_HIGH_SURROGATE;
       this.MAX_SURROGATE = this.MAX_LOW_SURROGATE;
     }
-    CharCompanionObject.$metadata$ = {kind: Kotlin.Kind.OBJECT, simpleName: 'CharCompanionObject', interfaces: []};
+    CharCompanionObject.$metadata$ = {kind: Kind_OBJECT, simpleName: 'CharCompanionObject', interfaces: []};
     var CharCompanionObject_instance = null;
     function CharCompanionObject_getInstance() {
       if (CharCompanionObject_instance === null) {
@@ -1228,7 +1457,7 @@
     function StringCompanionObject() {
       StringCompanionObject_instance = this;
     }
-    StringCompanionObject.$metadata$ = {kind: Kotlin.Kind.OBJECT, simpleName: 'StringCompanionObject', interfaces: []};
+    StringCompanionObject.$metadata$ = {kind: Kind_OBJECT, simpleName: 'StringCompanionObject', interfaces: []};
     var StringCompanionObject_instance = null;
     function StringCompanionObject_getInstance() {
       if (StringCompanionObject_instance === null) {
@@ -1238,7 +1467,7 @@
     }
     function Comparable() {
     }
-    Comparable.$metadata$ = {kind: Kotlin.Kind.INTERFACE, simpleName: 'Comparable', interfaces: []};
+    Comparable.$metadata$ = {kind: Kind_INTERFACE, simpleName: 'Comparable', interfaces: []};
     Object.defineProperty(Enum, 'Companion', {get: Enum$Companion_getInstance});
     var package$kotlin = _.kotlin || (_.kotlin = {});
     package$kotlin.Enum = Enum;
@@ -1267,22 +1496,35 @@
   }());
   (function() {
     'use strict';
+    var Kind_INTERFACE = Kotlin.Kind.INTERFACE;
     var defineInlineFunction = Kotlin.defineInlineFunction;
     var wrapFunction = Kotlin.wrapFunction;
-    var toBoxedChar = Kotlin.toBoxedChar;
+    var Kind_CLASS = Kotlin.Kind.CLASS;
+    var toString = Kotlin.toString;
+    var equals = Kotlin.equals;
+    var unboxChar = Kotlin.unboxChar;
     var Comparable = Kotlin.kotlin.Comparable;
-    var CharCompanionObject = Kotlin.kotlin.js.internal.CharCompanionObject;
+    var toBoxedChar = Kotlin.toBoxedChar;
+    var kotlin_js_internal_CharCompanionObject = Kotlin.kotlin.js.internal.CharCompanionObject;
+    var numberToInt = Kotlin.numberToInt;
+    var ensureNotNull = Kotlin.ensureNotNull;
     var Any = Object;
     var arrayToString = Kotlin.arrayToString;
+    var hashCode = Kotlin.hashCode;
+    var Kind_OBJECT = Kotlin.Kind.OBJECT;
     var Throwable = Error;
-    var unboxChar = Kotlin.unboxChar;
     var sort = Kotlin.primitiveArraySort;
-    var DoubleCompanionObject = Kotlin.kotlin.js.internal.DoubleCompanionObject;
-    var ByteCompanionObject = Kotlin.kotlin.js.internal.ByteCompanionObject;
-    var IntCompanionObject = Kotlin.kotlin.js.internal.IntCompanionObject;
-    var ShortCompanionObject = Kotlin.kotlin.js.internal.ShortCompanionObject;
-    var FloatCompanionObject = Kotlin.kotlin.js.internal.FloatCompanionObject;
+    var kotlin_js_internal_DoubleCompanionObject = Kotlin.kotlin.js.internal.DoubleCompanionObject;
+    var kotlin_js_internal_ByteCompanionObject = Kotlin.kotlin.js.internal.ByteCompanionObject;
+    var toByte = Kotlin.toByte;
+    var kotlin_js_internal_IntCompanionObject = Kotlin.kotlin.js.internal.IntCompanionObject;
+    var kotlin_js_internal_ShortCompanionObject = Kotlin.kotlin.js.internal.ShortCompanionObject;
+    var toShort = Kotlin.toShort;
+    var toChar = Kotlin.toChar;
+    var toRawBits = Kotlin.doubleToRawBits;
+    var kotlin_js_internal_FloatCompanionObject = Kotlin.kotlin.js.internal.FloatCompanionObject;
     var Enum = Kotlin.kotlin.Enum;
+    var DeprecationLevel = Kotlin.kotlin.DeprecationLevel;
     booleanArrayIterator$ObjectLiteral.prototype = Object.create(BooleanIterator.prototype);
     booleanArrayIterator$ObjectLiteral.prototype.constructor = booleanArrayIterator$ObjectLiteral;
     byteArrayIterator$ObjectLiteral.prototype = Object.create(ByteIterator.prototype);
@@ -1355,7 +1597,7 @@
     ConcurrentModificationException.prototype.constructor = ConcurrentModificationException;
     UnsupportedOperationException.prototype = Object.create(RuntimeException.prototype);
     UnsupportedOperationException.prototype.constructor = UnsupportedOperationException;
-    NumberFormatException.prototype = Object.create(RuntimeException.prototype);
+    NumberFormatException.prototype = Object.create(IllegalArgumentException.prototype);
     NumberFormatException.prototype.constructor = NumberFormatException;
     NullPointerException.prototype = Object.create(RuntimeException.prototype);
     NullPointerException.prototype.constructor = NullPointerException;
@@ -1363,10 +1605,12 @@
     ClassCastException.prototype.constructor = ClassCastException;
     AssertionError.prototype = Object.create(Error_0.prototype);
     AssertionError.prototype.constructor = AssertionError;
-    NoSuchElementException.prototype = Object.create(Exception.prototype);
+    NoSuchElementException.prototype = Object.create(RuntimeException.prototype);
     NoSuchElementException.prototype.constructor = NoSuchElementException;
     NoWhenBranchMatchedException.prototype = Object.create(RuntimeException.prototype);
     NoWhenBranchMatchedException.prototype.constructor = NoWhenBranchMatchedException;
+    UninitializedPropertyAccessException.prototype = Object.create(RuntimeException.prototype);
+    UninitializedPropertyAccessException.prototype.constructor = UninitializedPropertyAccessException;
     AbstractList.prototype = Object.create(AbstractCollection.prototype);
     AbstractList.prototype.constructor = AbstractList;
     asList$ObjectLiteral.prototype = Object.create(AbstractList.prototype);
@@ -1379,6 +1623,12 @@
     findNext$ObjectLiteral$groups$ObjectLiteral.prototype.constructor = findNext$ObjectLiteral$groups$ObjectLiteral;
     asList$ObjectLiteral_0.prototype = Object.create(AbstractList.prototype);
     asList$ObjectLiteral_0.prototype.constructor = asList$ObjectLiteral_0;
+    SimpleKClassImpl.prototype = Object.create(KClassImpl.prototype);
+    SimpleKClassImpl.prototype.constructor = SimpleKClassImpl;
+    PrimitiveKClassImpl.prototype = Object.create(KClassImpl.prototype);
+    PrimitiveKClassImpl.prototype.constructor = PrimitiveKClassImpl;
+    NothingKClassImpl.prototype = Object.create(KClassImpl.prototype);
+    NothingKClassImpl.prototype.constructor = NothingKClassImpl;
     CharProgressionIterator.prototype = Object.create(CharIterator.prototype);
     CharProgressionIterator.prototype.constructor = CharProgressionIterator;
     IntProgressionIterator.prototype = Object.create(IntIterator.prototype);
@@ -1419,8 +1669,18 @@
     ReversedList.prototype.constructor = ReversedList;
     DistinctIterator.prototype = Object.create(AbstractIterator.prototype);
     DistinctIterator.prototype.constructor = DistinctIterator;
+    MovingSubList.prototype = Object.create(AbstractList.prototype);
+    MovingSubList.prototype.constructor = MovingSubList;
+    RingBuffer$iterator$ObjectLiteral.prototype = Object.create(AbstractIterator.prototype);
+    RingBuffer$iterator$ObjectLiteral.prototype.constructor = RingBuffer$iterator$ObjectLiteral;
+    RingBuffer.prototype = Object.create(AbstractList.prototype);
+    RingBuffer.prototype.constructor = RingBuffer;
     SequenceBuilderIterator.prototype = Object.create(SequenceBuilder.prototype);
     SequenceBuilderIterator.prototype.constructor = SequenceBuilderIterator;
+    RequireKotlinVersionKind.prototype = Object.create(Enum.prototype);
+    RequireKotlinVersionKind.prototype.constructor = RequireKotlinVersionKind;
+    InvocationKind.prototype = Object.create(Enum.prototype);
+    InvocationKind.prototype.constructor = InvocationKind;
     iterator$ObjectLiteral.prototype = Object.create(CharIterator.prototype);
     iterator$ObjectLiteral.prototype.constructor = iterator$ObjectLiteral;
     LazyThreadSafetyMode.prototype = Object.create(Enum.prototype);
@@ -1429,8 +1689,9 @@
     NotImplementedError.prototype.constructor = NotImplementedError;
     function Comparator() {
     }
-    Comparator.$metadata$ = {kind: Kotlin.Kind.INTERFACE, simpleName: 'Comparator', interfaces: []};
+    Comparator.$metadata$ = {kind: Kind_INTERFACE, simpleName: 'Comparator', interfaces: []};
     var Comparator_0 = defineInlineFunction('kotlin.kotlin.Comparator_x4fedy$', wrapFunction(function () {
+      var Kind_CLASS = Kotlin.Kind.CLASS;
       var Comparator = _.kotlin.Comparator;
       function Comparator$ObjectLiteral(closure$comparison) {
         this.closure$comparison = closure$comparison;
@@ -1438,7 +1699,7 @@
       Comparator$ObjectLiteral.prototype.compare = function (a, b) {
         return this.closure$comparison(a, b);
       };
-      Comparator$ObjectLiteral.$metadata$ = {kind: Kotlin.Kind.CLASS, interfaces: [Comparator]};
+      Comparator$ObjectLiteral.$metadata$ = {kind: Kind_CLASS, interfaces: [Comparator]};
       return function (comparison) {
         return new Comparator$ObjectLiteral(comparison);
       };
@@ -1448,53 +1709,59 @@
         name = '';
       this.name = name;
     }
-    native.$metadata$ = {kind: Kotlin.Kind.CLASS, simpleName: 'native', interfaces: [Annotation]};
+    native.$metadata$ = {kind: Kind_CLASS, simpleName: 'native', interfaces: [Annotation]};
     function nativeGetter() {
     }
-    nativeGetter.$metadata$ = {kind: Kotlin.Kind.CLASS, simpleName: 'nativeGetter', interfaces: [Annotation]};
+    nativeGetter.$metadata$ = {kind: Kind_CLASS, simpleName: 'nativeGetter', interfaces: [Annotation]};
     function nativeSetter() {
     }
-    nativeSetter.$metadata$ = {kind: Kotlin.Kind.CLASS, simpleName: 'nativeSetter', interfaces: [Annotation]};
+    nativeSetter.$metadata$ = {kind: Kind_CLASS, simpleName: 'nativeSetter', interfaces: [Annotation]};
     function nativeInvoke() {
     }
-    nativeInvoke.$metadata$ = {kind: Kotlin.Kind.CLASS, simpleName: 'nativeInvoke', interfaces: [Annotation]};
+    nativeInvoke.$metadata$ = {kind: Kind_CLASS, simpleName: 'nativeInvoke', interfaces: [Annotation]};
     function library(name) {
       if (name === void 0)
         name = '';
       this.name = name;
     }
-    library.$metadata$ = {kind: Kotlin.Kind.CLASS, simpleName: 'library', interfaces: [Annotation]};
+    library.$metadata$ = {kind: Kind_CLASS, simpleName: 'library', interfaces: [Annotation]};
     function marker() {
     }
-    marker.$metadata$ = {kind: Kotlin.Kind.CLASS, simpleName: 'marker', interfaces: [Annotation]};
+    marker.$metadata$ = {kind: Kind_CLASS, simpleName: 'marker', interfaces: [Annotation]};
     function JsName(name) {
       this.name = name;
     }
-    JsName.$metadata$ = {kind: Kotlin.Kind.CLASS, simpleName: 'JsName', interfaces: [Annotation]};
+    JsName.$metadata$ = {kind: Kind_CLASS, simpleName: 'JsName', interfaces: [Annotation]};
     function JsModule(import_0) {
       this.import = import_0;
     }
-    JsModule.$metadata$ = {kind: Kotlin.Kind.CLASS, simpleName: 'JsModule', interfaces: [Annotation]};
+    JsModule.$metadata$ = {kind: Kind_CLASS, simpleName: 'JsModule', interfaces: [Annotation]};
     function JsNonModule() {
     }
-    JsNonModule.$metadata$ = {kind: Kotlin.Kind.CLASS, simpleName: 'JsNonModule', interfaces: [Annotation]};
+    JsNonModule.$metadata$ = {kind: Kind_CLASS, simpleName: 'JsNonModule', interfaces: [Annotation]};
     function JsQualifier(value) {
       this.value = value;
     }
-    JsQualifier.$metadata$ = {kind: Kotlin.Kind.CLASS, simpleName: 'JsQualifier', interfaces: [Annotation]};
+    JsQualifier.$metadata$ = {kind: Kind_CLASS, simpleName: 'JsQualifier', interfaces: [Annotation]};
     function JvmOverloads() {
     }
-    JvmOverloads.$metadata$ = {kind: Kotlin.Kind.CLASS, simpleName: 'JvmOverloads', interfaces: [Annotation]};
+    JvmOverloads.$metadata$ = {kind: Kind_CLASS, simpleName: 'JvmOverloads', interfaces: [Annotation]};
     function JvmName(name) {
       this.name = name;
     }
-    JvmName.$metadata$ = {kind: Kotlin.Kind.CLASS, simpleName: 'JvmName', interfaces: [Annotation]};
+    JvmName.$metadata$ = {kind: Kind_CLASS, simpleName: 'JvmName', interfaces: [Annotation]};
     function JvmMultifileClass() {
     }
-    JvmMultifileClass.$metadata$ = {kind: Kotlin.Kind.CLASS, simpleName: 'JvmMultifileClass', interfaces: [Annotation]};
+    JvmMultifileClass.$metadata$ = {kind: Kind_CLASS, simpleName: 'JvmMultifileClass', interfaces: [Annotation]};
     function JvmField() {
     }
-    JvmField.$metadata$ = {kind: Kotlin.Kind.CLASS, simpleName: 'JvmField', interfaces: [Annotation]};
+    JvmField.$metadata$ = {kind: Kind_CLASS, simpleName: 'JvmField', interfaces: [Annotation]};
+    function Volatile() {
+    }
+    Volatile.$metadata$ = {kind: Kind_CLASS, simpleName: 'Volatile', interfaces: [Annotation]};
+    function Synchronized() {
+    }
+    Synchronized.$metadata$ = {kind: Kind_CLASS, simpleName: 'Synchronized', interfaces: [Annotation]};
     function arrayIterator$ObjectLiteral(closure$arr) {
       this.closure$arr = closure$arr;
       this.index = 0;
@@ -1510,30 +1777,32 @@
        else
         throw new NoSuchElementException(this.index.toString());
     };
-    arrayIterator$ObjectLiteral.$metadata$ = {kind: Kotlin.Kind.CLASS, interfaces: [Iterator]};
+    arrayIterator$ObjectLiteral.$metadata$ = {kind: Kind_CLASS, interfaces: [Iterator]};
     function arrayIterator(array, type) {
       if (type == null) {
         var arr = array;
         return new arrayIterator$ObjectLiteral(arr);
       }
-       else if (Kotlin.equals(type, 'BooleanArray'))
-        return booleanArrayIterator(array);
-      else if (Kotlin.equals(type, 'ByteArray'))
-        return byteArrayIterator(array);
-      else if (Kotlin.equals(type, 'ShortArray'))
-        return shortArrayIterator(array);
-      else if (Kotlin.equals(type, 'CharArray'))
-        return charArrayIterator(array);
-      else if (Kotlin.equals(type, 'IntArray'))
-        return intArrayIterator(array);
-      else if (Kotlin.equals(type, 'LongArray'))
-        return longArrayIterator(array);
-      else if (Kotlin.equals(type, 'FloatArray'))
-        return floatArrayIterator(array);
-      else if (Kotlin.equals(type, 'DoubleArray'))
-        return doubleArrayIterator(array);
-      else
-        throw new IllegalStateException('Unsupported type argument for arrayIterator: ' + Kotlin.toString(type));
+       else
+        switch (type) {
+          case 'BooleanArray':
+            return booleanArrayIterator(array);
+          case 'ByteArray':
+            return byteArrayIterator(array);
+          case 'ShortArray':
+            return shortArrayIterator(array);
+          case 'CharArray':
+            return charArrayIterator(array);
+          case 'IntArray':
+            return intArrayIterator(array);
+          case 'LongArray':
+            return longArrayIterator(array);
+          case 'FloatArray':
+            return floatArrayIterator(array);
+          case 'DoubleArray':
+            return doubleArrayIterator(array);
+          default:throw IllegalStateException_init_0('Unsupported type argument for arrayIterator: ' + toString(type));
+        }
     }
     function booleanArrayIterator$ObjectLiteral(closure$array) {
       this.closure$array = closure$array;
@@ -1551,7 +1820,7 @@
        else
         throw new NoSuchElementException(this.index.toString());
     };
-    booleanArrayIterator$ObjectLiteral.$metadata$ = {kind: Kotlin.Kind.CLASS, interfaces: [BooleanIterator]};
+    booleanArrayIterator$ObjectLiteral.$metadata$ = {kind: Kind_CLASS, interfaces: [BooleanIterator]};
     function booleanArrayIterator(array) {
       return new booleanArrayIterator$ObjectLiteral(array);
     }
@@ -1571,7 +1840,7 @@
        else
         throw new NoSuchElementException(this.index.toString());
     };
-    byteArrayIterator$ObjectLiteral.$metadata$ = {kind: Kotlin.Kind.CLASS, interfaces: [ByteIterator]};
+    byteArrayIterator$ObjectLiteral.$metadata$ = {kind: Kind_CLASS, interfaces: [ByteIterator]};
     function byteArrayIterator(array) {
       return new byteArrayIterator$ObjectLiteral(array);
     }
@@ -1591,7 +1860,7 @@
        else
         throw new NoSuchElementException(this.index.toString());
     };
-    shortArrayIterator$ObjectLiteral.$metadata$ = {kind: Kotlin.Kind.CLASS, interfaces: [ShortIterator]};
+    shortArrayIterator$ObjectLiteral.$metadata$ = {kind: Kind_CLASS, interfaces: [ShortIterator]};
     function shortArrayIterator(array) {
       return new shortArrayIterator$ObjectLiteral(array);
     }
@@ -1611,7 +1880,7 @@
        else
         throw new NoSuchElementException(this.index.toString());
     };
-    charArrayIterator$ObjectLiteral.$metadata$ = {kind: Kotlin.Kind.CLASS, interfaces: [CharIterator]};
+    charArrayIterator$ObjectLiteral.$metadata$ = {kind: Kind_CLASS, interfaces: [CharIterator]};
     function charArrayIterator(array) {
       return new charArrayIterator$ObjectLiteral(array);
     }
@@ -1631,7 +1900,7 @@
        else
         throw new NoSuchElementException(this.index.toString());
     };
-    intArrayIterator$ObjectLiteral.$metadata$ = {kind: Kotlin.Kind.CLASS, interfaces: [IntIterator]};
+    intArrayIterator$ObjectLiteral.$metadata$ = {kind: Kind_CLASS, interfaces: [IntIterator]};
     function intArrayIterator(array) {
       return new intArrayIterator$ObjectLiteral(array);
     }
@@ -1651,7 +1920,7 @@
        else
         throw new NoSuchElementException(this.index.toString());
     };
-    floatArrayIterator$ObjectLiteral.$metadata$ = {kind: Kotlin.Kind.CLASS, interfaces: [FloatIterator]};
+    floatArrayIterator$ObjectLiteral.$metadata$ = {kind: Kind_CLASS, interfaces: [FloatIterator]};
     function floatArrayIterator(array) {
       return new floatArrayIterator$ObjectLiteral(array);
     }
@@ -1671,7 +1940,7 @@
        else
         throw new NoSuchElementException(this.index.toString());
     };
-    doubleArrayIterator$ObjectLiteral.$metadata$ = {kind: Kotlin.Kind.CLASS, interfaces: [DoubleIterator]};
+    doubleArrayIterator$ObjectLiteral.$metadata$ = {kind: Kind_CLASS, interfaces: [DoubleIterator]};
     function doubleArrayIterator(array) {
       return new doubleArrayIterator$ObjectLiteral(array);
     }
@@ -1691,16 +1960,16 @@
        else
         throw new NoSuchElementException(this.index.toString());
     };
-    longArrayIterator$ObjectLiteral.$metadata$ = {kind: Kotlin.Kind.CLASS, interfaces: [LongIterator]};
+    longArrayIterator$ObjectLiteral.$metadata$ = {kind: Kind_CLASS, interfaces: [LongIterator]};
     function longArrayIterator(array) {
       return new longArrayIterator$ObjectLiteral(array);
     }
     function PropertyMetadata(name) {
       this.callableName = name;
     }
-    PropertyMetadata.$metadata$ = {kind: Kotlin.Kind.CLASS, simpleName: 'PropertyMetadata', interfaces: []};
+    PropertyMetadata.$metadata$ = {kind: Kind_CLASS, simpleName: 'PropertyMetadata', interfaces: []};
     function noWhenBranchMatched() {
-      throw new NoWhenBranchMatchedException();
+      throw NoWhenBranchMatchedException_init();
     }
     function subSequence(c, startIndex, endIndex) {
       if (typeof c === 'string') {
@@ -1721,7 +1990,7 @@
     function newThrowable(message, cause) {
       var tmp$;
       var throwable = new Error();
-      if (Kotlin.equals(typeof message, 'undefined')) {
+      if (equals(typeof message, 'undefined')) {
         tmp$ = cause != null ? cause.toString() : null;
       }
        else {
@@ -1739,10 +2008,10 @@
       return Kotlin.isType(other, BoxedChar) && this.c === other.c;
     };
     BoxedChar.prototype.hashCode = function () {
-      return this.c | 0;
+      return this.c;
     };
     BoxedChar.prototype.toString = function () {
-      return String.fromCharCode(this.c);
+      return String.fromCharCode(unboxChar(this.c));
     };
     BoxedChar.prototype.compareTo_11rb$ = function (other) {
       return this.c - other;
@@ -1750,7 +2019,7 @@
     BoxedChar.prototype.valueOf = function () {
       return this.c;
     };
-    BoxedChar.$metadata$ = {kind: Kotlin.Kind.CLASS, simpleName: 'BoxedChar', interfaces: [Comparable]};
+    BoxedChar.$metadata$ = {kind: Kind_CLASS, simpleName: 'BoxedChar', interfaces: [Comparable]};
     var concat = defineInlineFunction('kotlin.concat_2r4q7p$', function (args) {
       var tmp$;
       var typed = Array(args.length);
@@ -1805,7 +2074,7 @@
         tmp$ = args.length - 1 | 0;
         for (var i_0 = 0; i_0 <= tmp$; i_0++) {
           var tmp$_4;
-          size = size + (typeof (tmp$_4 = args[i_0].length) === 'number' ? tmp$_4 : Kotlin.throwCCE()) | 0;
+          size = size + (typeof (tmp$_4 = args[i_0].length) === 'number' ? tmp$_4 : throwCCE()) | 0;
         }
         var result = new a.constructor(size);
         if (a.$type$ !== undefined) {
@@ -1861,10 +2130,10 @@
       };
     }));
     function isHighSurrogate($receiver) {
-      return (new CharRange(CharCompanionObject.MIN_HIGH_SURROGATE, CharCompanionObject.MAX_HIGH_SURROGATE)).contains_mef7kx$($receiver);
+      return (new CharRange(kotlin_js_internal_CharCompanionObject.MIN_HIGH_SURROGATE, kotlin_js_internal_CharCompanionObject.MAX_HIGH_SURROGATE)).contains_mef7kx$($receiver);
     }
     function isLowSurrogate($receiver) {
-      return (new CharRange(CharCompanionObject.MIN_LOW_SURROGATE, CharCompanionObject.MAX_LOW_SURROGATE)).contains_mef7kx$($receiver);
+      return (new CharRange(kotlin_js_internal_CharCompanionObject.MIN_LOW_SURROGATE, kotlin_js_internal_CharCompanionObject.MAX_LOW_SURROGATE)).contains_mef7kx$($receiver);
     }
     var orEmpty = defineInlineFunction('kotlin.kotlin.collections.orEmpty_oachgz$', function ($receiver) {
       return $receiver != null ? $receiver : [];
@@ -1909,6 +2178,30 @@
     function mapOf(pair) {
       return hashMapOf_0([pair]);
     }
+    function fill($receiver, value) {
+      var tmp$;
+      tmp$ = get_lastIndex_8($receiver);
+      for (var index = 0; index <= tmp$; index++) {
+        $receiver.set_wxm5ur$(index, value);
+      }
+    }
+    function shuffle($receiver) {
+      for (var i = get_lastIndex_8($receiver); i >= 1; i--) {
+        var j = rand(i + 1 | 0);
+        var copy = $receiver.get_za3lpa$(i);
+        $receiver.set_wxm5ur$(i, $receiver.get_za3lpa$(j));
+        $receiver.set_wxm5ur$(j, copy);
+      }
+    }
+    var Math_0 = Math;
+    function rand(upperBound) {
+      return numberToInt(Math_0.floor(Math.random() * upperBound));
+    }
+    function shuffled($receiver) {
+      var $receiver_0 = toMutableList_8($receiver);
+      shuffle($receiver_0);
+      return $receiver_0;
+    }
     function sort_0($receiver) {
       collectionsSort($receiver, naturalOrder());
     }
@@ -1916,23 +2209,36 @@
       collectionsSort($receiver, comparator);
     }
     function collectionsSort(list, comparator) {
-      var tmp$;
       if (list.size <= 1)
         return;
       var array = copyToArray(list);
       array.sort(comparator.compare.bind(comparator));
-      tmp$ = array.length - 1 | 0;
-      for (var i = 0; i <= tmp$; i++) {
+      for (var i = 0; i < array.length; i++) {
         list.set_wxm5ur$(i, array[i]);
       }
     }
+    function arrayOfNulls(reference, size) {
+      return Kotlin.newArray(size, null);
+    }
+    var toSingletonMapOrSelf = defineInlineFunction('kotlin.kotlin.collections.toSingletonMapOrSelf_1vp4qn$', function ($receiver) {
+      return $receiver;
+    });
+    var toSingletonMap = defineInlineFunction('kotlin.kotlin.collections.toSingletonMap_3imywq$', wrapFunction(function () {
+      var toMutableMap = _.kotlin.collections.toMutableMap_abgq59$;
+      return function ($receiver) {
+        return toMutableMap($receiver);
+      };
+    }));
+    var copyToArrayOfAny = defineInlineFunction('kotlin.kotlin.collections.copyToArrayOfAny_e0iprw$', function ($receiver, isVarargs) {
+      return isVarargs ? $receiver : $receiver.slice();
+    });
     function AbstractMutableCollection() {
       AbstractCollection.call(this);
     }
     AbstractMutableCollection.prototype.remove_11rb$ = function (element) {
       var iterator = this.iterator();
       while (iterator.hasNext()) {
-        if (Kotlin.equals(iterator.next(), element)) {
+        if (equals(iterator.next(), element)) {
           iterator.remove();
           return true;
         }
@@ -1957,7 +2263,7 @@
     }
     AbstractMutableCollection.prototype.removeAll_brywnq$ = function (elements) {
       var tmp$;
-      return removeAll_0(Kotlin.isType(tmp$ = this, MutableIterable) ? tmp$ : Kotlin.throwCCE(), AbstractMutableCollection$removeAll$lambda(elements));
+      return removeAll_0(Kotlin.isType(tmp$ = this, MutableIterable) ? tmp$ : throwCCE(), AbstractMutableCollection$removeAll$lambda(elements));
     };
     function AbstractMutableCollection$retainAll$lambda(closure$elements) {
       return function (it) {
@@ -1966,7 +2272,7 @@
     }
     AbstractMutableCollection.prototype.retainAll_brywnq$ = function (elements) {
       var tmp$;
-      return removeAll_0(Kotlin.isType(tmp$ = this, MutableIterable) ? tmp$ : Kotlin.throwCCE(), AbstractMutableCollection$retainAll$lambda(elements));
+      return removeAll_0(Kotlin.isType(tmp$ = this, MutableIterable) ? tmp$ : throwCCE(), AbstractMutableCollection$retainAll$lambda(elements));
     };
     AbstractMutableCollection.prototype.clear = function () {
       var iterator = this.iterator();
@@ -1978,7 +2284,7 @@
     AbstractMutableCollection.prototype.toJSON = function () {
       return this.toArray();
     };
-    AbstractMutableCollection.$metadata$ = {kind: Kotlin.Kind.CLASS, simpleName: 'AbstractMutableCollection', interfaces: [MutableCollection, AbstractCollection]};
+    AbstractMutableCollection.$metadata$ = {kind: Kind_CLASS, simpleName: 'AbstractMutableCollection', interfaces: [MutableCollection, AbstractCollection]};
     function AbstractMutableList() {
       AbstractMutableCollection.call(this);
       this.modCount = 0;
@@ -2028,7 +2334,7 @@
       var tmp$;
       tmp$ = get_lastIndex_8(this);
       for (var index = 0; index <= tmp$; index++) {
-        if (Kotlin.equals(this.get_za3lpa$(index), element)) {
+        if (equals(this.get_za3lpa$(index), element)) {
           return index;
         }
       }
@@ -2036,7 +2342,7 @@
     };
     AbstractMutableList.prototype.lastIndexOf_11rb$ = function (element) {
       for (var index = get_lastIndex_8(this); index >= 0; index--) {
-        if (Kotlin.equals(this.get_za3lpa$(index), element)) {
+        if (equals(this.get_za3lpa$(index), element)) {
           return index;
         }
       }
@@ -2081,20 +2387,20 @@
     AbstractMutableList$IteratorImpl.prototype.next = function () {
       var tmp$;
       if (!this.hasNext())
-        throw new NoSuchElementException();
+        throw NoSuchElementException_init();
       this.last_0 = (tmp$ = this.index_0, this.index_0 = tmp$ + 1 | 0, tmp$);
       return this.$outer.get_za3lpa$(this.last_0);
     };
     AbstractMutableList$IteratorImpl.prototype.remove = function () {
       if (!(this.last_0 !== -1)) {
         var message = 'Call next() or previous() before removing element from the iterator.';
-        throw new IllegalStateException(message.toString());
+        throw IllegalStateException_init_0(message.toString());
       }
       this.$outer.removeAt_za3lpa$(this.last_0);
       this.index_0 = this.last_0;
       this.last_0 = -1;
     };
-    AbstractMutableList$IteratorImpl.$metadata$ = {kind: Kotlin.Kind.CLASS, simpleName: 'IteratorImpl', interfaces: [MutableIterator]};
+    AbstractMutableList$IteratorImpl.$metadata$ = {kind: Kind_CLASS, simpleName: 'IteratorImpl', interfaces: [MutableIterator]};
     function AbstractMutableList$ListIteratorImpl($outer, index) {
       this.$outer = $outer;
       AbstractMutableList$IteratorImpl.call(this, this.$outer);
@@ -2109,7 +2415,7 @@
     };
     AbstractMutableList$ListIteratorImpl.prototype.previous = function () {
       if (!this.hasPrevious())
-        throw new NoSuchElementException();
+        throw NoSuchElementException_init();
       this.last_0 = (this.index_0 = this.index_0 - 1 | 0, this.index_0);
       return this.$outer.get_za3lpa$(this.last_0);
     };
@@ -2124,11 +2430,11 @@
     AbstractMutableList$ListIteratorImpl.prototype.set_11rb$ = function (element) {
       if (!(this.last_0 !== -1)) {
         var message = 'Call next() or previous() before updating element value with the iterator.';
-        throw new IllegalStateException(message.toString());
+        throw IllegalStateException_init_0(message.toString());
       }
       this.$outer.set_wxm5ur$(this.last_0, element);
     };
-    AbstractMutableList$ListIteratorImpl.$metadata$ = {kind: Kotlin.Kind.CLASS, simpleName: 'ListIteratorImpl', interfaces: [MutableListIterator, AbstractMutableList$IteratorImpl]};
+    AbstractMutableList$ListIteratorImpl.$metadata$ = {kind: Kind_CLASS, simpleName: 'ListIteratorImpl', interfaces: [MutableListIterator, AbstractMutableList$IteratorImpl]};
     function AbstractMutableList$SubList(list, fromIndex, toIndex) {
       AbstractMutableList.call(this);
       this.list_0 = list;
@@ -2159,8 +2465,8 @@
     Object.defineProperty(AbstractMutableList$SubList.prototype, 'size', {get: function () {
       return this._size_0;
     }});
-    AbstractMutableList$SubList.$metadata$ = {kind: Kotlin.Kind.CLASS, simpleName: 'SubList', interfaces: [RandomAccess, AbstractMutableList]};
-    AbstractMutableList.$metadata$ = {kind: Kotlin.Kind.CLASS, simpleName: 'AbstractMutableList', interfaces: [MutableList, AbstractMutableCollection]};
+    AbstractMutableList$SubList.$metadata$ = {kind: Kind_CLASS, simpleName: 'SubList', interfaces: [RandomAccess, AbstractMutableList]};
+    AbstractMutableList.$metadata$ = {kind: Kind_CLASS, simpleName: 'AbstractMutableList', interfaces: [MutableList, AbstractMutableCollection]};
     function AbstractMutableMap() {
       AbstractMap.call(this);
       this._keys_qe2m0n$_0 = null;
@@ -2190,7 +2496,7 @@
     AbstractMutableMap$SimpleEntry.prototype.equals = function (other) {
       return AbstractMap$Companion_getInstance().entryEquals_js7fox$(this, other);
     };
-    AbstractMutableMap$SimpleEntry.$metadata$ = {kind: Kotlin.Kind.CLASS, simpleName: 'SimpleEntry', interfaces: [MutableMap$MutableEntry]};
+    AbstractMutableMap$SimpleEntry.$metadata$ = {kind: Kind_CLASS, simpleName: 'SimpleEntry', interfaces: [MutableMap$MutableEntry]};
     function AbstractMutableMap$AbstractMutableMap$SimpleEntry_init(entry, $this) {
       $this = $this || Object.create(AbstractMutableMap$SimpleEntry.prototype);
       AbstractMutableMap$SimpleEntry.call($this, entry.key, entry.value);
@@ -2204,7 +2510,7 @@
       AbstractMutableSet.call(this);
     }
     AbstractMutableMap$get_AbstractMutableMap$keys$ObjectLiteral.prototype.add_11rb$ = function (element) {
-      throw new UnsupportedOperationException('Add is not supported on keys');
+      throw UnsupportedOperationException_init_0('Add is not supported on keys');
     };
     AbstractMutableMap$get_AbstractMutableMap$keys$ObjectLiteral.prototype.clear = function () {
       this.this$AbstractMutableMap.clear();
@@ -2224,7 +2530,7 @@
     AbstractMutableMap$get_AbstractMutableMap$keys$ObjectLiteral$iterator$ObjectLiteral.prototype.remove = function () {
       this.closure$entryIterator.remove();
     };
-    AbstractMutableMap$get_AbstractMutableMap$keys$ObjectLiteral$iterator$ObjectLiteral.$metadata$ = {kind: Kotlin.Kind.CLASS, interfaces: [MutableIterator]};
+    AbstractMutableMap$get_AbstractMutableMap$keys$ObjectLiteral$iterator$ObjectLiteral.$metadata$ = {kind: Kind_CLASS, interfaces: [MutableIterator]};
     AbstractMutableMap$get_AbstractMutableMap$keys$ObjectLiteral.prototype.iterator = function () {
       var entryIterator = this.this$AbstractMutableMap.entries.iterator();
       return new AbstractMutableMap$get_AbstractMutableMap$keys$ObjectLiteral$iterator$ObjectLiteral(entryIterator);
@@ -2239,13 +2545,12 @@
     Object.defineProperty(AbstractMutableMap$get_AbstractMutableMap$keys$ObjectLiteral.prototype, 'size', {get: function () {
       return this.this$AbstractMutableMap.size;
     }});
-    AbstractMutableMap$get_AbstractMutableMap$keys$ObjectLiteral.$metadata$ = {kind: Kotlin.Kind.CLASS, interfaces: [AbstractMutableSet]};
+    AbstractMutableMap$get_AbstractMutableMap$keys$ObjectLiteral.$metadata$ = {kind: Kind_CLASS, interfaces: [AbstractMutableSet]};
     Object.defineProperty(AbstractMutableMap.prototype, 'keys', {get: function () {
-      var tmp$;
       if (this._keys_qe2m0n$_0 == null) {
         this._keys_qe2m0n$_0 = new AbstractMutableMap$get_AbstractMutableMap$keys$ObjectLiteral(this);
       }
-      return (tmp$ = this._keys_qe2m0n$_0) != null ? tmp$ : Kotlin.throwNPE();
+      return ensureNotNull(this._keys_qe2m0n$_0);
     }});
     AbstractMutableMap.prototype.putAll_a2k3zr$ = function (from) {
       var tmp$;
@@ -2262,7 +2567,7 @@
       AbstractMutableCollection.call(this);
     }
     AbstractMutableMap$get_AbstractMutableMap$values$ObjectLiteral.prototype.add_11rb$ = function (element) {
-      throw new UnsupportedOperationException('Add is not supported on values');
+      throw UnsupportedOperationException_init_0('Add is not supported on values');
     };
     AbstractMutableMap$get_AbstractMutableMap$values$ObjectLiteral.prototype.clear = function () {
       this.this$AbstractMutableMap.clear();
@@ -2282,7 +2587,7 @@
     AbstractMutableMap$get_AbstractMutableMap$values$ObjectLiteral$iterator$ObjectLiteral.prototype.remove = function () {
       this.closure$entryIterator.remove();
     };
-    AbstractMutableMap$get_AbstractMutableMap$values$ObjectLiteral$iterator$ObjectLiteral.$metadata$ = {kind: Kotlin.Kind.CLASS, interfaces: [MutableIterator]};
+    AbstractMutableMap$get_AbstractMutableMap$values$ObjectLiteral$iterator$ObjectLiteral.$metadata$ = {kind: Kind_CLASS, interfaces: [MutableIterator]};
     AbstractMutableMap$get_AbstractMutableMap$values$ObjectLiteral.prototype.iterator = function () {
       var entryIterator = this.this$AbstractMutableMap.entries.iterator();
       return new AbstractMutableMap$get_AbstractMutableMap$values$ObjectLiteral$iterator$ObjectLiteral(entryIterator);
@@ -2300,20 +2605,19 @@
     AbstractMutableMap$get_AbstractMutableMap$values$ObjectLiteral.prototype.hashCode = function () {
       return AbstractList$Companion_getInstance().orderedHashCode_nykoif$(this);
     };
-    AbstractMutableMap$get_AbstractMutableMap$values$ObjectLiteral.$metadata$ = {kind: Kotlin.Kind.CLASS, interfaces: [AbstractMutableCollection]};
+    AbstractMutableMap$get_AbstractMutableMap$values$ObjectLiteral.$metadata$ = {kind: Kind_CLASS, interfaces: [AbstractMutableCollection]};
     Object.defineProperty(AbstractMutableMap.prototype, 'values', {get: function () {
-      var tmp$;
       if (this._values_kxdlqh$_0 == null) {
         this._values_kxdlqh$_0 = new AbstractMutableMap$get_AbstractMutableMap$values$ObjectLiteral(this);
       }
-      return (tmp$ = this._values_kxdlqh$_0) != null ? tmp$ : Kotlin.throwNPE();
+      return ensureNotNull(this._values_kxdlqh$_0);
     }});
     AbstractMutableMap.prototype.remove_11rb$ = function (key) {
       var iter = this.entries.iterator();
       while (iter.hasNext()) {
         var entry = iter.next();
         var k = entry.key;
-        if (Kotlin.equals(key, k)) {
+        if (equals(key, k)) {
           var value = entry.value;
           iter.remove();
           return value;
@@ -2321,7 +2625,7 @@
       }
       return null;
     };
-    AbstractMutableMap.$metadata$ = {kind: Kotlin.Kind.CLASS, simpleName: 'AbstractMutableMap', interfaces: [MutableMap, AbstractMap]};
+    AbstractMutableMap.$metadata$ = {kind: Kind_CLASS, simpleName: 'AbstractMutableMap', interfaces: [MutableMap, AbstractMap]};
     function AbstractMutableSet() {
       AbstractMutableCollection.call(this);
     }
@@ -2335,7 +2639,7 @@
     AbstractMutableSet.prototype.hashCode = function () {
       return AbstractSet$Companion_getInstance().unorderedHashCode_nykoif$(this);
     };
-    AbstractMutableSet.$metadata$ = {kind: Kotlin.Kind.CLASS, simpleName: 'AbstractMutableSet', interfaces: [MutableSet, AbstractMutableCollection]};
+    AbstractMutableSet.$metadata$ = {kind: Kind_CLASS, simpleName: 'AbstractMutableSet', interfaces: [MutableSet, AbstractMutableCollection]};
     function ArrayList(array) {
       AbstractMutableList.call(this);
       this.array_hd7ov6$_0 = array;
@@ -2349,14 +2653,14 @@
     }});
     ArrayList.prototype.get_za3lpa$ = function (index) {
       var tmp$;
-      return (tmp$ = this.array_hd7ov6$_0[this.rangeCheck_xcmk5o$_0(index)]) == null || Kotlin.isType(tmp$, Any) ? tmp$ : Kotlin.throwCCE();
+      return (tmp$ = this.array_hd7ov6$_0[this.rangeCheck_xcmk5o$_0(index)]) == null || Kotlin.isType(tmp$, Any) ? tmp$ : throwCCE();
     };
     ArrayList.prototype.set_wxm5ur$ = function (index, element) {
       var tmp$;
       this.rangeCheck_xcmk5o$_0(index);
       var $receiver = this.array_hd7ov6$_0[index];
       this.array_hd7ov6$_0[index] = element;
-      return (tmp$ = $receiver) == null || Kotlin.isType(tmp$, Any) ? tmp$ : Kotlin.throwCCE();
+      return (tmp$ = $receiver) == null || Kotlin.isType(tmp$, Any) ? tmp$ : throwCCE();
     };
     ArrayList.prototype.add_11rb$ = function (element) {
       this.array_hd7ov6$_0.push(element);
@@ -2397,13 +2701,10 @@
       return index === get_lastIndex_8(this) ? this.array_hd7ov6$_0.pop() : this.array_hd7ov6$_0.splice(index, 1)[0];
     };
     ArrayList.prototype.remove_11rb$ = function (element) {
-      var tmp$, tmp$_0, tmp$_1, tmp$_2;
-      tmp$ = get_indices(this.array_hd7ov6$_0);
-      tmp$_0 = tmp$.first;
-      tmp$_1 = tmp$.last;
-      tmp$_2 = tmp$.step;
-      for (var index = tmp$_0; index <= tmp$_1; index += tmp$_2) {
-        if (Kotlin.equals(this.array_hd7ov6$_0[index], element)) {
+      var tmp$;
+      tmp$ = this.array_hd7ov6$_0;
+      for (var index = 0; index !== tmp$.length; ++index) {
+        if (equals(this.array_hd7ov6$_0[index], element)) {
           this.array_hd7ov6$_0.splice(index, 1);
           this.modCount = this.modCount + 1 | 0;
           return true;
@@ -2429,7 +2730,7 @@
       return arrayToString(this.array_hd7ov6$_0);
     };
     ArrayList.prototype.toArray = function () {
-      return this.array_hd7ov6$_0.slice();
+      return [].slice.call(this.array_hd7ov6$_0);
     };
     ArrayList.prototype.rangeCheck_xcmk5o$_0 = function (index) {
       AbstractList$Companion_getInstance().checkElementIndex_6xvm5r$(index, this.size);
@@ -2439,7 +2740,7 @@
       AbstractList$Companion_getInstance().checkPositionIndex_6xvm5r$(index, this.size);
       return index;
     };
-    ArrayList.$metadata$ = {kind: Kotlin.Kind.CLASS, simpleName: 'ArrayList', interfaces: [RandomAccess, AbstractMutableList]};
+    ArrayList.$metadata$ = {kind: Kind_CLASS, simpleName: 'ArrayList', interfaces: [RandomAccess, AbstractMutableList]};
     function ArrayList_init(capacity, $this) {
       if (capacity === void 0)
         capacity = 0;
@@ -2458,13 +2759,13 @@
       EqualityComparator$HashCode_instance = this;
     }
     EqualityComparator$HashCode.prototype.equals_oaftn8$ = function (value1, value2) {
-      return Kotlin.equals(value1, value2);
+      return equals(value1, value2);
     };
     EqualityComparator$HashCode.prototype.getHashCode_s8jyv4$ = function (value) {
       var tmp$;
-      return (tmp$ = value != null ? Kotlin.hashCode(value) : null) != null ? tmp$ : 0;
+      return (tmp$ = value != null ? hashCode(value) : null) != null ? tmp$ : 0;
     };
-    EqualityComparator$HashCode.$metadata$ = {kind: Kotlin.Kind.OBJECT, simpleName: 'HashCode', interfaces: [EqualityComparator]};
+    EqualityComparator$HashCode.$metadata$ = {kind: Kind_OBJECT, simpleName: 'HashCode', interfaces: [EqualityComparator]};
     var EqualityComparator$HashCode_instance = null;
     function EqualityComparator$HashCode_getInstance() {
       if (EqualityComparator$HashCode_instance === null) {
@@ -2472,7 +2773,7 @@
       }
       return EqualityComparator$HashCode_instance;
     }
-    EqualityComparator.$metadata$ = {kind: Kotlin.Kind.INTERFACE, simpleName: 'EqualityComparator', interfaces: []};
+    EqualityComparator.$metadata$ = {kind: Kind_INTERFACE, simpleName: 'EqualityComparator', interfaces: []};
     function HashMap() {
       this.internalMap_uxhen5$_0 = null;
       this.equality_vgh6cm$_0 = null;
@@ -2483,7 +2784,7 @@
       AbstractMutableSet.call(this);
     }
     HashMap$EntrySet.prototype.add_11rb$ = function (element) {
-      throw new UnsupportedOperationException('Add is not supported on entries');
+      throw UnsupportedOperationException_init_0('Add is not supported on entries');
     };
     HashMap$EntrySet.prototype.clear = function () {
       this.$outer.clear();
@@ -2504,7 +2805,7 @@
     Object.defineProperty(HashMap$EntrySet.prototype, 'size', {get: function () {
       return this.$outer.size;
     }});
-    HashMap$EntrySet.$metadata$ = {kind: Kotlin.Kind.CLASS, simpleName: 'EntrySet', interfaces: [AbstractMutableSet]};
+    HashMap$EntrySet.$metadata$ = {kind: Kind_CLASS, simpleName: 'EntrySet', interfaces: [AbstractMutableSet]};
     HashMap.prototype.clear = function () {
       this.internalMap_uxhen5$_0.clear();
     };
@@ -2534,11 +2835,10 @@
       return any$result;
     };
     Object.defineProperty(HashMap.prototype, 'entries', {get: function () {
-      var tmp$;
       if (this._entries_7ih87x$_0 == null) {
         this._entries_7ih87x$_0 = this.createEntrySet();
       }
-      return (tmp$ = this._entries_7ih87x$_0) != null ? tmp$ : Kotlin.throwNPE();
+      return ensureNotNull(this._entries_7ih87x$_0);
     }});
     HashMap.prototype.createEntrySet = function () {
       return new HashMap$EntrySet(this);
@@ -2555,7 +2855,7 @@
     Object.defineProperty(HashMap.prototype, 'size', {get: function () {
       return this.internalMap_uxhen5$_0.size;
     }});
-    HashMap.$metadata$ = {kind: Kotlin.Kind.CLASS, simpleName: 'HashMap', interfaces: [AbstractMutableMap]};
+    HashMap.$metadata$ = {kind: Kind_CLASS, simpleName: 'HashMap', interfaces: [AbstractMutableMap]};
     function HashMap_init(internalMap, $this) {
       $this = $this || Object.create(HashMap.prototype);
       AbstractMutableMap.call($this);
@@ -2576,11 +2876,11 @@
       HashMap_init_0($this);
       if (!(initialCapacity >= 0)) {
         var message = 'Negative initial capacity';
-        throw new IllegalArgumentException(message.toString());
+        throw IllegalArgumentException_init_0(message.toString());
       }
       if (!(loadFactor >= 0)) {
         var message_0 = 'Non-positive load factor';
-        throw new IllegalArgumentException(message_0.toString());
+        throw IllegalArgumentException_init_0(message_0.toString());
       }
       return $this;
     }
@@ -2620,7 +2920,7 @@
     Object.defineProperty(HashSet.prototype, 'size', {get: function () {
       return this.map_eot64i$_0.size;
     }});
-    HashSet.$metadata$ = {kind: Kotlin.Kind.CLASS, simpleName: 'HashSet', interfaces: [AbstractMutableSet]};
+    HashSet.$metadata$ = {kind: Kind_CLASS, simpleName: 'HashSet', interfaces: [AbstractMutableSet]};
     function HashSet_init($this) {
       $this = $this || Object.create(HashSet.prototype);
       AbstractMutableSet.call($this);
@@ -2822,7 +3122,7 @@
     InternalHashCodeMap$iterator$ObjectLiteral.prototype.next = function () {
       var tmp$;
       if (!this.hasNext())
-        throw new NoSuchElementException();
+        throw NoSuchElementException_init();
       if (this.isChain) {
         tmp$ = this.chainOrEntry[this.itemIndex];
       }
@@ -2835,16 +3135,15 @@
       return lastEntry;
     };
     InternalHashCodeMap$iterator$ObjectLiteral.prototype.remove = function () {
-      var tmp$;
       if (this.lastEntry == null) {
         var message = 'Required value was null.';
-        throw new IllegalStateException(message.toString());
+        throw IllegalStateException_init_0(message.toString());
       }
-      this.this$InternalHashCodeMap.remove_11rb$(((tmp$ = this.lastEntry) != null ? tmp$ : Kotlin.throwNPE()).key);
+      this.this$InternalHashCodeMap.remove_11rb$(ensureNotNull(this.lastEntry).key);
       this.lastEntry = null;
       this.itemIndex = this.itemIndex - 1 | 0;
     };
-    InternalHashCodeMap$iterator$ObjectLiteral.$metadata$ = {kind: Kotlin.Kind.CLASS, interfaces: [MutableIterator]};
+    InternalHashCodeMap$iterator$ObjectLiteral.$metadata$ = {kind: Kind_CLASS, interfaces: [MutableIterator]};
     InternalHashCodeMap.prototype.iterator = function () {
       return new InternalHashCodeMap$iterator$ObjectLiteral(this);
     };
@@ -2852,7 +3151,7 @@
       var chainOrEntry = this.backingMap_0[hashCode];
       return chainOrEntry === undefined ? null : chainOrEntry;
     };
-    InternalHashCodeMap.$metadata$ = {kind: Kotlin.Kind.CLASS, simpleName: 'InternalHashCodeMap', interfaces: [InternalMap]};
+    InternalHashCodeMap.$metadata$ = {kind: Kind_CLASS, simpleName: 'InternalHashCodeMap', interfaces: [InternalMap]};
     function InternalMap() {
     }
     InternalMap.prototype.createJsMap = function () {
@@ -2861,7 +3160,7 @@
       delete result['foo'];
       return result;
     };
-    InternalMap.$metadata$ = {kind: Kotlin.Kind.INTERFACE, simpleName: 'InternalMap', interfaces: [MutableIterable]};
+    InternalMap.$metadata$ = {kind: Kind_INTERFACE, simpleName: 'InternalMap', interfaces: [MutableIterable]};
     function InternalStringMap(equality) {
       this.equality_qma612$_0 = equality;
       this.backingMap_0 = this.createJsMap();
@@ -2889,7 +3188,7 @@
     InternalStringMap.prototype.put_xwzc9p$ = function (key, value) {
       if (!(typeof key === 'string')) {
         var message = 'Failed requirement.';
-        throw new IllegalArgumentException(message.toString());
+        throw IllegalArgumentException_init_0(message.toString());
       }
       var oldValue = this.backingMap_0[key];
       this.backingMap_0[key] = value;
@@ -2931,7 +3230,7 @@
       var tmp$, tmp$_0;
       var key = this.iterator_0.next();
       this.lastKey_0 = key;
-      tmp$_0 = (tmp$ = key) == null || Kotlin.isType(tmp$, Any) ? tmp$ : Kotlin.throwCCE();
+      tmp$_0 = (tmp$ = key) == null || Kotlin.isType(tmp$, Any) ? tmp$ : throwCCE();
       return this.this$InternalStringMap.newMapEntry_0(tmp$_0);
     };
     InternalStringMap$iterator$ObjectLiteral.prototype.remove = function () {
@@ -2941,14 +3240,14 @@
       var checkNotNull$result;
       if (value == null) {
         var message = 'Required value was null.';
-        throw new IllegalStateException(message.toString());
+        throw IllegalStateException_init_0(message.toString());
       }
        else {
         checkNotNull$result = value;
       }
-      tmp$_0.remove_11rb$((tmp$ = checkNotNull$result) == null || Kotlin.isType(tmp$, Any) ? tmp$ : Kotlin.throwCCE());
+      tmp$_0.remove_11rb$((tmp$ = checkNotNull$result) == null || Kotlin.isType(tmp$, Any) ? tmp$ : throwCCE());
     };
-    InternalStringMap$iterator$ObjectLiteral.$metadata$ = {kind: Kotlin.Kind.CLASS, interfaces: [MutableIterator]};
+    InternalStringMap$iterator$ObjectLiteral.$metadata$ = {kind: Kind_CLASS, interfaces: [MutableIterator]};
     InternalStringMap.prototype.iterator = function () {
       return new InternalStringMap$iterator$ObjectLiteral(this);
     };
@@ -2974,11 +3273,11 @@
     InternalStringMap$newMapEntry$ObjectLiteral.prototype.equals = function (other) {
       return AbstractMap$Companion_getInstance().entryEquals_js7fox$(this, other);
     };
-    InternalStringMap$newMapEntry$ObjectLiteral.$metadata$ = {kind: Kotlin.Kind.CLASS, interfaces: [MutableMap$MutableEntry]};
+    InternalStringMap$newMapEntry$ObjectLiteral.$metadata$ = {kind: Kind_CLASS, interfaces: [MutableMap$MutableEntry]};
     InternalStringMap.prototype.newMapEntry_0 = function (key) {
       return new InternalStringMap$newMapEntry$ObjectLiteral(key, this);
     };
-    InternalStringMap.$metadata$ = {kind: Kotlin.Kind.CLASS, simpleName: 'InternalStringMap', interfaces: [InternalMap]};
+    InternalStringMap.$metadata$ = {kind: Kind_CLASS, simpleName: 'InternalStringMap', interfaces: [InternalMap]};
     function LinkedHashMap() {
       this.head_1lr44l$_0 = null;
       this.map_97q5dv$_0 = null;
@@ -2988,7 +3287,7 @@
       this.next_8be2vx$ = null;
       this.prev_8be2vx$ = null;
     }
-    LinkedHashMap$ChainEntry.$metadata$ = {kind: Kotlin.Kind.CLASS, simpleName: 'ChainEntry', interfaces: [AbstractMutableMap$SimpleEntry]};
+    LinkedHashMap$ChainEntry.$metadata$ = {kind: Kind_CLASS, simpleName: 'ChainEntry', interfaces: [AbstractMutableMap$SimpleEntry]};
     function LinkedHashMap$EntrySet($outer) {
       this.$outer = $outer;
       AbstractMutableSet.call(this);
@@ -3003,10 +3302,9 @@
       return this.next_0 !== null;
     };
     LinkedHashMap$EntrySet$EntryIterator.prototype.next = function () {
-      var tmp$;
       if (!this.hasNext())
-        throw new NoSuchElementException();
-      var current = (tmp$ = this.next_0) != null ? tmp$ : Kotlin.throwNPE();
+        throw NoSuchElementException_init();
+      var current = ensureNotNull(this.next_0);
       this.last_0 = current;
       var $receiver = current.next_8be2vx$;
       this.$outer.$outer;
@@ -3014,18 +3312,17 @@
       return current;
     };
     LinkedHashMap$EntrySet$EntryIterator.prototype.remove = function () {
-      var tmp$, tmp$_0;
       if (!(this.last_0 != null)) {
         var message = 'Check failed.';
-        throw new IllegalStateException(message.toString());
+        throw IllegalStateException_init_0(message.toString());
       }
-      this.$outer.$outer.remove_aul5td$_0((tmp$ = this.last_0) != null ? tmp$ : Kotlin.throwNPE());
-      this.$outer.$outer.map_97q5dv$_0.remove_11rb$(((tmp$_0 = this.last_0) != null ? tmp$_0 : Kotlin.throwNPE()).key);
+      this.$outer.$outer.remove_aul5td$_0(ensureNotNull(this.last_0));
+      this.$outer.$outer.map_97q5dv$_0.remove_11rb$(ensureNotNull(this.last_0).key);
       this.last_0 = null;
     };
-    LinkedHashMap$EntrySet$EntryIterator.$metadata$ = {kind: Kotlin.Kind.CLASS, simpleName: 'EntryIterator', interfaces: [MutableIterator]};
+    LinkedHashMap$EntrySet$EntryIterator.$metadata$ = {kind: Kind_CLASS, simpleName: 'EntryIterator', interfaces: [MutableIterator]};
     LinkedHashMap$EntrySet.prototype.add_11rb$ = function (element) {
-      throw new UnsupportedOperationException('Add is not supported on entries');
+      throw UnsupportedOperationException_init_0('Add is not supported on entries');
     };
     LinkedHashMap$EntrySet.prototype.clear = function () {
       this.$outer.clear();
@@ -3046,11 +3343,11 @@
     Object.defineProperty(LinkedHashMap$EntrySet.prototype, 'size', {get: function () {
       return this.$outer.size;
     }});
-    LinkedHashMap$EntrySet.$metadata$ = {kind: Kotlin.Kind.CLASS, simpleName: 'EntrySet', interfaces: [AbstractMutableSet]};
+    LinkedHashMap$EntrySet.$metadata$ = {kind: Kind_CLASS, simpleName: 'EntrySet', interfaces: [AbstractMutableSet]};
     LinkedHashMap.prototype.addToEnd_ufg2hg$_0 = function ($receiver) {
       if (!($receiver.next_8be2vx$ == null && $receiver.prev_8be2vx$ == null)) {
         var message = 'Check failed.';
-        throw new IllegalStateException(message.toString());
+        throw IllegalStateException_init_0(message.toString());
       }
       var _head = this.head_1lr44l$_0;
       if (_head == null) {
@@ -3063,7 +3360,7 @@
         var checkNotNull$result;
         if (value == null) {
           var message_0 = 'Required value was null.';
-          throw new IllegalStateException(message_0.toString());
+          throw IllegalStateException_init_0(message_0.toString());
         }
          else {
           checkNotNull$result = value;
@@ -3076,7 +3373,6 @@
       }
     };
     LinkedHashMap.prototype.remove_aul5td$_0 = function ($receiver) {
-      var tmp$, tmp$_0;
       if ($receiver.next_8be2vx$ === $receiver) {
         this.head_1lr44l$_0 = null;
       }
@@ -3084,8 +3380,8 @@
         if (this.head_1lr44l$_0 === $receiver) {
           this.head_1lr44l$_0 = $receiver.next_8be2vx$;
         }
-        ((tmp$ = $receiver.next_8be2vx$) != null ? tmp$ : Kotlin.throwNPE()).prev_8be2vx$ = $receiver.prev_8be2vx$;
-        ((tmp$_0 = $receiver.prev_8be2vx$) != null ? tmp$_0 : Kotlin.throwNPE()).next_8be2vx$ = $receiver.next_8be2vx$;
+        ensureNotNull($receiver.next_8be2vx$).prev_8be2vx$ = $receiver.prev_8be2vx$;
+        ensureNotNull($receiver.prev_8be2vx$).next_8be2vx$ = $receiver.next_8be2vx$;
       }
       $receiver.next_8be2vx$ = null;
       $receiver.prev_8be2vx$ = null;
@@ -3098,17 +3394,17 @@
       return this.map_97q5dv$_0.containsKey_11rb$(key);
     };
     LinkedHashMap.prototype.containsValue_11rc$ = function (value) {
-      var tmp$, tmp$_0;
+      var tmp$;
       tmp$ = this.head_1lr44l$_0;
       if (tmp$ == null) {
         return false;
       }
       var node = tmp$;
       do {
-        if (Kotlin.equals(node.value, value)) {
+        if (equals(node.value, value)) {
           return true;
         }
-        node = (tmp$_0 = node.next_8be2vx$) != null ? tmp$_0 : Kotlin.throwNPE();
+        node = ensureNotNull(node.next_8be2vx$);
       }
        while (node !== this.head_1lr44l$_0);
       return false;
@@ -3143,7 +3439,7 @@
     Object.defineProperty(LinkedHashMap.prototype, 'size', {get: function () {
       return this.map_97q5dv$_0.size;
     }});
-    LinkedHashMap.$metadata$ = {kind: Kotlin.Kind.CLASS, simpleName: 'LinkedHashMap', interfaces: [HashMap, Map]};
+    LinkedHashMap.$metadata$ = {kind: Kind_CLASS, simpleName: 'LinkedHashMap', interfaces: [HashMap, Map]};
     function LinkedHashMap_init($this) {
       $this = $this || Object.create(LinkedHashMap.prototype);
       HashMap_init_0($this);
@@ -3156,7 +3452,7 @@
       HashMap_init_0($this);
       LinkedHashMap.call($this);
       var tmp$;
-      $this.map_97q5dv$_0 = Kotlin.isType(tmp$ = backingMap, HashMap) ? tmp$ : Kotlin.throwCCE();
+      $this.map_97q5dv$_0 = Kotlin.isType(tmp$ = backingMap, HashMap) ? tmp$ : throwCCE();
       return $this;
     }
     function LinkedHashMap_init_1(initialCapacity, loadFactor, $this) {
@@ -3183,7 +3479,7 @@
     }
     function LinkedHashSet() {
     }
-    LinkedHashSet.$metadata$ = {kind: Kotlin.Kind.CLASS, simpleName: 'LinkedHashSet', interfaces: [HashSet]};
+    LinkedHashSet.$metadata$ = {kind: Kind_CLASS, simpleName: 'LinkedHashSet', interfaces: [HashSet]};
     function LinkedHashSet_init(map, $this) {
       $this = $this || Object.create(LinkedHashSet.prototype);
       HashSet_init_2(map, $this);
@@ -3218,13 +3514,7 @@
     }
     function RandomAccess() {
     }
-    RandomAccess.$metadata$ = {kind: Kotlin.Kind.INTERFACE, simpleName: 'RandomAccess', interfaces: []};
-    function Volatile() {
-    }
-    Volatile.$metadata$ = {kind: Kotlin.Kind.CLASS, simpleName: 'Volatile', interfaces: [Annotation]};
-    function Synchronized() {
-    }
-    Synchronized.$metadata$ = {kind: Kotlin.Kind.CLASS, simpleName: 'Synchronized', interfaces: [Annotation]};
+    RandomAccess.$metadata$ = {kind: Kind_INTERFACE, simpleName: 'RandomAccess', interfaces: []};
     var synchronized = defineInlineFunction('kotlin.kotlin.synchronized_eocq09$', function (lock, block) {
       return block();
     });
@@ -3239,7 +3529,7 @@
     };
     BaseOutput.prototype.flush = function () {
     };
-    BaseOutput.$metadata$ = {kind: Kotlin.Kind.CLASS, simpleName: 'BaseOutput', interfaces: []};
+    BaseOutput.$metadata$ = {kind: Kind_CLASS, simpleName: 'BaseOutput', interfaces: []};
     function NodeJsOutput(outputStream) {
       BaseOutput.call(this);
       this.outputStream = outputStream;
@@ -3247,7 +3537,7 @@
     NodeJsOutput.prototype.print_s8jyv4$ = function (message) {
       return this.outputStream.write(String(message));
     };
-    NodeJsOutput.$metadata$ = {kind: Kotlin.Kind.CLASS, simpleName: 'NodeJsOutput', interfaces: [BaseOutput]};
+    NodeJsOutput.$metadata$ = {kind: Kind_CLASS, simpleName: 'NodeJsOutput', interfaces: [BaseOutput]};
     function OutputToConsoleLog() {
       BaseOutput.call(this);
     }
@@ -3260,7 +3550,7 @@
     OutputToConsoleLog.prototype.println = function () {
       console.log('');
     };
-    OutputToConsoleLog.$metadata$ = {kind: Kotlin.Kind.CLASS, simpleName: 'OutputToConsoleLog', interfaces: [BaseOutput]};
+    OutputToConsoleLog.$metadata$ = {kind: Kind_CLASS, simpleName: 'OutputToConsoleLog', interfaces: [BaseOutput]};
     function BufferedOutput() {
       BaseOutput.call(this);
       this.buffer = '';
@@ -3271,7 +3561,7 @@
     BufferedOutput.prototype.flush = function () {
       this.buffer = '';
     };
-    BufferedOutput.$metadata$ = {kind: Kotlin.Kind.CLASS, simpleName: 'BufferedOutput', interfaces: [BaseOutput]};
+    BufferedOutput.$metadata$ = {kind: Kind_CLASS, simpleName: 'BufferedOutput', interfaces: [BaseOutput]};
     function BufferedOutputToConsoleLog() {
       BufferedOutput.call(this);
     }
@@ -3289,7 +3579,7 @@
       console.log(this.buffer);
       this.buffer = '';
     };
-    BufferedOutputToConsoleLog.$metadata$ = {kind: Kotlin.Kind.CLASS, simpleName: 'BufferedOutputToConsoleLog', interfaces: [BufferedOutput]};
+    BufferedOutputToConsoleLog.$metadata$ = {kind: Kind_CLASS, simpleName: 'BufferedOutputToConsoleLog', interfaces: [BufferedOutput]};
     var output;
     function String_0(value) {
       return String(value);
@@ -3332,13 +3622,14 @@
       this.exception_0 = exception;
       this.doResumeWrapper_0();
     };
+    var throwCCE = Kotlin.throwCCE;
     CoroutineImpl.prototype.doResumeWrapper_0 = function () {
       var completion = this.resultContinuation_0;
       var tmp$;
       try {
         var result = this.doResume();
-        if (result !== package$intrinsics.COROUTINE_SUSPENDED) {
-          (Kotlin.isType(tmp$ = completion, Continuation) ? tmp$ : Kotlin.throwCCE()).resume_11rb$(result);
+        if (result !== COROUTINE_SUSPENDED) {
+          (Kotlin.isType(tmp$ = completion, Continuation) ? tmp$ : throwCCE()).resume_11rb$(result);
         }
       }
        catch (t) {
@@ -3349,13 +3640,13 @@
           throw t;
       }
     };
-    CoroutineImpl.$metadata$ = {kind: Kotlin.Kind.CLASS, simpleName: 'CoroutineImpl', interfaces: [Continuation]};
+    CoroutineImpl.$metadata$ = {kind: Kind_CLASS, simpleName: 'CoroutineImpl', interfaces: [Continuation]};
     var UNDECIDED;
     var RESUMED;
     function Fail(exception) {
       this.exception = exception;
     }
-    Fail.$metadata$ = {kind: Kotlin.Kind.CLASS, simpleName: 'Fail', interfaces: []};
+    Fail.$metadata$ = {kind: Kind_CLASS, simpleName: 'Fail', interfaces: []};
     function SafeContinuation(delegate, initialResult) {
       this.delegate_0 = delegate;
       this.result_0 = initialResult;
@@ -3371,7 +3662,7 @@
         this.delegate_0.resume_11rb$(value);
       }
        else {
-        throw new IllegalStateException('Already resumed');
+        throw IllegalStateException_init_0('Already resumed');
       }
     };
     SafeContinuation.prototype.resumeWithException_tcv7n7$ = function (exception) {
@@ -3382,7 +3673,7 @@
         this.delegate_0.resumeWithException_tcv7n7$(exception);
       }
        else {
-        throw new IllegalStateException('Already resumed');
+        throw IllegalStateException_init_0('Already resumed');
       }
     };
     SafeContinuation.prototype.getResult = function () {
@@ -3400,7 +3691,7 @@
       }
       return tmp$;
     };
-    SafeContinuation.$metadata$ = {kind: Kotlin.Kind.CLASS, simpleName: 'SafeContinuation', interfaces: [Continuation]};
+    SafeContinuation.$metadata$ = {kind: Kind_CLASS, simpleName: 'SafeContinuation', interfaces: [Continuation]};
     function SafeContinuation_init(delegate, $this) {
       $this = $this || Object.create(SafeContinuation.prototype);
       SafeContinuation.call($this, delegate, UNDECIDED);
@@ -3418,6 +3709,11 @@
     function createCoroutineUnchecked_0($receiver, completion) {
       return $receiver(completion, true).facade;
     }
+    var dateLocaleOptions = defineInlineFunction('kotlin.kotlin.js.dateLocaleOptions_49uy1x$', function (init) {
+      var result = new Object();
+      init(result);
+      return result;
+    });
     var asDynamic = defineInlineFunction('kotlin.kotlin.js.asDynamic_mzud1t$', function ($receiver) {
       return $receiver;
     });
@@ -3436,24 +3732,27 @@
         tmp$_0 = Kotlin.arrayIterator(r);
       }
        else
-        tmp$_0 = (Kotlin.isType(tmp$ = r, Iterable) ? tmp$ : Kotlin.throwCCE()).iterator();
+        tmp$_0 = (Kotlin.isType(tmp$ = r, Iterable) ? tmp$ : throwCCE()).iterator();
       return tmp$_0;
     }
     function throwNPE(message) {
       throw new NullPointerException(message);
     }
-    function throwCCE() {
+    function throwCCE_0() {
       throw new ClassCastException('Illegal cast');
     }
     function throwISE(message) {
-      throw new IllegalStateException(message);
+      throw IllegalStateException_init_0(message);
     }
-    function Error_0(message) {
-      if (message === void 0)
-        message = null;
+    function throwUPAE(propertyName) {
+      throw UninitializedPropertyAccessException_init_0('lateinit property ' + propertyName + ' has not been initialized');
+    }
+    function Error_0(message, cause) {
       Throwable.call(this);
-      this.message_q7r8iu$_0 = message;
-      this.cause_us9j0c$_0 = null;
+      var tmp$;
+      tmp$ = cause != null ? cause : null;
+      this.message_q7r8iu$_0 = typeof message === 'undefined' && tmp$ != null ? Kotlin.toString(tmp$) : message;
+      this.cause_us9j0c$_0 = tmp$;
       Kotlin.captureStack(Throwable, this);
       this.name = 'Error';
     }
@@ -3463,13 +3762,37 @@
     Object.defineProperty(Error_0.prototype, 'cause', {get: function () {
       return this.cause_us9j0c$_0;
     }});
-    Error_0.$metadata$ = {kind: Kotlin.Kind.CLASS, simpleName: 'Error', interfaces: [Throwable]};
-    function Exception(message) {
-      if (message === void 0)
-        message = null;
+    Error_0.$metadata$ = {kind: Kind_CLASS, simpleName: 'Error', interfaces: [Throwable]};
+    function Error_init($this) {
+      $this = $this || Object.create(Error_0.prototype);
+      Throwable.call($this);
+      $this.message_q7r8iu$_0 = null;
+      $this.cause_us9j0c$_0 = null;
+      get_js(getKClass(Error_0)).call($this, null, null);
+      return $this;
+    }
+    function Error_init_0(message, $this) {
+      $this = $this || Object.create(Error_0.prototype);
+      Throwable.call($this);
+      $this.message_q7r8iu$_0 = message;
+      $this.cause_us9j0c$_0 = null;
+      get_js(getKClass(Error_0)).call($this, message, null);
+      return $this;
+    }
+    function Error_init_1(cause, $this) {
+      $this = $this || Object.create(Error_0.prototype);
+      Throwable.call($this);
+      $this.message_q7r8iu$_0 = typeof undefined === 'undefined' && cause != null ? Kotlin.toString(cause) : undefined;
+      $this.cause_us9j0c$_0 = cause;
+      get_js(getKClass(Error_0)).call($this, undefined, cause);
+      return $this;
+    }
+    function Exception(message, cause) {
       Throwable.call(this);
-      this.message_8yp7un$_0 = message;
-      this.cause_th0jdv$_0 = null;
+      var tmp$;
+      tmp$ = cause != null ? cause : null;
+      this.message_8yp7un$_0 = typeof message === 'undefined' && tmp$ != null ? Kotlin.toString(tmp$) : message;
+      this.cause_th0jdv$_0 = tmp$;
       Kotlin.captureStack(Throwable, this);
       this.name = 'Exception';
     }
@@ -3479,91 +3802,242 @@
     Object.defineProperty(Exception.prototype, 'cause', {get: function () {
       return this.cause_th0jdv$_0;
     }});
-    Exception.$metadata$ = {kind: Kotlin.Kind.CLASS, simpleName: 'Exception', interfaces: [Throwable]};
-    function RuntimeException(message) {
-      if (message === void 0)
-        message = null;
-      Exception.call(this, message);
+    Exception.$metadata$ = {kind: Kind_CLASS, simpleName: 'Exception', interfaces: [Throwable]};
+    function Exception_init($this) {
+      $this = $this || Object.create(Exception.prototype);
+      Throwable.call($this);
+      $this.message_8yp7un$_0 = null;
+      $this.cause_th0jdv$_0 = null;
+      get_js(getKClass(Exception)).call($this, null, null);
+      return $this;
+    }
+    function Exception_init_0(message, $this) {
+      $this = $this || Object.create(Exception.prototype);
+      Throwable.call($this);
+      $this.message_8yp7un$_0 = message;
+      $this.cause_th0jdv$_0 = null;
+      get_js(getKClass(Exception)).call($this, message, null);
+      return $this;
+    }
+    function Exception_init_1(cause, $this) {
+      $this = $this || Object.create(Exception.prototype);
+      Throwable.call($this);
+      $this.message_8yp7un$_0 = typeof undefined === 'undefined' && cause != null ? Kotlin.toString(cause) : undefined;
+      $this.cause_th0jdv$_0 = cause;
+      get_js(getKClass(Exception)).call($this, undefined, cause);
+      return $this;
+    }
+    function RuntimeException(message, cause) {
+      Exception.call(this, message, cause);
       this.name = 'RuntimeException';
     }
-    RuntimeException.$metadata$ = {kind: Kotlin.Kind.CLASS, simpleName: 'RuntimeException', interfaces: [Exception]};
-    function IllegalArgumentException(message) {
-      if (message === void 0)
-        message = null;
-      RuntimeException.call(this, message);
+    RuntimeException.$metadata$ = {kind: Kind_CLASS, simpleName: 'RuntimeException', interfaces: [Exception]};
+    function RuntimeException_init($this) {
+      $this = $this || Object.create(RuntimeException.prototype);
+      RuntimeException.call($this, null, null);
+      return $this;
+    }
+    function RuntimeException_init_0(message, $this) {
+      $this = $this || Object.create(RuntimeException.prototype);
+      RuntimeException.call($this, message, null);
+      return $this;
+    }
+    function RuntimeException_init_1(cause, $this) {
+      $this = $this || Object.create(RuntimeException.prototype);
+      RuntimeException.call($this, undefined, cause);
+      return $this;
+    }
+    function IllegalArgumentException(message, cause) {
+      RuntimeException.call(this, message, cause);
       this.name = 'IllegalArgumentException';
     }
-    IllegalArgumentException.$metadata$ = {kind: Kotlin.Kind.CLASS, simpleName: 'IllegalArgumentException', interfaces: [RuntimeException]};
-    function IllegalStateException(message) {
-      if (message === void 0)
-        message = null;
-      RuntimeException.call(this, message);
+    IllegalArgumentException.$metadata$ = {kind: Kind_CLASS, simpleName: 'IllegalArgumentException', interfaces: [RuntimeException]};
+    function IllegalArgumentException_init($this) {
+      $this = $this || Object.create(IllegalArgumentException.prototype);
+      IllegalArgumentException.call($this, null, null);
+      return $this;
+    }
+    function IllegalArgumentException_init_0(message, $this) {
+      $this = $this || Object.create(IllegalArgumentException.prototype);
+      IllegalArgumentException.call($this, message, null);
+      return $this;
+    }
+    function IllegalArgumentException_init_1(cause, $this) {
+      $this = $this || Object.create(IllegalArgumentException.prototype);
+      IllegalArgumentException.call($this, undefined, cause);
+      return $this;
+    }
+    function IllegalStateException(message, cause) {
+      RuntimeException.call(this, message, cause);
       this.name = 'IllegalStateException';
     }
-    IllegalStateException.$metadata$ = {kind: Kotlin.Kind.CLASS, simpleName: 'IllegalStateException', interfaces: [RuntimeException]};
+    IllegalStateException.$metadata$ = {kind: Kind_CLASS, simpleName: 'IllegalStateException', interfaces: [RuntimeException]};
+    function IllegalStateException_init($this) {
+      $this = $this || Object.create(IllegalStateException.prototype);
+      IllegalStateException.call($this, null, null);
+      return $this;
+    }
+    function IllegalStateException_init_0(message, $this) {
+      $this = $this || Object.create(IllegalStateException.prototype);
+      IllegalStateException.call($this, message, null);
+      return $this;
+    }
+    function IllegalStateException_init_1(cause, $this) {
+      $this = $this || Object.create(IllegalStateException.prototype);
+      IllegalStateException.call($this, undefined, cause);
+      return $this;
+    }
     function IndexOutOfBoundsException(message) {
-      if (message === void 0)
-        message = null;
-      RuntimeException.call(this, message);
+      RuntimeException_init_0(message, this);
       this.name = 'IndexOutOfBoundsException';
     }
-    IndexOutOfBoundsException.$metadata$ = {kind: Kotlin.Kind.CLASS, simpleName: 'IndexOutOfBoundsException', interfaces: [RuntimeException]};
-    function ConcurrentModificationException(message) {
-      if (message === void 0)
-        message = null;
-      RuntimeException.call(this, message);
+    IndexOutOfBoundsException.$metadata$ = {kind: Kind_CLASS, simpleName: 'IndexOutOfBoundsException', interfaces: [RuntimeException]};
+    function IndexOutOfBoundsException_init($this) {
+      $this = $this || Object.create(IndexOutOfBoundsException.prototype);
+      IndexOutOfBoundsException.call($this, null);
+      return $this;
+    }
+    function ConcurrentModificationException(message, cause) {
+      RuntimeException.call(this, message, cause);
       this.name = 'ConcurrentModificationException';
     }
-    ConcurrentModificationException.$metadata$ = {kind: Kotlin.Kind.CLASS, simpleName: 'ConcurrentModificationException', interfaces: [RuntimeException]};
-    function UnsupportedOperationException(message) {
-      if (message === void 0)
-        message = null;
-      RuntimeException.call(this, message);
+    ConcurrentModificationException.$metadata$ = {kind: Kind_CLASS, simpleName: 'ConcurrentModificationException', interfaces: [RuntimeException]};
+    function ConcurrentModificationException_init($this) {
+      $this = $this || Object.create(ConcurrentModificationException.prototype);
+      ConcurrentModificationException.call($this, null, null);
+      return $this;
+    }
+    function ConcurrentModificationException_init_0(message, $this) {
+      $this = $this || Object.create(ConcurrentModificationException.prototype);
+      ConcurrentModificationException.call($this, message, null);
+      return $this;
+    }
+    function ConcurrentModificationException_init_1(cause, $this) {
+      $this = $this || Object.create(ConcurrentModificationException.prototype);
+      ConcurrentModificationException.call($this, undefined, cause);
+      return $this;
+    }
+    function UnsupportedOperationException(message, cause) {
+      RuntimeException.call(this, message, cause);
       this.name = 'UnsupportedOperationException';
     }
-    UnsupportedOperationException.$metadata$ = {kind: Kotlin.Kind.CLASS, simpleName: 'UnsupportedOperationException', interfaces: [RuntimeException]};
+    UnsupportedOperationException.$metadata$ = {kind: Kind_CLASS, simpleName: 'UnsupportedOperationException', interfaces: [RuntimeException]};
+    function UnsupportedOperationException_init($this) {
+      $this = $this || Object.create(UnsupportedOperationException.prototype);
+      UnsupportedOperationException.call($this, null, null);
+      return $this;
+    }
+    function UnsupportedOperationException_init_0(message, $this) {
+      $this = $this || Object.create(UnsupportedOperationException.prototype);
+      UnsupportedOperationException.call($this, message, null);
+      return $this;
+    }
+    function UnsupportedOperationException_init_1(cause, $this) {
+      $this = $this || Object.create(UnsupportedOperationException.prototype);
+      UnsupportedOperationException.call($this, undefined, cause);
+      return $this;
+    }
     function NumberFormatException(message) {
-      if (message === void 0)
-        message = null;
-      RuntimeException.call(this, message);
+      IllegalArgumentException_init_0(message, this);
       this.name = 'NumberFormatException';
     }
-    NumberFormatException.$metadata$ = {kind: Kotlin.Kind.CLASS, simpleName: 'NumberFormatException', interfaces: [RuntimeException]};
+    NumberFormatException.$metadata$ = {kind: Kind_CLASS, simpleName: 'NumberFormatException', interfaces: [IllegalArgumentException]};
+    function NumberFormatException_init($this) {
+      $this = $this || Object.create(NumberFormatException.prototype);
+      NumberFormatException.call($this, null);
+      return $this;
+    }
     function NullPointerException(message) {
-      if (message === void 0)
-        message = null;
-      RuntimeException.call(this, message);
+      RuntimeException_init_0(message, this);
       this.name = 'NullPointerException';
     }
-    NullPointerException.$metadata$ = {kind: Kotlin.Kind.CLASS, simpleName: 'NullPointerException', interfaces: [RuntimeException]};
+    NullPointerException.$metadata$ = {kind: Kind_CLASS, simpleName: 'NullPointerException', interfaces: [RuntimeException]};
+    function NullPointerException_init($this) {
+      $this = $this || Object.create(NullPointerException.prototype);
+      NullPointerException.call($this, null);
+      return $this;
+    }
     function ClassCastException(message) {
-      if (message === void 0)
-        message = null;
-      RuntimeException.call(this, message);
+      RuntimeException_init_0(message, this);
       this.name = 'ClassCastException';
     }
-    ClassCastException.$metadata$ = {kind: Kotlin.Kind.CLASS, simpleName: 'ClassCastException', interfaces: [RuntimeException]};
-    function AssertionError(message) {
-      if (message === void 0)
-        message = null;
-      Error_0.call(this, message);
+    ClassCastException.$metadata$ = {kind: Kind_CLASS, simpleName: 'ClassCastException', interfaces: [RuntimeException]};
+    function ClassCastException_init($this) {
+      $this = $this || Object.create(ClassCastException.prototype);
+      ClassCastException.call($this, null);
+      return $this;
+    }
+    function AssertionError(message, cause) {
+      Error_0.call(this, message, cause);
       this.name = 'AssertionError';
     }
-    AssertionError.$metadata$ = {kind: Kotlin.Kind.CLASS, simpleName: 'AssertionError', interfaces: [Error_0]};
+    AssertionError.$metadata$ = {kind: Kind_CLASS, simpleName: 'AssertionError', interfaces: [Error_0]};
+    function AssertionError_init($this) {
+      $this = $this || Object.create(AssertionError.prototype);
+      AssertionError_init_0(null, $this);
+      return $this;
+    }
+    function AssertionError_init_0(message, $this) {
+      $this = $this || Object.create(AssertionError.prototype);
+      AssertionError.call($this, message, null);
+      return $this;
+    }
+    function AssertionError_init_1(message, $this) {
+      $this = $this || Object.create(AssertionError.prototype);
+      var tmp$;
+      AssertionError.call($this, toString(message), Kotlin.isType(tmp$ = message, Throwable) ? tmp$ : null);
+      return $this;
+    }
     function NoSuchElementException(message) {
-      if (message === void 0)
-        message = null;
-      Exception.call(this, message);
+      RuntimeException_init_0(message, this);
       this.name = 'NoSuchElementException';
     }
-    NoSuchElementException.$metadata$ = {kind: Kotlin.Kind.CLASS, simpleName: 'NoSuchElementException', interfaces: [Exception]};
-    function NoWhenBranchMatchedException(message) {
-      if (message === void 0)
-        message = null;
-      RuntimeException.call(this, message);
+    NoSuchElementException.$metadata$ = {kind: Kind_CLASS, simpleName: 'NoSuchElementException', interfaces: [RuntimeException]};
+    function NoSuchElementException_init($this) {
+      $this = $this || Object.create(NoSuchElementException.prototype);
+      NoSuchElementException.call($this, null);
+      return $this;
+    }
+    function NoWhenBranchMatchedException(message, cause) {
+      RuntimeException.call(this, message, cause);
       this.name = 'NoWhenBranchMatchedException';
     }
-    NoWhenBranchMatchedException.$metadata$ = {kind: Kotlin.Kind.CLASS, simpleName: 'NoWhenBranchMatchedException', interfaces: [RuntimeException]};
+    NoWhenBranchMatchedException.$metadata$ = {kind: Kind_CLASS, simpleName: 'NoWhenBranchMatchedException', interfaces: [RuntimeException]};
+    function NoWhenBranchMatchedException_init($this) {
+      $this = $this || Object.create(NoWhenBranchMatchedException.prototype);
+      NoWhenBranchMatchedException.call($this, null, null);
+      return $this;
+    }
+    function NoWhenBranchMatchedException_init_0(message, $this) {
+      $this = $this || Object.create(NoWhenBranchMatchedException.prototype);
+      NoWhenBranchMatchedException.call($this, message, null);
+      return $this;
+    }
+    function NoWhenBranchMatchedException_init_1(cause, $this) {
+      $this = $this || Object.create(NoWhenBranchMatchedException.prototype);
+      NoWhenBranchMatchedException.call($this, undefined, cause);
+      return $this;
+    }
+    function UninitializedPropertyAccessException(message, cause) {
+      RuntimeException.call(this, message, cause);
+      this.name = 'UninitializedPropertyAccessException';
+    }
+    UninitializedPropertyAccessException.$metadata$ = {kind: Kind_CLASS, simpleName: 'UninitializedPropertyAccessException', interfaces: [RuntimeException]};
+    function UninitializedPropertyAccessException_init($this) {
+      $this = $this || Object.create(UninitializedPropertyAccessException.prototype);
+      UninitializedPropertyAccessException.call($this, null, null);
+      return $this;
+    }
+    function UninitializedPropertyAccessException_init_0(message, $this) {
+      $this = $this || Object.create(UninitializedPropertyAccessException.prototype);
+      UninitializedPropertyAccessException.call($this, message, null);
+      return $this;
+    }
+    function UninitializedPropertyAccessException_init_1(cause, $this) {
+      $this = $this || Object.create(UninitializedPropertyAccessException.prototype);
+      UninitializedPropertyAccessException.call($this, undefined, cause);
+      return $this;
+    }
     var component1 = defineInlineFunction('kotlin.kotlin.collections.component1_us0mfu$', function ($receiver) {
       return $receiver[0];
     });
@@ -4559,25 +5033,16 @@
       return index >= 0 && index <= get_lastIndex_7($receiver) ? $receiver[index] : null;
     }
     function indexOf($receiver, element) {
-      var tmp$, tmp$_0, tmp$_1, tmp$_2, tmp$_3, tmp$_4, tmp$_5, tmp$_6;
       if (element == null) {
-        tmp$ = get_indices($receiver);
-        tmp$_0 = tmp$.first;
-        tmp$_1 = tmp$.last;
-        tmp$_2 = tmp$.step;
-        for (var index = tmp$_0; index <= tmp$_1; index += tmp$_2) {
+        for (var index = 0; index !== $receiver.length; ++index) {
           if ($receiver[index] == null) {
             return index;
           }
         }
       }
        else {
-        tmp$_3 = get_indices($receiver);
-        tmp$_4 = tmp$_3.first;
-        tmp$_5 = tmp$_3.last;
-        tmp$_6 = tmp$_3.step;
-        for (var index_0 = tmp$_4; index_0 <= tmp$_5; index_0 += tmp$_6) {
-          if (Kotlin.equals(element, $receiver[index_0])) {
+        for (var index_0 = 0; index_0 !== $receiver.length; ++index_0) {
+          if (equals(element, $receiver[index_0])) {
             return index_0;
           }
         }
@@ -4585,12 +5050,7 @@
       return -1;
     }
     function indexOf_0($receiver, element) {
-      var tmp$, tmp$_0, tmp$_1, tmp$_2;
-      tmp$ = get_indices_0($receiver);
-      tmp$_0 = tmp$.first;
-      tmp$_1 = tmp$.last;
-      tmp$_2 = tmp$.step;
-      for (var index = tmp$_0; index <= tmp$_1; index += tmp$_2) {
+      for (var index = 0; index !== $receiver.length; ++index) {
         if (element === $receiver[index]) {
           return index;
         }
@@ -4598,12 +5058,7 @@
       return -1;
     }
     function indexOf_1($receiver, element) {
-      var tmp$, tmp$_0, tmp$_1, tmp$_2;
-      tmp$ = get_indices_1($receiver);
-      tmp$_0 = tmp$.first;
-      tmp$_1 = tmp$.last;
-      tmp$_2 = tmp$.step;
-      for (var index = tmp$_0; index <= tmp$_1; index += tmp$_2) {
+      for (var index = 0; index !== $receiver.length; ++index) {
         if (element === $receiver[index]) {
           return index;
         }
@@ -4611,12 +5066,7 @@
       return -1;
     }
     function indexOf_2($receiver, element) {
-      var tmp$, tmp$_0, tmp$_1, tmp$_2;
-      tmp$ = get_indices_2($receiver);
-      tmp$_0 = tmp$.first;
-      tmp$_1 = tmp$.last;
-      tmp$_2 = tmp$.step;
-      for (var index = tmp$_0; index <= tmp$_1; index += tmp$_2) {
+      for (var index = 0; index !== $receiver.length; ++index) {
         if (element === $receiver[index]) {
           return index;
         }
@@ -4624,25 +5074,15 @@
       return -1;
     }
     function indexOf_3($receiver, element) {
-      var tmp$, tmp$_0, tmp$_1, tmp$_2;
-      tmp$ = get_indices_3($receiver);
-      tmp$_0 = tmp$.first;
-      tmp$_1 = tmp$.last;
-      tmp$_2 = tmp$.step;
-      for (var index = tmp$_0; index <= tmp$_1; index += tmp$_2) {
-        if (Kotlin.equals(element, $receiver[index])) {
+      for (var index = 0; index !== $receiver.length; ++index) {
+        if (equals(element, $receiver[index])) {
           return index;
         }
       }
       return -1;
     }
     function indexOf_4($receiver, element) {
-      var tmp$, tmp$_0, tmp$_1, tmp$_2;
-      tmp$ = get_indices_4($receiver);
-      tmp$_0 = tmp$.first;
-      tmp$_1 = tmp$.last;
-      tmp$_2 = tmp$.step;
-      for (var index = tmp$_0; index <= tmp$_1; index += tmp$_2) {
+      for (var index = 0; index !== $receiver.length; ++index) {
         if (element === $receiver[index]) {
           return index;
         }
@@ -4650,12 +5090,7 @@
       return -1;
     }
     function indexOf_5($receiver, element) {
-      var tmp$, tmp$_0, tmp$_1, tmp$_2;
-      tmp$ = get_indices_5($receiver);
-      tmp$_0 = tmp$.first;
-      tmp$_1 = tmp$.last;
-      tmp$_2 = tmp$.step;
-      for (var index = tmp$_0; index <= tmp$_1; index += tmp$_2) {
+      for (var index = 0; index !== $receiver.length; ++index) {
         if (element === $receiver[index]) {
           return index;
         }
@@ -4663,12 +5098,7 @@
       return -1;
     }
     function indexOf_6($receiver, element) {
-      var tmp$, tmp$_0, tmp$_1, tmp$_2;
-      tmp$ = get_indices_6($receiver);
-      tmp$_0 = tmp$.first;
-      tmp$_1 = tmp$.last;
-      tmp$_2 = tmp$.step;
-      for (var index = tmp$_0; index <= tmp$_1; index += tmp$_2) {
+      for (var index = 0; index !== $receiver.length; ++index) {
         if (element === $receiver[index]) {
           return index;
         }
@@ -4676,156 +5106,81 @@
       return -1;
     }
     function indexOf_7($receiver, element) {
-      var tmp$, tmp$_0, tmp$_1, tmp$_2;
-      tmp$ = get_indices_7($receiver);
-      tmp$_0 = tmp$.first;
-      tmp$_1 = tmp$.last;
-      tmp$_2 = tmp$.step;
-      for (var index = tmp$_0; index <= tmp$_1; index += tmp$_2) {
+      for (var index = 0; index !== $receiver.length; ++index) {
         if (element === $receiver[index]) {
           return index;
         }
       }
       return -1;
     }
-    var indexOfFirst = defineInlineFunction('kotlin.kotlin.collections.indexOfFirst_sfx99b$', wrapFunction(function () {
-      var get_indices = _.kotlin.collections.get_indices_m7z4lg$;
-      return function ($receiver, predicate) {
-        var tmp$, tmp$_0, tmp$_1, tmp$_2;
-        tmp$ = get_indices($receiver);
-        tmp$_0 = tmp$.first;
-        tmp$_1 = tmp$.last;
-        tmp$_2 = tmp$.step;
-        for (var index = tmp$_0; index <= tmp$_1; index += tmp$_2) {
-          if (predicate($receiver[index])) {
-            return index;
-          }
+    var indexOfFirst = defineInlineFunction('kotlin.kotlin.collections.indexOfFirst_sfx99b$', function ($receiver, predicate) {
+      for (var index = 0; index !== $receiver.length; ++index) {
+        if (predicate($receiver[index])) {
+          return index;
         }
-        return -1;
-      };
-    }));
-    var indexOfFirst_0 = defineInlineFunction('kotlin.kotlin.collections.indexOfFirst_c3i447$', wrapFunction(function () {
-      var get_indices = _.kotlin.collections.get_indices_964n91$;
-      return function ($receiver, predicate) {
-        var tmp$, tmp$_0, tmp$_1, tmp$_2;
-        tmp$ = get_indices($receiver);
-        tmp$_0 = tmp$.first;
-        tmp$_1 = tmp$.last;
-        tmp$_2 = tmp$.step;
-        for (var index = tmp$_0; index <= tmp$_1; index += tmp$_2) {
-          if (predicate($receiver[index])) {
-            return index;
-          }
+      }
+      return -1;
+    });
+    var indexOfFirst_0 = defineInlineFunction('kotlin.kotlin.collections.indexOfFirst_c3i447$', function ($receiver, predicate) {
+      for (var index = 0; index !== $receiver.length; ++index) {
+        if (predicate($receiver[index])) {
+          return index;
         }
-        return -1;
-      };
-    }));
-    var indexOfFirst_1 = defineInlineFunction('kotlin.kotlin.collections.indexOfFirst_247xw3$', wrapFunction(function () {
-      var get_indices = _.kotlin.collections.get_indices_i2lc79$;
-      return function ($receiver, predicate) {
-        var tmp$, tmp$_0, tmp$_1, tmp$_2;
-        tmp$ = get_indices($receiver);
-        tmp$_0 = tmp$.first;
-        tmp$_1 = tmp$.last;
-        tmp$_2 = tmp$.step;
-        for (var index = tmp$_0; index <= tmp$_1; index += tmp$_2) {
-          if (predicate($receiver[index])) {
-            return index;
-          }
+      }
+      return -1;
+    });
+    var indexOfFirst_1 = defineInlineFunction('kotlin.kotlin.collections.indexOfFirst_247xw3$', function ($receiver, predicate) {
+      for (var index = 0; index !== $receiver.length; ++index) {
+        if (predicate($receiver[index])) {
+          return index;
         }
-        return -1;
-      };
-    }));
-    var indexOfFirst_2 = defineInlineFunction('kotlin.kotlin.collections.indexOfFirst_il4kyb$', wrapFunction(function () {
-      var get_indices = _.kotlin.collections.get_indices_tmsbgo$;
-      return function ($receiver, predicate) {
-        var tmp$, tmp$_0, tmp$_1, tmp$_2;
-        tmp$ = get_indices($receiver);
-        tmp$_0 = tmp$.first;
-        tmp$_1 = tmp$.last;
-        tmp$_2 = tmp$.step;
-        for (var index = tmp$_0; index <= tmp$_1; index += tmp$_2) {
-          if (predicate($receiver[index])) {
-            return index;
-          }
+      }
+      return -1;
+    });
+    var indexOfFirst_2 = defineInlineFunction('kotlin.kotlin.collections.indexOfFirst_il4kyb$', function ($receiver, predicate) {
+      for (var index = 0; index !== $receiver.length; ++index) {
+        if (predicate($receiver[index])) {
+          return index;
         }
-        return -1;
-      };
-    }));
-    var indexOfFirst_3 = defineInlineFunction('kotlin.kotlin.collections.indexOfFirst_i1oc7r$', wrapFunction(function () {
-      var get_indices = _.kotlin.collections.get_indices_se6h4x$;
-      return function ($receiver, predicate) {
-        var tmp$, tmp$_0, tmp$_1, tmp$_2;
-        tmp$ = get_indices($receiver);
-        tmp$_0 = tmp$.first;
-        tmp$_1 = tmp$.last;
-        tmp$_2 = tmp$.step;
-        for (var index = tmp$_0; index <= tmp$_1; index += tmp$_2) {
-          if (predicate($receiver[index])) {
-            return index;
-          }
+      }
+      return -1;
+    });
+    var indexOfFirst_3 = defineInlineFunction('kotlin.kotlin.collections.indexOfFirst_i1oc7r$', function ($receiver, predicate) {
+      for (var index = 0; index !== $receiver.length; ++index) {
+        if (predicate($receiver[index])) {
+          return index;
         }
-        return -1;
-      };
-    }));
-    var indexOfFirst_4 = defineInlineFunction('kotlin.kotlin.collections.indexOfFirst_u4nq1f$', wrapFunction(function () {
-      var get_indices = _.kotlin.collections.get_indices_rjqryz$;
-      return function ($receiver, predicate) {
-        var tmp$, tmp$_0, tmp$_1, tmp$_2;
-        tmp$ = get_indices($receiver);
-        tmp$_0 = tmp$.first;
-        tmp$_1 = tmp$.last;
-        tmp$_2 = tmp$.step;
-        for (var index = tmp$_0; index <= tmp$_1; index += tmp$_2) {
-          if (predicate($receiver[index])) {
-            return index;
-          }
+      }
+      return -1;
+    });
+    var indexOfFirst_4 = defineInlineFunction('kotlin.kotlin.collections.indexOfFirst_u4nq1f$', function ($receiver, predicate) {
+      for (var index = 0; index !== $receiver.length; ++index) {
+        if (predicate($receiver[index])) {
+          return index;
         }
-        return -1;
-      };
-    }));
-    var indexOfFirst_5 = defineInlineFunction('kotlin.kotlin.collections.indexOfFirst_3vq27r$', wrapFunction(function () {
-      var get_indices = _.kotlin.collections.get_indices_bvy38s$;
-      return function ($receiver, predicate) {
-        var tmp$, tmp$_0, tmp$_1, tmp$_2;
-        tmp$ = get_indices($receiver);
-        tmp$_0 = tmp$.first;
-        tmp$_1 = tmp$.last;
-        tmp$_2 = tmp$.step;
-        for (var index = tmp$_0; index <= tmp$_1; index += tmp$_2) {
-          if (predicate($receiver[index])) {
-            return index;
-          }
+      }
+      return -1;
+    });
+    var indexOfFirst_5 = defineInlineFunction('kotlin.kotlin.collections.indexOfFirst_3vq27r$', function ($receiver, predicate) {
+      for (var index = 0; index !== $receiver.length; ++index) {
+        if (predicate($receiver[index])) {
+          return index;
         }
-        return -1;
-      };
-    }));
-    var indexOfFirst_6 = defineInlineFunction('kotlin.kotlin.collections.indexOfFirst_xffwn9$', wrapFunction(function () {
-      var get_indices = _.kotlin.collections.get_indices_l1lu5t$;
-      return function ($receiver, predicate) {
-        var tmp$, tmp$_0, tmp$_1, tmp$_2;
-        tmp$ = get_indices($receiver);
-        tmp$_0 = tmp$.first;
-        tmp$_1 = tmp$.last;
-        tmp$_2 = tmp$.step;
-        for (var index = tmp$_0; index <= tmp$_1; index += tmp$_2) {
-          if (predicate($receiver[index])) {
-            return index;
-          }
+      }
+      return -1;
+    });
+    var indexOfFirst_6 = defineInlineFunction('kotlin.kotlin.collections.indexOfFirst_xffwn9$', function ($receiver, predicate) {
+      for (var index = 0; index !== $receiver.length; ++index) {
+        if (predicate($receiver[index])) {
+          return index;
         }
-        return -1;
-      };
-    }));
+      }
+      return -1;
+    });
     var indexOfFirst_7 = defineInlineFunction('kotlin.kotlin.collections.indexOfFirst_3ji0pj$', wrapFunction(function () {
-      var get_indices = _.kotlin.collections.get_indices_355ntz$;
       var toBoxedChar = Kotlin.toBoxedChar;
       return function ($receiver, predicate) {
-        var tmp$, tmp$_0, tmp$_1, tmp$_2;
-        tmp$ = get_indices($receiver);
-        tmp$_0 = tmp$.first;
-        tmp$_1 = tmp$.last;
-        tmp$_2 = tmp$.step;
-        for (var index = tmp$_0; index <= tmp$_1; index += tmp$_2) {
+        for (var index = 0; index !== $receiver.length; ++index) {
           if (predicate(toBoxedChar($receiver[index]))) {
             return index;
           }
@@ -5174,7 +5529,7 @@
         tmp$_0 = reversed_8(get_indices($receiver)).iterator();
         while (tmp$_0.hasNext()) {
           var index_0 = tmp$_0.next();
-          if (Kotlin.equals(element, $receiver[index_0])) {
+          if (equals(element, $receiver[index_0])) {
             return index_0;
           }
         }
@@ -5219,7 +5574,7 @@
       tmp$ = reversed_8(get_indices_3($receiver)).iterator();
       while (tmp$.hasNext()) {
         var index = tmp$.next();
-        if (Kotlin.equals(element, $receiver[index])) {
+        if (equals(element, $receiver[index])) {
           return index;
         }
       }
@@ -5434,98 +5789,117 @@
     }));
     function single($receiver) {
       var tmp$;
-      if ($receiver.length === 0)
-        throw new NoSuchElementException('Array is empty.');
-      else if ($receiver.length === 1)
-        tmp$ = $receiver[0];
-      else
-        throw new IllegalArgumentException('Array has more than one element.');
+      switch ($receiver.length) {
+        case 0:
+          throw new NoSuchElementException('Array is empty.');
+        case 1:
+          tmp$ = $receiver[0];
+          break;
+        default:throw IllegalArgumentException_init_0('Array has more than one element.');
+      }
       return tmp$;
     }
     function single_0($receiver) {
       var tmp$;
-      if ($receiver.length === 0)
-        throw new NoSuchElementException('Array is empty.');
-      else if ($receiver.length === 1)
-        tmp$ = $receiver[0];
-      else
-        throw new IllegalArgumentException('Array has more than one element.');
+      switch ($receiver.length) {
+        case 0:
+          throw new NoSuchElementException('Array is empty.');
+        case 1:
+          tmp$ = $receiver[0];
+          break;
+        default:throw IllegalArgumentException_init_0('Array has more than one element.');
+      }
       return tmp$;
     }
     function single_1($receiver) {
       var tmp$;
-      if ($receiver.length === 0)
-        throw new NoSuchElementException('Array is empty.');
-      else if ($receiver.length === 1)
-        tmp$ = $receiver[0];
-      else
-        throw new IllegalArgumentException('Array has more than one element.');
+      switch ($receiver.length) {
+        case 0:
+          throw new NoSuchElementException('Array is empty.');
+        case 1:
+          tmp$ = $receiver[0];
+          break;
+        default:throw IllegalArgumentException_init_0('Array has more than one element.');
+      }
       return tmp$;
     }
     function single_2($receiver) {
       var tmp$;
-      if ($receiver.length === 0)
-        throw new NoSuchElementException('Array is empty.');
-      else if ($receiver.length === 1)
-        tmp$ = $receiver[0];
-      else
-        throw new IllegalArgumentException('Array has more than one element.');
+      switch ($receiver.length) {
+        case 0:
+          throw new NoSuchElementException('Array is empty.');
+        case 1:
+          tmp$ = $receiver[0];
+          break;
+        default:throw IllegalArgumentException_init_0('Array has more than one element.');
+      }
       return tmp$;
     }
     function single_3($receiver) {
       var tmp$;
-      if ($receiver.length === 0)
-        throw new NoSuchElementException('Array is empty.');
-      else if ($receiver.length === 1)
-        tmp$ = $receiver[0];
-      else
-        throw new IllegalArgumentException('Array has more than one element.');
+      switch ($receiver.length) {
+        case 0:
+          throw new NoSuchElementException('Array is empty.');
+        case 1:
+          tmp$ = $receiver[0];
+          break;
+        default:throw IllegalArgumentException_init_0('Array has more than one element.');
+      }
       return tmp$;
     }
     function single_4($receiver) {
       var tmp$;
-      if ($receiver.length === 0)
-        throw new NoSuchElementException('Array is empty.');
-      else if ($receiver.length === 1)
-        tmp$ = $receiver[0];
-      else
-        throw new IllegalArgumentException('Array has more than one element.');
+      switch ($receiver.length) {
+        case 0:
+          throw new NoSuchElementException('Array is empty.');
+        case 1:
+          tmp$ = $receiver[0];
+          break;
+        default:throw IllegalArgumentException_init_0('Array has more than one element.');
+      }
       return tmp$;
     }
     function single_5($receiver) {
       var tmp$;
-      if ($receiver.length === 0)
-        throw new NoSuchElementException('Array is empty.');
-      else if ($receiver.length === 1)
-        tmp$ = $receiver[0];
-      else
-        throw new IllegalArgumentException('Array has more than one element.');
+      switch ($receiver.length) {
+        case 0:
+          throw new NoSuchElementException('Array is empty.');
+        case 1:
+          tmp$ = $receiver[0];
+          break;
+        default:throw IllegalArgumentException_init_0('Array has more than one element.');
+      }
       return tmp$;
     }
     function single_6($receiver) {
       var tmp$;
-      if ($receiver.length === 0)
-        throw new NoSuchElementException('Array is empty.');
-      else if ($receiver.length === 1)
-        tmp$ = $receiver[0];
-      else
-        throw new IllegalArgumentException('Array has more than one element.');
+      switch ($receiver.length) {
+        case 0:
+          throw new NoSuchElementException('Array is empty.');
+        case 1:
+          tmp$ = $receiver[0];
+          break;
+        default:throw IllegalArgumentException_init_0('Array has more than one element.');
+      }
       return tmp$;
     }
     function single_7($receiver) {
       var tmp$;
-      if ($receiver.length === 0)
-        throw new NoSuchElementException('Array is empty.');
-      else if ($receiver.length === 1)
-        tmp$ = $receiver[0];
-      else
-        throw new IllegalArgumentException('Array has more than one element.');
+      switch ($receiver.length) {
+        case 0:
+          throw new NoSuchElementException('Array is empty.');
+        case 1:
+          tmp$ = $receiver[0];
+          break;
+        default:throw IllegalArgumentException_init_0('Array has more than one element.');
+      }
       return tmp$;
     }
     var single_8 = defineInlineFunction('kotlin.kotlin.collections.single_sfx99b$', wrapFunction(function () {
-      var IllegalArgumentException_init = _.kotlin.IllegalArgumentException;
+      var IllegalArgumentException_init = _.kotlin.IllegalArgumentException_init_pdl1vj$;
       var NoSuchElementException_init = _.kotlin.NoSuchElementException;
       var Any = Object;
+      var throwCCE = Kotlin.throwCCE;
       return function ($receiver, predicate) {
         var tmp$, tmp$_0;
         var single = null;
@@ -5534,19 +5908,20 @@
           var element = $receiver[tmp$];
           if (predicate(element)) {
             if (found)
-              throw new IllegalArgumentException_init('Array contains more than one matching element.');
+              throw IllegalArgumentException_init('Array contains more than one matching element.');
             single = element;
             found = true;
           }
         }
         if (!found)
           throw new NoSuchElementException_init('Array contains no element matching the predicate.');
-        return (tmp$_0 = single) == null || Kotlin.isType(tmp$_0, Any) ? tmp$_0 : Kotlin.throwCCE();
+        return (tmp$_0 = single) == null || Kotlin.isType(tmp$_0, Any) ? tmp$_0 : throwCCE();
       };
     }));
     var single_9 = defineInlineFunction('kotlin.kotlin.collections.single_c3i447$', wrapFunction(function () {
-      var IllegalArgumentException_init = _.kotlin.IllegalArgumentException;
+      var IllegalArgumentException_init = _.kotlin.IllegalArgumentException_init_pdl1vj$;
       var NoSuchElementException_init = _.kotlin.NoSuchElementException;
+      var throwCCE = Kotlin.throwCCE;
       return function ($receiver, predicate) {
         var tmp$, tmp$_0;
         var single = null;
@@ -5555,19 +5930,20 @@
           var element = $receiver[tmp$];
           if (predicate(element)) {
             if (found)
-              throw new IllegalArgumentException_init('Array contains more than one matching element.');
+              throw IllegalArgumentException_init('Array contains more than one matching element.');
             single = element;
             found = true;
           }
         }
         if (!found)
           throw new NoSuchElementException_init('Array contains no element matching the predicate.');
-        return typeof (tmp$_0 = single) === 'number' ? tmp$_0 : Kotlin.throwCCE();
+        return typeof (tmp$_0 = single) === 'number' ? tmp$_0 : throwCCE();
       };
     }));
     var single_10 = defineInlineFunction('kotlin.kotlin.collections.single_247xw3$', wrapFunction(function () {
-      var IllegalArgumentException_init = _.kotlin.IllegalArgumentException;
+      var IllegalArgumentException_init = _.kotlin.IllegalArgumentException_init_pdl1vj$;
       var NoSuchElementException_init = _.kotlin.NoSuchElementException;
+      var throwCCE = Kotlin.throwCCE;
       return function ($receiver, predicate) {
         var tmp$, tmp$_0;
         var single = null;
@@ -5576,19 +5952,20 @@
           var element = $receiver[tmp$];
           if (predicate(element)) {
             if (found)
-              throw new IllegalArgumentException_init('Array contains more than one matching element.');
+              throw IllegalArgumentException_init('Array contains more than one matching element.');
             single = element;
             found = true;
           }
         }
         if (!found)
           throw new NoSuchElementException_init('Array contains no element matching the predicate.');
-        return typeof (tmp$_0 = single) === 'number' ? tmp$_0 : Kotlin.throwCCE();
+        return typeof (tmp$_0 = single) === 'number' ? tmp$_0 : throwCCE();
       };
     }));
     var single_11 = defineInlineFunction('kotlin.kotlin.collections.single_il4kyb$', wrapFunction(function () {
-      var IllegalArgumentException_init = _.kotlin.IllegalArgumentException;
+      var IllegalArgumentException_init = _.kotlin.IllegalArgumentException_init_pdl1vj$;
       var NoSuchElementException_init = _.kotlin.NoSuchElementException;
+      var throwCCE = Kotlin.throwCCE;
       return function ($receiver, predicate) {
         var tmp$, tmp$_0;
         var single = null;
@@ -5597,19 +5974,20 @@
           var element = $receiver[tmp$];
           if (predicate(element)) {
             if (found)
-              throw new IllegalArgumentException_init('Array contains more than one matching element.');
+              throw IllegalArgumentException_init('Array contains more than one matching element.');
             single = element;
             found = true;
           }
         }
         if (!found)
           throw new NoSuchElementException_init('Array contains no element matching the predicate.');
-        return typeof (tmp$_0 = single) === 'number' ? tmp$_0 : Kotlin.throwCCE();
+        return typeof (tmp$_0 = single) === 'number' ? tmp$_0 : throwCCE();
       };
     }));
     var single_12 = defineInlineFunction('kotlin.kotlin.collections.single_i1oc7r$', wrapFunction(function () {
-      var IllegalArgumentException_init = _.kotlin.IllegalArgumentException;
+      var IllegalArgumentException_init = _.kotlin.IllegalArgumentException_init_pdl1vj$;
       var NoSuchElementException_init = _.kotlin.NoSuchElementException;
+      var throwCCE = Kotlin.throwCCE;
       return function ($receiver, predicate) {
         var tmp$, tmp$_0;
         var single = null;
@@ -5618,19 +5996,20 @@
           var element = $receiver[tmp$];
           if (predicate(element)) {
             if (found)
-              throw new IllegalArgumentException_init('Array contains more than one matching element.');
+              throw IllegalArgumentException_init('Array contains more than one matching element.');
             single = element;
             found = true;
           }
         }
         if (!found)
           throw new NoSuchElementException_init('Array contains no element matching the predicate.');
-        return Kotlin.isType(tmp$_0 = single, Kotlin.Long) ? tmp$_0 : Kotlin.throwCCE();
+        return Kotlin.isType(tmp$_0 = single, Kotlin.Long) ? tmp$_0 : throwCCE();
       };
     }));
     var single_13 = defineInlineFunction('kotlin.kotlin.collections.single_u4nq1f$', wrapFunction(function () {
-      var IllegalArgumentException_init = _.kotlin.IllegalArgumentException;
+      var IllegalArgumentException_init = _.kotlin.IllegalArgumentException_init_pdl1vj$;
       var NoSuchElementException_init = _.kotlin.NoSuchElementException;
+      var throwCCE = Kotlin.throwCCE;
       return function ($receiver, predicate) {
         var tmp$, tmp$_0;
         var single = null;
@@ -5639,19 +6018,20 @@
           var element = $receiver[tmp$];
           if (predicate(element)) {
             if (found)
-              throw new IllegalArgumentException_init('Array contains more than one matching element.');
+              throw IllegalArgumentException_init('Array contains more than one matching element.');
             single = element;
             found = true;
           }
         }
         if (!found)
           throw new NoSuchElementException_init('Array contains no element matching the predicate.');
-        return typeof (tmp$_0 = single) === 'number' ? tmp$_0 : Kotlin.throwCCE();
+        return typeof (tmp$_0 = single) === 'number' ? tmp$_0 : throwCCE();
       };
     }));
     var single_14 = defineInlineFunction('kotlin.kotlin.collections.single_3vq27r$', wrapFunction(function () {
-      var IllegalArgumentException_init = _.kotlin.IllegalArgumentException;
+      var IllegalArgumentException_init = _.kotlin.IllegalArgumentException_init_pdl1vj$;
       var NoSuchElementException_init = _.kotlin.NoSuchElementException;
+      var throwCCE = Kotlin.throwCCE;
       return function ($receiver, predicate) {
         var tmp$, tmp$_0;
         var single = null;
@@ -5660,19 +6040,20 @@
           var element = $receiver[tmp$];
           if (predicate(element)) {
             if (found)
-              throw new IllegalArgumentException_init('Array contains more than one matching element.');
+              throw IllegalArgumentException_init('Array contains more than one matching element.');
             single = element;
             found = true;
           }
         }
         if (!found)
           throw new NoSuchElementException_init('Array contains no element matching the predicate.');
-        return typeof (tmp$_0 = single) === 'number' ? tmp$_0 : Kotlin.throwCCE();
+        return typeof (tmp$_0 = single) === 'number' ? tmp$_0 : throwCCE();
       };
     }));
     var single_15 = defineInlineFunction('kotlin.kotlin.collections.single_xffwn9$', wrapFunction(function () {
-      var IllegalArgumentException_init = _.kotlin.IllegalArgumentException;
+      var IllegalArgumentException_init = _.kotlin.IllegalArgumentException_init_pdl1vj$;
       var NoSuchElementException_init = _.kotlin.NoSuchElementException;
+      var throwCCE = Kotlin.throwCCE;
       return function ($receiver, predicate) {
         var tmp$, tmp$_0;
         var single = null;
@@ -5681,21 +6062,22 @@
           var element = $receiver[tmp$];
           if (predicate(element)) {
             if (found)
-              throw new IllegalArgumentException_init('Array contains more than one matching element.');
+              throw IllegalArgumentException_init('Array contains more than one matching element.');
             single = element;
             found = true;
           }
         }
         if (!found)
           throw new NoSuchElementException_init('Array contains no element matching the predicate.');
-        return typeof (tmp$_0 = single) === 'boolean' ? tmp$_0 : Kotlin.throwCCE();
+        return typeof (tmp$_0 = single) === 'boolean' ? tmp$_0 : throwCCE();
       };
     }));
     var single_16 = defineInlineFunction('kotlin.kotlin.collections.single_3ji0pj$', wrapFunction(function () {
       var toBoxedChar = Kotlin.toBoxedChar;
-      var IllegalArgumentException_init = _.kotlin.IllegalArgumentException;
+      var IllegalArgumentException_init = _.kotlin.IllegalArgumentException_init_pdl1vj$;
       var unboxChar = Kotlin.unboxChar;
       var NoSuchElementException_init = _.kotlin.NoSuchElementException;
+      var throwCCE = Kotlin.throwCCE;
       return function ($receiver, predicate) {
         var tmp$, tmp$_0;
         var single = null;
@@ -5704,14 +6086,14 @@
           var element = unboxChar($receiver[tmp$]);
           if (predicate(toBoxedChar(element))) {
             if (found)
-              throw new IllegalArgumentException_init('Array contains more than one matching element.');
+              throw IllegalArgumentException_init('Array contains more than one matching element.');
             single = element;
             found = true;
           }
         }
         if (!found)
           throw new NoSuchElementException_init('Array contains no element matching the predicate.');
-        return unboxChar(Kotlin.isChar(tmp$_0 = toBoxedChar(single)) ? tmp$_0 : Kotlin.throwCCE());
+        return unboxChar(Kotlin.isChar(tmp$_0 = toBoxedChar(single)) ? tmp$_0 : throwCCE());
       };
     }));
     function singleOrNull($receiver) {
@@ -5901,126 +6283,126 @@
     function drop($receiver, n) {
       if (!(n >= 0)) {
         var message = 'Requested element count ' + n + ' is less than zero.';
-        throw new IllegalArgumentException(message.toString());
+        throw IllegalArgumentException_init_0(message.toString());
       }
       return takeLast($receiver, coerceAtLeast_2($receiver.length - n | 0, 0));
     }
     function drop_0($receiver, n) {
       if (!(n >= 0)) {
         var message = 'Requested element count ' + n + ' is less than zero.';
-        throw new IllegalArgumentException(message.toString());
+        throw IllegalArgumentException_init_0(message.toString());
       }
       return takeLast_0($receiver, coerceAtLeast_2($receiver.length - n | 0, 0));
     }
     function drop_1($receiver, n) {
       if (!(n >= 0)) {
         var message = 'Requested element count ' + n + ' is less than zero.';
-        throw new IllegalArgumentException(message.toString());
+        throw IllegalArgumentException_init_0(message.toString());
       }
       return takeLast_1($receiver, coerceAtLeast_2($receiver.length - n | 0, 0));
     }
     function drop_2($receiver, n) {
       if (!(n >= 0)) {
         var message = 'Requested element count ' + n + ' is less than zero.';
-        throw new IllegalArgumentException(message.toString());
+        throw IllegalArgumentException_init_0(message.toString());
       }
       return takeLast_2($receiver, coerceAtLeast_2($receiver.length - n | 0, 0));
     }
     function drop_3($receiver, n) {
       if (!(n >= 0)) {
         var message = 'Requested element count ' + n + ' is less than zero.';
-        throw new IllegalArgumentException(message.toString());
+        throw IllegalArgumentException_init_0(message.toString());
       }
       return takeLast_3($receiver, coerceAtLeast_2($receiver.length - n | 0, 0));
     }
     function drop_4($receiver, n) {
       if (!(n >= 0)) {
         var message = 'Requested element count ' + n + ' is less than zero.';
-        throw new IllegalArgumentException(message.toString());
+        throw IllegalArgumentException_init_0(message.toString());
       }
       return takeLast_4($receiver, coerceAtLeast_2($receiver.length - n | 0, 0));
     }
     function drop_5($receiver, n) {
       if (!(n >= 0)) {
         var message = 'Requested element count ' + n + ' is less than zero.';
-        throw new IllegalArgumentException(message.toString());
+        throw IllegalArgumentException_init_0(message.toString());
       }
       return takeLast_5($receiver, coerceAtLeast_2($receiver.length - n | 0, 0));
     }
     function drop_6($receiver, n) {
       if (!(n >= 0)) {
         var message = 'Requested element count ' + n + ' is less than zero.';
-        throw new IllegalArgumentException(message.toString());
+        throw IllegalArgumentException_init_0(message.toString());
       }
       return takeLast_6($receiver, coerceAtLeast_2($receiver.length - n | 0, 0));
     }
     function drop_7($receiver, n) {
       if (!(n >= 0)) {
         var message = 'Requested element count ' + n + ' is less than zero.';
-        throw new IllegalArgumentException(message.toString());
+        throw IllegalArgumentException_init_0(message.toString());
       }
       return takeLast_7($receiver, coerceAtLeast_2($receiver.length - n | 0, 0));
     }
     function dropLast($receiver, n) {
       if (!(n >= 0)) {
         var message = 'Requested element count ' + n + ' is less than zero.';
-        throw new IllegalArgumentException(message.toString());
+        throw IllegalArgumentException_init_0(message.toString());
       }
       return take($receiver, coerceAtLeast_2($receiver.length - n | 0, 0));
     }
     function dropLast_0($receiver, n) {
       if (!(n >= 0)) {
         var message = 'Requested element count ' + n + ' is less than zero.';
-        throw new IllegalArgumentException(message.toString());
+        throw IllegalArgumentException_init_0(message.toString());
       }
       return take_0($receiver, coerceAtLeast_2($receiver.length - n | 0, 0));
     }
     function dropLast_1($receiver, n) {
       if (!(n >= 0)) {
         var message = 'Requested element count ' + n + ' is less than zero.';
-        throw new IllegalArgumentException(message.toString());
+        throw IllegalArgumentException_init_0(message.toString());
       }
       return take_1($receiver, coerceAtLeast_2($receiver.length - n | 0, 0));
     }
     function dropLast_2($receiver, n) {
       if (!(n >= 0)) {
         var message = 'Requested element count ' + n + ' is less than zero.';
-        throw new IllegalArgumentException(message.toString());
+        throw IllegalArgumentException_init_0(message.toString());
       }
       return take_2($receiver, coerceAtLeast_2($receiver.length - n | 0, 0));
     }
     function dropLast_3($receiver, n) {
       if (!(n >= 0)) {
         var message = 'Requested element count ' + n + ' is less than zero.';
-        throw new IllegalArgumentException(message.toString());
+        throw IllegalArgumentException_init_0(message.toString());
       }
       return take_3($receiver, coerceAtLeast_2($receiver.length - n | 0, 0));
     }
     function dropLast_4($receiver, n) {
       if (!(n >= 0)) {
         var message = 'Requested element count ' + n + ' is less than zero.';
-        throw new IllegalArgumentException(message.toString());
+        throw IllegalArgumentException_init_0(message.toString());
       }
       return take_4($receiver, coerceAtLeast_2($receiver.length - n | 0, 0));
     }
     function dropLast_5($receiver, n) {
       if (!(n >= 0)) {
         var message = 'Requested element count ' + n + ' is less than zero.';
-        throw new IllegalArgumentException(message.toString());
+        throw IllegalArgumentException_init_0(message.toString());
       }
       return take_5($receiver, coerceAtLeast_2($receiver.length - n | 0, 0));
     }
     function dropLast_6($receiver, n) {
       if (!(n >= 0)) {
         var message = 'Requested element count ' + n + ' is less than zero.';
-        throw new IllegalArgumentException(message.toString());
+        throw IllegalArgumentException_init_0(message.toString());
       }
       return take_6($receiver, coerceAtLeast_2($receiver.length - n | 0, 0));
     }
     function dropLast_7($receiver, n) {
       if (!(n >= 0)) {
         var message = 'Requested element count ' + n + ' is less than zero.';
-        throw new IllegalArgumentException(message.toString());
+        throw IllegalArgumentException_init_0(message.toString());
       }
       return take_7($receiver, coerceAtLeast_2($receiver.length - n | 0, 0));
     }
@@ -7163,7 +7545,7 @@
     }
     function sliceArray($receiver, indices) {
       var tmp$, tmp$_0;
-      var result = Kotlin.newArray($receiver, indices.size, null);
+      var result = arrayOfNulls($receiver, indices.size);
       var targetIndex = 0;
       tmp$ = indices.iterator();
       while (tmp$.hasNext()) {
@@ -7310,7 +7692,7 @@
       var tmp$, tmp$_0;
       if (!(n >= 0)) {
         var message = 'Requested element count ' + n + ' is less than zero.';
-        throw new IllegalArgumentException(message.toString());
+        throw IllegalArgumentException_init_0(message.toString());
       }
       if (n === 0)
         return emptyList();
@@ -7332,7 +7714,7 @@
       var tmp$, tmp$_0;
       if (!(n >= 0)) {
         var message = 'Requested element count ' + n + ' is less than zero.';
-        throw new IllegalArgumentException(message.toString());
+        throw IllegalArgumentException_init_0(message.toString());
       }
       if (n === 0)
         return emptyList();
@@ -7354,7 +7736,7 @@
       var tmp$, tmp$_0;
       if (!(n >= 0)) {
         var message = 'Requested element count ' + n + ' is less than zero.';
-        throw new IllegalArgumentException(message.toString());
+        throw IllegalArgumentException_init_0(message.toString());
       }
       if (n === 0)
         return emptyList();
@@ -7376,7 +7758,7 @@
       var tmp$, tmp$_0;
       if (!(n >= 0)) {
         var message = 'Requested element count ' + n + ' is less than zero.';
-        throw new IllegalArgumentException(message.toString());
+        throw IllegalArgumentException_init_0(message.toString());
       }
       if (n === 0)
         return emptyList();
@@ -7398,7 +7780,7 @@
       var tmp$, tmp$_0;
       if (!(n >= 0)) {
         var message = 'Requested element count ' + n + ' is less than zero.';
-        throw new IllegalArgumentException(message.toString());
+        throw IllegalArgumentException_init_0(message.toString());
       }
       if (n === 0)
         return emptyList();
@@ -7420,7 +7802,7 @@
       var tmp$, tmp$_0;
       if (!(n >= 0)) {
         var message = 'Requested element count ' + n + ' is less than zero.';
-        throw new IllegalArgumentException(message.toString());
+        throw IllegalArgumentException_init_0(message.toString());
       }
       if (n === 0)
         return emptyList();
@@ -7442,7 +7824,7 @@
       var tmp$, tmp$_0;
       if (!(n >= 0)) {
         var message = 'Requested element count ' + n + ' is less than zero.';
-        throw new IllegalArgumentException(message.toString());
+        throw IllegalArgumentException_init_0(message.toString());
       }
       if (n === 0)
         return emptyList();
@@ -7464,7 +7846,7 @@
       var tmp$, tmp$_0;
       if (!(n >= 0)) {
         var message = 'Requested element count ' + n + ' is less than zero.';
-        throw new IllegalArgumentException(message.toString());
+        throw IllegalArgumentException_init_0(message.toString());
       }
       if (n === 0)
         return emptyList();
@@ -7486,7 +7868,7 @@
       var tmp$, tmp$_0;
       if (!(n >= 0)) {
         var message = 'Requested element count ' + n + ' is less than zero.';
-        throw new IllegalArgumentException(message.toString());
+        throw IllegalArgumentException_init_0(message.toString());
       }
       if (n === 0)
         return emptyList();
@@ -7508,7 +7890,7 @@
       var tmp$;
       if (!(n >= 0)) {
         var message = 'Requested element count ' + n + ' is less than zero.';
-        throw new IllegalArgumentException(message.toString());
+        throw IllegalArgumentException_init_0(message.toString());
       }
       if (n === 0)
         return emptyList();
@@ -7527,7 +7909,7 @@
       var tmp$;
       if (!(n >= 0)) {
         var message = 'Requested element count ' + n + ' is less than zero.';
-        throw new IllegalArgumentException(message.toString());
+        throw IllegalArgumentException_init_0(message.toString());
       }
       if (n === 0)
         return emptyList();
@@ -7546,7 +7928,7 @@
       var tmp$;
       if (!(n >= 0)) {
         var message = 'Requested element count ' + n + ' is less than zero.';
-        throw new IllegalArgumentException(message.toString());
+        throw IllegalArgumentException_init_0(message.toString());
       }
       if (n === 0)
         return emptyList();
@@ -7565,7 +7947,7 @@
       var tmp$;
       if (!(n >= 0)) {
         var message = 'Requested element count ' + n + ' is less than zero.';
-        throw new IllegalArgumentException(message.toString());
+        throw IllegalArgumentException_init_0(message.toString());
       }
       if (n === 0)
         return emptyList();
@@ -7584,7 +7966,7 @@
       var tmp$;
       if (!(n >= 0)) {
         var message = 'Requested element count ' + n + ' is less than zero.';
-        throw new IllegalArgumentException(message.toString());
+        throw IllegalArgumentException_init_0(message.toString());
       }
       if (n === 0)
         return emptyList();
@@ -7603,7 +7985,7 @@
       var tmp$;
       if (!(n >= 0)) {
         var message = 'Requested element count ' + n + ' is less than zero.';
-        throw new IllegalArgumentException(message.toString());
+        throw IllegalArgumentException_init_0(message.toString());
       }
       if (n === 0)
         return emptyList();
@@ -7622,7 +8004,7 @@
       var tmp$;
       if (!(n >= 0)) {
         var message = 'Requested element count ' + n + ' is less than zero.';
-        throw new IllegalArgumentException(message.toString());
+        throw IllegalArgumentException_init_0(message.toString());
       }
       if (n === 0)
         return emptyList();
@@ -7641,7 +8023,7 @@
       var tmp$;
       if (!(n >= 0)) {
         var message = 'Requested element count ' + n + ' is less than zero.';
-        throw new IllegalArgumentException(message.toString());
+        throw IllegalArgumentException_init_0(message.toString());
       }
       if (n === 0)
         return emptyList();
@@ -7660,7 +8042,7 @@
       var tmp$;
       if (!(n >= 0)) {
         var message = 'Requested element count ' + n + ' is less than zero.';
-        throw new IllegalArgumentException(message.toString());
+        throw IllegalArgumentException_init_0(message.toString());
       }
       if (n === 0)
         return emptyList();
@@ -8095,7 +8477,7 @@
     function reversedArray($receiver) {
       if ($receiver.length === 0)
         return $receiver;
-      var result = Kotlin.newArray($receiver, $receiver.length, null);
+      var result = arrayOfNulls($receiver, $receiver.length);
       var lastIndex = get_lastIndex($receiver);
       for (var i = 0; i <= lastIndex; i++)
         result[lastIndex - i | 0] = $receiver[i];
@@ -8185,6 +8567,7 @@
           };
         };
       });
+      var Kind_CLASS = Kotlin.Kind.CLASS;
       var Comparator = _.kotlin.Comparator;
       function Comparator$ObjectLiteral(closure$comparison) {
         this.closure$comparison = closure$comparison;
@@ -8192,7 +8575,7 @@
       Comparator$ObjectLiteral.prototype.compare = function (a, b) {
         return this.closure$comparison(a, b);
       };
-      Comparator$ObjectLiteral.$metadata$ = {kind: Kotlin.Kind.CLASS, interfaces: [Comparator]};
+      Comparator$ObjectLiteral.$metadata$ = {kind: Kind_CLASS, interfaces: [Comparator]};
       return function ($receiver, selector) {
         if ($receiver.length > 1) {
           sortWith($receiver, new Comparator$ObjectLiteral(compareBy$lambda(selector)));
@@ -8211,6 +8594,7 @@
           };
         };
       });
+      var Kind_CLASS = Kotlin.Kind.CLASS;
       var Comparator = _.kotlin.Comparator;
       function Comparator$ObjectLiteral(closure$comparison) {
         this.closure$comparison = closure$comparison;
@@ -8218,7 +8602,7 @@
       Comparator$ObjectLiteral.prototype.compare = function (a, b) {
         return this.closure$comparison(a, b);
       };
-      Comparator$ObjectLiteral.$metadata$ = {kind: Kotlin.Kind.CLASS, interfaces: [Comparator]};
+      Comparator$ObjectLiteral.$metadata$ = {kind: Kind_CLASS, interfaces: [Comparator]};
       return function ($receiver, selector) {
         if ($receiver.length > 1) {
           sortWith($receiver, new Comparator$ObjectLiteral(compareByDescending$lambda(selector)));
@@ -8439,6 +8823,7 @@
           };
         };
       });
+      var Kind_CLASS = Kotlin.Kind.CLASS;
       var Comparator = _.kotlin.Comparator;
       function Comparator$ObjectLiteral(closure$comparison) {
         this.closure$comparison = closure$comparison;
@@ -8446,7 +8831,7 @@
       Comparator$ObjectLiteral.prototype.compare = function (a, b) {
         return this.closure$comparison(a, b);
       };
-      Comparator$ObjectLiteral.$metadata$ = {kind: Kotlin.Kind.CLASS, interfaces: [Comparator]};
+      Comparator$ObjectLiteral.$metadata$ = {kind: Kind_CLASS, interfaces: [Comparator]};
       return function ($receiver, selector) {
         return sortedWith($receiver, new Comparator$ObjectLiteral(compareBy$lambda(selector)));
       };
@@ -8463,6 +8848,7 @@
           };
         };
       });
+      var Kind_CLASS = Kotlin.Kind.CLASS;
       var Comparator = _.kotlin.Comparator;
       function Comparator$ObjectLiteral(closure$comparison) {
         this.closure$comparison = closure$comparison;
@@ -8470,7 +8856,7 @@
       Comparator$ObjectLiteral.prototype.compare = function (a, b) {
         return this.closure$comparison(a, b);
       };
-      Comparator$ObjectLiteral.$metadata$ = {kind: Kotlin.Kind.CLASS, interfaces: [Comparator]};
+      Comparator$ObjectLiteral.$metadata$ = {kind: Kind_CLASS, interfaces: [Comparator]};
       return function ($receiver, selector) {
         return sortedWith($receiver, new Comparator$ObjectLiteral(compareBy$lambda(selector)));
       };
@@ -8487,6 +8873,7 @@
           };
         };
       });
+      var Kind_CLASS = Kotlin.Kind.CLASS;
       var Comparator = _.kotlin.Comparator;
       function Comparator$ObjectLiteral(closure$comparison) {
         this.closure$comparison = closure$comparison;
@@ -8494,7 +8881,7 @@
       Comparator$ObjectLiteral.prototype.compare = function (a, b) {
         return this.closure$comparison(a, b);
       };
-      Comparator$ObjectLiteral.$metadata$ = {kind: Kotlin.Kind.CLASS, interfaces: [Comparator]};
+      Comparator$ObjectLiteral.$metadata$ = {kind: Kind_CLASS, interfaces: [Comparator]};
       return function ($receiver, selector) {
         return sortedWith($receiver, new Comparator$ObjectLiteral(compareBy$lambda(selector)));
       };
@@ -8511,6 +8898,7 @@
           };
         };
       });
+      var Kind_CLASS = Kotlin.Kind.CLASS;
       var Comparator = _.kotlin.Comparator;
       function Comparator$ObjectLiteral(closure$comparison) {
         this.closure$comparison = closure$comparison;
@@ -8518,7 +8906,7 @@
       Comparator$ObjectLiteral.prototype.compare = function (a, b) {
         return this.closure$comparison(a, b);
       };
-      Comparator$ObjectLiteral.$metadata$ = {kind: Kotlin.Kind.CLASS, interfaces: [Comparator]};
+      Comparator$ObjectLiteral.$metadata$ = {kind: Kind_CLASS, interfaces: [Comparator]};
       return function ($receiver, selector) {
         return sortedWith($receiver, new Comparator$ObjectLiteral(compareBy$lambda(selector)));
       };
@@ -8535,6 +8923,7 @@
           };
         };
       });
+      var Kind_CLASS = Kotlin.Kind.CLASS;
       var Comparator = _.kotlin.Comparator;
       function Comparator$ObjectLiteral(closure$comparison) {
         this.closure$comparison = closure$comparison;
@@ -8542,7 +8931,7 @@
       Comparator$ObjectLiteral.prototype.compare = function (a, b) {
         return this.closure$comparison(a, b);
       };
-      Comparator$ObjectLiteral.$metadata$ = {kind: Kotlin.Kind.CLASS, interfaces: [Comparator]};
+      Comparator$ObjectLiteral.$metadata$ = {kind: Kind_CLASS, interfaces: [Comparator]};
       return function ($receiver, selector) {
         return sortedWith($receiver, new Comparator$ObjectLiteral(compareBy$lambda(selector)));
       };
@@ -8559,6 +8948,7 @@
           };
         };
       });
+      var Kind_CLASS = Kotlin.Kind.CLASS;
       var Comparator = _.kotlin.Comparator;
       function Comparator$ObjectLiteral(closure$comparison) {
         this.closure$comparison = closure$comparison;
@@ -8566,7 +8956,7 @@
       Comparator$ObjectLiteral.prototype.compare = function (a, b) {
         return this.closure$comparison(a, b);
       };
-      Comparator$ObjectLiteral.$metadata$ = {kind: Kotlin.Kind.CLASS, interfaces: [Comparator]};
+      Comparator$ObjectLiteral.$metadata$ = {kind: Kind_CLASS, interfaces: [Comparator]};
       return function ($receiver, selector) {
         return sortedWith($receiver, new Comparator$ObjectLiteral(compareBy$lambda(selector)));
       };
@@ -8583,6 +8973,7 @@
           };
         };
       });
+      var Kind_CLASS = Kotlin.Kind.CLASS;
       var Comparator = _.kotlin.Comparator;
       function Comparator$ObjectLiteral(closure$comparison) {
         this.closure$comparison = closure$comparison;
@@ -8590,7 +8981,7 @@
       Comparator$ObjectLiteral.prototype.compare = function (a, b) {
         return this.closure$comparison(a, b);
       };
-      Comparator$ObjectLiteral.$metadata$ = {kind: Kotlin.Kind.CLASS, interfaces: [Comparator]};
+      Comparator$ObjectLiteral.$metadata$ = {kind: Kind_CLASS, interfaces: [Comparator]};
       return function ($receiver, selector) {
         return sortedWith($receiver, new Comparator$ObjectLiteral(compareBy$lambda(selector)));
       };
@@ -8607,6 +8998,7 @@
           };
         };
       });
+      var Kind_CLASS = Kotlin.Kind.CLASS;
       var Comparator = _.kotlin.Comparator;
       function Comparator$ObjectLiteral(closure$comparison) {
         this.closure$comparison = closure$comparison;
@@ -8614,7 +9006,7 @@
       Comparator$ObjectLiteral.prototype.compare = function (a, b) {
         return this.closure$comparison(a, b);
       };
-      Comparator$ObjectLiteral.$metadata$ = {kind: Kotlin.Kind.CLASS, interfaces: [Comparator]};
+      Comparator$ObjectLiteral.$metadata$ = {kind: Kind_CLASS, interfaces: [Comparator]};
       return function ($receiver, selector) {
         return sortedWith($receiver, new Comparator$ObjectLiteral(compareBy$lambda(selector)));
       };
@@ -8631,6 +9023,7 @@
           };
         };
       });
+      var Kind_CLASS = Kotlin.Kind.CLASS;
       var Comparator = _.kotlin.Comparator;
       function Comparator$ObjectLiteral(closure$comparison) {
         this.closure$comparison = closure$comparison;
@@ -8638,7 +9031,7 @@
       Comparator$ObjectLiteral.prototype.compare = function (a, b) {
         return this.closure$comparison(a, b);
       };
-      Comparator$ObjectLiteral.$metadata$ = {kind: Kotlin.Kind.CLASS, interfaces: [Comparator]};
+      Comparator$ObjectLiteral.$metadata$ = {kind: Kind_CLASS, interfaces: [Comparator]};
       return function ($receiver, selector) {
         return sortedWith($receiver, new Comparator$ObjectLiteral(compareBy$lambda(selector)));
       };
@@ -8655,6 +9048,7 @@
           };
         };
       });
+      var Kind_CLASS = Kotlin.Kind.CLASS;
       var Comparator = _.kotlin.Comparator;
       function Comparator$ObjectLiteral(closure$comparison) {
         this.closure$comparison = closure$comparison;
@@ -8662,7 +9056,7 @@
       Comparator$ObjectLiteral.prototype.compare = function (a, b) {
         return this.closure$comparison(a, b);
       };
-      Comparator$ObjectLiteral.$metadata$ = {kind: Kotlin.Kind.CLASS, interfaces: [Comparator]};
+      Comparator$ObjectLiteral.$metadata$ = {kind: Kind_CLASS, interfaces: [Comparator]};
       return function ($receiver, selector) {
         return sortedWith($receiver, new Comparator$ObjectLiteral(compareByDescending$lambda(selector)));
       };
@@ -8679,6 +9073,7 @@
           };
         };
       });
+      var Kind_CLASS = Kotlin.Kind.CLASS;
       var Comparator = _.kotlin.Comparator;
       function Comparator$ObjectLiteral(closure$comparison) {
         this.closure$comparison = closure$comparison;
@@ -8686,7 +9081,7 @@
       Comparator$ObjectLiteral.prototype.compare = function (a, b) {
         return this.closure$comparison(a, b);
       };
-      Comparator$ObjectLiteral.$metadata$ = {kind: Kotlin.Kind.CLASS, interfaces: [Comparator]};
+      Comparator$ObjectLiteral.$metadata$ = {kind: Kind_CLASS, interfaces: [Comparator]};
       return function ($receiver, selector) {
         return sortedWith($receiver, new Comparator$ObjectLiteral(compareByDescending$lambda(selector)));
       };
@@ -8703,6 +9098,7 @@
           };
         };
       });
+      var Kind_CLASS = Kotlin.Kind.CLASS;
       var Comparator = _.kotlin.Comparator;
       function Comparator$ObjectLiteral(closure$comparison) {
         this.closure$comparison = closure$comparison;
@@ -8710,7 +9106,7 @@
       Comparator$ObjectLiteral.prototype.compare = function (a, b) {
         return this.closure$comparison(a, b);
       };
-      Comparator$ObjectLiteral.$metadata$ = {kind: Kotlin.Kind.CLASS, interfaces: [Comparator]};
+      Comparator$ObjectLiteral.$metadata$ = {kind: Kind_CLASS, interfaces: [Comparator]};
       return function ($receiver, selector) {
         return sortedWith($receiver, new Comparator$ObjectLiteral(compareByDescending$lambda(selector)));
       };
@@ -8727,6 +9123,7 @@
           };
         };
       });
+      var Kind_CLASS = Kotlin.Kind.CLASS;
       var Comparator = _.kotlin.Comparator;
       function Comparator$ObjectLiteral(closure$comparison) {
         this.closure$comparison = closure$comparison;
@@ -8734,7 +9131,7 @@
       Comparator$ObjectLiteral.prototype.compare = function (a, b) {
         return this.closure$comparison(a, b);
       };
-      Comparator$ObjectLiteral.$metadata$ = {kind: Kotlin.Kind.CLASS, interfaces: [Comparator]};
+      Comparator$ObjectLiteral.$metadata$ = {kind: Kind_CLASS, interfaces: [Comparator]};
       return function ($receiver, selector) {
         return sortedWith($receiver, new Comparator$ObjectLiteral(compareByDescending$lambda(selector)));
       };
@@ -8751,6 +9148,7 @@
           };
         };
       });
+      var Kind_CLASS = Kotlin.Kind.CLASS;
       var Comparator = _.kotlin.Comparator;
       function Comparator$ObjectLiteral(closure$comparison) {
         this.closure$comparison = closure$comparison;
@@ -8758,7 +9156,7 @@
       Comparator$ObjectLiteral.prototype.compare = function (a, b) {
         return this.closure$comparison(a, b);
       };
-      Comparator$ObjectLiteral.$metadata$ = {kind: Kotlin.Kind.CLASS, interfaces: [Comparator]};
+      Comparator$ObjectLiteral.$metadata$ = {kind: Kind_CLASS, interfaces: [Comparator]};
       return function ($receiver, selector) {
         return sortedWith($receiver, new Comparator$ObjectLiteral(compareByDescending$lambda(selector)));
       };
@@ -8775,6 +9173,7 @@
           };
         };
       });
+      var Kind_CLASS = Kotlin.Kind.CLASS;
       var Comparator = _.kotlin.Comparator;
       function Comparator$ObjectLiteral(closure$comparison) {
         this.closure$comparison = closure$comparison;
@@ -8782,7 +9181,7 @@
       Comparator$ObjectLiteral.prototype.compare = function (a, b) {
         return this.closure$comparison(a, b);
       };
-      Comparator$ObjectLiteral.$metadata$ = {kind: Kotlin.Kind.CLASS, interfaces: [Comparator]};
+      Comparator$ObjectLiteral.$metadata$ = {kind: Kind_CLASS, interfaces: [Comparator]};
       return function ($receiver, selector) {
         return sortedWith($receiver, new Comparator$ObjectLiteral(compareByDescending$lambda(selector)));
       };
@@ -8799,6 +9198,7 @@
           };
         };
       });
+      var Kind_CLASS = Kotlin.Kind.CLASS;
       var Comparator = _.kotlin.Comparator;
       function Comparator$ObjectLiteral(closure$comparison) {
         this.closure$comparison = closure$comparison;
@@ -8806,7 +9206,7 @@
       Comparator$ObjectLiteral.prototype.compare = function (a, b) {
         return this.closure$comparison(a, b);
       };
-      Comparator$ObjectLiteral.$metadata$ = {kind: Kotlin.Kind.CLASS, interfaces: [Comparator]};
+      Comparator$ObjectLiteral.$metadata$ = {kind: Kind_CLASS, interfaces: [Comparator]};
       return function ($receiver, selector) {
         return sortedWith($receiver, new Comparator$ObjectLiteral(compareByDescending$lambda(selector)));
       };
@@ -8823,6 +9223,7 @@
           };
         };
       });
+      var Kind_CLASS = Kotlin.Kind.CLASS;
       var Comparator = _.kotlin.Comparator;
       function Comparator$ObjectLiteral(closure$comparison) {
         this.closure$comparison = closure$comparison;
@@ -8830,7 +9231,7 @@
       Comparator$ObjectLiteral.prototype.compare = function (a, b) {
         return this.closure$comparison(a, b);
       };
-      Comparator$ObjectLiteral.$metadata$ = {kind: Kotlin.Kind.CLASS, interfaces: [Comparator]};
+      Comparator$ObjectLiteral.$metadata$ = {kind: Kind_CLASS, interfaces: [Comparator]};
       return function ($receiver, selector) {
         return sortedWith($receiver, new Comparator$ObjectLiteral(compareByDescending$lambda(selector)));
       };
@@ -8847,6 +9248,7 @@
           };
         };
       });
+      var Kind_CLASS = Kotlin.Kind.CLASS;
       var Comparator = _.kotlin.Comparator;
       function Comparator$ObjectLiteral(closure$comparison) {
         this.closure$comparison = closure$comparison;
@@ -8854,7 +9256,7 @@
       Comparator$ObjectLiteral.prototype.compare = function (a, b) {
         return this.closure$comparison(a, b);
       };
-      Comparator$ObjectLiteral.$metadata$ = {kind: Kotlin.Kind.CLASS, interfaces: [Comparator]};
+      Comparator$ObjectLiteral.$metadata$ = {kind: Kind_CLASS, interfaces: [Comparator]};
       return function ($receiver, selector) {
         return sortedWith($receiver, new Comparator$ObjectLiteral(compareByDescending$lambda(selector)));
       };
@@ -9049,91 +9451,59 @@
       return $receiver.length - 1 | 0;
     }
     function toBooleanArray($receiver) {
-      var tmp$, tmp$_0, tmp$_1, tmp$_2;
       var result = Kotlin.booleanArray($receiver.length);
-      tmp$ = get_indices($receiver);
-      tmp$_0 = tmp$.first;
-      tmp$_1 = tmp$.last;
-      tmp$_2 = tmp$.step;
-      for (var index = tmp$_0; index <= tmp$_1; index += tmp$_2)
+      for (var index = 0; index !== $receiver.length; ++index) {
         result[index] = $receiver[index];
+      }
       return result;
     }
     function toByteArray($receiver) {
-      var tmp$, tmp$_0, tmp$_1, tmp$_2;
       var result = new Int8Array($receiver.length);
-      tmp$ = get_indices($receiver);
-      tmp$_0 = tmp$.first;
-      tmp$_1 = tmp$.last;
-      tmp$_2 = tmp$.step;
-      for (var index = tmp$_0; index <= tmp$_1; index += tmp$_2)
+      for (var index = 0; index !== $receiver.length; ++index) {
         result[index] = $receiver[index];
+      }
       return result;
     }
     function toCharArray($receiver) {
-      var tmp$, tmp$_0, tmp$_1, tmp$_2;
       var result = Kotlin.charArray($receiver.length);
-      tmp$ = get_indices($receiver);
-      tmp$_0 = tmp$.first;
-      tmp$_1 = tmp$.last;
-      tmp$_2 = tmp$.step;
-      for (var index = tmp$_0; index <= tmp$_1; index += tmp$_2)
+      for (var index = 0; index !== $receiver.length; ++index) {
         result[index] = unboxChar($receiver[index]);
+      }
       return result;
     }
     function toDoubleArray($receiver) {
-      var tmp$, tmp$_0, tmp$_1, tmp$_2;
       var result = new Float64Array($receiver.length);
-      tmp$ = get_indices($receiver);
-      tmp$_0 = tmp$.first;
-      tmp$_1 = tmp$.last;
-      tmp$_2 = tmp$.step;
-      for (var index = tmp$_0; index <= tmp$_1; index += tmp$_2)
+      for (var index = 0; index !== $receiver.length; ++index) {
         result[index] = $receiver[index];
+      }
       return result;
     }
     function toFloatArray($receiver) {
-      var tmp$, tmp$_0, tmp$_1, tmp$_2;
       var result = new Float32Array($receiver.length);
-      tmp$ = get_indices($receiver);
-      tmp$_0 = tmp$.first;
-      tmp$_1 = tmp$.last;
-      tmp$_2 = tmp$.step;
-      for (var index = tmp$_0; index <= tmp$_1; index += tmp$_2)
+      for (var index = 0; index !== $receiver.length; ++index) {
         result[index] = $receiver[index];
+      }
       return result;
     }
     function toIntArray($receiver) {
-      var tmp$, tmp$_0, tmp$_1, tmp$_2;
       var result = new Int32Array($receiver.length);
-      tmp$ = get_indices($receiver);
-      tmp$_0 = tmp$.first;
-      tmp$_1 = tmp$.last;
-      tmp$_2 = tmp$.step;
-      for (var index = tmp$_0; index <= tmp$_1; index += tmp$_2)
+      for (var index = 0; index !== $receiver.length; ++index) {
         result[index] = $receiver[index];
+      }
       return result;
     }
     function toLongArray($receiver) {
-      var tmp$, tmp$_0, tmp$_1, tmp$_2;
       var result = Kotlin.longArray($receiver.length);
-      tmp$ = get_indices($receiver);
-      tmp$_0 = tmp$.first;
-      tmp$_1 = tmp$.last;
-      tmp$_2 = tmp$.step;
-      for (var index = tmp$_0; index <= tmp$_1; index += tmp$_2)
+      for (var index = 0; index !== $receiver.length; ++index) {
         result[index] = $receiver[index];
+      }
       return result;
     }
     function toShortArray($receiver) {
-      var tmp$, tmp$_0, tmp$_1, tmp$_2;
       var result = new Int16Array($receiver.length);
-      tmp$ = get_indices($receiver);
-      tmp$_0 = tmp$.first;
-      tmp$_1 = tmp$.last;
-      tmp$_2 = tmp$.step;
-      for (var index = tmp$_0; index <= tmp$_1; index += tmp$_2)
+      for (var index = 0; index !== $receiver.length; ++index) {
         result[index] = $receiver[index];
+      }
       return result;
     }
     var associate = defineInlineFunction('kotlin.kotlin.collections.associate_51p84z$', wrapFunction(function () {
@@ -9894,92 +10264,128 @@
     }
     function toList($receiver) {
       var tmp$;
-      if ($receiver.length === 0)
-        tmp$ = emptyList();
-      else if ($receiver.length === 1)
-        tmp$ = listOf($receiver[0]);
-      else
-        tmp$ = toMutableList($receiver);
+      switch ($receiver.length) {
+        case 0:
+          tmp$ = emptyList();
+          break;
+        case 1:
+          tmp$ = listOf($receiver[0]);
+          break;
+        default:tmp$ = toMutableList($receiver);
+          break;
+      }
       return tmp$;
     }
     function toList_0($receiver) {
       var tmp$;
-      if ($receiver.length === 0)
-        tmp$ = emptyList();
-      else if ($receiver.length === 1)
-        tmp$ = listOf($receiver[0]);
-      else
-        tmp$ = toMutableList_0($receiver);
+      switch ($receiver.length) {
+        case 0:
+          tmp$ = emptyList();
+          break;
+        case 1:
+          tmp$ = listOf($receiver[0]);
+          break;
+        default:tmp$ = toMutableList_0($receiver);
+          break;
+      }
       return tmp$;
     }
     function toList_1($receiver) {
       var tmp$;
-      if ($receiver.length === 0)
-        tmp$ = emptyList();
-      else if ($receiver.length === 1)
-        tmp$ = listOf($receiver[0]);
-      else
-        tmp$ = toMutableList_1($receiver);
+      switch ($receiver.length) {
+        case 0:
+          tmp$ = emptyList();
+          break;
+        case 1:
+          tmp$ = listOf($receiver[0]);
+          break;
+        default:tmp$ = toMutableList_1($receiver);
+          break;
+      }
       return tmp$;
     }
     function toList_2($receiver) {
       var tmp$;
-      if ($receiver.length === 0)
-        tmp$ = emptyList();
-      else if ($receiver.length === 1)
-        tmp$ = listOf($receiver[0]);
-      else
-        tmp$ = toMutableList_2($receiver);
+      switch ($receiver.length) {
+        case 0:
+          tmp$ = emptyList();
+          break;
+        case 1:
+          tmp$ = listOf($receiver[0]);
+          break;
+        default:tmp$ = toMutableList_2($receiver);
+          break;
+      }
       return tmp$;
     }
     function toList_3($receiver) {
       var tmp$;
-      if ($receiver.length === 0)
-        tmp$ = emptyList();
-      else if ($receiver.length === 1)
-        tmp$ = listOf($receiver[0]);
-      else
-        tmp$ = toMutableList_3($receiver);
+      switch ($receiver.length) {
+        case 0:
+          tmp$ = emptyList();
+          break;
+        case 1:
+          tmp$ = listOf($receiver[0]);
+          break;
+        default:tmp$ = toMutableList_3($receiver);
+          break;
+      }
       return tmp$;
     }
     function toList_4($receiver) {
       var tmp$;
-      if ($receiver.length === 0)
-        tmp$ = emptyList();
-      else if ($receiver.length === 1)
-        tmp$ = listOf($receiver[0]);
-      else
-        tmp$ = toMutableList_4($receiver);
+      switch ($receiver.length) {
+        case 0:
+          tmp$ = emptyList();
+          break;
+        case 1:
+          tmp$ = listOf($receiver[0]);
+          break;
+        default:tmp$ = toMutableList_4($receiver);
+          break;
+      }
       return tmp$;
     }
     function toList_5($receiver) {
       var tmp$;
-      if ($receiver.length === 0)
-        tmp$ = emptyList();
-      else if ($receiver.length === 1)
-        tmp$ = listOf($receiver[0]);
-      else
-        tmp$ = toMutableList_5($receiver);
+      switch ($receiver.length) {
+        case 0:
+          tmp$ = emptyList();
+          break;
+        case 1:
+          tmp$ = listOf($receiver[0]);
+          break;
+        default:tmp$ = toMutableList_5($receiver);
+          break;
+      }
       return tmp$;
     }
     function toList_6($receiver) {
       var tmp$;
-      if ($receiver.length === 0)
-        tmp$ = emptyList();
-      else if ($receiver.length === 1)
-        tmp$ = listOf($receiver[0]);
-      else
-        tmp$ = toMutableList_6($receiver);
+      switch ($receiver.length) {
+        case 0:
+          tmp$ = emptyList();
+          break;
+        case 1:
+          tmp$ = listOf($receiver[0]);
+          break;
+        default:tmp$ = toMutableList_6($receiver);
+          break;
+      }
       return tmp$;
     }
     function toList_7($receiver) {
       var tmp$;
-      if ($receiver.length === 0)
-        tmp$ = emptyList();
-      else if ($receiver.length === 1)
-        tmp$ = listOf(toBoxedChar($receiver[0]));
-      else
-        tmp$ = toMutableList_7($receiver);
+      switch ($receiver.length) {
+        case 0:
+          tmp$ = emptyList();
+          break;
+        case 1:
+          tmp$ = listOf(toBoxedChar($receiver[0]));
+          break;
+        default:tmp$ = toMutableList_7($receiver);
+          break;
+      }
       return tmp$;
     }
     function toMutableList($receiver) {
@@ -10059,92 +10465,128 @@
     }
     function toSet($receiver) {
       var tmp$;
-      if ($receiver.length === 0)
-        tmp$ = emptySet();
-      else if ($receiver.length === 1)
-        tmp$ = setOf($receiver[0]);
-      else
-        tmp$ = toCollection($receiver, LinkedHashSet_init_2(mapCapacity($receiver.length)));
+      switch ($receiver.length) {
+        case 0:
+          tmp$ = emptySet();
+          break;
+        case 1:
+          tmp$ = setOf($receiver[0]);
+          break;
+        default:tmp$ = toCollection($receiver, LinkedHashSet_init_2(mapCapacity($receiver.length)));
+          break;
+      }
       return tmp$;
     }
     function toSet_0($receiver) {
       var tmp$;
-      if ($receiver.length === 0)
-        tmp$ = emptySet();
-      else if ($receiver.length === 1)
-        tmp$ = setOf($receiver[0]);
-      else
-        tmp$ = toCollection_0($receiver, LinkedHashSet_init_2(mapCapacity($receiver.length)));
+      switch ($receiver.length) {
+        case 0:
+          tmp$ = emptySet();
+          break;
+        case 1:
+          tmp$ = setOf($receiver[0]);
+          break;
+        default:tmp$ = toCollection_0($receiver, LinkedHashSet_init_2(mapCapacity($receiver.length)));
+          break;
+      }
       return tmp$;
     }
     function toSet_1($receiver) {
       var tmp$;
-      if ($receiver.length === 0)
-        tmp$ = emptySet();
-      else if ($receiver.length === 1)
-        tmp$ = setOf($receiver[0]);
-      else
-        tmp$ = toCollection_1($receiver, LinkedHashSet_init_2(mapCapacity($receiver.length)));
+      switch ($receiver.length) {
+        case 0:
+          tmp$ = emptySet();
+          break;
+        case 1:
+          tmp$ = setOf($receiver[0]);
+          break;
+        default:tmp$ = toCollection_1($receiver, LinkedHashSet_init_2(mapCapacity($receiver.length)));
+          break;
+      }
       return tmp$;
     }
     function toSet_2($receiver) {
       var tmp$;
-      if ($receiver.length === 0)
-        tmp$ = emptySet();
-      else if ($receiver.length === 1)
-        tmp$ = setOf($receiver[0]);
-      else
-        tmp$ = toCollection_2($receiver, LinkedHashSet_init_2(mapCapacity($receiver.length)));
+      switch ($receiver.length) {
+        case 0:
+          tmp$ = emptySet();
+          break;
+        case 1:
+          tmp$ = setOf($receiver[0]);
+          break;
+        default:tmp$ = toCollection_2($receiver, LinkedHashSet_init_2(mapCapacity($receiver.length)));
+          break;
+      }
       return tmp$;
     }
     function toSet_3($receiver) {
       var tmp$;
-      if ($receiver.length === 0)
-        tmp$ = emptySet();
-      else if ($receiver.length === 1)
-        tmp$ = setOf($receiver[0]);
-      else
-        tmp$ = toCollection_3($receiver, LinkedHashSet_init_2(mapCapacity($receiver.length)));
+      switch ($receiver.length) {
+        case 0:
+          tmp$ = emptySet();
+          break;
+        case 1:
+          tmp$ = setOf($receiver[0]);
+          break;
+        default:tmp$ = toCollection_3($receiver, LinkedHashSet_init_2(mapCapacity($receiver.length)));
+          break;
+      }
       return tmp$;
     }
     function toSet_4($receiver) {
       var tmp$;
-      if ($receiver.length === 0)
-        tmp$ = emptySet();
-      else if ($receiver.length === 1)
-        tmp$ = setOf($receiver[0]);
-      else
-        tmp$ = toCollection_4($receiver, LinkedHashSet_init_2(mapCapacity($receiver.length)));
+      switch ($receiver.length) {
+        case 0:
+          tmp$ = emptySet();
+          break;
+        case 1:
+          tmp$ = setOf($receiver[0]);
+          break;
+        default:tmp$ = toCollection_4($receiver, LinkedHashSet_init_2(mapCapacity($receiver.length)));
+          break;
+      }
       return tmp$;
     }
     function toSet_5($receiver) {
       var tmp$;
-      if ($receiver.length === 0)
-        tmp$ = emptySet();
-      else if ($receiver.length === 1)
-        tmp$ = setOf($receiver[0]);
-      else
-        tmp$ = toCollection_5($receiver, LinkedHashSet_init_2(mapCapacity($receiver.length)));
+      switch ($receiver.length) {
+        case 0:
+          tmp$ = emptySet();
+          break;
+        case 1:
+          tmp$ = setOf($receiver[0]);
+          break;
+        default:tmp$ = toCollection_5($receiver, LinkedHashSet_init_2(mapCapacity($receiver.length)));
+          break;
+      }
       return tmp$;
     }
     function toSet_6($receiver) {
       var tmp$;
-      if ($receiver.length === 0)
-        tmp$ = emptySet();
-      else if ($receiver.length === 1)
-        tmp$ = setOf($receiver[0]);
-      else
-        tmp$ = toCollection_6($receiver, LinkedHashSet_init_2(mapCapacity($receiver.length)));
+      switch ($receiver.length) {
+        case 0:
+          tmp$ = emptySet();
+          break;
+        case 1:
+          tmp$ = setOf($receiver[0]);
+          break;
+        default:tmp$ = toCollection_6($receiver, LinkedHashSet_init_2(mapCapacity($receiver.length)));
+          break;
+      }
       return tmp$;
     }
     function toSet_7($receiver) {
       var tmp$;
-      if ($receiver.length === 0)
-        tmp$ = emptySet();
-      else if ($receiver.length === 1)
-        tmp$ = setOf(toBoxedChar($receiver[0]));
-      else
-        tmp$ = toCollection_7($receiver, LinkedHashSet_init_2(mapCapacity($receiver.length)));
+      switch ($receiver.length) {
+        case 0:
+          tmp$ = emptySet();
+          break;
+        case 1:
+          tmp$ = setOf(toBoxedChar($receiver[0]));
+          break;
+        default:tmp$ = toCollection_7($receiver, LinkedHashSet_init_2(mapCapacity($receiver.length)));
+          break;
+      }
       return tmp$;
     }
     var flatMap = defineInlineFunction('kotlin.kotlin.collections.flatMap_m96iup$', wrapFunction(function () {
@@ -11258,6 +11700,7 @@
       };
     }));
     var groupingBy = defineInlineFunction('kotlin.kotlin.collections.groupingBy_73x53s$', wrapFunction(function () {
+      var Kind_CLASS = Kotlin.Kind.CLASS;
       var Grouping = _.kotlin.collections.Grouping;
       function groupingBy$ObjectLiteral(this$groupingBy, closure$keySelector) {
         this.this$groupingBy = this$groupingBy;
@@ -11269,7 +11712,7 @@
       groupingBy$ObjectLiteral.prototype.keyOf_11rb$ = function (element) {
         return this.closure$keySelector(element);
       };
-      groupingBy$ObjectLiteral.$metadata$ = {kind: Kotlin.Kind.CLASS, interfaces: [Grouping]};
+      groupingBy$ObjectLiteral.$metadata$ = {kind: Kind_CLASS, interfaces: [Grouping]};
       return function ($receiver, keySelector) {
         return new groupingBy$ObjectLiteral($receiver, keySelector);
       };
@@ -11505,6 +11948,19 @@
     }));
     var mapIndexedNotNull = defineInlineFunction('kotlin.kotlin.collections.mapIndexedNotNull_aytly7$', wrapFunction(function () {
       var ArrayList_init = _.kotlin.collections.ArrayList_init_ww73n8$;
+      var wrapFunction = Kotlin.wrapFunction;
+      var Unit = Kotlin.kotlin.Unit;
+      var mapIndexedNotNullTo$lambda = wrapFunction(function () {
+        return function (closure$transform, closure$destination) {
+          return function (index, element) {
+            var tmp$;
+            if ((tmp$ = closure$transform(index, element)) != null) {
+              closure$destination.add_11rb$(tmp$);
+            }
+            return Unit;
+          };
+        };
+      });
       return function ($receiver, transform) {
         var destination = ArrayList_init();
         var tmp$, tmp$_0;
@@ -11520,6 +11976,19 @@
       };
     }));
     var mapIndexedNotNullTo = defineInlineFunction('kotlin.kotlin.collections.mapIndexedNotNullTo_97f7ib$', wrapFunction(function () {
+      var wrapFunction = Kotlin.wrapFunction;
+      var Unit = Kotlin.kotlin.Unit;
+      var mapIndexedNotNullTo$lambda = wrapFunction(function () {
+        return function (closure$transform, closure$destination) {
+          return function (index, element) {
+            var tmp$;
+            if ((tmp$ = closure$transform(index, element)) != null) {
+              closure$destination.add_11rb$(tmp$);
+            }
+            return Unit;
+          };
+        };
+      });
       return function ($receiver, destination, transform) {
         var tmp$, tmp$_0;
         var index = 0;
@@ -11620,6 +12089,19 @@
     }));
     var mapNotNull = defineInlineFunction('kotlin.kotlin.collections.mapNotNull_oxs7gb$', wrapFunction(function () {
       var ArrayList_init = _.kotlin.collections.ArrayList_init_ww73n8$;
+      var wrapFunction = Kotlin.wrapFunction;
+      var Unit = Kotlin.kotlin.Unit;
+      var mapNotNullTo$lambda = wrapFunction(function () {
+        return function (closure$transform, closure$destination) {
+          return function (element) {
+            var tmp$;
+            if ((tmp$ = closure$transform(element)) != null) {
+              closure$destination.add_11rb$(tmp$);
+            }
+            return Unit;
+          };
+        };
+      });
       return function ($receiver, transform) {
         var destination = ArrayList_init();
         var tmp$;
@@ -11634,6 +12116,19 @@
       };
     }));
     var mapNotNullTo = defineInlineFunction('kotlin.kotlin.collections.mapNotNullTo_cni40x$', wrapFunction(function () {
+      var wrapFunction = Kotlin.wrapFunction;
+      var Unit = Kotlin.kotlin.Unit;
+      var mapNotNullTo$lambda = wrapFunction(function () {
+        return function (closure$transform, closure$destination) {
+          return function (element) {
+            var tmp$;
+            if ((tmp$ = closure$transform(element)) != null) {
+              closure$destination.add_11rb$(tmp$);
+            }
+            return Unit;
+          };
+        };
+      });
       return function ($receiver, destination, transform) {
         var tmp$;
         for (tmp$ = 0; tmp$ !== $receiver.length; ++tmp$) {
@@ -14051,12 +14546,12 @@
       };
     }));
     var reduce = defineInlineFunction('kotlin.kotlin.collections.reduce_5bz9yp$', wrapFunction(function () {
-      var UnsupportedOperationException_init = _.kotlin.UnsupportedOperationException;
+      var UnsupportedOperationException_init = _.kotlin.UnsupportedOperationException_init_pdl1vj$;
       var get_lastIndex = _.kotlin.collections.get_lastIndex_m7z4lg$;
       return function ($receiver, operation) {
         var tmp$;
         if ($receiver.length === 0)
-          throw new UnsupportedOperationException_init("Empty array can't be reduced.");
+          throw UnsupportedOperationException_init("Empty array can't be reduced.");
         var accumulator = $receiver[0];
         tmp$ = get_lastIndex($receiver);
         for (var index = 1; index <= tmp$; index++) {
@@ -14066,12 +14561,12 @@
       };
     }));
     var reduce_0 = defineInlineFunction('kotlin.kotlin.collections.reduce_ua0gmo$', wrapFunction(function () {
-      var UnsupportedOperationException_init = _.kotlin.UnsupportedOperationException;
+      var UnsupportedOperationException_init = _.kotlin.UnsupportedOperationException_init_pdl1vj$;
       var get_lastIndex = _.kotlin.collections.get_lastIndex_964n91$;
       return function ($receiver, operation) {
         var tmp$;
         if ($receiver.length === 0)
-          throw new UnsupportedOperationException_init("Empty array can't be reduced.");
+          throw UnsupportedOperationException_init("Empty array can't be reduced.");
         var accumulator = $receiver[0];
         tmp$ = get_lastIndex($receiver);
         for (var index = 1; index <= tmp$; index++) {
@@ -14081,12 +14576,12 @@
       };
     }));
     var reduce_1 = defineInlineFunction('kotlin.kotlin.collections.reduce_5x6csy$', wrapFunction(function () {
-      var UnsupportedOperationException_init = _.kotlin.UnsupportedOperationException;
+      var UnsupportedOperationException_init = _.kotlin.UnsupportedOperationException_init_pdl1vj$;
       var get_lastIndex = _.kotlin.collections.get_lastIndex_i2lc79$;
       return function ($receiver, operation) {
         var tmp$;
         if ($receiver.length === 0)
-          throw new UnsupportedOperationException_init("Empty array can't be reduced.");
+          throw UnsupportedOperationException_init("Empty array can't be reduced.");
         var accumulator = $receiver[0];
         tmp$ = get_lastIndex($receiver);
         for (var index = 1; index <= tmp$; index++) {
@@ -14096,12 +14591,12 @@
       };
     }));
     var reduce_2 = defineInlineFunction('kotlin.kotlin.collections.reduce_vuuzha$', wrapFunction(function () {
-      var UnsupportedOperationException_init = _.kotlin.UnsupportedOperationException;
+      var UnsupportedOperationException_init = _.kotlin.UnsupportedOperationException_init_pdl1vj$;
       var get_lastIndex = _.kotlin.collections.get_lastIndex_tmsbgo$;
       return function ($receiver, operation) {
         var tmp$;
         if ($receiver.length === 0)
-          throw new UnsupportedOperationException_init("Empty array can't be reduced.");
+          throw UnsupportedOperationException_init("Empty array can't be reduced.");
         var accumulator = $receiver[0];
         tmp$ = get_lastIndex($receiver);
         for (var index = 1; index <= tmp$; index++) {
@@ -14111,12 +14606,12 @@
       };
     }));
     var reduce_3 = defineInlineFunction('kotlin.kotlin.collections.reduce_8z4g8g$', wrapFunction(function () {
-      var UnsupportedOperationException_init = _.kotlin.UnsupportedOperationException;
+      var UnsupportedOperationException_init = _.kotlin.UnsupportedOperationException_init_pdl1vj$;
       var get_lastIndex = _.kotlin.collections.get_lastIndex_se6h4x$;
       return function ($receiver, operation) {
         var tmp$;
         if ($receiver.length === 0)
-          throw new UnsupportedOperationException_init("Empty array can't be reduced.");
+          throw UnsupportedOperationException_init("Empty array can't be reduced.");
         var accumulator = $receiver[0];
         tmp$ = get_lastIndex($receiver);
         for (var index = 1; index <= tmp$; index++) {
@@ -14126,12 +14621,12 @@
       };
     }));
     var reduce_4 = defineInlineFunction('kotlin.kotlin.collections.reduce_m57mj6$', wrapFunction(function () {
-      var UnsupportedOperationException_init = _.kotlin.UnsupportedOperationException;
+      var UnsupportedOperationException_init = _.kotlin.UnsupportedOperationException_init_pdl1vj$;
       var get_lastIndex = _.kotlin.collections.get_lastIndex_rjqryz$;
       return function ($receiver, operation) {
         var tmp$;
         if ($receiver.length === 0)
-          throw new UnsupportedOperationException_init("Empty array can't be reduced.");
+          throw UnsupportedOperationException_init("Empty array can't be reduced.");
         var accumulator = $receiver[0];
         tmp$ = get_lastIndex($receiver);
         for (var index = 1; index <= tmp$; index++) {
@@ -14141,12 +14636,12 @@
       };
     }));
     var reduce_5 = defineInlineFunction('kotlin.kotlin.collections.reduce_5rthjk$', wrapFunction(function () {
-      var UnsupportedOperationException_init = _.kotlin.UnsupportedOperationException;
+      var UnsupportedOperationException_init = _.kotlin.UnsupportedOperationException_init_pdl1vj$;
       var get_lastIndex = _.kotlin.collections.get_lastIndex_bvy38s$;
       return function ($receiver, operation) {
         var tmp$;
         if ($receiver.length === 0)
-          throw new UnsupportedOperationException_init("Empty array can't be reduced.");
+          throw UnsupportedOperationException_init("Empty array can't be reduced.");
         var accumulator = $receiver[0];
         tmp$ = get_lastIndex($receiver);
         for (var index = 1; index <= tmp$; index++) {
@@ -14156,12 +14651,12 @@
       };
     }));
     var reduce_6 = defineInlineFunction('kotlin.kotlin.collections.reduce_if3lfm$', wrapFunction(function () {
-      var UnsupportedOperationException_init = _.kotlin.UnsupportedOperationException;
+      var UnsupportedOperationException_init = _.kotlin.UnsupportedOperationException_init_pdl1vj$;
       var get_lastIndex = _.kotlin.collections.get_lastIndex_l1lu5t$;
       return function ($receiver, operation) {
         var tmp$;
         if ($receiver.length === 0)
-          throw new UnsupportedOperationException_init("Empty array can't be reduced.");
+          throw UnsupportedOperationException_init("Empty array can't be reduced.");
         var accumulator = $receiver[0];
         tmp$ = get_lastIndex($receiver);
         for (var index = 1; index <= tmp$; index++) {
@@ -14171,14 +14666,14 @@
       };
     }));
     var reduce_7 = defineInlineFunction('kotlin.kotlin.collections.reduce_724a40$', wrapFunction(function () {
-      var UnsupportedOperationException_init = _.kotlin.UnsupportedOperationException;
+      var UnsupportedOperationException_init = _.kotlin.UnsupportedOperationException_init_pdl1vj$;
       var get_lastIndex = _.kotlin.collections.get_lastIndex_355ntz$;
       var toBoxedChar = Kotlin.toBoxedChar;
       var unboxChar = Kotlin.unboxChar;
       return function ($receiver, operation) {
         var tmp$;
         if ($receiver.length === 0)
-          throw new UnsupportedOperationException_init("Empty array can't be reduced.");
+          throw UnsupportedOperationException_init("Empty array can't be reduced.");
         var accumulator = $receiver[0];
         tmp$ = get_lastIndex($receiver);
         for (var index = 1; index <= tmp$; index++) {
@@ -14188,12 +14683,12 @@
       };
     }));
     var reduceIndexed = defineInlineFunction('kotlin.kotlin.collections.reduceIndexed_f61gul$', wrapFunction(function () {
-      var UnsupportedOperationException_init = _.kotlin.UnsupportedOperationException;
+      var UnsupportedOperationException_init = _.kotlin.UnsupportedOperationException_init_pdl1vj$;
       var get_lastIndex = _.kotlin.collections.get_lastIndex_m7z4lg$;
       return function ($receiver, operation) {
         var tmp$;
         if ($receiver.length === 0)
-          throw new UnsupportedOperationException_init("Empty array can't be reduced.");
+          throw UnsupportedOperationException_init("Empty array can't be reduced.");
         var accumulator = $receiver[0];
         tmp$ = get_lastIndex($receiver);
         for (var index = 1; index <= tmp$; index++) {
@@ -14203,12 +14698,12 @@
       };
     }));
     var reduceIndexed_0 = defineInlineFunction('kotlin.kotlin.collections.reduceIndexed_y1rlg4$', wrapFunction(function () {
-      var UnsupportedOperationException_init = _.kotlin.UnsupportedOperationException;
+      var UnsupportedOperationException_init = _.kotlin.UnsupportedOperationException_init_pdl1vj$;
       var get_lastIndex = _.kotlin.collections.get_lastIndex_964n91$;
       return function ($receiver, operation) {
         var tmp$;
         if ($receiver.length === 0)
-          throw new UnsupportedOperationException_init("Empty array can't be reduced.");
+          throw UnsupportedOperationException_init("Empty array can't be reduced.");
         var accumulator = $receiver[0];
         tmp$ = get_lastIndex($receiver);
         for (var index = 1; index <= tmp$; index++) {
@@ -14218,12 +14713,12 @@
       };
     }));
     var reduceIndexed_1 = defineInlineFunction('kotlin.kotlin.collections.reduceIndexed_ctdw5m$', wrapFunction(function () {
-      var UnsupportedOperationException_init = _.kotlin.UnsupportedOperationException;
+      var UnsupportedOperationException_init = _.kotlin.UnsupportedOperationException_init_pdl1vj$;
       var get_lastIndex = _.kotlin.collections.get_lastIndex_i2lc79$;
       return function ($receiver, operation) {
         var tmp$;
         if ($receiver.length === 0)
-          throw new UnsupportedOperationException_init("Empty array can't be reduced.");
+          throw UnsupportedOperationException_init("Empty array can't be reduced.");
         var accumulator = $receiver[0];
         tmp$ = get_lastIndex($receiver);
         for (var index = 1; index <= tmp$; index++) {
@@ -14233,12 +14728,12 @@
       };
     }));
     var reduceIndexed_2 = defineInlineFunction('kotlin.kotlin.collections.reduceIndexed_y7bnwe$', wrapFunction(function () {
-      var UnsupportedOperationException_init = _.kotlin.UnsupportedOperationException;
+      var UnsupportedOperationException_init = _.kotlin.UnsupportedOperationException_init_pdl1vj$;
       var get_lastIndex = _.kotlin.collections.get_lastIndex_tmsbgo$;
       return function ($receiver, operation) {
         var tmp$;
         if ($receiver.length === 0)
-          throw new UnsupportedOperationException_init("Empty array can't be reduced.");
+          throw UnsupportedOperationException_init("Empty array can't be reduced.");
         var accumulator = $receiver[0];
         tmp$ = get_lastIndex($receiver);
         for (var index = 1; index <= tmp$; index++) {
@@ -14248,12 +14743,12 @@
       };
     }));
     var reduceIndexed_3 = defineInlineFunction('kotlin.kotlin.collections.reduceIndexed_54m7jg$', wrapFunction(function () {
-      var UnsupportedOperationException_init = _.kotlin.UnsupportedOperationException;
+      var UnsupportedOperationException_init = _.kotlin.UnsupportedOperationException_init_pdl1vj$;
       var get_lastIndex = _.kotlin.collections.get_lastIndex_se6h4x$;
       return function ($receiver, operation) {
         var tmp$;
         if ($receiver.length === 0)
-          throw new UnsupportedOperationException_init("Empty array can't be reduced.");
+          throw UnsupportedOperationException_init("Empty array can't be reduced.");
         var accumulator = $receiver[0];
         tmp$ = get_lastIndex($receiver);
         for (var index = 1; index <= tmp$; index++) {
@@ -14263,12 +14758,12 @@
       };
     }));
     var reduceIndexed_4 = defineInlineFunction('kotlin.kotlin.collections.reduceIndexed_mzocqy$', wrapFunction(function () {
-      var UnsupportedOperationException_init = _.kotlin.UnsupportedOperationException;
+      var UnsupportedOperationException_init = _.kotlin.UnsupportedOperationException_init_pdl1vj$;
       var get_lastIndex = _.kotlin.collections.get_lastIndex_rjqryz$;
       return function ($receiver, operation) {
         var tmp$;
         if ($receiver.length === 0)
-          throw new UnsupportedOperationException_init("Empty array can't be reduced.");
+          throw UnsupportedOperationException_init("Empty array can't be reduced.");
         var accumulator = $receiver[0];
         tmp$ = get_lastIndex($receiver);
         for (var index = 1; index <= tmp$; index++) {
@@ -14278,12 +14773,12 @@
       };
     }));
     var reduceIndexed_5 = defineInlineFunction('kotlin.kotlin.collections.reduceIndexed_i4uovg$', wrapFunction(function () {
-      var UnsupportedOperationException_init = _.kotlin.UnsupportedOperationException;
+      var UnsupportedOperationException_init = _.kotlin.UnsupportedOperationException_init_pdl1vj$;
       var get_lastIndex = _.kotlin.collections.get_lastIndex_bvy38s$;
       return function ($receiver, operation) {
         var tmp$;
         if ($receiver.length === 0)
-          throw new UnsupportedOperationException_init("Empty array can't be reduced.");
+          throw UnsupportedOperationException_init("Empty array can't be reduced.");
         var accumulator = $receiver[0];
         tmp$ = get_lastIndex($receiver);
         for (var index = 1; index <= tmp$; index++) {
@@ -14293,12 +14788,12 @@
       };
     }));
     var reduceIndexed_6 = defineInlineFunction('kotlin.kotlin.collections.reduceIndexed_fqu0be$', wrapFunction(function () {
-      var UnsupportedOperationException_init = _.kotlin.UnsupportedOperationException;
+      var UnsupportedOperationException_init = _.kotlin.UnsupportedOperationException_init_pdl1vj$;
       var get_lastIndex = _.kotlin.collections.get_lastIndex_l1lu5t$;
       return function ($receiver, operation) {
         var tmp$;
         if ($receiver.length === 0)
-          throw new UnsupportedOperationException_init("Empty array can't be reduced.");
+          throw UnsupportedOperationException_init("Empty array can't be reduced.");
         var accumulator = $receiver[0];
         tmp$ = get_lastIndex($receiver);
         for (var index = 1; index <= tmp$; index++) {
@@ -14308,14 +14803,14 @@
       };
     }));
     var reduceIndexed_7 = defineInlineFunction('kotlin.kotlin.collections.reduceIndexed_n25zu4$', wrapFunction(function () {
-      var UnsupportedOperationException_init = _.kotlin.UnsupportedOperationException;
+      var UnsupportedOperationException_init = _.kotlin.UnsupportedOperationException_init_pdl1vj$;
       var get_lastIndex = _.kotlin.collections.get_lastIndex_355ntz$;
       var toBoxedChar = Kotlin.toBoxedChar;
       var unboxChar = Kotlin.unboxChar;
       return function ($receiver, operation) {
         var tmp$;
         if ($receiver.length === 0)
-          throw new UnsupportedOperationException_init("Empty array can't be reduced.");
+          throw UnsupportedOperationException_init("Empty array can't be reduced.");
         var accumulator = $receiver[0];
         tmp$ = get_lastIndex($receiver);
         for (var index = 1; index <= tmp$; index++) {
@@ -14326,12 +14821,12 @@
     }));
     var reduceRight = defineInlineFunction('kotlin.kotlin.collections.reduceRight_m9c08d$', wrapFunction(function () {
       var get_lastIndex = _.kotlin.collections.get_lastIndex_m7z4lg$;
-      var UnsupportedOperationException_init = _.kotlin.UnsupportedOperationException;
+      var UnsupportedOperationException_init = _.kotlin.UnsupportedOperationException_init_pdl1vj$;
       return function ($receiver, operation) {
         var tmp$, tmp$_0;
         var index = get_lastIndex($receiver);
         if (index < 0)
-          throw new UnsupportedOperationException_init("Empty array can't be reduced.");
+          throw UnsupportedOperationException_init("Empty array can't be reduced.");
         var accumulator = $receiver[tmp$ = index, index = tmp$ - 1 | 0, tmp$];
         while (index >= 0) {
           accumulator = operation($receiver[tmp$_0 = index, index = tmp$_0 - 1 | 0, tmp$_0], accumulator);
@@ -14341,12 +14836,12 @@
     }));
     var reduceRight_0 = defineInlineFunction('kotlin.kotlin.collections.reduceRight_ua0gmo$', wrapFunction(function () {
       var get_lastIndex = _.kotlin.collections.get_lastIndex_964n91$;
-      var UnsupportedOperationException_init = _.kotlin.UnsupportedOperationException;
+      var UnsupportedOperationException_init = _.kotlin.UnsupportedOperationException_init_pdl1vj$;
       return function ($receiver, operation) {
         var tmp$, tmp$_0;
         var index = get_lastIndex($receiver);
         if (index < 0)
-          throw new UnsupportedOperationException_init("Empty array can't be reduced.");
+          throw UnsupportedOperationException_init("Empty array can't be reduced.");
         var accumulator = $receiver[tmp$ = index, index = tmp$ - 1 | 0, tmp$];
         while (index >= 0) {
           accumulator = operation($receiver[tmp$_0 = index, index = tmp$_0 - 1 | 0, tmp$_0], accumulator);
@@ -14356,12 +14851,12 @@
     }));
     var reduceRight_1 = defineInlineFunction('kotlin.kotlin.collections.reduceRight_5x6csy$', wrapFunction(function () {
       var get_lastIndex = _.kotlin.collections.get_lastIndex_i2lc79$;
-      var UnsupportedOperationException_init = _.kotlin.UnsupportedOperationException;
+      var UnsupportedOperationException_init = _.kotlin.UnsupportedOperationException_init_pdl1vj$;
       return function ($receiver, operation) {
         var tmp$, tmp$_0;
         var index = get_lastIndex($receiver);
         if (index < 0)
-          throw new UnsupportedOperationException_init("Empty array can't be reduced.");
+          throw UnsupportedOperationException_init("Empty array can't be reduced.");
         var accumulator = $receiver[tmp$ = index, index = tmp$ - 1 | 0, tmp$];
         while (index >= 0) {
           accumulator = operation($receiver[tmp$_0 = index, index = tmp$_0 - 1 | 0, tmp$_0], accumulator);
@@ -14371,12 +14866,12 @@
     }));
     var reduceRight_2 = defineInlineFunction('kotlin.kotlin.collections.reduceRight_vuuzha$', wrapFunction(function () {
       var get_lastIndex = _.kotlin.collections.get_lastIndex_tmsbgo$;
-      var UnsupportedOperationException_init = _.kotlin.UnsupportedOperationException;
+      var UnsupportedOperationException_init = _.kotlin.UnsupportedOperationException_init_pdl1vj$;
       return function ($receiver, operation) {
         var tmp$, tmp$_0;
         var index = get_lastIndex($receiver);
         if (index < 0)
-          throw new UnsupportedOperationException_init("Empty array can't be reduced.");
+          throw UnsupportedOperationException_init("Empty array can't be reduced.");
         var accumulator = $receiver[tmp$ = index, index = tmp$ - 1 | 0, tmp$];
         while (index >= 0) {
           accumulator = operation($receiver[tmp$_0 = index, index = tmp$_0 - 1 | 0, tmp$_0], accumulator);
@@ -14386,12 +14881,12 @@
     }));
     var reduceRight_3 = defineInlineFunction('kotlin.kotlin.collections.reduceRight_8z4g8g$', wrapFunction(function () {
       var get_lastIndex = _.kotlin.collections.get_lastIndex_se6h4x$;
-      var UnsupportedOperationException_init = _.kotlin.UnsupportedOperationException;
+      var UnsupportedOperationException_init = _.kotlin.UnsupportedOperationException_init_pdl1vj$;
       return function ($receiver, operation) {
         var tmp$, tmp$_0;
         var index = get_lastIndex($receiver);
         if (index < 0)
-          throw new UnsupportedOperationException_init("Empty array can't be reduced.");
+          throw UnsupportedOperationException_init("Empty array can't be reduced.");
         var accumulator = $receiver[tmp$ = index, index = tmp$ - 1 | 0, tmp$];
         while (index >= 0) {
           accumulator = operation($receiver[tmp$_0 = index, index = tmp$_0 - 1 | 0, tmp$_0], accumulator);
@@ -14401,12 +14896,12 @@
     }));
     var reduceRight_4 = defineInlineFunction('kotlin.kotlin.collections.reduceRight_m57mj6$', wrapFunction(function () {
       var get_lastIndex = _.kotlin.collections.get_lastIndex_rjqryz$;
-      var UnsupportedOperationException_init = _.kotlin.UnsupportedOperationException;
+      var UnsupportedOperationException_init = _.kotlin.UnsupportedOperationException_init_pdl1vj$;
       return function ($receiver, operation) {
         var tmp$, tmp$_0;
         var index = get_lastIndex($receiver);
         if (index < 0)
-          throw new UnsupportedOperationException_init("Empty array can't be reduced.");
+          throw UnsupportedOperationException_init("Empty array can't be reduced.");
         var accumulator = $receiver[tmp$ = index, index = tmp$ - 1 | 0, tmp$];
         while (index >= 0) {
           accumulator = operation($receiver[tmp$_0 = index, index = tmp$_0 - 1 | 0, tmp$_0], accumulator);
@@ -14416,12 +14911,12 @@
     }));
     var reduceRight_5 = defineInlineFunction('kotlin.kotlin.collections.reduceRight_5rthjk$', wrapFunction(function () {
       var get_lastIndex = _.kotlin.collections.get_lastIndex_bvy38s$;
-      var UnsupportedOperationException_init = _.kotlin.UnsupportedOperationException;
+      var UnsupportedOperationException_init = _.kotlin.UnsupportedOperationException_init_pdl1vj$;
       return function ($receiver, operation) {
         var tmp$, tmp$_0;
         var index = get_lastIndex($receiver);
         if (index < 0)
-          throw new UnsupportedOperationException_init("Empty array can't be reduced.");
+          throw UnsupportedOperationException_init("Empty array can't be reduced.");
         var accumulator = $receiver[tmp$ = index, index = tmp$ - 1 | 0, tmp$];
         while (index >= 0) {
           accumulator = operation($receiver[tmp$_0 = index, index = tmp$_0 - 1 | 0, tmp$_0], accumulator);
@@ -14431,12 +14926,12 @@
     }));
     var reduceRight_6 = defineInlineFunction('kotlin.kotlin.collections.reduceRight_if3lfm$', wrapFunction(function () {
       var get_lastIndex = _.kotlin.collections.get_lastIndex_l1lu5t$;
-      var UnsupportedOperationException_init = _.kotlin.UnsupportedOperationException;
+      var UnsupportedOperationException_init = _.kotlin.UnsupportedOperationException_init_pdl1vj$;
       return function ($receiver, operation) {
         var tmp$, tmp$_0;
         var index = get_lastIndex($receiver);
         if (index < 0)
-          throw new UnsupportedOperationException_init("Empty array can't be reduced.");
+          throw UnsupportedOperationException_init("Empty array can't be reduced.");
         var accumulator = $receiver[tmp$ = index, index = tmp$ - 1 | 0, tmp$];
         while (index >= 0) {
           accumulator = operation($receiver[tmp$_0 = index, index = tmp$_0 - 1 | 0, tmp$_0], accumulator);
@@ -14446,14 +14941,14 @@
     }));
     var reduceRight_7 = defineInlineFunction('kotlin.kotlin.collections.reduceRight_724a40$', wrapFunction(function () {
       var get_lastIndex = _.kotlin.collections.get_lastIndex_355ntz$;
-      var UnsupportedOperationException_init = _.kotlin.UnsupportedOperationException;
+      var UnsupportedOperationException_init = _.kotlin.UnsupportedOperationException_init_pdl1vj$;
       var toBoxedChar = Kotlin.toBoxedChar;
       var unboxChar = Kotlin.unboxChar;
       return function ($receiver, operation) {
         var tmp$, tmp$_0;
         var index = get_lastIndex($receiver);
         if (index < 0)
-          throw new UnsupportedOperationException_init("Empty array can't be reduced.");
+          throw UnsupportedOperationException_init("Empty array can't be reduced.");
         var accumulator = $receiver[tmp$ = index, index = tmp$ - 1 | 0, tmp$];
         while (index >= 0) {
           accumulator = unboxChar(operation(toBoxedChar($receiver[tmp$_0 = index, index = tmp$_0 - 1 | 0, tmp$_0]), toBoxedChar(accumulator)));
@@ -14463,12 +14958,12 @@
     }));
     var reduceRightIndexed = defineInlineFunction('kotlin.kotlin.collections.reduceRightIndexed_cf9tch$', wrapFunction(function () {
       var get_lastIndex = _.kotlin.collections.get_lastIndex_m7z4lg$;
-      var UnsupportedOperationException_init = _.kotlin.UnsupportedOperationException;
+      var UnsupportedOperationException_init = _.kotlin.UnsupportedOperationException_init_pdl1vj$;
       return function ($receiver, operation) {
         var tmp$;
         var index = get_lastIndex($receiver);
         if (index < 0)
-          throw new UnsupportedOperationException_init("Empty array can't be reduced.");
+          throw UnsupportedOperationException_init("Empty array can't be reduced.");
         var accumulator = $receiver[tmp$ = index, index = tmp$ - 1 | 0, tmp$];
         while (index >= 0) {
           accumulator = operation(index, $receiver[index], accumulator);
@@ -14479,12 +14974,12 @@
     }));
     var reduceRightIndexed_0 = defineInlineFunction('kotlin.kotlin.collections.reduceRightIndexed_y1rlg4$', wrapFunction(function () {
       var get_lastIndex = _.kotlin.collections.get_lastIndex_964n91$;
-      var UnsupportedOperationException_init = _.kotlin.UnsupportedOperationException;
+      var UnsupportedOperationException_init = _.kotlin.UnsupportedOperationException_init_pdl1vj$;
       return function ($receiver, operation) {
         var tmp$;
         var index = get_lastIndex($receiver);
         if (index < 0)
-          throw new UnsupportedOperationException_init("Empty array can't be reduced.");
+          throw UnsupportedOperationException_init("Empty array can't be reduced.");
         var accumulator = $receiver[tmp$ = index, index = tmp$ - 1 | 0, tmp$];
         while (index >= 0) {
           accumulator = operation(index, $receiver[index], accumulator);
@@ -14495,12 +14990,12 @@
     }));
     var reduceRightIndexed_1 = defineInlineFunction('kotlin.kotlin.collections.reduceRightIndexed_ctdw5m$', wrapFunction(function () {
       var get_lastIndex = _.kotlin.collections.get_lastIndex_i2lc79$;
-      var UnsupportedOperationException_init = _.kotlin.UnsupportedOperationException;
+      var UnsupportedOperationException_init = _.kotlin.UnsupportedOperationException_init_pdl1vj$;
       return function ($receiver, operation) {
         var tmp$;
         var index = get_lastIndex($receiver);
         if (index < 0)
-          throw new UnsupportedOperationException_init("Empty array can't be reduced.");
+          throw UnsupportedOperationException_init("Empty array can't be reduced.");
         var accumulator = $receiver[tmp$ = index, index = tmp$ - 1 | 0, tmp$];
         while (index >= 0) {
           accumulator = operation(index, $receiver[index], accumulator);
@@ -14511,12 +15006,12 @@
     }));
     var reduceRightIndexed_2 = defineInlineFunction('kotlin.kotlin.collections.reduceRightIndexed_y7bnwe$', wrapFunction(function () {
       var get_lastIndex = _.kotlin.collections.get_lastIndex_tmsbgo$;
-      var UnsupportedOperationException_init = _.kotlin.UnsupportedOperationException;
+      var UnsupportedOperationException_init = _.kotlin.UnsupportedOperationException_init_pdl1vj$;
       return function ($receiver, operation) {
         var tmp$;
         var index = get_lastIndex($receiver);
         if (index < 0)
-          throw new UnsupportedOperationException_init("Empty array can't be reduced.");
+          throw UnsupportedOperationException_init("Empty array can't be reduced.");
         var accumulator = $receiver[tmp$ = index, index = tmp$ - 1 | 0, tmp$];
         while (index >= 0) {
           accumulator = operation(index, $receiver[index], accumulator);
@@ -14527,12 +15022,12 @@
     }));
     var reduceRightIndexed_3 = defineInlineFunction('kotlin.kotlin.collections.reduceRightIndexed_54m7jg$', wrapFunction(function () {
       var get_lastIndex = _.kotlin.collections.get_lastIndex_se6h4x$;
-      var UnsupportedOperationException_init = _.kotlin.UnsupportedOperationException;
+      var UnsupportedOperationException_init = _.kotlin.UnsupportedOperationException_init_pdl1vj$;
       return function ($receiver, operation) {
         var tmp$;
         var index = get_lastIndex($receiver);
         if (index < 0)
-          throw new UnsupportedOperationException_init("Empty array can't be reduced.");
+          throw UnsupportedOperationException_init("Empty array can't be reduced.");
         var accumulator = $receiver[tmp$ = index, index = tmp$ - 1 | 0, tmp$];
         while (index >= 0) {
           accumulator = operation(index, $receiver[index], accumulator);
@@ -14543,12 +15038,12 @@
     }));
     var reduceRightIndexed_4 = defineInlineFunction('kotlin.kotlin.collections.reduceRightIndexed_mzocqy$', wrapFunction(function () {
       var get_lastIndex = _.kotlin.collections.get_lastIndex_rjqryz$;
-      var UnsupportedOperationException_init = _.kotlin.UnsupportedOperationException;
+      var UnsupportedOperationException_init = _.kotlin.UnsupportedOperationException_init_pdl1vj$;
       return function ($receiver, operation) {
         var tmp$;
         var index = get_lastIndex($receiver);
         if (index < 0)
-          throw new UnsupportedOperationException_init("Empty array can't be reduced.");
+          throw UnsupportedOperationException_init("Empty array can't be reduced.");
         var accumulator = $receiver[tmp$ = index, index = tmp$ - 1 | 0, tmp$];
         while (index >= 0) {
           accumulator = operation(index, $receiver[index], accumulator);
@@ -14559,12 +15054,12 @@
     }));
     var reduceRightIndexed_5 = defineInlineFunction('kotlin.kotlin.collections.reduceRightIndexed_i4uovg$', wrapFunction(function () {
       var get_lastIndex = _.kotlin.collections.get_lastIndex_bvy38s$;
-      var UnsupportedOperationException_init = _.kotlin.UnsupportedOperationException;
+      var UnsupportedOperationException_init = _.kotlin.UnsupportedOperationException_init_pdl1vj$;
       return function ($receiver, operation) {
         var tmp$;
         var index = get_lastIndex($receiver);
         if (index < 0)
-          throw new UnsupportedOperationException_init("Empty array can't be reduced.");
+          throw UnsupportedOperationException_init("Empty array can't be reduced.");
         var accumulator = $receiver[tmp$ = index, index = tmp$ - 1 | 0, tmp$];
         while (index >= 0) {
           accumulator = operation(index, $receiver[index], accumulator);
@@ -14575,12 +15070,12 @@
     }));
     var reduceRightIndexed_6 = defineInlineFunction('kotlin.kotlin.collections.reduceRightIndexed_fqu0be$', wrapFunction(function () {
       var get_lastIndex = _.kotlin.collections.get_lastIndex_l1lu5t$;
-      var UnsupportedOperationException_init = _.kotlin.UnsupportedOperationException;
+      var UnsupportedOperationException_init = _.kotlin.UnsupportedOperationException_init_pdl1vj$;
       return function ($receiver, operation) {
         var tmp$;
         var index = get_lastIndex($receiver);
         if (index < 0)
-          throw new UnsupportedOperationException_init("Empty array can't be reduced.");
+          throw UnsupportedOperationException_init("Empty array can't be reduced.");
         var accumulator = $receiver[tmp$ = index, index = tmp$ - 1 | 0, tmp$];
         while (index >= 0) {
           accumulator = operation(index, $receiver[index], accumulator);
@@ -14591,14 +15086,14 @@
     }));
     var reduceRightIndexed_7 = defineInlineFunction('kotlin.kotlin.collections.reduceRightIndexed_n25zu4$', wrapFunction(function () {
       var get_lastIndex = _.kotlin.collections.get_lastIndex_355ntz$;
-      var UnsupportedOperationException_init = _.kotlin.UnsupportedOperationException;
+      var UnsupportedOperationException_init = _.kotlin.UnsupportedOperationException_init_pdl1vj$;
       var toBoxedChar = Kotlin.toBoxedChar;
       var unboxChar = Kotlin.unboxChar;
       return function ($receiver, operation) {
         var tmp$;
         var index = get_lastIndex($receiver);
         if (index < 0)
-          throw new UnsupportedOperationException_init("Empty array can't be reduced.");
+          throw UnsupportedOperationException_init("Empty array can't be reduced.");
         var accumulator = $receiver[tmp$ = index, index = tmp$ - 1 | 0, tmp$];
         while (index >= 0) {
           accumulator = unboxChar(operation(index, toBoxedChar($receiver[index]), toBoxedChar(accumulator)));
@@ -14782,10 +15277,10 @@
       for (tmp$ = 0; tmp$ !== $receiver.length; ++tmp$) {
         var element = $receiver[tmp$];
         if (element == null) {
-          throw new IllegalArgumentException('null element found in ' + $receiver + '.');
+          throw IllegalArgumentException_init_0('null element found in ' + $receiver + '.');
         }
       }
-      return Kotlin.isArray(tmp$_0 = $receiver) ? tmp$_0 : Kotlin.throwCCE();
+      return Kotlin.isArray(tmp$_0 = $receiver) ? tmp$_0 : throwCCE();
     }
     var partition = defineInlineFunction('kotlin.kotlin.collections.partition_sfx99b$', wrapFunction(function () {
       var ArrayList_init = _.kotlin.collections.ArrayList_init_ww73n8$;
@@ -14960,7 +15455,6 @@
         return new Pair_init(first, second);
       };
     }));
-    var Math_0 = Math;
     function zip($receiver, other) {
       var tmp$;
       var size = Math_0.min($receiver.length, other.length);
@@ -16118,7 +16612,7 @@
     Iterable$ObjectLiteral.prototype.iterator = function () {
       return this.closure$iterator();
     };
-    Iterable$ObjectLiteral.$metadata$ = {kind: Kotlin.Kind.CLASS, interfaces: [Iterable]};
+    Iterable$ObjectLiteral.$metadata$ = {kind: Kind_CLASS, interfaces: [Iterable]};
     function asIterable($receiver) {
       if ($receiver.length === 0)
         return emptyList();
@@ -16215,7 +16709,7 @@
     Sequence$ObjectLiteral.prototype.iterator = function () {
       return this.closure$iterator();
     };
-    Sequence$ObjectLiteral.$metadata$ = {kind: Kotlin.Kind.CLASS, interfaces: [Sequence]};
+    Sequence$ObjectLiteral.$metadata$ = {kind: Kind_CLASS, interfaces: [Sequence]};
     function asSequence($receiver) {
       if ($receiver.length === 0)
         return emptySequence();
@@ -16310,7 +16804,7 @@
         sum += element;
         count = count + 1 | 0;
       }
-      return count === 0 ? DoubleCompanionObject.NaN : sum / count;
+      return count === 0 ? kotlin_js_internal_DoubleCompanionObject.NaN : sum / count;
     }
     function average_0($receiver) {
       var tmp$;
@@ -16321,7 +16815,7 @@
         sum += element;
         count = count + 1 | 0;
       }
-      return count === 0 ? DoubleCompanionObject.NaN : sum / count;
+      return count === 0 ? kotlin_js_internal_DoubleCompanionObject.NaN : sum / count;
     }
     function average_1($receiver) {
       var tmp$;
@@ -16332,7 +16826,7 @@
         sum += element;
         count = count + 1 | 0;
       }
-      return count === 0 ? DoubleCompanionObject.NaN : sum / count;
+      return count === 0 ? kotlin_js_internal_DoubleCompanionObject.NaN : sum / count;
     }
     function average_2($receiver) {
       var tmp$;
@@ -16343,7 +16837,7 @@
         sum += element;
         count = count + 1 | 0;
       }
-      return count === 0 ? DoubleCompanionObject.NaN : sum / count;
+      return count === 0 ? kotlin_js_internal_DoubleCompanionObject.NaN : sum / count;
     }
     function average_3($receiver) {
       var tmp$;
@@ -16354,7 +16848,7 @@
         sum += element;
         count = count + 1 | 0;
       }
-      return count === 0 ? DoubleCompanionObject.NaN : sum / count;
+      return count === 0 ? kotlin_js_internal_DoubleCompanionObject.NaN : sum / count;
     }
     function average_4($receiver) {
       var tmp$;
@@ -16365,7 +16859,7 @@
         sum += element;
         count = count + 1 | 0;
       }
-      return count === 0 ? DoubleCompanionObject.NaN : sum / count;
+      return count === 0 ? kotlin_js_internal_DoubleCompanionObject.NaN : sum / count;
     }
     function average_5($receiver) {
       var tmp$;
@@ -16376,7 +16870,7 @@
         sum += element;
         count = count + 1 | 0;
       }
-      return count === 0 ? DoubleCompanionObject.NaN : sum / count;
+      return count === 0 ? kotlin_js_internal_DoubleCompanionObject.NaN : sum / count;
     }
     function average_6($receiver) {
       var tmp$;
@@ -16387,7 +16881,7 @@
         sum += element;
         count = count + 1 | 0;
       }
-      return count === 0 ? DoubleCompanionObject.NaN : sum / count;
+      return count === 0 ? kotlin_js_internal_DoubleCompanionObject.NaN : sum / count;
     }
     function average_7($receiver) {
       var tmp$;
@@ -16398,7 +16892,7 @@
         sum += element;
         count = count + 1 | 0;
       }
-      return count === 0 ? DoubleCompanionObject.NaN : sum / count;
+      return count === 0 ? kotlin_js_internal_DoubleCompanionObject.NaN : sum / count;
     }
     function average_8($receiver) {
       var tmp$;
@@ -16409,7 +16903,7 @@
         sum += element;
         count = count + 1 | 0;
       }
-      return count === 0 ? DoubleCompanionObject.NaN : sum / count;
+      return count === 0 ? kotlin_js_internal_DoubleCompanionObject.NaN : sum / count;
     }
     function average_9($receiver) {
       var tmp$;
@@ -16420,7 +16914,7 @@
         sum += element;
         count = count + 1 | 0;
       }
-      return count === 0 ? DoubleCompanionObject.NaN : sum / count;
+      return count === 0 ? kotlin_js_internal_DoubleCompanionObject.NaN : sum / count;
     }
     function average_10($receiver) {
       var tmp$;
@@ -16431,7 +16925,7 @@
         sum += element;
         count = count + 1 | 0;
       }
-      return count === 0 ? DoubleCompanionObject.NaN : sum / count;
+      return count === 0 ? kotlin_js_internal_DoubleCompanionObject.NaN : sum / count;
     }
     function sum($receiver) {
       var tmp$;
@@ -16608,7 +17102,7 @@
     asList$ObjectLiteral.prototype.lastIndexOf_11rb$ = function (element) {
       return lastIndexOf_7(this.this$asList, element);
     };
-    asList$ObjectLiteral.$metadata$ = {kind: Kotlin.Kind.CLASS, interfaces: [RandomAccess, AbstractList]};
+    asList$ObjectLiteral.$metadata$ = {kind: Kind_CLASS, interfaces: [RandomAccess, AbstractList]};
     function asList_7($receiver) {
       return new asList$ObjectLiteral($receiver);
     }
@@ -17123,7 +17617,7 @@
       tmp$ = $receiver.iterator();
       while (tmp$.hasNext()) {
         var item = tmp$.next();
-        if (Kotlin.equals(element, item))
+        if (equals(element, item))
           return index;
         index = index + 1 | 0;
       }
@@ -17199,6 +17693,7 @@
     var last_19 = defineInlineFunction('kotlin.kotlin.collections.last_6jwkkr$', wrapFunction(function () {
       var NoSuchElementException_init = _.kotlin.NoSuchElementException;
       var Any = Object;
+      var throwCCE = Kotlin.throwCCE;
       return function ($receiver, predicate) {
         var tmp$, tmp$_0;
         var last = null;
@@ -17213,7 +17708,7 @@
         }
         if (!found)
           throw new NoSuchElementException_init('Collection contains no element matching the predicate.');
-        return (tmp$_0 = last) == null || Kotlin.isType(tmp$_0, Any) ? tmp$_0 : Kotlin.throwCCE();
+        return (tmp$_0 = last) == null || Kotlin.isType(tmp$_0, Any) ? tmp$_0 : throwCCE();
       };
     }));
     var last_20 = defineInlineFunction('kotlin.kotlin.collections.last_dmm9ex$', wrapFunction(function () {
@@ -17237,7 +17732,7 @@
       tmp$ = $receiver.iterator();
       while (tmp$.hasNext()) {
         var item = tmp$.next();
-        if (Kotlin.equals(element, item))
+        if (equals(element, item))
           lastIndex = index;
         index = index + 1 | 0;
       }
@@ -17292,25 +17787,27 @@
           throw new NoSuchElementException('Collection is empty.');
         var single = iterator.next();
         if (iterator.hasNext())
-          throw new IllegalArgumentException('Collection has more than one element.');
+          throw IllegalArgumentException_init_0('Collection has more than one element.');
         return single;
       }
     }
     function single_18($receiver) {
-      var tmp$, tmp$_0;
-      tmp$ = $receiver.size;
-      if (tmp$ === 0)
-        throw new NoSuchElementException('List is empty.');
-      else if (tmp$ === 1)
-        tmp$_0 = $receiver.get_za3lpa$(0);
-      else
-        throw new IllegalArgumentException('List has more than one element.');
-      return tmp$_0;
+      var tmp$;
+      switch ($receiver.size) {
+        case 0:
+          throw new NoSuchElementException('List is empty.');
+        case 1:
+          tmp$ = $receiver.get_za3lpa$(0);
+          break;
+        default:throw IllegalArgumentException_init_0('List has more than one element.');
+      }
+      return tmp$;
     }
     var single_19 = defineInlineFunction('kotlin.kotlin.collections.single_6jwkkr$', wrapFunction(function () {
-      var IllegalArgumentException_init = _.kotlin.IllegalArgumentException;
+      var IllegalArgumentException_init = _.kotlin.IllegalArgumentException_init_pdl1vj$;
       var NoSuchElementException_init = _.kotlin.NoSuchElementException;
       var Any = Object;
+      var throwCCE = Kotlin.throwCCE;
       return function ($receiver, predicate) {
         var tmp$, tmp$_0;
         var single = null;
@@ -17320,14 +17817,14 @@
           var element = tmp$.next();
           if (predicate(element)) {
             if (found)
-              throw new IllegalArgumentException_init('Collection contains more than one matching element.');
+              throw IllegalArgumentException_init('Collection contains more than one matching element.');
             single = element;
             found = true;
           }
         }
         if (!found)
           throw new NoSuchElementException_init('Collection contains no element matching the predicate.');
-        return (tmp$_0 = single) == null || Kotlin.isType(tmp$_0, Any) ? tmp$_0 : Kotlin.throwCCE();
+        return (tmp$_0 = single) == null || Kotlin.isType(tmp$_0, Any) ? tmp$_0 : throwCCE();
       };
     }));
     function singleOrNull_17($receiver) {
@@ -17368,7 +17865,7 @@
       var tmp$, tmp$_0, tmp$_1, tmp$_2;
       if (!(n >= 0)) {
         var message = 'Requested element count ' + n + ' is less than zero.';
-        throw new IllegalArgumentException(message.toString());
+        throw IllegalArgumentException_init_0(message.toString());
       }
       if (n === 0)
         return toList_8($receiver);
@@ -17411,7 +17908,7 @@
     function dropLast_8($receiver, n) {
       if (!(n >= 0)) {
         var message = 'Requested element count ' + n + ' is less than zero.';
-        throw new IllegalArgumentException(message.toString());
+        throw IllegalArgumentException_init_0(message.toString());
       }
       return take_8($receiver, coerceAtLeast_2($receiver.size - n | 0, 0));
     }
@@ -17585,7 +18082,7 @@
       var tmp$, tmp$_0;
       if (!(n >= 0)) {
         var message = 'Requested element count ' + n + ' is less than zero.';
-        throw new IllegalArgumentException(message.toString());
+        throw IllegalArgumentException_init_0(message.toString());
       }
       if (n === 0)
         return emptyList();
@@ -17610,7 +18107,7 @@
       var tmp$, tmp$_0;
       if (!(n >= 0)) {
         var message = 'Requested element count ' + n + ' is less than zero.';
-        throw new IllegalArgumentException(message.toString());
+        throw IllegalArgumentException_init_0(message.toString());
       }
       if (n === 0)
         return emptyList();
@@ -17703,6 +18200,7 @@
           };
         };
       });
+      var Kind_CLASS = Kotlin.Kind.CLASS;
       var Comparator = _.kotlin.Comparator;
       function Comparator$ObjectLiteral(closure$comparison) {
         this.closure$comparison = closure$comparison;
@@ -17710,7 +18208,7 @@
       Comparator$ObjectLiteral.prototype.compare = function (a, b) {
         return this.closure$comparison(a, b);
       };
-      Comparator$ObjectLiteral.$metadata$ = {kind: Kotlin.Kind.CLASS, interfaces: [Comparator]};
+      Comparator$ObjectLiteral.$metadata$ = {kind: Kind_CLASS, interfaces: [Comparator]};
       return function ($receiver, selector) {
         if ($receiver.size > 1) {
           sortWith($receiver, new Comparator$ObjectLiteral(compareBy$lambda(selector)));
@@ -17729,6 +18227,7 @@
           };
         };
       });
+      var Kind_CLASS = Kotlin.Kind.CLASS;
       var Comparator = _.kotlin.Comparator;
       function Comparator$ObjectLiteral(closure$comparison) {
         this.closure$comparison = closure$comparison;
@@ -17736,7 +18235,7 @@
       Comparator$ObjectLiteral.prototype.compare = function (a, b) {
         return this.closure$comparison(a, b);
       };
-      Comparator$ObjectLiteral.$metadata$ = {kind: Kotlin.Kind.CLASS, interfaces: [Comparator]};
+      Comparator$ObjectLiteral.$metadata$ = {kind: Kind_CLASS, interfaces: [Comparator]};
       return function ($receiver, selector) {
         if ($receiver.size > 1) {
           sortWith($receiver, new Comparator$ObjectLiteral(compareByDescending$lambda(selector)));
@@ -17751,7 +18250,7 @@
       if (Kotlin.isType($receiver, Collection)) {
         if ($receiver.size <= 1)
           return toList_8($receiver);
-        var $receiver_0 = Kotlin.isArray(tmp$ = copyToArray($receiver)) ? tmp$ : Kotlin.throwCCE();
+        var $receiver_0 = Kotlin.isArray(tmp$ = copyToArray($receiver)) ? tmp$ : throwCCE();
         sort_2($receiver_0);
         return asList($receiver_0);
       }
@@ -17771,6 +18270,7 @@
           };
         };
       });
+      var Kind_CLASS = Kotlin.Kind.CLASS;
       var Comparator = _.kotlin.Comparator;
       function Comparator$ObjectLiteral(closure$comparison) {
         this.closure$comparison = closure$comparison;
@@ -17778,7 +18278,7 @@
       Comparator$ObjectLiteral.prototype.compare = function (a, b) {
         return this.closure$comparison(a, b);
       };
-      Comparator$ObjectLiteral.$metadata$ = {kind: Kotlin.Kind.CLASS, interfaces: [Comparator]};
+      Comparator$ObjectLiteral.$metadata$ = {kind: Kind_CLASS, interfaces: [Comparator]};
       return function ($receiver, selector) {
         return sortedWith($receiver, new Comparator$ObjectLiteral(compareBy$lambda(selector)));
       };
@@ -17795,6 +18295,7 @@
           };
         };
       });
+      var Kind_CLASS = Kotlin.Kind.CLASS;
       var Comparator = _.kotlin.Comparator;
       function Comparator$ObjectLiteral(closure$comparison) {
         this.closure$comparison = closure$comparison;
@@ -17802,7 +18303,7 @@
       Comparator$ObjectLiteral.prototype.compare = function (a, b) {
         return this.closure$comparison(a, b);
       };
-      Comparator$ObjectLiteral.$metadata$ = {kind: Kotlin.Kind.CLASS, interfaces: [Comparator]};
+      Comparator$ObjectLiteral.$metadata$ = {kind: Kind_CLASS, interfaces: [Comparator]};
       return function ($receiver, selector) {
         return sortedWith($receiver, new Comparator$ObjectLiteral(compareByDescending$lambda(selector)));
       };
@@ -17815,7 +18316,7 @@
       if (Kotlin.isType($receiver, Collection)) {
         if ($receiver.size <= 1)
           return toList_8($receiver);
-        var $receiver_0 = Kotlin.isArray(tmp$ = copyToArray($receiver)) ? tmp$ : Kotlin.throwCCE();
+        var $receiver_0 = Kotlin.isArray(tmp$ = copyToArray($receiver)) ? tmp$ : throwCCE();
         sortWith_0($receiver_0, comparator);
         return asList($receiver_0);
       }
@@ -18004,16 +18505,19 @@
       return toCollection_8($receiver, HashSet_init_1(mapCapacity(collectionSizeOrDefault($receiver, 12))));
     }
     function toList_8($receiver) {
-      var tmp$, tmp$_0;
+      var tmp$;
       if (Kotlin.isType($receiver, Collection)) {
-        tmp$ = $receiver.size;
-        if (tmp$ === 0)
-          tmp$_0 = emptyList();
-        else if (tmp$ === 1)
-          tmp$_0 = listOf(Kotlin.isType($receiver, List) ? $receiver.get_za3lpa$(0) : $receiver.iterator().next());
-        else
-          tmp$_0 = toMutableList_9($receiver);
-        return tmp$_0;
+        switch ($receiver.size) {
+          case 0:
+            tmp$ = emptyList();
+            break;
+          case 1:
+            tmp$ = listOf(Kotlin.isType($receiver, List) ? $receiver.get_za3lpa$(0) : $receiver.iterator().next());
+            break;
+          default:tmp$ = toMutableList_9($receiver);
+            break;
+        }
+        return tmp$;
       }
       return optimizeReadOnlyList(toMutableList_8($receiver));
     }
@@ -18026,16 +18530,19 @@
       return ArrayList_init_0($receiver);
     }
     function toSet_8($receiver) {
-      var tmp$, tmp$_0;
+      var tmp$;
       if (Kotlin.isType($receiver, Collection)) {
-        tmp$ = $receiver.size;
-        if (tmp$ === 0)
-          tmp$_0 = emptySet();
-        else if (tmp$ === 1)
-          tmp$_0 = setOf(Kotlin.isType($receiver, List) ? $receiver.get_za3lpa$(0) : $receiver.iterator().next());
-        else
-          tmp$_0 = toCollection_8($receiver, LinkedHashSet_init_2(mapCapacity($receiver.size)));
-        return tmp$_0;
+        switch ($receiver.size) {
+          case 0:
+            tmp$ = emptySet();
+            break;
+          case 1:
+            tmp$ = setOf(Kotlin.isType($receiver, List) ? $receiver.get_za3lpa$(0) : $receiver.iterator().next());
+            break;
+          default:tmp$ = toCollection_8($receiver, LinkedHashSet_init_2(mapCapacity($receiver.size)));
+            break;
+        }
+        return tmp$;
       }
       return optimizeReadOnlySet(toCollection_8($receiver, LinkedHashSet_init_0()));
     }
@@ -18168,6 +18675,7 @@
       };
     }));
     var groupingBy_0 = defineInlineFunction('kotlin.kotlin.collections.groupingBy_dvm6j0$', wrapFunction(function () {
+      var Kind_CLASS = Kotlin.Kind.CLASS;
       var Grouping = _.kotlin.collections.Grouping;
       function groupingBy$ObjectLiteral(this$groupingBy, closure$keySelector) {
         this.this$groupingBy = this$groupingBy;
@@ -18179,7 +18687,7 @@
       groupingBy$ObjectLiteral.prototype.keyOf_11rb$ = function (element) {
         return this.closure$keySelector(element);
       };
-      groupingBy$ObjectLiteral.$metadata$ = {kind: Kotlin.Kind.CLASS, interfaces: [Grouping]};
+      groupingBy$ObjectLiteral.$metadata$ = {kind: Kind_CLASS, interfaces: [Grouping]};
       return function ($receiver, keySelector) {
         return new groupingBy$ObjectLiteral($receiver, keySelector);
       };
@@ -18215,6 +18723,19 @@
     }));
     var mapIndexedNotNull_0 = defineInlineFunction('kotlin.kotlin.collections.mapIndexedNotNull_aw5p9p$', wrapFunction(function () {
       var ArrayList_init = _.kotlin.collections.ArrayList_init_ww73n8$;
+      var wrapFunction = Kotlin.wrapFunction;
+      var Unit = Kotlin.kotlin.Unit;
+      var mapIndexedNotNullTo$lambda = wrapFunction(function () {
+        return function (closure$transform, closure$destination) {
+          return function (index, element) {
+            var tmp$;
+            if ((tmp$ = closure$transform(index, element)) != null) {
+              closure$destination.add_11rb$(tmp$);
+            }
+            return Unit;
+          };
+        };
+      });
       return function ($receiver, transform) {
         var destination = ArrayList_init();
         var tmp$, tmp$_0;
@@ -18231,6 +18752,19 @@
       };
     }));
     var mapIndexedNotNullTo_0 = defineInlineFunction('kotlin.kotlin.collections.mapIndexedNotNullTo_s7kjlj$', wrapFunction(function () {
+      var wrapFunction = Kotlin.wrapFunction;
+      var Unit = Kotlin.kotlin.Unit;
+      var mapIndexedNotNullTo$lambda = wrapFunction(function () {
+        return function (closure$transform, closure$destination) {
+          return function (index, element) {
+            var tmp$;
+            if ((tmp$ = closure$transform(index, element)) != null) {
+              closure$destination.add_11rb$(tmp$);
+            }
+            return Unit;
+          };
+        };
+      });
       return function ($receiver, destination, transform) {
         var tmp$, tmp$_0;
         var index = 0;
@@ -18257,6 +18791,19 @@
     });
     var mapNotNull_0 = defineInlineFunction('kotlin.kotlin.collections.mapNotNull_3fhhkf$', wrapFunction(function () {
       var ArrayList_init = _.kotlin.collections.ArrayList_init_ww73n8$;
+      var wrapFunction = Kotlin.wrapFunction;
+      var Unit = Kotlin.kotlin.Unit;
+      var mapNotNullTo$lambda = wrapFunction(function () {
+        return function (closure$transform, closure$destination) {
+          return function (element) {
+            var tmp$;
+            if ((tmp$ = closure$transform(element)) != null) {
+              closure$destination.add_11rb$(tmp$);
+            }
+            return Unit;
+          };
+        };
+      });
       return function ($receiver, transform) {
         var destination = ArrayList_init();
         var tmp$;
@@ -18272,6 +18819,19 @@
       };
     }));
     var mapNotNullTo_0 = defineInlineFunction('kotlin.kotlin.collections.mapNotNullTo_p5b1il$', wrapFunction(function () {
+      var wrapFunction = Kotlin.wrapFunction;
+      var Unit = Kotlin.kotlin.Unit;
+      var mapNotNullTo$lambda = wrapFunction(function () {
+        return function (closure$transform, closure$destination) {
+          return function (element) {
+            var tmp$;
+            if ((tmp$ = closure$transform(element)) != null) {
+              closure$destination.add_11rb$(tmp$);
+            }
+            return Unit;
+          };
+        };
+      });
       return function ($receiver, destination, transform) {
         var tmp$;
         tmp$ = $receiver.iterator();
@@ -18647,11 +19207,11 @@
       };
     }));
     var reduce_8 = defineInlineFunction('kotlin.kotlin.collections.reduce_lrrcxv$', wrapFunction(function () {
-      var UnsupportedOperationException_init = _.kotlin.UnsupportedOperationException;
+      var UnsupportedOperationException_init = _.kotlin.UnsupportedOperationException_init_pdl1vj$;
       return function ($receiver, operation) {
         var iterator = $receiver.iterator();
         if (!iterator.hasNext())
-          throw new UnsupportedOperationException_init("Empty collection can't be reduced.");
+          throw UnsupportedOperationException_init("Empty collection can't be reduced.");
         var accumulator = iterator.next();
         while (iterator.hasNext()) {
           accumulator = operation(accumulator, iterator.next());
@@ -18660,12 +19220,12 @@
       };
     }));
     var reduceIndexed_8 = defineInlineFunction('kotlin.kotlin.collections.reduceIndexed_8txfjb$', wrapFunction(function () {
-      var UnsupportedOperationException_init = _.kotlin.UnsupportedOperationException;
+      var UnsupportedOperationException_init = _.kotlin.UnsupportedOperationException_init_pdl1vj$;
       return function ($receiver, operation) {
         var tmp$;
         var iterator = $receiver.iterator();
         if (!iterator.hasNext())
-          throw new UnsupportedOperationException_init("Empty collection can't be reduced.");
+          throw UnsupportedOperationException_init("Empty collection can't be reduced.");
         var index = 1;
         var accumulator = iterator.next();
         while (iterator.hasNext()) {
@@ -18675,11 +19235,11 @@
       };
     }));
     var reduceRight_8 = defineInlineFunction('kotlin.kotlin.collections.reduceRight_y5l5zf$', wrapFunction(function () {
-      var UnsupportedOperationException_init = _.kotlin.UnsupportedOperationException;
+      var UnsupportedOperationException_init = _.kotlin.UnsupportedOperationException_init_pdl1vj$;
       return function ($receiver, operation) {
         var iterator = $receiver.listIterator_za3lpa$($receiver.size);
         if (!iterator.hasPrevious())
-          throw new UnsupportedOperationException_init("Empty list can't be reduced.");
+          throw UnsupportedOperationException_init("Empty list can't be reduced.");
         var accumulator = iterator.previous();
         while (iterator.hasPrevious()) {
           accumulator = operation(iterator.previous(), accumulator);
@@ -18688,11 +19248,11 @@
       };
     }));
     var reduceRightIndexed_8 = defineInlineFunction('kotlin.kotlin.collections.reduceRightIndexed_1a67zb$', wrapFunction(function () {
-      var UnsupportedOperationException_init = _.kotlin.UnsupportedOperationException;
+      var UnsupportedOperationException_init = _.kotlin.UnsupportedOperationException_init_pdl1vj$;
       return function ($receiver, operation) {
         var iterator = $receiver.listIterator_za3lpa$($receiver.size);
         if (!iterator.hasPrevious())
-          throw new UnsupportedOperationException_init("Empty list can't be reduced.");
+          throw UnsupportedOperationException_init("Empty list can't be reduced.");
         var accumulator = iterator.previous();
         while (iterator.hasPrevious()) {
           var index = iterator.previousIndex();
@@ -18727,10 +19287,10 @@
       while (tmp$.hasNext()) {
         var element = tmp$.next();
         if (element == null) {
-          throw new IllegalArgumentException('null element found in ' + $receiver + '.');
+          throw IllegalArgumentException_init_0('null element found in ' + $receiver + '.');
         }
       }
-      return Kotlin.isType(tmp$_0 = $receiver, Iterable) ? tmp$_0 : Kotlin.throwCCE();
+      return Kotlin.isType(tmp$_0 = $receiver, Iterable) ? tmp$_0 : throwCCE();
     }
     function requireNoNulls_1($receiver) {
       var tmp$, tmp$_0;
@@ -18738,10 +19298,16 @@
       while (tmp$.hasNext()) {
         var element = tmp$.next();
         if (element == null) {
-          throw new IllegalArgumentException('null element found in ' + $receiver + '.');
+          throw IllegalArgumentException_init_0('null element found in ' + $receiver + '.');
         }
       }
-      return Kotlin.isType(tmp$_0 = $receiver, List) ? tmp$_0 : Kotlin.throwCCE();
+      return Kotlin.isType(tmp$_0 = $receiver, List) ? tmp$_0 : throwCCE();
+    }
+    function chunked($receiver, size) {
+      return windowed($receiver, size, size, true);
+    }
+    function chunked_0($receiver, size, transform) {
+      return windowed_0($receiver, size, size, true, transform);
     }
     function minus($receiver, element) {
       var result = ArrayList_init(collectionSizeOrDefault($receiver, 10));
@@ -18751,7 +19317,7 @@
       while (tmp$.hasNext()) {
         var element_0 = tmp$.next();
         var predicate$result;
-        if (!removed.v && Kotlin.equals(element_0, element)) {
+        if (!removed.v && equals(element_0, element)) {
           removed.v = true;
           predicate$result = false;
         }
@@ -18904,6 +19470,67 @@
         return plus($receiver, element);
       };
     }));
+    function windowed($receiver, size, step, partialWindows) {
+      if (step === void 0)
+        step = 1;
+      if (partialWindows === void 0)
+        partialWindows = false;
+      checkWindowSizeStep(size, step);
+      if (Kotlin.isType($receiver, RandomAccess) && Kotlin.isType($receiver, List)) {
+        var thisSize = $receiver.size;
+        var result = ArrayList_init((thisSize + step - 1 | 0) / step | 0);
+        var index = {v: 0};
+        while (index.v < thisSize) {
+          var windowSize = coerceAtMost_2(size, thisSize - index.v | 0);
+          if (windowSize < size && !partialWindows)
+            break;
+          var list = ArrayList_init(windowSize);
+          var tmp$;
+          tmp$ = windowSize - 1 | 0;
+          for (var index_0 = 0; index_0 <= tmp$; index_0++) {
+            list.add_11rb$($receiver.get_za3lpa$(index_0 + index.v | 0));
+          }
+          result.add_11rb$(list);
+          index.v = index.v + step | 0;
+        }
+        return result;
+      }
+      var result_0 = ArrayList_init();
+      var $receiver_0 = windowedIterator($receiver.iterator(), size, step, partialWindows, false);
+      while ($receiver_0.hasNext()) {
+        var element = $receiver_0.next();
+        result_0.add_11rb$(element);
+      }
+      return result_0;
+    }
+    function windowed_0($receiver, size, step, partialWindows, transform) {
+      if (step === void 0)
+        step = 1;
+      if (partialWindows === void 0)
+        partialWindows = false;
+      checkWindowSizeStep(size, step);
+      if (Kotlin.isType($receiver, RandomAccess) && Kotlin.isType($receiver, List)) {
+        var thisSize = $receiver.size;
+        var result = ArrayList_init((thisSize + step - 1 | 0) / step | 0);
+        var window_0 = new MovingSubList($receiver);
+        var index = 0;
+        while (index < thisSize) {
+          window_0.move_vux9f0$(index, coerceAtMost_2(index + size | 0, thisSize));
+          if (!partialWindows && window_0.size < size)
+            break;
+          result.add_11rb$(transform(window_0));
+          index = index + step | 0;
+        }
+        return result;
+      }
+      var result_0 = ArrayList_init();
+      var $receiver_0 = windowedIterator($receiver.iterator(), size, step, partialWindows, true);
+      while ($receiver_0.hasNext()) {
+        var element = $receiver_0.next();
+        result_0.add_11rb$(transform(element));
+      }
+      return result_0;
+    }
     function zip_51($receiver, other) {
       var tmp$, tmp$_0;
       var arraySize = other.length;
@@ -18958,6 +19585,43 @@
           list.add_11rb$(transform(first.next(), second.next()));
         }
         return list;
+      };
+    }));
+    function zipWithNext($receiver) {
+      var zipWithNext$result;
+      zipWithNext$break: do {
+        var iterator = $receiver.iterator();
+        if (!iterator.hasNext()) {
+          zipWithNext$result = emptyList();
+          break zipWithNext$break;
+        }
+        var result = ArrayList_init();
+        var current = iterator.next();
+        while (iterator.hasNext()) {
+          var next = iterator.next();
+          result.add_11rb$(to(current, next));
+          current = next;
+        }
+        zipWithNext$result = result;
+      }
+       while (false);
+      return zipWithNext$result;
+    }
+    var zipWithNext_0 = defineInlineFunction('kotlin.kotlin.collections.zipWithNext_kvcuaw$', wrapFunction(function () {
+      var emptyList = _.kotlin.collections.emptyList_287e2$;
+      var ArrayList_init = _.kotlin.collections.ArrayList_init_ww73n8$;
+      return function ($receiver, transform) {
+        var iterator = $receiver.iterator();
+        if (!iterator.hasNext())
+          return emptyList();
+        var result = ArrayList_init();
+        var current = iterator.next();
+        while (iterator.hasNext()) {
+          var next = iterator.next();
+          result.add_11rb$(transform(current, next));
+          current = next;
+        }
+        return result;
       };
     }));
     function joinTo_8($receiver, buffer, separator, prefix, postfix, limit, truncated, transform) {
@@ -19021,7 +19685,7 @@
     Sequence$ObjectLiteral_0.prototype.iterator = function () {
       return this.closure$iterator();
     };
-    Sequence$ObjectLiteral_0.$metadata$ = {kind: Kotlin.Kind.CLASS, interfaces: [Sequence]};
+    Sequence$ObjectLiteral_0.$metadata$ = {kind: Kind_CLASS, interfaces: [Sequence]};
     function asSequence_8($receiver) {
       return new Sequence$ObjectLiteral_0(asSequence$lambda_8($receiver));
     }
@@ -19035,7 +19699,7 @@
         sum += element;
         count = count + 1 | 0;
       }
-      return count === 0 ? DoubleCompanionObject.NaN : sum / count;
+      return count === 0 ? kotlin_js_internal_DoubleCompanionObject.NaN : sum / count;
     }
     function average_12($receiver) {
       var tmp$;
@@ -19047,7 +19711,7 @@
         sum += element;
         count = count + 1 | 0;
       }
-      return count === 0 ? DoubleCompanionObject.NaN : sum / count;
+      return count === 0 ? kotlin_js_internal_DoubleCompanionObject.NaN : sum / count;
     }
     function average_13($receiver) {
       var tmp$;
@@ -19059,7 +19723,7 @@
         sum += element;
         count = count + 1 | 0;
       }
-      return count === 0 ? DoubleCompanionObject.NaN : sum / count;
+      return count === 0 ? kotlin_js_internal_DoubleCompanionObject.NaN : sum / count;
     }
     function average_14($receiver) {
       var tmp$;
@@ -19071,7 +19735,7 @@
         sum += element;
         count = count + 1 | 0;
       }
-      return count === 0 ? DoubleCompanionObject.NaN : sum / count;
+      return count === 0 ? kotlin_js_internal_DoubleCompanionObject.NaN : sum / count;
     }
     function average_15($receiver) {
       var tmp$;
@@ -19083,7 +19747,7 @@
         sum += element;
         count = count + 1 | 0;
       }
-      return count === 0 ? DoubleCompanionObject.NaN : sum / count;
+      return count === 0 ? kotlin_js_internal_DoubleCompanionObject.NaN : sum / count;
     }
     function average_16($receiver) {
       var tmp$;
@@ -19095,7 +19759,7 @@
         sum += element;
         count = count + 1 | 0;
       }
-      return count === 0 ? DoubleCompanionObject.NaN : sum / count;
+      return count === 0 ? kotlin_js_internal_DoubleCompanionObject.NaN : sum / count;
     }
     function sum_11($receiver) {
       var tmp$;
@@ -19162,14 +19826,16 @@
     }
     var maxOf_0 = defineInlineFunction('kotlin.kotlin.comparisons.maxOf_5gdoe6$', wrapFunction(function () {
       var Math_0 = Math;
+      var toByte = Kotlin.toByte;
       return function (a, b) {
-        return Kotlin.toByte(Math_0.max(a, b));
+        return toByte(Math_0.max(a, b));
       };
     }));
     var maxOf_1 = defineInlineFunction('kotlin.kotlin.comparisons.maxOf_8bdmd0$', wrapFunction(function () {
       var Math_0 = Math;
+      var toShort = Kotlin.toShort;
       return function (a, b) {
-        return Kotlin.toShort(Math_0.max(a, b));
+        return toShort(Math_0.max(a, b));
       };
     }));
     var maxOf_2 = defineInlineFunction('kotlin.kotlin.comparisons.maxOf_vux9f0$', wrapFunction(function () {
@@ -19202,14 +19868,16 @@
     }
     var maxOf_7 = defineInlineFunction('kotlin.kotlin.comparisons.maxOf_d9r5kp$', wrapFunction(function () {
       var Math_0 = Math;
+      var toByte = Kotlin.toByte;
       return function (a, b, c) {
-        return Kotlin.toByte(Math_0.max(a, Math_0.max(b, c)));
+        return toByte(Math_0.max(a, Math_0.max(b, c)));
       };
     }));
     var maxOf_8 = defineInlineFunction('kotlin.kotlin.comparisons.maxOf_i3nxhr$', wrapFunction(function () {
       var Math_0 = Math;
+      var toShort = Kotlin.toShort;
       return function (a, b, c) {
-        return Kotlin.toShort(Math_0.max(a, Math_0.max(b, c)));
+        return toShort(Math_0.max(a, Math_0.max(b, c)));
       };
     }));
     var maxOf_9 = defineInlineFunction('kotlin.kotlin.comparisons.maxOf_qt1dr2$', wrapFunction(function () {
@@ -19248,14 +19916,16 @@
     }
     var minOf_0 = defineInlineFunction('kotlin.kotlin.comparisons.minOf_5gdoe6$', wrapFunction(function () {
       var Math_0 = Math;
+      var toByte = Kotlin.toByte;
       return function (a, b) {
-        return Kotlin.toByte(Math_0.min(a, b));
+        return toByte(Math_0.min(a, b));
       };
     }));
     var minOf_1 = defineInlineFunction('kotlin.kotlin.comparisons.minOf_8bdmd0$', wrapFunction(function () {
       var Math_0 = Math;
+      var toShort = Kotlin.toShort;
       return function (a, b) {
-        return Kotlin.toShort(Math_0.min(a, b));
+        return toShort(Math_0.min(a, b));
       };
     }));
     var minOf_2 = defineInlineFunction('kotlin.kotlin.comparisons.minOf_vux9f0$', wrapFunction(function () {
@@ -19288,14 +19958,16 @@
     }
     var minOf_7 = defineInlineFunction('kotlin.kotlin.comparisons.minOf_d9r5kp$', wrapFunction(function () {
       var Math_0 = Math;
+      var toByte = Kotlin.toByte;
       return function (a, b, c) {
-        return Kotlin.toByte(Math_0.min(a, Math_0.min(b, c)));
+        return toByte(Math_0.min(a, Math_0.min(b, c)));
       };
     }));
     var minOf_8 = defineInlineFunction('kotlin.kotlin.comparisons.minOf_i3nxhr$', wrapFunction(function () {
       var Math_0 = Math;
+      var toShort = Kotlin.toShort;
       return function (a, b, c) {
-        return Kotlin.toShort(Math_0.min(a, Math_0.min(b, c)));
+        return toShort(Math_0.min(a, Math_0.min(b, c)));
       };
     }));
     var minOf_9 = defineInlineFunction('kotlin.kotlin.comparisons.minOf_qt1dr2$', wrapFunction(function () {
@@ -19391,6 +20063,19 @@
     }));
     var mapNotNull_1 = defineInlineFunction('kotlin.kotlin.collections.mapNotNull_9b72hb$', wrapFunction(function () {
       var ArrayList_init = _.kotlin.collections.ArrayList_init_ww73n8$;
+      var wrapFunction = Kotlin.wrapFunction;
+      var Unit = Kotlin.kotlin.Unit;
+      var mapNotNullTo$lambda = wrapFunction(function () {
+        return function (closure$transform, closure$destination) {
+          return function (element) {
+            var tmp$;
+            if ((tmp$ = closure$transform(element)) != null) {
+              closure$destination.add_11rb$(tmp$);
+            }
+            return Unit;
+          };
+        };
+      });
       return function ($receiver, transform) {
         var destination = ArrayList_init();
         var tmp$;
@@ -19406,6 +20091,19 @@
       };
     }));
     var mapNotNullTo_1 = defineInlineFunction('kotlin.kotlin.collections.mapNotNullTo_ir6y9a$', wrapFunction(function () {
+      var wrapFunction = Kotlin.wrapFunction;
+      var Unit = Kotlin.kotlin.Unit;
+      var mapNotNullTo$lambda = wrapFunction(function () {
+        return function (closure$transform, closure$destination) {
+          return function (element) {
+            var tmp$;
+            if ((tmp$ = closure$transform(element)) != null) {
+              closure$destination.add_11rb$(tmp$);
+            }
+            return Unit;
+          };
+        };
+      });
       return function ($receiver, destination, transform) {
         var tmp$;
         tmp$ = $receiver.entries.iterator();
@@ -19725,17 +20423,17 @@
       return IntProgression$Companion_getInstance().fromClosedRange_qt1dr2$($receiver, to, -1);
     }
     function reversed_9($receiver) {
-      return IntProgression$Companion_getInstance().fromClosedRange_qt1dr2$($receiver.last, $receiver.first, -$receiver.step);
+      return IntProgression$Companion_getInstance().fromClosedRange_qt1dr2$($receiver.last, $receiver.first, -$receiver.step | 0);
     }
     function reversed_10($receiver) {
       return LongProgression$Companion_getInstance().fromClosedRange_b9bd0d$($receiver.last, $receiver.first, $receiver.step.unaryMinus());
     }
     function reversed_11($receiver) {
-      return CharProgression$Companion_getInstance().fromClosedRange_ayra44$($receiver.last, $receiver.first, -$receiver.step);
+      return CharProgression$Companion_getInstance().fromClosedRange_ayra44$($receiver.last, $receiver.first, -$receiver.step | 0);
     }
     function step($receiver, step) {
       checkStepIsPositive(step > 0, step);
-      return IntProgression$Companion_getInstance().fromClosedRange_qt1dr2$($receiver.first, $receiver.last, $receiver.step > 0 ? step : -step);
+      return IntProgression$Companion_getInstance().fromClosedRange_qt1dr2$($receiver.first, $receiver.last, $receiver.step > 0 ? step : -step | 0);
     }
     function step_0($receiver, step) {
       checkStepIsPositive(step.compareTo_11rb$(Kotlin.Long.fromInt(0)) > 0, step);
@@ -19743,31 +20441,37 @@
     }
     function step_1($receiver, step) {
       checkStepIsPositive(step > 0, step);
-      return CharProgression$Companion_getInstance().fromClosedRange_ayra44$($receiver.first, $receiver.last, $receiver.step > 0 ? step : -step);
+      return CharProgression$Companion_getInstance().fromClosedRange_ayra44$($receiver.first, $receiver.last, $receiver.step > 0 ? step : -step | 0);
     }
     function toByteExactOrNull($receiver) {
-      return (new IntRange(ByteCompanionObject.MIN_VALUE, ByteCompanionObject.MAX_VALUE)).contains_mef7kx$($receiver) ? Kotlin.toByte($receiver) : null;
+      var tmp$, tmp$_0;
+      tmp$ = kotlin_js_internal_ByteCompanionObject.MIN_VALUE;
+      tmp$_0 = kotlin_js_internal_ByteCompanionObject.MAX_VALUE;
+      return tmp$ <= $receiver && $receiver <= tmp$_0 ? toByte($receiver) : null;
     }
     function toByteExactOrNull_0($receiver) {
-      return Kotlin.Long.fromInt(-128).rangeTo(Kotlin.Long.fromInt(127)).contains_mef7kx$($receiver) ? Kotlin.toByte($receiver.toInt()) : null;
+      return Kotlin.Long.fromInt(-128).lessThanOrEqual($receiver) && $receiver.lessThanOrEqual(Kotlin.Long.fromInt(127)) ? toByte($receiver.toInt()) : null;
     }
     function toByteExactOrNull_1($receiver) {
-      return contains_34(new IntRange(ByteCompanionObject.MIN_VALUE, ByteCompanionObject.MAX_VALUE), $receiver) ? Kotlin.toByte($receiver) : null;
+      return contains_34(new IntRange(kotlin_js_internal_ByteCompanionObject.MIN_VALUE, kotlin_js_internal_ByteCompanionObject.MAX_VALUE), $receiver) ? toByte($receiver) : null;
     }
     function toByteExactOrNull_2($receiver) {
-      return rangeTo_1(ByteCompanionObject.MIN_VALUE, ByteCompanionObject.MAX_VALUE).contains_mef7kx$($receiver) ? Kotlin.toByte($receiver) : null;
+      return rangeTo_1(kotlin_js_internal_ByteCompanionObject.MIN_VALUE, kotlin_js_internal_ByteCompanionObject.MAX_VALUE).contains_mef7kx$($receiver) ? toByte(numberToInt($receiver)) : null;
     }
     function toByteExactOrNull_3($receiver) {
-      return rangeTo_1(ByteCompanionObject.MIN_VALUE, ByteCompanionObject.MAX_VALUE).contains_mef7kx$($receiver) ? Kotlin.toByte($receiver) : null;
+      return rangeTo_1(kotlin_js_internal_ByteCompanionObject.MIN_VALUE, kotlin_js_internal_ByteCompanionObject.MAX_VALUE).contains_mef7kx$($receiver) ? toByte(numberToInt($receiver)) : null;
     }
     function toIntExactOrNull($receiver) {
-      return Kotlin.Long.fromInt(-2147483648).rangeTo(Kotlin.Long.fromInt(2147483647)).contains_mef7kx$($receiver) ? $receiver.toInt() : null;
+      var tmp$, tmp$_0;
+      tmp$ = Kotlin.Long.fromInt(-2147483648);
+      tmp$_0 = Kotlin.Long.fromInt(2147483647);
+      return tmp$.lessThanOrEqual($receiver) && $receiver.lessThanOrEqual(tmp$_0) ? $receiver.toInt() : null;
     }
     function toIntExactOrNull_0($receiver) {
-      return rangeTo_1(IntCompanionObject.MIN_VALUE, IntCompanionObject.MAX_VALUE).contains_mef7kx$($receiver) ? $receiver | 0 : null;
+      return rangeTo_1(kotlin_js_internal_IntCompanionObject.MIN_VALUE, kotlin_js_internal_IntCompanionObject.MAX_VALUE).contains_mef7kx$($receiver) ? numberToInt($receiver) : null;
     }
     function toIntExactOrNull_1($receiver) {
-      return rangeTo_1(IntCompanionObject.MIN_VALUE, IntCompanionObject.MAX_VALUE).contains_mef7kx$($receiver) ? $receiver | 0 : null;
+      return rangeTo_1(kotlin_js_internal_IntCompanionObject.MIN_VALUE, kotlin_js_internal_IntCompanionObject.MAX_VALUE).contains_mef7kx$($receiver) ? numberToInt($receiver) : null;
     }
     function toLongExactOrNull($receiver) {
       return rangeTo_1((new Kotlin.Long(0, -2147483648)).toNumber(), (new Kotlin.Long(-1, 2147483647)).toNumber()).contains_mef7kx$($receiver) ? Kotlin.Long.fromNumber($receiver) : null;
@@ -19776,16 +20480,19 @@
       return rangeTo_1((new Kotlin.Long(0, -2147483648)).toNumber(), (new Kotlin.Long(-1, 2147483647)).toNumber()).contains_mef7kx$($receiver) ? Kotlin.Long.fromNumber($receiver) : null;
     }
     function toShortExactOrNull($receiver) {
-      return (new IntRange(ShortCompanionObject.MIN_VALUE, ShortCompanionObject.MAX_VALUE)).contains_mef7kx$($receiver) ? Kotlin.toShort($receiver) : null;
+      var tmp$, tmp$_0;
+      tmp$ = kotlin_js_internal_ShortCompanionObject.MIN_VALUE;
+      tmp$_0 = kotlin_js_internal_ShortCompanionObject.MAX_VALUE;
+      return tmp$ <= $receiver && $receiver <= tmp$_0 ? toShort($receiver) : null;
     }
     function toShortExactOrNull_0($receiver) {
-      return Kotlin.Long.fromInt(-32768).rangeTo(Kotlin.Long.fromInt(32767)).contains_mef7kx$($receiver) ? Kotlin.toShort($receiver.toInt()) : null;
+      return Kotlin.Long.fromInt(-32768).lessThanOrEqual($receiver) && $receiver.lessThanOrEqual(Kotlin.Long.fromInt(32767)) ? toShort($receiver.toInt()) : null;
     }
     function toShortExactOrNull_1($receiver) {
-      return rangeTo_1(ShortCompanionObject.MIN_VALUE, ShortCompanionObject.MAX_VALUE).contains_mef7kx$($receiver) ? Kotlin.toShort($receiver) : null;
+      return rangeTo_1(kotlin_js_internal_ShortCompanionObject.MIN_VALUE, kotlin_js_internal_ShortCompanionObject.MAX_VALUE).contains_mef7kx$($receiver) ? toShort(numberToInt($receiver)) : null;
     }
     function toShortExactOrNull_2($receiver) {
-      return rangeTo_1(ShortCompanionObject.MIN_VALUE, ShortCompanionObject.MAX_VALUE).contains_mef7kx$($receiver) ? Kotlin.toShort($receiver) : null;
+      return rangeTo_1(kotlin_js_internal_ShortCompanionObject.MIN_VALUE, kotlin_js_internal_ShortCompanionObject.MAX_VALUE).contains_mef7kx$($receiver) ? toShort(numberToInt($receiver)) : null;
     }
     function until($receiver, to) {
       return new IntRange($receiver, to - 1 | 0);
@@ -19802,10 +20509,10 @@
     function until_3($receiver, to) {
       if (to <= 0)
         return CharRange$Companion_getInstance().EMPTY;
-      return new CharRange($receiver, Kotlin.toChar(to - 1));
+      return new CharRange($receiver, toChar(to - 1));
     }
     function until_4($receiver, to) {
-      if (to <= IntCompanionObject.MIN_VALUE)
+      if (to <= kotlin_js_internal_IntCompanionObject.MIN_VALUE)
         return IntRange$Companion_getInstance().EMPTY;
       return new IntRange($receiver, to - 1 | 0);
     }
@@ -19813,12 +20520,12 @@
       return $receiver.rangeTo(Kotlin.Long.fromInt(to).subtract(Kotlin.Long.fromInt(1)));
     }
     function until_6($receiver, to) {
-      if (to <= IntCompanionObject.MIN_VALUE)
+      if (to <= kotlin_js_internal_IntCompanionObject.MIN_VALUE)
         return IntRange$Companion_getInstance().EMPTY;
       return new IntRange($receiver, to - 1 | 0);
     }
     function until_7($receiver, to) {
-      if (to <= IntCompanionObject.MIN_VALUE)
+      if (to <= kotlin_js_internal_IntCompanionObject.MIN_VALUE)
         return IntRange$Companion_getInstance().EMPTY;
       return new IntRange($receiver, to - 1 | 0);
     }
@@ -19899,7 +20606,7 @@
     function coerceIn($receiver, minimumValue, maximumValue) {
       if (minimumValue !== null && maximumValue !== null) {
         if (Kotlin.compareTo(minimumValue, maximumValue) > 0)
-          throw new IllegalArgumentException('Cannot coerce value to an empty range: maximum ' + Kotlin.toString(maximumValue) + ' is less than minimum ' + Kotlin.toString(minimumValue) + '.');
+          throw IllegalArgumentException_init_0('Cannot coerce value to an empty range: maximum ' + toString(maximumValue) + ' is less than minimum ' + toString(minimumValue) + '.');
         if (Kotlin.compareTo($receiver, minimumValue) < 0)
           return minimumValue;
         if (Kotlin.compareTo($receiver, maximumValue) > 0)
@@ -19915,7 +20622,7 @@
     }
     function coerceIn_0($receiver, minimumValue, maximumValue) {
       if (minimumValue > maximumValue)
-        throw new IllegalArgumentException('Cannot coerce value to an empty range: maximum ' + maximumValue + ' is less than minimum ' + minimumValue + '.');
+        throw IllegalArgumentException_init_0('Cannot coerce value to an empty range: maximum ' + maximumValue + ' is less than minimum ' + minimumValue + '.');
       if ($receiver < minimumValue)
         return minimumValue;
       if ($receiver > maximumValue)
@@ -19924,7 +20631,7 @@
     }
     function coerceIn_1($receiver, minimumValue, maximumValue) {
       if (minimumValue > maximumValue)
-        throw new IllegalArgumentException('Cannot coerce value to an empty range: maximum ' + maximumValue + ' is less than minimum ' + minimumValue + '.');
+        throw IllegalArgumentException_init_0('Cannot coerce value to an empty range: maximum ' + maximumValue + ' is less than minimum ' + minimumValue + '.');
       if ($receiver < minimumValue)
         return minimumValue;
       if ($receiver > maximumValue)
@@ -19933,7 +20640,7 @@
     }
     function coerceIn_2($receiver, minimumValue, maximumValue) {
       if (minimumValue > maximumValue)
-        throw new IllegalArgumentException('Cannot coerce value to an empty range: maximum ' + maximumValue + ' is less than minimum ' + minimumValue + '.');
+        throw IllegalArgumentException_init_0('Cannot coerce value to an empty range: maximum ' + maximumValue + ' is less than minimum ' + minimumValue + '.');
       if ($receiver < minimumValue)
         return minimumValue;
       if ($receiver > maximumValue)
@@ -19942,7 +20649,7 @@
     }
     function coerceIn_3($receiver, minimumValue, maximumValue) {
       if (minimumValue.compareTo_11rb$(maximumValue) > 0)
-        throw new IllegalArgumentException('Cannot coerce value to an empty range: maximum ' + maximumValue + ' is less than minimum ' + minimumValue + '.');
+        throw IllegalArgumentException_init_0('Cannot coerce value to an empty range: maximum ' + maximumValue + ' is less than minimum ' + minimumValue + '.');
       if ($receiver.compareTo_11rb$(minimumValue) < 0)
         return minimumValue;
       if ($receiver.compareTo_11rb$(maximumValue) > 0)
@@ -19951,7 +20658,7 @@
     }
     function coerceIn_4($receiver, minimumValue, maximumValue) {
       if (minimumValue > maximumValue)
-        throw new IllegalArgumentException('Cannot coerce value to an empty range: maximum ' + maximumValue + ' is less than minimum ' + minimumValue + '.');
+        throw IllegalArgumentException_init_0('Cannot coerce value to an empty range: maximum ' + maximumValue + ' is less than minimum ' + minimumValue + '.');
       if ($receiver < minimumValue)
         return minimumValue;
       if ($receiver > maximumValue)
@@ -19960,7 +20667,7 @@
     }
     function coerceIn_5($receiver, minimumValue, maximumValue) {
       if (minimumValue > maximumValue)
-        throw new IllegalArgumentException('Cannot coerce value to an empty range: maximum ' + maximumValue + ' is less than minimum ' + minimumValue + '.');
+        throw IllegalArgumentException_init_0('Cannot coerce value to an empty range: maximum ' + maximumValue + ' is less than minimum ' + minimumValue + '.');
       if ($receiver < minimumValue)
         return minimumValue;
       if ($receiver > maximumValue)
@@ -19970,7 +20677,7 @@
     function coerceIn_6($receiver, range) {
       var tmp$;
       if (range.isEmpty())
-        throw new IllegalArgumentException('Cannot coerce value to an empty range: ' + range + '.');
+        throw IllegalArgumentException_init_0('Cannot coerce value to an empty range: ' + range + '.');
       if (range.lessThanOrEquals_n65qkk$($receiver, range.start) && !range.lessThanOrEquals_n65qkk$(range.start, $receiver))
         tmp$ = range.start;
       else if (range.lessThanOrEquals_n65qkk$(range.endInclusive, $receiver) && !range.lessThanOrEquals_n65qkk$($receiver, range.endInclusive))
@@ -19985,7 +20692,7 @@
         return coerceIn_6($receiver, range);
       }
       if (range.isEmpty())
-        throw new IllegalArgumentException('Cannot coerce value to an empty range: ' + range + '.');
+        throw IllegalArgumentException_init_0('Cannot coerce value to an empty range: ' + range + '.');
       if (Kotlin.compareTo($receiver, range.start) < 0)
         tmp$ = range.start;
       else if (Kotlin.compareTo($receiver, range.endInclusive) > 0)
@@ -20000,7 +20707,7 @@
         return coerceIn_6($receiver, range);
       }
       if (range.isEmpty())
-        throw new IllegalArgumentException('Cannot coerce value to an empty range: ' + range + '.');
+        throw IllegalArgumentException_init_0('Cannot coerce value to an empty range: ' + range + '.');
       if ($receiver < range.start)
         tmp$ = range.start;
       else if ($receiver > range.endInclusive)
@@ -20015,7 +20722,7 @@
         return coerceIn_6($receiver, range);
       }
       if (range.isEmpty())
-        throw new IllegalArgumentException('Cannot coerce value to an empty range: ' + range + '.');
+        throw IllegalArgumentException_init_0('Cannot coerce value to an empty range: ' + range + '.');
       if ($receiver.compareTo_11rb$(range.start) < 0)
         tmp$ = range.start;
       else if ($receiver.compareTo_11rb$(range.endInclusive) > 0)
@@ -20131,7 +20838,7 @@
       tmp$ = $receiver.iterator();
       while (tmp$.hasNext()) {
         var item = tmp$.next();
-        if (Kotlin.equals(element, item))
+        if (equals(element, item))
           return index;
         index = index + 1 | 0;
       }
@@ -20174,6 +20881,7 @@
     var last_22 = defineInlineFunction('kotlin.kotlin.sequences.last_euau3h$', wrapFunction(function () {
       var NoSuchElementException_init = _.kotlin.NoSuchElementException;
       var Any = Object;
+      var throwCCE = Kotlin.throwCCE;
       return function ($receiver, predicate) {
         var tmp$, tmp$_0;
         var last = null;
@@ -20188,7 +20896,7 @@
         }
         if (!found)
           throw new NoSuchElementException_init('Sequence contains no element matching the predicate.');
-        return (tmp$_0 = last) == null || Kotlin.isType(tmp$_0, Any) ? tmp$_0 : Kotlin.throwCCE();
+        return (tmp$_0 = last) == null || Kotlin.isType(tmp$_0, Any) ? tmp$_0 : throwCCE();
       };
     }));
     function lastIndexOf_10($receiver, element) {
@@ -20198,7 +20906,7 @@
       tmp$ = $receiver.iterator();
       while (tmp$.hasNext()) {
         var item = tmp$.next();
-        if (Kotlin.equals(element, item))
+        if (equals(element, item))
           lastIndex = index;
         index = index + 1 | 0;
       }
@@ -20231,13 +20939,14 @@
         throw new NoSuchElementException('Sequence is empty.');
       var single = iterator.next();
       if (iterator.hasNext())
-        throw new IllegalArgumentException('Sequence has more than one element.');
+        throw IllegalArgumentException_init_0('Sequence has more than one element.');
       return single;
     }
     var single_21 = defineInlineFunction('kotlin.kotlin.sequences.single_euau3h$', wrapFunction(function () {
-      var IllegalArgumentException_init = _.kotlin.IllegalArgumentException;
+      var IllegalArgumentException_init = _.kotlin.IllegalArgumentException_init_pdl1vj$;
       var NoSuchElementException_init = _.kotlin.NoSuchElementException;
       var Any = Object;
+      var throwCCE = Kotlin.throwCCE;
       return function ($receiver, predicate) {
         var tmp$, tmp$_0;
         var single = null;
@@ -20247,14 +20956,14 @@
           var element = tmp$.next();
           if (predicate(element)) {
             if (found)
-              throw new IllegalArgumentException_init('Sequence contains more than one matching element.');
+              throw IllegalArgumentException_init('Sequence contains more than one matching element.');
             single = element;
             found = true;
           }
         }
         if (!found)
           throw new NoSuchElementException_init('Sequence contains no element matching the predicate.');
-        return (tmp$_0 = single) == null || Kotlin.isType(tmp$_0, Any) ? tmp$_0 : Kotlin.throwCCE();
+        return (tmp$_0 = single) == null || Kotlin.isType(tmp$_0, Any) ? tmp$_0 : throwCCE();
       };
     }));
     function singleOrNull_20($receiver) {
@@ -20288,7 +20997,7 @@
       var tmp$;
       if (!(n >= 0)) {
         var message = 'Requested element count ' + n + ' is less than zero.';
-        throw new IllegalArgumentException(message.toString());
+        throw IllegalArgumentException_init_0(message.toString());
       }
       if (n === 0)
         tmp$ = $receiver;
@@ -20331,6 +21040,7 @@
     var filterIsInstance_1 = defineInlineFunction('kotlin.kotlin.sequences.filterIsInstance_1ivc31$', wrapFunction(function () {
       var filter = _.kotlin.sequences.filter_euau3h$;
       var Sequence = _.kotlin.sequences.Sequence;
+      var throwCCE = Kotlin.throwCCE;
       function filterIsInstance$lambda(typeClosure$R, isR) {
         return function (it) {
           return isR(it);
@@ -20338,7 +21048,7 @@
       }
       return function (R_0, isR, $receiver) {
         var tmp$;
-        return Kotlin.isType(tmp$ = filter($receiver, filterIsInstance$lambda(R_0, isR)), Sequence) ? tmp$ : Kotlin.throwCCE();
+        return Kotlin.isType(tmp$ = filter($receiver, filterIsInstance$lambda(R_0, isR)), Sequence) ? tmp$ : throwCCE();
       };
     }));
     var filterIsInstanceTo_1 = defineInlineFunction('kotlin.kotlin.sequences.filterIsInstanceTo_e33yd4$', function (R_0, isR, $receiver, destination) {
@@ -20359,7 +21069,7 @@
     }
     function filterNotNull_1($receiver) {
       var tmp$;
-      return Kotlin.isType(tmp$ = filterNot_9($receiver, filterNotNull$lambda), Sequence) ? tmp$ : Kotlin.throwCCE();
+      return Kotlin.isType(tmp$ = filterNot_9($receiver, filterNotNull$lambda), Sequence) ? tmp$ : throwCCE();
     }
     function filterNotNullTo_1($receiver, destination) {
       var tmp$;
@@ -20395,7 +21105,7 @@
       var tmp$;
       if (!(n >= 0)) {
         var message = 'Requested element count ' + n + ' is less than zero.';
-        throw new IllegalArgumentException(message.toString());
+        throw IllegalArgumentException_init_0(message.toString());
       }
       if (n === 0)
         tmp$ = emptySequence();
@@ -20416,7 +21126,7 @@
       sort_0(sortedList);
       return sortedList.iterator();
     };
-    sorted$ObjectLiteral.$metadata$ = {kind: Kotlin.Kind.CLASS, interfaces: [Sequence]};
+    sorted$ObjectLiteral.$metadata$ = {kind: Kind_CLASS, interfaces: [Sequence]};
     function sorted_8($receiver) {
       return new sorted$ObjectLiteral($receiver);
     }
@@ -20432,6 +21142,7 @@
           };
         };
       });
+      var Kind_CLASS = Kotlin.Kind.CLASS;
       var Comparator = _.kotlin.Comparator;
       function Comparator$ObjectLiteral(closure$comparison) {
         this.closure$comparison = closure$comparison;
@@ -20439,7 +21150,7 @@
       Comparator$ObjectLiteral.prototype.compare = function (a, b) {
         return this.closure$comparison(a, b);
       };
-      Comparator$ObjectLiteral.$metadata$ = {kind: Kotlin.Kind.CLASS, interfaces: [Comparator]};
+      Comparator$ObjectLiteral.$metadata$ = {kind: Kind_CLASS, interfaces: [Comparator]};
       return function ($receiver, selector) {
         return sortedWith($receiver, new Comparator$ObjectLiteral(compareBy$lambda(selector)));
       };
@@ -20456,6 +21167,7 @@
           };
         };
       });
+      var Kind_CLASS = Kotlin.Kind.CLASS;
       var Comparator = _.kotlin.Comparator;
       function Comparator$ObjectLiteral(closure$comparison) {
         this.closure$comparison = closure$comparison;
@@ -20463,7 +21175,7 @@
       Comparator$ObjectLiteral.prototype.compare = function (a, b) {
         return this.closure$comparison(a, b);
       };
-      Comparator$ObjectLiteral.$metadata$ = {kind: Kotlin.Kind.CLASS, interfaces: [Comparator]};
+      Comparator$ObjectLiteral.$metadata$ = {kind: Kind_CLASS, interfaces: [Comparator]};
       return function ($receiver, selector) {
         return sortedWith($receiver, new Comparator$ObjectLiteral(compareByDescending$lambda(selector)));
       };
@@ -20480,7 +21192,7 @@
       sortWith(sortedList, this.closure$comparator);
       return sortedList.iterator();
     };
-    sortedWith$ObjectLiteral.$metadata$ = {kind: Kotlin.Kind.CLASS, interfaces: [Sequence]};
+    sortedWith$ObjectLiteral.$metadata$ = {kind: Kind_CLASS, interfaces: [Sequence]};
     function sortedWith_9($receiver, comparator) {
       return new sortedWith$ObjectLiteral($receiver, comparator);
     }
@@ -20693,6 +21405,7 @@
       };
     }));
     var groupingBy_1 = defineInlineFunction('kotlin.kotlin.sequences.groupingBy_z5avom$', wrapFunction(function () {
+      var Kind_CLASS = Kotlin.Kind.CLASS;
       var Grouping = _.kotlin.collections.Grouping;
       function groupingBy$ObjectLiteral(this$groupingBy, closure$keySelector) {
         this.this$groupingBy = this$groupingBy;
@@ -20704,7 +21417,7 @@
       groupingBy$ObjectLiteral.prototype.keyOf_11rb$ = function (element) {
         return this.closure$keySelector(element);
       };
-      groupingBy$ObjectLiteral.$metadata$ = {kind: Kotlin.Kind.CLASS, interfaces: [Grouping]};
+      groupingBy$ObjectLiteral.$metadata$ = {kind: Kind_CLASS, interfaces: [Grouping]};
       return function ($receiver, keySelector) {
         return new groupingBy$ObjectLiteral($receiver, keySelector);
       };
@@ -20719,6 +21432,19 @@
       return filterNotNull_1(new TransformingIndexedSequence($receiver, transform));
     }
     var mapIndexedNotNullTo_1 = defineInlineFunction('kotlin.kotlin.sequences.mapIndexedNotNullTo_eyjglh$', wrapFunction(function () {
+      var wrapFunction = Kotlin.wrapFunction;
+      var Unit = Kotlin.kotlin.Unit;
+      var mapIndexedNotNullTo$lambda = wrapFunction(function () {
+        return function (closure$transform, closure$destination) {
+          return function (index, element) {
+            var tmp$;
+            if ((tmp$ = closure$transform(index, element)) != null) {
+              closure$destination.add_11rb$(tmp$);
+            }
+            return Unit;
+          };
+        };
+      });
       return function ($receiver, destination, transform) {
         var tmp$, tmp$_0;
         var index = 0;
@@ -20747,6 +21473,19 @@
       return filterNotNull_1(new TransformingSequence($receiver, transform));
     }
     var mapNotNullTo_2 = defineInlineFunction('kotlin.kotlin.sequences.mapNotNullTo_u5l3of$', wrapFunction(function () {
+      var wrapFunction = Kotlin.wrapFunction;
+      var Unit = Kotlin.kotlin.Unit;
+      var mapNotNullTo$lambda = wrapFunction(function () {
+        return function (closure$transform, closure$destination) {
+          return function (element) {
+            var tmp$;
+            if ((tmp$ = closure$transform(element)) != null) {
+              closure$destination.add_11rb$(tmp$);
+            }
+            return Unit;
+          };
+        };
+      });
       return function ($receiver, destination, transform) {
         var tmp$;
         tmp$ = $receiver.iterator();
@@ -21041,11 +21780,11 @@
       return map_10($receiver, onEach$lambda(action));
     }
     var reduce_9 = defineInlineFunction('kotlin.kotlin.sequences.reduce_linb1r$', wrapFunction(function () {
-      var UnsupportedOperationException_init = _.kotlin.UnsupportedOperationException;
+      var UnsupportedOperationException_init = _.kotlin.UnsupportedOperationException_init_pdl1vj$;
       return function ($receiver, operation) {
         var iterator = $receiver.iterator();
         if (!iterator.hasNext())
-          throw new UnsupportedOperationException_init("Empty sequence can't be reduced.");
+          throw UnsupportedOperationException_init("Empty sequence can't be reduced.");
         var accumulator = iterator.next();
         while (iterator.hasNext()) {
           accumulator = operation(accumulator, iterator.next());
@@ -21054,12 +21793,12 @@
       };
     }));
     var reduceIndexed_9 = defineInlineFunction('kotlin.kotlin.sequences.reduceIndexed_8denzp$', wrapFunction(function () {
-      var UnsupportedOperationException_init = _.kotlin.UnsupportedOperationException;
+      var UnsupportedOperationException_init = _.kotlin.UnsupportedOperationException_init_pdl1vj$;
       return function ($receiver, operation) {
         var tmp$;
         var iterator = $receiver.iterator();
         if (!iterator.hasNext())
-          throw new UnsupportedOperationException_init("Empty sequence can't be reduced.");
+          throw UnsupportedOperationException_init("Empty sequence can't be reduced.");
         var index = 1;
         var accumulator = iterator.next();
         while (iterator.hasNext()) {
@@ -21091,7 +21830,7 @@
     function requireNoNulls$lambda(this$requireNoNulls) {
       return function (it) {
         if (it == null) {
-          throw new IllegalArgumentException('null element found in ' + this$requireNoNulls + '.');
+          throw IllegalArgumentException_init_0('null element found in ' + this$requireNoNulls + '.');
         }
         return it;
       };
@@ -21099,13 +21838,19 @@
     function requireNoNulls_2($receiver) {
       return map_10($receiver, requireNoNulls$lambda($receiver));
     }
+    function chunked_1($receiver, size) {
+      return windowed_1($receiver, size, size, true);
+    }
+    function chunked_2($receiver, size, transform) {
+      return windowed_2($receiver, size, size, true, transform);
+    }
     function minus$ObjectLiteral(this$minus, closure$element) {
       this.this$minus = this$minus;
       this.closure$element = closure$element;
     }
     function minus$ObjectLiteral$iterator$lambda(closure$removed, closure$element) {
       return function (it) {
-        if (!closure$removed.v && Kotlin.equals(it, closure$element)) {
+        if (!closure$removed.v && equals(it, closure$element)) {
           closure$removed.v = true;
           return false;
         }
@@ -21117,7 +21862,7 @@
       var removed = {v: false};
       return filter_9(this.this$minus, minus$ObjectLiteral$iterator$lambda(removed, this.closure$element)).iterator();
     };
-    minus$ObjectLiteral.$metadata$ = {kind: Kotlin.Kind.CLASS, interfaces: [Sequence]};
+    minus$ObjectLiteral.$metadata$ = {kind: Kind_CLASS, interfaces: [Sequence]};
     function minus_3($receiver, element) {
       return new minus$ObjectLiteral($receiver, element);
     }
@@ -21134,7 +21879,7 @@
       var other = toHashSet(this.closure$elements);
       return filterNot_9(this.this$minus, minus$ObjectLiteral$iterator$lambda_0(other)).iterator();
     };
-    minus$ObjectLiteral_0.$metadata$ = {kind: Kotlin.Kind.CLASS, interfaces: [Sequence]};
+    minus$ObjectLiteral_0.$metadata$ = {kind: Kind_CLASS, interfaces: [Sequence]};
     function minus_4($receiver, elements) {
       if (elements.length === 0)
         return $receiver;
@@ -21156,7 +21901,7 @@
       else
         return filterNot_9(this.this$minus, minus$ObjectLiteral$iterator$lambda_1(other)).iterator();
     };
-    minus$ObjectLiteral_1.$metadata$ = {kind: Kotlin.Kind.CLASS, interfaces: [Sequence]};
+    minus$ObjectLiteral_1.$metadata$ = {kind: Kind_CLASS, interfaces: [Sequence]};
     function minus_5($receiver, elements) {
       return new minus$ObjectLiteral_1(elements, $receiver);
     }
@@ -21176,7 +21921,7 @@
       else
         return filterNot_9(this.this$minus, minus$ObjectLiteral$iterator$lambda_2(other)).iterator();
     };
-    minus$ObjectLiteral_2.$metadata$ = {kind: Kotlin.Kind.CLASS, interfaces: [Sequence]};
+    minus$ObjectLiteral_2.$metadata$ = {kind: Kind_CLASS, interfaces: [Sequence]};
     function minus_6($receiver, elements) {
       return new minus$ObjectLiteral_2(elements, $receiver);
     }
@@ -21224,6 +21969,20 @@
         return plus($receiver, element);
       };
     }));
+    function windowed_1($receiver, size, step, partialWindows) {
+      if (step === void 0)
+        step = 1;
+      if (partialWindows === void 0)
+        partialWindows = false;
+      return windowedSequence_1($receiver, size, step, partialWindows, false);
+    }
+    function windowed_2($receiver, size, step, partialWindows, transform) {
+      if (step === void 0)
+        step = 1;
+      if (partialWindows === void 0)
+        partialWindows = false;
+      return map_10(windowedSequence_1($receiver, size, step, partialWindows, true), transform);
+    }
     function zip$lambda(t1, t2) {
       return to(t1, t2);
     }
@@ -21232,6 +21991,90 @@
     }
     function zip_56($receiver, other, transform) {
       return new MergingSequence($receiver, other, transform);
+    }
+    function zipWithNext$lambda(a, b) {
+      return to(a, b);
+    }
+    function zipWithNext_1($receiver) {
+      return zipWithNext_2($receiver, zipWithNext$lambda);
+    }
+    function zipWithNext$lambda_0(this$zipWithNext_0, closure$transform_0) {
+      return function ($receiver_0, continuation_0, suspended) {
+        var instance = new Coroutine$zipWithNext$lambda(this$zipWithNext_0, closure$transform_0, $receiver_0, this, continuation_0);
+        if (suspended)
+          return instance;
+        else
+          return instance.doResume(null);
+      };
+    }
+    function Coroutine$zipWithNext$lambda(this$zipWithNext_0, closure$transform_0, $receiver_0, controller, continuation_0) {
+      CoroutineImpl.call(this, continuation_0);
+      this.$controller = controller;
+      this.exceptionState_0 = 1;
+      this.local$this$zipWithNext = this$zipWithNext_0;
+      this.local$closure$transform = closure$transform_0;
+      this.local$iterator = void 0;
+      this.local$current = void 0;
+      this.local$next = void 0;
+      this.local$$receiver = $receiver_0;
+    }
+    Coroutine$zipWithNext$lambda.$metadata$ = {kind: Kotlin.Kind.CLASS, simpleName: null, interfaces: [CoroutineImpl]};
+    Coroutine$zipWithNext$lambda.prototype = Object.create(CoroutineImpl.prototype);
+    Coroutine$zipWithNext$lambda.prototype.constructor = Coroutine$zipWithNext$lambda;
+    Coroutine$zipWithNext$lambda.prototype.doResume = function () {
+      do
+        try {
+          switch (this.state_0) {
+            case 0:
+              this.local$iterator = this.local$this$zipWithNext.iterator();
+              if (!this.local$iterator.hasNext()) {
+                return;
+              }
+               else {
+                this.state_0 = 2;
+                continue;
+              }
+
+            case 1:
+              throw this.exception_0;
+            case 2:
+              this.local$current = this.local$iterator.next();
+              this.state_0 = 3;
+              continue;
+            case 3:
+              if (!this.local$iterator.hasNext()) {
+                this.state_0 = 5;
+                continue;
+              }
+
+              this.local$next = this.local$iterator.next();
+              this.state_0 = 4;
+              this.result_0 = this.local$$receiver.yield_11rb$(this.local$closure$transform(this.local$current, this.local$next), this);
+              if (this.result_0 === COROUTINE_SUSPENDED)
+                return COROUTINE_SUSPENDED;
+              continue;
+            case 4:
+              this.local$current = this.local$next;
+              this.state_0 = 3;
+              continue;
+            case 5:
+              return Unit;
+          }
+        }
+         catch (e) {
+          if (this.state_0 === 1) {
+            this.exceptionState_0 = this.state_0;
+            throw e;
+          }
+           else {
+            this.state_0 = this.exceptionState_0;
+            this.exception_0 = e;
+          }
+        }
+       while (true);
+    };
+    function zipWithNext_2($receiver, transform) {
+      return buildSequence(zipWithNext$lambda_0($receiver, transform));
     }
     function joinTo_9($receiver, buffer, separator, prefix, postfix, limit, truncated, transform) {
       if (separator === void 0)
@@ -21291,7 +22134,7 @@
     Iterable$ObjectLiteral_0.prototype.iterator = function () {
       return this.closure$iterator();
     };
-    Iterable$ObjectLiteral_0.$metadata$ = {kind: Kotlin.Kind.CLASS, interfaces: [Iterable]};
+    Iterable$ObjectLiteral_0.$metadata$ = {kind: Kind_CLASS, interfaces: [Iterable]};
     function asIterable_10($receiver) {
       return new Iterable$ObjectLiteral_0(asIterable$lambda_8($receiver));
     }
@@ -21308,7 +22151,7 @@
         sum += element;
         count = count + 1 | 0;
       }
-      return count === 0 ? DoubleCompanionObject.NaN : sum / count;
+      return count === 0 ? kotlin_js_internal_DoubleCompanionObject.NaN : sum / count;
     }
     function average_18($receiver) {
       var tmp$;
@@ -21320,7 +22163,7 @@
         sum += element;
         count = count + 1 | 0;
       }
-      return count === 0 ? DoubleCompanionObject.NaN : sum / count;
+      return count === 0 ? kotlin_js_internal_DoubleCompanionObject.NaN : sum / count;
     }
     function average_19($receiver) {
       var tmp$;
@@ -21332,7 +22175,7 @@
         sum += element;
         count = count + 1 | 0;
       }
-      return count === 0 ? DoubleCompanionObject.NaN : sum / count;
+      return count === 0 ? kotlin_js_internal_DoubleCompanionObject.NaN : sum / count;
     }
     function average_20($receiver) {
       var tmp$;
@@ -21344,7 +22187,7 @@
         sum += element;
         count = count + 1 | 0;
       }
-      return count === 0 ? DoubleCompanionObject.NaN : sum / count;
+      return count === 0 ? kotlin_js_internal_DoubleCompanionObject.NaN : sum / count;
     }
     function average_21($receiver) {
       var tmp$;
@@ -21356,7 +22199,7 @@
         sum += element;
         count = count + 1 | 0;
       }
-      return count === 0 ? DoubleCompanionObject.NaN : sum / count;
+      return count === 0 ? kotlin_js_internal_DoubleCompanionObject.NaN : sum / count;
     }
     function average_22($receiver) {
       var tmp$;
@@ -21368,7 +22211,7 @@
         sum += element;
         count = count + 1 | 0;
       }
-      return count === 0 ? DoubleCompanionObject.NaN : sum / count;
+      return count === 0 ? kotlin_js_internal_DoubleCompanionObject.NaN : sum / count;
     }
     function sum_17($receiver) {
       var tmp$;
@@ -21438,7 +22281,7 @@
       while (tmp$.hasNext()) {
         var element_0 = tmp$.next();
         var predicate$result;
-        if (!removed.v && Kotlin.equals(element_0, element)) {
+        if (!removed.v && equals(element_0, element)) {
           removed.v = true;
           predicate$result = false;
         }
@@ -21701,22 +22544,24 @@
       };
     }));
     function single_22($receiver) {
-      var tmp$, tmp$_0;
-      tmp$ = $receiver.length;
-      if (tmp$ === 0)
-        throw new NoSuchElementException('Char sequence is empty.');
-      else if (tmp$ === 1)
-        tmp$_0 = $receiver.charCodeAt(0);
-      else
-        throw new IllegalArgumentException('Char sequence has more than one element.');
-      return tmp$_0;
+      var tmp$;
+      switch ($receiver.length) {
+        case 0:
+          throw new NoSuchElementException('Char sequence is empty.');
+        case 1:
+          tmp$ = $receiver.charCodeAt(0);
+          break;
+        default:throw IllegalArgumentException_init_0('Char sequence has more than one element.');
+      }
+      return tmp$;
     }
     var single_23 = defineInlineFunction('kotlin.kotlin.text.single_2pivbd$', wrapFunction(function () {
       var iterator = _.kotlin.text.iterator_gw00vp$;
       var toBoxedChar = Kotlin.toBoxedChar;
-      var IllegalArgumentException_init = _.kotlin.IllegalArgumentException;
+      var IllegalArgumentException_init = _.kotlin.IllegalArgumentException_init_pdl1vj$;
       var unboxChar = Kotlin.unboxChar;
       var NoSuchElementException_init = _.kotlin.NoSuchElementException;
+      var throwCCE = Kotlin.throwCCE;
       return function ($receiver, predicate) {
         var tmp$, tmp$_0;
         var single = null;
@@ -21726,14 +22571,14 @@
           var element = unboxChar(tmp$.next());
           if (predicate(toBoxedChar(element))) {
             if (found)
-              throw new IllegalArgumentException_init('Char sequence contains more than one matching element.');
+              throw IllegalArgumentException_init('Char sequence contains more than one matching element.');
             single = element;
             found = true;
           }
         }
         if (!found)
           throw new NoSuchElementException_init('Char sequence contains no character matching the predicate.');
-        return unboxChar(Kotlin.isChar(tmp$_0 = toBoxedChar(single)) ? tmp$_0 : Kotlin.throwCCE());
+        return unboxChar(Kotlin.isChar(tmp$_0 = toBoxedChar(single)) ? tmp$_0 : throwCCE());
       };
     }));
     function singleOrNull_22($receiver) {
@@ -21765,28 +22610,28 @@
     function drop_10($receiver, n) {
       if (!(n >= 0)) {
         var message = 'Requested character count ' + n + ' is less than zero.';
-        throw new IllegalArgumentException(message.toString());
+        throw IllegalArgumentException_init_0(message.toString());
       }
       return Kotlin.subSequence($receiver, coerceAtMost_2(n, $receiver.length), $receiver.length);
     }
     function drop_11($receiver, n) {
       if (!(n >= 0)) {
         var message = 'Requested character count ' + n + ' is less than zero.';
-        throw new IllegalArgumentException(message.toString());
+        throw IllegalArgumentException_init_0(message.toString());
       }
       return $receiver.substring(coerceAtMost_2(n, $receiver.length));
     }
     function dropLast_9($receiver, n) {
       if (!(n >= 0)) {
         var message = 'Requested character count ' + n + ' is less than zero.';
-        throw new IllegalArgumentException(message.toString());
+        throw IllegalArgumentException_init_0(message.toString());
       }
       return take_10($receiver, coerceAtLeast_2($receiver.length - n | 0, 0));
     }
     function dropLast_10($receiver, n) {
       if (!(n >= 0)) {
         var message = 'Requested character count ' + n + ' is less than zero.';
-        throw new IllegalArgumentException(message.toString());
+        throw IllegalArgumentException_init_0(message.toString());
       }
       return take_11($receiver, coerceAtLeast_2($receiver.length - n | 0, 0));
     }
@@ -22026,30 +22871,31 @@
       return result;
     }
     var slice_22 = defineInlineFunction('kotlin.kotlin.text.slice_djwhei$', wrapFunction(function () {
+      var throwCCE = Kotlin.throwCCE;
       var slice = _.kotlin.text.slice_ymrxhc$;
       return function ($receiver, indices) {
         var tmp$;
-        return slice(Kotlin.isCharSequence(tmp$ = $receiver) ? tmp$ : Kotlin.throwCCE(), indices).toString();
+        return slice(Kotlin.isCharSequence(tmp$ = $receiver) ? tmp$ : throwCCE(), indices).toString();
       };
     }));
     function take_10($receiver, n) {
       if (!(n >= 0)) {
         var message = 'Requested character count ' + n + ' is less than zero.';
-        throw new IllegalArgumentException(message.toString());
+        throw IllegalArgumentException_init_0(message.toString());
       }
       return Kotlin.subSequence($receiver, 0, coerceAtMost_2(n, $receiver.length));
     }
     function take_11($receiver, n) {
       if (!(n >= 0)) {
         var message = 'Requested character count ' + n + ' is less than zero.';
-        throw new IllegalArgumentException(message.toString());
+        throw IllegalArgumentException_init_0(message.toString());
       }
       return $receiver.substring(0, coerceAtMost_2(n, $receiver.length));
     }
     function takeLast_9($receiver, n) {
       if (!(n >= 0)) {
         var message = 'Requested character count ' + n + ' is less than zero.';
-        throw new IllegalArgumentException(message.toString());
+        throw IllegalArgumentException_init_0(message.toString());
       }
       var length = $receiver.length;
       return Kotlin.subSequence($receiver, length - coerceAtMost_2(n, length) | 0, length);
@@ -22057,7 +22903,7 @@
     function takeLast_10($receiver, n) {
       if (!(n >= 0)) {
         var message = 'Requested character count ' + n + ' is less than zero.';
-        throw new IllegalArgumentException(message.toString());
+        throw IllegalArgumentException_init_0(message.toString());
       }
       var length = $receiver.length;
       return $receiver.substring(length - coerceAtMost_2(n, length) | 0);
@@ -22114,10 +22960,11 @@
       return StringBuilder_init_0($receiver).reverse();
     }
     var reversed_13 = defineInlineFunction('kotlin.kotlin.text.reversed_pdl1vz$', wrapFunction(function () {
+      var throwCCE = Kotlin.throwCCE;
       var reversed = _.kotlin.text.reversed_gw00vp$;
       return function ($receiver) {
         var tmp$;
-        return reversed(Kotlin.isCharSequence(tmp$ = $receiver) ? tmp$ : Kotlin.throwCCE()).toString();
+        return reversed(Kotlin.isCharSequence(tmp$ = $receiver) ? tmp$ : throwCCE()).toString();
       };
     }));
     var associate_10 = defineInlineFunction('kotlin.kotlin.text.associate_b3xl1f$', wrapFunction(function () {
@@ -22234,29 +23081,35 @@
       return toCollection_10($receiver, HashSet_init_1(mapCapacity($receiver.length)));
     }
     function toList_11($receiver) {
-      var tmp$, tmp$_0;
-      tmp$ = $receiver.length;
-      if (tmp$ === 0)
-        tmp$_0 = emptyList();
-      else if (tmp$ === 1)
-        tmp$_0 = listOf(toBoxedChar($receiver.charCodeAt(0)));
-      else
-        tmp$_0 = toMutableList_11($receiver);
-      return tmp$_0;
+      var tmp$;
+      switch ($receiver.length) {
+        case 0:
+          tmp$ = emptyList();
+          break;
+        case 1:
+          tmp$ = listOf(toBoxedChar($receiver.charCodeAt(0)));
+          break;
+        default:tmp$ = toMutableList_11($receiver);
+          break;
+      }
+      return tmp$;
     }
     function toMutableList_11($receiver) {
       return toCollection_10($receiver, ArrayList_init($receiver.length));
     }
     function toSet_10($receiver) {
-      var tmp$, tmp$_0;
-      tmp$ = $receiver.length;
-      if (tmp$ === 0)
-        tmp$_0 = emptySet();
-      else if (tmp$ === 1)
-        tmp$_0 = setOf(toBoxedChar($receiver.charCodeAt(0)));
-      else
-        tmp$_0 = toCollection_10($receiver, LinkedHashSet_init_2(mapCapacity($receiver.length)));
-      return tmp$_0;
+      var tmp$;
+      switch ($receiver.length) {
+        case 0:
+          tmp$ = emptySet();
+          break;
+        case 1:
+          tmp$ = setOf(toBoxedChar($receiver.charCodeAt(0)));
+          break;
+        default:tmp$ = toCollection_10($receiver, LinkedHashSet_init_2(mapCapacity($receiver.length)));
+          break;
+      }
+      return tmp$;
     }
     var flatMap_11 = defineInlineFunction('kotlin.kotlin.text.flatMap_83nucd$', wrapFunction(function () {
       var ArrayList_init = _.kotlin.collections.ArrayList_init_ww73n8$;
@@ -22407,6 +23260,7 @@
     var groupingBy_2 = defineInlineFunction('kotlin.kotlin.text.groupingBy_16h5q4$', wrapFunction(function () {
       var iterator = _.kotlin.text.iterator_gw00vp$;
       var toBoxedChar = Kotlin.toBoxedChar;
+      var Kind_CLASS = Kotlin.Kind.CLASS;
       var Grouping = _.kotlin.collections.Grouping;
       function groupingBy$ObjectLiteral(this$groupingBy, closure$keySelector) {
         this.this$groupingBy = this$groupingBy;
@@ -22418,7 +23272,7 @@
       groupingBy$ObjectLiteral.prototype.keyOf_11rb$ = function (element) {
         return this.closure$keySelector(toBoxedChar(element));
       };
-      groupingBy$ObjectLiteral.$metadata$ = {kind: Kotlin.Kind.CLASS, interfaces: [Grouping]};
+      groupingBy$ObjectLiteral.$metadata$ = {kind: Kind_CLASS, interfaces: [Grouping]};
       return function ($receiver, keySelector) {
         return new groupingBy$ObjectLiteral($receiver, keySelector);
       };
@@ -22459,6 +23313,19 @@
     var mapIndexedNotNull_2 = defineInlineFunction('kotlin.kotlin.text.mapIndexedNotNull_iqd6dn$', wrapFunction(function () {
       var ArrayList_init = _.kotlin.collections.ArrayList_init_ww73n8$;
       var unboxChar = Kotlin.unboxChar;
+      var wrapFunction = Kotlin.wrapFunction;
+      var Unit = Kotlin.kotlin.Unit;
+      var mapIndexedNotNullTo$lambda = wrapFunction(function () {
+        return function (closure$transform, closure$destination) {
+          return function (index, element) {
+            var tmp$;
+            if ((tmp$ = closure$transform(index, element)) != null) {
+              closure$destination.add_11rb$(tmp$);
+            }
+            return Unit;
+          };
+        };
+      });
       var iterator = _.kotlin.text.iterator_gw00vp$;
       var toBoxedChar = Kotlin.toBoxedChar;
       return function ($receiver, transform) {
@@ -22478,6 +23345,19 @@
     }));
     var mapIndexedNotNullTo_2 = defineInlineFunction('kotlin.kotlin.text.mapIndexedNotNullTo_cynlyo$', wrapFunction(function () {
       var unboxChar = Kotlin.unboxChar;
+      var wrapFunction = Kotlin.wrapFunction;
+      var Unit = Kotlin.kotlin.Unit;
+      var mapIndexedNotNullTo$lambda = wrapFunction(function () {
+        return function (closure$transform, closure$destination) {
+          return function (index, element) {
+            var tmp$;
+            if ((tmp$ = closure$transform(index, element)) != null) {
+              closure$destination.add_11rb$(tmp$);
+            }
+            return Unit;
+          };
+        };
+      });
       var iterator = _.kotlin.text.iterator_gw00vp$;
       var toBoxedChar = Kotlin.toBoxedChar;
       return function ($receiver, destination, transform) {
@@ -22512,6 +23392,19 @@
     var mapNotNull_3 = defineInlineFunction('kotlin.kotlin.text.mapNotNull_10i1d3$', wrapFunction(function () {
       var ArrayList_init = _.kotlin.collections.ArrayList_init_ww73n8$;
       var unboxChar = Kotlin.unboxChar;
+      var wrapFunction = Kotlin.wrapFunction;
+      var Unit = Kotlin.kotlin.Unit;
+      var mapNotNullTo$lambda = wrapFunction(function () {
+        return function (closure$transform, closure$destination) {
+          return function (element) {
+            var tmp$;
+            if ((tmp$ = closure$transform(element)) != null) {
+              closure$destination.add_11rb$(tmp$);
+            }
+            return Unit;
+          };
+        };
+      });
       var iterator = _.kotlin.text.iterator_gw00vp$;
       var toBoxedChar = Kotlin.toBoxedChar;
       return function ($receiver, transform) {
@@ -22530,6 +23423,19 @@
     }));
     var mapNotNullTo_3 = defineInlineFunction('kotlin.kotlin.text.mapNotNullTo_jcwsr8$', wrapFunction(function () {
       var unboxChar = Kotlin.unboxChar;
+      var wrapFunction = Kotlin.wrapFunction;
+      var Unit = Kotlin.kotlin.Unit;
+      var mapNotNullTo$lambda = wrapFunction(function () {
+        return function (closure$transform, closure$destination) {
+          return function (element) {
+            var tmp$;
+            if ((tmp$ = closure$transform(element)) != null) {
+              closure$destination.add_11rb$(tmp$);
+            }
+            return Unit;
+          };
+        };
+      });
       var iterator = _.kotlin.text.iterator_gw00vp$;
       var toBoxedChar = Kotlin.toBoxedChar;
       return function ($receiver, destination, transform) {
@@ -22831,14 +23737,14 @@
       };
     }));
     var reduce_10 = defineInlineFunction('kotlin.kotlin.text.reduce_bc19pa$', wrapFunction(function () {
-      var UnsupportedOperationException_init = _.kotlin.UnsupportedOperationException;
+      var UnsupportedOperationException_init = _.kotlin.UnsupportedOperationException_init_pdl1vj$;
       var get_lastIndex = _.kotlin.text.get_lastIndex_gw00vp$;
       var toBoxedChar = Kotlin.toBoxedChar;
       var unboxChar = Kotlin.unboxChar;
       return function ($receiver, operation) {
         var tmp$;
         if ($receiver.length === 0)
-          throw new UnsupportedOperationException_init("Empty char sequence can't be reduced.");
+          throw UnsupportedOperationException_init("Empty char sequence can't be reduced.");
         var accumulator = $receiver.charCodeAt(0);
         tmp$ = get_lastIndex($receiver);
         for (var index = 1; index <= tmp$; index++) {
@@ -22848,14 +23754,14 @@
       };
     }));
     var reduceIndexed_10 = defineInlineFunction('kotlin.kotlin.text.reduceIndexed_8uyn22$', wrapFunction(function () {
-      var UnsupportedOperationException_init = _.kotlin.UnsupportedOperationException;
+      var UnsupportedOperationException_init = _.kotlin.UnsupportedOperationException_init_pdl1vj$;
       var get_lastIndex = _.kotlin.text.get_lastIndex_gw00vp$;
       var toBoxedChar = Kotlin.toBoxedChar;
       var unboxChar = Kotlin.unboxChar;
       return function ($receiver, operation) {
         var tmp$;
         if ($receiver.length === 0)
-          throw new UnsupportedOperationException_init("Empty char sequence can't be reduced.");
+          throw UnsupportedOperationException_init("Empty char sequence can't be reduced.");
         var accumulator = $receiver.charCodeAt(0);
         tmp$ = get_lastIndex($receiver);
         for (var index = 1; index <= tmp$; index++) {
@@ -22866,14 +23772,14 @@
     }));
     var reduceRight_9 = defineInlineFunction('kotlin.kotlin.text.reduceRight_bc19pa$', wrapFunction(function () {
       var get_lastIndex = _.kotlin.text.get_lastIndex_gw00vp$;
-      var UnsupportedOperationException_init = _.kotlin.UnsupportedOperationException;
+      var UnsupportedOperationException_init = _.kotlin.UnsupportedOperationException_init_pdl1vj$;
       var toBoxedChar = Kotlin.toBoxedChar;
       var unboxChar = Kotlin.unboxChar;
       return function ($receiver, operation) {
         var tmp$, tmp$_0;
         var index = get_lastIndex($receiver);
         if (index < 0)
-          throw new UnsupportedOperationException_init("Empty char sequence can't be reduced.");
+          throw UnsupportedOperationException_init("Empty char sequence can't be reduced.");
         var accumulator = $receiver.charCodeAt((tmp$ = index, index = tmp$ - 1 | 0, tmp$));
         while (index >= 0) {
           accumulator = unboxChar(operation(toBoxedChar($receiver.charCodeAt((tmp$_0 = index, index = tmp$_0 - 1 | 0, tmp$_0))), toBoxedChar(accumulator)));
@@ -22883,14 +23789,14 @@
     }));
     var reduceRightIndexed_9 = defineInlineFunction('kotlin.kotlin.text.reduceRightIndexed_8uyn22$', wrapFunction(function () {
       var get_lastIndex = _.kotlin.text.get_lastIndex_gw00vp$;
-      var UnsupportedOperationException_init = _.kotlin.UnsupportedOperationException;
+      var UnsupportedOperationException_init = _.kotlin.UnsupportedOperationException_init_pdl1vj$;
       var toBoxedChar = Kotlin.toBoxedChar;
       var unboxChar = Kotlin.unboxChar;
       return function ($receiver, operation) {
         var tmp$;
         var index = get_lastIndex($receiver);
         if (index < 0)
-          throw new UnsupportedOperationException_init("Empty char sequence can't be reduced.");
+          throw UnsupportedOperationException_init("Empty char sequence can't be reduced.");
         var accumulator = $receiver.charCodeAt((tmp$ = index, index = tmp$ - 1 | 0, tmp$));
         while (index >= 0) {
           accumulator = unboxChar(operation(index, toBoxedChar($receiver.charCodeAt(index)), toBoxedChar(accumulator)));
@@ -22929,6 +23835,21 @@
         return sum;
       };
     }));
+    function chunked_3($receiver, size) {
+      return windowed_3($receiver, size, size, true);
+    }
+    function chunked_4($receiver, size, transform) {
+      return windowed_4($receiver, size, size, true, transform);
+    }
+    function chunkedSequence$lambda(it) {
+      return it.toString();
+    }
+    function chunkedSequence($receiver, size) {
+      return chunkedSequence_0($receiver, size, chunkedSequence$lambda);
+    }
+    function chunkedSequence_0($receiver, size, transform) {
+      return windowedSequence_0($receiver, size, size, true, transform);
+    }
     var partition_10 = defineInlineFunction('kotlin.kotlin.text.partition_2pivbd$', wrapFunction(function () {
       var StringBuilder_init = _.kotlin.text.StringBuilder;
       var iterator = _.kotlin.text.iterator_gw00vp$;
@@ -22975,6 +23896,66 @@
         return new Pair_init(first.toString(), second.toString());
       };
     }));
+    function windowed$lambda(it) {
+      return it.toString();
+    }
+    function windowed_3($receiver, size, step, partialWindows) {
+      if (step === void 0)
+        step = 1;
+      if (partialWindows === void 0)
+        partialWindows = false;
+      return windowed_4($receiver, size, step, partialWindows, windowed$lambda);
+    }
+    function windowed_4($receiver, size, step, partialWindows, transform) {
+      if (step === void 0)
+        step = 1;
+      if (partialWindows === void 0)
+        partialWindows = false;
+      var tmp$;
+      checkWindowSizeStep(size, step);
+      var thisSize = $receiver.length;
+      var result = ArrayList_init((thisSize + step - 1 | 0) / step | 0);
+      var index = 0;
+      while (index < thisSize) {
+        var end = index + size | 0;
+        if (end > thisSize) {
+          if (partialWindows)
+            tmp$ = thisSize;
+          else
+            break;
+        }
+         else
+          tmp$ = end;
+        var coercedEnd = tmp$;
+        result.add_11rb$(transform(Kotlin.subSequence($receiver, index, coercedEnd)));
+        index = index + step | 0;
+      }
+      return result;
+    }
+    function windowedSequence$lambda(it) {
+      return it.toString();
+    }
+    function windowedSequence($receiver, size, step, partialWindows) {
+      if (step === void 0)
+        step = 1;
+      if (partialWindows === void 0)
+        partialWindows = false;
+      return windowedSequence_0($receiver, size, step, partialWindows, windowedSequence$lambda);
+    }
+    function windowedSequence$lambda_0(closure$transform, closure$size, this$windowedSequence) {
+      return function (index) {
+        return closure$transform(Kotlin.subSequence(this$windowedSequence, index, coerceAtMost_2(index + closure$size | 0, this$windowedSequence.length)));
+      };
+    }
+    function windowedSequence_0($receiver, size, step_0, partialWindows, transform) {
+      if (step_0 === void 0)
+        step_0 = 1;
+      if (partialWindows === void 0)
+        partialWindows = false;
+      checkWindowSizeStep(size, step_0);
+      var windows = step(partialWindows ? get_indices_9($receiver) : until_4(0, $receiver.length - size + 1 | 0), step_0);
+      return map_10(asSequence_8(windows), windowedSequence$lambda_0(transform, size, $receiver));
+    }
     function zip_57($receiver, other) {
       var tmp$;
       var length = Math_0.min($receiver.length, other.length);
@@ -23000,6 +23981,42 @@
         return list;
       };
     }));
+    function zipWithNext_3($receiver) {
+      var zipWithNext$result;
+      zipWithNext$break: do {
+        var tmp$;
+        var size = $receiver.length - 1 | 0;
+        if (size < 1) {
+          zipWithNext$result = emptyList();
+          break zipWithNext$break;
+        }
+        var result = ArrayList_init(size);
+        tmp$ = size - 1 | 0;
+        for (var index = 0; index <= tmp$; index++) {
+          result.add_11rb$(to(toBoxedChar($receiver.charCodeAt(index)), toBoxedChar($receiver.charCodeAt(index + 1 | 0))));
+        }
+        zipWithNext$result = result;
+      }
+       while (false);
+      return zipWithNext$result;
+    }
+    var zipWithNext_4 = defineInlineFunction('kotlin.kotlin.text.zipWithNext_hf4kax$', wrapFunction(function () {
+      var emptyList = _.kotlin.collections.emptyList_287e2$;
+      var ArrayList_init = _.kotlin.collections.ArrayList_init_ww73n8$;
+      var toBoxedChar = Kotlin.toBoxedChar;
+      return function ($receiver, transform) {
+        var tmp$;
+        var size = $receiver.length - 1 | 0;
+        if (size < 1)
+          return emptyList();
+        var result = ArrayList_init(size);
+        tmp$ = size - 1 | 0;
+        for (var index = 0; index <= tmp$; index++) {
+          result.add_11rb$(transform(toBoxedChar($receiver.charCodeAt(index)), toBoxedChar($receiver.charCodeAt(index + 1 | 0))));
+        }
+        return result;
+      };
+    }));
     function asIterable$lambda_9(this$asIterable) {
       return function () {
         return iterator_3(this$asIterable);
@@ -23011,7 +24028,7 @@
     Iterable$ObjectLiteral_1.prototype.iterator = function () {
       return this.closure$iterator();
     };
-    Iterable$ObjectLiteral_1.$metadata$ = {kind: Kotlin.Kind.CLASS, interfaces: [Iterable]};
+    Iterable$ObjectLiteral_1.$metadata$ = {kind: Kind_CLASS, interfaces: [Iterable]};
     function asIterable_11($receiver) {
       var tmp$ = typeof $receiver === 'string';
       if (tmp$) {
@@ -23032,7 +24049,7 @@
     Sequence$ObjectLiteral_1.prototype.iterator = function () {
       return this.closure$iterator();
     };
-    Sequence$ObjectLiteral_1.$metadata$ = {kind: Kotlin.Kind.CLASS, interfaces: [Sequence]};
+    Sequence$ObjectLiteral_1.$metadata$ = {kind: Kind_CLASS, interfaces: [Sequence]};
     function asSequence_11($receiver) {
       var tmp$ = typeof $receiver === 'string';
       if (tmp$) {
@@ -23051,9 +24068,18 @@
         var key = $receiver.keyOf_11rb$(e);
         var accumulator = destination.get_11rb$(key);
         var tmp$_0;
-        destination.put_xwzc9p$(key, (accumulator == null && !destination.containsKey_11rb$(key) ? 0 : (tmp$_0 = accumulator) == null || Kotlin.isType(tmp$_0, Any) ? tmp$_0 : Kotlin.throwCCE()) + 1 | 0);
+        destination.put_xwzc9p$(key, (accumulator == null && !destination.containsKey_11rb$(key) ? 0 : (tmp$_0 = accumulator) == null || Kotlin.isType(tmp$_0, Any) ? tmp$_0 : throwCCE()) + 1 | 0);
       }
       return destination;
+    }
+    function Serializable() {
+    }
+    Serializable.$metadata$ = {kind: Kind_INTERFACE, simpleName: 'Serializable', interfaces: []};
+    function min_16($receiver, a, b) {
+      return a.compareTo_11rb$(b) <= 0 ? a : b;
+    }
+    function max_16($receiver, a, b) {
+      return a.compareTo_11rb$(b) >= 0 ? a : b;
     }
     function json(pairs) {
       var tmp$;
@@ -23087,9 +24113,6 @@
     }
     function lazy_1(lock, initializer) {
       return new UnsafeLazyImpl(initializer);
-    }
-    function arrayOfNulls(reference, size) {
-      return Kotlin.newArray(size, null);
     }
     function fillFrom(src, dst) {
       var tmp$;
@@ -23146,40 +24169,589 @@
         to.$type$ = from.$type$;
       }
     });
-    var toSingletonMapOrSelf = defineInlineFunction('kotlin.kotlin.toSingletonMapOrSelf_1vp4qn$', function ($receiver) {
-      return $receiver;
-    });
-    var toSingletonMap = defineInlineFunction('kotlin.kotlin.toSingletonMap_3imywq$', wrapFunction(function () {
-      var toMutableMap = _.kotlin.collections.toMutableMap_abgq59$;
-      return function ($receiver) {
-        return toMutableMap($receiver);
+    var PI;
+    var E;
+    var sin = defineInlineFunction('kotlin.kotlin.math.sin_14dthe$', wrapFunction(function () {
+      var Math_0 = Math;
+      return function (x) {
+        return Math_0.sin(x);
       };
     }));
-    var copyToArrayOfAny = defineInlineFunction('kotlin.kotlin.copyToArrayOfAny_e0iprw$', function ($receiver, isVarargs) {
-      return isVarargs ? $receiver : $receiver.slice();
-    });
-    function Serializable() {
+    var cos = defineInlineFunction('kotlin.kotlin.math.cos_14dthe$', wrapFunction(function () {
+      var Math_0 = Math;
+      return function (x) {
+        return Math_0.cos(x);
+      };
+    }));
+    var tan = defineInlineFunction('kotlin.kotlin.math.tan_14dthe$', wrapFunction(function () {
+      var Math_0 = Math;
+      return function (x) {
+        return Math_0.tan(x);
+      };
+    }));
+    var asin = defineInlineFunction('kotlin.kotlin.math.asin_14dthe$', wrapFunction(function () {
+      var Math_0 = Math;
+      return function (x) {
+        return Math_0.asin(x);
+      };
+    }));
+    var acos = defineInlineFunction('kotlin.kotlin.math.acos_14dthe$', wrapFunction(function () {
+      var Math_0 = Math;
+      return function (x) {
+        return Math_0.acos(x);
+      };
+    }));
+    var atan = defineInlineFunction('kotlin.kotlin.math.atan_14dthe$', wrapFunction(function () {
+      var Math_0 = Math;
+      return function (x) {
+        return Math_0.atan(x);
+      };
+    }));
+    var atan2 = defineInlineFunction('kotlin.kotlin.math.atan2_lu1900$', wrapFunction(function () {
+      var Math_0 = Math;
+      return function (y, x) {
+        return Math_0.atan2(y, x);
+      };
+    }));
+    var sinh = defineInlineFunction('kotlin.kotlin.math.sinh_14dthe$', wrapFunction(function () {
+      var Math_0 = Math;
+      return function (x) {
+        return Math_0.sinh(x);
+      };
+    }));
+    var cosh = defineInlineFunction('kotlin.kotlin.math.cosh_14dthe$', wrapFunction(function () {
+      var Math_0 = Math;
+      return function (x) {
+        return Math_0.cosh(x);
+      };
+    }));
+    var tanh = defineInlineFunction('kotlin.kotlin.math.tanh_14dthe$', wrapFunction(function () {
+      var Math_0 = Math;
+      return function (x) {
+        return Math_0.tanh(x);
+      };
+    }));
+    var asinh = defineInlineFunction('kotlin.kotlin.math.asinh_14dthe$', wrapFunction(function () {
+      var Math_0 = Math;
+      return function (x) {
+        return Math_0.asinh(x);
+      };
+    }));
+    var acosh = defineInlineFunction('kotlin.kotlin.math.acosh_14dthe$', wrapFunction(function () {
+      var Math_0 = Math;
+      return function (x) {
+        return Math_0.acosh(x);
+      };
+    }));
+    var atanh = defineInlineFunction('kotlin.kotlin.math.atanh_14dthe$', wrapFunction(function () {
+      var Math_0 = Math;
+      return function (x) {
+        return Math_0.atanh(x);
+      };
+    }));
+    var hypot = defineInlineFunction('kotlin.kotlin.math.hypot_lu1900$', wrapFunction(function () {
+      var Math_0 = Math;
+      return function (x, y) {
+        return Math_0.hypot(x, y);
+      };
+    }));
+    var sqrt = defineInlineFunction('kotlin.kotlin.math.sqrt_14dthe$', wrapFunction(function () {
+      var Math_0 = Math;
+      return function (x) {
+        return Math_0.sqrt(x);
+      };
+    }));
+    var exp = defineInlineFunction('kotlin.kotlin.math.exp_14dthe$', wrapFunction(function () {
+      var Math_0 = Math;
+      return function (x) {
+        return Math_0.exp(x);
+      };
+    }));
+    var expm1 = defineInlineFunction('kotlin.kotlin.math.expm1_14dthe$', wrapFunction(function () {
+      var Math_0 = Math;
+      return function (x) {
+        return Math_0.expm1(x);
+      };
+    }));
+    function log(x, base) {
+      if (base <= 0.0 || base === 1.0)
+        return kotlin_js_internal_DoubleCompanionObject.NaN;
+      return Math.log(x) / Math.log(base);
     }
-    Serializable.$metadata$ = {kind: Kotlin.Kind.INTERFACE, simpleName: 'Serializable', interfaces: []};
-    function min_16($receiver, a, b) {
-      return a.compareTo_11rb$(b) <= 0 ? a : b;
+    var ln = defineInlineFunction('kotlin.kotlin.math.ln_14dthe$', wrapFunction(function () {
+      var Math_0 = Math;
+      return function (x) {
+        return Math_0.log(x);
+      };
+    }));
+    var log10 = defineInlineFunction('kotlin.kotlin.math.log10_14dthe$', wrapFunction(function () {
+      var Math_0 = Math;
+      return function (x) {
+        return Math_0.log10(x);
+      };
+    }));
+    var log2 = defineInlineFunction('kotlin.kotlin.math.log2_14dthe$', wrapFunction(function () {
+      var Math_0 = Math;
+      return function (x) {
+        return Math_0.log2(x);
+      };
+    }));
+    var ln1p = defineInlineFunction('kotlin.kotlin.math.ln1p_14dthe$', wrapFunction(function () {
+      var Math_0 = Math;
+      return function (x) {
+        return Math_0.log1p(x);
+      };
+    }));
+    var ceil = defineInlineFunction('kotlin.kotlin.math.ceil_14dthe$', wrapFunction(function () {
+      var Math_0 = Math;
+      return function (x) {
+        return Math_0.ceil(x);
+      };
+    }));
+    var floor = defineInlineFunction('kotlin.kotlin.math.floor_14dthe$', wrapFunction(function () {
+      var Math_0 = Math;
+      return function (x) {
+        return Math_0.floor(x);
+      };
+    }));
+    var truncate = defineInlineFunction('kotlin.kotlin.math.truncate_14dthe$', wrapFunction(function () {
+      var Math_0 = Math;
+      return function (x) {
+        return Math_0.trunc(x);
+      };
+    }));
+    function round(x) {
+      if (x % 0.5 !== 0.0) {
+        return Math.round(x);
+      }
+      var floor = Math_0.floor(x);
+      return floor % 2 === 0.0 ? floor : Math_0.ceil(x);
     }
-    function max_16($receiver, a, b) {
-      return a.compareTo_11rb$(b) >= 0 ? a : b;
+    var abs = defineInlineFunction('kotlin.kotlin.math.abs_14dthe$', wrapFunction(function () {
+      var Math_0 = Math;
+      return function (x) {
+        return Math_0.abs(x);
+      };
+    }));
+    var sign = defineInlineFunction('kotlin.kotlin.math.sign_14dthe$', wrapFunction(function () {
+      var Math_0 = Math;
+      return function (x) {
+        return Math_0.sign(x);
+      };
+    }));
+    var min_17 = defineInlineFunction('kotlin.kotlin.math.min_lu1900$', wrapFunction(function () {
+      var Math_0 = Math;
+      return function (a, b) {
+        return Math_0.min(a, b);
+      };
+    }));
+    var max_17 = defineInlineFunction('kotlin.kotlin.math.max_lu1900$', wrapFunction(function () {
+      var Math_0 = Math;
+      return function (a, b) {
+        return Math_0.max(a, b);
+      };
+    }));
+    var pow = defineInlineFunction('kotlin.kotlin.math.pow_38ydlf$', wrapFunction(function () {
+      var Math_0 = Math;
+      return function ($receiver, x) {
+        return Math_0.pow($receiver, x);
+      };
+    }));
+    var pow_0 = defineInlineFunction('kotlin.kotlin.math.pow_j6vyb1$', wrapFunction(function () {
+      var Math_0 = Math;
+      return function ($receiver, n) {
+        return Math_0.pow($receiver, n);
+      };
+    }));
+    var get_absoluteValue = defineInlineFunction('kotlin.kotlin.math.get_absoluteValue_yrwdxr$', wrapFunction(function () {
+      var Math_0 = Math;
+      return function ($receiver) {
+        return Math_0.abs($receiver);
+      };
+    }));
+    var get_sign = defineInlineFunction('kotlin.kotlin.math.get_sign_yrwdxr$', wrapFunction(function () {
+      var Math_0 = Math;
+      return function ($receiver) {
+        return Math_0.sign($receiver);
+      };
+    }));
+    function withSign($receiver, sign) {
+      var thisSignBit = Kotlin.doubleSignBit($receiver);
+      var newSignBit = Kotlin.doubleSignBit(sign);
+      return thisSignBit === newSignBit ? $receiver : -$receiver;
     }
-    function toByte($receiver) {
+    var withSign_0 = defineInlineFunction('kotlin.kotlin.math.withSign_j6vyb1$', wrapFunction(function () {
+      var withSign = _.kotlin.math.withSign_38ydlf$;
+      return function ($receiver, sign) {
+        return withSign($receiver, sign);
+      };
+    }));
+    function get_ulp($receiver) {
+      if ($receiver < 0)
+        return get_ulp(-$receiver);
+      else if (isNaN_1($receiver) || $receiver === kotlin_js_internal_DoubleCompanionObject.POSITIVE_INFINITY)
+        return $receiver;
+      else if ($receiver === kotlin_js_internal_DoubleCompanionObject.MAX_VALUE)
+        return $receiver - nextDown($receiver);
+      else
+        return nextUp($receiver) - $receiver;
+    }
+    function nextUp($receiver) {
+      if (isNaN_1($receiver) || $receiver === kotlin_js_internal_DoubleCompanionObject.POSITIVE_INFINITY)
+        return $receiver;
+      else if ($receiver === 0.0)
+        return kotlin_js_internal_DoubleCompanionObject.MIN_VALUE;
+      else {
+        var bits = toRawBits($receiver).add(Kotlin.Long.fromInt($receiver > 0 ? 1 : -1));
+        return Kotlin.doubleFromBits(bits);
+      }
+    }
+    function nextDown($receiver) {
+      if (isNaN_1($receiver) || $receiver === kotlin_js_internal_DoubleCompanionObject.NEGATIVE_INFINITY)
+        return $receiver;
+      else if ($receiver === 0.0)
+        return -kotlin_js_internal_DoubleCompanionObject.MIN_VALUE;
+      else {
+        var bits = toRawBits($receiver).add(Kotlin.Long.fromInt($receiver > 0 ? -1 : 1));
+        return Kotlin.doubleFromBits(bits);
+      }
+    }
+    function nextTowards($receiver, to) {
+      if (isNaN_1($receiver) || isNaN_1(to))
+        return kotlin_js_internal_DoubleCompanionObject.NaN;
+      else if (to === $receiver)
+        return to;
+      else if (to > $receiver)
+        return nextUp($receiver);
+      else
+        return nextDown($receiver);
+    }
+    function roundToInt($receiver) {
+      if (isNaN_1($receiver))
+        throw IllegalArgumentException_init_0('Cannot round NaN value.');
+      else if ($receiver > kotlin_js_internal_IntCompanionObject.MAX_VALUE)
+        return kotlin_js_internal_IntCompanionObject.MAX_VALUE;
+      else if ($receiver < kotlin_js_internal_IntCompanionObject.MIN_VALUE)
+        return kotlin_js_internal_IntCompanionObject.MIN_VALUE;
+      else {
+        return numberToInt(Math.round($receiver));
+      }
+    }
+    function roundToLong($receiver) {
+      if (isNaN_1($receiver))
+        throw IllegalArgumentException_init_0('Cannot round NaN value.');
+      else if ($receiver > (new Kotlin.Long(-1, 2147483647)).toNumber())
+        return new Kotlin.Long(-1, 2147483647);
+      else if ($receiver < (new Kotlin.Long(0, -2147483648)).toNumber())
+        return new Kotlin.Long(0, -2147483648);
+      else {
+        return Kotlin.Long.fromNumber(Math.round($receiver));
+      }
+    }
+    var sin_0 = defineInlineFunction('kotlin.kotlin.math.sin_mx4ult$', wrapFunction(function () {
+      var Math_0 = Math;
+      return function (x) {
+        return Math_0.sin(x);
+      };
+    }));
+    var cos_0 = defineInlineFunction('kotlin.kotlin.math.cos_mx4ult$', wrapFunction(function () {
+      var Math_0 = Math;
+      return function (x) {
+        return Math_0.cos(x);
+      };
+    }));
+    var tan_0 = defineInlineFunction('kotlin.kotlin.math.tan_mx4ult$', wrapFunction(function () {
+      var Math_0 = Math;
+      return function (x) {
+        return Math_0.tan(x);
+      };
+    }));
+    var asin_0 = defineInlineFunction('kotlin.kotlin.math.asin_mx4ult$', wrapFunction(function () {
+      var Math_0 = Math;
+      return function (x) {
+        return Math_0.asin(x);
+      };
+    }));
+    var acos_0 = defineInlineFunction('kotlin.kotlin.math.acos_mx4ult$', wrapFunction(function () {
+      var Math_0 = Math;
+      return function (x) {
+        return Math_0.acos(x);
+      };
+    }));
+    var atan_0 = defineInlineFunction('kotlin.kotlin.math.atan_mx4ult$', wrapFunction(function () {
+      var Math_0 = Math;
+      return function (x) {
+        return Math_0.atan(x);
+      };
+    }));
+    var atan2_0 = defineInlineFunction('kotlin.kotlin.math.atan2_dleff0$', wrapFunction(function () {
+      var Math_0 = Math;
+      return function (y, x) {
+        return Math_0.atan2(y, x);
+      };
+    }));
+    var sinh_0 = defineInlineFunction('kotlin.kotlin.math.sinh_mx4ult$', wrapFunction(function () {
+      var Math_0 = Math;
+      return function (x) {
+        return Math_0.sinh(x);
+      };
+    }));
+    var cosh_0 = defineInlineFunction('kotlin.kotlin.math.cosh_mx4ult$', wrapFunction(function () {
+      var Math_0 = Math;
+      return function (x) {
+        return Math_0.cosh(x);
+      };
+    }));
+    var tanh_0 = defineInlineFunction('kotlin.kotlin.math.tanh_mx4ult$', wrapFunction(function () {
+      var Math_0 = Math;
+      return function (x) {
+        return Math_0.tanh(x);
+      };
+    }));
+    var asinh_0 = defineInlineFunction('kotlin.kotlin.math.asinh_mx4ult$', wrapFunction(function () {
+      var Math_0 = Math;
+      return function (x) {
+        return Math_0.asinh(x);
+      };
+    }));
+    var acosh_0 = defineInlineFunction('kotlin.kotlin.math.acosh_mx4ult$', wrapFunction(function () {
+      var Math_0 = Math;
+      return function (x) {
+        return Math_0.acosh(x);
+      };
+    }));
+    var atanh_0 = defineInlineFunction('kotlin.kotlin.math.atanh_mx4ult$', wrapFunction(function () {
+      var Math_0 = Math;
+      return function (x) {
+        return Math_0.atanh(x);
+      };
+    }));
+    var hypot_0 = defineInlineFunction('kotlin.kotlin.math.hypot_dleff0$', wrapFunction(function () {
+      var Math_0 = Math;
+      return function (x, y) {
+        return Math_0.hypot(x, y);
+      };
+    }));
+    var sqrt_0 = defineInlineFunction('kotlin.kotlin.math.sqrt_mx4ult$', wrapFunction(function () {
+      var Math_0 = Math;
+      return function (x) {
+        return Math_0.sqrt(x);
+      };
+    }));
+    var exp_0 = defineInlineFunction('kotlin.kotlin.math.exp_mx4ult$', wrapFunction(function () {
+      var Math_0 = Math;
+      return function (x) {
+        return Math_0.exp(x);
+      };
+    }));
+    var expm1_0 = defineInlineFunction('kotlin.kotlin.math.expm1_mx4ult$', wrapFunction(function () {
+      var Math_0 = Math;
+      return function (x) {
+        return Math_0.expm1(x);
+      };
+    }));
+    var log_0 = defineInlineFunction('kotlin.kotlin.math.log_dleff0$', wrapFunction(function () {
+      var log = _.kotlin.math.log_lu1900$;
+      return function (x, base) {
+        return log(x, base);
+      };
+    }));
+    var ln_0 = defineInlineFunction('kotlin.kotlin.math.ln_mx4ult$', wrapFunction(function () {
+      var Math_0 = Math;
+      return function (x) {
+        return Math_0.log(x);
+      };
+    }));
+    var log10_0 = defineInlineFunction('kotlin.kotlin.math.log10_mx4ult$', wrapFunction(function () {
+      var Math_0 = Math;
+      return function (x) {
+        return Math_0.log10(x);
+      };
+    }));
+    var log2_0 = defineInlineFunction('kotlin.kotlin.math.log2_mx4ult$', wrapFunction(function () {
+      var Math_0 = Math;
+      return function (x) {
+        return Math_0.log2(x);
+      };
+    }));
+    var ln1p_0 = defineInlineFunction('kotlin.kotlin.math.ln1p_mx4ult$', wrapFunction(function () {
+      var Math_0 = Math;
+      return function (x) {
+        return Math_0.log1p(x);
+      };
+    }));
+    var ceil_0 = defineInlineFunction('kotlin.kotlin.math.ceil_mx4ult$', wrapFunction(function () {
+      var Math_0 = Math;
+      return function (x) {
+        return Math_0.ceil(x);
+      };
+    }));
+    var floor_0 = defineInlineFunction('kotlin.kotlin.math.floor_mx4ult$', wrapFunction(function () {
+      var Math_0 = Math;
+      return function (x) {
+        return Math_0.floor(x);
+      };
+    }));
+    var truncate_0 = defineInlineFunction('kotlin.kotlin.math.truncate_mx4ult$', wrapFunction(function () {
+      var Math_0 = Math;
+      return function (x) {
+        return Math_0.trunc(x);
+      };
+    }));
+    var round_0 = defineInlineFunction('kotlin.kotlin.math.round_mx4ult$', wrapFunction(function () {
+      var round = _.kotlin.math.round_14dthe$;
+      return function (x) {
+        return round(x);
+      };
+    }));
+    var abs_0 = defineInlineFunction('kotlin.kotlin.math.abs_mx4ult$', wrapFunction(function () {
+      var Math_0 = Math;
+      return function (x) {
+        return Math_0.abs(x);
+      };
+    }));
+    var sign_0 = defineInlineFunction('kotlin.kotlin.math.sign_mx4ult$', wrapFunction(function () {
+      var Math_0 = Math;
+      return function (x) {
+        return Math_0.sign(x);
+      };
+    }));
+    var min_18 = defineInlineFunction('kotlin.kotlin.math.min_dleff0$', wrapFunction(function () {
+      var Math_0 = Math;
+      return function (a, b) {
+        return Math_0.min(a, b);
+      };
+    }));
+    var max_18 = defineInlineFunction('kotlin.kotlin.math.max_dleff0$', wrapFunction(function () {
+      var Math_0 = Math;
+      return function (a, b) {
+        return Math_0.max(a, b);
+      };
+    }));
+    var pow_1 = defineInlineFunction('kotlin.kotlin.math.pow_yni7l$', wrapFunction(function () {
+      var Math_0 = Math;
+      return function ($receiver, x) {
+        return Math_0.pow($receiver, x);
+      };
+    }));
+    var pow_2 = defineInlineFunction('kotlin.kotlin.math.pow_lcymw2$', wrapFunction(function () {
+      var Math_0 = Math;
+      return function ($receiver, n) {
+        return Math_0.pow($receiver, n);
+      };
+    }));
+    var get_absoluteValue_0 = defineInlineFunction('kotlin.kotlin.math.get_absoluteValue_81szk$', wrapFunction(function () {
+      var Math_0 = Math;
+      return function ($receiver) {
+        return Math_0.abs($receiver);
+      };
+    }));
+    var get_sign_0 = defineInlineFunction('kotlin.kotlin.math.get_sign_81szk$', wrapFunction(function () {
+      var Math_0 = Math;
+      return function ($receiver) {
+        return Math_0.sign($receiver);
+      };
+    }));
+    var withSign_1 = defineInlineFunction('kotlin.kotlin.math.withSign_yni7l$', wrapFunction(function () {
+      var withSign = _.kotlin.math.withSign_38ydlf$;
+      return function ($receiver, sign) {
+        return withSign($receiver, sign);
+      };
+    }));
+    var withSign_2 = defineInlineFunction('kotlin.kotlin.math.withSign_lcymw2$', wrapFunction(function () {
+      var withSign = _.kotlin.math.withSign_38ydlf$;
+      return function ($receiver, sign) {
+        return withSign($receiver, sign);
+      };
+    }));
+    var roundToInt_0 = defineInlineFunction('kotlin.kotlin.math.roundToInt_81szk$', wrapFunction(function () {
+      var roundToInt = _.kotlin.math.roundToInt_yrwdxr$;
+      return function ($receiver) {
+        return roundToInt($receiver);
+      };
+    }));
+    var roundToLong_0 = defineInlineFunction('kotlin.kotlin.math.roundToLong_81szk$', wrapFunction(function () {
+      var roundToLong = _.kotlin.math.roundToLong_yrwdxr$;
+      return function ($receiver) {
+        return roundToLong($receiver);
+      };
+    }));
+    function abs_1(n) {
+      return n < 0 ? -n | 0 | 0 : n;
+    }
+    var min_19 = defineInlineFunction('kotlin.kotlin.math.min_vux9f0$', wrapFunction(function () {
+      var Math_0 = Math;
+      return function (a, b) {
+        return Math_0.min(a, b);
+      };
+    }));
+    var max_19 = defineInlineFunction('kotlin.kotlin.math.max_vux9f0$', wrapFunction(function () {
+      var Math_0 = Math;
+      return function (a, b) {
+        return Math_0.max(a, b);
+      };
+    }));
+    var get_absoluteValue_1 = defineInlineFunction('kotlin.kotlin.math.get_absoluteValue_s8ev3n$', wrapFunction(function () {
+      var abs = _.kotlin.math.abs_za3lpa$;
+      return function ($receiver) {
+        return abs($receiver);
+      };
+    }));
+    function get_sign_1($receiver) {
+      if ($receiver < 0)
+        return -1;
+      else if ($receiver > 0)
+        return 1;
+      else
+        return 0;
+    }
+    function abs_2(n) {
+      return n.compareTo_11rb$(Kotlin.Long.fromInt(0)) < 0 ? n.unaryMinus() : n;
+    }
+    var min_20 = defineInlineFunction('kotlin.kotlin.math.min_3pjtqy$', wrapFunction(function () {
+      var Math_0 = Math;
+      var min = _.kotlin.js.min_bug313$;
+      return function (a, b) {
+        return min(Math_0, a, b);
+      };
+    }));
+    var max_20 = defineInlineFunction('kotlin.kotlin.math.max_3pjtqy$', wrapFunction(function () {
+      var Math_0 = Math;
+      var max = _.kotlin.js.max_bug313$;
+      return function (a, b) {
+        return max(Math_0, a, b);
+      };
+    }));
+    var get_absoluteValue_2 = defineInlineFunction('kotlin.kotlin.math.get_absoluteValue_mts6qi$', wrapFunction(function () {
+      var abs = _.kotlin.math.abs_s8cxhz$;
+      return function ($receiver) {
+        return abs($receiver);
+      };
+    }));
+    function get_sign_2($receiver) {
+      if ($receiver.compareTo_11rb$(Kotlin.Long.fromInt(0)) < 0)
+        return -1;
+      else if ($receiver.compareTo_11rb$(Kotlin.Long.fromInt(0)) > 0)
+        return 1;
+      else
+        return 0;
+    }
+    function toBoolean($receiver) {
+      return equals($receiver.toLowerCase(), 'true');
+    }
+    function toByte_0($receiver) {
       var tmp$;
       return (tmp$ = toByteOrNull($receiver)) != null ? tmp$ : numberFormatError($receiver);
     }
-    function toByte_0($receiver, radix) {
+    function toByte_1($receiver, radix) {
       var tmp$;
       return (tmp$ = toByteOrNull_0($receiver, radix)) != null ? tmp$ : numberFormatError($receiver);
     }
-    function toShort($receiver) {
+    function toShort_0($receiver) {
       var tmp$;
       return (tmp$ = toShortOrNull($receiver)) != null ? tmp$ : numberFormatError($receiver);
     }
-    function toShort_0($receiver, radix) {
+    function toShort_1($receiver, radix) {
       var tmp$;
       return (tmp$ = toShortOrNull_0($receiver, radix)) != null ? tmp$ : numberFormatError($receiver);
     }
@@ -23222,16 +24794,17 @@
       };
     }));
     function isNaN_0($receiver) {
-      var tmp$;
-      tmp$ = $receiver.toLowerCase();
-      if (Kotlin.equals(tmp$, 'nan') || Kotlin.equals(tmp$, '+nan') || Kotlin.equals(tmp$, '-nan'))
-        return true;
-      else
-        return false;
+      switch ($receiver.toLowerCase()) {
+        case 'nan':
+        case '+nan':
+        case '-nan':
+          return true;
+        default:return false;
+      }
     }
     function checkRadix(radix) {
-      if (!(new IntRange(2, 36)).contains_mef7kx$(radix)) {
-        throw new IllegalArgumentException('radix ' + radix + ' was not in valid range 2..36');
+      if (!(2 <= radix && radix <= 36)) {
+        throw IllegalArgumentException_init_0('radix ' + radix + ' was not in valid range 2..36');
       }
       return radix;
     }
@@ -23258,10 +24831,10 @@
       return $receiver !== $receiver;
     }
     function isInfinite($receiver) {
-      return $receiver === DoubleCompanionObject.POSITIVE_INFINITY || $receiver === DoubleCompanionObject.NEGATIVE_INFINITY;
+      return $receiver === kotlin_js_internal_DoubleCompanionObject.POSITIVE_INFINITY || $receiver === kotlin_js_internal_DoubleCompanionObject.NEGATIVE_INFINITY;
     }
     function isInfinite_0($receiver) {
-      return $receiver === FloatCompanionObject.POSITIVE_INFINITY || $receiver === FloatCompanionObject.NEGATIVE_INFINITY;
+      return $receiver === kotlin_js_internal_FloatCompanionObject.POSITIVE_INFINITY || $receiver === kotlin_js_internal_FloatCompanionObject.NEGATIVE_INFINITY;
     }
     function isFinite($receiver) {
       return !isInfinite($receiver) && !isNaN_1($receiver);
@@ -23269,6 +24842,18 @@
     function isFinite_0($receiver) {
       return !isInfinite_0($receiver) && !isNaN_2($receiver);
     }
+    var fromBits = defineInlineFunction('kotlin.kotlin.fromBits_pkt8ie$', function ($receiver, bits) {
+      return Kotlin.doubleFromBits(bits);
+    });
+    var fromBits_0 = defineInlineFunction('kotlin.kotlin.fromBits_4ql4v8$', function ($receiver, bits) {
+      return Kotlin.floatFromBits(bits);
+    });
+    var then = defineInlineFunction('kotlin.kotlin.js.then_eyvp0y$', function ($receiver, onFulfilled) {
+      return $receiver.then(onFulfilled);
+    });
+    var then_0 = defineInlineFunction('kotlin.kotlin.js.then_a5sxob$', function ($receiver, onFulfilled, onRejected) {
+      return $receiver.then(onFulfilled, onRejected);
+    });
     var rangeTo = defineInlineFunction('kotlin.kotlin.ranges.rangeTo_yni7l$', wrapFunction(function () {
       var rangeTo = _.kotlin.ranges.rangeTo_38ydlf$;
       return function ($receiver, that) {
@@ -23297,7 +24882,7 @@
       RegexOption_initFields();
       return RegexOption$MULTILINE_instance;
     }
-    RegexOption.$metadata$ = {kind: Kotlin.Kind.CLASS, simpleName: 'RegexOption', interfaces: [Enum]};
+    RegexOption.$metadata$ = {kind: Kind_CLASS, simpleName: 'RegexOption', interfaces: [Enum]};
     function RegexOption$values() {
       return [RegexOption$IGNORE_CASE_getInstance(), RegexOption$MULTILINE_getInstance()];
     }
@@ -23308,14 +24893,14 @@
           return RegexOption$IGNORE_CASE_getInstance();
         case 'MULTILINE':
           return RegexOption$MULTILINE_getInstance();
-        default:Kotlin.throwISE('No enum constant kotlin.text.RegexOption.' + name);
+        default:throwISE('No enum constant kotlin.text.RegexOption.' + name);
       }
     }
     RegexOption.valueOf_61zpoe$ = RegexOption$valueOf;
     function MatchGroup(value) {
       this.value = value;
     }
-    MatchGroup.$metadata$ = {kind: Kotlin.Kind.CLASS, simpleName: 'MatchGroup', interfaces: []};
+    MatchGroup.$metadata$ = {kind: Kind_CLASS, simpleName: 'MatchGroup', interfaces: []};
     MatchGroup.prototype.component1 = function () {
       return this.value;
     };
@@ -23384,6 +24969,7 @@
     };
     Regex.prototype.replace_20wsma$ = defineInlineFunction('kotlin.kotlin.text.Regex.replace_20wsma$', wrapFunction(function () {
       var StringBuilder_init = _.kotlin.text.StringBuilder_init_za3lpa$;
+      var ensureNotNull = Kotlin.ensureNotNull;
       return function (input, transform) {
         var match = this.find_905azu$(input);
         if (match == null)
@@ -23392,7 +24978,7 @@
         var length = input.length;
         var sb = StringBuilder_init(length);
         do {
-          var foundMatch = match != null ? match : Kotlin.throwNPE();
+          var foundMatch = ensureNotNull(match);
           sb.append_ezbsdh$(input, lastStart, foundMatch.range.start);
           sb.append_gw00v9$(transform(foundMatch));
           lastStart = foundMatch.range.endInclusive + 1 | 0;
@@ -23423,7 +25009,7 @@
       var tmp$;
       if (!(limit >= 0)) {
         var message = 'Limit must be non-negative, but was ' + limit;
-        throw new IllegalArgumentException(message.toString());
+        throw IllegalArgumentException_init_0(message.toString());
       }
       var it = this.findAll_905azu$(input);
       var matches = limit === 0 ? it : take_9(it, limit - 1 | 0);
@@ -23447,7 +25033,7 @@
       this.replacementEscape_0 = new RegExp('\\$', 'g');
     }
     Regex$Companion.prototype.fromLiteral_61zpoe$ = function (literal) {
-      return Regex_1(this.escape_61zpoe$(literal));
+      return Regex_init_0(this.escape_61zpoe$(literal));
     };
     Regex$Companion.prototype.escape_61zpoe$ = function (literal) {
       return literal.replace(this.patternEscape_0, '\\$&');
@@ -23455,7 +25041,7 @@
     Regex$Companion.prototype.escapeReplacement_61zpoe$ = function (literal) {
       return literal.replace(this.replacementEscape_0, '$$$$');
     };
-    Regex$Companion.$metadata$ = {kind: Kotlin.Kind.OBJECT, simpleName: 'Companion', interfaces: []};
+    Regex$Companion.$metadata$ = {kind: Kind_OBJECT, simpleName: 'Companion', interfaces: []};
     var Regex$Companion_instance = null;
     function Regex$Companion_getInstance() {
       if (Regex$Companion_instance === null) {
@@ -23463,7 +25049,17 @@
       }
       return Regex$Companion_instance;
     }
-    Regex.$metadata$ = {kind: Kotlin.Kind.CLASS, simpleName: 'Regex', interfaces: []};
+    Regex.$metadata$ = {kind: Kind_CLASS, simpleName: 'Regex', interfaces: []};
+    function Regex_init(pattern, option, $this) {
+      $this = $this || Object.create(Regex.prototype);
+      Regex.call($this, pattern, setOf(option));
+      return $this;
+    }
+    function Regex_init_0(pattern, $this) {
+      $this = $this || Object.create(Regex.prototype);
+      Regex.call($this, pattern, emptySet());
+      return $this;
+    }
     function Regex_0(pattern, option) {
       return new Regex(pattern, setOf(option));
     }
@@ -23483,8 +25079,7 @@
       return this.range_co6b9w$_0;
     }});
     Object.defineProperty(findNext$ObjectLiteral.prototype, 'value', {get: function () {
-      var tmp$;
-      return (tmp$ = this.closure$match[0]) != null ? tmp$ : Kotlin.throwNPE();
+      return ensureNotNull(this.closure$match[0]);
     }});
     Object.defineProperty(findNext$ObjectLiteral.prototype, 'groups', {get: function () {
       return this.groups_qcaztb$_0;
@@ -23500,13 +25095,12 @@
       var tmp$;
       return (tmp$ = this.closure$match[index]) != null ? tmp$ : '';
     };
-    findNext$ObjectLiteral$get_findNext$ObjectLiteral$groupValues$ObjectLiteral.$metadata$ = {kind: Kotlin.Kind.CLASS, interfaces: [AbstractList]};
+    findNext$ObjectLiteral$get_findNext$ObjectLiteral$groupValues$ObjectLiteral.$metadata$ = {kind: Kind_CLASS, interfaces: [AbstractList]};
     Object.defineProperty(findNext$ObjectLiteral.prototype, 'groupValues', {get: function () {
-      var tmp$;
       if (this.groupValues__0 == null) {
         this.groupValues__0 = new findNext$ObjectLiteral$get_findNext$ObjectLiteral$groupValues$ObjectLiteral(this.closure$match);
       }
-      return (tmp$ = this.groupValues__0) != null ? tmp$ : Kotlin.throwNPE();
+      return ensureNotNull(this.groupValues__0);
     }});
     findNext$ObjectLiteral.prototype.next = function () {
       return findNext(this.this$findNext, this.closure$input, this.closure$range.isEmpty() ? this.closure$range.start + 1 | 0 : this.closure$range.endInclusive + 1 | 0);
@@ -23530,8 +25124,8 @@
       var tmp$;
       return (tmp$ = this.closure$match[index]) != null ? new MatchGroup(tmp$) : null;
     };
-    findNext$ObjectLiteral$groups$ObjectLiteral.$metadata$ = {kind: Kotlin.Kind.CLASS, interfaces: [AbstractCollection, MatchGroupCollection]};
-    findNext$ObjectLiteral.$metadata$ = {kind: Kotlin.Kind.CLASS, interfaces: [MatchResult]};
+    findNext$ObjectLiteral$groups$ObjectLiteral.$metadata$ = {kind: Kind_CLASS, interfaces: [AbstractCollection, MatchGroupCollection]};
+    findNext$ObjectLiteral.$metadata$ = {kind: Kind_CLASS, interfaces: [MatchResult]};
     function findNext($receiver, input, from) {
       $receiver.lastIndex = from;
       var match = $receiver.exec(input);
@@ -23556,13 +25150,13 @@
       var tmp$;
       tmp$ = this.sequenceRef_0;
       if (tmp$ == null) {
-        throw new IllegalStateException('This sequence can be consumed only once.');
+        throw IllegalStateException_init_0('This sequence can be consumed only once.');
       }
       var sequence = tmp$;
       this.sequenceRef_0 = null;
       return sequence.iterator();
     };
-    ConstrainedOnceSequence.$metadata$ = {kind: Kotlin.Kind.CLASS, simpleName: 'ConstrainedOnceSequence', interfaces: [Sequence]};
+    ConstrainedOnceSequence.$metadata$ = {kind: Kind_CLASS, simpleName: 'ConstrainedOnceSequence', interfaces: [Sequence]};
     var toUpperCase_0 = defineInlineFunction('kotlin.kotlin.text.toUpperCase_pdl1vz$', function ($receiver) {
       return $receiver.toUpperCase();
     });
@@ -23639,7 +25233,7 @@
     function isBlank($receiver) {
       return $receiver.length === 0 || matches(typeof $receiver === 'string' ? $receiver : $receiver.toString(), '^[\\s\\xA0]+$');
     }
-    function equals($receiver, other, ignoreCase) {
+    function equals_0($receiver, other, ignoreCase) {
       if (ignoreCase === void 0)
         ignoreCase = false;
       var tmp$;
@@ -23648,11 +25242,11 @@
       else {
         var tmp$_0;
         if (!ignoreCase)
-          tmp$_0 = Kotlin.equals($receiver, other);
+          tmp$_0 = equals($receiver, other);
         else {
           var tmp$_1 = other != null;
           if (tmp$_1) {
-            tmp$_1 = Kotlin.equals($receiver.toLowerCase(), other.toLowerCase());
+            tmp$_1 = equals($receiver.toLowerCase(), other.toLowerCase());
           }
           tmp$_0 = tmp$_1;
         }
@@ -23675,29 +25269,32 @@
       var tmp$;
       if (!(n >= 0)) {
         var message = "Count 'n' must be non-negative, but was " + n + '.';
-        throw new IllegalArgumentException(message.toString());
+        throw IllegalArgumentException_init_0(message.toString());
       }
-      if (n === 0)
-        tmp$ = '';
-      else if (n === 1)
-        tmp$ = $receiver.toString();
-      else {
-        var result = '';
-        if (!($receiver.length === 0)) {
-          var s = $receiver.toString();
-          var count = n;
-          while (true) {
-            if ((count & 1) === 1) {
-              result += s;
+      switch (n) {
+        case 0:
+          tmp$ = '';
+          break;
+        case 1:
+          tmp$ = $receiver.toString();
+          break;
+        default:var result = '';
+          if (!($receiver.length === 0)) {
+            var s = $receiver.toString();
+            var count = n;
+            while (true) {
+              if ((count & 1) === 1) {
+                result += s;
+              }
+              count = count >>> 1;
+              if (count === 0) {
+                break;
+              }
+              s += s;
             }
-            count = count >>> 1;
-            if (count === 0) {
-              break;
-            }
-            s += s;
           }
-        }
-        return result;
+
+          return result;
       }
       return tmp$;
     }
@@ -23723,7 +25320,7 @@
     }
     function Appendable() {
     }
-    Appendable.$metadata$ = {kind: Kotlin.Kind.INTERFACE, simpleName: 'Appendable', interfaces: []};
+    Appendable.$metadata$ = {kind: Kind_INTERFACE, simpleName: 'Appendable', interfaces: []};
     function StringBuilder(content) {
       if (content === void 0)
         content = '';
@@ -23743,15 +25340,15 @@
       return this;
     };
     StringBuilder.prototype.append_gw00v9$ = function (csq) {
-      this.string_0 += Kotlin.toString(csq);
+      this.string_0 += toString(csq);
       return this;
     };
     StringBuilder.prototype.append_ezbsdh$ = function (csq, start, end) {
-      this.string_0 += Kotlin.toString(csq).substring(start, end);
+      this.string_0 += toString(csq).substring(start, end);
       return this;
     };
     StringBuilder.prototype.append_s8jyv4$ = function (obj) {
-      this.string_0 += Kotlin.toString(obj);
+      this.string_0 += toString(obj);
       return this;
     };
     StringBuilder.prototype.reverse = function () {
@@ -23761,7 +25358,7 @@
     StringBuilder.prototype.toString = function () {
       return this.string_0;
     };
-    StringBuilder.$metadata$ = {kind: Kotlin.Kind.CLASS, simpleName: 'StringBuilder', interfaces: [CharSequence, Appendable]};
+    StringBuilder.$metadata$ = {kind: Kind_CLASS, simpleName: 'StringBuilder', interfaces: [CharSequence, Appendable]};
     function StringBuilder_init(capacity, $this) {
       $this = $this || Object.create(StringBuilder.prototype);
       StringBuilder.call($this);
@@ -23808,14 +25405,13 @@
       return $receiver_0;
     }
     function appendElement($receiver, name, init) {
-      var tmp$;
-      var $receiver_0 = createElement((tmp$ = $receiver.ownerDocument) != null ? tmp$ : Kotlin.throwNPE(), name, init);
+      var $receiver_0 = createElement(ensureNotNull($receiver.ownerDocument), name, init);
       $receiver.appendChild($receiver_0);
       return $receiver_0;
     }
     function hasClass($receiver, cssClass) {
       var tmp$ = $receiver.className;
-      return Regex_1('(^|.*' + '\\' + 's+)' + cssClass + '(' + '$' + '|' + '\\' + 's+.*)').matches_6bul2c$(tmp$);
+      return Regex_init_0('(^|.*' + '\\' + 's+)' + cssClass + '(' + '$' + '|' + '\\' + 's+.*)').matches_6bul2c$(tmp$);
     }
     function addClass($receiver, cssClasses) {
       var destination = ArrayList_init();
@@ -23828,7 +25424,7 @@
       var missingClasses = destination;
       if (!missingClasses.isEmpty()) {
         var tmp$_0;
-        var presentClasses = trim_3(Kotlin.isCharSequence(tmp$_0 = $receiver.className) ? tmp$_0 : Kotlin.throwCCE()).toString();
+        var presentClasses = trim_3(Kotlin.isCharSequence(tmp$_0 = $receiver.className) ? tmp$_0 : throwCCE()).toString();
         var $receiver_0 = new StringBuilder();
         $receiver_0.append_gw00v9$(presentClasses);
         if (!(presentClasses.length === 0)) {
@@ -23857,8 +25453,8 @@
       if (any$result) {
         var toBeRemoved = toSet(cssClasses);
         var tmp$_0;
-        var tmp$_1 = trim_3(Kotlin.isCharSequence(tmp$_0 = $receiver.className) ? tmp$_0 : Kotlin.throwCCE()).toString();
-        var $receiver_0 = Regex_1('\\s+').split_905azu$(tmp$_1, 0);
+        var tmp$_1 = trim_3(Kotlin.isCharSequence(tmp$_0 = $receiver.className) ? tmp$_0 : throwCCE()).toString();
+        var $receiver_0 = Regex_init_0('\\s+').split_905azu$(tmp$_1, 0);
         var destination = ArrayList_init();
         var tmp$_2;
         tmp$_2 = $receiver_0.iterator();
@@ -23890,7 +25486,7 @@
     EventListenerHandler.prototype.toString = function () {
       return 'EventListenerHandler(' + this.handler_0 + ')';
     };
-    EventListenerHandler.$metadata$ = {kind: Kotlin.Kind.CLASS, simpleName: 'EventListenerHandler', interfaces: []};
+    EventListenerHandler.$metadata$ = {kind: Kind_CLASS, simpleName: 'EventListenerHandler', interfaces: []};
     function asList$ObjectLiteral_0(this$asList) {
       this.this$asList = this$asList;
       AbstractList.call(this);
@@ -23905,19 +25501,17 @@
        else
         throw new IndexOutOfBoundsException('index ' + index + ' is not in range [0..' + get_lastIndex_8(this) + ']');
     };
-    asList$ObjectLiteral_0.$metadata$ = {kind: Kotlin.Kind.CLASS, interfaces: [AbstractList]};
+    asList$ObjectLiteral_0.$metadata$ = {kind: Kind_CLASS, interfaces: [AbstractList]};
     function asList_8($receiver) {
       return new asList$ObjectLiteral_0($receiver);
     }
     function clear($receiver) {
-      var tmp$;
       while ($receiver.hasChildNodes()) {
-        $receiver.removeChild((tmp$ = $receiver.firstChild) != null ? tmp$ : Kotlin.throwNPE());
+        $receiver.removeChild(ensureNotNull($receiver.firstChild));
       }
     }
     function appendText($receiver, text) {
-      var tmp$;
-      $receiver.appendChild(((tmp$ = $receiver.ownerDocument) != null ? tmp$ : Kotlin.throwNPE()).createTextNode(text));
+      $receiver.appendChild(ensureNotNull($receiver.ownerDocument).createTextNode(text));
       return $receiver;
     }
     var WebGLContextAttributes = defineInlineFunction('kotlin.org.khronos.webgl.WebGLContextAttributes_2tn698$', function (alpha, depth, stencil, antialias, premultipliedAlpha, preserveDrawingBuffer, preferLowPowerToHighPerformance, failIfMajorPerformanceCaveat) {
@@ -25959,33 +27553,28 @@
       return 'text';
     });
     function get_jsClass($receiver) {
-      var tmp$;
-      tmp$ = typeof $receiver;
-      if (Kotlin.equals(tmp$, 'string'))
-        return String;
-      else if (Kotlin.equals(tmp$, 'number'))
-        return Number;
-      else if (Kotlin.equals(tmp$, 'boolean'))
-        return Boolean;
-      else
-        return Object.getPrototypeOf($receiver).constructor;
+      switch (typeof $receiver) {
+        case 'string':
+          return String;
+        case 'number':
+          return Number;
+        case 'boolean':
+          return Boolean;
+        default:return Object.getPrototypeOf($receiver).constructor;
+      }
     }
     function get_js($receiver) {
       var tmp$;
-      return (Kotlin.isType(tmp$ = $receiver, KClassImpl) ? tmp$ : Kotlin.throwCCE()).jClass_8be2vx$;
+      return (Kotlin.isType(tmp$ = $receiver, KClassImpl) ? tmp$ : throwCCE()).jClass;
     }
     function get_kotlin($receiver) {
       return getKClass($receiver);
     }
     function KClassImpl(jClass) {
-      this.jClass_8be2vx$ = jClass;
-      this.metadata_0 = this.jClass_8be2vx$.$metadata$;
-      var tmp$, tmp$_0;
-      this.hashCode_0 = (tmp$_0 = (tmp$ = this.simpleName) != null ? Kotlin.hashCode(tmp$) : null) != null ? tmp$_0 : 0;
+      this.jClass_1ppatx$_0 = jClass;
     }
-    Object.defineProperty(KClassImpl.prototype, 'simpleName', {get: function () {
-      var tmp$;
-      return (tmp$ = this.metadata_0) != null ? tmp$.simpleName : null;
+    Object.defineProperty(KClassImpl.prototype, 'jClass', {get: function () {
+      return this.jClass_1ppatx$_0;
     }});
     Object.defineProperty(KClassImpl.prototype, 'annotations', {get: function () {
       throw new NotImplementedError();
@@ -26036,30 +27625,242 @@
       throw new NotImplementedError();
     }});
     KClassImpl.prototype.equals = function (other) {
-      return Kotlin.isType(other, KClassImpl) && Kotlin.equals(this.jClass_8be2vx$, other.jClass_8be2vx$);
+      return Kotlin.isType(other, KClassImpl) && equals(this.jClass, other.jClass);
     };
     KClassImpl.prototype.hashCode = function () {
-      return this.hashCode_0;
-    };
-    KClassImpl.prototype.isInstance_s8jyv4$ = function (value) {
-      return Kotlin.isType(value, this.jClass_8be2vx$);
+      var tmp$, tmp$_0;
+      return (tmp$_0 = (tmp$ = this.simpleName) != null ? hashCode(tmp$) : null) != null ? tmp$_0 : 0;
     };
     KClassImpl.prototype.toString = function () {
-      return 'class ' + Kotlin.toString(this.simpleName);
+      return 'class ' + toString(this.simpleName);
     };
-    KClassImpl.$metadata$ = {kind: Kotlin.Kind.CLASS, simpleName: 'KClassImpl', interfaces: [KClass]};
+    KClassImpl.$metadata$ = {kind: Kind_CLASS, simpleName: 'KClassImpl', interfaces: [KClass]};
+    function SimpleKClassImpl(jClass) {
+      KClassImpl.call(this, jClass);
+      var tmp$;
+      this.simpleName_m7mxi0$_0 = (tmp$ = jClass.$metadata$) != null ? tmp$.simpleName : null;
+    }
+    Object.defineProperty(SimpleKClassImpl.prototype, 'simpleName', {get: function () {
+      return this.simpleName_m7mxi0$_0;
+    }});
+    SimpleKClassImpl.prototype.isInstance_s8jyv4$ = function (value) {
+      return Kotlin.isType(value, this.jClass);
+    };
+    SimpleKClassImpl.$metadata$ = {kind: Kind_CLASS, simpleName: 'SimpleKClassImpl', interfaces: [KClassImpl]};
+    function PrimitiveKClassImpl(jClass, givenSimpleName, isInstanceFunction) {
+      KClassImpl.call(this, jClass);
+      this.givenSimpleName_0 = givenSimpleName;
+      this.isInstanceFunction_0 = isInstanceFunction;
+    }
+    PrimitiveKClassImpl.prototype.equals = function (other) {
+      if (!Kotlin.isType(other, PrimitiveKClassImpl))
+        return false;
+      return KClassImpl.prototype.equals.call(this, other) && equals(this.givenSimpleName_0, other.givenSimpleName_0);
+    };
+    Object.defineProperty(PrimitiveKClassImpl.prototype, 'simpleName', {get: function () {
+      return this.givenSimpleName_0;
+    }});
+    PrimitiveKClassImpl.prototype.isInstance_s8jyv4$ = function (value) {
+      return this.isInstanceFunction_0(value);
+    };
+    PrimitiveKClassImpl.$metadata$ = {kind: Kind_CLASS, simpleName: 'PrimitiveKClassImpl', interfaces: [KClassImpl]};
+    function NothingKClassImpl() {
+      NothingKClassImpl_instance = this;
+      KClassImpl.call(this, Object);
+      this.simpleName_lnzy73$_0 = 'Nothing';
+    }
+    Object.defineProperty(NothingKClassImpl.prototype, 'simpleName', {get: function () {
+      return this.simpleName_lnzy73$_0;
+    }});
+    NothingKClassImpl.prototype.isInstance_s8jyv4$ = function (value) {
+      return false;
+    };
+    Object.defineProperty(NothingKClassImpl.prototype, 'jClass', {get: function () {
+      throw UnsupportedOperationException_init_0("There's no native JS class for Nothing type");
+    }});
+    NothingKClassImpl.prototype.equals = function (other) {
+      return other === this;
+    };
+    NothingKClassImpl.prototype.hashCode = function () {
+      return 0;
+    };
+    NothingKClassImpl.$metadata$ = {kind: Kind_OBJECT, simpleName: 'NothingKClassImpl', interfaces: [KClassImpl]};
+    var NothingKClassImpl_instance = null;
+    function NothingKClassImpl_getInstance() {
+      if (NothingKClassImpl_instance === null) {
+        new NothingKClassImpl();
+      }
+      return NothingKClassImpl_instance;
+    }
+    function PrimitiveClasses() {
+      PrimitiveClasses_instance = this;
+      this.anyClass = new PrimitiveKClassImpl(Object, 'Any', PrimitiveClasses$anyClass$lambda);
+      this.numberClass = new PrimitiveKClassImpl(Number, 'Number', PrimitiveClasses$numberClass$lambda);
+      this.nothingClass = NothingKClassImpl_getInstance();
+      this.booleanClass = new PrimitiveKClassImpl(Boolean, 'Boolean', PrimitiveClasses$booleanClass$lambda);
+      this.byteClass = new PrimitiveKClassImpl(Number, 'Byte', PrimitiveClasses$byteClass$lambda);
+      this.shortClass = new PrimitiveKClassImpl(Number, 'Short', PrimitiveClasses$shortClass$lambda);
+      this.intClass = new PrimitiveKClassImpl(Number, 'Int', PrimitiveClasses$intClass$lambda);
+      this.floatClass = new PrimitiveKClassImpl(Number, 'Float', PrimitiveClasses$floatClass$lambda);
+      this.doubleClass = new PrimitiveKClassImpl(Number, 'Double', PrimitiveClasses$doubleClass$lambda);
+      this.arrayClass = new PrimitiveKClassImpl(Array, 'Array', PrimitiveClasses$arrayClass$lambda);
+      this.stringClass = new PrimitiveKClassImpl(String, 'String', PrimitiveClasses$stringClass$lambda);
+      this.throwableClass = new PrimitiveKClassImpl(Error, 'Throwable', PrimitiveClasses$throwableClass$lambda);
+      this.booleanArrayClass = new PrimitiveKClassImpl(Array, 'BooleanArray', PrimitiveClasses$booleanArrayClass$lambda);
+      this.charArrayClass = new PrimitiveKClassImpl(Uint16Array, 'CharArray', PrimitiveClasses$charArrayClass$lambda);
+      this.byteArrayClass = new PrimitiveKClassImpl(Int8Array, 'ByteArray', PrimitiveClasses$byteArrayClass$lambda);
+      this.shortArrayClass = new PrimitiveKClassImpl(Int16Array, 'ShortArray', PrimitiveClasses$shortArrayClass$lambda);
+      this.intArrayClass = new PrimitiveKClassImpl(Int32Array, 'IntArray', PrimitiveClasses$intArrayClass$lambda);
+      this.longArrayClass = new PrimitiveKClassImpl(Array, 'LongArray', PrimitiveClasses$longArrayClass$lambda);
+      this.floatArrayClass = new PrimitiveKClassImpl(Float32Array, 'FloatArray', PrimitiveClasses$floatArrayClass$lambda);
+      this.doubleArrayClass = new PrimitiveKClassImpl(Float64Array, 'DoubleArray', PrimitiveClasses$doubleArrayClass$lambda);
+    }
+    function PrimitiveClasses$functionClass$lambda$lambda(closure$arity) {
+      return function (it) {
+        return typeof it === 'function' && it.length == closure$arity;
+      };
+    }
+    PrimitiveClasses.prototype.functionClass = function (arity) {
+      var tmp$;
+      var tmp$_0;
+      if ((tmp$ = functionClasses[arity]) != null)
+        tmp$_0 = tmp$;
+      else {
+        var result = new PrimitiveKClassImpl(Function, 'Function' + arity, PrimitiveClasses$functionClass$lambda$lambda(arity));
+        functionClasses[arity] = result;
+        tmp$_0 = result;
+      }
+      return tmp$_0;
+    };
+    function PrimitiveClasses$anyClass$lambda(it) {
+      return Kotlin.isType(it, Any);
+    }
+    function PrimitiveClasses$numberClass$lambda(it) {
+      return Kotlin.isNumber(it);
+    }
+    function PrimitiveClasses$booleanClass$lambda(it) {
+      return typeof it === 'boolean';
+    }
+    function PrimitiveClasses$byteClass$lambda(it) {
+      return typeof it === 'number';
+    }
+    function PrimitiveClasses$shortClass$lambda(it) {
+      return typeof it === 'number';
+    }
+    function PrimitiveClasses$intClass$lambda(it) {
+      return typeof it === 'number';
+    }
+    function PrimitiveClasses$floatClass$lambda(it) {
+      return typeof it === 'number';
+    }
+    function PrimitiveClasses$doubleClass$lambda(it) {
+      return typeof it === 'number';
+    }
+    function PrimitiveClasses$arrayClass$lambda(it) {
+      return Kotlin.isArray(it);
+    }
+    function PrimitiveClasses$stringClass$lambda(it) {
+      return typeof it === 'string';
+    }
+    function PrimitiveClasses$throwableClass$lambda(it) {
+      return Kotlin.isType(it, Throwable);
+    }
+    function PrimitiveClasses$booleanArrayClass$lambda(it) {
+      return Kotlin.isBooleanArray(it);
+    }
+    function PrimitiveClasses$charArrayClass$lambda(it) {
+      return Kotlin.isCharArray(it);
+    }
+    function PrimitiveClasses$byteArrayClass$lambda(it) {
+      return Kotlin.isByteArray(it);
+    }
+    function PrimitiveClasses$shortArrayClass$lambda(it) {
+      return Kotlin.isShortArray(it);
+    }
+    function PrimitiveClasses$intArrayClass$lambda(it) {
+      return Kotlin.isIntArray(it);
+    }
+    function PrimitiveClasses$longArrayClass$lambda(it) {
+      return Kotlin.isLongArray(it);
+    }
+    function PrimitiveClasses$floatArrayClass$lambda(it) {
+      return Kotlin.isFloatArray(it);
+    }
+    function PrimitiveClasses$doubleArrayClass$lambda(it) {
+      return Kotlin.isDoubleArray(it);
+    }
+    PrimitiveClasses.$metadata$ = {kind: Kind_OBJECT, simpleName: 'PrimitiveClasses', interfaces: []};
+    var PrimitiveClasses_instance = null;
+    function PrimitiveClasses_getInstance() {
+      if (PrimitiveClasses_instance === null) {
+        new PrimitiveClasses();
+      }
+      return PrimitiveClasses_instance;
+    }
+    var functionClasses;
     function getKClass(jClass) {
       return getOrCreateKClass(jClass);
     }
     function getKClassFromExpression(e) {
-      return getOrCreateKClass(get_jsClass(e));
+      var tmp$;
+      switch (typeof e) {
+        case 'string':
+          tmp$ = PrimitiveClasses_getInstance().stringClass;
+          break;
+        case 'number':
+          tmp$ = (e | 0) === e ? PrimitiveClasses_getInstance().intClass : PrimitiveClasses_getInstance().doubleClass;
+          break;
+        case 'boolean':
+          tmp$ = PrimitiveClasses_getInstance().booleanClass;
+          break;
+        case 'function':
+          tmp$ = PrimitiveClasses_getInstance().functionClass(e.length);
+          break;
+        default:if (Kotlin.isBooleanArray(e))
+            tmp$ = PrimitiveClasses_getInstance().booleanArrayClass;
+          else if (Kotlin.isCharArray(e))
+            tmp$ = PrimitiveClasses_getInstance().charArrayClass;
+          else if (Kotlin.isByteArray(e))
+            tmp$ = PrimitiveClasses_getInstance().byteArrayClass;
+          else if (Kotlin.isShortArray(e))
+            tmp$ = PrimitiveClasses_getInstance().shortArrayClass;
+          else if (Kotlin.isIntArray(e))
+            tmp$ = PrimitiveClasses_getInstance().intArrayClass;
+          else if (Kotlin.isLongArray(e))
+            tmp$ = PrimitiveClasses_getInstance().longArrayClass;
+          else if (Kotlin.isFloatArray(e))
+            tmp$ = PrimitiveClasses_getInstance().floatArrayClass;
+          else if (Kotlin.isDoubleArray(e))
+            tmp$ = PrimitiveClasses_getInstance().doubleArrayClass;
+          else if (Kotlin.isType(e, KClass))
+            tmp$ = getKClass(KClass);
+          else if (Kotlin.isArray(e))
+            tmp$ = PrimitiveClasses_getInstance().arrayClass;
+          else {
+            var constructor = Object.getPrototypeOf(e).constructor;
+            if (constructor === Object)
+              tmp$ = PrimitiveClasses_getInstance().anyClass;
+            else if (constructor === Error)
+              tmp$ = PrimitiveClasses_getInstance().throwableClass;
+            else {
+              var jsClass = constructor;
+              tmp$ = getOrCreateKClass(jsClass);
+            }
+          }
+
+          break;
+      }
+      return tmp$;
     }
     function getOrCreateKClass(jClass) {
       var tmp$;
+      if (jClass === String) {
+        return PrimitiveClasses_getInstance().stringClass;
+      }
       var metadata = jClass.$metadata$;
       if (metadata != null) {
         if (metadata.$kClass$ == null) {
-          var kClass = new KClassImpl(jClass);
+          var kClass = new SimpleKClassImpl(jClass);
           metadata.$kClass$ = kClass;
           tmp$ = kClass;
         }
@@ -26068,50 +27869,50 @@
         }
       }
        else {
-        tmp$ = new KClassImpl(jClass);
+        tmp$ = new SimpleKClassImpl(jClass);
       }
       return tmp$;
     }
     function Annotation() {
     }
-    Annotation.$metadata$ = {kind: Kotlin.Kind.INTERFACE, simpleName: 'Annotation', interfaces: []};
+    Annotation.$metadata$ = {kind: Kind_INTERFACE, simpleName: 'Annotation', interfaces: []};
     function CharSequence() {
     }
-    CharSequence.$metadata$ = {kind: Kotlin.Kind.INTERFACE, simpleName: 'CharSequence', interfaces: []};
+    CharSequence.$metadata$ = {kind: Kind_INTERFACE, simpleName: 'CharSequence', interfaces: []};
     function Iterable() {
     }
-    Iterable.$metadata$ = {kind: Kotlin.Kind.INTERFACE, simpleName: 'Iterable', interfaces: []};
+    Iterable.$metadata$ = {kind: Kind_INTERFACE, simpleName: 'Iterable', interfaces: []};
     function MutableIterable() {
     }
-    MutableIterable.$metadata$ = {kind: Kotlin.Kind.INTERFACE, simpleName: 'MutableIterable', interfaces: [Iterable]};
+    MutableIterable.$metadata$ = {kind: Kind_INTERFACE, simpleName: 'MutableIterable', interfaces: [Iterable]};
     function Collection() {
     }
-    Collection.$metadata$ = {kind: Kotlin.Kind.INTERFACE, simpleName: 'Collection', interfaces: [Iterable]};
+    Collection.$metadata$ = {kind: Kind_INTERFACE, simpleName: 'Collection', interfaces: [Iterable]};
     function MutableCollection() {
     }
-    MutableCollection.$metadata$ = {kind: Kotlin.Kind.INTERFACE, simpleName: 'MutableCollection', interfaces: [MutableIterable, Collection]};
+    MutableCollection.$metadata$ = {kind: Kind_INTERFACE, simpleName: 'MutableCollection', interfaces: [MutableIterable, Collection]};
     function List() {
     }
-    List.$metadata$ = {kind: Kotlin.Kind.INTERFACE, simpleName: 'List', interfaces: [Collection]};
+    List.$metadata$ = {kind: Kind_INTERFACE, simpleName: 'List', interfaces: [Collection]};
     function MutableList() {
     }
-    MutableList.$metadata$ = {kind: Kotlin.Kind.INTERFACE, simpleName: 'MutableList', interfaces: [MutableCollection, List]};
+    MutableList.$metadata$ = {kind: Kind_INTERFACE, simpleName: 'MutableList', interfaces: [MutableCollection, List]};
     function Set() {
     }
-    Set.$metadata$ = {kind: Kotlin.Kind.INTERFACE, simpleName: 'Set', interfaces: [Collection]};
+    Set.$metadata$ = {kind: Kind_INTERFACE, simpleName: 'Set', interfaces: [Collection]};
     function MutableSet() {
     }
-    MutableSet.$metadata$ = {kind: Kotlin.Kind.INTERFACE, simpleName: 'MutableSet', interfaces: [MutableCollection, Set]};
+    MutableSet.$metadata$ = {kind: Kind_INTERFACE, simpleName: 'MutableSet', interfaces: [MutableCollection, Set]};
     function Map() {
     }
     Map.prototype.getOrDefault_xwzc9p$ = function (key, defaultValue) {
       var tmp$;
-      return (tmp$ = null) == null || Kotlin.isType(tmp$, Any) ? tmp$ : Kotlin.throwCCE();
+      return (tmp$ = null) == null || Kotlin.isType(tmp$, Any) ? tmp$ : throwCCE();
     };
     function Map$Entry() {
     }
-    Map$Entry.$metadata$ = {kind: Kotlin.Kind.INTERFACE, simpleName: 'Entry', interfaces: []};
-    Map.$metadata$ = {kind: Kotlin.Kind.INTERFACE, simpleName: 'Map', interfaces: []};
+    Map$Entry.$metadata$ = {kind: Kind_INTERFACE, simpleName: 'Entry', interfaces: []};
+    Map.$metadata$ = {kind: Kind_INTERFACE, simpleName: 'Map', interfaces: []};
     function MutableMap() {
     }
     MutableMap.prototype.remove_xwzc9p$ = function (key, value) {
@@ -26119,71 +27920,71 @@
     };
     function MutableMap$MutableEntry() {
     }
-    MutableMap$MutableEntry.$metadata$ = {kind: Kotlin.Kind.INTERFACE, simpleName: 'MutableEntry', interfaces: [Map$Entry]};
-    MutableMap.$metadata$ = {kind: Kotlin.Kind.INTERFACE, simpleName: 'MutableMap', interfaces: [Map]};
-    function Function() {
+    MutableMap$MutableEntry.$metadata$ = {kind: Kind_INTERFACE, simpleName: 'MutableEntry', interfaces: [Map$Entry]};
+    MutableMap.$metadata$ = {kind: Kind_INTERFACE, simpleName: 'MutableMap', interfaces: [Map]};
+    function Function_0() {
     }
-    Function.$metadata$ = {kind: Kotlin.Kind.INTERFACE, simpleName: 'Function', interfaces: []};
+    Function_0.$metadata$ = {kind: Kind_INTERFACE, simpleName: 'Function', interfaces: []};
     function Iterator() {
     }
-    Iterator.$metadata$ = {kind: Kotlin.Kind.INTERFACE, simpleName: 'Iterator', interfaces: []};
+    Iterator.$metadata$ = {kind: Kind_INTERFACE, simpleName: 'Iterator', interfaces: []};
     function MutableIterator() {
     }
-    MutableIterator.$metadata$ = {kind: Kotlin.Kind.INTERFACE, simpleName: 'MutableIterator', interfaces: [Iterator]};
+    MutableIterator.$metadata$ = {kind: Kind_INTERFACE, simpleName: 'MutableIterator', interfaces: [Iterator]};
     function ListIterator() {
     }
-    ListIterator.$metadata$ = {kind: Kotlin.Kind.INTERFACE, simpleName: 'ListIterator', interfaces: [Iterator]};
+    ListIterator.$metadata$ = {kind: Kind_INTERFACE, simpleName: 'ListIterator', interfaces: [Iterator]};
     function MutableListIterator() {
     }
-    MutableListIterator.$metadata$ = {kind: Kotlin.Kind.INTERFACE, simpleName: 'MutableListIterator', interfaces: [MutableIterator, ListIterator]};
+    MutableListIterator.$metadata$ = {kind: Kind_INTERFACE, simpleName: 'MutableListIterator', interfaces: [MutableIterator, ListIterator]};
     function ByteIterator() {
     }
     ByteIterator.prototype.next = function () {
       return this.nextByte();
     };
-    ByteIterator.$metadata$ = {kind: Kotlin.Kind.CLASS, simpleName: 'ByteIterator', interfaces: [Iterator]};
+    ByteIterator.$metadata$ = {kind: Kind_CLASS, simpleName: 'ByteIterator', interfaces: [Iterator]};
     function CharIterator() {
     }
     CharIterator.prototype.next = function () {
       return toBoxedChar(this.nextChar());
     };
-    CharIterator.$metadata$ = {kind: Kotlin.Kind.CLASS, simpleName: 'CharIterator', interfaces: [Iterator]};
+    CharIterator.$metadata$ = {kind: Kind_CLASS, simpleName: 'CharIterator', interfaces: [Iterator]};
     function ShortIterator() {
     }
     ShortIterator.prototype.next = function () {
       return this.nextShort();
     };
-    ShortIterator.$metadata$ = {kind: Kotlin.Kind.CLASS, simpleName: 'ShortIterator', interfaces: [Iterator]};
+    ShortIterator.$metadata$ = {kind: Kind_CLASS, simpleName: 'ShortIterator', interfaces: [Iterator]};
     function IntIterator() {
     }
     IntIterator.prototype.next = function () {
       return this.nextInt();
     };
-    IntIterator.$metadata$ = {kind: Kotlin.Kind.CLASS, simpleName: 'IntIterator', interfaces: [Iterator]};
+    IntIterator.$metadata$ = {kind: Kind_CLASS, simpleName: 'IntIterator', interfaces: [Iterator]};
     function LongIterator() {
     }
     LongIterator.prototype.next = function () {
       return this.nextLong();
     };
-    LongIterator.$metadata$ = {kind: Kotlin.Kind.CLASS, simpleName: 'LongIterator', interfaces: [Iterator]};
+    LongIterator.$metadata$ = {kind: Kind_CLASS, simpleName: 'LongIterator', interfaces: [Iterator]};
     function FloatIterator() {
     }
     FloatIterator.prototype.next = function () {
       return this.nextFloat();
     };
-    FloatIterator.$metadata$ = {kind: Kotlin.Kind.CLASS, simpleName: 'FloatIterator', interfaces: [Iterator]};
+    FloatIterator.$metadata$ = {kind: Kind_CLASS, simpleName: 'FloatIterator', interfaces: [Iterator]};
     function DoubleIterator() {
     }
     DoubleIterator.prototype.next = function () {
       return this.nextDouble();
     };
-    DoubleIterator.$metadata$ = {kind: Kotlin.Kind.CLASS, simpleName: 'DoubleIterator', interfaces: [Iterator]};
+    DoubleIterator.$metadata$ = {kind: Kind_CLASS, simpleName: 'DoubleIterator', interfaces: [Iterator]};
     function BooleanIterator() {
     }
     BooleanIterator.prototype.next = function () {
       return this.nextBoolean();
     };
-    BooleanIterator.$metadata$ = {kind: Kotlin.Kind.CLASS, simpleName: 'BooleanIterator', interfaces: [Iterator]};
+    BooleanIterator.$metadata$ = {kind: Kind_CLASS, simpleName: 'BooleanIterator', interfaces: [Iterator]};
     function CharProgressionIterator(first, last, step) {
       CharIterator.call(this);
       this.step = step;
@@ -26198,15 +27999,15 @@
       var value = this.next_0;
       if (value === this.finalElement_0) {
         if (!this.hasNext_0)
-          throw new NoSuchElementException();
+          throw NoSuchElementException_init();
         this.hasNext_0 = false;
       }
        else {
         this.next_0 = this.next_0 + this.step | 0;
       }
-      return Kotlin.toChar(value);
+      return toChar(value);
     };
-    CharProgressionIterator.$metadata$ = {kind: Kotlin.Kind.CLASS, simpleName: 'CharProgressionIterator', interfaces: [CharIterator]};
+    CharProgressionIterator.$metadata$ = {kind: Kind_CLASS, simpleName: 'CharProgressionIterator', interfaces: [CharIterator]};
     function IntProgressionIterator(first, last, step) {
       IntIterator.call(this);
       this.step = step;
@@ -26221,7 +28022,7 @@
       var value = this.next_0;
       if (value === this.finalElement_0) {
         if (!this.hasNext_0)
-          throw new NoSuchElementException();
+          throw NoSuchElementException_init();
         this.hasNext_0 = false;
       }
        else {
@@ -26229,7 +28030,7 @@
       }
       return value;
     };
-    IntProgressionIterator.$metadata$ = {kind: Kotlin.Kind.CLASS, simpleName: 'IntProgressionIterator', interfaces: [IntIterator]};
+    IntProgressionIterator.$metadata$ = {kind: Kind_CLASS, simpleName: 'IntProgressionIterator', interfaces: [IntIterator]};
     function LongProgressionIterator(first, last, step) {
       LongIterator.call(this);
       this.step = step;
@@ -26242,9 +28043,9 @@
     };
     LongProgressionIterator.prototype.nextLong = function () {
       var value = this.next_0;
-      if (Kotlin.equals(value, this.finalElement_0)) {
+      if (equals(value, this.finalElement_0)) {
         if (!this.hasNext_0)
-          throw new NoSuchElementException();
+          throw NoSuchElementException_init();
         this.hasNext_0 = false;
       }
        else {
@@ -26252,13 +28053,13 @@
       }
       return value;
     };
-    LongProgressionIterator.$metadata$ = {kind: Kotlin.Kind.CLASS, simpleName: 'LongProgressionIterator', interfaces: [LongIterator]};
+    LongProgressionIterator.$metadata$ = {kind: Kind_CLASS, simpleName: 'LongProgressionIterator', interfaces: [LongIterator]};
     function CharProgression(start, endInclusive, step) {
       CharProgression$Companion_getInstance();
       if (step === 0)
-        throw new IllegalArgumentException('Step must be non-zero');
+        throw IllegalArgumentException_init_0('Step must be non-zero');
       this.first = start;
-      this.last = Kotlin.toChar(getProgressionLastElement(start | 0, endInclusive | 0, step));
+      this.last = toChar(getProgressionLastElement(start | 0, endInclusive | 0, step));
       this.step = step;
     }
     CharProgression.prototype.iterator = function () {
@@ -26274,7 +28075,7 @@
       return this.isEmpty() ? -1 : (31 * ((31 * (this.first | 0) | 0) + (this.last | 0) | 0) | 0) + this.step | 0;
     };
     CharProgression.prototype.toString = function () {
-      return this.step > 0 ? String.fromCharCode(this.first) + '..' + String.fromCharCode(this.last) + ' step ' + this.step : String.fromCharCode(this.first) + ' downTo ' + String.fromCharCode(this.last) + ' step ' + -this.step;
+      return this.step > 0 ? String.fromCharCode(this.first) + '..' + String.fromCharCode(this.last) + ' step ' + this.step : String.fromCharCode(this.first) + ' downTo ' + String.fromCharCode(this.last) + ' step ' + (-this.step | 0);
     };
     function CharProgression$Companion() {
       CharProgression$Companion_instance = this;
@@ -26282,7 +28083,7 @@
     CharProgression$Companion.prototype.fromClosedRange_ayra44$ = function (rangeStart, rangeEnd, step) {
       return new CharProgression(rangeStart, rangeEnd, step);
     };
-    CharProgression$Companion.$metadata$ = {kind: Kotlin.Kind.OBJECT, simpleName: 'Companion', interfaces: []};
+    CharProgression$Companion.$metadata$ = {kind: Kind_OBJECT, simpleName: 'Companion', interfaces: []};
     var CharProgression$Companion_instance = null;
     function CharProgression$Companion_getInstance() {
       if (CharProgression$Companion_instance === null) {
@@ -26290,11 +28091,11 @@
       }
       return CharProgression$Companion_instance;
     }
-    CharProgression.$metadata$ = {kind: Kotlin.Kind.CLASS, simpleName: 'CharProgression', interfaces: [Iterable]};
+    CharProgression.$metadata$ = {kind: Kind_CLASS, simpleName: 'CharProgression', interfaces: [Iterable]};
     function IntProgression(start, endInclusive, step) {
       IntProgression$Companion_getInstance();
       if (step === 0)
-        throw new IllegalArgumentException('Step must be non-zero');
+        throw IllegalArgumentException_init_0('Step must be non-zero');
       this.first = start;
       this.last = getProgressionLastElement(start, endInclusive, step);
       this.step = step;
@@ -26312,7 +28113,7 @@
       return this.isEmpty() ? -1 : (31 * ((31 * this.first | 0) + this.last | 0) | 0) + this.step | 0;
     };
     IntProgression.prototype.toString = function () {
-      return this.step > 0 ? this.first.toString() + '..' + this.last + ' step ' + this.step : this.first.toString() + ' downTo ' + this.last + ' step ' + -this.step;
+      return this.step > 0 ? this.first.toString() + '..' + this.last + ' step ' + this.step : this.first.toString() + ' downTo ' + this.last + ' step ' + (-this.step | 0);
     };
     function IntProgression$Companion() {
       IntProgression$Companion_instance = this;
@@ -26320,7 +28121,7 @@
     IntProgression$Companion.prototype.fromClosedRange_qt1dr2$ = function (rangeStart, rangeEnd, step) {
       return new IntProgression(rangeStart, rangeEnd, step);
     };
-    IntProgression$Companion.$metadata$ = {kind: Kotlin.Kind.OBJECT, simpleName: 'Companion', interfaces: []};
+    IntProgression$Companion.$metadata$ = {kind: Kind_OBJECT, simpleName: 'Companion', interfaces: []};
     var IntProgression$Companion_instance = null;
     function IntProgression$Companion_getInstance() {
       if (IntProgression$Companion_instance === null) {
@@ -26328,11 +28129,11 @@
       }
       return IntProgression$Companion_instance;
     }
-    IntProgression.$metadata$ = {kind: Kotlin.Kind.CLASS, simpleName: 'IntProgression', interfaces: [Iterable]};
+    IntProgression.$metadata$ = {kind: Kind_CLASS, simpleName: 'IntProgression', interfaces: [Iterable]};
     function LongProgression(start, endInclusive, step) {
       LongProgression$Companion_getInstance();
-      if (Kotlin.equals(step, Kotlin.Long.ZERO))
-        throw new IllegalArgumentException('Step must be non-zero');
+      if (equals(step, Kotlin.Long.ZERO))
+        throw IllegalArgumentException_init_0('Step must be non-zero');
       this.first = start;
       this.last = getProgressionLastElement_0(start, endInclusive, step);
       this.step = step;
@@ -26344,7 +28145,7 @@
       return this.step.compareTo_11rb$(Kotlin.Long.fromInt(0)) > 0 ? this.first.compareTo_11rb$(this.last) > 0 : this.first.compareTo_11rb$(this.last) < 0;
     };
     LongProgression.prototype.equals = function (other) {
-      return Kotlin.isType(other, LongProgression) && (this.isEmpty() && other.isEmpty() || (Kotlin.equals(this.first, other.first) && Kotlin.equals(this.last, other.last) && Kotlin.equals(this.step, other.step)));
+      return Kotlin.isType(other, LongProgression) && (this.isEmpty() && other.isEmpty() || (equals(this.first, other.first) && equals(this.last, other.last) && equals(this.step, other.step)));
     };
     LongProgression.prototype.hashCode = function () {
       return this.isEmpty() ? -1 : Kotlin.Long.fromInt(31).multiply(Kotlin.Long.fromInt(31).multiply(this.first.xor(this.first.shiftRightUnsigned(32))).add(this.last.xor(this.last.shiftRightUnsigned(32)))).add(this.step.xor(this.step.shiftRightUnsigned(32))).toInt();
@@ -26358,7 +28159,7 @@
     LongProgression$Companion.prototype.fromClosedRange_b9bd0d$ = function (rangeStart, rangeEnd, step) {
       return new LongProgression(rangeStart, rangeEnd, step);
     };
-    LongProgression$Companion.$metadata$ = {kind: Kotlin.Kind.OBJECT, simpleName: 'Companion', interfaces: []};
+    LongProgression$Companion.$metadata$ = {kind: Kind_OBJECT, simpleName: 'Companion', interfaces: []};
     var LongProgression$Companion_instance = null;
     function LongProgression$Companion_getInstance() {
       if (LongProgression$Companion_instance === null) {
@@ -26366,7 +28167,7 @@
       }
       return LongProgression$Companion_instance;
     }
-    LongProgression.$metadata$ = {kind: Kotlin.Kind.CLASS, simpleName: 'LongProgression', interfaces: [Iterable]};
+    LongProgression.$metadata$ = {kind: Kind_CLASS, simpleName: 'LongProgression', interfaces: [Iterable]};
     function ClosedRange() {
     }
     ClosedRange.prototype.contains_mef7kx$ = function (value) {
@@ -26375,7 +28176,7 @@
     ClosedRange.prototype.isEmpty = function () {
       return Kotlin.compareTo(this.start, this.endInclusive) > 0;
     };
-    ClosedRange.$metadata$ = {kind: Kotlin.Kind.INTERFACE, simpleName: 'ClosedRange', interfaces: []};
+    ClosedRange.$metadata$ = {kind: Kind_INTERFACE, simpleName: 'ClosedRange', interfaces: []};
     function CharRange(start, endInclusive) {
       CharRange$Companion_getInstance();
       CharProgression.call(this, start, endInclusive, 1);
@@ -26403,9 +28204,9 @@
     };
     function CharRange$Companion() {
       CharRange$Companion_instance = this;
-      this.EMPTY = new CharRange(Kotlin.toChar(1), Kotlin.toChar(0));
+      this.EMPTY = new CharRange(toChar(1), toChar(0));
     }
-    CharRange$Companion.$metadata$ = {kind: Kotlin.Kind.OBJECT, simpleName: 'Companion', interfaces: []};
+    CharRange$Companion.$metadata$ = {kind: Kind_OBJECT, simpleName: 'Companion', interfaces: []};
     var CharRange$Companion_instance = null;
     function CharRange$Companion_getInstance() {
       if (CharRange$Companion_instance === null) {
@@ -26413,7 +28214,7 @@
       }
       return CharRange$Companion_instance;
     }
-    CharRange.$metadata$ = {kind: Kotlin.Kind.CLASS, simpleName: 'CharRange', interfaces: [ClosedRange, CharProgression]};
+    CharRange.$metadata$ = {kind: Kind_CLASS, simpleName: 'CharRange', interfaces: [ClosedRange, CharProgression]};
     function IntRange(start, endInclusive) {
       IntRange$Companion_getInstance();
       IntProgression.call(this, start, endInclusive, 1);
@@ -26443,7 +28244,7 @@
       IntRange$Companion_instance = this;
       this.EMPTY = new IntRange(1, 0);
     }
-    IntRange$Companion.$metadata$ = {kind: Kotlin.Kind.OBJECT, simpleName: 'Companion', interfaces: []};
+    IntRange$Companion.$metadata$ = {kind: Kind_OBJECT, simpleName: 'Companion', interfaces: []};
     var IntRange$Companion_instance = null;
     function IntRange$Companion_getInstance() {
       if (IntRange$Companion_instance === null) {
@@ -26451,7 +28252,7 @@
       }
       return IntRange$Companion_instance;
     }
-    IntRange.$metadata$ = {kind: Kotlin.Kind.CLASS, simpleName: 'IntRange', interfaces: [ClosedRange, IntProgression]};
+    IntRange.$metadata$ = {kind: Kind_CLASS, simpleName: 'IntRange', interfaces: [ClosedRange, IntProgression]};
     function LongRange(start, endInclusive) {
       LongRange$Companion_getInstance();
       LongProgression.call(this, start, endInclusive, Kotlin.Long.ONE);
@@ -26469,7 +28270,7 @@
       return this.first.compareTo_11rb$(this.last) > 0;
     };
     LongRange.prototype.equals = function (other) {
-      return Kotlin.isType(other, LongRange) && (this.isEmpty() && other.isEmpty() || (Kotlin.equals(this.first, other.first) && Kotlin.equals(this.last, other.last)));
+      return Kotlin.isType(other, LongRange) && (this.isEmpty() && other.isEmpty() || (equals(this.first, other.first) && equals(this.last, other.last)));
     };
     LongRange.prototype.hashCode = function () {
       return this.isEmpty() ? -1 : Kotlin.Long.fromInt(31).multiply(this.first.xor(this.first.shiftRightUnsigned(32))).add(this.last.xor(this.last.shiftRightUnsigned(32))).toInt();
@@ -26481,7 +28282,7 @@
       LongRange$Companion_instance = this;
       this.EMPTY = new LongRange(Kotlin.Long.ONE, Kotlin.Long.ZERO);
     }
-    LongRange$Companion.$metadata$ = {kind: Kotlin.Kind.OBJECT, simpleName: 'Companion', interfaces: []};
+    LongRange$Companion.$metadata$ = {kind: Kind_OBJECT, simpleName: 'Companion', interfaces: []};
     var LongRange$Companion_instance = null;
     function LongRange$Companion_getInstance() {
       if (LongRange$Companion_instance === null) {
@@ -26489,14 +28290,14 @@
       }
       return LongRange$Companion_instance;
     }
-    LongRange.$metadata$ = {kind: Kotlin.Kind.CLASS, simpleName: 'LongRange', interfaces: [ClosedRange, LongProgression]};
+    LongRange.$metadata$ = {kind: Kind_CLASS, simpleName: 'LongRange', interfaces: [ClosedRange, LongProgression]};
     function Unit() {
       Unit_instance = this;
     }
     Unit.prototype.toString = function () {
       return 'kotlin.Unit';
     };
-    Unit.$metadata$ = {kind: Kotlin.Kind.OBJECT, simpleName: 'Unit', interfaces: []};
+    Unit.$metadata$ = {kind: Kind_OBJECT, simpleName: 'Unit', interfaces: []};
     var Unit_instance = null;
     function Unit_getInstance() {
       if (Unit_instance === null) {
@@ -26603,7 +28404,7 @@
       AnnotationTarget_initFields();
       return AnnotationTarget$TYPEALIAS_instance;
     }
-    AnnotationTarget.$metadata$ = {kind: Kotlin.Kind.CLASS, simpleName: 'AnnotationTarget', interfaces: [Enum]};
+    AnnotationTarget.$metadata$ = {kind: Kind_CLASS, simpleName: 'AnnotationTarget', interfaces: [Enum]};
     function AnnotationTarget$values() {
       return [AnnotationTarget$CLASS_getInstance(), AnnotationTarget$ANNOTATION_CLASS_getInstance(), AnnotationTarget$TYPE_PARAMETER_getInstance(), AnnotationTarget$PROPERTY_getInstance(), AnnotationTarget$FIELD_getInstance(), AnnotationTarget$LOCAL_VARIABLE_getInstance(), AnnotationTarget$VALUE_PARAMETER_getInstance(), AnnotationTarget$CONSTRUCTOR_getInstance(), AnnotationTarget$FUNCTION_getInstance(), AnnotationTarget$PROPERTY_GETTER_getInstance(), AnnotationTarget$PROPERTY_SETTER_getInstance(), AnnotationTarget$TYPE_getInstance(), AnnotationTarget$EXPRESSION_getInstance(), AnnotationTarget$FILE_getInstance(), AnnotationTarget$TYPEALIAS_getInstance()];
     }
@@ -26640,7 +28441,7 @@
           return AnnotationTarget$FILE_getInstance();
         case 'TYPEALIAS':
           return AnnotationTarget$TYPEALIAS_getInstance();
-        default:Kotlin.throwISE('No enum constant kotlin.annotation.AnnotationTarget.' + name);
+        default:throwISE('No enum constant kotlin.annotation.AnnotationTarget.' + name);
       }
     }
     AnnotationTarget.valueOf_61zpoe$ = AnnotationTarget$valueOf;
@@ -26671,7 +28472,7 @@
       AnnotationRetention_initFields();
       return AnnotationRetention$RUNTIME_instance;
     }
-    AnnotationRetention.$metadata$ = {kind: Kotlin.Kind.CLASS, simpleName: 'AnnotationRetention', interfaces: [Enum]};
+    AnnotationRetention.$metadata$ = {kind: Kind_CLASS, simpleName: 'AnnotationRetention', interfaces: [Enum]};
     function AnnotationRetention$values() {
       return [AnnotationRetention$SOURCE_getInstance(), AnnotationRetention$BINARY_getInstance(), AnnotationRetention$RUNTIME_getInstance()];
     }
@@ -26684,32 +28485,32 @@
           return AnnotationRetention$BINARY_getInstance();
         case 'RUNTIME':
           return AnnotationRetention$RUNTIME_getInstance();
-        default:Kotlin.throwISE('No enum constant kotlin.annotation.AnnotationRetention.' + name);
+        default:throwISE('No enum constant kotlin.annotation.AnnotationRetention.' + name);
       }
     }
     AnnotationRetention.valueOf_61zpoe$ = AnnotationRetention$valueOf;
     function Target(allowedTargets) {
       this.allowedTargets = allowedTargets;
     }
-    Target.$metadata$ = {kind: Kotlin.Kind.CLASS, simpleName: 'Target', interfaces: [Annotation]};
+    Target.$metadata$ = {kind: Kind_CLASS, simpleName: 'Target', interfaces: [Annotation]};
     function Retention(value) {
       if (value === void 0)
         value = AnnotationRetention$RUNTIME_getInstance();
       this.value = value;
     }
-    Retention.$metadata$ = {kind: Kotlin.Kind.CLASS, simpleName: 'Retention', interfaces: [Annotation]};
+    Retention.$metadata$ = {kind: Kind_CLASS, simpleName: 'Retention', interfaces: [Annotation]};
     function Repeatable() {
     }
-    Repeatable.$metadata$ = {kind: Kotlin.Kind.CLASS, simpleName: 'Repeatable', interfaces: [Annotation]};
+    Repeatable.$metadata$ = {kind: Kind_CLASS, simpleName: 'Repeatable', interfaces: [Annotation]};
     function MustBeDocumented() {
     }
-    MustBeDocumented.$metadata$ = {kind: Kotlin.Kind.CLASS, simpleName: 'MustBeDocumented', interfaces: [Annotation]};
+    MustBeDocumented.$metadata$ = {kind: Kind_CLASS, simpleName: 'MustBeDocumented', interfaces: [Annotation]};
     function PureReifiable() {
     }
-    PureReifiable.$metadata$ = {kind: Kotlin.Kind.CLASS, simpleName: 'PureReifiable', interfaces: [Annotation]};
+    PureReifiable.$metadata$ = {kind: Kind_CLASS, simpleName: 'PureReifiable', interfaces: [Annotation]};
     function PlatformDependent() {
     }
-    PlatformDependent.$metadata$ = {kind: Kotlin.Kind.CLASS, simpleName: 'PlatformDependent', interfaces: [Annotation]};
+    PlatformDependent.$metadata$ = {kind: Kind_CLASS, simpleName: 'PlatformDependent', interfaces: [Annotation]};
     function mod(a, b) {
       var mod = a % b;
       return mod >= 0 ? mod : mod + b | 0;
@@ -26729,10 +28530,10 @@
         return end - differenceModulo(end, start, step) | 0;
       }
        else if (step < 0) {
-        return end + differenceModulo(start, end, -step) | 0;
+        return end + differenceModulo(start, end, -step | 0) | 0;
       }
        else {
-        throw new IllegalArgumentException('Step is zero.');
+        throw IllegalArgumentException_init_0('Step is zero.');
       }
     }
     function getProgressionLastElement_0(start, end, step) {
@@ -26743,27 +28544,27 @@
         return end.add(differenceModulo_0(start, end, step.unaryMinus()));
       }
        else {
-        throw new IllegalArgumentException('Step is zero.');
+        throw IllegalArgumentException_init_0('Step is zero.');
       }
     }
     function KAnnotatedElement() {
     }
-    KAnnotatedElement.$metadata$ = {kind: Kotlin.Kind.INTERFACE, simpleName: 'KAnnotatedElement', interfaces: []};
+    KAnnotatedElement.$metadata$ = {kind: Kind_INTERFACE, simpleName: 'KAnnotatedElement', interfaces: []};
     function KCallable() {
     }
-    KCallable.$metadata$ = {kind: Kotlin.Kind.INTERFACE, simpleName: 'KCallable', interfaces: [KAnnotatedElement]};
+    KCallable.$metadata$ = {kind: Kind_INTERFACE, simpleName: 'KCallable', interfaces: [KAnnotatedElement]};
     function KClass() {
     }
-    KClass.$metadata$ = {kind: Kotlin.Kind.INTERFACE, simpleName: 'KClass', interfaces: [KClassifier, KAnnotatedElement, KDeclarationContainer]};
+    KClass.$metadata$ = {kind: Kind_INTERFACE, simpleName: 'KClass', interfaces: [KClassifier, KAnnotatedElement, KDeclarationContainer]};
     function KClassifier() {
     }
-    KClassifier.$metadata$ = {kind: Kotlin.Kind.INTERFACE, simpleName: 'KClassifier', interfaces: []};
+    KClassifier.$metadata$ = {kind: Kind_INTERFACE, simpleName: 'KClassifier', interfaces: []};
     function KDeclarationContainer() {
     }
-    KDeclarationContainer.$metadata$ = {kind: Kotlin.Kind.INTERFACE, simpleName: 'KDeclarationContainer', interfaces: []};
+    KDeclarationContainer.$metadata$ = {kind: Kind_INTERFACE, simpleName: 'KDeclarationContainer', interfaces: []};
     function KFunction() {
     }
-    KFunction.$metadata$ = {kind: Kotlin.Kind.INTERFACE, simpleName: 'KFunction', interfaces: [Function, KCallable]};
+    KFunction.$metadata$ = {kind: Kind_INTERFACE, simpleName: 'KFunction', interfaces: [Function_0, KCallable]};
     function KParameter() {
     }
     function KParameter$Kind(name, ordinal) {
@@ -26793,7 +28594,7 @@
       KParameter$Kind_initFields();
       return KParameter$Kind$VALUE_instance;
     }
-    KParameter$Kind.$metadata$ = {kind: Kotlin.Kind.CLASS, simpleName: 'Kind', interfaces: [Enum]};
+    KParameter$Kind.$metadata$ = {kind: Kind_CLASS, simpleName: 'Kind', interfaces: [Enum]};
     function KParameter$Kind$values() {
       return [KParameter$Kind$INSTANCE_getInstance(), KParameter$Kind$EXTENSION_RECEIVER_getInstance(), KParameter$Kind$VALUE_getInstance()];
     }
@@ -26806,65 +28607,65 @@
           return KParameter$Kind$EXTENSION_RECEIVER_getInstance();
         case 'VALUE':
           return KParameter$Kind$VALUE_getInstance();
-        default:Kotlin.throwISE('No enum constant kotlin.reflect.KParameter.Kind.' + name);
+        default:throwISE('No enum constant kotlin.reflect.KParameter.Kind.' + name);
       }
     }
     KParameter$Kind.valueOf_61zpoe$ = KParameter$Kind$valueOf;
-    KParameter.$metadata$ = {kind: Kotlin.Kind.INTERFACE, simpleName: 'KParameter', interfaces: [KAnnotatedElement]};
+    KParameter.$metadata$ = {kind: Kind_INTERFACE, simpleName: 'KParameter', interfaces: [KAnnotatedElement]};
     function KProperty() {
     }
     function KProperty$Accessor() {
     }
-    KProperty$Accessor.$metadata$ = {kind: Kotlin.Kind.INTERFACE, simpleName: 'Accessor', interfaces: []};
+    KProperty$Accessor.$metadata$ = {kind: Kind_INTERFACE, simpleName: 'Accessor', interfaces: []};
     function KProperty$Getter() {
     }
-    KProperty$Getter.$metadata$ = {kind: Kotlin.Kind.INTERFACE, simpleName: 'Getter', interfaces: [KFunction, KProperty$Accessor]};
-    KProperty.$metadata$ = {kind: Kotlin.Kind.INTERFACE, simpleName: 'KProperty', interfaces: [KCallable]};
+    KProperty$Getter.$metadata$ = {kind: Kind_INTERFACE, simpleName: 'Getter', interfaces: [KFunction, KProperty$Accessor]};
+    KProperty.$metadata$ = {kind: Kind_INTERFACE, simpleName: 'KProperty', interfaces: [KCallable]};
     function KMutableProperty() {
     }
     function KMutableProperty$Setter() {
     }
-    KMutableProperty$Setter.$metadata$ = {kind: Kotlin.Kind.INTERFACE, simpleName: 'Setter', interfaces: [KFunction, KProperty$Accessor]};
-    KMutableProperty.$metadata$ = {kind: Kotlin.Kind.INTERFACE, simpleName: 'KMutableProperty', interfaces: [KProperty]};
+    KMutableProperty$Setter.$metadata$ = {kind: Kind_INTERFACE, simpleName: 'Setter', interfaces: [KFunction, KProperty$Accessor]};
+    KMutableProperty.$metadata$ = {kind: Kind_INTERFACE, simpleName: 'KMutableProperty', interfaces: [KProperty]};
     function KProperty0() {
     }
     function KProperty0$Getter() {
     }
-    KProperty0$Getter.$metadata$ = {kind: Kotlin.Kind.INTERFACE, simpleName: 'Getter', interfaces: [KProperty$Getter]};
-    KProperty0.$metadata$ = {kind: Kotlin.Kind.INTERFACE, simpleName: 'KProperty0', interfaces: [KProperty]};
+    KProperty0$Getter.$metadata$ = {kind: Kind_INTERFACE, simpleName: 'Getter', interfaces: [KProperty$Getter]};
+    KProperty0.$metadata$ = {kind: Kind_INTERFACE, simpleName: 'KProperty0', interfaces: [KProperty]};
     function KMutableProperty0() {
     }
     function KMutableProperty0$Setter() {
     }
-    KMutableProperty0$Setter.$metadata$ = {kind: Kotlin.Kind.INTERFACE, simpleName: 'Setter', interfaces: [KMutableProperty$Setter]};
-    KMutableProperty0.$metadata$ = {kind: Kotlin.Kind.INTERFACE, simpleName: 'KMutableProperty0', interfaces: [KMutableProperty, KProperty0]};
+    KMutableProperty0$Setter.$metadata$ = {kind: Kind_INTERFACE, simpleName: 'Setter', interfaces: [KMutableProperty$Setter]};
+    KMutableProperty0.$metadata$ = {kind: Kind_INTERFACE, simpleName: 'KMutableProperty0', interfaces: [KMutableProperty, KProperty0]};
     function KProperty1() {
     }
     function KProperty1$Getter() {
     }
-    KProperty1$Getter.$metadata$ = {kind: Kotlin.Kind.INTERFACE, simpleName: 'Getter', interfaces: [KProperty$Getter]};
-    KProperty1.$metadata$ = {kind: Kotlin.Kind.INTERFACE, simpleName: 'KProperty1', interfaces: [KProperty]};
+    KProperty1$Getter.$metadata$ = {kind: Kind_INTERFACE, simpleName: 'Getter', interfaces: [KProperty$Getter]};
+    KProperty1.$metadata$ = {kind: Kind_INTERFACE, simpleName: 'KProperty1', interfaces: [KProperty]};
     function KMutableProperty1() {
     }
     function KMutableProperty1$Setter() {
     }
-    KMutableProperty1$Setter.$metadata$ = {kind: Kotlin.Kind.INTERFACE, simpleName: 'Setter', interfaces: [KMutableProperty$Setter]};
-    KMutableProperty1.$metadata$ = {kind: Kotlin.Kind.INTERFACE, simpleName: 'KMutableProperty1', interfaces: [KMutableProperty, KProperty1]};
+    KMutableProperty1$Setter.$metadata$ = {kind: Kind_INTERFACE, simpleName: 'Setter', interfaces: [KMutableProperty$Setter]};
+    KMutableProperty1.$metadata$ = {kind: Kind_INTERFACE, simpleName: 'KMutableProperty1', interfaces: [KMutableProperty, KProperty1]};
     function KProperty2() {
     }
     function KProperty2$Getter() {
     }
-    KProperty2$Getter.$metadata$ = {kind: Kotlin.Kind.INTERFACE, simpleName: 'Getter', interfaces: [KProperty$Getter]};
-    KProperty2.$metadata$ = {kind: Kotlin.Kind.INTERFACE, simpleName: 'KProperty2', interfaces: [KProperty]};
+    KProperty2$Getter.$metadata$ = {kind: Kind_INTERFACE, simpleName: 'Getter', interfaces: [KProperty$Getter]};
+    KProperty2.$metadata$ = {kind: Kind_INTERFACE, simpleName: 'KProperty2', interfaces: [KProperty]};
     function KMutableProperty2() {
     }
     function KMutableProperty2$Setter() {
     }
-    KMutableProperty2$Setter.$metadata$ = {kind: Kotlin.Kind.INTERFACE, simpleName: 'Setter', interfaces: [KMutableProperty$Setter]};
-    KMutableProperty2.$metadata$ = {kind: Kotlin.Kind.INTERFACE, simpleName: 'KMutableProperty2', interfaces: [KMutableProperty, KProperty2]};
+    KMutableProperty2$Setter.$metadata$ = {kind: Kind_INTERFACE, simpleName: 'Setter', interfaces: [KMutableProperty$Setter]};
+    KMutableProperty2.$metadata$ = {kind: Kind_INTERFACE, simpleName: 'KMutableProperty2', interfaces: [KMutableProperty, KProperty2]};
     function KType() {
     }
-    KType.$metadata$ = {kind: Kotlin.Kind.INTERFACE, simpleName: 'KType', interfaces: []};
+    KType.$metadata$ = {kind: Kind_INTERFACE, simpleName: 'KType', interfaces: []};
     function KTypeProjection(variance, type) {
       KTypeProjection$Companion_getInstance();
       this.variance = variance;
@@ -26883,7 +28684,7 @@
     KTypeProjection$Companion.prototype.covariant_saj79j$ = function (type) {
       return new KTypeProjection(KVariance$OUT_getInstance(), type);
     };
-    KTypeProjection$Companion.$metadata$ = {kind: Kotlin.Kind.OBJECT, simpleName: 'Companion', interfaces: []};
+    KTypeProjection$Companion.$metadata$ = {kind: Kind_OBJECT, simpleName: 'Companion', interfaces: []};
     var KTypeProjection$Companion_instance = null;
     function KTypeProjection$Companion_getInstance() {
       if (KTypeProjection$Companion_instance === null) {
@@ -26891,7 +28692,7 @@
       }
       return KTypeProjection$Companion_instance;
     }
-    KTypeProjection.$metadata$ = {kind: Kotlin.Kind.CLASS, simpleName: 'KTypeProjection', interfaces: []};
+    KTypeProjection.$metadata$ = {kind: Kind_CLASS, simpleName: 'KTypeProjection', interfaces: []};
     KTypeProjection.prototype.component1 = function () {
       return this.variance;
     };
@@ -26915,7 +28716,7 @@
     };
     function KTypeParameter() {
     }
-    KTypeParameter.$metadata$ = {kind: Kotlin.Kind.INTERFACE, simpleName: 'KTypeParameter', interfaces: [KClassifier]};
+    KTypeParameter.$metadata$ = {kind: Kind_INTERFACE, simpleName: 'KTypeParameter', interfaces: [KClassifier]};
     function KVariance(name, ordinal) {
       Enum.call(this);
       this.name$ = name;
@@ -26943,7 +28744,7 @@
       KVariance_initFields();
       return KVariance$OUT_instance;
     }
-    KVariance.$metadata$ = {kind: Kotlin.Kind.CLASS, simpleName: 'KVariance', interfaces: [Enum]};
+    KVariance.$metadata$ = {kind: Kind_CLASS, simpleName: 'KVariance', interfaces: [Enum]};
     function KVariance$values() {
       return [KVariance$INVARIANT_getInstance(), KVariance$IN_getInstance(), KVariance$OUT_getInstance()];
     }
@@ -26956,7 +28757,7 @@
           return KVariance$IN_getInstance();
         case 'OUT':
           return KVariance$OUT_getInstance();
-        default:Kotlin.throwISE('No enum constant kotlin.reflect.KVariance.' + name);
+        default:throwISE('No enum constant kotlin.reflect.KVariance.' + name);
       }
     }
     KVariance.valueOf_61zpoe$ = KVariance$valueOf;
@@ -26993,7 +28794,7 @@
       KVisibility_initFields();
       return KVisibility$PRIVATE_instance;
     }
-    KVisibility.$metadata$ = {kind: Kotlin.Kind.CLASS, simpleName: 'KVisibility', interfaces: [Enum]};
+    KVisibility.$metadata$ = {kind: Kind_CLASS, simpleName: 'KVisibility', interfaces: [Enum]};
     function KVisibility$values() {
       return [KVisibility$PUBLIC_getInstance(), KVisibility$PROTECTED_getInstance(), KVisibility$INTERNAL_getInstance(), KVisibility$PRIVATE_getInstance()];
     }
@@ -27008,7 +28809,7 @@
           return KVisibility$INTERNAL_getInstance();
         case 'PRIVATE':
           return KVisibility$PRIVATE_getInstance();
-        default:Kotlin.throwISE('No enum constant kotlin.reflect.KVisibility.' + name);
+        default:throwISE('No enum constant kotlin.reflect.KVisibility.' + name);
       }
     }
     KVisibility.valueOf_61zpoe$ = KVisibility$valueOf;
@@ -27025,7 +28826,7 @@
         tmp$ = this.iterator();
         while (tmp$.hasNext()) {
           var element_0 = tmp$.next();
-          if (Kotlin.equals(element_0, element)) {
+          if (equals(element_0, element)) {
             any$result = true;
             break any$break;
           }
@@ -27061,7 +28862,7 @@
     };
     function AbstractCollection$toString$lambda(this$AbstractCollection) {
       return function (it) {
-        return it === this$AbstractCollection ? '(this Collection)' : Kotlin.toString(it);
+        return it === this$AbstractCollection ? '(this Collection)' : toString(it);
       };
     }
     AbstractCollection.prototype.toString = function () {
@@ -27073,7 +28874,7 @@
     AbstractCollection.prototype.toArray_ro6dgy$ = function (array) {
       return copyToArrayImpl_0(this, array);
     };
-    AbstractCollection.$metadata$ = {kind: Kotlin.Kind.CLASS, simpleName: 'AbstractCollection', interfaces: [Collection]};
+    AbstractCollection.$metadata$ = {kind: Kind_CLASS, simpleName: 'AbstractCollection', interfaces: [Collection]};
     function State(name, ordinal) {
       Enum.call(this);
       this.name$ = name;
@@ -27107,7 +28908,7 @@
       State_initFields();
       return State$Failed_instance;
     }
-    State.$metadata$ = {kind: Kotlin.Kind.CLASS, simpleName: 'State', interfaces: [Enum]};
+    State.$metadata$ = {kind: Kind_CLASS, simpleName: 'State', interfaces: [Enum]};
     function State$values() {
       return [State$Ready_getInstance(), State$NotReady_getInstance(), State$Done_getInstance(), State$Failed_getInstance()];
     }
@@ -27122,7 +28923,7 @@
           return State$Done_getInstance();
         case 'Failed':
           return State$Failed_getInstance();
-        default:Kotlin.throwISE('No enum constant kotlin.collections.State.' + name);
+        default:throwISE('No enum constant kotlin.collections.State.' + name);
       }
     }
     State.valueOf_61zpoe$ = State$valueOf;
@@ -27131,26 +28932,29 @@
       this.nextValue_phdh64$_0 = null;
     }
     AbstractIterator.prototype.hasNext = function () {
-      var tmp$, tmp$_0;
+      var tmp$;
       if (!(this.state_smy23j$_0 !== State$Failed_getInstance())) {
         var message = 'Failed requirement.';
-        throw new IllegalArgumentException(message.toString());
+        throw IllegalArgumentException_init_0(message.toString());
       }
-      tmp$ = this.state_smy23j$_0;
-      if (Kotlin.equals(tmp$, State$Done_getInstance()))
-        tmp$_0 = false;
-      else if (Kotlin.equals(tmp$, State$Ready_getInstance()))
-        tmp$_0 = true;
-      else
-        tmp$_0 = this.tryToComputeNext_ser32m$_0();
-      return tmp$_0;
+      switch (this.state_smy23j$_0.name) {
+        case 'Done':
+          tmp$ = false;
+          break;
+        case 'Ready':
+          tmp$ = true;
+          break;
+        default:tmp$ = this.tryToComputeNext_ser32m$_0();
+          break;
+      }
+      return tmp$;
     };
     AbstractIterator.prototype.next = function () {
       var tmp$;
       if (!this.hasNext())
-        throw new NoSuchElementException();
+        throw NoSuchElementException_init();
       this.state_smy23j$_0 = State$NotReady_getInstance();
-      return (tmp$ = this.nextValue_phdh64$_0) == null || Kotlin.isType(tmp$, Any) ? tmp$ : Kotlin.throwCCE();
+      return (tmp$ = this.nextValue_phdh64$_0) == null || Kotlin.isType(tmp$, Any) ? tmp$ : throwCCE();
     };
     AbstractIterator.prototype.tryToComputeNext_ser32m$_0 = function () {
       this.state_smy23j$_0 = State$Failed_getInstance();
@@ -27164,7 +28968,7 @@
     AbstractIterator.prototype.done = function () {
       this.state_smy23j$_0 = State$Done_getInstance();
     };
-    AbstractIterator.$metadata$ = {kind: Kotlin.Kind.CLASS, simpleName: 'AbstractIterator', interfaces: [Iterator]};
+    AbstractIterator.$metadata$ = {kind: Kind_CLASS, simpleName: 'AbstractIterator', interfaces: [Iterator]};
     function AbstractList() {
       AbstractList$Companion_getInstance();
       AbstractCollection.call(this);
@@ -27180,7 +28984,7 @@
         tmp$ = this.iterator();
         while (tmp$.hasNext()) {
           var item = tmp$.next();
-          if (Kotlin.equals(item, element)) {
+          if (equals(item, element)) {
             indexOfFirst$result = index;
             break indexOfFirst$break;
           }
@@ -27196,7 +29000,7 @@
       indexOfLast$break: do {
         var iterator = this.listIterator_za3lpa$(this.size);
         while (iterator.hasPrevious()) {
-          if (Kotlin.equals(iterator.previous(), element)) {
+          if (equals(iterator.previous(), element)) {
             indexOfLast$result = iterator.nextIndex();
             break indexOfLast$break;
           }
@@ -27230,7 +29034,7 @@
     Object.defineProperty(AbstractList$SubList.prototype, 'size', {get: function () {
       return this._size_0;
     }});
-    AbstractList$SubList.$metadata$ = {kind: Kotlin.Kind.CLASS, simpleName: 'SubList', interfaces: [RandomAccess, AbstractList]};
+    AbstractList$SubList.$metadata$ = {kind: Kind_CLASS, simpleName: 'SubList', interfaces: [RandomAccess, AbstractList]};
     AbstractList.prototype.equals = function (other) {
       if (other === this)
         return true;
@@ -27251,11 +29055,11 @@
     AbstractList$IteratorImpl.prototype.next = function () {
       var tmp$, tmp$_0;
       if (!this.hasNext())
-        throw new NoSuchElementException();
+        throw NoSuchElementException_init();
       tmp$_0 = (tmp$ = this.index_0, this.index_0 = tmp$ + 1 | 0, tmp$);
       return this.$outer.get_za3lpa$(tmp$_0);
     };
-    AbstractList$IteratorImpl.$metadata$ = {kind: Kotlin.Kind.CLASS, simpleName: 'IteratorImpl', interfaces: [Iterator]};
+    AbstractList$IteratorImpl.$metadata$ = {kind: Kind_CLASS, simpleName: 'IteratorImpl', interfaces: [Iterator]};
     function AbstractList$ListIteratorImpl($outer, index) {
       this.$outer = $outer;
       AbstractList$IteratorImpl.call(this, this.$outer);
@@ -27270,13 +29074,13 @@
     };
     AbstractList$ListIteratorImpl.prototype.previous = function () {
       if (!this.hasPrevious())
-        throw new NoSuchElementException();
+        throw NoSuchElementException_init();
       return this.$outer.get_za3lpa$((this.index_0 = this.index_0 - 1 | 0, this.index_0));
     };
     AbstractList$ListIteratorImpl.prototype.previousIndex = function () {
       return this.index_0 - 1 | 0;
     };
-    AbstractList$ListIteratorImpl.$metadata$ = {kind: Kotlin.Kind.CLASS, simpleName: 'ListIteratorImpl', interfaces: [ListIterator, AbstractList$IteratorImpl]};
+    AbstractList$ListIteratorImpl.$metadata$ = {kind: Kind_CLASS, simpleName: 'ListIteratorImpl', interfaces: [ListIterator, AbstractList$IteratorImpl]};
     function AbstractList$Companion() {
       AbstractList$Companion_instance = this;
     }
@@ -27295,18 +29099,18 @@
         throw new IndexOutOfBoundsException('fromIndex: ' + fromIndex + ', toIndex: ' + toIndex + ', size: ' + size);
       }
       if (fromIndex > toIndex) {
-        throw new IllegalArgumentException('fromIndex: ' + fromIndex + ' > toIndex: ' + toIndex);
+        throw IllegalArgumentException_init_0('fromIndex: ' + fromIndex + ' > toIndex: ' + toIndex);
       }
     };
     AbstractList$Companion.prototype.orderedHashCode_nykoif$ = function (c) {
       var tmp$, tmp$_0;
-      var hashCode = 1;
+      var hashCode_0 = 1;
       tmp$ = c.iterator();
       while (tmp$.hasNext()) {
         var e = tmp$.next();
-        hashCode = (31 * hashCode | 0) + ((tmp$_0 = e != null ? Kotlin.hashCode(e) : null) != null ? tmp$_0 : 0) | 0;
+        hashCode_0 = (31 * hashCode_0 | 0) + ((tmp$_0 = e != null ? hashCode(e) : null) != null ? tmp$_0 : 0) | 0;
       }
-      return hashCode;
+      return hashCode_0;
     };
     AbstractList$Companion.prototype.orderedEquals_e92ka7$ = function (c, other) {
       var tmp$;
@@ -27317,13 +29121,13 @@
       while (tmp$.hasNext()) {
         var elem = tmp$.next();
         var elemOther = otherIterator.next();
-        if (!Kotlin.equals(elem, elemOther)) {
+        if (!equals(elem, elemOther)) {
           return false;
         }
       }
       return true;
     };
-    AbstractList$Companion.$metadata$ = {kind: Kotlin.Kind.OBJECT, simpleName: 'Companion', interfaces: []};
+    AbstractList$Companion.$metadata$ = {kind: Kind_OBJECT, simpleName: 'Companion', interfaces: []};
     var AbstractList$Companion_instance = null;
     function AbstractList$Companion_getInstance() {
       if (AbstractList$Companion_instance === null) {
@@ -27331,7 +29135,7 @@
       }
       return AbstractList$Companion_instance;
     }
-    AbstractList.$metadata$ = {kind: Kotlin.Kind.CLASS, simpleName: 'AbstractList', interfaces: [List, AbstractCollection]};
+    AbstractList.$metadata$ = {kind: Kind_CLASS, simpleName: 'AbstractList', interfaces: [List, AbstractCollection]};
     function AbstractMap() {
       AbstractMap$Companion_getInstance();
       this._keys_up5z3z$_0 = null;
@@ -27352,7 +29156,7 @@
         tmp$ = $receiver.iterator();
         while (tmp$.hasNext()) {
           var element = tmp$.next();
-          if (Kotlin.equals(element.value, value)) {
+          if (equals(element.value, value)) {
             any$result = true;
             break any$break;
           }
@@ -27368,14 +29172,14 @@
       var key = entry.key;
       var value = entry.value;
       var tmp$;
-      var ourValue = (Kotlin.isType(tmp$ = this, Map) ? tmp$ : Kotlin.throwCCE()).get_11rb$(key);
-      if (!Kotlin.equals(value, ourValue)) {
+      var ourValue = (Kotlin.isType(tmp$ = this, Map) ? tmp$ : throwCCE()).get_11rb$(key);
+      if (!equals(value, ourValue)) {
         return false;
       }
       var tmp$_0 = ourValue == null;
       if (tmp$_0) {
         var tmp$_1;
-        tmp$_0 = !(Kotlin.isType(tmp$_1 = this, Map) ? tmp$_1 : Kotlin.throwCCE()).containsKey_11rb$(key);
+        tmp$_0 = !(Kotlin.isType(tmp$_1 = this, Map) ? tmp$_1 : throwCCE()).containsKey_11rb$(key);
       }
       if (tmp$_0) {
         return false;
@@ -27415,7 +29219,7 @@
       return (tmp$ = this.implFindEntry_8k1i24$_0(key)) != null ? tmp$.value : null;
     };
     AbstractMap.prototype.hashCode = function () {
-      return Kotlin.hashCode(this.entries);
+      return hashCode(this.entries);
     };
     AbstractMap.prototype.isEmpty = function () {
       return this.size === 0;
@@ -27439,7 +29243,7 @@
     AbstractMap$get_AbstractMap$keys$ObjectLiteral$iterator$ObjectLiteral.prototype.next = function () {
       return this.closure$entryIterator.next().key;
     };
-    AbstractMap$get_AbstractMap$keys$ObjectLiteral$iterator$ObjectLiteral.$metadata$ = {kind: Kotlin.Kind.CLASS, interfaces: [Iterator]};
+    AbstractMap$get_AbstractMap$keys$ObjectLiteral$iterator$ObjectLiteral.$metadata$ = {kind: Kind_CLASS, interfaces: [Iterator]};
     AbstractMap$get_AbstractMap$keys$ObjectLiteral.prototype.iterator = function () {
       var entryIterator = this.this$AbstractMap.entries.iterator();
       return new AbstractMap$get_AbstractMap$keys$ObjectLiteral$iterator$ObjectLiteral(entryIterator);
@@ -27447,13 +29251,12 @@
     Object.defineProperty(AbstractMap$get_AbstractMap$keys$ObjectLiteral.prototype, 'size', {get: function () {
       return this.this$AbstractMap.size;
     }});
-    AbstractMap$get_AbstractMap$keys$ObjectLiteral.$metadata$ = {kind: Kotlin.Kind.CLASS, interfaces: [AbstractSet]};
+    AbstractMap$get_AbstractMap$keys$ObjectLiteral.$metadata$ = {kind: Kind_CLASS, interfaces: [AbstractSet]};
     Object.defineProperty(AbstractMap.prototype, 'keys', {get: function () {
-      var tmp$;
       if (this._keys_up5z3z$_0 == null) {
         this._keys_up5z3z$_0 = new AbstractMap$get_AbstractMap$keys$ObjectLiteral(this);
       }
-      return (tmp$ = this._keys_up5z3z$_0) != null ? tmp$ : Kotlin.throwNPE();
+      return ensureNotNull(this._keys_up5z3z$_0);
     }});
     function AbstractMap$toString$lambda(this$AbstractMap) {
       return function (it) {
@@ -27467,7 +29270,7 @@
       return this.toString_kthv8s$_0(entry.key) + '=' + this.toString_kthv8s$_0(entry.value);
     };
     AbstractMap.prototype.toString_kthv8s$_0 = function (o) {
-      return o === this ? '(this Map)' : Kotlin.toString(o);
+      return o === this ? '(this Map)' : toString(o);
     };
     function AbstractMap$get_AbstractMap$values$ObjectLiteral(this$AbstractMap) {
       this.this$AbstractMap = this$AbstractMap;
@@ -27485,7 +29288,7 @@
     AbstractMap$get_AbstractMap$values$ObjectLiteral$iterator$ObjectLiteral.prototype.next = function () {
       return this.closure$entryIterator.next().value;
     };
-    AbstractMap$get_AbstractMap$values$ObjectLiteral$iterator$ObjectLiteral.$metadata$ = {kind: Kotlin.Kind.CLASS, interfaces: [Iterator]};
+    AbstractMap$get_AbstractMap$values$ObjectLiteral$iterator$ObjectLiteral.$metadata$ = {kind: Kind_CLASS, interfaces: [Iterator]};
     AbstractMap$get_AbstractMap$values$ObjectLiteral.prototype.iterator = function () {
       var entryIterator = this.this$AbstractMap.entries.iterator();
       return new AbstractMap$get_AbstractMap$values$ObjectLiteral$iterator$ObjectLiteral(entryIterator);
@@ -27493,13 +29296,12 @@
     Object.defineProperty(AbstractMap$get_AbstractMap$values$ObjectLiteral.prototype, 'size', {get: function () {
       return this.this$AbstractMap.size;
     }});
-    AbstractMap$get_AbstractMap$values$ObjectLiteral.$metadata$ = {kind: Kotlin.Kind.CLASS, interfaces: [AbstractCollection]};
+    AbstractMap$get_AbstractMap$values$ObjectLiteral.$metadata$ = {kind: Kind_CLASS, interfaces: [AbstractCollection]};
     Object.defineProperty(AbstractMap.prototype, 'values', {get: function () {
-      var tmp$;
       if (this._values_6nw1f1$_0 == null) {
         this._values_6nw1f1$_0 = new AbstractMap$get_AbstractMap$values$ObjectLiteral(this);
       }
-      return (tmp$ = this._values_6nw1f1$_0) != null ? tmp$ : Kotlin.throwNPE();
+      return ensureNotNull(this._values_6nw1f1$_0);
     }});
     AbstractMap.prototype.implFindEntry_8k1i24$_0 = function (key) {
       var $receiver = this.entries;
@@ -27509,7 +29311,7 @@
         tmp$ = $receiver.iterator();
         while (tmp$.hasNext()) {
           var element = tmp$.next();
-          if (Kotlin.equals(element.key, key)) {
+          if (equals(element.key, key)) {
             firstOrNull$result = element;
             break firstOrNull$break;
           }
@@ -27524,17 +29326,17 @@
     }
     AbstractMap$Companion.prototype.entryHashCode_9fthdn$ = function (e) {
       var tmp$, tmp$_0, tmp$_1, tmp$_2;
-      return ((tmp$_0 = (tmp$ = e.key) != null ? Kotlin.hashCode(tmp$) : null) != null ? tmp$_0 : 0) ^ ((tmp$_2 = (tmp$_1 = e.value) != null ? Kotlin.hashCode(tmp$_1) : null) != null ? tmp$_2 : 0);
+      return ((tmp$_0 = (tmp$ = e.key) != null ? hashCode(tmp$) : null) != null ? tmp$_0 : 0) ^ ((tmp$_2 = (tmp$_1 = e.value) != null ? hashCode(tmp$_1) : null) != null ? tmp$_2 : 0);
     };
     AbstractMap$Companion.prototype.entryToString_9fthdn$ = function (e) {
-      return Kotlin.toString(e.key) + '=' + Kotlin.toString(e.value);
+      return toString(e.key) + '=' + toString(e.value);
     };
     AbstractMap$Companion.prototype.entryEquals_js7fox$ = function (e, other) {
       if (!Kotlin.isType(other, Map$Entry))
         return false;
-      return Kotlin.equals(e.key, other.key) && Kotlin.equals(e.value, other.value);
+      return equals(e.key, other.key) && equals(e.value, other.value);
     };
-    AbstractMap$Companion.$metadata$ = {kind: Kotlin.Kind.OBJECT, simpleName: 'Companion', interfaces: []};
+    AbstractMap$Companion.$metadata$ = {kind: Kind_OBJECT, simpleName: 'Companion', interfaces: []};
     var AbstractMap$Companion_instance = null;
     function AbstractMap$Companion_getInstance() {
       if (AbstractMap$Companion_instance === null) {
@@ -27542,7 +29344,7 @@
       }
       return AbstractMap$Companion_instance;
     }
-    AbstractMap.$metadata$ = {kind: Kotlin.Kind.CLASS, simpleName: 'AbstractMap', interfaces: [Map]};
+    AbstractMap.$metadata$ = {kind: Kind_CLASS, simpleName: 'AbstractMap', interfaces: [Map]};
     function AbstractSet() {
       AbstractSet$Companion_getInstance();
       AbstractCollection.call(this);
@@ -27562,21 +29364,21 @@
     }
     AbstractSet$Companion.prototype.unorderedHashCode_nykoif$ = function (c) {
       var tmp$;
-      var hashCode = 0;
+      var hashCode_0 = 0;
       tmp$ = c.iterator();
       while (tmp$.hasNext()) {
         var element = tmp$.next();
         var tmp$_0;
-        hashCode = hashCode + ((tmp$_0 = element != null ? Kotlin.hashCode(element) : null) != null ? tmp$_0 : 0) | 0;
+        hashCode_0 = hashCode_0 + ((tmp$_0 = element != null ? hashCode(element) : null) != null ? tmp$_0 : 0) | 0;
       }
-      return hashCode;
+      return hashCode_0;
     };
     AbstractSet$Companion.prototype.setEquals_y8f7en$ = function (c, other) {
       if (c.size !== other.size)
         return false;
       return c.containsAll_brywnq$(other);
     };
-    AbstractSet$Companion.$metadata$ = {kind: Kotlin.Kind.OBJECT, simpleName: 'Companion', interfaces: []};
+    AbstractSet$Companion.$metadata$ = {kind: Kind_OBJECT, simpleName: 'Companion', interfaces: []};
     var AbstractSet$Companion_instance = null;
     function AbstractSet$Companion_getInstance() {
       if (AbstractSet$Companion_instance === null) {
@@ -27584,7 +29386,7 @@
       }
       return AbstractSet$Companion_instance;
     }
-    AbstractSet.$metadata$ = {kind: Kotlin.Kind.CLASS, simpleName: 'AbstractSet', interfaces: [Set, AbstractCollection]};
+    AbstractSet.$metadata$ = {kind: Kind_CLASS, simpleName: 'AbstractSet', interfaces: [Set, AbstractCollection]};
     function flatten($receiver) {
       var tmp$;
       var tmp$_0;
@@ -27627,12 +29429,12 @@
       return -1;
     };
     EmptyIterator.prototype.next = function () {
-      throw new NoSuchElementException();
+      throw NoSuchElementException_init();
     };
     EmptyIterator.prototype.previous = function () {
-      throw new NoSuchElementException();
+      throw NoSuchElementException_init();
     };
-    EmptyIterator.$metadata$ = {kind: Kotlin.Kind.OBJECT, simpleName: 'EmptyIterator', interfaces: [ListIterator]};
+    EmptyIterator.$metadata$ = {kind: Kind_OBJECT, simpleName: 'EmptyIterator', interfaces: [ListIterator]};
     var EmptyIterator_instance = null;
     function EmptyIterator_getInstance() {
       if (EmptyIterator_instance === null) {
@@ -27693,7 +29495,7 @@
     EmptyList.prototype.readResolve_0 = function () {
       return EmptyList_getInstance();
     };
-    EmptyList.$metadata$ = {kind: Kotlin.Kind.OBJECT, simpleName: 'EmptyList', interfaces: [RandomAccess, Serializable, List]};
+    EmptyList.$metadata$ = {kind: Kind_OBJECT, simpleName: 'EmptyList', interfaces: [RandomAccess, Serializable, List]};
     var EmptyList_instance = null;
     function EmptyList_getInstance() {
       if (EmptyList_instance === null) {
@@ -27745,7 +29547,7 @@
       var $receiver = this.values;
       return this.isVarargs ? $receiver : $receiver.slice();
     };
-    ArrayAsCollection.$metadata$ = {kind: Kotlin.Kind.CLASS, simpleName: 'ArrayAsCollection', interfaces: [Collection]};
+    ArrayAsCollection.$metadata$ = {kind: Kind_CLASS, simpleName: 'ArrayAsCollection', interfaces: [Collection]};
     function emptyList() {
       return EmptyList_getInstance();
     }
@@ -27831,14 +29633,13 @@
       return $receiver.containsAll_brywnq$(elements);
     });
     function optimizeReadOnlyList($receiver) {
-      var tmp$;
-      tmp$ = $receiver.size;
-      if (tmp$ === 0)
-        return emptyList();
-      else if (tmp$ === 1)
-        return listOf($receiver.get_za3lpa$(0));
-      else
-        return $receiver;
+      switch ($receiver.size) {
+        case 0:
+          return emptyList();
+        case 1:
+          return listOf($receiver.get_za3lpa$(0));
+        default:return $receiver;
+      }
     }
     function binarySearch($receiver, element, fromIndex, toIndex) {
       if (fromIndex === void 0)
@@ -27859,7 +29660,7 @@
         else
           return mid;
       }
-      return -(low + 1 | 0);
+      return -(low + 1 | 0) | 0;
     }
     function binarySearch_0($receiver, element, comparator, fromIndex, toIndex) {
       if (fromIndex === void 0)
@@ -27880,7 +29681,7 @@
         else
           return mid;
       }
-      return -(low + 1 | 0);
+      return -(low + 1 | 0) | 0;
     }
     var binarySearchBy = defineInlineFunction('kotlin.kotlin.collections.binarySearchBy_7gj2ve$', wrapFunction(function () {
       var compareValues = _.kotlin.comparisons.compareValues_s00gnj$;
@@ -27917,11 +29718,11 @@
         else
           return mid;
       }
-      return -(low + 1 | 0);
+      return -(low + 1 | 0) | 0;
     }
     function rangeCheck(size, fromIndex, toIndex) {
       if (fromIndex > toIndex)
-        throw new IllegalArgumentException('fromIndex (' + fromIndex + ') is greater than toIndex (' + toIndex + ').');
+        throw IllegalArgumentException_init_0('fromIndex (' + fromIndex + ') is greater than toIndex (' + toIndex + ').');
       else if (fromIndex < 0)
         throw new IndexOutOfBoundsException('fromIndex (' + fromIndex + ') is less than zero.');
       else if (toIndex > size)
@@ -27929,7 +29730,7 @@
     }
     function Grouping() {
     }
-    Grouping.$metadata$ = {kind: Kotlin.Kind.INTERFACE, simpleName: 'Grouping', interfaces: []};
+    Grouping.$metadata$ = {kind: Kind_INTERFACE, simpleName: 'Grouping', interfaces: []};
     var aggregate = defineInlineFunction('kotlin.kotlin.collections.aggregate_kz95qp$', wrapFunction(function () {
       var LinkedHashMap_init = _.kotlin.collections.LinkedHashMap_init_q3lmfv$;
       return function ($receiver, operation) {
@@ -27958,6 +29759,7 @@
     });
     var fold_11 = defineInlineFunction('kotlin.kotlin.collections.fold_2g9ybd$', wrapFunction(function () {
       var Any = Object;
+      var throwCCE = Kotlin.throwCCE;
       var LinkedHashMap_init = _.kotlin.collections.LinkedHashMap_init_q3lmfv$;
       return function ($receiver, initialValueSelector, operation) {
         var destination = LinkedHashMap_init();
@@ -27968,13 +29770,14 @@
           var key = $receiver.keyOf_11rb$(e);
           var accumulator = destination.get_11rb$(key);
           var tmp$_0;
-          destination.put_xwzc9p$(key, operation(key, accumulator == null && !destination.containsKey_11rb$(key) ? initialValueSelector(key, e) : (tmp$_0 = accumulator) == null || Kotlin.isType(tmp$_0, Any) ? tmp$_0 : Kotlin.throwCCE(), e));
+          destination.put_xwzc9p$(key, operation(key, accumulator == null && !destination.containsKey_11rb$(key) ? initialValueSelector(key, e) : (tmp$_0 = accumulator) == null || Kotlin.isType(tmp$_0, Any) ? tmp$_0 : throwCCE(), e));
         }
         return destination;
       };
     }));
     var foldTo = defineInlineFunction('kotlin.kotlin.collections.foldTo_ldb57n$', wrapFunction(function () {
       var Any = Object;
+      var throwCCE = Kotlin.throwCCE;
       return function ($receiver, destination, initialValueSelector, operation) {
         var tmp$;
         tmp$ = $receiver.sourceIterator();
@@ -27983,13 +29786,14 @@
           var key = $receiver.keyOf_11rb$(e);
           var accumulator = destination.get_11rb$(key);
           var tmp$_0;
-          destination.put_xwzc9p$(key, operation(key, accumulator == null && !destination.containsKey_11rb$(key) ? initialValueSelector(key, e) : (tmp$_0 = accumulator) == null || Kotlin.isType(tmp$_0, Any) ? tmp$_0 : Kotlin.throwCCE(), e));
+          destination.put_xwzc9p$(key, operation(key, accumulator == null && !destination.containsKey_11rb$(key) ? initialValueSelector(key, e) : (tmp$_0 = accumulator) == null || Kotlin.isType(tmp$_0, Any) ? tmp$_0 : throwCCE(), e));
         }
         return destination;
       };
     }));
     var fold_12 = defineInlineFunction('kotlin.kotlin.collections.fold_id3q3f$', wrapFunction(function () {
       var Any = Object;
+      var throwCCE = Kotlin.throwCCE;
       var LinkedHashMap_init = _.kotlin.collections.LinkedHashMap_init_q3lmfv$;
       return function ($receiver, initialValue, operation) {
         var destination = LinkedHashMap_init();
@@ -28000,13 +29804,14 @@
           var key = $receiver.keyOf_11rb$(e);
           var accumulator = destination.get_11rb$(key);
           var tmp$_0;
-          destination.put_xwzc9p$(key, operation(accumulator == null && !destination.containsKey_11rb$(key) ? initialValue : (tmp$_0 = accumulator) == null || Kotlin.isType(tmp$_0, Any) ? tmp$_0 : Kotlin.throwCCE(), e));
+          destination.put_xwzc9p$(key, operation(accumulator == null && !destination.containsKey_11rb$(key) ? initialValue : (tmp$_0 = accumulator) == null || Kotlin.isType(tmp$_0, Any) ? tmp$_0 : throwCCE(), e));
         }
         return destination;
       };
     }));
     var foldTo_0 = defineInlineFunction('kotlin.kotlin.collections.foldTo_1dwgsv$', wrapFunction(function () {
       var Any = Object;
+      var throwCCE = Kotlin.throwCCE;
       return function ($receiver, destination, initialValue, operation) {
         var tmp$;
         tmp$ = $receiver.sourceIterator();
@@ -28015,13 +29820,14 @@
           var key = $receiver.keyOf_11rb$(e);
           var accumulator = destination.get_11rb$(key);
           var tmp$_0;
-          destination.put_xwzc9p$(key, operation(accumulator == null && !destination.containsKey_11rb$(key) ? initialValue : (tmp$_0 = accumulator) == null || Kotlin.isType(tmp$_0, Any) ? tmp$_0 : Kotlin.throwCCE(), e));
+          destination.put_xwzc9p$(key, operation(accumulator == null && !destination.containsKey_11rb$(key) ? initialValue : (tmp$_0 = accumulator) == null || Kotlin.isType(tmp$_0, Any) ? tmp$_0 : throwCCE(), e));
         }
         return destination;
       };
     }));
     var reduce_11 = defineInlineFunction('kotlin.kotlin.collections.reduce_hy0spo$', wrapFunction(function () {
       var Any = Object;
+      var throwCCE = Kotlin.throwCCE;
       var LinkedHashMap_init = _.kotlin.collections.LinkedHashMap_init_q3lmfv$;
       return function ($receiver, operation) {
         var destination = LinkedHashMap_init();
@@ -28031,22 +29837,22 @@
           var e = tmp$.next();
           var key = $receiver.keyOf_11rb$(e);
           var accumulator = destination.get_11rb$(key);
-          var tmp$_0 = destination;
           var operation$result;
-          var tmp$_1;
+          var tmp$_0;
           if (accumulator == null && !destination.containsKey_11rb$(key)) {
             operation$result = e;
           }
            else {
-            operation$result = operation(key, (tmp$_1 = accumulator) == null || Kotlin.isType(tmp$_1, Any) ? tmp$_1 : Kotlin.throwCCE(), e);
+            operation$result = operation(key, (tmp$_0 = accumulator) == null || Kotlin.isType(tmp$_0, Any) ? tmp$_0 : throwCCE(), e);
           }
-          tmp$_0.put_xwzc9p$(key, operation$result);
+          destination.put_xwzc9p$(key, operation$result);
         }
         return destination;
       };
     }));
     var reduceTo = defineInlineFunction('kotlin.kotlin.collections.reduceTo_vpctix$', wrapFunction(function () {
       var Any = Object;
+      var throwCCE = Kotlin.throwCCE;
       return function ($receiver, destination, operation) {
         var tmp$;
         tmp$ = $receiver.sourceIterator();
@@ -28060,7 +29866,7 @@
             operation$result = e;
           }
            else {
-            operation$result = operation(key, (tmp$_0 = accumulator) == null || Kotlin.isType(tmp$_0, Any) ? tmp$_0 : Kotlin.throwCCE(), e);
+            operation$result = operation(key, (tmp$_0 = accumulator) == null || Kotlin.isType(tmp$_0, Any) ? tmp$_0 : throwCCE(), e);
           }
           destination.put_xwzc9p$(key, operation$result);
         }
@@ -28075,7 +29881,7 @@
         var key = $receiver.keyOf_11rb$(e);
         var accumulator = destination.get_11rb$(key);
         var tmp$_0;
-        destination.put_xwzc9p$(key, (accumulator == null && !destination.containsKey_11rb$(key) ? 0 : (tmp$_0 = accumulator) == null || Kotlin.isType(tmp$_0, Any) ? tmp$_0 : Kotlin.throwCCE()) + 1 | 0);
+        destination.put_xwzc9p$(key, (accumulator == null && !destination.containsKey_11rb$(key) ? 0 : (tmp$_0 = accumulator) == null || Kotlin.isType(tmp$_0, Any) ? tmp$_0 : throwCCE()) + 1 | 0);
       }
       return destination;
     }
@@ -28083,7 +29889,7 @@
       this.index = index;
       this.value = value;
     }
-    IndexedValue.$metadata$ = {kind: Kotlin.Kind.CLASS, simpleName: 'IndexedValue', interfaces: []};
+    IndexedValue.$metadata$ = {kind: Kind_CLASS, simpleName: 'IndexedValue', interfaces: []};
     IndexedValue.prototype.component1 = function () {
       return this.index;
     };
@@ -28106,6 +29912,7 @@
       return this === other || (other !== null && (typeof other === 'object' && (Object.getPrototypeOf(this) === Object.getPrototypeOf(other) && (Kotlin.equals(this.index, other.index) && Kotlin.equals(this.value, other.value)))));
     };
     var Iterable_0 = defineInlineFunction('kotlin.kotlin.collections.Iterable_ms0qmx$', wrapFunction(function () {
+      var Kind_CLASS = Kotlin.Kind.CLASS;
       var Iterable = _.kotlin.collections.Iterable;
       function Iterable$ObjectLiteral(closure$iterator) {
         this.closure$iterator = closure$iterator;
@@ -28113,7 +29920,7 @@
       Iterable$ObjectLiteral.prototype.iterator = function () {
         return this.closure$iterator();
       };
-      Iterable$ObjectLiteral.$metadata$ = {kind: Kotlin.Kind.CLASS, interfaces: [Iterable]};
+      Iterable$ObjectLiteral.$metadata$ = {kind: Kind_CLASS, interfaces: [Iterable]};
       return function (iterator) {
         return new Iterable$ObjectLiteral(iterator);
       };
@@ -28124,7 +29931,7 @@
     IndexingIterable.prototype.iterator = function () {
       return new IndexingIterator(this.iteratorFactory_0());
     };
-    IndexingIterable.$metadata$ = {kind: Kotlin.Kind.CLASS, simpleName: 'IndexingIterable', interfaces: [Iterable]};
+    IndexingIterable.$metadata$ = {kind: Kind_CLASS, simpleName: 'IndexingIterable', interfaces: [Iterable]};
     function collectionSizeOrNull($receiver) {
       return Kotlin.isType($receiver, Collection) ? $receiver.size : null;
     }
@@ -28199,21 +30006,32 @@
       var tmp$;
       return new IndexedValue((tmp$ = this.index_0, this.index_0 = tmp$ + 1 | 0, tmp$), this.iterator_0.next());
     };
-    IndexingIterator.$metadata$ = {kind: Kotlin.Kind.CLASS, simpleName: 'IndexingIterator', interfaces: [Iterator]};
+    IndexingIterator.$metadata$ = {kind: Kind_CLASS, simpleName: 'IndexingIterator', interfaces: [Iterator]};
     var getValue = defineInlineFunction('kotlin.kotlin.collections.getValue_u8h43m$', wrapFunction(function () {
       var getOrImplicitDefault = _.kotlin.collections.getOrImplicitDefault_t9ocha$;
       var Any = Object;
+      var throwCCE = Kotlin.throwCCE;
       return function ($receiver, thisRef, property) {
         var tmp$;
-        return (tmp$ = getOrImplicitDefault($receiver, property.callableName)) == null || Kotlin.isType(tmp$, Any) ? tmp$ : Kotlin.throwCCE();
+        return (tmp$ = getOrImplicitDefault($receiver, property.callableName)) == null || Kotlin.isType(tmp$, Any) ? tmp$ : throwCCE();
       };
     }));
-    var getValue_0 = defineInlineFunction('kotlin.kotlin.collections.getValue_ag2o6f$', wrapFunction(function () {
+    var getValue_0 = defineInlineFunction('kotlin.kotlin.collections.getValue_th1e6g$', wrapFunction(function () {
       var getOrImplicitDefault = _.kotlin.collections.getOrImplicitDefault_t9ocha$;
       var Any = Object;
+      var throwCCE = Kotlin.throwCCE;
       return function ($receiver, thisRef, property) {
         var tmp$;
-        return (tmp$ = getOrImplicitDefault($receiver, property.callableName)) == null || Kotlin.isType(tmp$, Any) ? tmp$ : Kotlin.throwCCE();
+        return (tmp$ = getOrImplicitDefault($receiver, property.callableName)) == null || Kotlin.isType(tmp$, Any) ? tmp$ : throwCCE();
+      };
+    }));
+    var getValue_1 = defineInlineFunction('kotlin.kotlin.collections.getValue_ag2o6f$', wrapFunction(function () {
+      var getOrImplicitDefault = _.kotlin.collections.getOrImplicitDefault_t9ocha$;
+      var Any = Object;
+      var throwCCE = Kotlin.throwCCE;
+      return function ($receiver, thisRef, property) {
+        var tmp$;
+        return (tmp$ = getOrImplicitDefault($receiver, property.callableName)) == null || Kotlin.isType(tmp$, Any) ? tmp$ : throwCCE();
       };
     }));
     var setValue = defineInlineFunction('kotlin.kotlin.collections.setValue_p0hbkv$', function ($receiver, thisRef, property, value) {
@@ -28229,7 +30047,7 @@
         throw new NoSuchElementException('Key ' + key + ' is missing in the map.');
       }
        else {
-        getOrElseNullable$result = (tmp$ = value) == null || Kotlin.isType(tmp$, Any) ? tmp$ : Kotlin.throwCCE();
+        getOrElseNullable$result = (tmp$ = value) == null || Kotlin.isType(tmp$, Any) ? tmp$ : throwCCE();
       }
       return getOrElseNullable$result;
     }
@@ -28247,10 +30065,10 @@
     }
     function MapWithDefault() {
     }
-    MapWithDefault.$metadata$ = {kind: Kotlin.Kind.INTERFACE, simpleName: 'MapWithDefault', interfaces: [Map]};
+    MapWithDefault.$metadata$ = {kind: Kind_INTERFACE, simpleName: 'MapWithDefault', interfaces: [Map]};
     function MutableMapWithDefault() {
     }
-    MutableMapWithDefault.$metadata$ = {kind: Kotlin.Kind.INTERFACE, simpleName: 'MutableMapWithDefault', interfaces: [MapWithDefault, MutableMap]};
+    MutableMapWithDefault.$metadata$ = {kind: Kind_INTERFACE, simpleName: 'MutableMapWithDefault', interfaces: [MapWithDefault, MutableMap]};
     function MapWithDefaultImpl(map, default_0) {
       this.map_tyjeqh$_0 = map;
       this.default_0 = default_0;
@@ -28259,10 +30077,10 @@
       return this.map_tyjeqh$_0;
     }});
     MapWithDefaultImpl.prototype.equals = function (other) {
-      return Kotlin.equals(this.map, other);
+      return equals(this.map, other);
     };
     MapWithDefaultImpl.prototype.hashCode = function () {
-      return Kotlin.hashCode(this.map);
+      return hashCode(this.map);
     };
     MapWithDefaultImpl.prototype.toString = function () {
       return this.map.toString();
@@ -28300,11 +30118,11 @@
         getOrElseNullable$result = this.default_0(key);
       }
        else {
-        getOrElseNullable$result = (tmp$ = value) == null || Kotlin.isType(tmp$, Any) ? tmp$ : Kotlin.throwCCE();
+        getOrElseNullable$result = (tmp$ = value) == null || Kotlin.isType(tmp$, Any) ? tmp$ : throwCCE();
       }
       return getOrElseNullable$result;
     };
-    MapWithDefaultImpl.$metadata$ = {kind: Kotlin.Kind.CLASS, simpleName: 'MapWithDefaultImpl', interfaces: [MapWithDefault]};
+    MapWithDefaultImpl.$metadata$ = {kind: Kind_CLASS, simpleName: 'MapWithDefaultImpl', interfaces: [MapWithDefault]};
     function MutableMapWithDefaultImpl(map, default_0) {
       this.map_a09uzx$_0 = map;
       this.default_0 = default_0;
@@ -28313,10 +30131,10 @@
       return this.map_a09uzx$_0;
     }});
     MutableMapWithDefaultImpl.prototype.equals = function (other) {
-      return Kotlin.equals(this.map, other);
+      return equals(this.map, other);
     };
     MutableMapWithDefaultImpl.prototype.hashCode = function () {
-      return Kotlin.hashCode(this.map);
+      return hashCode(this.map);
     };
     MutableMapWithDefaultImpl.prototype.toString = function () {
       return this.map.toString();
@@ -28366,11 +30184,11 @@
         getOrElseNullable$result = this.default_0(key);
       }
        else {
-        getOrElseNullable$result = (tmp$ = value) == null || Kotlin.isType(tmp$, Any) ? tmp$ : Kotlin.throwCCE();
+        getOrElseNullable$result = (tmp$ = value) == null || Kotlin.isType(tmp$, Any) ? tmp$ : throwCCE();
       }
       return getOrElseNullable$result;
     };
-    MutableMapWithDefaultImpl.$metadata$ = {kind: Kotlin.Kind.CLASS, simpleName: 'MutableMapWithDefaultImpl', interfaces: [MutableMapWithDefault]};
+    MutableMapWithDefaultImpl.$metadata$ = {kind: Kind_CLASS, simpleName: 'MutableMapWithDefaultImpl', interfaces: [MutableMapWithDefault]};
     function EmptyMap() {
       EmptyMap_instance = this;
       this.serialVersionUID_0 = new Kotlin.Long(-888910638, 1920087921);
@@ -28411,7 +30229,7 @@
     EmptyMap.prototype.readResolve_0 = function () {
       return EmptyMap_getInstance();
     };
-    EmptyMap.$metadata$ = {kind: Kotlin.Kind.OBJECT, simpleName: 'EmptyMap', interfaces: [Serializable, Map]};
+    EmptyMap.$metadata$ = {kind: Kind_OBJECT, simpleName: 'EmptyMap', interfaces: [Serializable, Map]};
     var EmptyMap_instance = null;
     function EmptyMap_getInstance() {
       if (EmptyMap_instance === null) {
@@ -28421,7 +30239,7 @@
     }
     function emptyMap() {
       var tmp$;
-      return Kotlin.isType(tmp$ = EmptyMap_getInstance(), Map) ? tmp$ : Kotlin.throwCCE();
+      return Kotlin.isType(tmp$ = EmptyMap_getInstance(), Map) ? tmp$ : throwCCE();
     }
     function mapOf_0(pairs) {
       return pairs.length > 0 ? toMap_2(pairs, LinkedHashMap_init_1(mapCapacity(pairs.length))) : emptyMap();
@@ -28470,7 +30288,7 @@
       if (expectedSize < INT_MAX_POWER_OF_TWO) {
         return expectedSize + (expectedSize / 3 | 0) | 0;
       }
-      return IntCompanionObject.MAX_VALUE;
+      return kotlin_js_internal_IntCompanionObject.MAX_VALUE;
     }
     var INT_MAX_POWER_OF_TWO;
     var isNotEmpty_9 = defineInlineFunction('kotlin.kotlin.collections.isNotEmpty_abgq59$', function ($receiver) {
@@ -28484,16 +30302,18 @@
     }));
     var contains_40 = defineInlineFunction('kotlin.kotlin.collections.contains_4pa84t$', wrapFunction(function () {
       var Map = _.kotlin.collections.Map;
+      var throwCCE = Kotlin.throwCCE;
       return function ($receiver, key) {
         var tmp$;
-        return (Kotlin.isType(tmp$ = $receiver, Map) ? tmp$ : Kotlin.throwCCE()).containsKey_11rb$(key);
+        return (Kotlin.isType(tmp$ = $receiver, Map) ? tmp$ : throwCCE()).containsKey_11rb$(key);
       };
     }));
     var get_46 = defineInlineFunction('kotlin.kotlin.collections.get_4pa84t$', wrapFunction(function () {
       var Map = _.kotlin.collections.Map;
+      var throwCCE = Kotlin.throwCCE;
       return function ($receiver, key) {
         var tmp$;
-        return (Kotlin.isType(tmp$ = $receiver, Map) ? tmp$ : Kotlin.throwCCE()).get_11rb$(key);
+        return (Kotlin.isType(tmp$ = $receiver, Map) ? tmp$ : throwCCE()).get_11rb$(key);
       };
     }));
     var set_19 = defineInlineFunction('kotlin.kotlin.collections.set_6y9eq4$', function ($receiver, key, value) {
@@ -28501,9 +30321,10 @@
     });
     var containsKey = defineInlineFunction('kotlin.kotlin.collections.containsKey_ysgkzk$', wrapFunction(function () {
       var Map = _.kotlin.collections.Map;
+      var throwCCE = Kotlin.throwCCE;
       return function ($receiver, key) {
         var tmp$;
-        return (Kotlin.isType(tmp$ = $receiver, Map) ? tmp$ : Kotlin.throwCCE()).containsKey_11rb$(key);
+        return (Kotlin.isType(tmp$ = $receiver, Map) ? tmp$ : throwCCE()).containsKey_11rb$(key);
       };
     }));
     var containsValue = defineInlineFunction('kotlin.kotlin.collections.containsValue_bvbopf$', function ($receiver, value) {
@@ -28511,9 +30332,10 @@
     });
     var remove = defineInlineFunction('kotlin.kotlin.collections.remove_vbdv38$', wrapFunction(function () {
       var MutableMap = _.kotlin.collections.MutableMap;
+      var throwCCE = Kotlin.throwCCE;
       return function ($receiver, key) {
         var tmp$;
-        return (Kotlin.isType(tmp$ = $receiver, MutableMap) ? tmp$ : Kotlin.throwCCE()).remove_11rb$(key);
+        return (Kotlin.isType(tmp$ = $receiver, MutableMap) ? tmp$ : throwCCE()).remove_11rb$(key);
       };
     }));
     var component1_9 = defineInlineFunction('kotlin.kotlin.collections.component1_gzf0zl$', function ($receiver) {
@@ -28534,6 +30356,7 @@
     });
     var getOrElseNullable = defineInlineFunction('kotlin.kotlin.collections.getOrElseNullable_e54js$', wrapFunction(function () {
       var Any = Object;
+      var throwCCE = Kotlin.throwCCE;
       return function ($receiver, key, defaultValue) {
         var tmp$;
         var value = $receiver.get_11rb$(key);
@@ -28541,11 +30364,11 @@
           return defaultValue();
         }
          else {
-          return (tmp$ = value) == null || Kotlin.isType(tmp$, Any) ? tmp$ : Kotlin.throwCCE();
+          return (tmp$ = value) == null || Kotlin.isType(tmp$, Any) ? tmp$ : throwCCE();
         }
       };
     }));
-    function getValue_1($receiver, key) {
+    function getValue_2($receiver, key) {
       return getOrImplicitDefault($receiver, key);
     }
     var getOrPut = defineInlineFunction('kotlin.kotlin.collections.getOrPut_9wl75a$', function ($receiver, key, defaultValue) {
@@ -28726,16 +30549,19 @@
       };
     }));
     function toMap($receiver) {
-      var tmp$, tmp$_0;
+      var tmp$;
       if (Kotlin.isType($receiver, Collection)) {
-        tmp$ = $receiver.size;
-        if (tmp$ === 0)
-          tmp$_0 = emptyMap();
-        else if (tmp$ === 1)
-          tmp$_0 = mapOf(Kotlin.isType($receiver, List) ? $receiver.get_za3lpa$(0) : $receiver.iterator().next());
-        else
-          tmp$_0 = toMap_0($receiver, LinkedHashMap_init_1(mapCapacity($receiver.size)));
-        return tmp$_0;
+        switch ($receiver.size) {
+          case 0:
+            tmp$ = emptyMap();
+            break;
+          case 1:
+            tmp$ = mapOf(Kotlin.isType($receiver, List) ? $receiver.get_za3lpa$(0) : $receiver.iterator().next());
+            break;
+          default:tmp$ = toMap_0($receiver, LinkedHashMap_init_1(mapCapacity($receiver.size)));
+            break;
+        }
+        return tmp$;
       }
       return optimizeReadOnlyMap(toMap_0($receiver, LinkedHashMap_init()));
     }
@@ -28744,12 +30570,13 @@
       return destination;
     }
     function toMap_1($receiver) {
-      if ($receiver.length === 0)
-        return emptyMap();
-      else if ($receiver.length === 1)
-        return mapOf($receiver[0]);
-      else
-        return toMap_2($receiver, LinkedHashMap_init_1(mapCapacity($receiver.length)));
+      switch ($receiver.length) {
+        case 0:
+          return emptyMap();
+        case 1:
+          return mapOf($receiver[0]);
+        default:return toMap_2($receiver, LinkedHashMap_init_1(mapCapacity($receiver.length)));
+      }
     }
     function toMap_2($receiver, destination) {
       putAll(destination, $receiver);
@@ -28763,15 +30590,13 @@
       return destination;
     }
     function toMap_5($receiver) {
-      var tmp$;
-      tmp$ = $receiver.size;
-      if (tmp$ === 0)
-        return emptyMap();
-      else if (tmp$ === 1) {
-        return toMutableMap($receiver);
+      switch ($receiver.size) {
+        case 0:
+          return emptyMap();
+        case 1:
+          return toMutableMap($receiver);
+        default:return toMutableMap($receiver);
       }
-       else
-        return toMutableMap($receiver);
     }
     function toMutableMap($receiver) {
       return LinkedHashMap_init_2($receiver);
@@ -28889,35 +30714,36 @@
       };
     }));
     function optimizeReadOnlyMap($receiver) {
-      var tmp$;
-      tmp$ = $receiver.size;
-      if (tmp$ === 0)
-        return emptyMap();
-      else if (tmp$ === 1) {
-        return $receiver;
+      switch ($receiver.size) {
+        case 0:
+          return emptyMap();
+        case 1:
+          return $receiver;
+        default:return $receiver;
       }
-       else
-        return $receiver;
     }
     var remove_0 = defineInlineFunction('kotlin.kotlin.collections.remove_cz4ny2$', wrapFunction(function () {
       var MutableCollection = _.kotlin.collections.MutableCollection;
+      var throwCCE = Kotlin.throwCCE;
       return function ($receiver, element) {
         var tmp$;
-        return (Kotlin.isType(tmp$ = $receiver, MutableCollection) ? tmp$ : Kotlin.throwCCE()).remove_11rb$(element);
+        return (Kotlin.isType(tmp$ = $receiver, MutableCollection) ? tmp$ : throwCCE()).remove_11rb$(element);
       };
     }));
     var removeAll = defineInlineFunction('kotlin.kotlin.collections.removeAll_qrknmz$', wrapFunction(function () {
       var MutableCollection = _.kotlin.collections.MutableCollection;
+      var throwCCE = Kotlin.throwCCE;
       return function ($receiver, elements) {
         var tmp$;
-        return (Kotlin.isType(tmp$ = $receiver, MutableCollection) ? tmp$ : Kotlin.throwCCE()).removeAll_brywnq$(elements);
+        return (Kotlin.isType(tmp$ = $receiver, MutableCollection) ? tmp$ : throwCCE()).removeAll_brywnq$(elements);
       };
     }));
     var retainAll = defineInlineFunction('kotlin.kotlin.collections.retainAll_qrknmz$', wrapFunction(function () {
       var MutableCollection = _.kotlin.collections.MutableCollection;
+      var throwCCE = Kotlin.throwCCE;
       return function ($receiver, elements) {
         var tmp$;
-        return (Kotlin.isType(tmp$ = $receiver, MutableCollection) ? tmp$ : Kotlin.throwCCE()).retainAll_brywnq$(elements);
+        return (Kotlin.isType(tmp$ = $receiver, MutableCollection) ? tmp$ : throwCCE()).retainAll_brywnq$(elements);
       };
     }));
     var remove_1 = defineInlineFunction('kotlin.kotlin.collections.remove_tkbrz9$', function ($receiver, index) {
@@ -29019,7 +30845,7 @@
     function filterInPlace_0($receiver, predicate, predicateResultToRemove) {
       var tmp$, tmp$_0, tmp$_1, tmp$_2;
       if (!Kotlin.isType($receiver, RandomAccess))
-        return filterInPlace(Kotlin.isType(tmp$ = $receiver, MutableIterable) ? tmp$ : Kotlin.throwCCE(), predicate, predicateResultToRemove);
+        return filterInPlace(Kotlin.isType(tmp$ = $receiver, MutableIterable) ? tmp$ : throwCCE(), predicate, predicateResultToRemove);
       var writeIndex = 0;
       tmp$_0 = get_lastIndex_8($receiver);
       for (var readIndex = 0; readIndex <= tmp$_0; readIndex++) {
@@ -29044,7 +30870,7 @@
     function removeAll_2($receiver, elements) {
       var elements_0 = convertToSetForSetOperationWith(elements, $receiver);
       var tmp$;
-      return (Kotlin.isType(tmp$ = $receiver, MutableCollection) ? tmp$ : Kotlin.throwCCE()).removeAll_brywnq$(elements_0);
+      return (Kotlin.isType(tmp$ = $receiver, MutableCollection) ? tmp$ : throwCCE()).removeAll_brywnq$(elements_0);
     }
     function removeAll_3($receiver, elements) {
       var set = toHashSet_9(elements);
@@ -29056,7 +30882,7 @@
     function retainAll_2($receiver, elements) {
       var elements_0 = convertToSetForSetOperationWith(elements, $receiver);
       var tmp$;
-      return (Kotlin.isType(tmp$ = $receiver, MutableCollection) ? tmp$ : Kotlin.throwCCE()).retainAll_brywnq$(elements_0);
+      return (Kotlin.isType(tmp$ = $receiver, MutableCollection) ? tmp$ : throwCCE()).retainAll_brywnq$(elements_0);
     }
     function retainAll_3($receiver, elements) {
       if (!(elements.length === 0))
@@ -29086,7 +30912,7 @@
     ReversedListReadOnly.prototype.get_za3lpa$ = function (index) {
       return this.delegate_0.get_za3lpa$(reverseElementIndex(this, index));
     };
-    ReversedListReadOnly.$metadata$ = {kind: Kotlin.Kind.CLASS, simpleName: 'ReversedListReadOnly', interfaces: [AbstractList]};
+    ReversedListReadOnly.$metadata$ = {kind: Kind_CLASS, simpleName: 'ReversedListReadOnly', interfaces: [AbstractList]};
     function ReversedList(delegate) {
       AbstractMutableList.call(this);
       this.delegate_0 = delegate;
@@ -29109,15 +30935,19 @@
     ReversedList.prototype.add_wxm5ur$ = function (index, element) {
       this.delegate_0.add_wxm5ur$(reversePositionIndex(this, index), element);
     };
-    ReversedList.$metadata$ = {kind: Kotlin.Kind.CLASS, simpleName: 'ReversedList', interfaces: [AbstractMutableList]};
+    ReversedList.$metadata$ = {kind: Kind_CLASS, simpleName: 'ReversedList', interfaces: [AbstractMutableList]};
     function reverseElementIndex($receiver, index) {
-      if ((new IntRange(0, get_lastIndex_8($receiver))).contains_mef7kx$(index))
+      var tmp$;
+      tmp$ = get_lastIndex_8($receiver);
+      if (0 <= index && index <= tmp$)
         return get_lastIndex_8($receiver) - index | 0;
       else
         throw new IndexOutOfBoundsException('Element index ' + index + ' must be in range [' + new IntRange(0, get_lastIndex_8($receiver)) + '].');
     }
     function reversePositionIndex($receiver, index) {
-      if ((new IntRange(0, $receiver.size)).contains_mef7kx$(index))
+      var tmp$;
+      tmp$ = $receiver.size;
+      if (0 <= index && index <= tmp$)
         return $receiver.size - index | 0;
       else
         throw new IndexOutOfBoundsException('Position index ' + index + ' must be in range [' + new IntRange(0, $receiver.size) + '].');
@@ -29130,8 +30960,9 @@
     }
     function Sequence() {
     }
-    Sequence.$metadata$ = {kind: Kotlin.Kind.INTERFACE, simpleName: 'Sequence', interfaces: []};
+    Sequence.$metadata$ = {kind: Kind_INTERFACE, simpleName: 'Sequence', interfaces: []};
     var Sequence_0 = defineInlineFunction('kotlin.kotlin.sequences.Sequence_ms0qmx$', wrapFunction(function () {
+      var Kind_CLASS = Kotlin.Kind.CLASS;
       var Sequence = _.kotlin.sequences.Sequence;
       function Sequence$ObjectLiteral(closure$iterator) {
         this.closure$iterator = closure$iterator;
@@ -29139,7 +30970,7 @@
       Sequence$ObjectLiteral.prototype.iterator = function () {
         return this.closure$iterator();
       };
-      Sequence$ObjectLiteral.$metadata$ = {kind: Kotlin.Kind.CLASS, interfaces: [Sequence]};
+      Sequence$ObjectLiteral.$metadata$ = {kind: Kind_CLASS, interfaces: [Sequence]};
       return function (iterator) {
         return new Sequence$ObjectLiteral(iterator);
       };
@@ -29155,7 +30986,7 @@
     Sequence$ObjectLiteral_2.prototype.iterator = function () {
       return this.closure$iterator();
     };
-    Sequence$ObjectLiteral_2.$metadata$ = {kind: Kotlin.Kind.CLASS, interfaces: [Sequence]};
+    Sequence$ObjectLiteral_2.$metadata$ = {kind: Kind_CLASS, interfaces: [Sequence]};
     function asSequence_12($receiver) {
       return constrainOnce(new Sequence$ObjectLiteral_2(asSequence$lambda_10($receiver)));
     }
@@ -29177,7 +31008,7 @@
     EmptySequence.prototype.take_za3lpa$ = function (n) {
       return EmptySequence_getInstance();
     };
-    EmptySequence.$metadata$ = {kind: Kotlin.Kind.OBJECT, simpleName: 'EmptySequence', interfaces: [DropTakeSequence, Sequence]};
+    EmptySequence.$metadata$ = {kind: Kind_OBJECT, simpleName: 'EmptySequence', interfaces: [DropTakeSequence, Sequence]};
     var EmptySequence_instance = null;
     function EmptySequence_getInstance() {
       if (EmptySequence_instance === null) {
@@ -29203,7 +31034,7 @@
     function flatten_3($receiver, iterator) {
       var tmp$;
       if (Kotlin.isType($receiver, TransformingSequence)) {
-        return (Kotlin.isType(tmp$ = $receiver, TransformingSequence) ? tmp$ : Kotlin.throwCCE()).flatten_1tglza$(iterator);
+        return (Kotlin.isType(tmp$ = $receiver, TransformingSequence) ? tmp$ : throwCCE()).flatten_1tglza$(iterator);
       }
       return new FlatteningSequence($receiver, flatten$lambda_1, iterator);
     }
@@ -29248,22 +31079,22 @@
       if (this.nextState === -1)
         this.calcNext_0();
       if (this.nextState === 0)
-        throw new NoSuchElementException();
+        throw NoSuchElementException_init();
       var result = this.nextItem;
       this.nextItem = null;
       this.nextState = -1;
-      return (tmp$ = result) == null || Kotlin.isType(tmp$, Any) ? tmp$ : Kotlin.throwCCE();
+      return (tmp$ = result) == null || Kotlin.isType(tmp$, Any) ? tmp$ : throwCCE();
     };
     FilteringSequence$iterator$ObjectLiteral.prototype.hasNext = function () {
       if (this.nextState === -1)
         this.calcNext_0();
       return this.nextState === 1;
     };
-    FilteringSequence$iterator$ObjectLiteral.$metadata$ = {kind: Kotlin.Kind.CLASS, interfaces: [Iterator]};
+    FilteringSequence$iterator$ObjectLiteral.$metadata$ = {kind: Kind_CLASS, interfaces: [Iterator]};
     FilteringSequence.prototype.iterator = function () {
       return new FilteringSequence$iterator$ObjectLiteral(this);
     };
-    FilteringSequence.$metadata$ = {kind: Kotlin.Kind.CLASS, simpleName: 'FilteringSequence', interfaces: [Sequence]};
+    FilteringSequence.$metadata$ = {kind: Kind_CLASS, simpleName: 'FilteringSequence', interfaces: [Sequence]};
     function TransformingSequence(sequence, transformer) {
       this.sequence_0 = sequence;
       this.transformer_0 = transformer;
@@ -29278,14 +31109,14 @@
     TransformingSequence$iterator$ObjectLiteral.prototype.hasNext = function () {
       return this.iterator.hasNext();
     };
-    TransformingSequence$iterator$ObjectLiteral.$metadata$ = {kind: Kotlin.Kind.CLASS, interfaces: [Iterator]};
+    TransformingSequence$iterator$ObjectLiteral.$metadata$ = {kind: Kind_CLASS, interfaces: [Iterator]};
     TransformingSequence.prototype.iterator = function () {
       return new TransformingSequence$iterator$ObjectLiteral(this);
     };
     TransformingSequence.prototype.flatten_1tglza$ = function (iterator) {
       return new FlatteningSequence(this.sequence_0, this.transformer_0, iterator);
     };
-    TransformingSequence.$metadata$ = {kind: Kotlin.Kind.CLASS, simpleName: 'TransformingSequence', interfaces: [Sequence]};
+    TransformingSequence.$metadata$ = {kind: Kind_CLASS, simpleName: 'TransformingSequence', interfaces: [Sequence]};
     function TransformingIndexedSequence(sequence, transformer) {
       this.sequence_0 = sequence;
       this.transformer_0 = transformer;
@@ -29302,11 +31133,11 @@
     TransformingIndexedSequence$iterator$ObjectLiteral.prototype.hasNext = function () {
       return this.iterator.hasNext();
     };
-    TransformingIndexedSequence$iterator$ObjectLiteral.$metadata$ = {kind: Kotlin.Kind.CLASS, interfaces: [Iterator]};
+    TransformingIndexedSequence$iterator$ObjectLiteral.$metadata$ = {kind: Kind_CLASS, interfaces: [Iterator]};
     TransformingIndexedSequence.prototype.iterator = function () {
       return new TransformingIndexedSequence$iterator$ObjectLiteral(this);
     };
-    TransformingIndexedSequence.$metadata$ = {kind: Kotlin.Kind.CLASS, simpleName: 'TransformingIndexedSequence', interfaces: [Sequence]};
+    TransformingIndexedSequence.$metadata$ = {kind: Kind_CLASS, simpleName: 'TransformingIndexedSequence', interfaces: [Sequence]};
     function IndexingSequence(sequence) {
       this.sequence_0 = sequence;
     }
@@ -29321,11 +31152,11 @@
     IndexingSequence$iterator$ObjectLiteral.prototype.hasNext = function () {
       return this.iterator.hasNext();
     };
-    IndexingSequence$iterator$ObjectLiteral.$metadata$ = {kind: Kotlin.Kind.CLASS, interfaces: [Iterator]};
+    IndexingSequence$iterator$ObjectLiteral.$metadata$ = {kind: Kind_CLASS, interfaces: [Iterator]};
     IndexingSequence.prototype.iterator = function () {
       return new IndexingSequence$iterator$ObjectLiteral(this);
     };
-    IndexingSequence.$metadata$ = {kind: Kotlin.Kind.CLASS, simpleName: 'IndexingSequence', interfaces: [Sequence]};
+    IndexingSequence.$metadata$ = {kind: Kind_CLASS, simpleName: 'IndexingSequence', interfaces: [Sequence]};
     function MergingSequence(sequence1, sequence2, transform) {
       this.sequence1_0 = sequence1;
       this.sequence2_0 = sequence2;
@@ -29342,11 +31173,11 @@
     MergingSequence$iterator$ObjectLiteral.prototype.hasNext = function () {
       return this.iterator1.hasNext() && this.iterator2.hasNext();
     };
-    MergingSequence$iterator$ObjectLiteral.$metadata$ = {kind: Kotlin.Kind.CLASS, interfaces: [Iterator]};
+    MergingSequence$iterator$ObjectLiteral.$metadata$ = {kind: Kind_CLASS, interfaces: [Iterator]};
     MergingSequence.prototype.iterator = function () {
       return new MergingSequence$iterator$ObjectLiteral(this);
     };
-    MergingSequence.$metadata$ = {kind: Kotlin.Kind.CLASS, simpleName: 'MergingSequence', interfaces: [Sequence]};
+    MergingSequence.$metadata$ = {kind: Kind_CLASS, simpleName: 'MergingSequence', interfaces: [Sequence]};
     function FlatteningSequence(sequence, transformer, iterator) {
       this.sequence_0 = sequence;
       this.transformer_0 = transformer;
@@ -29358,10 +31189,9 @@
       this.itemIterator = null;
     }
     FlatteningSequence$iterator$ObjectLiteral.prototype.next = function () {
-      var tmp$;
       if (!this.ensureItemIterator_0())
-        throw new NoSuchElementException();
-      return ((tmp$ = this.itemIterator) != null ? tmp$ : Kotlin.throwNPE()).next();
+        throw NoSuchElementException_init();
+      return ensureNotNull(this.itemIterator).next();
     };
     FlatteningSequence$iterator$ObjectLiteral.prototype.hasNext = function () {
       return this.ensureItemIterator_0();
@@ -29385,29 +31215,29 @@
       }
       return true;
     };
-    FlatteningSequence$iterator$ObjectLiteral.$metadata$ = {kind: Kotlin.Kind.CLASS, interfaces: [Iterator]};
+    FlatteningSequence$iterator$ObjectLiteral.$metadata$ = {kind: Kind_CLASS, interfaces: [Iterator]};
     FlatteningSequence.prototype.iterator = function () {
       return new FlatteningSequence$iterator$ObjectLiteral(this);
     };
-    FlatteningSequence.$metadata$ = {kind: Kotlin.Kind.CLASS, simpleName: 'FlatteningSequence', interfaces: [Sequence]};
+    FlatteningSequence.$metadata$ = {kind: Kind_CLASS, simpleName: 'FlatteningSequence', interfaces: [Sequence]};
     function DropTakeSequence() {
     }
-    DropTakeSequence.$metadata$ = {kind: Kotlin.Kind.INTERFACE, simpleName: 'DropTakeSequence', interfaces: [Sequence]};
+    DropTakeSequence.$metadata$ = {kind: Kind_INTERFACE, simpleName: 'DropTakeSequence', interfaces: [Sequence]};
     function SubSequence(sequence, startIndex, endIndex) {
       this.sequence_0 = sequence;
       this.startIndex_0 = startIndex;
       this.endIndex_0 = endIndex;
       if (!(this.startIndex_0 >= 0)) {
         var message = 'startIndex should be non-negative, but is ' + this.startIndex_0;
-        throw new IllegalArgumentException(message.toString());
+        throw IllegalArgumentException_init_0(message.toString());
       }
       if (!(this.endIndex_0 >= 0)) {
         var message_0 = 'endIndex should be non-negative, but is ' + this.endIndex_0;
-        throw new IllegalArgumentException(message_0.toString());
+        throw IllegalArgumentException_init_0(message_0.toString());
       }
       if (!(this.endIndex_0 >= this.startIndex_0)) {
         var message_1 = 'endIndex should be not less than startIndex, but was ' + this.endIndex_0 + ' < ' + this.startIndex_0;
-        throw new IllegalArgumentException(message_1.toString());
+        throw IllegalArgumentException_init_0(message_1.toString());
       }
     }
     Object.defineProperty(SubSequence.prototype, 'count_0', {get: function () {
@@ -29437,21 +31267,21 @@
     SubSequence$iterator$ObjectLiteral.prototype.next = function () {
       this.drop_0();
       if (this.position >= this.this$SubSequence.endIndex_0)
-        throw new NoSuchElementException();
+        throw NoSuchElementException_init();
       this.position = this.position + 1 | 0;
       return this.iterator.next();
     };
-    SubSequence$iterator$ObjectLiteral.$metadata$ = {kind: Kotlin.Kind.CLASS, interfaces: [Iterator]};
+    SubSequence$iterator$ObjectLiteral.$metadata$ = {kind: Kind_CLASS, interfaces: [Iterator]};
     SubSequence.prototype.iterator = function () {
       return new SubSequence$iterator$ObjectLiteral(this);
     };
-    SubSequence.$metadata$ = {kind: Kotlin.Kind.CLASS, simpleName: 'SubSequence', interfaces: [DropTakeSequence, Sequence]};
+    SubSequence.$metadata$ = {kind: Kind_CLASS, simpleName: 'SubSequence', interfaces: [DropTakeSequence, Sequence]};
     function TakeSequence(sequence, count) {
       this.sequence_0 = sequence;
       this.count_0 = count;
       if (!(this.count_0 >= 0)) {
         var message = 'count must be non-negative, but was ' + this.count_0 + '.';
-        throw new IllegalArgumentException(message.toString());
+        throw IllegalArgumentException_init_0(message.toString());
       }
     }
     TakeSequence.prototype.drop_za3lpa$ = function (n) {
@@ -29466,18 +31296,18 @@
     }
     TakeSequence$iterator$ObjectLiteral.prototype.next = function () {
       if (this.left === 0)
-        throw new NoSuchElementException();
+        throw NoSuchElementException_init();
       this.left = this.left - 1 | 0;
       return this.iterator.next();
     };
     TakeSequence$iterator$ObjectLiteral.prototype.hasNext = function () {
       return this.left > 0 && this.iterator.hasNext();
     };
-    TakeSequence$iterator$ObjectLiteral.$metadata$ = {kind: Kotlin.Kind.CLASS, interfaces: [Iterator]};
+    TakeSequence$iterator$ObjectLiteral.$metadata$ = {kind: Kind_CLASS, interfaces: [Iterator]};
     TakeSequence.prototype.iterator = function () {
       return new TakeSequence$iterator$ObjectLiteral(this);
     };
-    TakeSequence.$metadata$ = {kind: Kotlin.Kind.CLASS, simpleName: 'TakeSequence', interfaces: [DropTakeSequence, Sequence]};
+    TakeSequence.$metadata$ = {kind: Kind_CLASS, simpleName: 'TakeSequence', interfaces: [DropTakeSequence, Sequence]};
     function TakeWhileSequence(sequence, predicate) {
       this.sequence_0 = sequence;
       this.predicate_0 = predicate;
@@ -29504,8 +31334,8 @@
       if (this.nextState === -1)
         this.calcNext_0();
       if (this.nextState === 0)
-        throw new NoSuchElementException();
-      var result = (tmp$ = this.nextItem) == null || Kotlin.isType(tmp$, Any) ? tmp$ : Kotlin.throwCCE();
+        throw NoSuchElementException_init();
+      var result = (tmp$ = this.nextItem) == null || Kotlin.isType(tmp$, Any) ? tmp$ : throwCCE();
       this.nextItem = null;
       this.nextState = -1;
       return result;
@@ -29515,17 +31345,17 @@
         this.calcNext_0();
       return this.nextState === 1;
     };
-    TakeWhileSequence$iterator$ObjectLiteral.$metadata$ = {kind: Kotlin.Kind.CLASS, interfaces: [Iterator]};
+    TakeWhileSequence$iterator$ObjectLiteral.$metadata$ = {kind: Kind_CLASS, interfaces: [Iterator]};
     TakeWhileSequence.prototype.iterator = function () {
       return new TakeWhileSequence$iterator$ObjectLiteral(this);
     };
-    TakeWhileSequence.$metadata$ = {kind: Kotlin.Kind.CLASS, simpleName: 'TakeWhileSequence', interfaces: [Sequence]};
+    TakeWhileSequence.$metadata$ = {kind: Kind_CLASS, simpleName: 'TakeWhileSequence', interfaces: [Sequence]};
     function DropSequence(sequence, count) {
       this.sequence_0 = sequence;
       this.count_0 = count;
       if (!(this.count_0 >= 0)) {
         var message = 'count must be non-negative, but was ' + this.count_0 + '.';
-        throw new IllegalArgumentException(message.toString());
+        throw IllegalArgumentException_init_0(message.toString());
       }
     }
     DropSequence.prototype.drop_za3lpa$ = function (n) {
@@ -29552,11 +31382,11 @@
       this.drop_0();
       return this.iterator.hasNext();
     };
-    DropSequence$iterator$ObjectLiteral.$metadata$ = {kind: Kotlin.Kind.CLASS, interfaces: [Iterator]};
+    DropSequence$iterator$ObjectLiteral.$metadata$ = {kind: Kind_CLASS, interfaces: [Iterator]};
     DropSequence.prototype.iterator = function () {
       return new DropSequence$iterator$ObjectLiteral(this);
     };
-    DropSequence.$metadata$ = {kind: Kotlin.Kind.CLASS, simpleName: 'DropSequence', interfaces: [DropTakeSequence, Sequence]};
+    DropSequence.$metadata$ = {kind: Kind_CLASS, simpleName: 'DropSequence', interfaces: [DropTakeSequence, Sequence]};
     function DropWhileSequence(sequence, predicate) {
       this.sequence_0 = sequence;
       this.predicate_0 = predicate;
@@ -29583,7 +31413,7 @@
       if (this.dropState === -1)
         this.drop_0();
       if (this.dropState === 1) {
-        var result = (tmp$ = this.nextItem) == null || Kotlin.isType(tmp$, Any) ? tmp$ : Kotlin.throwCCE();
+        var result = (tmp$ = this.nextItem) == null || Kotlin.isType(tmp$, Any) ? tmp$ : throwCCE();
         this.nextItem = null;
         this.dropState = 0;
         return result;
@@ -29595,11 +31425,11 @@
         this.drop_0();
       return this.dropState === 1 || this.iterator.hasNext();
     };
-    DropWhileSequence$iterator$ObjectLiteral.$metadata$ = {kind: Kotlin.Kind.CLASS, interfaces: [Iterator]};
+    DropWhileSequence$iterator$ObjectLiteral.$metadata$ = {kind: Kind_CLASS, interfaces: [Iterator]};
     DropWhileSequence.prototype.iterator = function () {
       return new DropWhileSequence$iterator$ObjectLiteral(this);
     };
-    DropWhileSequence.$metadata$ = {kind: Kotlin.Kind.CLASS, simpleName: 'DropWhileSequence', interfaces: [Sequence]};
+    DropWhileSequence.$metadata$ = {kind: Kind_CLASS, simpleName: 'DropWhileSequence', interfaces: [Sequence]};
     function DistinctSequence(source, keySelector) {
       this.source_0 = source;
       this.keySelector_0 = keySelector;
@@ -29607,7 +31437,7 @@
     DistinctSequence.prototype.iterator = function () {
       return new DistinctIterator(this.source_0.iterator(), this.keySelector_0);
     };
-    DistinctSequence.$metadata$ = {kind: Kotlin.Kind.CLASS, simpleName: 'DistinctSequence', interfaces: [Sequence]};
+    DistinctSequence.$metadata$ = {kind: Kind_CLASS, simpleName: 'DistinctSequence', interfaces: [Sequence]};
     function DistinctIterator(source, keySelector) {
       AbstractIterator.call(this);
       this.source_0 = source;
@@ -29625,7 +31455,7 @@
       }
       this.done();
     };
-    DistinctIterator.$metadata$ = {kind: Kotlin.Kind.CLASS, simpleName: 'DistinctIterator', interfaces: [AbstractIterator]};
+    DistinctIterator.$metadata$ = {kind: Kind_CLASS, simpleName: 'DistinctIterator', interfaces: [AbstractIterator]};
     function GeneratorSequence(getInitialValue, getNextValue) {
       this.getInitialValue_0 = getInitialValue;
       this.getNextValue_0 = getNextValue;
@@ -29636,13 +31466,7 @@
       this.nextState = -2;
     }
     GeneratorSequence$iterator$ObjectLiteral.prototype.calcNext_0 = function () {
-      var tmp$, tmp$_0;
-      if (this.nextState === -2)
-        tmp$_0 = this.this$GeneratorSequence.getInitialValue_0();
-      else {
-        tmp$_0 = this.this$GeneratorSequence.getNextValue_0((tmp$ = this.nextItem) != null ? tmp$ : Kotlin.throwNPE());
-      }
-      this.nextItem = tmp$_0;
+      this.nextItem = this.nextState === -2 ? this.this$GeneratorSequence.getInitialValue_0() : this.this$GeneratorSequence.getNextValue_0(ensureNotNull(this.nextItem));
       this.nextState = this.nextItem == null ? 0 : 1;
     };
     GeneratorSequence$iterator$ObjectLiteral.prototype.next = function () {
@@ -29650,8 +31474,8 @@
       if (this.nextState < 0)
         this.calcNext_0();
       if (this.nextState === 0)
-        throw new NoSuchElementException();
-      var result = Kotlin.isType(tmp$ = this.nextItem, Any) ? tmp$ : Kotlin.throwCCE();
+        throw NoSuchElementException_init();
+      var result = Kotlin.isType(tmp$ = this.nextItem, Any) ? tmp$ : throwCCE();
       this.nextState = -1;
       return result;
     };
@@ -29660,11 +31484,11 @@
         this.calcNext_0();
       return this.nextState === 1;
     };
-    GeneratorSequence$iterator$ObjectLiteral.$metadata$ = {kind: Kotlin.Kind.CLASS, interfaces: [Iterator]};
+    GeneratorSequence$iterator$ObjectLiteral.$metadata$ = {kind: Kind_CLASS, interfaces: [Iterator]};
     GeneratorSequence.prototype.iterator = function () {
       return new GeneratorSequence$iterator$ObjectLiteral(this);
     };
-    GeneratorSequence.$metadata$ = {kind: Kotlin.Kind.CLASS, simpleName: 'GeneratorSequence', interfaces: [Sequence]};
+    GeneratorSequence.$metadata$ = {kind: Kind_CLASS, simpleName: 'GeneratorSequence', interfaces: [Sequence]};
     function constrainOnce($receiver) {
       return Kotlin.isType($receiver, ConstrainedOnceSequence) ? $receiver : new ConstrainedOnceSequence($receiver);
     }
@@ -29718,7 +31542,7 @@
     EmptySet.prototype.readResolve_0 = function () {
       return EmptySet_getInstance();
     };
-    EmptySet.$metadata$ = {kind: Kotlin.Kind.OBJECT, simpleName: 'EmptySet', interfaces: [Serializable, Set]};
+    EmptySet.$metadata$ = {kind: Kind_OBJECT, simpleName: 'EmptySet', interfaces: [Serializable, Set]};
     var EmptySet_instance = null;
     function EmptySet_getInstance() {
       if (EmptySet_instance === null) {
@@ -29772,19 +31596,388 @@
       };
     }));
     function optimizeReadOnlySet($receiver) {
-      var tmp$;
-      tmp$ = $receiver.size;
-      if (tmp$ === 0)
-        return emptySet();
-      else if (tmp$ === 1)
-        return setOf($receiver.iterator().next());
-      else
-        return $receiver;
+      switch ($receiver.size) {
+        case 0:
+          return emptySet();
+        case 1:
+          return setOf($receiver.iterator().next());
+        default:return $receiver;
+      }
     }
+    function checkWindowSizeStep(size, step) {
+      if (!(size > 0 && step > 0)) {
+        var message = size !== step ? 'Both size ' + size + ' and step ' + step + ' must be greater than zero.' : 'size ' + size + ' must be greater than zero.';
+        throw IllegalArgumentException_init_0(message.toString());
+      }
+    }
+    function windowedSequence$lambda_1(this$windowedSequence, closure$size, closure$step, closure$partialWindows, closure$reuseBuffer) {
+      return function () {
+        return windowedIterator(this$windowedSequence.iterator(), closure$size, closure$step, closure$partialWindows, closure$reuseBuffer);
+      };
+    }
+    function Sequence$ObjectLiteral_3(closure$iterator) {
+      this.closure$iterator = closure$iterator;
+    }
+    Sequence$ObjectLiteral_3.prototype.iterator = function () {
+      return this.closure$iterator();
+    };
+    Sequence$ObjectLiteral_3.$metadata$ = {kind: Kind_CLASS, interfaces: [Sequence]};
+    function windowedSequence_1($receiver, size, step, partialWindows, reuseBuffer) {
+      checkWindowSizeStep(size, step);
+      return new Sequence$ObjectLiteral_3(windowedSequence$lambda_1($receiver, size, step, partialWindows, reuseBuffer));
+    }
+    function windowedIterator$lambda(closure$step_0, closure$size_0, closure$iterator_0, closure$reuseBuffer_0, closure$partialWindows_0) {
+      return function ($receiver_0, continuation_0, suspended) {
+        var instance = new Coroutine$windowedIterator$lambda(closure$step_0, closure$size_0, closure$iterator_0, closure$reuseBuffer_0, closure$partialWindows_0, $receiver_0, this, continuation_0);
+        if (suspended)
+          return instance;
+        else
+          return instance.doResume(null);
+      };
+    }
+    function Coroutine$windowedIterator$lambda(closure$step_0, closure$size_0, closure$iterator_0, closure$reuseBuffer_0, closure$partialWindows_0, $receiver_0, controller, continuation_0) {
+      CoroutineImpl.call(this, continuation_0);
+      this.$controller = controller;
+      this.exceptionState_0 = 1;
+      this.local$closure$step = closure$step_0;
+      this.local$closure$size = closure$size_0;
+      this.local$closure$iterator = closure$iterator_0;
+      this.local$closure$reuseBuffer = closure$reuseBuffer_0;
+      this.local$closure$partialWindows = closure$partialWindows_0;
+      this.local$tmp$ = void 0;
+      this.local$tmp$_0 = void 0;
+      this.local$gap = void 0;
+      this.local$buffer = void 0;
+      this.local$skip = void 0;
+      this.local$e = void 0;
+      this.local$buffer_0 = void 0;
+      this.local$$receiver = $receiver_0;
+    }
+    Coroutine$windowedIterator$lambda.$metadata$ = {kind: Kotlin.Kind.CLASS, simpleName: null, interfaces: [CoroutineImpl]};
+    Coroutine$windowedIterator$lambda.prototype = Object.create(CoroutineImpl.prototype);
+    Coroutine$windowedIterator$lambda.prototype.constructor = Coroutine$windowedIterator$lambda;
+    Coroutine$windowedIterator$lambda.prototype.doResume = function () {
+      do
+        try {
+          switch (this.state_0) {
+            case 0:
+              this.local$gap = this.local$closure$step - this.local$closure$size | 0;
+              if (this.local$gap >= 0) {
+                this.local$buffer = ArrayList_init(this.local$closure$size);
+                this.local$skip = 0;
+                this.local$tmp$ = this.local$closure$iterator;
+                this.state_0 = 12;
+                continue;
+              }
+               else {
+                this.local$buffer_0 = new RingBuffer(this.local$closure$size);
+                this.local$tmp$_0 = this.local$closure$iterator;
+                this.state_0 = 2;
+                continue;
+              }
+
+            case 1:
+              throw this.exception_0;
+            case 2:
+              if (!this.local$tmp$_0.hasNext()) {
+                this.state_0 = 5;
+                continue;
+              }
+
+              var e_0 = this.local$tmp$_0.next();
+              this.local$buffer_0.add_11rb$(e_0);
+              if (this.local$buffer_0.isFull()) {
+                this.state_0 = 3;
+                this.result_0 = this.local$$receiver.yield_11rb$(this.local$closure$reuseBuffer ? this.local$buffer_0 : ArrayList_init_0(this.local$buffer_0), this);
+                if (this.result_0 === COROUTINE_SUSPENDED)
+                  return COROUTINE_SUSPENDED;
+                continue;
+              }
+               else {
+                this.state_0 = 4;
+                continue;
+              }
+
+            case 3:
+              this.local$buffer_0.removeFirst_za3lpa$(this.local$closure$step);
+              this.state_0 = 4;
+              continue;
+            case 4:
+              this.state_0 = 2;
+              continue;
+            case 5:
+              if (this.local$closure$partialWindows) {
+                this.state_0 = 6;
+                continue;
+              }
+               else {
+                this.state_0 = 11;
+                continue;
+              }
+
+            case 6:
+              if (this.local$buffer_0.size <= this.local$closure$step) {
+                this.state_0 = 8;
+                continue;
+              }
+
+              this.state_0 = 7;
+              this.result_0 = this.local$$receiver.yield_11rb$(this.local$closure$reuseBuffer ? this.local$buffer_0 : ArrayList_init_0(this.local$buffer_0), this);
+              if (this.result_0 === COROUTINE_SUSPENDED)
+                return COROUTINE_SUSPENDED;
+              continue;
+            case 7:
+              this.local$buffer_0.removeFirst_za3lpa$(this.local$closure$step);
+              this.state_0 = 6;
+              continue;
+            case 8:
+              if (!this.local$buffer_0.isEmpty()) {
+                this.state_0 = 9;
+                this.result_0 = this.local$$receiver.yield_11rb$(this.local$buffer_0, this);
+                if (this.result_0 === COROUTINE_SUSPENDED)
+                  return COROUTINE_SUSPENDED;
+                continue;
+              }
+               else {
+                this.state_0 = 10;
+                continue;
+              }
+
+            case 9:
+              return Unit;
+            case 10:
+              this.state_0 = 11;
+              continue;
+            case 11:
+              this.state_0 = 20;
+              continue;
+            case 12:
+              if (!this.local$tmp$.hasNext()) {
+                this.state_0 = 16;
+                continue;
+              }
+
+              this.local$e = this.local$tmp$.next();
+              if (this.local$skip > 0) {
+                this.local$skip = this.local$skip - 1 | 0;
+                this.state_0 = 12;
+                continue;
+              }
+               else {
+                this.state_0 = 13;
+                continue;
+              }
+
+            case 13:
+              this.local$buffer.add_11rb$(this.local$e);
+              if (this.local$buffer.size === this.local$closure$size) {
+                this.state_0 = 14;
+                this.result_0 = this.local$$receiver.yield_11rb$(this.local$buffer, this);
+                if (this.result_0 === COROUTINE_SUSPENDED)
+                  return COROUTINE_SUSPENDED;
+                continue;
+              }
+               else {
+                this.state_0 = 15;
+                continue;
+              }
+
+            case 14:
+              if (this.local$closure$reuseBuffer)
+                this.local$buffer.clear();
+              else
+                this.local$buffer = ArrayList_init(this.local$closure$size);
+              this.local$skip = this.local$gap;
+              this.state_0 = 15;
+              continue;
+            case 15:
+              this.state_0 = 12;
+              continue;
+            case 16:
+              if (!this.local$buffer.isEmpty()) {
+                if (this.local$closure$partialWindows || this.local$buffer.size === this.local$closure$size) {
+                  this.state_0 = 17;
+                  this.result_0 = this.local$$receiver.yield_11rb$(this.local$buffer, this);
+                  if (this.result_0 === COROUTINE_SUSPENDED)
+                    return COROUTINE_SUSPENDED;
+                  continue;
+                }
+                 else {
+                  this.state_0 = 18;
+                  continue;
+                }
+              }
+               else {
+                this.state_0 = 19;
+                continue;
+              }
+
+            case 17:
+              return Unit;
+            case 18:
+              this.state_0 = 19;
+              continue;
+            case 19:
+              this.state_0 = 20;
+              continue;
+            case 20:
+              return Unit;
+          }
+        }
+         catch (e) {
+          if (this.state_0 === 1) {
+            this.exceptionState_0 = this.state_0;
+            throw e;
+          }
+           else {
+            this.state_0 = this.exceptionState_0;
+            this.exception_0 = e;
+          }
+        }
+       while (true);
+    };
+    function windowedIterator(iterator, size, step, partialWindows, reuseBuffer) {
+      if (!iterator.hasNext())
+        return EmptyIterator_getInstance();
+      return buildIterator(windowedIterator$lambda(step, size, iterator, reuseBuffer, partialWindows));
+    }
+    function MovingSubList(list) {
+      AbstractList.call(this);
+      this.list_0 = list;
+      this.fromIndex_0 = 0;
+      this._size_0 = 0;
+    }
+    MovingSubList.prototype.move_vux9f0$ = function (fromIndex, toIndex) {
+      AbstractList$Companion_getInstance().checkRangeIndexes_cub51b$(fromIndex, toIndex, this.list_0.size);
+      this.fromIndex_0 = fromIndex;
+      this._size_0 = toIndex - fromIndex | 0;
+    };
+    MovingSubList.prototype.get_za3lpa$ = function (index) {
+      AbstractList$Companion_getInstance().checkElementIndex_6xvm5r$(index, this._size_0);
+      return this.list_0.get_za3lpa$(this.fromIndex_0 + index | 0);
+    };
+    Object.defineProperty(MovingSubList.prototype, 'size', {get: function () {
+      return this._size_0;
+    }});
+    MovingSubList.$metadata$ = {kind: Kind_CLASS, simpleName: 'MovingSubList', interfaces: [RandomAccess, AbstractList]};
+    function RingBuffer(capacity) {
+      AbstractList.call(this);
+      this.capacity = capacity;
+      if (!(this.capacity >= 0)) {
+        var message = 'ring buffer capacity should not be negative but it is ' + this.capacity;
+        throw IllegalArgumentException_init_0(message.toString());
+      }
+      this.buffer_0 = Kotlin.newArray(this.capacity, null);
+      this.startIndex_0 = 0;
+      this.size_4goa01$_0 = 0;
+    }
+    Object.defineProperty(RingBuffer.prototype, 'size', {get: function () {
+      return this.size_4goa01$_0;
+    }, set: function (size) {
+      this.size_4goa01$_0 = size;
+    }});
+    RingBuffer.prototype.get_za3lpa$ = function (index) {
+      var tmp$;
+      AbstractList$Companion_getInstance().checkElementIndex_6xvm5r$(index, this.size);
+      return (tmp$ = this.buffer_0[(this.startIndex_0 + index | 0) % this.capacity]) == null || Kotlin.isType(tmp$, Any) ? tmp$ : throwCCE();
+    };
+    RingBuffer.prototype.isFull = function () {
+      return this.size === this.capacity;
+    };
+    function RingBuffer$iterator$ObjectLiteral(this$RingBuffer) {
+      this.this$RingBuffer = this$RingBuffer;
+      AbstractIterator.call(this);
+      this.count_0 = this$RingBuffer.size;
+      this.index_0 = this$RingBuffer.startIndex_0;
+    }
+    RingBuffer$iterator$ObjectLiteral.prototype.computeNext = function () {
+      var tmp$;
+      if (this.count_0 === 0) {
+        this.done();
+      }
+       else {
+        this.setNext_11rb$((tmp$ = this.this$RingBuffer.buffer_0[this.index_0]) == null || Kotlin.isType(tmp$, Any) ? tmp$ : throwCCE());
+        this.index_0 = (this.index_0 + 1 | 0) % this.this$RingBuffer.capacity;
+        this.count_0 = this.count_0 - 1 | 0;
+      }
+    };
+    RingBuffer$iterator$ObjectLiteral.$metadata$ = {kind: Kind_CLASS, interfaces: [AbstractIterator]};
+    RingBuffer.prototype.iterator = function () {
+      return new RingBuffer$iterator$ObjectLiteral(this);
+    };
+    RingBuffer.prototype.toArray_ro6dgy$ = function (array) {
+      var tmp$, tmp$_0, tmp$_1, tmp$_2;
+      var result = array.length < this.size ? copyOf_16(array, this.size) : Kotlin.isArray(tmp$ = array) ? tmp$ : throwCCE();
+      var size = this.size;
+      var widx = 0;
+      var idx = this.startIndex_0;
+      while (widx < size && idx < this.capacity) {
+        result[widx] = (tmp$_0 = this.buffer_0[idx]) == null || Kotlin.isType(tmp$_0, Any) ? tmp$_0 : throwCCE();
+        widx = widx + 1 | 0;
+        idx = idx + 1 | 0;
+      }
+      idx = 0;
+      while (widx < size) {
+        result[widx] = (tmp$_1 = this.buffer_0[idx]) == null || Kotlin.isType(tmp$_1, Any) ? tmp$_1 : throwCCE();
+        widx = widx + 1 | 0;
+        idx = idx + 1 | 0;
+      }
+      if (result.length > this.size)
+        result[this.size] = null;
+      return Kotlin.isArray(tmp$_2 = result) ? tmp$_2 : throwCCE();
+    };
+    RingBuffer.prototype.toArray = function () {
+      return this.toArray_ro6dgy$(Kotlin.newArray(this.size, null));
+    };
+    RingBuffer.prototype.add_11rb$ = function (element) {
+      if (this.isFull()) {
+        throw IllegalStateException_init_0('ring buffer is full');
+      }
+      this.buffer_0[(this.startIndex_0 + this.size | 0) % this.capacity] = element;
+      this.size = this.size + 1 | 0;
+    };
+    RingBuffer.prototype.removeFirst_za3lpa$ = function (n) {
+      if (!(n >= 0)) {
+        var message = "n shouldn't be negative but it is " + n;
+        throw IllegalArgumentException_init_0(message.toString());
+      }
+      if (!(n <= this.size)) {
+        var message_0 = "n shouldn't be greater than the buffer size: n = " + n + ', size = ' + this.size;
+        throw IllegalArgumentException_init_0(message_0.toString());
+      }
+      if (n > 0) {
+        var start = this.startIndex_0;
+        var end = (start + n | 0) % this.capacity;
+        if (start > end) {
+          this.fill_0(this.buffer_0, null, start, this.capacity);
+          this.fill_0(this.buffer_0, null, 0, end);
+        }
+         else {
+          this.fill_0(this.buffer_0, null, start, end);
+        }
+        this.startIndex_0 = end;
+        this.size = this.size - n | 0;
+      }
+    };
+    RingBuffer.prototype.forward_0 = function ($receiver, n) {
+      return ($receiver + n | 0) % this.capacity;
+    };
+    RingBuffer.prototype.fill_0 = function ($receiver, element, fromIndex, toIndex) {
+      if (fromIndex === void 0)
+        fromIndex = 0;
+      if (toIndex === void 0)
+        toIndex = $receiver.length;
+      var tmp$;
+      tmp$ = toIndex - 1 | 0;
+      for (var idx = fromIndex; idx <= tmp$; idx++) {
+        $receiver[idx] = element;
+      }
+    };
+    RingBuffer.$metadata$ = {kind: Kind_CLASS, simpleName: 'RingBuffer', interfaces: [RandomAccess, AbstractList]};
     function compareValuesBy(a, b, selectors) {
       if (!(selectors.length > 0)) {
         var message = 'Failed requirement.';
-        throw new IllegalArgumentException(message.toString());
+        throw IllegalArgumentException_init_0(message.toString());
       }
       return compareValuesByImpl(a, b, selectors);
     }
@@ -29817,7 +32010,7 @@
         return -1;
       if (b == null)
         return 1;
-      return Kotlin.compareTo(Kotlin.isComparable(tmp$ = a) ? tmp$ : Kotlin.throwCCE(), b);
+      return Kotlin.compareTo(Kotlin.isComparable(tmp$ = a) ? tmp$ : throwCCE(), b);
     }
     function compareBy$lambda(closure$selectors) {
       return function (a, b) {
@@ -29830,11 +32023,11 @@
     Comparator$ObjectLiteral.prototype.compare = function (a, b) {
       return this.closure$comparison(a, b);
     };
-    Comparator$ObjectLiteral.$metadata$ = {kind: Kotlin.Kind.CLASS, interfaces: [Comparator]};
+    Comparator$ObjectLiteral.$metadata$ = {kind: Kind_CLASS, interfaces: [Comparator]};
     function compareBy(selectors) {
       if (!(selectors.length > 0)) {
         var message = 'Failed requirement.';
-        throw new IllegalArgumentException(message.toString());
+        throw IllegalArgumentException_init_0(message.toString());
       }
       return new Comparator$ObjectLiteral(compareBy$lambda(selectors));
     }
@@ -29849,6 +32042,7 @@
           };
         };
       });
+      var Kind_CLASS = Kotlin.Kind.CLASS;
       var Comparator = _.kotlin.Comparator;
       function Comparator$ObjectLiteral(closure$comparison) {
         this.closure$comparison = closure$comparison;
@@ -29856,7 +32050,7 @@
       Comparator$ObjectLiteral.prototype.compare = function (a, b) {
         return this.closure$comparison(a, b);
       };
-      Comparator$ObjectLiteral.$metadata$ = {kind: Kotlin.Kind.CLASS, interfaces: [Comparator]};
+      Comparator$ObjectLiteral.$metadata$ = {kind: Kind_CLASS, interfaces: [Comparator]};
       return function (selector) {
         return new Comparator$ObjectLiteral(compareBy$lambda(selector));
       };
@@ -29869,6 +32063,7 @@
           return comparator.compare(selector(a), selector(b));
         };
       }
+      var Kind_CLASS = Kotlin.Kind.CLASS;
       var Comparator = _.kotlin.Comparator;
       function Comparator$ObjectLiteral(closure$comparison) {
         this.closure$comparison = closure$comparison;
@@ -29876,7 +32071,7 @@
       Comparator$ObjectLiteral.prototype.compare = function (a, b) {
         return this.closure$comparison(a, b);
       };
-      Comparator$ObjectLiteral.$metadata$ = {kind: Kotlin.Kind.CLASS, interfaces: [Comparator]};
+      Comparator$ObjectLiteral.$metadata$ = {kind: Kind_CLASS, interfaces: [Comparator]};
       return function (comparator, selector) {
         return new Comparator$ObjectLiteral(compareBy$lambda(comparator, selector));
       };
@@ -29892,6 +32087,7 @@
           };
         };
       });
+      var Kind_CLASS = Kotlin.Kind.CLASS;
       var Comparator = _.kotlin.Comparator;
       function Comparator$ObjectLiteral(closure$comparison) {
         this.closure$comparison = closure$comparison;
@@ -29899,7 +32095,7 @@
       Comparator$ObjectLiteral.prototype.compare = function (a, b) {
         return this.closure$comparison(a, b);
       };
-      Comparator$ObjectLiteral.$metadata$ = {kind: Kotlin.Kind.CLASS, interfaces: [Comparator]};
+      Comparator$ObjectLiteral.$metadata$ = {kind: Kind_CLASS, interfaces: [Comparator]};
       return function (selector) {
         return new Comparator$ObjectLiteral(compareByDescending$lambda(selector));
       };
@@ -29912,6 +32108,7 @@
           return comparator.compare(selector(b), selector(a));
         };
       }
+      var Kind_CLASS = Kotlin.Kind.CLASS;
       var Comparator = _.kotlin.Comparator;
       function Comparator$ObjectLiteral(closure$comparison) {
         this.closure$comparison = closure$comparison;
@@ -29919,7 +32116,7 @@
       Comparator$ObjectLiteral.prototype.compare = function (a, b) {
         return this.closure$comparison(a, b);
       };
-      Comparator$ObjectLiteral.$metadata$ = {kind: Kotlin.Kind.CLASS, interfaces: [Comparator]};
+      Comparator$ObjectLiteral.$metadata$ = {kind: Kind_CLASS, interfaces: [Comparator]};
       return function (comparator, selector) {
         return new Comparator$ObjectLiteral(compareByDescending$lambda(comparator, selector));
       };
@@ -29942,6 +32139,7 @@
           };
         };
       });
+      var Kind_CLASS = Kotlin.Kind.CLASS;
       var Comparator = _.kotlin.Comparator;
       function Comparator$ObjectLiteral(closure$comparison) {
         this.closure$comparison = closure$comparison;
@@ -29949,7 +32147,7 @@
       Comparator$ObjectLiteral.prototype.compare = function (a, b) {
         return this.closure$comparison(a, b);
       };
-      Comparator$ObjectLiteral.$metadata$ = {kind: Kotlin.Kind.CLASS, interfaces: [Comparator]};
+      Comparator$ObjectLiteral.$metadata$ = {kind: Kind_CLASS, interfaces: [Comparator]};
       return function ($receiver, selector) {
         return new Comparator$ObjectLiteral(thenBy$lambda($receiver, selector));
       };
@@ -29969,6 +32167,7 @@
           return tmp$;
         };
       }
+      var Kind_CLASS = Kotlin.Kind.CLASS;
       var Comparator = _.kotlin.Comparator;
       function Comparator$ObjectLiteral(closure$comparison) {
         this.closure$comparison = closure$comparison;
@@ -29976,7 +32175,7 @@
       Comparator$ObjectLiteral.prototype.compare = function (a, b) {
         return this.closure$comparison(a, b);
       };
-      Comparator$ObjectLiteral.$metadata$ = {kind: Kotlin.Kind.CLASS, interfaces: [Comparator]};
+      Comparator$ObjectLiteral.$metadata$ = {kind: Kind_CLASS, interfaces: [Comparator]};
       return function ($receiver, comparator, selector) {
         return new Comparator$ObjectLiteral(thenBy$lambda($receiver, comparator, selector));
       };
@@ -29999,6 +32198,7 @@
           };
         };
       });
+      var Kind_CLASS = Kotlin.Kind.CLASS;
       var Comparator = _.kotlin.Comparator;
       function Comparator$ObjectLiteral(closure$comparison) {
         this.closure$comparison = closure$comparison;
@@ -30006,7 +32206,7 @@
       Comparator$ObjectLiteral.prototype.compare = function (a, b) {
         return this.closure$comparison(a, b);
       };
-      Comparator$ObjectLiteral.$metadata$ = {kind: Kotlin.Kind.CLASS, interfaces: [Comparator]};
+      Comparator$ObjectLiteral.$metadata$ = {kind: Kind_CLASS, interfaces: [Comparator]};
       return function ($receiver, selector) {
         return new Comparator$ObjectLiteral(thenByDescending$lambda($receiver, selector));
       };
@@ -30026,6 +32226,7 @@
           return tmp$;
         };
       }
+      var Kind_CLASS = Kotlin.Kind.CLASS;
       var Comparator = _.kotlin.Comparator;
       function Comparator$ObjectLiteral(closure$comparison) {
         this.closure$comparison = closure$comparison;
@@ -30033,7 +32234,7 @@
       Comparator$ObjectLiteral.prototype.compare = function (a, b) {
         return this.closure$comparison(a, b);
       };
-      Comparator$ObjectLiteral.$metadata$ = {kind: Kotlin.Kind.CLASS, interfaces: [Comparator]};
+      Comparator$ObjectLiteral.$metadata$ = {kind: Kind_CLASS, interfaces: [Comparator]};
       return function ($receiver, comparator, selector) {
         return new Comparator$ObjectLiteral(thenByDescending$lambda($receiver, comparator, selector));
       };
@@ -30045,6 +32246,7 @@
           return previousCompare !== 0 ? previousCompare : closure$comparison(a, b);
         };
       }
+      var Kind_CLASS = Kotlin.Kind.CLASS;
       var Comparator = _.kotlin.Comparator;
       function Comparator$ObjectLiteral(closure$comparison) {
         this.closure$comparison = closure$comparison;
@@ -30052,7 +32254,7 @@
       Comparator$ObjectLiteral.prototype.compare = function (a, b) {
         return this.closure$comparison(a, b);
       };
-      Comparator$ObjectLiteral.$metadata$ = {kind: Kotlin.Kind.CLASS, interfaces: [Comparator]};
+      Comparator$ObjectLiteral.$metadata$ = {kind: Kind_CLASS, interfaces: [Comparator]};
       return function ($receiver, comparison) {
         return new Comparator$ObjectLiteral(thenComparator$lambda($receiver, comparison));
       };
@@ -30063,7 +32265,7 @@
         return previousCompare !== 0 ? previousCompare : closure$comparator.compare(a, b);
       };
     }
-    function then($receiver, comparator) {
+    function then_1($receiver, comparator) {
       return new Comparator$ObjectLiteral(then$lambda($receiver, comparator));
     }
     function thenDescending$lambda(this$thenDescending, closure$comparator) {
@@ -30121,20 +32323,20 @@
     }));
     function naturalOrder() {
       var tmp$;
-      return Kotlin.isType(tmp$ = NaturalOrderComparator_getInstance(), Comparator) ? tmp$ : Kotlin.throwCCE();
+      return Kotlin.isType(tmp$ = NaturalOrderComparator_getInstance(), Comparator) ? tmp$ : throwCCE();
     }
     function reverseOrder() {
       var tmp$;
-      return Kotlin.isType(tmp$ = ReverseOrderComparator_getInstance(), Comparator) ? tmp$ : Kotlin.throwCCE();
+      return Kotlin.isType(tmp$ = ReverseOrderComparator_getInstance(), Comparator) ? tmp$ : throwCCE();
     }
     function reversed_14($receiver) {
       var tmp$, tmp$_0;
       if (Kotlin.isType($receiver, ReversedComparator))
         return $receiver.comparator;
-      else if (Kotlin.equals($receiver, NaturalOrderComparator_getInstance()))
-        return Kotlin.isType(tmp$ = ReverseOrderComparator_getInstance(), Comparator) ? tmp$ : Kotlin.throwCCE();
-      else if (Kotlin.equals($receiver, ReverseOrderComparator_getInstance()))
-        return Kotlin.isType(tmp$_0 = NaturalOrderComparator_getInstance(), Comparator) ? tmp$_0 : Kotlin.throwCCE();
+      else if (equals($receiver, NaturalOrderComparator_getInstance()))
+        return Kotlin.isType(tmp$ = ReverseOrderComparator_getInstance(), Comparator) ? tmp$ : throwCCE();
+      else if (equals($receiver, ReverseOrderComparator_getInstance()))
+        return Kotlin.isType(tmp$_0 = NaturalOrderComparator_getInstance(), Comparator) ? tmp$_0 : throwCCE();
       else
         return new ReversedComparator($receiver);
     }
@@ -30147,7 +32349,7 @@
     ReversedComparator.prototype.reversed = function () {
       return this.comparator;
     };
-    ReversedComparator.$metadata$ = {kind: Kotlin.Kind.CLASS, simpleName: 'ReversedComparator', interfaces: [Comparator]};
+    ReversedComparator.$metadata$ = {kind: Kind_CLASS, simpleName: 'ReversedComparator', interfaces: [Comparator]};
     function NaturalOrderComparator() {
       NaturalOrderComparator_instance = this;
     }
@@ -30157,7 +32359,7 @@
     NaturalOrderComparator.prototype.reversed = function () {
       return ReverseOrderComparator_getInstance();
     };
-    NaturalOrderComparator.$metadata$ = {kind: Kotlin.Kind.OBJECT, simpleName: 'NaturalOrderComparator', interfaces: [Comparator]};
+    NaturalOrderComparator.$metadata$ = {kind: Kind_OBJECT, simpleName: 'NaturalOrderComparator', interfaces: [Comparator]};
     var NaturalOrderComparator_instance = null;
     function NaturalOrderComparator_getInstance() {
       if (NaturalOrderComparator_instance === null) {
@@ -30174,7 +32376,7 @@
     ReverseOrderComparator.prototype.reversed = function () {
       return NaturalOrderComparator_getInstance();
     };
-    ReverseOrderComparator.$metadata$ = {kind: Kotlin.Kind.OBJECT, simpleName: 'ReverseOrderComparator', interfaces: [Comparator]};
+    ReverseOrderComparator.$metadata$ = {kind: Kind_OBJECT, simpleName: 'ReverseOrderComparator', interfaces: [Comparator]};
     var ReverseOrderComparator_instance = null;
     function ReverseOrderComparator_getInstance() {
       if (ReverseOrderComparator_instance === null) {
@@ -30188,7 +32390,7 @@
     function ContinuationInterceptor$Key() {
       ContinuationInterceptor$Key_instance = this;
     }
-    ContinuationInterceptor$Key.$metadata$ = {kind: Kotlin.Kind.OBJECT, simpleName: 'Key', interfaces: [CoroutineContext$Key]};
+    ContinuationInterceptor$Key.$metadata$ = {kind: Kind_OBJECT, simpleName: 'Key', interfaces: [CoroutineContext$Key]};
     var ContinuationInterceptor$Key_instance = null;
     function ContinuationInterceptor$Key_getInstance() {
       if (ContinuationInterceptor$Key_instance === null) {
@@ -30196,7 +32398,7 @@
       }
       return ContinuationInterceptor$Key_instance;
     }
-    ContinuationInterceptor.$metadata$ = {kind: Kotlin.Kind.INTERFACE, simpleName: 'ContinuationInterceptor', interfaces: [CoroutineContext$Element]};
+    ContinuationInterceptor.$metadata$ = {kind: Kind_INTERFACE, simpleName: 'ContinuationInterceptor', interfaces: [CoroutineContext$Element]};
     function CoroutineContext() {
     }
     function CoroutineContext$plus$lambda(acc, element) {
@@ -30220,7 +32422,7 @@
     }
     CoroutineContext$Element.prototype.get_8oh8b3$ = function (key) {
       var tmp$;
-      return this.key === key ? Kotlin.isType(tmp$ = this, CoroutineContext$Element) ? tmp$ : Kotlin.throwCCE() : null;
+      return this.key === key ? Kotlin.isType(tmp$ = this, CoroutineContext$Element) ? tmp$ : throwCCE() : null;
     };
     CoroutineContext$Element.prototype.fold_m9u1mr$ = function (initial, operation) {
       return operation(initial, this);
@@ -30228,18 +32430,18 @@
     CoroutineContext$Element.prototype.minusKey_ds72xk$ = function (key) {
       return this.key === key ? EmptyCoroutineContext_getInstance() : this;
     };
-    CoroutineContext$Element.$metadata$ = {kind: Kotlin.Kind.INTERFACE, simpleName: 'Element', interfaces: [CoroutineContext]};
+    CoroutineContext$Element.$metadata$ = {kind: Kind_INTERFACE, simpleName: 'Element', interfaces: [CoroutineContext]};
     function CoroutineContext$Key() {
     }
-    CoroutineContext$Key.$metadata$ = {kind: Kotlin.Kind.INTERFACE, simpleName: 'Key', interfaces: []};
-    CoroutineContext.$metadata$ = {kind: Kotlin.Kind.INTERFACE, simpleName: 'CoroutineContext', interfaces: []};
+    CoroutineContext$Key.$metadata$ = {kind: Kind_INTERFACE, simpleName: 'Key', interfaces: []};
+    CoroutineContext.$metadata$ = {kind: Kind_INTERFACE, simpleName: 'CoroutineContext', interfaces: []};
     function AbstractCoroutineContextElement(key) {
       this.key_5qfgrq$_0 = key;
     }
     Object.defineProperty(AbstractCoroutineContextElement.prototype, 'key', {get: function () {
       return this.key_5qfgrq$_0;
     }});
-    AbstractCoroutineContextElement.$metadata$ = {kind: Kotlin.Kind.CLASS, simpleName: 'AbstractCoroutineContextElement', interfaces: [CoroutineContext$Element]};
+    AbstractCoroutineContextElement.$metadata$ = {kind: Kind_CLASS, simpleName: 'AbstractCoroutineContextElement', interfaces: [CoroutineContext$Element]};
     function EmptyCoroutineContext() {
       EmptyCoroutineContext_instance = this;
     }
@@ -30261,7 +32463,7 @@
     EmptyCoroutineContext.prototype.toString = function () {
       return 'EmptyCoroutineContext';
     };
-    EmptyCoroutineContext.$metadata$ = {kind: Kotlin.Kind.OBJECT, simpleName: 'EmptyCoroutineContext', interfaces: [CoroutineContext]};
+    EmptyCoroutineContext.$metadata$ = {kind: Kind_OBJECT, simpleName: 'EmptyCoroutineContext', interfaces: [CoroutineContext]};
     var EmptyCoroutineContext_instance = null;
     function EmptyCoroutineContext_getInstance() {
       if (EmptyCoroutineContext_instance === null) {
@@ -30310,7 +32512,7 @@
       return Kotlin.isType(this.left, CombinedContext) ? this.left.size_0() + 1 | 0 : 2;
     };
     CombinedContext.prototype.contains_0 = function (element) {
-      return Kotlin.equals(this.get_8oh8b3$(element.key), element);
+      return equals(this.get_8oh8b3$(element.key), element);
     };
     CombinedContext.prototype.containsAll_0 = function (context) {
       var tmp$;
@@ -30323,7 +32525,7 @@
           cur = next;
         }
          else {
-          return this.contains_0(Kotlin.isType(tmp$ = next, CoroutineContext$Element) ? tmp$ : Kotlin.throwCCE());
+          return this.contains_0(Kotlin.isType(tmp$ = next, CoroutineContext$Element) ? tmp$ : throwCCE());
         }
       }
     };
@@ -30331,21 +32533,21 @@
       return this === other || (Kotlin.isType(other, CombinedContext) && other.size_0() === this.size_0() && other.containsAll_0(this));
     };
     CombinedContext.prototype.hashCode = function () {
-      return Kotlin.hashCode(this.left) + Kotlin.hashCode(this.element) | 0;
+      return hashCode(this.left) + hashCode(this.element) | 0;
     };
     function CombinedContext$toString$lambda(acc, element) {
-      return acc.length === 0 ? element.toString() : acc + ', ' + Kotlin.toString(element);
+      return acc.length === 0 ? element.toString() : acc + ', ' + toString(element);
     }
     CombinedContext.prototype.toString = function () {
       return '[' + this.fold_m9u1mr$('', CombinedContext$toString$lambda) + ']';
     };
-    CombinedContext.$metadata$ = {kind: Kotlin.Kind.CLASS, simpleName: 'CombinedContext', interfaces: [CoroutineContext]};
+    CombinedContext.$metadata$ = {kind: Kind_CLASS, simpleName: 'CombinedContext', interfaces: [CoroutineContext]};
     function Continuation() {
     }
-    Continuation.$metadata$ = {kind: Kotlin.Kind.INTERFACE, simpleName: 'Continuation', interfaces: []};
+    Continuation.$metadata$ = {kind: Kind_INTERFACE, simpleName: 'Continuation', interfaces: []};
     function RestrictsSuspension() {
     }
-    RestrictsSuspension.$metadata$ = {kind: Kotlin.Kind.CLASS, simpleName: 'RestrictsSuspension', interfaces: [Annotation]};
+    RestrictsSuspension.$metadata$ = {kind: Kind_CLASS, simpleName: 'RestrictsSuspension', interfaces: [Annotation]};
     function startCoroutine($receiver, receiver, completion) {
       createCoroutineUnchecked($receiver, receiver, completion).resume_11rb$(Unit_getInstance());
     }
@@ -30358,7 +32560,10 @@
     function createCoroutine_0($receiver, completion) {
       return new SafeContinuation(createCoroutineUnchecked_0($receiver, completion), COROUTINE_SUSPENDED);
     }
-    var suspendCoroutine = defineInlineFunction('kotlin.kotlin.coroutines.experimental.suspendCoroutine_z3e1t3$', wrapFunction(function () {
+    function suspendCoroutine(block_0, continuation) {
+      return suspendCoroutine$lambda(block_0)(continuation.facade);
+    }
+    defineInlineFunction('kotlin.kotlin.coroutines.experimental.suspendCoroutine_z3e1t3$', wrapFunction(function () {
       var SafeContinuation_init = _.kotlin.coroutines.experimental.SafeContinuation_init_n4f53e$;
       function suspendCoroutine$lambda(closure$block) {
         return function (c) {
@@ -30367,20 +32572,22 @@
           return safe.getResult();
         };
       }
-      return function (block, continuation) {
-        return suspendCoroutine$lambda(block)(continuation.facade);
+      return function (block_0, continuation) {
+        Kotlin.suspendCall(suspendCoroutine$lambda(block_0)(Kotlin.coroutineReceiver().facade));
+        return Kotlin.coroutineResult(Kotlin.coroutineReceiver());
       };
     }));
     var processBareContinuationResume = defineInlineFunction('kotlin.kotlin.coroutines.experimental.processBareContinuationResume_xjdw2a$', wrapFunction(function () {
-      var intrinsics = _.kotlin.coroutines.experimental.intrinsics;
+      var COROUTINE_SUSPENDED = _.kotlin.coroutines.experimental.intrinsics.COROUTINE_SUSPENDED;
       var Continuation = _.kotlin.coroutines.experimental.Continuation;
+      var throwCCE = Kotlin.throwCCE;
       var Throwable = Error;
       return function (completion, block) {
         var tmp$;
         try {
           var result = block();
-          if (result !== intrinsics.COROUTINE_SUSPENDED) {
-            (Kotlin.isType(tmp$ = completion, Continuation) ? tmp$ : Kotlin.throwCCE()).resume_11rb$(result);
+          if (result !== COROUTINE_SUSPENDED) {
+            (Kotlin.isType(tmp$ = completion, Continuation) ? tmp$ : throwCCE()).resume_11rb$(result);
           }
         }
          catch (t) {
@@ -30397,15 +32604,15 @@
         return buildIterator(closure$builderAction);
       };
     }
-    function Sequence$ObjectLiteral_3(closure$iterator) {
+    function Sequence$ObjectLiteral_4(closure$iterator) {
       this.closure$iterator = closure$iterator;
     }
-    Sequence$ObjectLiteral_3.prototype.iterator = function () {
+    Sequence$ObjectLiteral_4.prototype.iterator = function () {
       return this.closure$iterator();
     };
-    Sequence$ObjectLiteral_3.$metadata$ = {kind: Kotlin.Kind.CLASS, interfaces: [Sequence]};
+    Sequence$ObjectLiteral_4.$metadata$ = {kind: Kind_CLASS, interfaces: [Sequence]};
     function buildSequence(builderAction) {
-      return new Sequence$ObjectLiteral_3(buildSequence$lambda(builderAction));
+      return new Sequence$ObjectLiteral_4(buildSequence$lambda(builderAction));
     }
     function buildIterator(builderAction) {
       var iterator = new SequenceBuilderIterator();
@@ -30422,7 +32629,7 @@
     SequenceBuilder.prototype.yieldAll_swo9gw$ = function (sequence, continuation) {
       return this.yieldAll_1phuh2$(sequence.iterator(), continuation);
     };
-    SequenceBuilder.$metadata$ = {kind: Kotlin.Kind.CLASS, simpleName: 'SequenceBuilder', interfaces: []};
+    SequenceBuilder.$metadata$ = {kind: Kind_CLASS, simpleName: 'SequenceBuilder', interfaces: []};
     var State_NotReady;
     var State_ManyNotReady;
     var State_ManyReady;
@@ -30437,63 +32644,64 @@
       this.nextStep = null;
     }
     SequenceBuilderIterator.prototype.hasNext = function () {
-      var tmp$, tmp$_0, tmp$_1;
       while (true) {
-        tmp$ = this.state_0;
-        if (tmp$ !== State_NotReady)
-          if (tmp$ === State_ManyNotReady)
-            if (((tmp$_0 = this.nextIterator_0) != null ? tmp$_0 : Kotlin.throwNPE()).hasNext()) {
+        switch (this.state_0) {
+          case 0:
+            break;
+          case 1:
+            if (ensureNotNull(this.nextIterator_0).hasNext()) {
               this.state_0 = State_ManyReady;
               return true;
             }
              else {
               this.nextIterator_0 = null;
             }
-           else if (tmp$ === State_Done)
+
+            break;
+          case 4:
             return false;
-          else if (tmp$ === State_Ready || tmp$ === State_ManyReady)
+          case 3:
+          case 2:
             return true;
-          else
-            throw this.exceptionalState_0();
+          default:throw this.exceptionalState_0();
+        }
         this.state_0 = State_Failed;
-        var step = (tmp$_1 = this.nextStep) != null ? tmp$_1 : Kotlin.throwNPE();
+        var step = ensureNotNull(this.nextStep);
         this.nextStep = null;
         step.resume_11rb$(Unit_getInstance());
       }
     };
     SequenceBuilderIterator.prototype.next = function () {
-      var tmp$, tmp$_0, tmp$_1;
-      tmp$ = this.state_0;
-      if (tmp$ === State_NotReady || tmp$ === State_ManyNotReady)
-        return this.nextNotReady_0();
-      else if (tmp$ === State_ManyReady) {
-        this.state_0 = State_ManyNotReady;
-        return ((tmp$_0 = this.nextIterator_0) != null ? tmp$_0 : Kotlin.throwNPE()).next();
+      var tmp$;
+      switch (this.state_0) {
+        case 0:
+        case 1:
+          return this.nextNotReady_0();
+        case 2:
+          this.state_0 = State_ManyNotReady;
+          return ensureNotNull(this.nextIterator_0).next();
+        case 3:
+          this.state_0 = State_NotReady;
+          var result = (tmp$ = this.nextValue_0) == null || Kotlin.isType(tmp$, Any) ? tmp$ : throwCCE();
+          this.nextValue_0 = null;
+          return result;
+        default:throw this.exceptionalState_0();
       }
-       else if (tmp$ === State_Ready) {
-        this.state_0 = State_NotReady;
-        var result = (tmp$_1 = this.nextValue_0) == null || Kotlin.isType(tmp$_1, Any) ? tmp$_1 : Kotlin.throwCCE();
-        this.nextValue_0 = null;
-        return result;
-      }
-       else
-        throw this.exceptionalState_0();
     };
     SequenceBuilderIterator.prototype.nextNotReady_0 = function () {
       if (!this.hasNext())
-        throw new NoSuchElementException();
+        throw NoSuchElementException_init();
       else
         return this.next();
     };
     SequenceBuilderIterator.prototype.exceptionalState_0 = function () {
-      var tmp$;
-      tmp$ = this.state_0;
-      if (tmp$ === State_Done)
-        return new NoSuchElementException();
-      else if (tmp$ === State_Failed)
-        return new IllegalStateException('Iterator has failed.');
-      else
-        return new IllegalStateException('Unexpected state of the iterator: ' + this.state_0);
+      switch (this.state_0) {
+        case 4:
+          return NoSuchElementException_init();
+        case 5:
+          return IllegalStateException_init_0('Iterator has failed.');
+        default:return IllegalStateException_init_0('Unexpected state of the iterator: ' + this.state_0);
+      }
     };
     function SequenceBuilderIterator$yield$lambda(this$SequenceBuilderIterator) {
       return function (c) {
@@ -30528,59 +32736,258 @@
     Object.defineProperty(SequenceBuilderIterator.prototype, 'context', {get: function () {
       return EmptyCoroutineContext_getInstance();
     }});
-    SequenceBuilderIterator.$metadata$ = {kind: Kotlin.Kind.CLASS, simpleName: 'SequenceBuilderIterator', interfaces: [Continuation, Iterator, SequenceBuilder]};
-    var suspendCoroutineOrReturn = defineInlineFunction('kotlin.kotlin.coroutines.experimental.intrinsics.suspendCoroutineOrReturn_8ufn2u$', wrapFunction(function () {
+    SequenceBuilderIterator.$metadata$ = {kind: Kind_CLASS, simpleName: 'SequenceBuilderIterator', interfaces: [Continuation, Iterator, SequenceBuilder]};
+    function suspendCoroutineOrReturn(block_0, continuation) {
+      return suspendCoroutineOrReturn$lambda(block_0)(continuation);
+    }
+    defineInlineFunction('kotlin.kotlin.coroutines.experimental.intrinsics.suspendCoroutineOrReturn_8ufn2u$', wrapFunction(function () {
+      function suspendCoroutineOrReturn$lambda(closure$block) {
+        return function (cont) {
+          return closure$block(cont.facade);
+        };
+      }
+      return function (block_0, continuation) {
+        Kotlin.suspendCall(suspendCoroutineOrReturn$lambda(block_0)(Kotlin.coroutineReceiver()));
+        return Kotlin.coroutineResult(Kotlin.coroutineReceiver());
+      };
+    }));
+    function suspendCoroutineUninterceptedOrReturn(block, continuation) {
+      throw new NotImplementedError_init('Implementation of suspendCoroutineUninterceptedOrReturn is intrinsic');
+    }
+    defineInlineFunction('kotlin.kotlin.coroutines.experimental.intrinsics.suspendCoroutineUninterceptedOrReturn_8ufn2u$', wrapFunction(function () {
       var NotImplementedError_init = _.kotlin.NotImplementedError;
       return function (block, continuation) {
-        throw new NotImplementedError_init('Implementation is intrinsic');
+        throw new NotImplementedError_init('Implementation of suspendCoroutineUninterceptedOrReturn is intrinsic');
+      };
+    }));
+    var intercepted = defineInlineFunction('kotlin.kotlin.coroutines.experimental.intrinsics.intercepted_5cx0c9$', wrapFunction(function () {
+      var NotImplementedError_init = _.kotlin.NotImplementedError;
+      return function ($receiver) {
+        throw new NotImplementedError_init('Implementation of intercepted is intrinsic');
+      };
+    }));
+    var get_coroutineContext = defineInlineFunction('kotlin.kotlin.coroutines.experimental.intrinsics.get_coroutineContext', wrapFunction(function () {
+      var NotImplementedError_init = _.kotlin.NotImplementedError;
+      return function () {
+        throw new NotImplementedError_init('Implemented as intrinsic');
       };
     }));
     var COROUTINE_SUSPENDED;
-    var and = defineInlineFunction('kotlin.kotlin.experimental.and_buxqzf$', function ($receiver, other) {
-      return Kotlin.toByte($receiver & other);
-    });
-    var or = defineInlineFunction('kotlin.kotlin.experimental.or_buxqzf$', function ($receiver, other) {
-      return Kotlin.toByte($receiver | other);
-    });
-    var xor = defineInlineFunction('kotlin.kotlin.experimental.xor_buxqzf$', function ($receiver, other) {
-      return Kotlin.toByte($receiver ^ other);
-    });
-    var inv = defineInlineFunction('kotlin.kotlin.experimental.inv_mz3mee$', function ($receiver) {
-      return Kotlin.toByte(~$receiver);
-    });
-    var and_0 = defineInlineFunction('kotlin.kotlin.experimental.and_mvfjzl$', function ($receiver, other) {
-      return Kotlin.toShort($receiver & other);
-    });
-    var or_0 = defineInlineFunction('kotlin.kotlin.experimental.or_mvfjzl$', function ($receiver, other) {
-      return Kotlin.toShort($receiver | other);
-    });
-    var xor_0 = defineInlineFunction('kotlin.kotlin.experimental.xor_mvfjzl$', function ($receiver, other) {
-      return Kotlin.toShort($receiver ^ other);
-    });
-    var inv_0 = defineInlineFunction('kotlin.kotlin.experimental.inv_5vcgdc$', function ($receiver) {
-      return Kotlin.toShort(~$receiver);
-    });
+    var and = defineInlineFunction('kotlin.kotlin.experimental.and_buxqzf$', wrapFunction(function () {
+      var toByte = Kotlin.toByte;
+      return function ($receiver, other) {
+        return toByte($receiver & other);
+      };
+    }));
+    var or = defineInlineFunction('kotlin.kotlin.experimental.or_buxqzf$', wrapFunction(function () {
+      var toByte = Kotlin.toByte;
+      return function ($receiver, other) {
+        return toByte($receiver | other);
+      };
+    }));
+    var xor = defineInlineFunction('kotlin.kotlin.experimental.xor_buxqzf$', wrapFunction(function () {
+      var toByte = Kotlin.toByte;
+      return function ($receiver, other) {
+        return toByte($receiver ^ other);
+      };
+    }));
+    var inv = defineInlineFunction('kotlin.kotlin.experimental.inv_mz3mee$', wrapFunction(function () {
+      var toByte = Kotlin.toByte;
+      return function ($receiver) {
+        return toByte(~$receiver);
+      };
+    }));
+    var and_0 = defineInlineFunction('kotlin.kotlin.experimental.and_mvfjzl$', wrapFunction(function () {
+      var toShort = Kotlin.toShort;
+      return function ($receiver, other) {
+        return toShort($receiver & other);
+      };
+    }));
+    var or_0 = defineInlineFunction('kotlin.kotlin.experimental.or_mvfjzl$', wrapFunction(function () {
+      var toShort = Kotlin.toShort;
+      return function ($receiver, other) {
+        return toShort($receiver | other);
+      };
+    }));
+    var xor_0 = defineInlineFunction('kotlin.kotlin.experimental.xor_mvfjzl$', wrapFunction(function () {
+      var toShort = Kotlin.toShort;
+      return function ($receiver, other) {
+        return toShort($receiver ^ other);
+      };
+    }));
+    var inv_0 = defineInlineFunction('kotlin.kotlin.experimental.inv_5vcgdc$', wrapFunction(function () {
+      var toShort = Kotlin.toShort;
+      return function ($receiver) {
+        return toShort(~$receiver);
+      };
+    }));
     function NoInfer() {
     }
-    NoInfer.$metadata$ = {kind: Kotlin.Kind.CLASS, simpleName: 'NoInfer', interfaces: [Annotation]};
+    NoInfer.$metadata$ = {kind: Kind_CLASS, simpleName: 'NoInfer', interfaces: [Annotation]};
     function Exact() {
     }
-    Exact.$metadata$ = {kind: Kotlin.Kind.CLASS, simpleName: 'Exact', interfaces: [Annotation]};
+    Exact.$metadata$ = {kind: Kind_CLASS, simpleName: 'Exact', interfaces: [Annotation]};
     function LowPriorityInOverloadResolution() {
     }
-    LowPriorityInOverloadResolution.$metadata$ = {kind: Kotlin.Kind.CLASS, simpleName: 'LowPriorityInOverloadResolution', interfaces: [Annotation]};
+    LowPriorityInOverloadResolution.$metadata$ = {kind: Kind_CLASS, simpleName: 'LowPriorityInOverloadResolution', interfaces: [Annotation]};
     function HidesMembers() {
     }
-    HidesMembers.$metadata$ = {kind: Kotlin.Kind.CLASS, simpleName: 'HidesMembers', interfaces: [Annotation]};
+    HidesMembers.$metadata$ = {kind: Kind_CLASS, simpleName: 'HidesMembers', interfaces: [Annotation]};
     function OnlyInputTypes() {
     }
-    OnlyInputTypes.$metadata$ = {kind: Kotlin.Kind.CLASS, simpleName: 'OnlyInputTypes', interfaces: [Annotation]};
+    OnlyInputTypes.$metadata$ = {kind: Kind_CLASS, simpleName: 'OnlyInputTypes', interfaces: [Annotation]};
     function InlineOnly() {
     }
-    InlineOnly.$metadata$ = {kind: Kotlin.Kind.CLASS, simpleName: 'InlineOnly', interfaces: [Annotation]};
+    InlineOnly.$metadata$ = {kind: Kind_CLASS, simpleName: 'InlineOnly', interfaces: [Annotation]};
     function DynamicExtension() {
     }
-    DynamicExtension.$metadata$ = {kind: Kotlin.Kind.CLASS, simpleName: 'DynamicExtension', interfaces: [Annotation]};
+    DynamicExtension.$metadata$ = {kind: Kind_CLASS, simpleName: 'DynamicExtension', interfaces: [Annotation]};
+    function AccessibleLateinitPropertyLiteral() {
+    }
+    AccessibleLateinitPropertyLiteral.$metadata$ = {kind: Kind_CLASS, simpleName: 'AccessibleLateinitPropertyLiteral', interfaces: [Annotation]};
+    function RequireKotlin(version, message, level, versionKind, errorCode) {
+      if (message === void 0)
+        message = '';
+      if (level === void 0)
+        level = DeprecationLevel.ERROR;
+      if (versionKind === void 0)
+        versionKind = RequireKotlinVersionKind$LANGUAGE_VERSION_getInstance();
+      if (errorCode === void 0)
+        errorCode = -1;
+      this.version = version;
+      this.message = message;
+      this.level = level;
+      this.versionKind = versionKind;
+      this.errorCode = errorCode;
+    }
+    RequireKotlin.$metadata$ = {kind: Kind_CLASS, simpleName: 'RequireKotlin', interfaces: [Annotation]};
+    function RequireKotlinVersionKind(name, ordinal) {
+      Enum.call(this);
+      this.name$ = name;
+      this.ordinal$ = ordinal;
+    }
+    function RequireKotlinVersionKind_initFields() {
+      RequireKotlinVersionKind_initFields = function () {
+      };
+      RequireKotlinVersionKind$LANGUAGE_VERSION_instance = new RequireKotlinVersionKind('LANGUAGE_VERSION', 0);
+      RequireKotlinVersionKind$COMPILER_VERSION_instance = new RequireKotlinVersionKind('COMPILER_VERSION', 1);
+      RequireKotlinVersionKind$API_VERSION_instance = new RequireKotlinVersionKind('API_VERSION', 2);
+    }
+    var RequireKotlinVersionKind$LANGUAGE_VERSION_instance;
+    function RequireKotlinVersionKind$LANGUAGE_VERSION_getInstance() {
+      RequireKotlinVersionKind_initFields();
+      return RequireKotlinVersionKind$LANGUAGE_VERSION_instance;
+    }
+    var RequireKotlinVersionKind$COMPILER_VERSION_instance;
+    function RequireKotlinVersionKind$COMPILER_VERSION_getInstance() {
+      RequireKotlinVersionKind_initFields();
+      return RequireKotlinVersionKind$COMPILER_VERSION_instance;
+    }
+    var RequireKotlinVersionKind$API_VERSION_instance;
+    function RequireKotlinVersionKind$API_VERSION_getInstance() {
+      RequireKotlinVersionKind_initFields();
+      return RequireKotlinVersionKind$API_VERSION_instance;
+    }
+    RequireKotlinVersionKind.$metadata$ = {kind: Kind_CLASS, simpleName: 'RequireKotlinVersionKind', interfaces: [Enum]};
+    function RequireKotlinVersionKind$values() {
+      return [RequireKotlinVersionKind$LANGUAGE_VERSION_getInstance(), RequireKotlinVersionKind$COMPILER_VERSION_getInstance(), RequireKotlinVersionKind$API_VERSION_getInstance()];
+    }
+    RequireKotlinVersionKind.values = RequireKotlinVersionKind$values;
+    function RequireKotlinVersionKind$valueOf(name) {
+      switch (name) {
+        case 'LANGUAGE_VERSION':
+          return RequireKotlinVersionKind$LANGUAGE_VERSION_getInstance();
+        case 'COMPILER_VERSION':
+          return RequireKotlinVersionKind$COMPILER_VERSION_getInstance();
+        case 'API_VERSION':
+          return RequireKotlinVersionKind$API_VERSION_getInstance();
+        default:throwISE('No enum constant kotlin.internal.RequireKotlinVersionKind.' + name);
+      }
+    }
+    RequireKotlinVersionKind.valueOf_61zpoe$ = RequireKotlinVersionKind$valueOf;
+    function ContractsDsl() {
+    }
+    ContractsDsl.$metadata$ = {kind: Kind_CLASS, simpleName: 'ContractsDsl', interfaces: [Annotation]};
+    function ContractBuilder() {
+    }
+    ContractBuilder.prototype.callsInPlace_jgvnlr$ = function (lambda, kind, callback$default) {
+      if (kind === void 0)
+        kind = InvocationKind$UNKNOWN_getInstance();
+      return callback$default ? callback$default(lambda, kind) : this.callsInPlace_jgvnlr$$default(lambda, kind);
+    };
+    ContractBuilder.$metadata$ = {kind: Kind_INTERFACE, simpleName: 'ContractBuilder', interfaces: []};
+    function InvocationKind(name, ordinal) {
+      Enum.call(this);
+      this.name$ = name;
+      this.ordinal$ = ordinal;
+    }
+    function InvocationKind_initFields() {
+      InvocationKind_initFields = function () {
+      };
+      InvocationKind$AT_MOST_ONCE_instance = new InvocationKind('AT_MOST_ONCE', 0);
+      InvocationKind$AT_LEAST_ONCE_instance = new InvocationKind('AT_LEAST_ONCE', 1);
+      InvocationKind$EXACTLY_ONCE_instance = new InvocationKind('EXACTLY_ONCE', 2);
+      InvocationKind$UNKNOWN_instance = new InvocationKind('UNKNOWN', 3);
+    }
+    var InvocationKind$AT_MOST_ONCE_instance;
+    function InvocationKind$AT_MOST_ONCE_getInstance() {
+      InvocationKind_initFields();
+      return InvocationKind$AT_MOST_ONCE_instance;
+    }
+    var InvocationKind$AT_LEAST_ONCE_instance;
+    function InvocationKind$AT_LEAST_ONCE_getInstance() {
+      InvocationKind_initFields();
+      return InvocationKind$AT_LEAST_ONCE_instance;
+    }
+    var InvocationKind$EXACTLY_ONCE_instance;
+    function InvocationKind$EXACTLY_ONCE_getInstance() {
+      InvocationKind_initFields();
+      return InvocationKind$EXACTLY_ONCE_instance;
+    }
+    var InvocationKind$UNKNOWN_instance;
+    function InvocationKind$UNKNOWN_getInstance() {
+      InvocationKind_initFields();
+      return InvocationKind$UNKNOWN_instance;
+    }
+    InvocationKind.$metadata$ = {kind: Kind_CLASS, simpleName: 'InvocationKind', interfaces: [Enum]};
+    function InvocationKind$values() {
+      return [InvocationKind$AT_MOST_ONCE_getInstance(), InvocationKind$AT_LEAST_ONCE_getInstance(), InvocationKind$EXACTLY_ONCE_getInstance(), InvocationKind$UNKNOWN_getInstance()];
+    }
+    InvocationKind.values = InvocationKind$values;
+    function InvocationKind$valueOf(name) {
+      switch (name) {
+        case 'AT_MOST_ONCE':
+          return InvocationKind$AT_MOST_ONCE_getInstance();
+        case 'AT_LEAST_ONCE':
+          return InvocationKind$AT_LEAST_ONCE_getInstance();
+        case 'EXACTLY_ONCE':
+          return InvocationKind$EXACTLY_ONCE_getInstance();
+        case 'UNKNOWN':
+          return InvocationKind$UNKNOWN_getInstance();
+        default:throwISE('No enum constant kotlin.internal.contracts.InvocationKind.' + name);
+      }
+    }
+    InvocationKind.valueOf_61zpoe$ = InvocationKind$valueOf;
+    var contract = defineInlineFunction('kotlin.kotlin.internal.contracts.contract_7ha1jq$', function (builder) {
+    });
+    function Effect() {
+    }
+    Effect.$metadata$ = {kind: Kind_INTERFACE, simpleName: 'Effect', interfaces: []};
+    function ConditionalEffect() {
+    }
+    ConditionalEffect.$metadata$ = {kind: Kind_INTERFACE, simpleName: 'ConditionalEffect', interfaces: [Effect]};
+    function SimpleEffect() {
+    }
+    SimpleEffect.$metadata$ = {kind: Kind_INTERFACE, simpleName: 'SimpleEffect', interfaces: []};
+    function Returns() {
+    }
+    Returns.$metadata$ = {kind: Kind_INTERFACE, simpleName: 'Returns', interfaces: [SimpleEffect]};
+    function ReturnsNotNull() {
+    }
+    ReturnsNotNull.$metadata$ = {kind: Kind_INTERFACE, simpleName: 'ReturnsNotNull', interfaces: [SimpleEffect]};
+    function CallsInPlace() {
+    }
+    CallsInPlace.$metadata$ = {kind: Kind_INTERFACE, simpleName: 'CallsInPlace', interfaces: [SimpleEffect]};
     function Delegates() {
       Delegates_instance = this;
     }
@@ -30589,6 +32996,7 @@
     };
     Delegates.prototype.observable_2ulm9r$ = defineInlineFunction('kotlin.kotlin.properties.Delegates.observable_2ulm9r$', wrapFunction(function () {
       var ObservableProperty = _.kotlin.properties.ObservableProperty;
+      var Kind_CLASS = Kotlin.Kind.CLASS;
       Delegates$observable$ObjectLiteral.prototype = Object.create(ObservableProperty.prototype);
       Delegates$observable$ObjectLiteral.prototype.constructor = Delegates$observable$ObjectLiteral;
       function Delegates$observable$ObjectLiteral(closure$onChange, initialValue_0) {
@@ -30598,13 +33006,14 @@
       Delegates$observable$ObjectLiteral.prototype.afterChange_jxtfl0$ = function (property, oldValue, newValue) {
         this.closure$onChange(property, oldValue, newValue);
       };
-      Delegates$observable$ObjectLiteral.$metadata$ = {kind: Kotlin.Kind.CLASS, interfaces: [ObservableProperty]};
+      Delegates$observable$ObjectLiteral.$metadata$ = {kind: Kind_CLASS, interfaces: [ObservableProperty]};
       return function (initialValue, onChange) {
         return new Delegates$observable$ObjectLiteral(onChange, initialValue);
       };
     }));
     Delegates.prototype.vetoable_61sx1h$ = defineInlineFunction('kotlin.kotlin.properties.Delegates.vetoable_61sx1h$', wrapFunction(function () {
       var ObservableProperty = _.kotlin.properties.ObservableProperty;
+      var Kind_CLASS = Kotlin.Kind.CLASS;
       Delegates$vetoable$ObjectLiteral.prototype = Object.create(ObservableProperty.prototype);
       Delegates$vetoable$ObjectLiteral.prototype.constructor = Delegates$vetoable$ObjectLiteral;
       function Delegates$vetoable$ObjectLiteral(closure$onChange, initialValue_0) {
@@ -30614,12 +33023,12 @@
       Delegates$vetoable$ObjectLiteral.prototype.beforeChange_jxtfl0$ = function (property, oldValue, newValue) {
         return this.closure$onChange(property, oldValue, newValue);
       };
-      Delegates$vetoable$ObjectLiteral.$metadata$ = {kind: Kotlin.Kind.CLASS, interfaces: [ObservableProperty]};
+      Delegates$vetoable$ObjectLiteral.$metadata$ = {kind: Kind_CLASS, interfaces: [ObservableProperty]};
       return function (initialValue, onChange) {
         return new Delegates$vetoable$ObjectLiteral(onChange, initialValue);
       };
     }));
-    Delegates.$metadata$ = {kind: Kotlin.Kind.OBJECT, simpleName: 'Delegates', interfaces: []};
+    Delegates.$metadata$ = {kind: Kind_OBJECT, simpleName: 'Delegates', interfaces: []};
     var Delegates_instance = null;
     function Delegates_getInstance() {
       if (Delegates_instance === null) {
@@ -30634,20 +33043,20 @@
       var tmp$;
       tmp$ = this.value_0;
       if (tmp$ == null) {
-        throw new IllegalStateException('Property ' + property.callableName + ' should be initialized before get.');
+        throw IllegalStateException_init_0('Property ' + property.callableName + ' should be initialized before get.');
       }
       return tmp$;
     };
     NotNullVar.prototype.setValue_9rddgb$ = function (thisRef, property, value) {
       this.value_0 = value;
     };
-    NotNullVar.$metadata$ = {kind: Kotlin.Kind.CLASS, simpleName: 'NotNullVar', interfaces: [ReadWriteProperty]};
+    NotNullVar.$metadata$ = {kind: Kind_CLASS, simpleName: 'NotNullVar', interfaces: [ReadWriteProperty]};
     function ReadOnlyProperty() {
     }
-    ReadOnlyProperty.$metadata$ = {kind: Kotlin.Kind.INTERFACE, simpleName: 'ReadOnlyProperty', interfaces: []};
+    ReadOnlyProperty.$metadata$ = {kind: Kind_INTERFACE, simpleName: 'ReadOnlyProperty', interfaces: []};
     function ReadWriteProperty() {
     }
-    ReadWriteProperty.$metadata$ = {kind: Kotlin.Kind.INTERFACE, simpleName: 'ReadWriteProperty', interfaces: []};
+    ReadWriteProperty.$metadata$ = {kind: Kind_INTERFACE, simpleName: 'ReadWriteProperty', interfaces: []};
     function ObservableProperty(initialValue) {
       this.value_kuqkmn$_0 = initialValue;
     }
@@ -30667,7 +33076,7 @@
       this.value_kuqkmn$_0 = value;
       this.afterChange_jxtfl0$(property, oldValue, value);
     };
-    ObservableProperty.$metadata$ = {kind: Kotlin.Kind.CLASS, simpleName: 'ObservableProperty', interfaces: [ReadWriteProperty]};
+    ObservableProperty.$metadata$ = {kind: Kind_CLASS, simpleName: 'ObservableProperty', interfaces: [ReadWriteProperty]};
     function ClosedFloatingPointRange() {
     }
     ClosedFloatingPointRange.prototype.contains_mef7kx$ = function (value) {
@@ -30676,7 +33085,7 @@
     ClosedFloatingPointRange.prototype.isEmpty = function () {
       return !this.lessThanOrEquals_n65qkk$(this.start, this.endInclusive);
     };
-    ClosedFloatingPointRange.$metadata$ = {kind: Kotlin.Kind.INTERFACE, simpleName: 'ClosedFloatingPointRange', interfaces: [ClosedRange]};
+    ClosedFloatingPointRange.$metadata$ = {kind: Kind_INTERFACE, simpleName: 'ClosedFloatingPointRange', interfaces: [ClosedRange]};
     function ComparableRange(start, endInclusive) {
       this.start_p1gsmm$_0 = start;
       this.endInclusive_jj4lf7$_0 = endInclusive;
@@ -30688,15 +33097,15 @@
       return this.endInclusive_jj4lf7$_0;
     }});
     ComparableRange.prototype.equals = function (other) {
-      return Kotlin.isType(other, ComparableRange) && (this.isEmpty() && other.isEmpty() || (Kotlin.equals(this.start, other.start) && Kotlin.equals(this.endInclusive, other.endInclusive)));
+      return Kotlin.isType(other, ComparableRange) && (this.isEmpty() && other.isEmpty() || (equals(this.start, other.start) && equals(this.endInclusive, other.endInclusive)));
     };
     ComparableRange.prototype.hashCode = function () {
-      return this.isEmpty() ? -1 : (31 * Kotlin.hashCode(this.start) | 0) + Kotlin.hashCode(this.endInclusive) | 0;
+      return this.isEmpty() ? -1 : (31 * hashCode(this.start) | 0) + hashCode(this.endInclusive) | 0;
     };
     ComparableRange.prototype.toString = function () {
-      return this.start + '..' + this.endInclusive;
+      return this.start.toString() + '..' + this.endInclusive;
     };
-    ComparableRange.$metadata$ = {kind: Kotlin.Kind.CLASS, simpleName: 'ComparableRange', interfaces: [ClosedRange]};
+    ComparableRange.$metadata$ = {kind: Kind_CLASS, simpleName: 'ComparableRange', interfaces: [ClosedRange]};
     function ClosedDoubleRange(start, endInclusive) {
       this._start_0 = start;
       this._endInclusive_0 = endInclusive;
@@ -30720,12 +33129,12 @@
       return Kotlin.isType(other, ClosedDoubleRange) && (this.isEmpty() && other.isEmpty() || (this._start_0 === other._start_0 && this._endInclusive_0 === other._endInclusive_0));
     };
     ClosedDoubleRange.prototype.hashCode = function () {
-      return this.isEmpty() ? -1 : (31 * Kotlin.hashCode(this._start_0) | 0) + Kotlin.hashCode(this._endInclusive_0) | 0;
+      return this.isEmpty() ? -1 : (31 * hashCode(this._start_0) | 0) + hashCode(this._endInclusive_0) | 0;
     };
     ClosedDoubleRange.prototype.toString = function () {
       return this._start_0.toString() + '..' + this._endInclusive_0;
     };
-    ClosedDoubleRange.$metadata$ = {kind: Kotlin.Kind.CLASS, simpleName: 'ClosedDoubleRange', interfaces: [ClosedFloatingPointRange]};
+    ClosedDoubleRange.$metadata$ = {kind: Kind_CLASS, simpleName: 'ClosedDoubleRange', interfaces: [ClosedFloatingPointRange]};
     function rangeTo_0($receiver, that) {
       return new ComparableRange($receiver, that);
     }
@@ -30734,12 +33143,12 @@
     }
     function checkStepIsPositive(isPositive, step) {
       if (!isPositive)
-        throw new IllegalArgumentException('Step must be positive, was: ' + step + '.');
+        throw IllegalArgumentException_init_0('Step must be positive, was: ' + step + '.');
     }
     var plus_47 = defineInlineFunction('kotlin.kotlin.text.plus_elu61a$', function ($receiver, other) {
       return String.fromCharCode($receiver) + other;
     });
-    function equals_0($receiver, other, ignoreCase) {
+    function equals_1($receiver, other, ignoreCase) {
       if (ignoreCase === void 0)
         ignoreCase = false;
       if ($receiver === other)
@@ -30753,13 +33162,25 @@
       return false;
     }
     function isSurrogate($receiver) {
-      return (new CharRange(CharCompanionObject.MIN_SURROGATE, CharCompanionObject.MAX_SURROGATE)).contains_mef7kx$($receiver);
+      return (new CharRange(kotlin_js_internal_CharCompanionObject.MIN_SURROGATE, kotlin_js_internal_CharCompanionObject.MAX_SURROGATE)).contains_mef7kx$($receiver);
     }
     function trimMargin($receiver, marginPrefix) {
       if (marginPrefix === void 0)
         marginPrefix = '|';
       return replaceIndentByMargin($receiver, '', marginPrefix);
     }
+    var Unit_0 = Kotlin.kotlin.Unit;
+    var mapIndexedNotNullTo$lambda = wrapFunction(function () {
+      return function (closure$transform, closure$destination) {
+        return function (index, element) {
+          var tmp$;
+          if ((tmp$ = closure$transform(index, element)) != null) {
+            closure$destination.add_11rb$(tmp$);
+          }
+          return Unit_0;
+        };
+      };
+    });
     function replaceIndentByMargin($receiver, newIndent, marginPrefix) {
       if (newIndent === void 0)
         newIndent = '';
@@ -30767,7 +33188,7 @@
         marginPrefix = '|';
       if (!!isBlank(marginPrefix)) {
         var message = 'marginPrefix must be non-blank string.';
-        throw new IllegalArgumentException(message.toString());
+        throw IllegalArgumentException_init_0(message.toString());
       }
       var lines_0 = lines($receiver);
       var resultSizeEstimate = $receiver.length + Kotlin.imul(newIndent.length, lines_0.size) | 0;
@@ -30915,7 +33336,20 @@
         return getIndentFunction$lambda_0(indent);
     }
     var reindent = wrapFunction(function () {
+      var Unit = Kotlin.kotlin.Unit;
+      var wrapFunction = Kotlin.wrapFunction;
       var ArrayList_init = _.kotlin.collections.ArrayList_init_ww73n8$;
+      var mapIndexedNotNullTo$lambda = wrapFunction(function () {
+        return function (closure$transform, closure$destination) {
+          return function (index, element) {
+            var tmp$;
+            if ((tmp$ = closure$transform(index, element)) != null) {
+              closure$destination.add_11rb$(tmp$);
+            }
+            return Unit;
+          };
+        };
+      });
       return function ($receiver, resultSizeEstimate, indentAddFunction, indentCutFunction) {
         var lastIndex = get_lastIndex_8($receiver);
         var destination = ArrayList_init();
@@ -30982,7 +33416,7 @@
       else if (Kotlin.isChar(element))
         $receiver.append_s8itvh$(unboxChar(element));
       else
-        $receiver.append_gw00v9$(Kotlin.toString(element));
+        $receiver.append_gw00v9$(toString(element));
     }
     function toByteOrNull($receiver) {
       return toByteOrNull_0($receiver, 10);
@@ -30994,9 +33428,9 @@
         return null;
       }
       var int = tmp$;
-      if (int < ByteCompanionObject.MIN_VALUE || int > ByteCompanionObject.MAX_VALUE)
+      if (int < kotlin_js_internal_ByteCompanionObject.MIN_VALUE || int > kotlin_js_internal_ByteCompanionObject.MAX_VALUE)
         return null;
-      return Kotlin.toByte(int);
+      return toByte(int);
     }
     function toShortOrNull($receiver) {
       return toShortOrNull_0($receiver, 10);
@@ -31008,9 +33442,9 @@
         return null;
       }
       var int = tmp$;
-      if (int < ShortCompanionObject.MIN_VALUE || int > ShortCompanionObject.MAX_VALUE)
+      if (int < kotlin_js_internal_ShortCompanionObject.MIN_VALUE || int > kotlin_js_internal_ShortCompanionObject.MAX_VALUE)
         return null;
-      return Kotlin.toShort(int);
+      return toShort(int);
     }
     function toIntOrNull($receiver) {
       return toIntOrNull_0($receiver, 10);
@@ -31031,7 +33465,7 @@
         start = 1;
         if (firstChar === 45) {
           isNegative = true;
-          limit = IntCompanionObject.MIN_VALUE;
+          limit = kotlin_js_internal_IntCompanionObject.MIN_VALUE;
         }
          else if (firstChar === 43) {
           isNegative = false;
@@ -31059,7 +33493,7 @@
           return null;
         result = result - digit | 0;
       }
-      return isNegative ? result : -result;
+      return isNegative ? result : -result | 0;
     }
     function toLongOrNull($receiver) {
       return toLongOrNull_0($receiver, 10);
@@ -31136,10 +33570,11 @@
       };
     }));
     var trim_0 = defineInlineFunction('kotlin.kotlin.text.trim_ouje1d$', wrapFunction(function () {
+      var throwCCE = Kotlin.throwCCE;
       var toBoxedChar = Kotlin.toBoxedChar;
       return function ($receiver, predicate) {
         var tmp$;
-        var $receiver_0 = Kotlin.isCharSequence(tmp$ = $receiver) ? tmp$ : Kotlin.throwCCE();
+        var $receiver_0 = Kotlin.isCharSequence(tmp$ = $receiver) ? tmp$ : throwCCE();
         var startIndex = 0;
         var endIndex = $receiver_0.length - 1 | 0;
         var startFound = false;
@@ -31178,11 +33613,12 @@
       };
     }));
     var trimStart_0 = defineInlineFunction('kotlin.kotlin.text.trimStart_ouje1d$', wrapFunction(function () {
+      var throwCCE = Kotlin.throwCCE;
       var get_indices = _.kotlin.text.get_indices_gw00vp$;
       var toBoxedChar = Kotlin.toBoxedChar;
       return function ($receiver, predicate) {
         var tmp$;
-        var $receiver_0 = Kotlin.isCharSequence(tmp$ = $receiver) ? tmp$ : Kotlin.throwCCE();
+        var $receiver_0 = Kotlin.isCharSequence(tmp$ = $receiver) ? tmp$ : throwCCE();
         var trimStart$result;
         trimStart$break: do {
           var tmp$_0, tmp$_1, tmp$_2, tmp$_3;
@@ -31218,12 +33654,13 @@
       };
     }));
     var trimEnd_0 = defineInlineFunction('kotlin.kotlin.text.trimEnd_ouje1d$', wrapFunction(function () {
+      var throwCCE = Kotlin.throwCCE;
       var get_indices = _.kotlin.text.get_indices_gw00vp$;
       var reversed = _.kotlin.ranges.reversed_zf1xzc$;
       var toBoxedChar = Kotlin.toBoxedChar;
       return function ($receiver, predicate) {
         var tmp$;
-        var $receiver_0 = Kotlin.isCharSequence(tmp$ = $receiver) ? tmp$ : Kotlin.throwCCE();
+        var $receiver_0 = Kotlin.isCharSequence(tmp$ = $receiver) ? tmp$ : throwCCE();
         var trimEnd$result;
         trimEnd$break: do {
           var tmp$_0;
@@ -31265,7 +33702,7 @@
     }
     function trim_2($receiver, chars) {
       var tmp$;
-      var $receiver_0 = Kotlin.isCharSequence(tmp$ = $receiver) ? tmp$ : Kotlin.throwCCE();
+      var $receiver_0 = Kotlin.isCharSequence(tmp$ = $receiver) ? tmp$ : throwCCE();
       var startIndex = 0;
       var endIndex = $receiver_0.length - 1 | 0;
       var startFound = false;
@@ -31308,7 +33745,7 @@
     }
     function trimStart_2($receiver, chars) {
       var tmp$;
-      var $receiver_0 = Kotlin.isCharSequence(tmp$ = $receiver) ? tmp$ : Kotlin.throwCCE();
+      var $receiver_0 = Kotlin.isCharSequence(tmp$ = $receiver) ? tmp$ : throwCCE();
       var trimStart$result;
       trimStart$break: do {
         var tmp$_0, tmp$_1, tmp$_2, tmp$_3;
@@ -31346,7 +33783,7 @@
     }
     function trimEnd_2($receiver, chars) {
       var tmp$;
-      var $receiver_0 = Kotlin.isCharSequence(tmp$ = $receiver) ? tmp$ : Kotlin.throwCCE();
+      var $receiver_0 = Kotlin.isCharSequence(tmp$ = $receiver) ? tmp$ : throwCCE();
       var trimEnd$result;
       trimEnd$break: do {
         var tmp$_0;
@@ -31386,10 +33823,11 @@
       return Kotlin.subSequence($receiver, startIndex, endIndex + 1 | 0);
     }
     var trim_4 = defineInlineFunction('kotlin.kotlin.text.trim_pdl1vz$', wrapFunction(function () {
+      var throwCCE = Kotlin.throwCCE;
       var trim = _.kotlin.text.trim_gw00vp$;
       return function ($receiver) {
         var tmp$;
-        return trim(Kotlin.isCharSequence(tmp$ = $receiver) ? tmp$ : Kotlin.throwCCE()).toString();
+        return trim(Kotlin.isCharSequence(tmp$ = $receiver) ? tmp$ : throwCCE()).toString();
       };
     }));
     function trimStart_3($receiver) {
@@ -31412,10 +33850,11 @@
       return trimStart$result;
     }
     var trimStart_4 = defineInlineFunction('kotlin.kotlin.text.trimStart_pdl1vz$', wrapFunction(function () {
+      var throwCCE = Kotlin.throwCCE;
       var trimStart = _.kotlin.text.trimStart_gw00vp$;
       return function ($receiver) {
         var tmp$;
-        return trimStart(Kotlin.isCharSequence(tmp$ = $receiver) ? tmp$ : Kotlin.throwCCE()).toString();
+        return trimStart(Kotlin.isCharSequence(tmp$ = $receiver) ? tmp$ : throwCCE()).toString();
       };
     }));
     function trimEnd_3($receiver) {
@@ -31436,10 +33875,11 @@
       return trimEnd$result;
     }
     var trimEnd_4 = defineInlineFunction('kotlin.kotlin.text.trimEnd_pdl1vz$', wrapFunction(function () {
+      var throwCCE = Kotlin.throwCCE;
       var trimEnd = _.kotlin.text.trimEnd_gw00vp$;
       return function ($receiver) {
         var tmp$;
-        return trimEnd(Kotlin.isCharSequence(tmp$ = $receiver) ? tmp$ : Kotlin.throwCCE()).toString();
+        return trimEnd(Kotlin.isCharSequence(tmp$ = $receiver) ? tmp$ : throwCCE()).toString();
       };
     }));
     function padStart($receiver, length, padChar) {
@@ -31447,7 +33887,7 @@
         padChar = 32;
       var tmp$;
       if (length < 0)
-        throw new IllegalArgumentException('Desired length ' + length + ' is less than zero.');
+        throw IllegalArgumentException_init_0('Desired length ' + length + ' is less than zero.');
       if (length <= $receiver.length)
         return Kotlin.subSequence($receiver, 0, $receiver.length);
       var sb = StringBuilder_init(length);
@@ -31461,14 +33901,14 @@
       if (padChar === void 0)
         padChar = 32;
       var tmp$;
-      return padStart(Kotlin.isCharSequence(tmp$ = $receiver) ? tmp$ : Kotlin.throwCCE(), length, padChar).toString();
+      return padStart(Kotlin.isCharSequence(tmp$ = $receiver) ? tmp$ : throwCCE(), length, padChar).toString();
     }
     function padEnd($receiver, length, padChar) {
       if (padChar === void 0)
         padChar = 32;
       var tmp$;
       if (length < 0)
-        throw new IllegalArgumentException('Desired length ' + length + ' is less than zero.');
+        throw IllegalArgumentException_init_0('Desired length ' + length + ' is less than zero.');
       if (length <= $receiver.length)
         return Kotlin.subSequence($receiver, 0, $receiver.length);
       var sb = StringBuilder_init(length);
@@ -31482,11 +33922,13 @@
       if (padChar === void 0)
         padChar = 32;
       var tmp$;
-      return padEnd(Kotlin.isCharSequence(tmp$ = $receiver) ? tmp$ : Kotlin.throwCCE(), length, padChar).toString();
+      return padEnd(Kotlin.isCharSequence(tmp$ = $receiver) ? tmp$ : throwCCE(), length, padChar).toString();
     }
-    var isNullOrEmpty = defineInlineFunction('kotlin.kotlin.text.isNullOrEmpty_qc8d1o$', function ($receiver) {
-      return $receiver == null || $receiver.length === 0;
-    });
+    var isNullOrEmpty = defineInlineFunction('kotlin.kotlin.text.isNullOrEmpty_qc8d1o$', wrapFunction(function () {
+      return function ($receiver) {
+        return $receiver == null || $receiver.length === 0;
+      };
+    }));
     var isEmpty_8 = defineInlineFunction('kotlin.kotlin.text.isEmpty_gw00vp$', function ($receiver) {
       return $receiver.length === 0;
     });
@@ -31518,7 +33960,7 @@
     iterator$ObjectLiteral.prototype.hasNext = function () {
       return this.index_0 < this.this$iterator.length;
     };
-    iterator$ObjectLiteral.$metadata$ = {kind: Kotlin.Kind.CLASS, interfaces: [CharIterator]};
+    iterator$ObjectLiteral.$metadata$ = {kind: Kind_CLASS, interfaces: [CharIterator]};
     function iterator_3($receiver) {
       return new iterator$ObjectLiteral($receiver);
     }
@@ -31532,7 +33974,9 @@
       return $receiver.length - 1 | 0;
     }
     function hasSurrogatePairAt($receiver, index) {
-      return (new IntRange(0, $receiver.length - 2 | 0)).contains_mef7kx$(index) && isHighSurrogate($receiver.charCodeAt(index)) && isLowSurrogate($receiver.charCodeAt(index + 1 | 0));
+      var tmp$;
+      tmp$ = $receiver.length - 2 | 0;
+      return 0 <= index && index <= tmp$ && isHighSurrogate($receiver.charCodeAt(index)) && isLowSurrogate($receiver.charCodeAt(index + 1 | 0));
     }
     function substring_1($receiver, range) {
       return $receiver.substring(range.start, range.endInclusive + 1 | 0);
@@ -31609,20 +34053,22 @@
       return sb;
     }
     var replaceRange_0 = defineInlineFunction('kotlin.kotlin.text.replaceRange_r96sod$', wrapFunction(function () {
+      var throwCCE = Kotlin.throwCCE;
       var replaceRange = _.kotlin.text.replaceRange_p5j4qv$;
       return function ($receiver, startIndex, endIndex, replacement) {
         var tmp$;
-        return replaceRange(Kotlin.isCharSequence(tmp$ = $receiver) ? tmp$ : Kotlin.throwCCE(), startIndex, endIndex, replacement).toString();
+        return replaceRange(Kotlin.isCharSequence(tmp$ = $receiver) ? tmp$ : throwCCE(), startIndex, endIndex, replacement).toString();
       };
     }));
     function replaceRange_1($receiver, range, replacement) {
       return replaceRange($receiver, range.start, range.endInclusive + 1 | 0, replacement);
     }
     var replaceRange_2 = defineInlineFunction('kotlin.kotlin.text.replaceRange_laqjpa$', wrapFunction(function () {
+      var throwCCE = Kotlin.throwCCE;
       var replaceRange = _.kotlin.text.replaceRange_r6gztw$;
       return function ($receiver, range, replacement) {
         var tmp$;
-        return replaceRange(Kotlin.isCharSequence(tmp$ = $receiver) ? tmp$ : Kotlin.throwCCE(), range, replacement).toString();
+        return replaceRange(Kotlin.isCharSequence(tmp$ = $receiver) ? tmp$ : throwCCE(), range, replacement).toString();
       };
     }));
     function removeRange($receiver, startIndex, endIndex) {
@@ -31636,20 +34082,22 @@
       return sb;
     }
     var removeRange_0 = defineInlineFunction('kotlin.kotlin.text.removeRange_qgyqat$', wrapFunction(function () {
+      var throwCCE = Kotlin.throwCCE;
       var removeRange = _.kotlin.text.removeRange_qdpigv$;
       return function ($receiver, startIndex, endIndex) {
         var tmp$;
-        return removeRange(Kotlin.isCharSequence(tmp$ = $receiver) ? tmp$ : Kotlin.throwCCE(), startIndex, endIndex).toString();
+        return removeRange(Kotlin.isCharSequence(tmp$ = $receiver) ? tmp$ : throwCCE(), startIndex, endIndex).toString();
       };
     }));
     function removeRange_1($receiver, range) {
       return removeRange($receiver, range.start, range.endInclusive + 1 | 0);
     }
     var removeRange_2 = defineInlineFunction('kotlin.kotlin.text.removeRange_fc3b62$', wrapFunction(function () {
+      var throwCCE = Kotlin.throwCCE;
       var removeRange = _.kotlin.text.removeRange_i511yc$;
       return function ($receiver, range) {
         var tmp$;
-        return removeRange(Kotlin.isCharSequence(tmp$ = $receiver) ? tmp$ : Kotlin.throwCCE(), range).toString();
+        return removeRange(Kotlin.isCharSequence(tmp$ = $receiver) ? tmp$ : throwCCE(), range).toString();
       };
     }));
     function removePrefix($receiver, prefix) {
@@ -31703,7 +34151,7 @@
         tmp$ = missingDelimiterValue;
       else {
         var tmp$_0;
-        tmp$ = replaceRange(Kotlin.isCharSequence(tmp$_0 = $receiver) ? tmp$_0 : Kotlin.throwCCE(), 0, index, replacement).toString();
+        tmp$ = replaceRange(Kotlin.isCharSequence(tmp$_0 = $receiver) ? tmp$_0 : throwCCE(), 0, index, replacement).toString();
       }
       return tmp$;
     }
@@ -31716,7 +34164,7 @@
         tmp$ = missingDelimiterValue;
       else {
         var tmp$_0;
-        tmp$ = replaceRange(Kotlin.isCharSequence(tmp$_0 = $receiver) ? tmp$_0 : Kotlin.throwCCE(), 0, index, replacement).toString();
+        tmp$ = replaceRange(Kotlin.isCharSequence(tmp$_0 = $receiver) ? tmp$_0 : throwCCE(), 0, index, replacement).toString();
       }
       return tmp$;
     }
@@ -31731,7 +34179,7 @@
         var startIndex = index + 1 | 0;
         var endIndex = $receiver.length;
         var tmp$_0;
-        tmp$ = replaceRange(Kotlin.isCharSequence(tmp$_0 = $receiver) ? tmp$_0 : Kotlin.throwCCE(), startIndex, endIndex, replacement).toString();
+        tmp$ = replaceRange(Kotlin.isCharSequence(tmp$_0 = $receiver) ? tmp$_0 : throwCCE(), startIndex, endIndex, replacement).toString();
       }
       return tmp$;
     }
@@ -31746,7 +34194,7 @@
         var startIndex = index + delimiter.length | 0;
         var endIndex = $receiver.length;
         var tmp$_0;
-        tmp$ = replaceRange(Kotlin.isCharSequence(tmp$_0 = $receiver) ? tmp$_0 : Kotlin.throwCCE(), startIndex, endIndex, replacement).toString();
+        tmp$ = replaceRange(Kotlin.isCharSequence(tmp$_0 = $receiver) ? tmp$_0 : throwCCE(), startIndex, endIndex, replacement).toString();
       }
       return tmp$;
     }
@@ -31761,7 +34209,7 @@
         var startIndex = index + delimiter.length | 0;
         var endIndex = $receiver.length;
         var tmp$_0;
-        tmp$ = replaceRange(Kotlin.isCharSequence(tmp$_0 = $receiver) ? tmp$_0 : Kotlin.throwCCE(), startIndex, endIndex, replacement).toString();
+        tmp$ = replaceRange(Kotlin.isCharSequence(tmp$_0 = $receiver) ? tmp$_0 : throwCCE(), startIndex, endIndex, replacement).toString();
       }
       return tmp$;
     }
@@ -31776,7 +34224,7 @@
         var startIndex = index + 1 | 0;
         var endIndex = $receiver.length;
         var tmp$_0;
-        tmp$ = replaceRange(Kotlin.isCharSequence(tmp$_0 = $receiver) ? tmp$_0 : Kotlin.throwCCE(), startIndex, endIndex, replacement).toString();
+        tmp$ = replaceRange(Kotlin.isCharSequence(tmp$_0 = $receiver) ? tmp$_0 : throwCCE(), startIndex, endIndex, replacement).toString();
       }
       return tmp$;
     }
@@ -31789,7 +34237,7 @@
         tmp$ = missingDelimiterValue;
       else {
         var tmp$_0;
-        tmp$ = replaceRange(Kotlin.isCharSequence(tmp$_0 = $receiver) ? tmp$_0 : Kotlin.throwCCE(), 0, index, replacement).toString();
+        tmp$ = replaceRange(Kotlin.isCharSequence(tmp$_0 = $receiver) ? tmp$_0 : throwCCE(), 0, index, replacement).toString();
       }
       return tmp$;
     }
@@ -31802,7 +34250,7 @@
         tmp$ = missingDelimiterValue;
       else {
         var tmp$_0;
-        tmp$ = replaceRange(Kotlin.isCharSequence(tmp$_0 = $receiver) ? tmp$_0 : Kotlin.throwCCE(), 0, index, replacement).toString();
+        tmp$ = replaceRange(Kotlin.isCharSequence(tmp$_0 = $receiver) ? tmp$_0 : throwCCE(), 0, index, replacement).toString();
       }
       return tmp$;
     }
@@ -31811,6 +34259,7 @@
     });
     var replace_2 = defineInlineFunction('kotlin.kotlin.text.replace_3avfay$', wrapFunction(function () {
       var StringBuilder_init = _.kotlin.text.StringBuilder_init_za3lpa$;
+      var ensureNotNull = Kotlin.ensureNotNull;
       return function ($receiver, regex, transform) {
         var replace_20wsma$result;
         replace_20wsma$break: do {
@@ -31823,7 +34272,7 @@
           var length = $receiver.length;
           var sb = StringBuilder_init(length);
           do {
-            var foundMatch = match != null ? match : Kotlin.throwNPE();
+            var foundMatch = ensureNotNull(match);
             sb.append_ezbsdh$($receiver, lastStart, foundMatch.range.start);
             sb.append_gw00v9$(transform(foundMatch));
             lastStart = foundMatch.range.endInclusive + 1 | 0;
@@ -31852,7 +34301,7 @@
       }
       tmp$ = length - 1 | 0;
       for (var index = 0; index <= tmp$; index++) {
-        if (!equals_0($receiver.charCodeAt(thisOffset + index | 0), other.charCodeAt(otherOffset + index | 0), ignoreCase))
+        if (!equals_1($receiver.charCodeAt(thisOffset + index | 0), other.charCodeAt(otherOffset + index | 0), ignoreCase))
           return false;
       }
       return true;
@@ -31860,12 +34309,12 @@
     function startsWith_1($receiver, char, ignoreCase) {
       if (ignoreCase === void 0)
         ignoreCase = false;
-      return $receiver.length > 0 && equals_0($receiver.charCodeAt(0), char, ignoreCase);
+      return $receiver.length > 0 && equals_1($receiver.charCodeAt(0), char, ignoreCase);
     }
     function endsWith_0($receiver, char, ignoreCase) {
       if (ignoreCase === void 0)
         ignoreCase = false;
-      return $receiver.length > 0 && equals_0($receiver.charCodeAt(get_lastIndex_9($receiver)), char, ignoreCase);
+      return $receiver.length > 0 && equals_1($receiver.charCodeAt(get_lastIndex_9($receiver)), char, ignoreCase);
     }
     function startsWith_2($receiver, prefix, ignoreCase) {
       if (ignoreCase === void 0)
@@ -31896,7 +34345,7 @@
         ignoreCase = false;
       var shortestLength = Math_0.min($receiver.length, other.length);
       var i = 0;
-      while (i < shortestLength && equals_0($receiver.charCodeAt(i), other.charCodeAt(i), ignoreCase)) {
+      while (i < shortestLength && equals_1($receiver.charCodeAt(i), other.charCodeAt(i), ignoreCase)) {
         i = i + 1 | 0;
       }
       if (hasSurrogatePairAt($receiver, i - 1 | 0) || hasSurrogatePairAt(other, i - 1 | 0)) {
@@ -31911,7 +34360,7 @@
       var otherLength = other.length;
       var shortestLength = Math_0.min(thisLength, otherLength);
       var i = 0;
-      while (i < shortestLength && equals_0($receiver.charCodeAt(thisLength - i - 1 | 0), other.charCodeAt(otherLength - i - 1 | 0), ignoreCase)) {
+      while (i < shortestLength && equals_1($receiver.charCodeAt(thisLength - i - 1 | 0), other.charCodeAt(otherLength - i - 1 | 0), ignoreCase)) {
         i = i + 1 | 0;
       }
       if (hasSurrogatePairAt($receiver, thisLength - i - 1 | 0) || hasSurrogatePairAt(other, otherLength - i - 1 | 0)) {
@@ -31933,13 +34382,8 @@
         var charAtIndex = $receiver.charCodeAt(index_0);
         var indexOfFirst$result;
         indexOfFirst$break: do {
-          var tmp$_0, tmp$_1, tmp$_2, tmp$_3;
-          tmp$_0 = get_indices_7(chars);
-          tmp$_1 = tmp$_0.first;
-          tmp$_2 = tmp$_0.last;
-          tmp$_3 = tmp$_0.step;
-          for (var index_1 = tmp$_1; index_1 <= tmp$_2; index_1 += tmp$_3) {
-            if (equals_0(unboxChar(toBoxedChar(chars[index_1])), charAtIndex, ignoreCase)) {
+          for (var index_1 = 0; index_1 !== chars.length; ++index_1) {
+            if (equals_1(unboxChar(toBoxedChar(chars[index_1])), charAtIndex, ignoreCase)) {
               indexOfFirst$result = index_1;
               break indexOfFirst$break;
             }
@@ -32150,8 +34594,7 @@
             this.nextSearchIndex = -1;
           }
            else {
-            var tmp$ = match;
-            var index = tmp$.component1(), length = tmp$.component2();
+            var index = match.component1(), length = match.component2();
             this.nextItem = new IntRange(this.currentStartIndex, index - 1 | 0);
             this.currentStartIndex = index + length | 0;
             this.nextSearchIndex = this.currentStartIndex + (length === 0 ? 1 : 0) | 0;
@@ -32165,8 +34608,8 @@
       if (this.nextState === -1)
         this.calcNext_0();
       if (this.nextState === 0)
-        throw new NoSuchElementException();
-      var result = Kotlin.isType(tmp$ = this.nextItem, IntRange) ? tmp$ : Kotlin.throwCCE();
+        throw NoSuchElementException_init();
+      var result = Kotlin.isType(tmp$ = this.nextItem, IntRange) ? tmp$ : throwCCE();
       this.nextItem = null;
       this.nextState = -1;
       return result;
@@ -32176,11 +34619,11 @@
         this.calcNext_0();
       return this.nextState === 1;
     };
-    DelimitedRangesSequence$iterator$ObjectLiteral.$metadata$ = {kind: Kotlin.Kind.CLASS, interfaces: [Iterator]};
+    DelimitedRangesSequence$iterator$ObjectLiteral.$metadata$ = {kind: Kind_CLASS, interfaces: [Iterator]};
     DelimitedRangesSequence.prototype.iterator = function () {
       return new DelimitedRangesSequence$iterator$ObjectLiteral(this);
     };
-    DelimitedRangesSequence.$metadata$ = {kind: Kotlin.Kind.CLASS, simpleName: 'DelimitedRangesSequence', interfaces: [Sequence]};
+    DelimitedRangesSequence.$metadata$ = {kind: Kind_CLASS, simpleName: 'DelimitedRangesSequence', interfaces: [Sequence]};
     function rangesDelimitedBy$lambda(closure$delimiters, closure$ignoreCase) {
       return function ($receiver, startIndex) {
         var tmp$;
@@ -32196,7 +34639,7 @@
         limit = 0;
       if (!(limit >= 0)) {
         var message = 'Limit must be non-negative, but was ' + limit + '.';
-        throw new IllegalArgumentException(message.toString());
+        throw IllegalArgumentException_init_0(message.toString());
       }
       return new DelimitedRangesSequence($receiver, startIndex, limit, rangesDelimitedBy$lambda(delimiters, ignoreCase));
     }
@@ -32215,7 +34658,7 @@
         limit = 0;
       if (!(limit >= 0)) {
         var message = 'Limit must be non-negative, but was ' + limit + '.';
-        throw new IllegalArgumentException(message.toString());
+        throw IllegalArgumentException_init_0(message.toString());
       }
       var delimitersList = asList(delimiters);
       return new DelimitedRangesSequence($receiver, startIndex, limit, rangesDelimitedBy$lambda_0(delimitersList, ignoreCase));
@@ -32287,47 +34730,47 @@
     }
     function Typography() {
       Typography_instance = this;
-      this.quote = 34;
-      this.dollar = 36;
-      this.amp = 38;
-      this.less = 60;
-      this.greater = 62;
-      this.nbsp = 160;
-      this.times = 215;
-      this.cent = 162;
-      this.pound = 163;
-      this.section = 167;
-      this.copyright = 169;
-      this.leftGuillemete = 171;
-      this.rightGuillemete = 187;
-      this.registered = 174;
-      this.degree = 176;
-      this.plusMinus = 177;
-      this.paragraph = 182;
-      this.middleDot = 183;
-      this.half = 189;
-      this.ndash = 8211;
-      this.mdash = 8212;
-      this.leftSingleQuote = 8216;
-      this.rightSingleQuote = 8217;
-      this.lowSingleQuote = 8218;
-      this.leftDoubleQuote = 8220;
-      this.rightDoubleQuote = 8221;
-      this.lowDoubleQuote = 8222;
-      this.dagger = 8224;
-      this.doubleDagger = 8225;
-      this.bullet = 8226;
-      this.ellipsis = 8230;
-      this.prime = 8242;
-      this.doublePrime = 8243;
-      this.euro = 8364;
-      this.tm = 8482;
-      this.almostEqual = 8776;
-      this.notEqual = 8800;
-      this.lessOrEqual = 8804;
-      this.greaterOrEqual = 8805;
+      this.quote = toBoxedChar(34);
+      this.dollar = toBoxedChar(36);
+      this.amp = toBoxedChar(38);
+      this.less = toBoxedChar(60);
+      this.greater = toBoxedChar(62);
+      this.nbsp = toBoxedChar(160);
+      this.times = toBoxedChar(215);
+      this.cent = toBoxedChar(162);
+      this.pound = toBoxedChar(163);
+      this.section = toBoxedChar(167);
+      this.copyright = toBoxedChar(169);
+      this.leftGuillemete = toBoxedChar(171);
+      this.rightGuillemete = toBoxedChar(187);
+      this.registered = toBoxedChar(174);
+      this.degree = toBoxedChar(176);
+      this.plusMinus = toBoxedChar(177);
+      this.paragraph = toBoxedChar(182);
+      this.middleDot = toBoxedChar(183);
+      this.half = toBoxedChar(189);
+      this.ndash = toBoxedChar(8211);
+      this.mdash = toBoxedChar(8212);
+      this.leftSingleQuote = toBoxedChar(8216);
+      this.rightSingleQuote = toBoxedChar(8217);
+      this.lowSingleQuote = toBoxedChar(8218);
+      this.leftDoubleQuote = toBoxedChar(8220);
+      this.rightDoubleQuote = toBoxedChar(8221);
+      this.lowDoubleQuote = toBoxedChar(8222);
+      this.dagger = toBoxedChar(8224);
+      this.doubleDagger = toBoxedChar(8225);
+      this.bullet = toBoxedChar(8226);
+      this.ellipsis = toBoxedChar(8230);
+      this.prime = toBoxedChar(8242);
+      this.doublePrime = toBoxedChar(8243);
+      this.euro = toBoxedChar(8364);
+      this.tm = toBoxedChar(8482);
+      this.almostEqual = toBoxedChar(8776);
+      this.notEqual = toBoxedChar(8800);
+      this.lessOrEqual = toBoxedChar(8804);
+      this.greaterOrEqual = toBoxedChar(8805);
     }
-    Typography.$metadata$ = {kind: Kotlin.Kind.OBJECT, simpleName: 'Typography', interfaces: []};
+    Typography.$metadata$ = {kind: Kind_OBJECT, simpleName: 'Typography', interfaces: []};
     var Typography_instance = null;
     function Typography_getInstance() {
       if (Typography_instance === null) {
@@ -32337,10 +34780,10 @@
     }
     function MatchGroupCollection() {
     }
-    MatchGroupCollection.$metadata$ = {kind: Kotlin.Kind.INTERFACE, simpleName: 'MatchGroupCollection', interfaces: [Collection]};
+    MatchGroupCollection.$metadata$ = {kind: Kind_INTERFACE, simpleName: 'MatchGroupCollection', interfaces: [Collection]};
     function MatchNamedGroupCollection() {
     }
-    MatchNamedGroupCollection.$metadata$ = {kind: Kotlin.Kind.INTERFACE, simpleName: 'MatchNamedGroupCollection', interfaces: [MatchGroupCollection]};
+    MatchNamedGroupCollection.$metadata$ = {kind: Kind_INTERFACE, simpleName: 'MatchNamedGroupCollection', interfaces: [MatchGroupCollection]};
     function MatchResult() {
     }
     Object.defineProperty(MatchResult.prototype, 'destructured', {get: function () {
@@ -32382,18 +34825,18 @@
     MatchResult$Destructured.prototype.toList = function () {
       return this.match.groupValues.subList_vux9f0$(1, this.match.groupValues.size);
     };
-    MatchResult$Destructured.$metadata$ = {kind: Kotlin.Kind.CLASS, simpleName: 'Destructured', interfaces: []};
-    MatchResult.$metadata$ = {kind: Kotlin.Kind.INTERFACE, simpleName: 'MatchResult', interfaces: []};
+    MatchResult$Destructured.$metadata$ = {kind: Kind_CLASS, simpleName: 'Destructured', interfaces: []};
+    MatchResult.$metadata$ = {kind: Kind_INTERFACE, simpleName: 'MatchResult', interfaces: []};
     var toRegex = defineInlineFunction('kotlin.kotlin.text.toRegex_pdl1vz$', wrapFunction(function () {
-      var Regex = _.kotlin.text.Regex_61zpoe$;
+      var Regex_init = _.kotlin.text.Regex_init_61zpoe$;
       return function ($receiver) {
-        return Regex($receiver);
+        return Regex_init($receiver);
       };
     }));
     var toRegex_0 = defineInlineFunction('kotlin.kotlin.text.toRegex_2jdgi1$', wrapFunction(function () {
-      var Regex = _.kotlin.text.Regex_sb3q2$;
+      var Regex_init = _.kotlin.text.Regex_init_sb3q2$;
       return function ($receiver, option) {
-        return Regex($receiver, option);
+        return Regex_init($receiver, option);
       };
     }));
     var toRegex_1 = defineInlineFunction('kotlin.kotlin.text.toRegex_8ioxci$', wrapFunction(function () {
@@ -32409,10 +34852,29 @@
       this.patch = patch;
       this.version_0 = this.versionOf_0(this.major, this.minor, this.patch);
     }
+    function KotlinVersion$versionOf$lambda(closure$major, closure$minor, closure$patch) {
+      return function () {
+        return 'Version components are out of range: ' + closure$major + '.' + closure$minor + '.' + closure$patch;
+      };
+    }
     KotlinVersion.prototype.versionOf_0 = function (major, minor, patch) {
-      if (!((new IntRange(0, KotlinVersion$Companion_getInstance().MAX_COMPONENT_VALUE)).contains_mef7kx$(major) && (new IntRange(0, KotlinVersion$Companion_getInstance().MAX_COMPONENT_VALUE)).contains_mef7kx$(minor) && (new IntRange(0, KotlinVersion$Companion_getInstance().MAX_COMPONENT_VALUE)).contains_mef7kx$(patch))) {
-        var message = 'Version components are out of range: ' + major + '.' + minor + '.' + patch;
-        throw new IllegalArgumentException(message.toString());
+      var tmp$, tmp$_0, tmp$_1, tmp$_2, tmp$_3;
+      tmp$ = KotlinVersion$Companion_getInstance().MAX_COMPONENT_VALUE;
+      if (0 <= major && major <= tmp$) {
+        tmp$_0 = KotlinVersion$Companion_getInstance().MAX_COMPONENT_VALUE;
+        tmp$_1 = (0 <= minor && minor <= tmp$_0);
+      }
+       else
+        tmp$_1 = false;
+      if (tmp$_1) {
+        tmp$_2 = KotlinVersion$Companion_getInstance().MAX_COMPONENT_VALUE;
+        tmp$_3 = (0 <= patch && patch <= tmp$_2);
+      }
+       else
+        tmp$_3 = false;
+      if (!tmp$_3) {
+        var message = KotlinVersion$versionOf$lambda(major, minor, patch)();
+        throw IllegalArgumentException_init_0(message.toString());
       }
       return (major << 16) + (minor << 8) + patch | 0;
     };
@@ -32445,9 +34907,9 @@
     function KotlinVersion$Companion() {
       KotlinVersion$Companion_instance = this;
       this.MAX_COMPONENT_VALUE = 255;
-      this.CURRENT = new KotlinVersion(1, 1, 50);
+      this.CURRENT = new KotlinVersion(1, 2, 20);
     }
-    KotlinVersion$Companion.$metadata$ = {kind: Kotlin.Kind.OBJECT, simpleName: 'Companion', interfaces: []};
+    KotlinVersion$Companion.$metadata$ = {kind: Kind_OBJECT, simpleName: 'Companion', interfaces: []};
     var KotlinVersion$Companion_instance = null;
     function KotlinVersion$Companion_getInstance() {
       if (KotlinVersion$Companion_instance === null) {
@@ -32455,19 +34917,25 @@
       }
       return KotlinVersion$Companion_instance;
     }
-    KotlinVersion.$metadata$ = {kind: Kotlin.Kind.CLASS, simpleName: 'KotlinVersion', interfaces: [Comparable]};
+    KotlinVersion.$metadata$ = {kind: Kind_CLASS, simpleName: 'KotlinVersion', interfaces: [Comparable]};
     function KotlinVersion_init(major, minor, $this) {
       $this = $this || Object.create(KotlinVersion.prototype);
       KotlinVersion.call($this, major, minor, 0);
       return $this;
     }
+    var get_isInitialized = defineInlineFunction('kotlin.kotlin.get_isInitialized_texjl9$', wrapFunction(function () {
+      var NotImplementedError_init = _.kotlin.NotImplementedError;
+      return function ($receiver) {
+        throw new NotImplementedError_init('Implementation is intrinsic');
+      };
+    }));
     function Lazy() {
     }
-    Lazy.$metadata$ = {kind: Kotlin.Kind.INTERFACE, simpleName: 'Lazy', interfaces: []};
+    Lazy.$metadata$ = {kind: Kind_INTERFACE, simpleName: 'Lazy', interfaces: []};
     function lazyOf(value) {
       return new InitializedLazyImpl(value);
     }
-    var getValue_2 = defineInlineFunction('kotlin.kotlin.getValue_thokl7$', function ($receiver, thisRef, property) {
+    var getValue_3 = defineInlineFunction('kotlin.kotlin.getValue_thokl7$', function ($receiver, thisRef, property) {
       return $receiver.value;
     });
     function LazyThreadSafetyMode(name, ordinal) {
@@ -32497,7 +34965,7 @@
       LazyThreadSafetyMode_initFields();
       return LazyThreadSafetyMode$NONE_instance;
     }
-    LazyThreadSafetyMode.$metadata$ = {kind: Kotlin.Kind.CLASS, simpleName: 'LazyThreadSafetyMode', interfaces: [Enum]};
+    LazyThreadSafetyMode.$metadata$ = {kind: Kind_CLASS, simpleName: 'LazyThreadSafetyMode', interfaces: [Enum]};
     function LazyThreadSafetyMode$values() {
       return [LazyThreadSafetyMode$SYNCHRONIZED_getInstance(), LazyThreadSafetyMode$PUBLICATION_getInstance(), LazyThreadSafetyMode$NONE_getInstance()];
     }
@@ -32510,14 +34978,14 @@
           return LazyThreadSafetyMode$PUBLICATION_getInstance();
         case 'NONE':
           return LazyThreadSafetyMode$NONE_getInstance();
-        default:Kotlin.throwISE('No enum constant kotlin.LazyThreadSafetyMode.' + name);
+        default:throwISE('No enum constant kotlin.LazyThreadSafetyMode.' + name);
       }
     }
     LazyThreadSafetyMode.valueOf_61zpoe$ = LazyThreadSafetyMode$valueOf;
     function UNINITIALIZED_VALUE() {
       UNINITIALIZED_VALUE_instance = this;
     }
-    UNINITIALIZED_VALUE.$metadata$ = {kind: Kotlin.Kind.OBJECT, simpleName: 'UNINITIALIZED_VALUE', interfaces: []};
+    UNINITIALIZED_VALUE.$metadata$ = {kind: Kind_OBJECT, simpleName: 'UNINITIALIZED_VALUE', interfaces: []};
     var UNINITIALIZED_VALUE_instance = null;
     function UNINITIALIZED_VALUE_getInstance() {
       if (UNINITIALIZED_VALUE_instance === null) {
@@ -32525,68 +34993,28 @@
       }
       return UNINITIALIZED_VALUE_instance;
     }
-    function SynchronizedLazyImpl(initializer, lock) {
-      if (lock === void 0)
-        lock = null;
-      this.initializer_0 = initializer;
-      this._value_0 = UNINITIALIZED_VALUE_getInstance();
-      this.lock_0 = lock != null ? lock : this;
-    }
-    function SynchronizedLazyImpl$get_SynchronizedLazyImpl$value$lambda(this$SynchronizedLazyImpl) {
-      return function () {
-        var tmp$, tmp$_0;
-        var _v2 = this$SynchronizedLazyImpl._value_0;
-        if (_v2 !== UNINITIALIZED_VALUE_getInstance()) {
-          return (tmp$ = _v2) == null || Kotlin.isType(tmp$, Any) ? tmp$ : Kotlin.throwCCE();
-        }
-         else {
-          var typedValue = ((tmp$_0 = this$SynchronizedLazyImpl.initializer_0) != null ? tmp$_0 : Kotlin.throwNPE())();
-          this$SynchronizedLazyImpl._value_0 = typedValue;
-          this$SynchronizedLazyImpl.initializer_0 = null;
-          return typedValue;
-        }
-      };
-    }
-    Object.defineProperty(SynchronizedLazyImpl.prototype, 'value', {get: function () {
-      var tmp$;
-      var _v1 = this._value_0;
-      if (_v1 !== UNINITIALIZED_VALUE_getInstance()) {
-        return (tmp$ = _v1) == null || Kotlin.isType(tmp$, Any) ? tmp$ : Kotlin.throwCCE();
-      }
-      return SynchronizedLazyImpl$get_SynchronizedLazyImpl$value$lambda(this)();
-    }});
-    SynchronizedLazyImpl.prototype.isInitialized = function () {
-      return this._value_0 !== UNINITIALIZED_VALUE_getInstance();
-    };
-    SynchronizedLazyImpl.prototype.toString = function () {
-      return this.isInitialized() ? Kotlin.toString(this.value) : 'Lazy value not initialized yet.';
-    };
-    SynchronizedLazyImpl.prototype.writeReplace_0 = function () {
-      return new InitializedLazyImpl(this.value);
-    };
-    SynchronizedLazyImpl.$metadata$ = {kind: Kotlin.Kind.CLASS, simpleName: 'SynchronizedLazyImpl', interfaces: [Serializable, Lazy]};
     function UnsafeLazyImpl(initializer) {
       this.initializer_0 = initializer;
       this._value_0 = UNINITIALIZED_VALUE_getInstance();
     }
     Object.defineProperty(UnsafeLazyImpl.prototype, 'value', {get: function () {
-      var tmp$, tmp$_0;
+      var tmp$;
       if (this._value_0 === UNINITIALIZED_VALUE_getInstance()) {
-        this._value_0 = ((tmp$ = this.initializer_0) != null ? tmp$ : Kotlin.throwNPE())();
+        this._value_0 = ensureNotNull(this.initializer_0)();
         this.initializer_0 = null;
       }
-      return (tmp$_0 = this._value_0) == null || Kotlin.isType(tmp$_0, Any) ? tmp$_0 : Kotlin.throwCCE();
+      return (tmp$ = this._value_0) == null || Kotlin.isType(tmp$, Any) ? tmp$ : throwCCE();
     }});
     UnsafeLazyImpl.prototype.isInitialized = function () {
       return this._value_0 !== UNINITIALIZED_VALUE_getInstance();
     };
     UnsafeLazyImpl.prototype.toString = function () {
-      return this.isInitialized() ? Kotlin.toString(this.value) : 'Lazy value not initialized yet.';
+      return this.isInitialized() ? toString(this.value) : 'Lazy value not initialized yet.';
     };
     UnsafeLazyImpl.prototype.writeReplace_0 = function () {
       return new InitializedLazyImpl(this.value);
     };
-    UnsafeLazyImpl.$metadata$ = {kind: Kotlin.Kind.CLASS, simpleName: 'UnsafeLazyImpl', interfaces: [Serializable, Lazy]};
+    UnsafeLazyImpl.$metadata$ = {kind: Kind_CLASS, simpleName: 'UnsafeLazyImpl', interfaces: [Serializable, Lazy]};
     function InitializedLazyImpl(value) {
       this.value_7taq70$_0 = value;
     }
@@ -32597,34 +35025,34 @@
       return true;
     };
     InitializedLazyImpl.prototype.toString = function () {
-      return Kotlin.toString(this.value);
+      return toString(this.value);
     };
-    InitializedLazyImpl.$metadata$ = {kind: Kotlin.Kind.CLASS, simpleName: 'InitializedLazyImpl', interfaces: [Serializable, Lazy]};
+    InitializedLazyImpl.$metadata$ = {kind: Kind_CLASS, simpleName: 'InitializedLazyImpl', interfaces: [Serializable, Lazy]};
     var require_0 = defineInlineFunction('kotlin.kotlin.require_6taknv$', wrapFunction(function () {
-      var IllegalArgumentException_init = _.kotlin.IllegalArgumentException;
+      var IllegalArgumentException_init = _.kotlin.IllegalArgumentException_init_pdl1vj$;
       return function (value) {
         if (!value) {
           var message = 'Failed requirement.';
-          throw new IllegalArgumentException_init(message.toString());
+          throw IllegalArgumentException_init(message.toString());
         }
       };
     }));
     var require_1 = defineInlineFunction('kotlin.kotlin.require_4ina18$', wrapFunction(function () {
-      var IllegalArgumentException_init = _.kotlin.IllegalArgumentException;
+      var IllegalArgumentException_init = _.kotlin.IllegalArgumentException_init_pdl1vj$;
       return function (value, lazyMessage) {
         if (!value) {
           var message = lazyMessage();
-          throw new IllegalArgumentException_init(message.toString());
+          throw IllegalArgumentException_init(message.toString());
         }
       };
     }));
     var requireNotNull = defineInlineFunction('kotlin.kotlin.requireNotNull_issdgt$', wrapFunction(function () {
-      var IllegalArgumentException_init = _.kotlin.IllegalArgumentException;
+      var IllegalArgumentException_init = _.kotlin.IllegalArgumentException_init_pdl1vj$;
       return function (value) {
         var requireNotNull$result;
         if (value == null) {
           var message = 'Required value was null.';
-          throw new IllegalArgumentException_init(message.toString());
+          throw IllegalArgumentException_init(message.toString());
         }
          else {
           requireNotNull$result = value;
@@ -32633,11 +35061,11 @@
       };
     }));
     var requireNotNull_0 = defineInlineFunction('kotlin.kotlin.requireNotNull_p3yddy$', wrapFunction(function () {
-      var IllegalArgumentException_init = _.kotlin.IllegalArgumentException;
+      var IllegalArgumentException_init = _.kotlin.IllegalArgumentException_init_pdl1vj$;
       return function (value, lazyMessage) {
         if (value == null) {
           var message = lazyMessage();
-          throw new IllegalArgumentException_init(message.toString());
+          throw IllegalArgumentException_init(message.toString());
         }
          else {
           return value;
@@ -32645,30 +35073,30 @@
       };
     }));
     var check = defineInlineFunction('kotlin.kotlin.check_6taknv$', wrapFunction(function () {
-      var IllegalStateException_init = _.kotlin.IllegalStateException;
+      var IllegalStateException_init = _.kotlin.IllegalStateException_init_pdl1vj$;
       return function (value) {
         if (!value) {
           var message = 'Check failed.';
-          throw new IllegalStateException_init(message.toString());
+          throw IllegalStateException_init(message.toString());
         }
       };
     }));
     var check_0 = defineInlineFunction('kotlin.kotlin.check_4ina18$', wrapFunction(function () {
-      var IllegalStateException_init = _.kotlin.IllegalStateException;
+      var IllegalStateException_init = _.kotlin.IllegalStateException_init_pdl1vj$;
       return function (value, lazyMessage) {
         if (!value) {
           var message = lazyMessage();
-          throw new IllegalStateException_init(message.toString());
+          throw IllegalStateException_init(message.toString());
         }
       };
     }));
     var checkNotNull = defineInlineFunction('kotlin.kotlin.checkNotNull_issdgt$', wrapFunction(function () {
-      var IllegalStateException_init = _.kotlin.IllegalStateException;
+      var IllegalStateException_init = _.kotlin.IllegalStateException_init_pdl1vj$;
       return function (value) {
         var checkNotNull$result;
         if (value == null) {
           var message = 'Required value was null.';
-          throw new IllegalStateException_init(message.toString());
+          throw IllegalStateException_init(message.toString());
         }
          else {
           checkNotNull$result = value;
@@ -32677,11 +35105,11 @@
       };
     }));
     var checkNotNull_0 = defineInlineFunction('kotlin.kotlin.checkNotNull_p3yddy$', wrapFunction(function () {
-      var IllegalStateException_init = _.kotlin.IllegalStateException;
+      var IllegalStateException_init = _.kotlin.IllegalStateException_init_pdl1vj$;
       return function (value, lazyMessage) {
         if (value == null) {
           var message = lazyMessage();
-          throw new IllegalStateException_init(message.toString());
+          throw IllegalStateException_init(message.toString());
         }
          else {
           return value;
@@ -32689,18 +35117,18 @@
       };
     }));
     var error = defineInlineFunction('kotlin.kotlin.error_za3rmp$', wrapFunction(function () {
-      var IllegalStateException_init = _.kotlin.IllegalStateException;
+      var IllegalStateException_init = _.kotlin.IllegalStateException_init_pdl1vj$;
       return function (message) {
-        throw new IllegalStateException_init(message.toString());
+        throw IllegalStateException_init(message.toString());
       };
     }));
     function NotImplementedError(message) {
       if (message === void 0)
         message = 'An operation is not implemented.';
-      Error_0.call(this, message);
+      Error_init_0(message, this);
       this.name = 'NotImplementedError';
     }
-    NotImplementedError.$metadata$ = {kind: Kotlin.Kind.CLASS, simpleName: 'NotImplementedError', interfaces: [Error_0]};
+    NotImplementedError.$metadata$ = {kind: Kind_CLASS, simpleName: 'NotImplementedError', interfaces: [Error_0]};
     var TODO = defineInlineFunction('kotlin.kotlin.TODO', wrapFunction(function () {
       var NotImplementedError_init = _.kotlin.NotImplementedError;
       return function () {
@@ -32713,39 +35141,57 @@
         throw new NotImplementedError_init('An operation is not implemented: ' + reason);
       };
     }));
-    var run = defineInlineFunction('kotlin.kotlin.run_klfg04$', function (block) {
-      return block();
-    });
-    var run_0 = defineInlineFunction('kotlin.kotlin.run_96jf0l$', function ($receiver, block) {
-      return block($receiver);
-    });
-    var with_0 = defineInlineFunction('kotlin.kotlin.with_ywwgyq$', function (receiver, block) {
-      return block(receiver);
-    });
-    var apply = defineInlineFunction('kotlin.kotlin.apply_9bxh2u$', function ($receiver, block) {
-      block($receiver);
-      return $receiver;
-    });
-    var also = defineInlineFunction('kotlin.kotlin.also_9bxh2u$', function ($receiver, block) {
-      block($receiver);
-      return $receiver;
-    });
-    var let_0 = defineInlineFunction('kotlin.kotlin.let_96jf0l$', function ($receiver, block) {
-      return block($receiver);
-    });
-    var takeIf = defineInlineFunction('kotlin.kotlin.takeIf_ujn5f2$', function ($receiver, predicate) {
-      return predicate($receiver) ? $receiver : null;
-    });
-    var takeUnless = defineInlineFunction('kotlin.kotlin.takeUnless_ujn5f2$', function ($receiver, predicate) {
-      return !predicate($receiver) ? $receiver : null;
-    });
-    var repeat_0 = defineInlineFunction('kotlin.kotlin.repeat_8b5ljp$', function (times, action) {
-      var tmp$;
-      tmp$ = times - 1 | 0;
-      for (var index = 0; index <= tmp$; index++) {
-        action(index);
-      }
-    });
+    var run = defineInlineFunction('kotlin.kotlin.run_klfg04$', wrapFunction(function () {
+      return function (block) {
+        return block();
+      };
+    }));
+    var run_0 = defineInlineFunction('kotlin.kotlin.run_96jf0l$', wrapFunction(function () {
+      return function ($receiver, block) {
+        return block($receiver);
+      };
+    }));
+    var with_0 = defineInlineFunction('kotlin.kotlin.with_ywwgyq$', wrapFunction(function () {
+      return function (receiver, block) {
+        return block(receiver);
+      };
+    }));
+    var apply = defineInlineFunction('kotlin.kotlin.apply_9bxh2u$', wrapFunction(function () {
+      return function ($receiver, block) {
+        block($receiver);
+        return $receiver;
+      };
+    }));
+    var also = defineInlineFunction('kotlin.kotlin.also_9bxh2u$', wrapFunction(function () {
+      return function ($receiver, block) {
+        block($receiver);
+        return $receiver;
+      };
+    }));
+    var let_0 = defineInlineFunction('kotlin.kotlin.let_96jf0l$', wrapFunction(function () {
+      return function ($receiver, block) {
+        return block($receiver);
+      };
+    }));
+    var takeIf = defineInlineFunction('kotlin.kotlin.takeIf_ujn5f2$', wrapFunction(function () {
+      return function ($receiver, predicate) {
+        return predicate($receiver) ? $receiver : null;
+      };
+    }));
+    var takeUnless = defineInlineFunction('kotlin.kotlin.takeUnless_ujn5f2$', wrapFunction(function () {
+      return function ($receiver, predicate) {
+        return !predicate($receiver) ? $receiver : null;
+      };
+    }));
+    var repeat_0 = defineInlineFunction('kotlin.kotlin.repeat_8b5ljp$', wrapFunction(function () {
+      return function (times, action) {
+        var tmp$;
+        tmp$ = times - 1 | 0;
+        for (var index = 0; index <= tmp$; index++) {
+          action(index);
+        }
+      };
+    }));
     function Pair(first, second) {
       this.first = first;
       this.second = second;
@@ -32753,7 +35199,7 @@
     Pair.prototype.toString = function () {
       return '(' + this.first + ', ' + this.second + ')';
     };
-    Pair.$metadata$ = {kind: Kotlin.Kind.CLASS, simpleName: 'Pair', interfaces: [Serializable]};
+    Pair.$metadata$ = {kind: Kind_CLASS, simpleName: 'Pair', interfaces: [Serializable]};
     Pair.prototype.component1 = function () {
       return this.first;
     };
@@ -32786,7 +35232,7 @@
     Triple.prototype.toString = function () {
       return '(' + this.first + ', ' + this.second + ', ' + this.third + ')';
     };
-    Triple.$metadata$ = {kind: Kotlin.Kind.CLASS, simpleName: 'Triple', interfaces: [Serializable]};
+    Triple.$metadata$ = {kind: Kind_CLASS, simpleName: 'Triple', interfaces: [Serializable]};
     Triple.prototype.component1 = function () {
       return this.first;
     };
@@ -32831,6 +35277,8 @@
     package$jvm.JvmName = JvmName;
     package$jvm.JvmMultifileClass = JvmMultifileClass;
     package$jvm.JvmField = JvmField;
+    package$jvm.Volatile = Volatile;
+    package$jvm.Synchronized = Synchronized;
     _.arrayIterator = arrayIterator;
     _.booleanArrayIterator = booleanArrayIterator;
     _.byteArrayIterator = byteArrayIterator;
@@ -32863,8 +35311,17 @@
     package$collections.listOf_mh5how$ = listOf;
     package$collections.setOf_mh5how$ = setOf;
     package$collections.mapOf_x2b85n$ = mapOf;
+    package$collections.fill_dwdffb$ = fill;
+    package$collections.shuffle_vvxzk3$ = shuffle;
+    package$collections.shuffled_7wnvza$ = shuffled;
     package$collections.sort_4wi501$ = sort_0;
     package$collections.sortWith_nqfjgj$ = sortWith;
+    package$collections.arrayOfNulls_qnun48$ = arrayOfNulls;
+    package$collections.toSingletonMapOrSelf_1vp4qn$ = toSingletonMapOrSelf;
+    package$collections.toMutableMap_abgq59$ = toMutableMap;
+    package$collections.toSingletonMap_3imywq$ = toSingletonMap;
+    package$collections.copyOf_us0mfu$ = copyOf;
+    package$collections.copyToArrayOfAny_e0iprw$ = copyToArrayOfAny;
     package$collections.AbstractMutableCollection = AbstractMutableCollection;
     package$collections.AbstractMutableList = AbstractMutableList;
     AbstractMutableMap.SimpleEntry_init_trwmqg$ = AbstractMutableMap$AbstractMutableMap$SimpleEntry_init;
@@ -32904,8 +35361,6 @@
     package$collections.LinkedHashSet = LinkedHashSet;
     package$collections.linkedStringSetOf_vqirvp$ = linkedStringSetOf;
     package$collections.RandomAccess = RandomAccess;
-    package$kotlin.Volatile = Volatile;
-    package$kotlin.Synchronized = Synchronized;
     var package$io = package$kotlin.io || (package$kotlin.io = {});
     package$io.NodeJsOutput = NodeJsOutput;
     package$io.OutputToConsoleLog = OutputToConsoleLog;
@@ -32927,24 +35382,62 @@
     var package$intrinsics = package$experimental.intrinsics || (package$experimental.intrinsics = {});
     package$intrinsics.createCoroutineUnchecked_uao1qo$ = createCoroutineUnchecked;
     package$intrinsics.createCoroutineUnchecked_xtwlez$ = createCoroutineUnchecked_0;
+    package$js.dateLocaleOptions_49uy1x$ = dateLocaleOptions;
     package$js.iterator_s8jyvk$ = iterator;
     _.throwNPE = throwNPE;
-    _.throwCCE = throwCCE;
+    _.throwCCE = throwCCE_0;
     _.throwISE = throwISE;
+    _.throwUPAE = throwUPAE;
+    package$kotlin.Error_init = Error_init;
+    package$kotlin.Error_init_pdl1vj$ = Error_init_0;
+    package$kotlin.Error_init_dbl4no$ = Error_init_1;
     package$kotlin.Error = Error_0;
+    package$kotlin.Exception_init = Exception_init;
+    package$kotlin.Exception_init_pdl1vj$ = Exception_init_0;
+    package$kotlin.Exception_init_dbl4no$ = Exception_init_1;
     package$kotlin.Exception = Exception;
+    package$kotlin.RuntimeException_init = RuntimeException_init;
+    package$kotlin.RuntimeException_init_pdl1vj$ = RuntimeException_init_0;
+    package$kotlin.RuntimeException_init_dbl4no$ = RuntimeException_init_1;
     package$kotlin.RuntimeException = RuntimeException;
+    package$kotlin.IllegalArgumentException_init = IllegalArgumentException_init;
+    package$kotlin.IllegalArgumentException_init_pdl1vj$ = IllegalArgumentException_init_0;
+    package$kotlin.IllegalArgumentException_init_dbl4no$ = IllegalArgumentException_init_1;
     package$kotlin.IllegalArgumentException = IllegalArgumentException;
+    package$kotlin.IllegalStateException_init = IllegalStateException_init;
+    package$kotlin.IllegalStateException_init_pdl1vj$ = IllegalStateException_init_0;
+    package$kotlin.IllegalStateException_init_dbl4no$ = IllegalStateException_init_1;
     package$kotlin.IllegalStateException = IllegalStateException;
+    package$kotlin.IndexOutOfBoundsException_init = IndexOutOfBoundsException_init;
     package$kotlin.IndexOutOfBoundsException = IndexOutOfBoundsException;
+    package$kotlin.ConcurrentModificationException_init = ConcurrentModificationException_init;
+    package$kotlin.ConcurrentModificationException_init_pdl1vj$ = ConcurrentModificationException_init_0;
+    package$kotlin.ConcurrentModificationException_init_dbl4no$ = ConcurrentModificationException_init_1;
     package$kotlin.ConcurrentModificationException = ConcurrentModificationException;
+    package$kotlin.UnsupportedOperationException_init = UnsupportedOperationException_init;
+    package$kotlin.UnsupportedOperationException_init_pdl1vj$ = UnsupportedOperationException_init_0;
+    package$kotlin.UnsupportedOperationException_init_dbl4no$ = UnsupportedOperationException_init_1;
     package$kotlin.UnsupportedOperationException = UnsupportedOperationException;
+    package$kotlin.NumberFormatException_init = NumberFormatException_init;
     package$kotlin.NumberFormatException = NumberFormatException;
+    package$kotlin.NullPointerException_init = NullPointerException_init;
     package$kotlin.NullPointerException = NullPointerException;
+    package$kotlin.ClassCastException_init = ClassCastException_init;
     package$kotlin.ClassCastException = ClassCastException;
+    package$kotlin.AssertionError_init = AssertionError_init;
+    package$kotlin.AssertionError_init_pdl1vj$ = AssertionError_init_0;
+    package$kotlin.AssertionError_init_s8jyv4$ = AssertionError_init_1;
     package$kotlin.AssertionError = AssertionError;
+    package$kotlin.NoSuchElementException_init = NoSuchElementException_init;
     package$kotlin.NoSuchElementException = NoSuchElementException;
+    package$kotlin.NoWhenBranchMatchedException_init = NoWhenBranchMatchedException_init;
+    package$kotlin.NoWhenBranchMatchedException_init_pdl1vj$ = NoWhenBranchMatchedException_init_0;
+    package$kotlin.NoWhenBranchMatchedException_init_dbl4no$ = NoWhenBranchMatchedException_init_1;
     package$kotlin.NoWhenBranchMatchedException = NoWhenBranchMatchedException;
+    package$kotlin.UninitializedPropertyAccessException_init = UninitializedPropertyAccessException_init;
+    package$kotlin.UninitializedPropertyAccessException_init_pdl1vj$ = UninitializedPropertyAccessException_init_0;
+    package$kotlin.UninitializedPropertyAccessException_init_dbl4no$ = UninitializedPropertyAccessException_init_1;
+    package$kotlin.UninitializedPropertyAccessException = UninitializedPropertyAccessException;
     package$collections.contains_mjy6jw$ = contains;
     package$collections.contains_jlnu8a$ = contains_0;
     package$collections.contains_s7ir3o$ = contains_1;
@@ -33026,33 +35519,33 @@
     package$collections.indexOf_taaqy$ = indexOf_5;
     package$collections.indexOf_yax8s4$ = indexOf_6;
     package$collections.indexOf_o2f9me$ = indexOf_7;
-    package$collections.get_indices_m7z4lg$ = get_indices;
     package$collections.indexOfFirst_sfx99b$ = indexOfFirst;
-    package$collections.get_indices_964n91$ = get_indices_0;
     package$collections.indexOfFirst_c3i447$ = indexOfFirst_0;
-    package$collections.get_indices_i2lc79$ = get_indices_1;
     package$collections.indexOfFirst_247xw3$ = indexOfFirst_1;
-    package$collections.get_indices_tmsbgo$ = get_indices_2;
     package$collections.indexOfFirst_il4kyb$ = indexOfFirst_2;
-    package$collections.get_indices_se6h4x$ = get_indices_3;
     package$collections.indexOfFirst_i1oc7r$ = indexOfFirst_3;
-    package$collections.get_indices_rjqryz$ = get_indices_4;
     package$collections.indexOfFirst_u4nq1f$ = indexOfFirst_4;
-    package$collections.get_indices_bvy38s$ = get_indices_5;
     package$collections.indexOfFirst_3vq27r$ = indexOfFirst_5;
-    package$collections.get_indices_l1lu5t$ = get_indices_6;
     package$collections.indexOfFirst_xffwn9$ = indexOfFirst_6;
-    package$collections.get_indices_355ntz$ = get_indices_7;
     package$collections.indexOfFirst_3ji0pj$ = indexOfFirst_7;
+    package$collections.get_indices_m7z4lg$ = get_indices;
     package$collections.reversed_7wnvza$ = reversed_8;
     package$collections.indexOfLast_sfx99b$ = indexOfLast;
+    package$collections.get_indices_964n91$ = get_indices_0;
     package$collections.indexOfLast_c3i447$ = indexOfLast_0;
+    package$collections.get_indices_i2lc79$ = get_indices_1;
     package$collections.indexOfLast_247xw3$ = indexOfLast_1;
+    package$collections.get_indices_tmsbgo$ = get_indices_2;
     package$collections.indexOfLast_il4kyb$ = indexOfLast_2;
+    package$collections.get_indices_se6h4x$ = get_indices_3;
     package$collections.indexOfLast_i1oc7r$ = indexOfLast_3;
+    package$collections.get_indices_rjqryz$ = get_indices_4;
     package$collections.indexOfLast_u4nq1f$ = indexOfLast_4;
+    package$collections.get_indices_bvy38s$ = get_indices_5;
     package$collections.indexOfLast_3vq27r$ = indexOfLast_5;
+    package$collections.get_indices_l1lu5t$ = get_indices_6;
     package$collections.indexOfLast_xffwn9$ = indexOfLast_6;
+    package$collections.get_indices_355ntz$ = get_indices_7;
     package$collections.indexOfLast_3ji0pj$ = indexOfLast_7;
     package$collections.last_us0mfu$ = last;
     package$collections.last_964n91$ = last_0;
@@ -34003,7 +36496,6 @@
     package$collections.sum_bvy38s$ = sum_10;
     package$collections.asList_us0mfu$ = asList;
     package$collections.asList_355ntz$ = asList_7;
-    package$collections.copyOf_us0mfu$ = copyOf;
     package$collections.copyOf_964n91$ = copyOf_0;
     package$collections.copyOf_i2lc79$ = copyOf_1;
     package$collections.copyOf_tmsbgo$ = copyOf_2;
@@ -34204,6 +36696,8 @@
     package$collections.sumByDouble_k0tf9a$ = sumByDouble_8;
     package$collections.requireNoNulls_m3lr2h$ = requireNoNulls_0;
     package$collections.requireNoNulls_whsx6z$ = requireNoNulls_1;
+    package$collections.chunked_ba2ldo$ = chunked;
+    package$collections.chunked_oqjilr$ = chunked_0;
     package$collections.minus_2ws7j4$ = minus;
     package$collections.minus_4gmyjx$ = minus_0;
     package$collections.minus_q4559j$ = minus_1;
@@ -34217,10 +36711,14 @@
     package$collections.plus_mydzjv$ = plus_31;
     package$collections.plus_i0e5px$ = plus_32;
     package$collections.plus_hjm0xj$ = plus_33;
+    package$collections.windowed_vo9c23$ = windowed;
+    package$collections.windowed_au5p4$ = windowed_0;
     package$collections.zip_xiheex$ = zip_51;
     package$collections.zip_curaua$ = zip_52;
     package$collections.zip_45mdf7$ = zip_53;
     package$collections.zip_3h9v02$ = zip_54;
+    package$collections.zipWithNext_7wnvza$ = zipWithNext;
+    package$collections.zipWithNext_kvcuaw$ = zipWithNext_0;
     package$collections.joinTo_gcc71v$ = joinTo_8;
     package$collections.joinToString_fmv235$ = joinToString_8;
     package$collections.asSequence_7wnvza$ = asSequence_8;
@@ -34470,6 +36968,8 @@
     package$sequences.sumBy_gvemys$ = sumBy_9;
     package$sequences.sumByDouble_b4hqx8$ = sumByDouble_9;
     package$sequences.requireNoNulls_q2m9h7$ = requireNoNulls_2;
+    package$sequences.chunked_wuwhe2$ = chunked_1;
+    package$sequences.chunked_b62g8t$ = chunked_2;
     package$sequences.minus_9h40j2$ = minus_3;
     package$sequences.minus_5jckhn$ = minus_4;
     package$sequences.minus_639hpx$ = minus_5;
@@ -34479,8 +36979,12 @@
     package$sequences.plus_5jckhn$ = plus_35;
     package$sequences.plus_639hpx$ = plus_36;
     package$sequences.plus_v0iwhp$ = plus_37;
+    package$sequences.windowed_1ll6yl$ = windowed_1;
+    package$sequences.windowed_4fyara$ = windowed_2;
     package$sequences.zip_r7q3s9$ = zip_55;
     package$sequences.zip_etk53i$ = zip_56;
+    package$sequences.zipWithNext_veqyi0$ = zipWithNext_1;
+    package$sequences.zipWithNext_k332kq$ = zipWithNext_2;
     package$sequences.joinTo_q99qgx$ = joinTo_9;
     package$sequences.joinToString_853xkz$ = joinToString_9;
     package$sequences.asIterable_veqyi0$ = asIterable_10;
@@ -34603,33 +37107,59 @@
     package$text.reduceRightIndexed_8uyn22$ = reduceRightIndexed_9;
     package$text.sumBy_kg4n8i$ = sumBy_10;
     package$text.sumByDouble_4bpanu$ = sumByDouble_10;
+    package$text.chunked_94bcnn$ = chunked_3;
+    package$text.chunked_hq8uo9$ = chunked_4;
+    package$text.chunkedSequence_94bcnn$ = chunkedSequence;
+    package$text.chunkedSequence_hq8uo9$ = chunkedSequence_0;
     package$text.partition_2pivbd$ = partition_10;
     package$text.partition_ouje1d$ = partition_11;
+    package$text.windowed_l0nco6$ = windowed_3;
+    package$text.windowed_tbil1a$ = windowed_4;
+    package$text.windowedSequence_l0nco6$ = windowedSequence;
+    package$text.windowedSequence_tbil1a$ = windowedSequence_0;
     package$text.zip_b6aurr$ = zip_57;
     package$text.zip_tac5w1$ = zip_58;
+    package$text.zipWithNext_gw00vp$ = zipWithNext_3;
+    package$text.zipWithNext_hf4kax$ = zipWithNext_4;
     package$text.asIterable_gw00vp$ = asIterable_11;
     package$text.asSequence_gw00vp$ = asSequence_11;
     package$collections.eachCount_kji7v9$ = eachCount;
+    package$io.Serializable = Serializable;
     package$js.json_pyyo18$ = json;
     package$js.add_g26eq9$ = add;
     package$kotlin.lazy_klfg04$ = lazy;
     package$kotlin.lazy_kls4a0$ = lazy_0;
     package$kotlin.lazy_c7lj6g$ = lazy_1;
-    package$kotlin.arrayOfNulls_qnun48$ = arrayOfNulls;
     package$kotlin.fillFrom_dgzutr$ = fillFrom;
     package$kotlin.arrayCopyResize_xao4iu$ = arrayCopyResize;
     package$kotlin.arrayPlusCollection_ksxw79$ = arrayPlusCollection;
     package$kotlin.fillFromCollection_40q1uj$ = fillFromCollection;
     package$kotlin.copyArrayType_dgzutr$ = copyArrayType;
-    package$kotlin.toSingletonMapOrSelf_1vp4qn$ = toSingletonMapOrSelf;
-    package$collections.toMutableMap_abgq59$ = toMutableMap;
-    package$kotlin.toSingletonMap_3imywq$ = toSingletonMap;
-    package$kotlin.copyToArrayOfAny_e0iprw$ = copyToArrayOfAny;
-    package$kotlin.Serializable = Serializable;
-    package$text.toByte_pdl1vz$ = toByte;
-    package$text.toByte_6ic1pp$ = toByte_0;
-    package$text.toShort_pdl1vz$ = toShort;
-    package$text.toShort_6ic1pp$ = toShort_0;
+    var package$math = package$kotlin.math || (package$kotlin.math = {});
+    Object.defineProperty(package$math, 'PI', {get: function () {
+      return PI;
+    }});
+    Object.defineProperty(package$math, 'E', {get: function () {
+      return E;
+    }});
+    package$math.log_lu1900$ = log;
+    package$math.round_14dthe$ = round;
+    package$math.withSign_38ydlf$ = withSign;
+    package$math.get_ulp_yrwdxr$ = get_ulp;
+    package$math.nextUp_yrwdxr$ = nextUp;
+    package$math.nextDown_yrwdxr$ = nextDown;
+    package$math.nextTowards_38ydlf$ = nextTowards;
+    package$math.roundToInt_yrwdxr$ = roundToInt;
+    package$math.roundToLong_yrwdxr$ = roundToLong;
+    package$math.abs_za3lpa$ = abs_1;
+    package$math.get_sign_s8ev3n$ = get_sign_1;
+    package$math.abs_s8cxhz$ = abs_2;
+    package$math.get_sign_mts6qi$ = get_sign_2;
+    package$text.toBoolean_pdl1vz$ = toBoolean;
+    package$text.toByte_pdl1vz$ = toByte_0;
+    package$text.toByte_6ic1pp$ = toByte_1;
+    package$text.toShort_pdl1vz$ = toShort_0;
+    package$text.toShort_6ic1pp$ = toShort_1;
     package$text.toInt_pdl1vz$ = toInt;
     package$text.toInt_6ic1pp$ = toInt_0;
     package$text.toLong_pdl1vz$ = toLong;
@@ -34644,6 +37174,8 @@
     package$kotlin.isInfinite_81szk$ = isInfinite_0;
     package$kotlin.isFinite_yrwdxr$ = isFinite;
     package$kotlin.isFinite_81szk$ = isFinite_0;
+    package$js.then_eyvp0y$ = then;
+    package$js.then_a5sxob$ = then_0;
     package$ranges.rangeTo_38ydlf$ = rangeTo_1;
     Object.defineProperty(RegexOption, 'IGNORE_CASE', {get: RegexOption$IGNORE_CASE_getInstance});
     Object.defineProperty(RegexOption, 'MULTILINE', {get: RegexOption$MULTILINE_getInstance});
@@ -34651,6 +37183,8 @@
     package$text.MatchGroup = MatchGroup;
     package$text.StringBuilder_init_za3lpa$ = StringBuilder_init;
     Object.defineProperty(Regex, 'Companion', {get: Regex$Companion_getInstance});
+    package$text.Regex_init_sb3q2$ = Regex_init;
+    package$text.Regex_init_61zpoe$ = Regex_init_0;
     package$text.Regex = Regex;
     package$text.Regex_sb3q2$ = Regex_0;
     package$text.Regex_61zpoe$ = Regex_1;
@@ -34663,7 +37197,7 @@
     package$text.endsWith_7epoxm$ = endsWith;
     package$text.matches_rjktp$ = matches;
     package$text.isBlank_gw00vp$ = isBlank;
-    package$text.equals_igcy3c$ = equals;
+    package$text.equals_igcy3c$ = equals_0;
     package$text.regionMatches_h3ii2q$ = regionMatches;
     package$text.capitalize_pdl1vz$ = capitalize;
     package$text.decapitalize_pdl1vz$ = decapitalize;
@@ -34857,6 +37391,10 @@
     var package$js_0 = package$reflect.js || (package$reflect.js = {});
     var package$internal = package$js_0.internal || (package$js_0.internal = {});
     package$internal.KClassImpl = KClassImpl;
+    package$internal.SimpleKClassImpl = SimpleKClassImpl;
+    package$internal.PrimitiveKClassImpl = PrimitiveKClassImpl;
+    Object.defineProperty(package$internal, 'NothingKClassImpl', {get: NothingKClassImpl_getInstance});
+    Object.defineProperty(package$internal, 'PrimitiveClasses', {get: PrimitiveClasses_getInstance});
     _.getKClass = getKClass;
     _.getKClassFromExpression = getKClassFromExpression;
     package$kotlin.Annotation = Annotation;
@@ -34872,7 +37410,7 @@
     package$collections.Map = Map;
     MutableMap.MutableEntry = MutableMap$MutableEntry;
     package$collections.MutableMap = MutableMap;
-    package$kotlin.Function = Function;
+    package$kotlin.Function = Function_0;
     package$collections.Iterator = Iterator;
     package$collections.MutableIterator = MutableIterator;
     package$collections.ListIterator = ListIterator;
@@ -34930,8 +37468,8 @@
     var package$internal_0 = package$kotlin.internal || (package$kotlin.internal = {});
     package$internal_0.PureReifiable = PureReifiable;
     package$internal_0.PlatformDependent = PlatformDependent;
-    package$internal_0.getProgressionLastElement_cub51b$ = getProgressionLastElement;
-    package$internal_0.getProgressionLastElement_e84ct6$ = getProgressionLastElement_0;
+    package$internal_0.getProgressionLastElement_qt1dr2$ = getProgressionLastElement;
+    package$internal_0.getProgressionLastElement_b9bd0d$ = getProgressionLastElement_0;
     package$reflect.KAnnotatedElement = KAnnotatedElement;
     package$reflect.KCallable = KCallable;
     package$reflect.KClass = KClass;
@@ -35026,7 +37564,7 @@
     package$collections.hashMapOf_qfcya0$ = hashMapOf_0;
     package$collections.linkedMapOf_qfcya0$ = linkedMapOf_0;
     package$collections.getOrElseNullable_e54js$ = getOrElseNullable;
-    package$collections.getValue_t9ocha$ = getValue_1;
+    package$collections.getValue_t9ocha$ = getValue_2;
     package$collections.mapValuesTo_8auxj8$ = mapValuesTo;
     package$collections.mapKeysTo_l1xmvz$ = mapKeysTo;
     package$collections.putAll_5gv49o$ = putAll;
@@ -35101,9 +37639,13 @@
     package$collections.hashSetOf_i5x0yv$ = hashSetOf_0;
     package$collections.linkedSetOf_i5x0yv$ = linkedSetOf_0;
     package$collections.optimizeReadOnlySet_94kdbt$ = optimizeReadOnlySet;
+    package$collections.checkWindowSizeStep_6xvm5r$ = checkWindowSizeStep;
+    package$collections.windowedSequence_38k18b$ = windowedSequence_1;
+    package$collections.windowedIterator_4ozct4$ = windowedIterator;
+    package$collections.MovingSubList = MovingSubList;
     package$comparisons.compareValuesBy_d999kh$ = compareValuesBy;
     package$comparisons.compareBy_bvgy4j$ = compareBy;
-    package$comparisons.then_15rrmw$ = then;
+    package$comparisons.then_15rrmw$ = then_1;
     package$comparisons.thenDescending_15rrmw$ = thenDescending;
     package$comparisons.nullsFirst_c94i6r$ = nullsFirst;
     package$comparisons.naturalOrder_dahdeg$ = naturalOrder;
@@ -35124,12 +37666,13 @@
     package$experimental.startCoroutine_xtwlez$ = startCoroutine_0;
     package$experimental.createCoroutine_uao1qo$ = createCoroutine;
     package$experimental.createCoroutine_xtwlez$ = createCoroutine_0;
-    package$experimental.buildSequence_of7nec$ = buildSequence;
-    package$experimental.buildIterator_of7nec$ = buildIterator;
-    package$experimental.SequenceBuilder = SequenceBuilder;
     Object.defineProperty(package$intrinsics, 'COROUTINE_SUSPENDED', {get: function () {
       return COROUTINE_SUSPENDED;
     }});
+    package$experimental.buildSequence_of7nec$ = buildSequence;
+    package$experimental.buildIterator_of7nec$ = buildIterator;
+    package$experimental.SequenceBuilder = SequenceBuilder;
+    Object.defineProperty(package$intrinsics, 'coroutineContext', {get: get_coroutineContext});
     package$internal_0.NoInfer = NoInfer;
     package$internal_0.Exact = Exact;
     package$internal_0.LowPriorityInOverloadResolution = LowPriorityInOverloadResolution;
@@ -35137,6 +37680,26 @@
     package$internal_0.OnlyInputTypes = OnlyInputTypes;
     package$internal_0.InlineOnly = InlineOnly;
     package$internal_0.DynamicExtension = DynamicExtension;
+    package$internal_0.AccessibleLateinitPropertyLiteral = AccessibleLateinitPropertyLiteral;
+    package$internal_0.RequireKotlin = RequireKotlin;
+    Object.defineProperty(RequireKotlinVersionKind, 'LANGUAGE_VERSION', {get: RequireKotlinVersionKind$LANGUAGE_VERSION_getInstance});
+    Object.defineProperty(RequireKotlinVersionKind, 'COMPILER_VERSION', {get: RequireKotlinVersionKind$COMPILER_VERSION_getInstance});
+    Object.defineProperty(RequireKotlinVersionKind, 'API_VERSION', {get: RequireKotlinVersionKind$API_VERSION_getInstance});
+    package$internal_0.RequireKotlinVersionKind = RequireKotlinVersionKind;
+    package$internal_0.ContractsDsl = ContractsDsl;
+    var package$contracts = package$internal_0.contracts || (package$internal_0.contracts = {});
+    package$contracts.ContractBuilder = ContractBuilder;
+    Object.defineProperty(InvocationKind, 'AT_MOST_ONCE', {get: InvocationKind$AT_MOST_ONCE_getInstance});
+    Object.defineProperty(InvocationKind, 'AT_LEAST_ONCE', {get: InvocationKind$AT_LEAST_ONCE_getInstance});
+    Object.defineProperty(InvocationKind, 'EXACTLY_ONCE', {get: InvocationKind$EXACTLY_ONCE_getInstance});
+    Object.defineProperty(InvocationKind, 'UNKNOWN', {get: InvocationKind$UNKNOWN_getInstance});
+    package$contracts.InvocationKind = InvocationKind;
+    package$contracts.Effect = Effect;
+    package$contracts.ConditionalEffect = ConditionalEffect;
+    package$contracts.SimpleEffect = SimpleEffect;
+    package$contracts.Returns = Returns;
+    package$contracts.ReturnsNotNull = ReturnsNotNull;
+    package$contracts.CallsInPlace = CallsInPlace;
     var package$properties = package$kotlin.properties || (package$kotlin.properties = {});
     package$properties.ObservableProperty = ObservableProperty;
     Object.defineProperty(package$properties, 'Delegates', {get: Delegates_getInstance});
@@ -35145,7 +37708,7 @@
     package$ranges.ClosedFloatingPointRange = ClosedFloatingPointRange;
     package$ranges.rangeTo_8xshf9$ = rangeTo_0;
     package$ranges.checkStepIsPositive_44uddq$ = checkStepIsPositive;
-    package$text.equals_4lte5s$ = equals_0;
+    package$text.equals_4lte5s$ = equals_1;
     package$text.isSurrogate_myv2d0$ = isSurrogate;
     package$text.trimMargin_rjktp$ = trimMargin;
     package$text.replaceIndentByMargin_j4ogox$ = replaceIndentByMargin;
@@ -35263,25 +37826,27 @@
     package$kotlin.Triple = Triple;
     package$kotlin.toList_z6mquf$ = toList_13;
     AbstractMap.prototype.getOrDefault_xwzc9p$ = Map.prototype.getOrDefault_xwzc9p$;
+    MutableMap.prototype.getOrDefault_xwzc9p$ = Map.prototype.getOrDefault_xwzc9p$;
     AbstractMutableMap.prototype.remove_xwzc9p$ = MutableMap.prototype.remove_xwzc9p$;
     InternalHashCodeMap.prototype.createJsMap = InternalMap.prototype.createJsMap;
     InternalStringMap.prototype.createJsMap = InternalMap.prototype.createJsMap;
     Object.defineProperty(findNext$ObjectLiteral.prototype, 'destructured', Object.getOwnPropertyDescriptor(MatchResult.prototype, 'destructured'));
-    MutableMap.prototype.getOrDefault_xwzc9p$ = Map.prototype.getOrDefault_xwzc9p$;
     MapWithDefault.prototype.getOrDefault_xwzc9p$ = Map.prototype.getOrDefault_xwzc9p$;
     MutableMapWithDefault.prototype.remove_xwzc9p$ = MutableMap.prototype.remove_xwzc9p$;
-    MapWithDefaultImpl.prototype.getOrDefault_xwzc9p$ = Map.prototype.getOrDefault_xwzc9p$;
-    MutableMapWithDefaultImpl.prototype.remove_xwzc9p$ = MutableMap.prototype.remove_xwzc9p$;
+    MutableMapWithDefault.prototype.getOrDefault_xwzc9p$ = MutableMap.prototype.getOrDefault_xwzc9p$;
+    MapWithDefaultImpl.prototype.getOrDefault_xwzc9p$ = MapWithDefault.prototype.getOrDefault_xwzc9p$;
+    MutableMapWithDefaultImpl.prototype.remove_xwzc9p$ = MutableMapWithDefault.prototype.remove_xwzc9p$;
+    MutableMapWithDefaultImpl.prototype.getOrDefault_xwzc9p$ = MutableMapWithDefault.prototype.getOrDefault_xwzc9p$;
     EmptyMap.prototype.getOrDefault_xwzc9p$ = Map.prototype.getOrDefault_xwzc9p$;
+    CoroutineContext$Element.prototype.plus_dvqyjb$ = CoroutineContext.prototype.plus_dvqyjb$;
     ContinuationInterceptor.prototype.get_8oh8b3$ = CoroutineContext$Element.prototype.get_8oh8b3$;
     ContinuationInterceptor.prototype.fold_m9u1mr$ = CoroutineContext$Element.prototype.fold_m9u1mr$;
     ContinuationInterceptor.prototype.minusKey_ds72xk$ = CoroutineContext$Element.prototype.minusKey_ds72xk$;
-    ContinuationInterceptor.prototype.plus_dvqyjb$ = CoroutineContext.prototype.plus_dvqyjb$;
-    CoroutineContext$Element.prototype.plus_dvqyjb$ = CoroutineContext.prototype.plus_dvqyjb$;
+    ContinuationInterceptor.prototype.plus_dvqyjb$ = CoroutineContext$Element.prototype.plus_dvqyjb$;
     AbstractCoroutineContextElement.prototype.get_8oh8b3$ = CoroutineContext$Element.prototype.get_8oh8b3$;
     AbstractCoroutineContextElement.prototype.fold_m9u1mr$ = CoroutineContext$Element.prototype.fold_m9u1mr$;
     AbstractCoroutineContextElement.prototype.minusKey_ds72xk$ = CoroutineContext$Element.prototype.minusKey_ds72xk$;
-    AbstractCoroutineContextElement.prototype.plus_dvqyjb$ = CoroutineContext.prototype.plus_dvqyjb$;
+    AbstractCoroutineContextElement.prototype.plus_dvqyjb$ = CoroutineContext$Element.prototype.plus_dvqyjb$;
     CombinedContext.prototype.plus_dvqyjb$ = CoroutineContext.prototype.plus_dvqyjb$;
     ComparableRange.prototype.contains_mef7kx$ = ClosedRange.prototype.contains_mef7kx$;
     ComparableRange.prototype.isEmpty = ClosedRange.prototype.isEmpty;
@@ -35289,7 +37854,10 @@
     output = isNode ? new NodeJsOutput(process.stdout) : new BufferedOutputToConsoleLog();
     UNDECIDED = new Any();
     RESUMED = new Any();
-    INT_MAX_POWER_OF_TWO = (IntCompanionObject.MAX_VALUE / 2 | 0) + 1 | 0;
+    PI = 3.141592653589793;
+    E = 2.718281828459045;
+    functionClasses = Kotlin.newArray(0, null);
+    INT_MAX_POWER_OF_TWO = (kotlin_js_internal_IntCompanionObject.MAX_VALUE / 2 | 0) + 1 | 0;
     State_NotReady = 0;
     State_ManyNotReady = 1;
     State_ManyReady = 2;

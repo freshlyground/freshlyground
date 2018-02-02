@@ -91,6 +91,20 @@
                                 </artifactItem>
                                 <artifactItem>
                                     <groupId>freshlyground</groupId>
+                                    <artifactId>fg-keyboard</artifactId>
+                                    <version>${project.version}</version>
+                                    <outputDirectory>../docs/js/lib/fg/keyboard</outputDirectory>
+                                    <includes>*.js</includes>
+                                </artifactItem>
+                                <artifactItem>
+                                    <groupId>freshlyground</groupId>
+                                    <artifactId>fg-agent</artifactId>
+                                    <version>${project.version}</version>
+                                    <outputDirectory>../docs/js/lib/fg/agent</outputDirectory>
+                                    <includes>*.js</includes>
+                                </artifactItem>
+                                <artifactItem>
+                                    <groupId>freshlyground</groupId>
                                     <artifactId>elements</artifactId>
                                     <version>${project.version}</version>
                                     <outputDirectory>../docs/js/lib/fg/el</outputDirectory>

@@ -3,17 +3,23 @@ if (typeof kotlin === 'undefined') {
 }
 var elements = function (_, Kotlin) {
   'use strict';
+  var throwCCE = Kotlin.throwCCE;
+  var Kind_OBJECT = Kotlin.Kind.OBJECT;
   var toMutableList = Kotlin.kotlin.collections.toMutableList_4c7yge$;
   var get_lastIndex = Kotlin.kotlin.collections.get_lastIndex_55thoc$;
-  var IllegalArgumentException = Kotlin.kotlin.IllegalArgumentException;
+  var IllegalArgumentException_init = Kotlin.kotlin.IllegalArgumentException_init_pdl1vj$;
   var reversed = Kotlin.kotlin.collections.reversed_7wnvza$;
+  var equals = Kotlin.equals;
+  var hashCode = Kotlin.hashCode;
   var startsWith = Kotlin.kotlin.text.startsWith_7epoxm$;
   var endsWith = Kotlin.kotlin.text.endsWith_7epoxm$;
   var split = Kotlin.kotlin.text.split_ip8yn$;
-  var equals = Kotlin.kotlin.text.equals_igcy3c$;
+  var equals_0 = Kotlin.kotlin.text.equals_igcy3c$;
   var isBlank = Kotlin.kotlin.text.isBlank_gw00vp$;
+  var Kind_CLASS = Kotlin.Kind.CLASS;
   var joinToString = Kotlin.kotlin.collections.joinToString_fmv235$;
   var Comparable = Kotlin.kotlin.Comparable;
+  var ensureNotNull = Kotlin.ensureNotNull;
   var substringBefore = Kotlin.kotlin.text.substringBefore_j4ogox$;
   var substringAfter = Kotlin.kotlin.text.substringAfter_j4ogox$;
   var linkedMapOf = Kotlin.kotlin.collections.linkedMapOf_qfcya0$;
@@ -21,23 +27,32 @@ var elements = function (_, Kotlin) {
   var Unit = Kotlin.kotlin.Unit;
   var Continuation = Kotlin.kotlin.coroutines.experimental.Continuation;
   var startCoroutine = Kotlin.kotlin.coroutines.experimental.startCoroutine_xtwlez$;
+  var RuntimeException_init = Kotlin.kotlin.RuntimeException_init_pdl1vj$;
   var RuntimeException = Kotlin.kotlin.RuntimeException;
+  var CoroutineImpl = Kotlin.kotlin.coroutines.experimental.CoroutineImpl;
+  var COROUTINE_SUSPENDED = Kotlin.kotlin.coroutines.experimental.intrinsics.COROUTINE_SUSPENDED;
+  var toShort = Kotlin.toShort;
   var toBoxedChar = Kotlin.toBoxedChar;
   var unboxChar = Kotlin.unboxChar;
   var padEnd = Kotlin.kotlin.text.padEnd_vrc1nu$;
   var Enum = Kotlin.kotlin.Enum;
+  var throwISE = Kotlin.throwISE;
+  var PropertyMetadata = Kotlin.PropertyMetadata;
   var List = Kotlin.kotlin.collections.List;
-  var IllegalStateException = Kotlin.kotlin.IllegalStateException;
+  var IllegalStateException_init = Kotlin.kotlin.IllegalStateException_init_pdl1vj$;
   var lazy = Kotlin.kotlin.lazy_klfg04$;
   var first = Kotlin.kotlin.collections.first_2p1efm$;
   var Pair = Kotlin.kotlin.Pair;
+  var Kind_INTERFACE = Kotlin.Kind.INTERFACE;
   var ReadWriteProperty = Kotlin.kotlin.properties.ReadWriteProperty;
   var substringBeforeLast = Kotlin.kotlin.text.substringBeforeLast_j4ogox$;
+  var toString = Kotlin.toString;
   var toDouble = Kotlin.kotlin.text.toDouble_pdl1vz$;
   var toInt = Kotlin.kotlin.text.toInt_pdl1vz$;
   var IntRange = Kotlin.kotlin.ranges.IntRange;
-  var IntCompanionObject = Kotlin.kotlin.js.internal.IntCompanionObject;
+  var kotlin_js_internal_IntCompanionObject = Kotlin.kotlin.js.internal.IntCompanionObject;
   var contains = Kotlin.kotlin.ranges.contains_bupbvv$;
+  var getCallableRef = Kotlin.getCallableRef;
   var toInt_0 = Kotlin.kotlin.text.toInt_6ic1pp$;
   var iterator = Kotlin.kotlin.text.iterator_gw00vp$;
   UnexpectedStatusException.prototype = Object.create(RuntimeException.prototype);
@@ -293,7 +308,7 @@ var elements = function (_, Kotlin) {
     var tmp$;
     if (obj1 != null && obj2 != null) {
       if (Kotlin.isComparable(obj1) && Kotlin.isComparable(obj2)) {
-        Kotlin.isComparable(tmp$ = obj1) ? tmp$ : Kotlin.throwCCE();
+        Kotlin.isComparable(tmp$ = obj1) ? tmp$ : throwCCE();
         return Kotlin.compareTo(obj1, obj2);
       }
        else {
@@ -341,7 +356,7 @@ var elements = function (_, Kotlin) {
     }
   };
   CompareTo.$metadata$ = {
-    kind: Kotlin.Kind.OBJECT,
+    kind: Kind_OBJECT,
     simpleName: 'CompareTo',
     interfaces: []
   };
@@ -401,7 +416,7 @@ var elements = function (_, Kotlin) {
   Object.defineProperty(Path.prototype, 'parent', {
     get: function () {
       if (this.elements.size === 1) {
-        throw new IllegalArgumentException('Path as not parent');
+        throw IllegalArgumentException_init('Path as not parent');
       }
       return new Path(this.absolute, this.trailingSlash, this.elements.subList_vux9f0$(0, get_lastIndex(this.elements) - 1 | 0));
     }
@@ -436,14 +451,14 @@ var elements = function (_, Kotlin) {
       return false;
     if (this.trailingSlash !== other.trailingSlash)
       return false;
-    if (!Kotlin.equals(this.elements, other.elements))
+    if (!equals(this.elements, other.elements))
       return false;
     return true;
   };
   Path.prototype.hashCode = function () {
-    var result = Kotlin.hashCode(this.absolute);
-    result = result + ((31 * result | 0) + Kotlin.hashCode(this.trailingSlash)) | 0;
-    result = result + ((31 * result | 0) + Kotlin.hashCode(this.elements)) | 0;
+    var result = hashCode(this.absolute);
+    result = result + ((31 * result | 0) + hashCode(this.trailingSlash)) | 0;
+    result = result + ((31 * result | 0) + hashCode(this.elements)) | 0;
     return result;
   };
   var emptyList = Kotlin.kotlin.collections.emptyList_287e2$;
@@ -467,7 +482,7 @@ var elements = function (_, Kotlin) {
     return new Path(absolute, trailingSlash, elements);
   };
   Path$Factory.$metadata$ = {
-    kind: Kotlin.Kind.OBJECT,
+    kind: Kind_OBJECT,
     simpleName: 'Factory',
     interfaces: []
   };
@@ -481,29 +496,29 @@ var elements = function (_, Kotlin) {
   function Path$Element(value) {
     this.value = value;
     if (isBlank(this.value)) {
-      throw new IllegalArgumentException('An Element cannot be blank');
+      throw IllegalArgumentException_init('An Element cannot be blank');
     }
   }
   Path$Element.prototype.matches_wgf8sj$ = function (other) {
-    return equals(other.value, other.value, true);
+    return equals_0(other.value, other.value, true);
   };
   Path$Element.prototype.equals = function (other) {
     if (this === other)
       return true;
     if (!Kotlin.isType(other, Path$Element))
       return false;
-    if (!Kotlin.equals(this.value, other.value))
+    if (!equals(this.value, other.value))
       return false;
     return true;
   };
   Path$Element.prototype.hashCode = function () {
-    return Kotlin.hashCode(this.value);
+    return hashCode(this.value);
   };
   Path$Element.prototype.toString = function () {
     return this.value;
   };
   Path$Element.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     simpleName: 'Element',
     interfaces: []
   };
@@ -511,18 +526,17 @@ var elements = function (_, Kotlin) {
     return it.toString();
   }
   Path.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     simpleName: 'Path',
     interfaces: [Comparable]
   };
   function toStacktrace($receiver) {
-    var tmp$;
     var stackTrace = '';
     var thisError = $receiver;
     if (thisError.stack != null) {
       stackTrace += thisError.stack;
       if ($receiver.cause != null) {
-        stackTrace = stackTrace + ('\nCaused by: ' + toStacktrace((tmp$ = $receiver.cause) != null ? tmp$ : Kotlin.throwNPE()));
+        stackTrace += '\nCaused by: ' + toStacktrace(ensureNotNull($receiver.cause));
         return stackTrace;
       }
     }
@@ -645,7 +659,7 @@ var elements = function (_, Kotlin) {
     return new URL(scheme, host, port, Path$Factory_getInstance().from_61zpoe$(path), URL$Query$Factory_getInstance().from_61zpoe$(query), fragment);
   };
   URL$Factory.$metadata$ = {
-    kind: Kotlin.Kind.OBJECT,
+    kind: Kind_OBJECT,
     simpleName: 'Factory',
     interfaces: []
   };
@@ -705,7 +719,7 @@ var elements = function (_, Kotlin) {
     return new URL$Query(map);
   };
   URL$Query$Factory.$metadata$ = {
-    kind: Kotlin.Kind.OBJECT,
+    kind: Kind_OBJECT,
     simpleName: 'Factory',
     interfaces: []
   };
@@ -717,7 +731,7 @@ var elements = function (_, Kotlin) {
     return URL$Query$Factory_instance;
   }
   URL$Query.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     simpleName: 'Query',
     interfaces: []
   };
@@ -736,7 +750,7 @@ var elements = function (_, Kotlin) {
     return this === other || (other !== null && (typeof other === 'object' && (Object.getPrototypeOf(this) === Object.getPrototypeOf(other) && Kotlin.equals(this.map, other.map))));
   };
   URL.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     simpleName: 'URL',
     interfaces: [Comparable]
   };
@@ -753,7 +767,7 @@ var elements = function (_, Kotlin) {
     console.error(toStacktrace(e));
   };
   launch$ObjectLiteral.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     interfaces: [Continuation]
   };
   function launch(block) {
@@ -796,7 +810,7 @@ var elements = function (_, Kotlin) {
     this.closure$element.appendChild_sr04hg$(errorContainerElement);
   };
   launch$ObjectLiteral_0.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     interfaces: [Continuation]
   };
   function launch_0(element, block) {
@@ -807,7 +821,7 @@ var elements = function (_, Kotlin) {
     this.name = 'InternalServerErrorException';
   }
   InternalServerErrorException.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     simpleName: 'InternalServerErrorException',
     interfaces: [UnexpectedStatusException]
   };
@@ -816,16 +830,16 @@ var elements = function (_, Kotlin) {
     this.name = 'NotFoundException';
   }
   NotFoundException.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     simpleName: 'NotFoundException',
     interfaces: [UnexpectedStatusException]
   };
   function UnexpectedStatusException(message) {
-    RuntimeException.call(this, message);
+    RuntimeException_init(message, this);
     this.name = 'UnexpectedStatusException';
   }
   UnexpectedStatusException.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     simpleName: 'UnexpectedStatusException',
     interfaces: [RuntimeException]
   };
@@ -855,20 +869,65 @@ var elements = function (_, Kotlin) {
       return safe.getResult();
     };
   }
-  function await_0($receiver, continuation) {
-    return suspendCoroutine$lambda(await$lambda($receiver))(continuation.facade);
+  function await_0($receiver_0, continuation_0, suspended) {
+    var instance = new Coroutine$await($receiver_0, continuation_0);
+    if (suspended)
+      return instance;
+    else
+      return instance.doResume(null);
   }
+  function Coroutine$await($receiver_0, continuation_0) {
+    CoroutineImpl.call(this, continuation_0);
+    this.exceptionState_0 = 1;
+    this.local$$receiver = $receiver_0;
+  }
+  Coroutine$await.$metadata$ = {
+    kind: Kotlin.Kind.CLASS,
+    simpleName: null,
+    interfaces: [CoroutineImpl]
+  };
+  Coroutine$await.prototype = Object.create(CoroutineImpl.prototype);
+  Coroutine$await.prototype.constructor = Coroutine$await;
+  Coroutine$await.prototype.doResume = function () {
+    do
+      try {
+        switch (this.state_0) {
+          case 0:
+            this.state_0 = 2;
+            this.result_0 = suspendCoroutine$lambda(await$lambda(this.local$$receiver))(this.facade);
+            if (this.result_0 === COROUTINE_SUSPENDED)
+              return COROUTINE_SUSPENDED;
+            continue;
+          case 1:
+            throw this.exception_0;
+          case 2:
+            this.result_0;
+            return this.result_0;
+        }
+      }
+       catch (e) {
+        if (this.state_0 === 1) {
+          this.exceptionState_0 = this.state_0;
+          throw e;
+        }
+         else {
+          this.state_0 = this.exceptionState_0;
+          this.exception_0 = e;
+        }
+      }
+     while (true);
+  };
   function send$lambda$lambda(closure$request, closure$cont) {
     return function (event) {
       var readyState = closure$request.readyState;
       if (readyState === XMLHttpRequest.DONE) {
-        if (closure$request.status === Kotlin.toShort(200)) {
+        if (closure$request.status === toShort(200)) {
           closure$cont.resume_11rb$(closure$request.responseText);
         }
-         else if (closure$request.status === Kotlin.toShort(404)) {
+         else if (closure$request.status === toShort(404)) {
           closure$cont.resumeWithException_tcv7n7$(new NotFoundException(closure$request.responseText));
         }
-         else if (closure$request.status === Kotlin.toShort(500)) {
+         else if (closure$request.status === toShort(500)) {
           closure$cont.resumeWithException_tcv7n7$(new InternalServerErrorException(closure$request.responseText));
         }
          else {
@@ -892,11 +951,57 @@ var elements = function (_, Kotlin) {
       return safe.getResult();
     };
   }
-  function send(request, body, continuation) {
-    if (body === void 0)
-      body = null;
-    return suspendCoroutine$lambda_0(send$lambda(request, body))(continuation.facade);
+  function send(request_0, body_0, continuation_0, suspended) {
+    var instance = new Coroutine$send(request_0, body_0, continuation_0);
+    if (suspended)
+      return instance;
+    else
+      return instance.doResume(null);
   }
+  function Coroutine$send(request_0, body_0, continuation_0) {
+    CoroutineImpl.call(this, continuation_0);
+    this.exceptionState_0 = 1;
+    this.local$request = request_0;
+    this.local$body = body_0;
+  }
+  Coroutine$send.$metadata$ = {
+    kind: Kotlin.Kind.CLASS,
+    simpleName: null,
+    interfaces: [CoroutineImpl]
+  };
+  Coroutine$send.prototype = Object.create(CoroutineImpl.prototype);
+  Coroutine$send.prototype.constructor = Coroutine$send;
+  Coroutine$send.prototype.doResume = function () {
+    do
+      try {
+        switch (this.state_0) {
+          case 0:
+            if (this.local$body === void 0)
+              this.local$body = null;
+            this.state_0 = 2;
+            this.result_0 = suspendCoroutine$lambda_0(send$lambda(this.local$request, this.local$body))(this.facade);
+            if (this.result_0 === COROUTINE_SUSPENDED)
+              return COROUTINE_SUSPENDED;
+            continue;
+          case 1:
+            throw this.exception_0;
+          case 2:
+            this.result_0;
+            return this.result_0;
+        }
+      }
+       catch (e) {
+        if (this.state_0 === 1) {
+          this.exceptionState_0 = this.state_0;
+          throw e;
+        }
+         else {
+          this.state_0 = this.exceptionState_0;
+          this.exception_0 = e;
+        }
+      }
+     while (true);
+  };
   var HEX_CHARS;
   function toHexString($receiver) {
     var char2 = unboxChar(HEX_CHARS[$receiver & 15]);
@@ -967,12 +1072,16 @@ var elements = function (_, Kotlin) {
     if (decimals === void 0)
       decimals = 2;
     var tmp$;
-    if (Kotlin.equals(side, Side$LEFT_getInstance()))
-      tmp$ = currency + ' ' + padEnd($receiver.toString(), decimals, 48);
-    else if (Kotlin.equals(side, Side$RIGHT_getInstance()))
-      tmp$ = padEnd($receiver.toString(), decimals, 48) + ' ' + currency;
-    else
-      tmp$ = Kotlin.noWhenBranchMatched();
+    switch (side.name) {
+      case 'LEFT':
+        tmp$ = currency + ' ' + padEnd($receiver.toString(), decimals, 48);
+        break;
+      case 'RIGHT':
+        tmp$ = padEnd($receiver.toString(), decimals, 48) + ' ' + currency;
+        break;
+      default:tmp$ = Kotlin.noWhenBranchMatched();
+        break;
+    }
     return tmp$;
   }
   function Side(name, ordinal) {
@@ -997,7 +1106,7 @@ var elements = function (_, Kotlin) {
     return Side$RIGHT_instance;
   }
   Side.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     simpleName: 'Side',
     interfaces: [Enum]
   };
@@ -1011,7 +1120,7 @@ var elements = function (_, Kotlin) {
         return Side$LEFT_getInstance();
       case 'RIGHT':
         return Side$RIGHT_getInstance();
-      default:Kotlin.throwISE('No enum constant fg.base.Side.' + name);
+      default:throwISE('No enum constant fg.base.Side.' + name);
     }
   }
   Side.valueOf_61zpoe$ = Side$valueOf;
@@ -1031,7 +1140,7 @@ var elements = function (_, Kotlin) {
     this.mountChildren_8be2vx$();
   };
   Body.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     simpleName: 'Body',
     interfaces: [Element]
   };
@@ -1166,7 +1275,7 @@ var elements = function (_, Kotlin) {
     if (existingElement === void 0)
       existingElement = null;
     if (w3cElement === void 0)
-      w3cElement = existingElement != null ? existingElement : Kotlin.isType(tmp$ = document.createElement(name != null ? name : Kotlin.throwNPE()), HTMLElement) ? tmp$ : Kotlin.throwCCE();
+      w3cElement = existingElement != null ? existingElement : Kotlin.isType(tmp$ = document.createElement(ensureNotNull(name)), HTMLElement) ? tmp$ : throwCCE();
     Node.call(this, w3cElement);
     this.w3cElement = w3cElement;
     this.renderCalled_3woh3p$_0 = false;
@@ -1199,16 +1308,12 @@ var elements = function (_, Kotlin) {
   });
   Object.defineProperty(Element.prototype, 'resizedListeners_6tprcf$_0', {
     get: function () {
-      var $receiver = this.resizedListeners_6tprcf$_xv9iml$_0;
-      new Kotlin.PropertyMetadata('resizedListeners');
-      return $receiver.value;
+      return this.resizedListeners_6tprcf$_xv9iml$_0.value;
     }
   });
   Object.defineProperty(Element.prototype, 'hideOnBreakpoints_ahju17$_0', {
     get: function () {
-      var $receiver = this.hideOnBreakpoints_ahju17$_9s1glk$_0;
-      new Kotlin.PropertyMetadata('hideOnBreakpoints');
-      return $receiver.value;
+      return this.hideOnBreakpoints_ahju17$_9s1glk$_0.value;
     }
   });
   Object.defineProperty(Element.prototype, 'childElements', {
@@ -1223,34 +1328,36 @@ var elements = function (_, Kotlin) {
         if (Kotlin.isType(element, Element))
           destination.add_11rb$(element);
       }
-      return Kotlin.isType(tmp$ = destination, List) ? tmp$ : Kotlin.throwCCE();
+      return Kotlin.isType(tmp$ = destination, List) ? tmp$ : throwCCE();
     }
   });
   Object.defineProperty(Element.prototype, '_parentElement', {
     get: function () {
-      var tmp$, tmp$_0;
-      return Kotlin.isType(tmp$_0 = (tmp$ = this._parentNode_8be2vx$) != null ? tmp$ : Kotlin.throwNPE(), Element) ? tmp$_0 : Kotlin.throwCCE();
+      var tmp$;
+      return Kotlin.isType(tmp$ = ensureNotNull(this._parentNode_8be2vx$), Element) ? tmp$ : throwCCE();
     }
   });
+  var Element$_id_metadata = new PropertyMetadata('_id');
   Object.defineProperty(Element.prototype, '_id', {
     get: function () {
-      return this._id_plg66c$_0.getValue_lrcp0p$(this, new Kotlin.PropertyMetadata('_id'));
+      return this._id_plg66c$_0.getValue_lrcp0p$(this, Element$_id_metadata);
     },
     set: function (_id) {
-      this._id_plg66c$_0.setValue_9rddgb$(this, new Kotlin.PropertyMetadata('_id'), _id);
+      this._id_plg66c$_0.setValue_9rddgb$(this, Element$_id_metadata, _id);
     }
   });
+  var Element$_tabindex_metadata = new PropertyMetadata('_tabindex');
   Object.defineProperty(Element.prototype, '_tabindex', {
     get: function () {
-      return this._tabindex_5a0oai$_0.getValue_lrcp0p$(this, new Kotlin.PropertyMetadata('_tabindex'));
+      return this._tabindex_5a0oai$_0.getValue_lrcp0p$(this, Element$_tabindex_metadata);
     },
     set: function (_tabindex) {
-      this._tabindex_5a0oai$_0.setValue_9rddgb$(this, new Kotlin.PropertyMetadata('_tabindex'), _tabindex);
+      this._tabindex_5a0oai$_0.setValue_9rddgb$(this, Element$_tabindex_metadata, _tabindex);
     }
   });
   Object.defineProperty(Element.prototype, 'hidden', {
     get: function () {
-      return Kotlin.equals(this._style.display, 'none');
+      return equals(this._style.display, 'none');
     }
   });
   Object.defineProperty(Element.prototype, '_style', {
@@ -1260,9 +1367,7 @@ var elements = function (_, Kotlin) {
   });
   Object.defineProperty(Element.prototype, 'style', {
     get: function () {
-      var $receiver = this.style_b8d6xn$_0;
-      new Kotlin.PropertyMetadata('style');
-      return $receiver.value;
+      return this.style_b8d6xn$_0.value;
     }
   });
   Object.defineProperty(Element.prototype, 'clientWidth', {
@@ -1313,7 +1418,7 @@ var elements = function (_, Kotlin) {
   Element.prototype.callRender_8be2vx$ = function () {
     var tmp$;
     if (this.renderCalled) {
-      throw new IllegalStateException('render has already been called for this element');
+      throw IllegalStateException_init('render has already been called for this element');
     }
     if ((tmp$ = this._layout) != null) {
       tmp$.initialize();
@@ -1329,7 +1434,7 @@ var elements = function (_, Kotlin) {
   };
   Element.prototype.callDidMount_8be2vx$ = function () {
     if (this.didMountCalled) {
-      throw new IllegalStateException('didMount has already been called for this element');
+      throw IllegalStateException_init('didMount has already been called for this element');
     }
     this.didMount();
     this.didMountCalled = true;
@@ -1368,18 +1473,16 @@ var elements = function (_, Kotlin) {
     this.w3cElement.classList.remove(name);
   };
   Element.prototype.removeClasses = function () {
-    var tmp$;
     while (this.w3cElement.classList.length > 0) {
-      this.w3cElement.classList.remove((tmp$ = this.w3cElement.classList[0]) != null ? tmp$ : Kotlin.throwNPE());
+      this.w3cElement.classList.remove(ensureNotNull(this.w3cElement.classList[0]));
     }
   };
   Element.prototype.removeClasses_leuowt$ = function (predicate) {
-    var tmp$;
     if (this.w3cElement.classList.length === 0) {
       return;
     }
     for (var i = Math.max(0, this.w3cElement.classList.length - 1 | 0); i >= 0; i--) {
-      var currClass = (tmp$ = this.w3cElement.classList[i]) != null ? tmp$ : Kotlin.throwNPE();
+      var currClass = ensureNotNull(this.w3cElement.classList[i]);
       if (predicate(currClass)) {
         this.w3cElement.classList.remove(currClass);
       }
@@ -1406,7 +1509,7 @@ var elements = function (_, Kotlin) {
   };
   Element.prototype.focus = function () {
     this.w3cElement.focus();
-    return Kotlin.equals(document.activeElement, this.w3cElement);
+    return equals(document.activeElement, this.w3cElement);
   };
   Element.prototype.traverseElements_pf9u9b$ = function (each) {
     var tmp$;
@@ -1469,9 +1572,7 @@ var elements = function (_, Kotlin) {
   }
   Object.defineProperty(Element$ResizeSensor.prototype, 'sensor_0', {
     get: function () {
-      var $receiver = this.sensor_j50878$_0;
-      new Kotlin.PropertyMetadata('sensor');
-      return $receiver.value;
+      return this.sensor_j50878$_0.value;
     }
   });
   function Element$ResizeSensor$init$lambda(this$ResizeSensor) {
@@ -1507,7 +1608,7 @@ var elements = function (_, Kotlin) {
   };
   Element$ResizeSensor.prototype.initializeSensor_0 = function () {
     this.element.appendChild_sr04hg$(this.sensor_0);
-    if (Kotlin.equals(this.getComputedPosition_0(), 'static')) {
+    if (equals(this.getComputedPosition_0(), 'static')) {
       this.element.style.position = Position$relative_getInstance();
     }
     this.sensor_0.reset();
@@ -1526,16 +1627,12 @@ var elements = function (_, Kotlin) {
   }
   Object.defineProperty(Element$ResizeSensor$Sensor.prototype, 'expandSensor', {
     get: function () {
-      var $receiver = this.expandSensor_k7vtsa$_0;
-      new Kotlin.PropertyMetadata('expandSensor');
-      return $receiver.value;
+      return this.expandSensor_k7vtsa$_0.value;
     }
   });
   Object.defineProperty(Element$ResizeSensor$Sensor.prototype, 'shrinkSensor', {
     get: function () {
-      var $receiver = this.shrinkSensor_5zg4ih$_0;
-      new Kotlin.PropertyMetadata('shrinkSensor');
-      return $receiver.value;
+      return this.shrinkSensor_5zg4ih$_0.value;
     }
   });
   Element$ResizeSensor$Sensor.prototype.render = function () {
@@ -1560,7 +1657,7 @@ var elements = function (_, Kotlin) {
     };
   }
   Element$ResizeSensor$Sensor.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     simpleName: 'Sensor',
     interfaces: [Div]
   };
@@ -1572,9 +1669,7 @@ var elements = function (_, Kotlin) {
   }
   Object.defineProperty(Element$ResizeSensor$SensorExpand.prototype, 'child', {
     get: function () {
-      var $receiver = this.child_k3kltg$_0;
-      new Kotlin.PropertyMetadata('child');
-      return $receiver.value;
+      return this.child_k3kltg$_0.value;
     }
   });
   Element$ResizeSensor$SensorExpand.prototype.render = function () {
@@ -1597,7 +1692,7 @@ var elements = function (_, Kotlin) {
     };
   }
   Element$ResizeSensor$SensorExpand.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     simpleName: 'SensorExpand',
     interfaces: [Div]
   };
@@ -1609,9 +1704,7 @@ var elements = function (_, Kotlin) {
   }
   Object.defineProperty(Element$ResizeSensor$SensorShrink.prototype, 'child', {
     get: function () {
-      var $receiver = this.child_yc0b39$_0;
-      new Kotlin.PropertyMetadata('child');
-      return $receiver.value;
+      return this.child_yc0b39$_0.value;
     }
   });
   Element$ResizeSensor$SensorShrink.prototype.render = function () {
@@ -1632,7 +1725,7 @@ var elements = function (_, Kotlin) {
     };
   }
   Element$ResizeSensor$SensorShrink.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     simpleName: 'SensorShrink',
     interfaces: [Div]
   };
@@ -1671,7 +1764,7 @@ var elements = function (_, Kotlin) {
     };
   }
   Element$ResizeSensor.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     simpleName: 'ResizeSensor',
     interfaces: []
   };
@@ -1682,7 +1775,7 @@ var elements = function (_, Kotlin) {
     this.height = height;
   }
   Element$ResizedEvent.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     simpleName: 'ResizedEvent',
     interfaces: []
   };
@@ -1727,7 +1820,7 @@ var elements = function (_, Kotlin) {
     };
   }
   Element.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     simpleName: 'Element',
     interfaces: [Node]
   };
@@ -1735,18 +1828,15 @@ var elements = function (_, Kotlin) {
   var HashMap_init = Kotlin.kotlin.collections.HashMap_init_q3lmfv$;
   function Html(w3cElement) {
     Html$Html_getInstance();
-    var tmp$;
     if (w3cElement === void 0)
-      w3cElement = (tmp$ = document.documentElement) != null ? tmp$ : Kotlin.throwNPE();
+      w3cElement = ensureNotNull(document.documentElement);
     this.w3cElement = w3cElement;
     this.stylesheet_myfdbn$_0 = lazy(Html$stylesheet$lambda);
     this.registeredClassStyles_0 = HashMap_init();
   }
   Object.defineProperty(Html.prototype, 'stylesheet_0', {
     get: function () {
-      var $receiver = this.stylesheet_myfdbn$_0;
-      new Kotlin.PropertyMetadata('stylesheet');
-      return $receiver.value;
+      return this.stylesheet_myfdbn$_0.value;
     }
   });
   function Html$init$lambda($receiver) {
@@ -1822,7 +1912,7 @@ var elements = function (_, Kotlin) {
     Html$Html_instance = this;
   }
   Html$Html.$metadata$ = {
-    kind: Kotlin.Kind.OBJECT,
+    kind: Kind_OBJECT,
     simpleName: 'Html',
     interfaces: []
   };
@@ -1835,10 +1925,10 @@ var elements = function (_, Kotlin) {
   }
   function Html$stylesheet$lambda() {
     var tmp$;
-    return Kotlin.isType(tmp$ = document.styleSheets[0], CSSStyleSheet) ? tmp$ : Kotlin.throwCCE();
+    return Kotlin.isType(tmp$ = document.styleSheets[0], CSSStyleSheet) ? tmp$ : throwCCE();
   }
   Html.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     simpleName: 'Html',
     interfaces: []
   };
@@ -1921,11 +2011,11 @@ var elements = function (_, Kotlin) {
   }
   Node.prototype.insertBefore_p937mc$ = function (node, child) {
     if (node._parentNode_8be2vx$ != null) {
-      throw new IllegalStateException("Node cannot be added. It's already added. Please remove it first.");
+      throw IllegalStateException_init("Node cannot be added. It's already added. Please remove it first.");
     }
     var childIndex = this._childNodes_klwbd4$_0.indexOf_11rb$(child);
     if (childIndex === -1) {
-      throw new IllegalArgumentException('reference ' + child.w3cNode_8be2vx$.nodeName + ' is expected as child');
+      throw IllegalArgumentException_init('reference ' + child.w3cNode_8be2vx$.nodeName + ' is expected as child');
     }
     node._parentNode_8be2vx$ = this;
     if (Kotlin.isType(node, Element) && (this.rendering || this.rendered) && !child.rendered) {
@@ -1955,7 +2045,7 @@ var elements = function (_, Kotlin) {
   }
   Node.prototype.appendChild_sr04hg$ = function (node) {
     if (node._parentNode_8be2vx$ != null) {
-      throw new IllegalStateException("Node cannot be added. It's already added. Please remove it first.");
+      throw IllegalStateException_init("Node cannot be added. It's already added. Please remove it first.");
     }
     node._parentNode_8be2vx$ = this;
     if (Kotlin.isType(node, Element) && (this.rendering || this.rendered) && !node.rendered) {
@@ -2048,14 +2138,14 @@ var elements = function (_, Kotlin) {
   Node.prototype.childRemoved_sr04hg$ = function (child) {
   };
   Node.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     simpleName: 'Node',
     interfaces: []
   };
   function StyledClass() {
   }
   StyledClass.$metadata$ = {
-    kind: Kotlin.Kind.INTERFACE,
+    kind: Kind_INTERFACE,
     simpleName: 'StyledClass',
     interfaces: []
   };
@@ -2064,17 +2154,17 @@ var elements = function (_, Kotlin) {
       text = null;
     if (existingNode === void 0)
       existingNode = null;
-    Node.call(this, existingNode != null ? existingNode : document.createTextNode(text != null ? text : Kotlin.throwNPE()));
+    Node.call(this, existingNode != null ? existingNode : document.createTextNode(ensureNotNull(text)));
   }
   Text_0.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     simpleName: 'Text',
     interfaces: [Node]
   };
   function TypedStyledClass() {
   }
   TypedStyledClass.$metadata$ = {
-    kind: Kotlin.Kind.INTERFACE,
+    kind: Kind_INTERFACE,
     simpleName: 'TypedStyledClass',
     interfaces: []
   };
@@ -2098,10 +2188,9 @@ var elements = function (_, Kotlin) {
     receiver.w3cElement.setAttribute(this.attributeName, initialValue);
   }
   W3cDelegates$Attribute.prototype.getValue_lrcp0p$ = function (thisRef, property) {
-    var tmp$;
     var w3cElement = thisRef.w3cElement;
     var attributeName = this.attributeName;
-    return (tmp$ = w3cElement.getAttribute(attributeName)) != null ? tmp$ : Kotlin.throwNPE();
+    return ensureNotNull(w3cElement.getAttribute(attributeName));
   };
   W3cDelegates$Attribute.prototype.setValue_9rddgb$ = function (thisRef, property, value) {
     var w3cElement = thisRef.w3cElement;
@@ -2109,7 +2198,7 @@ var elements = function (_, Kotlin) {
     w3cElement.setAttribute(attributeName, value);
   };
   W3cDelegates$Attribute.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     simpleName: 'Attribute',
     interfaces: [ReadWriteProperty]
   };
@@ -2138,7 +2227,7 @@ var elements = function (_, Kotlin) {
     }
   };
   W3cDelegates$NullableAttribute.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     simpleName: 'NullableAttribute',
     interfaces: [ReadWriteProperty]
   };
@@ -2168,7 +2257,7 @@ var elements = function (_, Kotlin) {
     }
   };
   W3cDelegates$NullableBooleanAttribute.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     simpleName: 'NullableBooleanAttribute',
     interfaces: [ReadWriteProperty]
   };
@@ -2197,12 +2286,12 @@ var elements = function (_, Kotlin) {
     }
   };
   W3cDelegates$NullableDimensionAttribute.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     simpleName: 'NullableDimensionAttribute',
     interfaces: [ReadWriteProperty]
   };
   W3cDelegates.$metadata$ = {
-    kind: Kotlin.Kind.OBJECT,
+    kind: Kind_OBJECT,
     simpleName: 'W3cDelegates',
     interfaces: []
   };
@@ -2225,15 +2314,15 @@ var elements = function (_, Kotlin) {
         return type.newFn(substringBeforeLast($receiver, type.postfix));
       }
     }
-    throw new IllegalArgumentException('String [' + Kotlin.toString($receiver) + '] cannot be converted to any Dimension');
+    throw IllegalArgumentException_init('String [' + toString($receiver) + '] cannot be converted to any Dimension');
   }
   function Dimension() {
   }
   Dimension.prototype.toHtml = function () {
-    return this.value + this.type.postfix;
+    return this.value.toString() + this.type.postfix;
   };
   Dimension.$metadata$ = {
-    kind: Kotlin.Kind.INTERFACE,
+    kind: Kind_INTERFACE,
     simpleName: 'Dimension',
     interfaces: []
   };
@@ -2366,7 +2455,7 @@ var elements = function (_, Kotlin) {
     return DimensionType$vmax_instance;
   }
   DimensionType.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     simpleName: 'DimensionType',
     interfaces: [Enum]
   };
@@ -2402,7 +2491,7 @@ var elements = function (_, Kotlin) {
         return DimensionType$vmin_getInstance();
       case 'vmax':
         return DimensionType$vmax_getInstance();
-      default:Kotlin.throwISE('No enum constant fg.elements.DimensionType.' + name);
+      default:throwISE('No enum constant fg.elements.DimensionType.' + name);
     }
   }
   DimensionType.valueOf_61zpoe$ = DimensionType$valueOf;
@@ -2424,7 +2513,7 @@ var elements = function (_, Kotlin) {
     return this.toHtml();
   };
   Percent.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     simpleName: 'Percent',
     interfaces: [Dimension]
   };
@@ -2466,7 +2555,7 @@ var elements = function (_, Kotlin) {
     return this.toHtml();
   };
   Pixels.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     simpleName: 'Pixels',
     interfaces: [Dimension]
   };
@@ -2511,7 +2600,7 @@ var elements = function (_, Kotlin) {
     return this.toHtml();
   };
   Mm.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     simpleName: 'Mm',
     interfaces: [Dimension]
   };
@@ -2550,7 +2639,7 @@ var elements = function (_, Kotlin) {
     return this.toHtml();
   };
   Cm.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     simpleName: 'Cm',
     interfaces: [Dimension]
   };
@@ -2592,7 +2681,7 @@ var elements = function (_, Kotlin) {
     return this.toHtml();
   };
   In.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     simpleName: 'In',
     interfaces: [Dimension]
   };
@@ -2634,7 +2723,7 @@ var elements = function (_, Kotlin) {
     return this.toHtml();
   };
   Pt.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     simpleName: 'Pt',
     interfaces: [Dimension]
   };
@@ -2673,7 +2762,7 @@ var elements = function (_, Kotlin) {
     return this.toHtml();
   };
   Pc.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     simpleName: 'Pc',
     interfaces: [Dimension]
   };
@@ -2712,7 +2801,7 @@ var elements = function (_, Kotlin) {
     return this.toHtml();
   };
   Em.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     simpleName: 'Em',
     interfaces: [Dimension]
   };
@@ -2754,7 +2843,7 @@ var elements = function (_, Kotlin) {
     return this.toHtml();
   };
   Rem.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     simpleName: 'Rem',
     interfaces: [Dimension]
   };
@@ -2796,7 +2885,7 @@ var elements = function (_, Kotlin) {
     return this.toHtml();
   };
   Vh.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     simpleName: 'Vh',
     interfaces: [Dimension]
   };
@@ -2835,7 +2924,7 @@ var elements = function (_, Kotlin) {
     return this.toHtml();
   };
   Vw.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     simpleName: 'Vw',
     interfaces: [Dimension]
   };
@@ -2874,7 +2963,7 @@ var elements = function (_, Kotlin) {
     return this.toHtml();
   };
   VMin.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     simpleName: 'VMin',
     interfaces: [Dimension]
   };
@@ -2913,7 +3002,7 @@ var elements = function (_, Kotlin) {
     return this.toHtml();
   };
   VMax.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     simpleName: 'VMax',
     interfaces: [Dimension]
   };
@@ -2940,7 +3029,7 @@ var elements = function (_, Kotlin) {
   }
   function render($receiver, init) {
     var tmp$;
-    $receiver.renderBlocks_8be2vx$.add_11rb$(typeof (tmp$ = init) === 'function' ? tmp$ : Kotlin.throwCCE());
+    $receiver.renderBlocks_8be2vx$.add_11rb$(typeof (tmp$ = init) === 'function' ? tmp$ : throwCCE());
     return $receiver;
   }
   function onClick($receiver, listener) {
@@ -2981,59 +3070,59 @@ var elements = function (_, Kotlin) {
   }
   function onMouseDown($receiver, listener) {
     var tmp$;
-    $receiver.w3cElement.addEventListener('mousedown', typeof (tmp$ = listener) === 'function' ? tmp$ : Kotlin.throwCCE());
+    $receiver.w3cElement.addEventListener('mousedown', typeof (tmp$ = listener) === 'function' ? tmp$ : throwCCE());
   }
   function unMouseDown($receiver, listener) {
     var tmp$;
-    $receiver.w3cElement.removeEventListener('mousedown', typeof (tmp$ = listener) === 'function' ? tmp$ : Kotlin.throwCCE());
+    $receiver.w3cElement.removeEventListener('mousedown', typeof (tmp$ = listener) === 'function' ? tmp$ : throwCCE());
   }
   function onMouseUp($receiver, listener) {
     var tmp$;
-    $receiver.w3cElement.addEventListener('mouseup', typeof (tmp$ = listener) === 'function' ? tmp$ : Kotlin.throwCCE());
+    $receiver.w3cElement.addEventListener('mouseup', typeof (tmp$ = listener) === 'function' ? tmp$ : throwCCE());
   }
   function unMouseUp($receiver, listener) {
     var tmp$;
-    $receiver.w3cElement.removeEventListener('mouseup', typeof (tmp$ = listener) === 'function' ? tmp$ : Kotlin.throwCCE());
+    $receiver.w3cElement.removeEventListener('mouseup', typeof (tmp$ = listener) === 'function' ? tmp$ : throwCCE());
   }
   function onMouseEnter($receiver, listener) {
     var tmp$;
-    $receiver.w3cElement.addEventListener('mouseenter', typeof (tmp$ = listener) === 'function' ? tmp$ : Kotlin.throwCCE());
+    $receiver.w3cElement.addEventListener('mouseenter', typeof (tmp$ = listener) === 'function' ? tmp$ : throwCCE());
   }
   function unMouseEnter($receiver, listener) {
     var tmp$;
-    $receiver.w3cElement.removeEventListener('mouseenter', typeof (tmp$ = listener) === 'function' ? tmp$ : Kotlin.throwCCE());
+    $receiver.w3cElement.removeEventListener('mouseenter', typeof (tmp$ = listener) === 'function' ? tmp$ : throwCCE());
   }
   function onMouseLeave($receiver, listener) {
     var tmp$;
-    $receiver.w3cElement.addEventListener('mouseleave', typeof (tmp$ = listener) === 'function' ? tmp$ : Kotlin.throwCCE());
+    $receiver.w3cElement.addEventListener('mouseleave', typeof (tmp$ = listener) === 'function' ? tmp$ : throwCCE());
   }
   function unMouseLeave($receiver, listener) {
     var tmp$;
-    $receiver.w3cElement.removeEventListener('mouseleave', typeof (tmp$ = listener) === 'function' ? tmp$ : Kotlin.throwCCE());
+    $receiver.w3cElement.removeEventListener('mouseleave', typeof (tmp$ = listener) === 'function' ? tmp$ : throwCCE());
   }
   function onMouseMove($receiver, listener) {
     var tmp$;
-    $receiver.w3cElement.addEventListener('mousemove', typeof (tmp$ = listener) === 'function' ? tmp$ : Kotlin.throwCCE());
+    $receiver.w3cElement.addEventListener('mousemove', typeof (tmp$ = listener) === 'function' ? tmp$ : throwCCE());
   }
   function unMouseMove($receiver, listener) {
     var tmp$;
-    $receiver.w3cElement.removeEventListener('mousemove', typeof (tmp$ = listener) === 'function' ? tmp$ : Kotlin.throwCCE());
+    $receiver.w3cElement.removeEventListener('mousemove', typeof (tmp$ = listener) === 'function' ? tmp$ : throwCCE());
   }
   function onMouseOut($receiver, listener) {
     var tmp$;
-    $receiver.w3cElement.addEventListener('mouseout', typeof (tmp$ = listener) === 'function' ? tmp$ : Kotlin.throwCCE());
+    $receiver.w3cElement.addEventListener('mouseout', typeof (tmp$ = listener) === 'function' ? tmp$ : throwCCE());
   }
   function unMouseOut($receiver, listener) {
     var tmp$;
-    $receiver.w3cElement.removeEventListener('mouseout', typeof (tmp$ = listener) === 'function' ? tmp$ : Kotlin.throwCCE());
+    $receiver.w3cElement.removeEventListener('mouseout', typeof (tmp$ = listener) === 'function' ? tmp$ : throwCCE());
   }
   function onMouseOver($receiver, listener) {
     var tmp$;
-    $receiver.w3cElement.addEventListener('mouseover', typeof (tmp$ = listener) === 'function' ? tmp$ : Kotlin.throwCCE());
+    $receiver.w3cElement.addEventListener('mouseover', typeof (tmp$ = listener) === 'function' ? tmp$ : throwCCE());
   }
   function unMouseOver($receiver, listener) {
     var tmp$;
-    $receiver.w3cElement.removeEventListener('mouseover', typeof (tmp$ = listener) === 'function' ? tmp$ : Kotlin.throwCCE());
+    $receiver.w3cElement.removeEventListener('mouseover', typeof (tmp$ = listener) === 'function' ? tmp$ : throwCCE());
   }
   function onScroll($receiver, listener) {
     $receiver.w3cElement.addEventListener('scroll', listener);
@@ -3043,27 +3132,27 @@ var elements = function (_, Kotlin) {
   }
   function onKeyUp($receiver, listener) {
     var tmp$;
-    $receiver.w3cElement.addEventListener('keyup', typeof (tmp$ = listener) === 'function' ? tmp$ : Kotlin.throwCCE());
+    $receiver.w3cElement.addEventListener('keyup', typeof (tmp$ = listener) === 'function' ? tmp$ : throwCCE());
   }
   function unKeyUp($receiver, listener) {
     var tmp$;
-    $receiver.w3cElement.removeEventListener('keyup', typeof (tmp$ = listener) === 'function' ? tmp$ : Kotlin.throwCCE());
+    $receiver.w3cElement.removeEventListener('keyup', typeof (tmp$ = listener) === 'function' ? tmp$ : throwCCE());
   }
   function onKeyPress($receiver, listener) {
     var tmp$;
-    $receiver.w3cElement.addEventListener('keypress', typeof (tmp$ = listener) === 'function' ? tmp$ : Kotlin.throwCCE());
+    $receiver.w3cElement.addEventListener('keypress', typeof (tmp$ = listener) === 'function' ? tmp$ : throwCCE());
   }
   function unKeyPress($receiver, listener) {
     var tmp$;
-    $receiver.w3cElement.removeEventListener('keypress', typeof (tmp$ = listener) === 'function' ? tmp$ : Kotlin.throwCCE());
+    $receiver.w3cElement.removeEventListener('keypress', typeof (tmp$ = listener) === 'function' ? tmp$ : throwCCE());
   }
   function onKeyDown($receiver, listener) {
     var tmp$;
-    $receiver.w3cElement.addEventListener('keydown', typeof (tmp$ = listener) === 'function' ? tmp$ : Kotlin.throwCCE());
+    $receiver.w3cElement.addEventListener('keydown', typeof (tmp$ = listener) === 'function' ? tmp$ : throwCCE());
   }
   function unKeyDown($receiver, listener) {
     var tmp$;
-    $receiver.w3cElement.removeEventListener('keydown', typeof (tmp$ = listener) === 'function' ? tmp$ : Kotlin.throwCCE());
+    $receiver.w3cElement.removeEventListener('keydown', typeof (tmp$ = listener) === 'function' ? tmp$ : throwCCE());
   }
   function onDrag($receiver, listener) {
     $receiver.w3cElement.addEventListener('drag', listener);
@@ -3117,40 +3206,44 @@ var elements = function (_, Kotlin) {
     this._height_1g0cp$_0 = W3cDelegates_getInstance().nullableDimensionAttribute_61zpoe$('height');
     this._src_jgc3k$_0 = W3cDelegates_getInstance().attribute_o3qcra$(this, src, 'src');
   }
+  var Img$_alt_metadata = new PropertyMetadata('_alt');
   Object.defineProperty(Img.prototype, '_alt', {
     get: function () {
-      return this._alt_jrxwl$_0.getValue_lrcp0p$(this, new Kotlin.PropertyMetadata('_alt'));
+      return this._alt_jrxwl$_0.getValue_lrcp0p$(this, Img$_alt_metadata);
     },
     set: function (_alt) {
-      this._alt_jrxwl$_0.setValue_9rddgb$(this, new Kotlin.PropertyMetadata('_alt'), _alt);
+      this._alt_jrxwl$_0.setValue_9rddgb$(this, Img$_alt_metadata, _alt);
     }
   });
+  var Img$_width_metadata = new PropertyMetadata('_width');
   Object.defineProperty(Img.prototype, '_width', {
     get: function () {
-      return this._width_kc0cbm$_0.getValue_lrcp0p$(this, new Kotlin.PropertyMetadata('_width'));
+      return this._width_kc0cbm$_0.getValue_lrcp0p$(this, Img$_width_metadata);
     },
     set: function (_width) {
-      this._width_kc0cbm$_0.setValue_9rddgb$(this, new Kotlin.PropertyMetadata('_width'), _width);
+      this._width_kc0cbm$_0.setValue_9rddgb$(this, Img$_width_metadata, _width);
     }
   });
+  var Img$_height_metadata = new PropertyMetadata('_height');
   Object.defineProperty(Img.prototype, '_height', {
     get: function () {
-      return this._height_1g0cp$_0.getValue_lrcp0p$(this, new Kotlin.PropertyMetadata('_height'));
+      return this._height_1g0cp$_0.getValue_lrcp0p$(this, Img$_height_metadata);
     },
     set: function (_height) {
-      this._height_1g0cp$_0.setValue_9rddgb$(this, new Kotlin.PropertyMetadata('_height'), _height);
+      this._height_1g0cp$_0.setValue_9rddgb$(this, Img$_height_metadata, _height);
     }
   });
+  var Img$_src_metadata = new PropertyMetadata('_src');
   Object.defineProperty(Img.prototype, '_src', {
     get: function () {
-      return this._src_jgc3k$_0.getValue_lrcp0p$(this, new Kotlin.PropertyMetadata('_src'));
+      return this._src_jgc3k$_0.getValue_lrcp0p$(this, Img$_src_metadata);
     },
     set: function (_src) {
-      this._src_jgc3k$_0.setValue_9rddgb$(this, new Kotlin.PropertyMetadata('_src'), _src);
+      this._src_jgc3k$_0.setValue_9rddgb$(this, Img$_src_metadata, _src);
     }
   });
   Img.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     simpleName: 'Img',
     interfaces: [Element]
   };
@@ -3169,104 +3262,116 @@ var elements = function (_, Kotlin) {
     this._type_q251f7$_0 = W3cDelegates_getInstance().nullableAttribute_61zpoe$('type');
     this._value_r2xlw6$_0 = W3cDelegates_getInstance().nullableAttribute_61zpoe$('value');
   }
+  var Button$_autofocus_metadata = new PropertyMetadata('_autofocus');
   Object.defineProperty(Button.prototype, '_autofocus', {
     get: function () {
-      return this._autofocus_prp4zi$_0.getValue_lrcp0p$(this, new Kotlin.PropertyMetadata('_autofocus'));
+      return this._autofocus_prp4zi$_0.getValue_lrcp0p$(this, Button$_autofocus_metadata);
     },
     set: function (_autofocus) {
-      this._autofocus_prp4zi$_0.setValue_9rddgb$(this, new Kotlin.PropertyMetadata('_autofocus'), _autofocus);
+      this._autofocus_prp4zi$_0.setValue_9rddgb$(this, Button$_autofocus_metadata, _autofocus);
     }
   });
+  var Button$_disabled_metadata = new PropertyMetadata('_disabled');
   Object.defineProperty(Button.prototype, '_disabled', {
     get: function () {
-      return this._disabled_p371td$_0.getValue_lrcp0p$(this, new Kotlin.PropertyMetadata('_disabled'));
+      return this._disabled_p371td$_0.getValue_lrcp0p$(this, Button$_disabled_metadata);
     },
     set: function (_disabled) {
-      this._disabled_p371td$_0.setValue_9rddgb$(this, new Kotlin.PropertyMetadata('_disabled'), _disabled);
+      this._disabled_p371td$_0.setValue_9rddgb$(this, Button$_disabled_metadata, _disabled);
     }
   });
+  var Button$_form_metadata = new PropertyMetadata('_form');
   Object.defineProperty(Button.prototype, '_form', {
     get: function () {
-      return this._form_pu9kx5$_0.getValue_lrcp0p$(this, new Kotlin.PropertyMetadata('_form'));
+      return this._form_pu9kx5$_0.getValue_lrcp0p$(this, Button$_form_metadata);
     },
     set: function (_form) {
-      this._form_pu9kx5$_0.setValue_9rddgb$(this, new Kotlin.PropertyMetadata('_form'), _form);
+      this._form_pu9kx5$_0.setValue_9rddgb$(this, Button$_form_metadata, _form);
     }
   });
+  var Button$_formaction_metadata = new PropertyMetadata('_formaction');
   Object.defineProperty(Button.prototype, '_formaction', {
     get: function () {
-      return this._formaction_ou14z7$_0.getValue_lrcp0p$(this, new Kotlin.PropertyMetadata('_formaction'));
+      return this._formaction_ou14z7$_0.getValue_lrcp0p$(this, Button$_formaction_metadata);
     },
     set: function (_formaction) {
-      this._formaction_ou14z7$_0.setValue_9rddgb$(this, new Kotlin.PropertyMetadata('_formaction'), _formaction);
+      this._formaction_ou14z7$_0.setValue_9rddgb$(this, Button$_formaction_metadata, _formaction);
     }
   });
+  var Button$_formenctype_metadata = new PropertyMetadata('_formenctype');
   Object.defineProperty(Button.prototype, '_formenctype', {
     get: function () {
-      return this._formenctype_qqdwdl$_0.getValue_lrcp0p$(this, new Kotlin.PropertyMetadata('_formenctype'));
+      return this._formenctype_qqdwdl$_0.getValue_lrcp0p$(this, Button$_formenctype_metadata);
     },
     set: function (_formenctype) {
-      this._formenctype_qqdwdl$_0.setValue_9rddgb$(this, new Kotlin.PropertyMetadata('_formenctype'), _formenctype);
+      this._formenctype_qqdwdl$_0.setValue_9rddgb$(this, Button$_formenctype_metadata, _formenctype);
     }
   });
+  var Button$_formmethod_metadata = new PropertyMetadata('_formmethod');
   Object.defineProperty(Button.prototype, '_formmethod', {
     get: function () {
-      return this._formmethod_b6h0pk$_0.getValue_lrcp0p$(this, new Kotlin.PropertyMetadata('_formmethod'));
+      return this._formmethod_b6h0pk$_0.getValue_lrcp0p$(this, Button$_formmethod_metadata);
     },
     set: function (_formmethod) {
-      this._formmethod_b6h0pk$_0.setValue_9rddgb$(this, new Kotlin.PropertyMetadata('_formmethod'), _formmethod);
+      this._formmethod_b6h0pk$_0.setValue_9rddgb$(this, Button$_formmethod_metadata, _formmethod);
     }
   });
+  var Button$_formnovalidate_metadata = new PropertyMetadata('_formnovalidate');
   Object.defineProperty(Button.prototype, '_formnovalidate', {
     get: function () {
-      return this._formnovalidate_kfqq32$_0.getValue_lrcp0p$(this, new Kotlin.PropertyMetadata('_formnovalidate'));
+      return this._formnovalidate_kfqq32$_0.getValue_lrcp0p$(this, Button$_formnovalidate_metadata);
     },
     set: function (_formnovalidate) {
-      this._formnovalidate_kfqq32$_0.setValue_9rddgb$(this, new Kotlin.PropertyMetadata('_formnovalidate'), _formnovalidate);
+      this._formnovalidate_kfqq32$_0.setValue_9rddgb$(this, Button$_formnovalidate_metadata, _formnovalidate);
     }
   });
+  var Button$_formtarget_metadata = new PropertyMetadata('_formtarget');
   Object.defineProperty(Button.prototype, '_formtarget', {
     get: function () {
-      return this._formtarget_ilw03c$_0.getValue_lrcp0p$(this, new Kotlin.PropertyMetadata('_formtarget'));
+      return this._formtarget_ilw03c$_0.getValue_lrcp0p$(this, Button$_formtarget_metadata);
     },
     set: function (_formtarget) {
-      this._formtarget_ilw03c$_0.setValue_9rddgb$(this, new Kotlin.PropertyMetadata('_formtarget'), _formtarget);
+      this._formtarget_ilw03c$_0.setValue_9rddgb$(this, Button$_formtarget_metadata, _formtarget);
     }
   });
+  var Button$_menu_metadata = new PropertyMetadata('_menu');
   Object.defineProperty(Button.prototype, '_menu', {
     get: function () {
-      return this._menu_pxxofi$_0.getValue_lrcp0p$(this, new Kotlin.PropertyMetadata('_menu'));
+      return this._menu_pxxofi$_0.getValue_lrcp0p$(this, Button$_menu_metadata);
     },
     set: function (_menu) {
-      this._menu_pxxofi$_0.setValue_9rddgb$(this, new Kotlin.PropertyMetadata('_menu'), _menu);
+      this._menu_pxxofi$_0.setValue_9rddgb$(this, Button$_menu_metadata, _menu);
     }
   });
+  var Button$_name_metadata = new PropertyMetadata('_name');
   Object.defineProperty(Button.prototype, '_name', {
     get: function () {
-      return this._name_pyevya$_0.getValue_lrcp0p$(this, new Kotlin.PropertyMetadata('_name'));
+      return this._name_pyevya$_0.getValue_lrcp0p$(this, Button$_name_metadata);
     },
     set: function (_name) {
-      this._name_pyevya$_0.setValue_9rddgb$(this, new Kotlin.PropertyMetadata('_name'), _name);
+      this._name_pyevya$_0.setValue_9rddgb$(this, Button$_name_metadata, _name);
     }
   });
+  var Button$_type_metadata = new PropertyMetadata('_type');
   Object.defineProperty(Button.prototype, '_type', {
     get: function () {
-      return this._type_q251f7$_0.getValue_lrcp0p$(this, new Kotlin.PropertyMetadata('_type'));
+      return this._type_q251f7$_0.getValue_lrcp0p$(this, Button$_type_metadata);
     },
     set: function (_type) {
-      this._type_q251f7$_0.setValue_9rddgb$(this, new Kotlin.PropertyMetadata('_type'), _type);
+      this._type_q251f7$_0.setValue_9rddgb$(this, Button$_type_metadata, _type);
     }
   });
+  var Button$_value_metadata = new PropertyMetadata('_value');
   Object.defineProperty(Button.prototype, '_value', {
     get: function () {
-      return this._value_r2xlw6$_0.getValue_lrcp0p$(this, new Kotlin.PropertyMetadata('_value'));
+      return this._value_r2xlw6$_0.getValue_lrcp0p$(this, Button$_value_metadata);
     },
     set: function (_value) {
-      this._value_r2xlw6$_0.setValue_9rddgb$(this, new Kotlin.PropertyMetadata('_value'), _value);
+      this._value_r2xlw6$_0.setValue_9rddgb$(this, Button$_value_metadata, _value);
     }
   });
   Button.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     simpleName: 'Button',
     interfaces: [Element]
   };
@@ -3274,14 +3379,14 @@ var elements = function (_, Kotlin) {
     Element.call(this, 'select');
   }
   Select.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     simpleName: 'Select',
     interfaces: [Element]
   };
   function Input(type) {
     Element.call(this, 'input');
     var tmp$;
-    this._inputElement = Kotlin.isType(tmp$ = this.w3cElement, HTMLInputElement) ? tmp$ : Kotlin.throwCCE();
+    this._inputElement = Kotlin.isType(tmp$ = this.w3cElement, HTMLInputElement) ? tmp$ : throwCCE();
     this._type_ewb5ch$_0 = W3cDelegates_getInstance().attribute_o3qcra$(this, type.name, 'type');
     this._accept_qdyd7l$_0 = W3cDelegates_getInstance().nullableAttribute_61zpoe$('accept');
     this._alt_wkgwta$_0 = W3cDelegates_getInstance().nullableAttribute_61zpoe$('alt');
@@ -3322,249 +3427,280 @@ var elements = function (_, Kotlin) {
       this._inputElement.value = value != null ? value : '';
     }
   });
+  var Input$_type_metadata = new PropertyMetadata('_type');
   Object.defineProperty(Input.prototype, '_type', {
     get: function () {
-      return this._type_ewb5ch$_0.getValue_lrcp0p$(this, new Kotlin.PropertyMetadata('_type'));
+      return this._type_ewb5ch$_0.getValue_lrcp0p$(this, Input$_type_metadata);
     }
   });
+  var Input$_accept_metadata = new PropertyMetadata('_accept');
   Object.defineProperty(Input.prototype, '_accept', {
     get: function () {
-      return this._accept_qdyd7l$_0.getValue_lrcp0p$(this, new Kotlin.PropertyMetadata('_accept'));
+      return this._accept_qdyd7l$_0.getValue_lrcp0p$(this, Input$_accept_metadata);
     },
     set: function (_accept) {
-      this._accept_qdyd7l$_0.setValue_9rddgb$(this, new Kotlin.PropertyMetadata('_accept'), _accept);
+      this._accept_qdyd7l$_0.setValue_9rddgb$(this, Input$_accept_metadata, _accept);
     }
   });
+  var Input$_alt_metadata = new PropertyMetadata('_alt');
   Object.defineProperty(Input.prototype, '_alt', {
     get: function () {
-      return this._alt_wkgwta$_0.getValue_lrcp0p$(this, new Kotlin.PropertyMetadata('_alt'));
+      return this._alt_wkgwta$_0.getValue_lrcp0p$(this, Input$_alt_metadata);
     },
     set: function (_alt) {
-      this._alt_wkgwta$_0.setValue_9rddgb$(this, new Kotlin.PropertyMetadata('_alt'), _alt);
+      this._alt_wkgwta$_0.setValue_9rddgb$(this, Input$_alt_metadata, _alt);
     }
   });
+  var Input$_autocomplete_metadata = new PropertyMetadata('_autocomplete');
   Object.defineProperty(Input.prototype, '_autocomplete', {
     get: function () {
-      return this._autocomplete_i3gp4x$_0.getValue_lrcp0p$(this, new Kotlin.PropertyMetadata('_autocomplete'));
+      return this._autocomplete_i3gp4x$_0.getValue_lrcp0p$(this, Input$_autocomplete_metadata);
     },
     set: function (_autocomplete) {
-      this._autocomplete_i3gp4x$_0.setValue_9rddgb$(this, new Kotlin.PropertyMetadata('_autocomplete'), _autocomplete);
+      this._autocomplete_i3gp4x$_0.setValue_9rddgb$(this, Input$_autocomplete_metadata, _autocomplete);
     }
   });
+  var Input$_autofocus_metadata = new PropertyMetadata('_autofocus');
   Object.defineProperty(Input.prototype, '_autofocus', {
     get: function () {
-      return this._autofocus_xbz73y$_0.getValue_lrcp0p$(this, new Kotlin.PropertyMetadata('_autofocus'));
+      return this._autofocus_xbz73y$_0.getValue_lrcp0p$(this, Input$_autofocus_metadata);
     },
     set: function (_autofocus) {
-      this._autofocus_xbz73y$_0.setValue_9rddgb$(this, new Kotlin.PropertyMetadata('_autofocus'), _autofocus);
+      this._autofocus_xbz73y$_0.setValue_9rddgb$(this, Input$_autofocus_metadata, _autofocus);
     }
   });
+  var Input$_checked_metadata = new PropertyMetadata('_checked');
   Object.defineProperty(Input.prototype, '_checked', {
     get: function () {
-      return this._checked_qk97ok$_0.getValue_lrcp0p$(this, new Kotlin.PropertyMetadata('_checked'));
+      return this._checked_qk97ok$_0.getValue_lrcp0p$(this, Input$_checked_metadata);
     },
     set: function (_checked) {
-      this._checked_qk97ok$_0.setValue_9rddgb$(this, new Kotlin.PropertyMetadata('_checked'), _checked);
+      this._checked_qk97ok$_0.setValue_9rddgb$(this, Input$_checked_metadata, _checked);
     }
   });
+  var Input$_dirname_metadata = new PropertyMetadata('_dirname');
   Object.defineProperty(Input.prototype, '_dirname', {
     get: function () {
-      return this._dirname_5cmiqb$_0.getValue_lrcp0p$(this, new Kotlin.PropertyMetadata('_dirname'));
+      return this._dirname_5cmiqb$_0.getValue_lrcp0p$(this, Input$_dirname_metadata);
     },
     set: function (_dirname) {
-      this._dirname_5cmiqb$_0.setValue_9rddgb$(this, new Kotlin.PropertyMetadata('_dirname'), _dirname);
+      this._dirname_5cmiqb$_0.setValue_9rddgb$(this, Input$_dirname_metadata, _dirname);
     }
   });
+  var Input$_disabled_metadata = new PropertyMetadata('_disabled');
   Object.defineProperty(Input.prototype, '_disabled', {
     get: function () {
-      return this._disabled_wciegd$_0.getValue_lrcp0p$(this, new Kotlin.PropertyMetadata('_disabled'));
+      return this._disabled_wciegd$_0.getValue_lrcp0p$(this, Input$_disabled_metadata);
     },
     set: function (_disabled) {
-      this._disabled_wciegd$_0.setValue_9rddgb$(this, new Kotlin.PropertyMetadata('_disabled'), _disabled);
+      this._disabled_wciegd$_0.setValue_9rddgb$(this, Input$_disabled_metadata, _disabled);
     }
   });
+  var Input$_form_metadata = new PropertyMetadata('_form');
   Object.defineProperty(Input.prototype, '_form', {
     get: function () {
-      return this._form_f46luj$_0.getValue_lrcp0p$(this, new Kotlin.PropertyMetadata('_form'));
+      return this._form_f46luj$_0.getValue_lrcp0p$(this, Input$_form_metadata);
     },
     set: function (_form) {
-      this._form_f46luj$_0.setValue_9rddgb$(this, new Kotlin.PropertyMetadata('_form'), _form);
+      this._form_f46luj$_0.setValue_9rddgb$(this, Input$_form_metadata, _form);
     }
   });
+  var Input$_formaction_metadata = new PropertyMetadata('_formaction');
   Object.defineProperty(Input.prototype, '_formaction', {
     get: function () {
-      return this._formaction_vk3wlt$_0.getValue_lrcp0p$(this, new Kotlin.PropertyMetadata('_formaction'));
+      return this._formaction_vk3wlt$_0.getValue_lrcp0p$(this, Input$_formaction_metadata);
     },
     set: function (_formaction) {
-      this._formaction_vk3wlt$_0.setValue_9rddgb$(this, new Kotlin.PropertyMetadata('_formaction'), _formaction);
+      this._formaction_vk3wlt$_0.setValue_9rddgb$(this, Input$_formaction_metadata, _formaction);
     }
   });
+  var Input$_formenctype_metadata = new PropertyMetadata('_formenctype');
   Object.defineProperty(Input.prototype, '_formenctype', {
     get: function () {
-      return this._formenctype_v33x7$_0.getValue_lrcp0p$(this, new Kotlin.PropertyMetadata('_formenctype'));
+      return this._formenctype_v33x7$_0.getValue_lrcp0p$(this, Input$_formenctype_metadata);
     },
     set: function (_formenctype) {
-      this._formenctype_v33x7$_0.setValue_9rddgb$(this, new Kotlin.PropertyMetadata('_formenctype'), _formenctype);
+      this._formenctype_v33x7$_0.setValue_9rddgb$(this, Input$_formenctype_metadata, _formenctype);
     }
   });
+  var Input$_formmethod_metadata = new PropertyMetadata('_formmethod');
   Object.defineProperty(Input.prototype, '_formmethod', {
     get: function () {
-      return this._formmethod_3ghzok$_0.getValue_lrcp0p$(this, new Kotlin.PropertyMetadata('_formmethod'));
+      return this._formmethod_3ghzok$_0.getValue_lrcp0p$(this, Input$_formmethod_metadata);
     },
     set: function (_formmethod) {
-      this._formmethod_3ghzok$_0.setValue_9rddgb$(this, new Kotlin.PropertyMetadata('_formmethod'), _formmethod);
+      this._formmethod_3ghzok$_0.setValue_9rddgb$(this, Input$_formmethod_metadata, _formmethod);
     }
   });
+  var Input$_formnovalidate_metadata = new PropertyMetadata('_formnovalidate');
   Object.defineProperty(Input.prototype, '_formnovalidate', {
     get: function () {
-      return this._formnovalidate_63j1ea$_0.getValue_lrcp0p$(this, new Kotlin.PropertyMetadata('_formnovalidate'));
+      return this._formnovalidate_63j1ea$_0.getValue_lrcp0p$(this, Input$_formnovalidate_metadata);
     },
     set: function (_formnovalidate) {
-      this._formnovalidate_63j1ea$_0.setValue_9rddgb$(this, new Kotlin.PropertyMetadata('_formnovalidate'), _formnovalidate);
+      this._formnovalidate_63j1ea$_0.setValue_9rddgb$(this, Input$_formnovalidate_metadata, _formnovalidate);
     }
   });
+  var Input$_formtarget_metadata = new PropertyMetadata('_formtarget');
   Object.defineProperty(Input.prototype, '_formtarget', {
     get: function () {
-      return this._formtarget_x8v0hg$_0.getValue_lrcp0p$(this, new Kotlin.PropertyMetadata('_formtarget'));
+      return this._formtarget_x8v0hg$_0.getValue_lrcp0p$(this, Input$_formtarget_metadata);
     },
     set: function (_formtarget) {
-      this._formtarget_x8v0hg$_0.setValue_9rddgb$(this, new Kotlin.PropertyMetadata('_formtarget'), _formtarget);
+      this._formtarget_x8v0hg$_0.setValue_9rddgb$(this, Input$_formtarget_metadata, _formtarget);
     }
   });
+  var Input$_height_metadata = new PropertyMetadata('_height');
   Object.defineProperty(Input.prototype, '_height', {
     get: function () {
-      return this._height_bw2mse$_0.getValue_lrcp0p$(this, new Kotlin.PropertyMetadata('_height'));
+      return this._height_bw2mse$_0.getValue_lrcp0p$(this, Input$_height_metadata);
     },
     set: function (_height) {
-      this._height_bw2mse$_0.setValue_9rddgb$(this, new Kotlin.PropertyMetadata('_height'), _height);
+      this._height_bw2mse$_0.setValue_9rddgb$(this, Input$_height_metadata, _height);
     }
   });
+  var Input$_inputmode_metadata = new PropertyMetadata('_inputmode');
   Object.defineProperty(Input.prototype, '_inputmode', {
     get: function () {
-      return this._inputmode_crsnj6$_0.getValue_lrcp0p$(this, new Kotlin.PropertyMetadata('_inputmode'));
+      return this._inputmode_crsnj6$_0.getValue_lrcp0p$(this, Input$_inputmode_metadata);
     },
     set: function (_inputmode) {
-      this._inputmode_crsnj6$_0.setValue_9rddgb$(this, new Kotlin.PropertyMetadata('_inputmode'), _inputmode);
+      this._inputmode_crsnj6$_0.setValue_9rddgb$(this, Input$_inputmode_metadata, _inputmode);
     }
   });
+  var Input$_list_metadata = new PropertyMetadata('_list');
   Object.defineProperty(Input.prototype, '_list', {
     get: function () {
-      return this._list_f0znat$_0.getValue_lrcp0p$(this, new Kotlin.PropertyMetadata('_list'));
+      return this._list_f0znat$_0.getValue_lrcp0p$(this, Input$_list_metadata);
     },
     set: function (_list) {
-      this._list_f0znat$_0.setValue_9rddgb$(this, new Kotlin.PropertyMetadata('_list'), _list);
+      this._list_f0znat$_0.setValue_9rddgb$(this, Input$_list_metadata, _list);
     }
   });
+  var Input$_max_metadata = new PropertyMetadata('_max');
   Object.defineProperty(Input.prototype, '_max', {
     get: function () {
-      return this._max_wk9h15$_0.getValue_lrcp0p$(this, new Kotlin.PropertyMetadata('_max'));
+      return this._max_wk9h15$_0.getValue_lrcp0p$(this, Input$_max_metadata);
     },
     set: function (_max) {
-      this._max_wk9h15$_0.setValue_9rddgb$(this, new Kotlin.PropertyMetadata('_max'), _max);
+      this._max_wk9h15$_0.setValue_9rddgb$(this, Input$_max_metadata, _max);
     }
   });
+  var Input$_maxlength_metadata = new PropertyMetadata('_maxlength');
   Object.defineProperty(Input.prototype, '_maxlength', {
     get: function () {
-      return this._maxlength_s15cwx$_0.getValue_lrcp0p$(this, new Kotlin.PropertyMetadata('_maxlength'));
+      return this._maxlength_s15cwx$_0.getValue_lrcp0p$(this, Input$_maxlength_metadata);
     },
     set: function (_maxlength) {
-      this._maxlength_s15cwx$_0.setValue_9rddgb$(this, new Kotlin.PropertyMetadata('_maxlength'), _maxlength);
+      this._maxlength_s15cwx$_0.setValue_9rddgb$(this, Input$_maxlength_metadata, _maxlength);
     }
   });
+  var Input$_min_metadata = new PropertyMetadata('_min');
   Object.defineProperty(Input.prototype, '_min', {
     get: function () {
-      return this._min_wk9bc7$_0.getValue_lrcp0p$(this, new Kotlin.PropertyMetadata('_min'));
+      return this._min_wk9bc7$_0.getValue_lrcp0p$(this, Input$_min_metadata);
     },
     set: function (_min) {
-      this._min_wk9bc7$_0.setValue_9rddgb$(this, new Kotlin.PropertyMetadata('_min'), _min);
+      this._min_wk9bc7$_0.setValue_9rddgb$(this, Input$_min_metadata, _min);
     }
   });
+  var Input$_minlength_metadata = new PropertyMetadata('_minlength');
   Object.defineProperty(Input.prototype, '_minlength', {
     get: function () {
-      return this._minlength_24766l$_0.getValue_lrcp0p$(this, new Kotlin.PropertyMetadata('_minlength'));
+      return this._minlength_24766l$_0.getValue_lrcp0p$(this, Input$_minlength_metadata);
     },
     set: function (_minlength) {
-      this._minlength_24766l$_0.setValue_9rddgb$(this, new Kotlin.PropertyMetadata('_minlength'), _minlength);
+      this._minlength_24766l$_0.setValue_9rddgb$(this, Input$_minlength_metadata, _minlength);
     }
   });
+  var Input$_multiple_metadata = new PropertyMetadata('_multiple');
   Object.defineProperty(Input.prototype, '_multiple', {
     get: function () {
-      return this._multiple_fjzzbt$_0.getValue_lrcp0p$(this, new Kotlin.PropertyMetadata('_multiple'));
+      return this._multiple_fjzzbt$_0.getValue_lrcp0p$(this, Input$_multiple_metadata);
     },
     set: function (_multiple) {
-      this._multiple_fjzzbt$_0.setValue_9rddgb$(this, new Kotlin.PropertyMetadata('_multiple'), _multiple);
+      this._multiple_fjzzbt$_0.setValue_9rddgb$(this, Input$_multiple_metadata, _multiple);
     }
   });
+  var Input$_name_metadata = new PropertyMetadata('_name');
   Object.defineProperty(Input.prototype, '_name', {
     get: function () {
-      return this._name_f01ate$_0.getValue_lrcp0p$(this, new Kotlin.PropertyMetadata('_name'));
+      return this._name_f01ate$_0.getValue_lrcp0p$(this, Input$_name_metadata);
     },
     set: function (_name) {
-      this._name_f01ate$_0.setValue_9rddgb$(this, new Kotlin.PropertyMetadata('_name'), _name);
+      this._name_f01ate$_0.setValue_9rddgb$(this, Input$_name_metadata, _name);
     }
   });
+  var Input$_pattern_metadata = new PropertyMetadata('_pattern');
   Object.defineProperty(Input.prototype, '_pattern', {
     get: function () {
-      return this._pattern_lr2fyz$_0.getValue_lrcp0p$(this, new Kotlin.PropertyMetadata('_pattern'));
+      return this._pattern_lr2fyz$_0.getValue_lrcp0p$(this, Input$_pattern_metadata);
     },
     set: function (_pattern) {
-      this._pattern_lr2fyz$_0.setValue_9rddgb$(this, new Kotlin.PropertyMetadata('_pattern'), _pattern);
+      this._pattern_lr2fyz$_0.setValue_9rddgb$(this, Input$_pattern_metadata, _pattern);
     }
   });
+  var Input$_placeholder_metadata = new PropertyMetadata('_placeholder');
   Object.defineProperty(Input.prototype, '_placeholder', {
     get: function () {
-      return this._placeholder_rv3vq0$_0.getValue_lrcp0p$(this, new Kotlin.PropertyMetadata('_placeholder'));
+      return this._placeholder_rv3vq0$_0.getValue_lrcp0p$(this, Input$_placeholder_metadata);
     },
     set: function (_placeholder) {
-      this._placeholder_rv3vq0$_0.setValue_9rddgb$(this, new Kotlin.PropertyMetadata('_placeholder'), _placeholder);
+      this._placeholder_rv3vq0$_0.setValue_9rddgb$(this, Input$_placeholder_metadata, _placeholder);
     }
   });
+  var Input$_readonly_metadata = new PropertyMetadata('_readonly');
   Object.defineProperty(Input.prototype, '_readonly', {
     get: function () {
-      return this._readonly_hbvbfr$_0.getValue_lrcp0p$(this, new Kotlin.PropertyMetadata('_readonly'));
+      return this._readonly_hbvbfr$_0.getValue_lrcp0p$(this, Input$_readonly_metadata);
     },
     set: function (_readonly) {
-      this._readonly_hbvbfr$_0.setValue_9rddgb$(this, new Kotlin.PropertyMetadata('_readonly'), _readonly);
+      this._readonly_hbvbfr$_0.setValue_9rddgb$(this, Input$_readonly_metadata, _readonly);
     }
   });
+  var Input$_required_metadata = new PropertyMetadata('_required');
   Object.defineProperty(Input.prototype, '_required', {
     get: function () {
-      return this._required_nzp5hy$_0.getValue_lrcp0p$(this, new Kotlin.PropertyMetadata('_required'));
+      return this._required_nzp5hy$_0.getValue_lrcp0p$(this, Input$_required_metadata);
     },
     set: function (_required) {
-      this._required_nzp5hy$_0.setValue_9rddgb$(this, new Kotlin.PropertyMetadata('_required'), _required);
+      this._required_nzp5hy$_0.setValue_9rddgb$(this, Input$_required_metadata, _required);
     }
   });
+  var Input$_size_metadata = new PropertyMetadata('_size');
   Object.defineProperty(Input.prototype, '_size', {
     get: function () {
-      return this._size_ex4ybc$_0.getValue_lrcp0p$(this, new Kotlin.PropertyMetadata('_size'));
+      return this._size_ex4ybc$_0.getValue_lrcp0p$(this, Input$_size_metadata);
     },
     set: function (_size) {
-      this._size_ex4ybc$_0.setValue_9rddgb$(this, new Kotlin.PropertyMetadata('_size'), _size);
+      this._size_ex4ybc$_0.setValue_9rddgb$(this, Input$_size_metadata, _size);
     }
   });
+  var Input$_src_metadata = new PropertyMetadata('_src');
   Object.defineProperty(Input.prototype, '_src', {
     get: function () {
-      return this._src_wk5b09$_0.getValue_lrcp0p$(this, new Kotlin.PropertyMetadata('_src'));
+      return this._src_wk5b09$_0.getValue_lrcp0p$(this, Input$_src_metadata);
     },
     set: function (_src) {
-      this._src_wk5b09$_0.setValue_9rddgb$(this, new Kotlin.PropertyMetadata('_src'), _src);
+      this._src_wk5b09$_0.setValue_9rddgb$(this, Input$_src_metadata, _src);
     }
   });
+  var Input$_step_metadata = new PropertyMetadata('_step');
   Object.defineProperty(Input.prototype, '_step', {
     get: function () {
-      return this._step_ewycrn$_0.getValue_lrcp0p$(this, new Kotlin.PropertyMetadata('_step'));
+      return this._step_ewycrn$_0.getValue_lrcp0p$(this, Input$_step_metadata);
     },
     set: function (_step) {
-      this._step_ewycrn$_0.setValue_9rddgb$(this, new Kotlin.PropertyMetadata('_step'), _step);
+      this._step_ewycrn$_0.setValue_9rddgb$(this, Input$_step_metadata, _step);
     }
   });
+  var Input$_width_metadata = new PropertyMetadata('_width');
   Object.defineProperty(Input.prototype, '_width', {
     get: function () {
-      return this._width_ygsfrv$_0.getValue_lrcp0p$(this, new Kotlin.PropertyMetadata('_width'));
+      return this._width_ygsfrv$_0.getValue_lrcp0p$(this, Input$_width_metadata);
     },
     set: function (_width) {
-      this._width_ygsfrv$_0.setValue_9rddgb$(this, new Kotlin.PropertyMetadata('_width'), _width);
+      this._width_ygsfrv$_0.setValue_9rddgb$(this, Input$_width_metadata, _width);
     }
   });
   function Input$Type(name, ordinal) {
@@ -3601,7 +3737,7 @@ var elements = function (_, Kotlin) {
     return Input$Type$radio_instance;
   }
   Input$Type.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     simpleName: 'Type',
     interfaces: [Enum]
   };
@@ -3619,12 +3755,12 @@ var elements = function (_, Kotlin) {
         return Input$Type$number_getInstance();
       case 'radio':
         return Input$Type$radio_getInstance();
-      default:Kotlin.throwISE('No enum constant fg.elements.Input.Type.' + name);
+      default:throwISE('No enum constant fg.elements.Input.Type.' + name);
     }
   }
   Input$Type.valueOf_61zpoe$ = Input$Type$valueOf;
   Input.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     simpleName: 'Input',
     interfaces: [Element]
   };
@@ -3632,7 +3768,7 @@ var elements = function (_, Kotlin) {
     Input.call(this, Input$Type$text_getInstance());
   }
   InputText.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     simpleName: 'InputText',
     interfaces: [Input]
   };
@@ -3640,7 +3776,7 @@ var elements = function (_, Kotlin) {
     Input.call(this, Input$Type$radio_getInstance());
   }
   InputRadio.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     simpleName: 'InputRadio',
     interfaces: [Input]
   };
@@ -3649,34 +3785,32 @@ var elements = function (_, Kotlin) {
   }
   Object.defineProperty(InputNumber.prototype, 'doubleValue', {
     get: function () {
-      var tmp$;
       if (Kotlin.callGetter(this, Input.prototype, 'value') == null) {
         return null;
       }
        else {
-        return toDouble((tmp$ = Kotlin.callGetter(this, Input.prototype, 'value')) != null ? tmp$ : Kotlin.throwNPE());
+        return toDouble(ensureNotNull(Kotlin.callGetter(this, Input.prototype, 'value')));
       }
     },
     set: function (value) {
-      Kotlin.callSetter(this, Input.prototype, 'value', Kotlin.toString(value));
+      Kotlin.callSetter(this, Input.prototype, 'value', toString(value));
     }
   });
   Object.defineProperty(InputNumber.prototype, 'intValue', {
     get: function () {
-      var tmp$;
       if (Kotlin.callGetter(this, Input.prototype, 'value') == null) {
         return null;
       }
        else {
-        return toInt((tmp$ = Kotlin.callGetter(this, Input.prototype, 'value')) != null ? tmp$ : Kotlin.throwNPE());
+        return toInt(ensureNotNull(Kotlin.callGetter(this, Input.prototype, 'value')));
       }
     },
     set: function (value) {
-      Kotlin.callSetter(this, Input.prototype, 'value', Kotlin.toString(value));
+      Kotlin.callSetter(this, Input.prototype, 'value', toString(value));
     }
   });
   InputNumber.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     simpleName: 'InputNumber',
     interfaces: [Input]
   };
@@ -3687,19 +3821,20 @@ var elements = function (_, Kotlin) {
     this._for_qh86tw$_0 = W3cDelegates_getInstance().nullableAttribute_61zpoe$('for');
     this._for = labelFor;
   }
+  var Label$_for_metadata = new PropertyMetadata('_for');
   Object.defineProperty(Label.prototype, '_for', {
     get: function () {
-      return this._for_qh86tw$_0.getValue_lrcp0p$(this, new Kotlin.PropertyMetadata('_for'));
+      return this._for_qh86tw$_0.getValue_lrcp0p$(this, Label$_for_metadata);
     },
     set: function (_for) {
-      this._for_qh86tw$_0.setValue_9rddgb$(this, new Kotlin.PropertyMetadata('_for'), _for);
+      this._for_qh86tw$_0.setValue_9rddgb$(this, Label$_for_metadata, _for);
     }
   });
   Label.prototype.render = function () {
     Element.prototype.render.call(this);
   };
   Label.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     simpleName: 'Label',
     interfaces: [Element]
   };
@@ -3707,7 +3842,7 @@ var elements = function (_, Kotlin) {
     Element.call(this, 'p');
   }
   P.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     simpleName: 'P',
     interfaces: [Element]
   };
@@ -3715,7 +3850,7 @@ var elements = function (_, Kotlin) {
     Element.call(this, 'hr');
   }
   Hr.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     simpleName: 'Hr',
     interfaces: [Element]
   };
@@ -3723,7 +3858,7 @@ var elements = function (_, Kotlin) {
     Element.call(this, 'pre');
   }
   Pre.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     simpleName: 'Pre',
     interfaces: [Element]
   };
@@ -3731,7 +3866,7 @@ var elements = function (_, Kotlin) {
     Element.call(this, 'blockquote');
   }
   Blockquote.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     simpleName: 'Blockquote',
     interfaces: [Element]
   };
@@ -3739,7 +3874,7 @@ var elements = function (_, Kotlin) {
     Element.call(this, 'ol');
   }
   Ol.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     simpleName: 'Ol',
     interfaces: [Element]
   };
@@ -3747,7 +3882,7 @@ var elements = function (_, Kotlin) {
     Element.call(this, 'ul');
   }
   Ul.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     simpleName: 'Ul',
     interfaces: [Element]
   };
@@ -3755,7 +3890,7 @@ var elements = function (_, Kotlin) {
     Element.call(this, 'li');
   }
   Li.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     simpleName: 'Li',
     interfaces: [Element]
   };
@@ -3763,7 +3898,7 @@ var elements = function (_, Kotlin) {
     Element.call(this, 'dl');
   }
   Dl.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     simpleName: 'Dl',
     interfaces: [Element]
   };
@@ -3771,7 +3906,7 @@ var elements = function (_, Kotlin) {
     Element.call(this, 'dt');
   }
   Dt.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     simpleName: 'Dt',
     interfaces: [Element]
   };
@@ -3779,7 +3914,7 @@ var elements = function (_, Kotlin) {
     Element.call(this, 'dd');
   }
   Dd.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     simpleName: 'Dd',
     interfaces: [Element]
   };
@@ -3787,7 +3922,7 @@ var elements = function (_, Kotlin) {
     Element.call(this, 'figure');
   }
   Figure.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     simpleName: 'Figure',
     interfaces: [Element]
   };
@@ -3795,7 +3930,7 @@ var elements = function (_, Kotlin) {
     Element.call(this, 'figcaption');
   }
   Figcaption.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     simpleName: 'Figcaption',
     interfaces: [Element]
   };
@@ -3803,7 +3938,7 @@ var elements = function (_, Kotlin) {
     Element.call(this, 'div');
   }
   Div.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     simpleName: 'Div',
     interfaces: [Element]
   };
@@ -3811,14 +3946,14 @@ var elements = function (_, Kotlin) {
     Element.call(this, 'main');
   }
   Main.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     simpleName: 'Main',
     interfaces: [Element]
   };
   function Breakpoint() {
   }
   Breakpoint.$metadata$ = {
-    kind: Kotlin.Kind.INTERFACE,
+    kind: Kind_INTERFACE,
     simpleName: 'Breakpoint',
     interfaces: []
   };
@@ -3830,9 +3965,7 @@ var elements = function (_, Kotlin) {
   }
   Object.defineProperty(BreakpointLayout.prototype, 'style', {
     get: function () {
-      var $receiver = this.style_v82tvi$_0;
-      new Kotlin.PropertyMetadata('style');
-      return $receiver.value;
+      return this.style_v82tvi$_0.value;
     }
   });
   BreakpointLayout.prototype.apply_nfb22d$ = function (element) {
@@ -3868,7 +4001,7 @@ var elements = function (_, Kotlin) {
     return new DeferredTypedStyle();
   }
   BreakpointLayout.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     simpleName: 'BreakpointLayout',
     interfaces: []
   };
@@ -3915,7 +4048,7 @@ var elements = function (_, Kotlin) {
     DefaultBreakpoints$small_instance = new DefaultBreakpoints('small', 1, new IntRange(600, 959));
     DefaultBreakpoints$medium_instance = new DefaultBreakpoints('medium', 2, new IntRange(960, 1279));
     DefaultBreakpoints$large_instance = new DefaultBreakpoints('large', 3, new IntRange(1280, 1919));
-    DefaultBreakpoints$xlarge_instance = new DefaultBreakpoints('xlarge', 4, new IntRange(1920, IntCompanionObject.MAX_VALUE));
+    DefaultBreakpoints$xlarge_instance = new DefaultBreakpoints('xlarge', 4, new IntRange(1920, kotlin_js_internal_IntCompanionObject.MAX_VALUE));
   }
   var DefaultBreakpoints$xsmall_instance;
   function DefaultBreakpoints$xsmall_getInstance() {
@@ -3946,7 +4079,7 @@ var elements = function (_, Kotlin) {
     return contains(this.range, x);
   };
   DefaultBreakpoints.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     simpleName: 'DefaultBreakpoints',
     interfaces: [Breakpoint, Enum]
   };
@@ -3966,7 +4099,7 @@ var elements = function (_, Kotlin) {
         return DefaultBreakpoints$large_getInstance();
       case 'xlarge':
         return DefaultBreakpoints$xlarge_getInstance();
-      default:Kotlin.throwISE('No enum constant fg.elements.layout.DefaultBreakpoints.' + name);
+      default:throwISE('No enum constant fg.elements.layout.DefaultBreakpoints.' + name);
     }
   }
   DefaultBreakpoints.valueOf_61zpoe$ = DefaultBreakpoints$valueOf;
@@ -3986,16 +4119,12 @@ var elements = function (_, Kotlin) {
   }
   Object.defineProperty(Layout.prototype, 'style', {
     get: function () {
-      var $receiver = this.style_5ucdzh$_0;
-      new Kotlin.PropertyMetadata('style');
-      return $receiver.value;
+      return this.style_5ucdzh$_0.value;
     }
   });
   Object.defineProperty(Layout.prototype, 'deferredTypedStyle_0', {
     get: function () {
-      var $receiver = this.deferredTypedStyle_bpz3ey$_0;
-      new Kotlin.PropertyMetadata('deferredTypedStyle');
-      return $receiver.value;
+      return this.deferredTypedStyle_bpz3ey$_0.value;
     }
   });
   Layout.prototype.windowResized_0 = function (windowWidth) {
@@ -4042,7 +4171,6 @@ var elements = function (_, Kotlin) {
   };
   Layout.prototype.initialize = function () {
     this.element_0.style.display = Display$flex_getInstance();
-    console.log('Activating default layout');
     this.deferredTypedStyle_0.apply_54c9de$(this.element_0);
     this.currentIsDefaultLayout_0 = true;
   };
@@ -4050,7 +4178,7 @@ var elements = function (_, Kotlin) {
     this.breakpointLayouts_0.add_11rb$(breakpoint);
     if (!this.registeredWindowResizedListener_0) {
       this.registeredWindowResizedListener_0 = true;
-      window.addEventListener('resize', this.windowResizedListener_0);
+      onResize(window, this.windowResizedListener_0);
     }
   };
   Layout.prototype.onActivated_o14v8n$ = function (listener) {
@@ -4103,7 +4231,7 @@ var elements = function (_, Kotlin) {
     };
   }
   Layout.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     simpleName: 'Layout',
     interfaces: []
   };
@@ -4111,7 +4239,7 @@ var elements = function (_, Kotlin) {
     Element.call(this, 'article');
   }
   Article.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     simpleName: 'Article',
     interfaces: [Element]
   };
@@ -4119,7 +4247,7 @@ var elements = function (_, Kotlin) {
     Element.call(this, 'section');
   }
   Section.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     simpleName: 'Section',
     interfaces: [Element]
   };
@@ -4127,7 +4255,7 @@ var elements = function (_, Kotlin) {
     Element.call(this, 'nav');
   }
   Nav.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     simpleName: 'Nav',
     interfaces: [Element]
   };
@@ -4135,7 +4263,7 @@ var elements = function (_, Kotlin) {
     Element.call(this, 'aside');
   }
   Aside.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     simpleName: 'Aside',
     interfaces: [Element]
   };
@@ -4143,7 +4271,7 @@ var elements = function (_, Kotlin) {
     Element.call(this, 'h1');
   }
   H1.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     simpleName: 'H1',
     interfaces: [Element]
   };
@@ -4151,7 +4279,7 @@ var elements = function (_, Kotlin) {
     Element.call(this, 'h2');
   }
   H2.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     simpleName: 'H2',
     interfaces: [Element]
   };
@@ -4159,7 +4287,7 @@ var elements = function (_, Kotlin) {
     Element.call(this, 'h3');
   }
   H3.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     simpleName: 'H3',
     interfaces: [Element]
   };
@@ -4167,7 +4295,7 @@ var elements = function (_, Kotlin) {
     Element.call(this, 'h4');
   }
   H4.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     simpleName: 'H4',
     interfaces: [Element]
   };
@@ -4175,7 +4303,7 @@ var elements = function (_, Kotlin) {
     Element.call(this, 'h5');
   }
   H5.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     simpleName: 'H5',
     interfaces: [Element]
   };
@@ -4183,7 +4311,7 @@ var elements = function (_, Kotlin) {
     Element.call(this, 'h6');
   }
   H6.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     simpleName: 'H6',
     interfaces: [Element]
   };
@@ -4191,7 +4319,7 @@ var elements = function (_, Kotlin) {
     Element.call(this, 'header');
   }
   Header.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     simpleName: 'Header',
     interfaces: [Element]
   };
@@ -4199,7 +4327,7 @@ var elements = function (_, Kotlin) {
     Element.call(this, 'footer');
   }
   Footer.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     simpleName: 'Footer',
     interfaces: [Element]
   };
@@ -4207,7 +4335,7 @@ var elements = function (_, Kotlin) {
     Element.call(this, 'address');
   }
   Address.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     simpleName: 'Address',
     interfaces: [Element]
   };
@@ -4219,7 +4347,7 @@ var elements = function (_, Kotlin) {
     this.ANY = new AnySelector();
   }
   Selector$Statics.$metadata$ = {
-    kind: Kotlin.Kind.OBJECT,
+    kind: Kind_OBJECT,
     simpleName: 'Statics',
     interfaces: []
   };
@@ -4231,7 +4359,7 @@ var elements = function (_, Kotlin) {
     return Selector$Statics_instance;
   }
   Selector.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     simpleName: 'Selector',
     interfaces: []
   };
@@ -4247,7 +4375,7 @@ var elements = function (_, Kotlin) {
     this.GET = new AnySelector();
   }
   AnySelector$Statics.$metadata$ = {
-    kind: Kotlin.Kind.OBJECT,
+    kind: Kind_OBJECT,
     simpleName: 'Statics',
     interfaces: []
   };
@@ -4259,7 +4387,7 @@ var elements = function (_, Kotlin) {
     return AnySelector$Statics_instance;
   }
   AnySelector.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     simpleName: 'AnySelector',
     interfaces: [Selector]
   };
@@ -4271,7 +4399,7 @@ var elements = function (_, Kotlin) {
     return this.value;
   };
   AnimationNameSelector.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     simpleName: 'AnimationNameSelector',
     interfaces: [Selector]
   };
@@ -4283,7 +4411,7 @@ var elements = function (_, Kotlin) {
     return this.value;
   };
   KeyframeSelector.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     simpleName: 'KeyframeSelector',
     interfaces: [Selector]
   };
@@ -4295,7 +4423,7 @@ var elements = function (_, Kotlin) {
     return this.value;
   };
   TypeSelector.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     simpleName: 'TypeSelector',
     interfaces: [Selector]
   };
@@ -4307,7 +4435,7 @@ var elements = function (_, Kotlin) {
     return '.' + this.value;
   };
   ClassSelector.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     simpleName: 'ClassSelector',
     interfaces: [Selector]
   };
@@ -4319,7 +4447,7 @@ var elements = function (_, Kotlin) {
     return '#' + this.value;
   };
   IdSelector.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     simpleName: 'IdSelector',
     interfaces: [Selector]
   };
@@ -4331,7 +4459,7 @@ var elements = function (_, Kotlin) {
     return '[' + this.value + ']';
   };
   AttrSelector.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     simpleName: 'AttrSelector',
     interfaces: [Selector]
   };
@@ -4343,7 +4471,7 @@ var elements = function (_, Kotlin) {
     return ':' + this.value;
   };
   PseudoClassSelector.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     simpleName: 'PseudoClassSelector',
     interfaces: [Selector]
   };
@@ -4357,7 +4485,7 @@ var elements = function (_, Kotlin) {
     return this.a.toString() + ' ' + this.combinator + ' ' + this.b.toString();
   };
   CompositeSelector.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     simpleName: 'CompositeSelector',
     interfaces: [Selector]
   };
@@ -4365,7 +4493,7 @@ var elements = function (_, Kotlin) {
     CompositeSelector.call(this, a, '>', b);
   }
   ChildSelector.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     simpleName: 'ChildSelector',
     interfaces: [CompositeSelector]
   };
@@ -4373,7 +4501,7 @@ var elements = function (_, Kotlin) {
     CompositeSelector.call(this, a, '+', b);
   }
   AdjacentSiblingSelector.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     simpleName: 'AdjacentSiblingSelector',
     interfaces: [CompositeSelector]
   };
@@ -4381,7 +4509,7 @@ var elements = function (_, Kotlin) {
     CompositeSelector.call(this, a, '~', b);
   }
   GeneralSiblingSelector.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     simpleName: 'GeneralSiblingSelector',
     interfaces: [CompositeSelector]
   };
@@ -4392,7 +4520,7 @@ var elements = function (_, Kotlin) {
     return this.a.toString() + ' ' + this.b.toString();
   };
   DescendantSelector.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     simpleName: 'DescendantSelector',
     interfaces: [CompositeSelector]
   };
@@ -4403,7 +4531,7 @@ var elements = function (_, Kotlin) {
     return this.a.toString() + this.b.toString();
   };
   AndSelector.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     simpleName: 'AndSelector',
     interfaces: [CompositeSelector]
   };
@@ -4415,7 +4543,7 @@ var elements = function (_, Kotlin) {
     return ':not(' + this.selector + ')';
   };
   NotSelector.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     simpleName: 'NotSelector',
     interfaces: [Selector]
   };
@@ -4429,7 +4557,7 @@ var elements = function (_, Kotlin) {
      else if (startsWith($receiver, '#')) {
       return new IdSelector(substringAfter($receiver, '#'));
     }
-     else if (Kotlin.equals($receiver, '*')) {
+     else if (equals($receiver, '*')) {
       return new AnySelector();
     }
      else {
@@ -4506,7 +4634,7 @@ var elements = function (_, Kotlin) {
     return this.asString;
   };
   AlignItems.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     simpleName: 'AlignItems',
     interfaces: [Enum]
   };
@@ -4532,7 +4660,7 @@ var elements = function (_, Kotlin) {
         return AlignItems$initial_getInstance();
       case 'unset':
         return AlignItems$unset_getInstance();
-      default:Kotlin.throwISE('No enum constant fg.elements.style.typed.AlignItems.' + name);
+      default:throwISE('No enum constant fg.elements.style.typed.AlignItems.' + name);
     }
   }
   AlignItems.valueOf_61zpoe$ = AlignItems$valueOf;
@@ -4541,11 +4669,11 @@ var elements = function (_, Kotlin) {
     tmp$ = AlignItems$values();
     for (tmp$_0 = 0; tmp$_0 !== tmp$.length; ++tmp$_0) {
       var one = tmp$[tmp$_0];
-      if (Kotlin.equals(one.asString, $receiver)) {
+      if (equals(one.asString, $receiver)) {
         return one;
       }
     }
-    throw new IllegalArgumentException('Unknown align-items: ' + $receiver);
+    throw IllegalArgumentException_init('Unknown align-items: ' + $receiver);
   }
   function Border(width, style, color) {
     Border$Companion_getInstance();
@@ -4572,7 +4700,7 @@ var elements = function (_, Kotlin) {
     return new Border(width, style, color);
   };
   Border$Companion.$metadata$ = {
-    kind: Kotlin.Kind.OBJECT,
+    kind: Kind_OBJECT,
     simpleName: 'Companion',
     interfaces: []
   };
@@ -4608,7 +4736,7 @@ var elements = function (_, Kotlin) {
     }
   };
   Border.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     simpleName: 'Border',
     interfaces: []
   };
@@ -4682,7 +4810,7 @@ var elements = function (_, Kotlin) {
     return BorderStyle$none_instance;
   }
   BorderStyle.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     simpleName: 'BorderStyle',
     interfaces: [Enum]
   };
@@ -4712,7 +4840,7 @@ var elements = function (_, Kotlin) {
         return BorderStyle$solid_getInstance();
       case 'none':
         return BorderStyle$none_getInstance();
-      default:Kotlin.throwISE('No enum constant fg.elements.style.typed.BorderStyle.' + name);
+      default:throwISE('No enum constant fg.elements.style.typed.BorderStyle.' + name);
     }
   }
   BorderStyle.valueOf_61zpoe$ = BorderStyle$valueOf;
@@ -4750,261 +4878,292 @@ var elements = function (_, Kotlin) {
     this.flexBasis_dvcvee$_0 = new BoundedTypedStyle$FlexBasisDelegate();
     this.order_r5kxr3$_0 = new BoundedTypedStyle$IntDelegate();
   }
+  var BoundedTypedStyle$display_metadata = new PropertyMetadata('display');
   Object.defineProperty(BoundedTypedStyle.prototype, 'display', {
     get: function () {
-      return this.display_roevhp$_0.getValue_lrcp0p$(this, new Kotlin.PropertyMetadata('display'));
+      return this.display_roevhp$_0.getValue_lrcp0p$(this, BoundedTypedStyle$display_metadata);
     },
     set: function (display) {
-      this.display_roevhp$_0.setValue_9rddgb$(this, new Kotlin.PropertyMetadata('display'), display);
+      this.display_roevhp$_0.setValue_9rddgb$(this, BoundedTypedStyle$display_metadata, display);
     }
   });
+  var BoundedTypedStyle$position_metadata = new PropertyMetadata('position');
   Object.defineProperty(BoundedTypedStyle.prototype, 'position', {
     get: function () {
-      return this.position_tsf53w$_0.getValue_lrcp0p$(this, new Kotlin.PropertyMetadata('position'));
+      return this.position_tsf53w$_0.getValue_lrcp0p$(this, BoundedTypedStyle$position_metadata);
     },
     set: function (position) {
-      this.position_tsf53w$_0.setValue_9rddgb$(this, new Kotlin.PropertyMetadata('position'), position);
+      this.position_tsf53w$_0.setValue_9rddgb$(this, BoundedTypedStyle$position_metadata, position);
     }
   });
+  var BoundedTypedStyle$color_metadata = new PropertyMetadata('color');
   Object.defineProperty(BoundedTypedStyle.prototype, 'color', {
     get: function () {
-      return this.color_wvmgyc$_0.getValue_lrcp0p$(this, new Kotlin.PropertyMetadata('color'));
+      return this.color_wvmgyc$_0.getValue_lrcp0p$(this, BoundedTypedStyle$color_metadata);
     },
     set: function (color) {
-      this.color_wvmgyc$_0.setValue_9rddgb$(this, new Kotlin.PropertyMetadata('color'), color);
+      this.color_wvmgyc$_0.setValue_9rddgb$(this, BoundedTypedStyle$color_metadata, color);
     }
   });
+  var BoundedTypedStyle$backgroundColor_metadata = new PropertyMetadata('backgroundColor');
   Object.defineProperty(BoundedTypedStyle.prototype, 'backgroundColor', {
     get: function () {
-      return this.backgroundColor_xu8mh2$_0.getValue_lrcp0p$(this, new Kotlin.PropertyMetadata('backgroundColor'));
+      return this.backgroundColor_xu8mh2$_0.getValue_lrcp0p$(this, BoundedTypedStyle$backgroundColor_metadata);
     },
     set: function (backgroundColor) {
-      this.backgroundColor_xu8mh2$_0.setValue_9rddgb$(this, new Kotlin.PropertyMetadata('backgroundColor'), backgroundColor);
+      this.backgroundColor_xu8mh2$_0.setValue_9rddgb$(this, BoundedTypedStyle$backgroundColor_metadata, backgroundColor);
     }
   });
+  var BoundedTypedStyle$left_metadata = new PropertyMetadata('left');
   Object.defineProperty(BoundedTypedStyle.prototype, 'left', {
     get: function () {
-      return this.left_joz27y$_0.getValue_lrcp0p$(this, new Kotlin.PropertyMetadata('left'));
+      return this.left_joz27y$_0.getValue_lrcp0p$(this, BoundedTypedStyle$left_metadata);
     },
     set: function (left) {
-      this.left_joz27y$_0.setValue_9rddgb$(this, new Kotlin.PropertyMetadata('left'), left);
+      this.left_joz27y$_0.setValue_9rddgb$(this, BoundedTypedStyle$left_metadata, left);
     }
   });
+  var BoundedTypedStyle$right_metadata = new PropertyMetadata('right');
   Object.defineProperty(BoundedTypedStyle.prototype, 'right', {
     get: function () {
-      return this.right_pvc8od$_0.getValue_lrcp0p$(this, new Kotlin.PropertyMetadata('right'));
+      return this.right_pvc8od$_0.getValue_lrcp0p$(this, BoundedTypedStyle$right_metadata);
     },
     set: function (right) {
-      this.right_pvc8od$_0.setValue_9rddgb$(this, new Kotlin.PropertyMetadata('right'), right);
+      this.right_pvc8od$_0.setValue_9rddgb$(this, BoundedTypedStyle$right_metadata, right);
     }
   });
+  var BoundedTypedStyle$top_metadata = new PropertyMetadata('top');
   Object.defineProperty(BoundedTypedStyle.prototype, 'top', {
     get: function () {
-      return this.top_m9uuva$_0.getValue_lrcp0p$(this, new Kotlin.PropertyMetadata('top'));
+      return this.top_m9uuva$_0.getValue_lrcp0p$(this, BoundedTypedStyle$top_metadata);
     },
     set: function (top) {
-      this.top_m9uuva$_0.setValue_9rddgb$(this, new Kotlin.PropertyMetadata('top'), top);
+      this.top_m9uuva$_0.setValue_9rddgb$(this, BoundedTypedStyle$top_metadata, top);
     }
   });
+  var BoundedTypedStyle$bottom_metadata = new PropertyMetadata('bottom');
   Object.defineProperty(BoundedTypedStyle.prototype, 'bottom', {
     get: function () {
-      return this.bottom_vofgka$_0.getValue_lrcp0p$(this, new Kotlin.PropertyMetadata('bottom'));
+      return this.bottom_vofgka$_0.getValue_lrcp0p$(this, BoundedTypedStyle$bottom_metadata);
     },
     set: function (bottom) {
-      this.bottom_vofgka$_0.setValue_9rddgb$(this, new Kotlin.PropertyMetadata('bottom'), bottom);
+      this.bottom_vofgka$_0.setValue_9rddgb$(this, BoundedTypedStyle$bottom_metadata, bottom);
     }
   });
+  var BoundedTypedStyle$width_metadata = new PropertyMetadata('width');
   Object.defineProperty(BoundedTypedStyle.prototype, 'width', {
     get: function () {
-      return this.width_ni5t1z$_0.getValue_lrcp0p$(this, new Kotlin.PropertyMetadata('width'));
+      return this.width_ni5t1z$_0.getValue_lrcp0p$(this, BoundedTypedStyle$width_metadata);
     },
     set: function (width) {
-      this.width_ni5t1z$_0.setValue_9rddgb$(this, new Kotlin.PropertyMetadata('width'), width);
+      this.width_ni5t1z$_0.setValue_9rddgb$(this, BoundedTypedStyle$width_metadata, width);
     }
   });
+  var BoundedTypedStyle$height_metadata = new PropertyMetadata('height');
   Object.defineProperty(BoundedTypedStyle.prototype, 'height', {
     get: function () {
-      return this.height_r85cde$_0.getValue_lrcp0p$(this, new Kotlin.PropertyMetadata('height'));
+      return this.height_r85cde$_0.getValue_lrcp0p$(this, BoundedTypedStyle$height_metadata);
     },
     set: function (height) {
-      this.height_r85cde$_0.setValue_9rddgb$(this, new Kotlin.PropertyMetadata('height'), height);
+      this.height_r85cde$_0.setValue_9rddgb$(this, BoundedTypedStyle$height_metadata, height);
     }
   });
+  var BoundedTypedStyle$minWidth_metadata = new PropertyMetadata('minWidth');
   Object.defineProperty(BoundedTypedStyle.prototype, 'minWidth', {
     get: function () {
-      return this.minWidth_6ib0y9$_0.getValue_lrcp0p$(this, new Kotlin.PropertyMetadata('minWidth'));
+      return this.minWidth_6ib0y9$_0.getValue_lrcp0p$(this, BoundedTypedStyle$minWidth_metadata);
     },
     set: function (minWidth) {
-      this.minWidth_6ib0y9$_0.setValue_9rddgb$(this, new Kotlin.PropertyMetadata('minWidth'), minWidth);
+      this.minWidth_6ib0y9$_0.setValue_9rddgb$(this, BoundedTypedStyle$minWidth_metadata, minWidth);
     }
   });
+  var BoundedTypedStyle$minHeight_metadata = new PropertyMetadata('minHeight');
   Object.defineProperty(BoundedTypedStyle.prototype, 'minHeight', {
     get: function () {
-      return this.minHeight_k847uy$_0.getValue_lrcp0p$(this, new Kotlin.PropertyMetadata('minHeight'));
+      return this.minHeight_k847uy$_0.getValue_lrcp0p$(this, BoundedTypedStyle$minHeight_metadata);
     },
     set: function (minHeight) {
-      this.minHeight_k847uy$_0.setValue_9rddgb$(this, new Kotlin.PropertyMetadata('minHeight'), minHeight);
+      this.minHeight_k847uy$_0.setValue_9rddgb$(this, BoundedTypedStyle$minHeight_metadata, minHeight);
     }
   });
+  var BoundedTypedStyle$maxWidth_metadata = new PropertyMetadata('maxWidth');
   Object.defineProperty(BoundedTypedStyle.prototype, 'maxWidth', {
     get: function () {
-      return this.maxWidth_69lvbx$_0.getValue_lrcp0p$(this, new Kotlin.PropertyMetadata('maxWidth'));
+      return this.maxWidth_69lvbx$_0.getValue_lrcp0p$(this, BoundedTypedStyle$maxWidth_metadata);
     },
     set: function (maxWidth) {
-      this.maxWidth_69lvbx$_0.setValue_9rddgb$(this, new Kotlin.PropertyMetadata('maxWidth'), maxWidth);
+      this.maxWidth_69lvbx$_0.setValue_9rddgb$(this, BoundedTypedStyle$maxWidth_metadata, maxWidth);
     }
   });
+  var BoundedTypedStyle$maxHeight_metadata = new PropertyMetadata('maxHeight');
   Object.defineProperty(BoundedTypedStyle.prototype, 'maxHeight', {
     get: function () {
-      return this.maxHeight_9x8b8k$_0.getValue_lrcp0p$(this, new Kotlin.PropertyMetadata('maxHeight'));
+      return this.maxHeight_9x8b8k$_0.getValue_lrcp0p$(this, BoundedTypedStyle$maxHeight_metadata);
     },
     set: function (maxHeight) {
-      this.maxHeight_9x8b8k$_0.setValue_9rddgb$(this, new Kotlin.PropertyMetadata('maxHeight'), maxHeight);
+      this.maxHeight_9x8b8k$_0.setValue_9rddgb$(this, BoundedTypedStyle$maxHeight_metadata, maxHeight);
     }
   });
+  var BoundedTypedStyle$marginLeft_metadata = new PropertyMetadata('marginLeft');
   Object.defineProperty(BoundedTypedStyle.prototype, 'marginLeft', {
     get: function () {
-      return this.marginLeft_kiu1f4$_0.getValue_lrcp0p$(this, new Kotlin.PropertyMetadata('marginLeft'));
+      return this.marginLeft_kiu1f4$_0.getValue_lrcp0p$(this, BoundedTypedStyle$marginLeft_metadata);
     },
     set: function (marginLeft) {
-      this.marginLeft_kiu1f4$_0.setValue_9rddgb$(this, new Kotlin.PropertyMetadata('marginLeft'), marginLeft);
+      this.marginLeft_kiu1f4$_0.setValue_9rddgb$(this, BoundedTypedStyle$marginLeft_metadata, marginLeft);
     }
   });
+  var BoundedTypedStyle$marginRight_metadata = new PropertyMetadata('marginRight');
   Object.defineProperty(BoundedTypedStyle.prototype, 'marginRight', {
     get: function () {
-      return this.marginRight_5nxi7$_0.getValue_lrcp0p$(this, new Kotlin.PropertyMetadata('marginRight'));
+      return this.marginRight_5nxi7$_0.getValue_lrcp0p$(this, BoundedTypedStyle$marginRight_metadata);
     },
     set: function (marginRight) {
-      this.marginRight_5nxi7$_0.setValue_9rddgb$(this, new Kotlin.PropertyMetadata('marginRight'), marginRight);
+      this.marginRight_5nxi7$_0.setValue_9rddgb$(this, BoundedTypedStyle$marginRight_metadata, marginRight);
     }
   });
+  var BoundedTypedStyle$marginTop_metadata = new PropertyMetadata('marginTop');
   Object.defineProperty(BoundedTypedStyle.prototype, 'marginTop', {
     get: function () {
-      return this.marginTop_9txirs$_0.getValue_lrcp0p$(this, new Kotlin.PropertyMetadata('marginTop'));
+      return this.marginTop_9txirs$_0.getValue_lrcp0p$(this, BoundedTypedStyle$marginTop_metadata);
     },
     set: function (marginTop) {
-      this.marginTop_9txirs$_0.setValue_9rddgb$(this, new Kotlin.PropertyMetadata('marginTop'), marginTop);
+      this.marginTop_9txirs$_0.setValue_9rddgb$(this, BoundedTypedStyle$marginTop_metadata, marginTop);
     }
   });
+  var BoundedTypedStyle$marginBottom_metadata = new PropertyMetadata('marginBottom');
   Object.defineProperty(BoundedTypedStyle.prototype, 'marginBottom', {
     get: function () {
-      return this.marginBottom_nkzktw$_0.getValue_lrcp0p$(this, new Kotlin.PropertyMetadata('marginBottom'));
+      return this.marginBottom_nkzktw$_0.getValue_lrcp0p$(this, BoundedTypedStyle$marginBottom_metadata);
     },
     set: function (marginBottom) {
-      this.marginBottom_nkzktw$_0.setValue_9rddgb$(this, new Kotlin.PropertyMetadata('marginBottom'), marginBottom);
+      this.marginBottom_nkzktw$_0.setValue_9rddgb$(this, BoundedTypedStyle$marginBottom_metadata, marginBottom);
     }
   });
+  var BoundedTypedStyle$paddingLeft_metadata = new PropertyMetadata('paddingLeft');
   Object.defineProperty(BoundedTypedStyle.prototype, 'paddingLeft', {
     get: function () {
-      return this.paddingLeft_8uyc6v$_0.getValue_lrcp0p$(this, new Kotlin.PropertyMetadata('paddingLeft'));
+      return this.paddingLeft_8uyc6v$_0.getValue_lrcp0p$(this, BoundedTypedStyle$paddingLeft_metadata);
     },
     set: function (paddingLeft) {
-      this.paddingLeft_8uyc6v$_0.setValue_9rddgb$(this, new Kotlin.PropertyMetadata('paddingLeft'), paddingLeft);
+      this.paddingLeft_8uyc6v$_0.setValue_9rddgb$(this, BoundedTypedStyle$paddingLeft_metadata, paddingLeft);
     }
   });
+  var BoundedTypedStyle$paddingRight_metadata = new PropertyMetadata('paddingRight');
   Object.defineProperty(BoundedTypedStyle.prototype, 'paddingRight', {
     get: function () {
-      return this.paddingRight_6kedqe$_0.getValue_lrcp0p$(this, new Kotlin.PropertyMetadata('paddingRight'));
+      return this.paddingRight_6kedqe$_0.getValue_lrcp0p$(this, BoundedTypedStyle$paddingRight_metadata);
     },
     set: function (paddingRight) {
-      this.paddingRight_6kedqe$_0.setValue_9rddgb$(this, new Kotlin.PropertyMetadata('paddingRight'), paddingRight);
+      this.paddingRight_6kedqe$_0.setValue_9rddgb$(this, BoundedTypedStyle$paddingRight_metadata, paddingRight);
     }
   });
+  var BoundedTypedStyle$paddingTop_metadata = new PropertyMetadata('paddingTop');
   Object.defineProperty(BoundedTypedStyle.prototype, 'paddingTop', {
     get: function () {
-      return this.paddingTop_kby8f3$_0.getValue_lrcp0p$(this, new Kotlin.PropertyMetadata('paddingTop'));
+      return this.paddingTop_kby8f3$_0.getValue_lrcp0p$(this, BoundedTypedStyle$paddingTop_metadata);
     },
     set: function (paddingTop) {
-      this.paddingTop_kby8f3$_0.setValue_9rddgb$(this, new Kotlin.PropertyMetadata('paddingTop'), paddingTop);
+      this.paddingTop_kby8f3$_0.setValue_9rddgb$(this, BoundedTypedStyle$paddingTop_metadata, paddingTop);
     }
   });
+  var BoundedTypedStyle$paddingBottom_metadata = new PropertyMetadata('paddingBottom');
   Object.defineProperty(BoundedTypedStyle.prototype, 'paddingBottom', {
     get: function () {
-      return this.paddingBottom_96fdyl$_0.getValue_lrcp0p$(this, new Kotlin.PropertyMetadata('paddingBottom'));
+      return this.paddingBottom_96fdyl$_0.getValue_lrcp0p$(this, BoundedTypedStyle$paddingBottom_metadata);
     },
     set: function (paddingBottom) {
-      this.paddingBottom_96fdyl$_0.setValue_9rddgb$(this, new Kotlin.PropertyMetadata('paddingBottom'), paddingBottom);
+      this.paddingBottom_96fdyl$_0.setValue_9rddgb$(this, BoundedTypedStyle$paddingBottom_metadata, paddingBottom);
     }
   });
+  var BoundedTypedStyle$border_metadata = new PropertyMetadata('border');
   Object.defineProperty(BoundedTypedStyle.prototype, 'border', {
     get: function () {
-      return this.border_vn1gah$_0.getValue_lrcp0p$(this, new Kotlin.PropertyMetadata('border'));
+      return this.border_vn1gah$_0.getValue_lrcp0p$(this, BoundedTypedStyle$border_metadata);
     },
     set: function (border) {
-      this.border_vn1gah$_0.setValue_9rddgb$(this, new Kotlin.PropertyMetadata('border'), border);
+      this.border_vn1gah$_0.setValue_9rddgb$(this, BoundedTypedStyle$border_metadata, border);
     }
   });
+  var BoundedTypedStyle$flexDirection_metadata = new PropertyMetadata('flexDirection');
   Object.defineProperty(BoundedTypedStyle.prototype, 'flexDirection', {
     get: function () {
-      return this.flexDirection_qeg1d5$_0.getValue_lrcp0p$(this, new Kotlin.PropertyMetadata('flexDirection'));
+      return this.flexDirection_qeg1d5$_0.getValue_lrcp0p$(this, BoundedTypedStyle$flexDirection_metadata);
     },
     set: function (flexDirection) {
-      this.flexDirection_qeg1d5$_0.setValue_9rddgb$(this, new Kotlin.PropertyMetadata('flexDirection'), flexDirection);
+      this.flexDirection_qeg1d5$_0.setValue_9rddgb$(this, BoundedTypedStyle$flexDirection_metadata, flexDirection);
     }
   });
+  var BoundedTypedStyle$justifyContent_metadata = new PropertyMetadata('justifyContent');
   Object.defineProperty(BoundedTypedStyle.prototype, 'justifyContent', {
     get: function () {
-      return this.justifyContent_aft2gs$_0.getValue_lrcp0p$(this, new Kotlin.PropertyMetadata('justifyContent'));
+      return this.justifyContent_aft2gs$_0.getValue_lrcp0p$(this, BoundedTypedStyle$justifyContent_metadata);
     },
     set: function (justifyContent) {
-      this.justifyContent_aft2gs$_0.setValue_9rddgb$(this, new Kotlin.PropertyMetadata('justifyContent'), justifyContent);
+      this.justifyContent_aft2gs$_0.setValue_9rddgb$(this, BoundedTypedStyle$justifyContent_metadata, justifyContent);
     }
   });
+  var BoundedTypedStyle$alignItems_metadata = new PropertyMetadata('alignItems');
   Object.defineProperty(BoundedTypedStyle.prototype, 'alignItems', {
     get: function () {
-      return this.alignItems_rmg9ze$_0.getValue_lrcp0p$(this, new Kotlin.PropertyMetadata('alignItems'));
+      return this.alignItems_rmg9ze$_0.getValue_lrcp0p$(this, BoundedTypedStyle$alignItems_metadata);
     },
     set: function (alignItems) {
-      this.alignItems_rmg9ze$_0.setValue_9rddgb$(this, new Kotlin.PropertyMetadata('alignItems'), alignItems);
+      this.alignItems_rmg9ze$_0.setValue_9rddgb$(this, BoundedTypedStyle$alignItems_metadata, alignItems);
     }
   });
+  var BoundedTypedStyle$flex_metadata = new PropertyMetadata('flex');
   Object.defineProperty(BoundedTypedStyle.prototype, 'flex', {
     get: function () {
-      return this.flex_jlsqx8$_0.getValue_lrcp0p$(this, new Kotlin.PropertyMetadata('flex'));
+      return this.flex_jlsqx8$_0.getValue_lrcp0p$(this, BoundedTypedStyle$flex_metadata);
     },
     set: function (flex) {
-      this.flex_jlsqx8$_0.setValue_9rddgb$(this, new Kotlin.PropertyMetadata('flex'), flex);
+      this.flex_jlsqx8$_0.setValue_9rddgb$(this, BoundedTypedStyle$flex_metadata, flex);
     }
   });
+  var BoundedTypedStyle$flexGrow_metadata = new PropertyMetadata('flexGrow');
   Object.defineProperty(BoundedTypedStyle.prototype, 'flexGrow', {
     get: function () {
-      return this.flexGrow_ruwqyv$_0.getValue_lrcp0p$(this, new Kotlin.PropertyMetadata('flexGrow'));
+      return this.flexGrow_ruwqyv$_0.getValue_lrcp0p$(this, BoundedTypedStyle$flexGrow_metadata);
     },
     set: function (flexGrow) {
-      this.flexGrow_ruwqyv$_0.setValue_9rddgb$(this, new Kotlin.PropertyMetadata('flexGrow'), flexGrow);
+      this.flexGrow_ruwqyv$_0.setValue_9rddgb$(this, BoundedTypedStyle$flexGrow_metadata, flexGrow);
     }
   });
+  var BoundedTypedStyle$flexShrink_metadata = new PropertyMetadata('flexShrink');
   Object.defineProperty(BoundedTypedStyle.prototype, 'flexShrink', {
     get: function () {
-      return this.flexShrink_z4clz1$_0.getValue_lrcp0p$(this, new Kotlin.PropertyMetadata('flexShrink'));
+      return this.flexShrink_z4clz1$_0.getValue_lrcp0p$(this, BoundedTypedStyle$flexShrink_metadata);
     },
     set: function (flexShrink) {
-      this.flexShrink_z4clz1$_0.setValue_9rddgb$(this, new Kotlin.PropertyMetadata('flexShrink'), flexShrink);
+      this.flexShrink_z4clz1$_0.setValue_9rddgb$(this, BoundedTypedStyle$flexShrink_metadata, flexShrink);
     }
   });
+  var BoundedTypedStyle$flexBasis_metadata = new PropertyMetadata('flexBasis');
   Object.defineProperty(BoundedTypedStyle.prototype, 'flexBasis', {
     get: function () {
-      return this.flexBasis_dvcvee$_0.getValue_lrcp0p$(this, new Kotlin.PropertyMetadata('flexBasis'));
+      return this.flexBasis_dvcvee$_0.getValue_lrcp0p$(this, BoundedTypedStyle$flexBasis_metadata);
     },
     set: function (flexBasis) {
-      this.flexBasis_dvcvee$_0.setValue_9rddgb$(this, new Kotlin.PropertyMetadata('flexBasis'), flexBasis);
+      this.flexBasis_dvcvee$_0.setValue_9rddgb$(this, BoundedTypedStyle$flexBasis_metadata, flexBasis);
     }
   });
+  var BoundedTypedStyle$order_metadata = new PropertyMetadata('order');
   Object.defineProperty(BoundedTypedStyle.prototype, 'order', {
     get: function () {
-      return this.order_r5kxr3$_0.getValue_lrcp0p$(this, new Kotlin.PropertyMetadata('order'));
+      return this.order_r5kxr3$_0.getValue_lrcp0p$(this, BoundedTypedStyle$order_metadata);
     },
     set: function (order) {
-      this.order_r5kxr3$_0.setValue_9rddgb$(this, new Kotlin.PropertyMetadata('order'), order);
+      this.order_r5kxr3$_0.setValue_9rddgb$(this, BoundedTypedStyle$order_metadata, order);
     }
   });
   function BoundedTypedStyle$AlignItemsDelegate() {
-    BoundedTypedStyle$TypedPropertyDelegate.call(this, void 0, Kotlin.getCallableRef('toAlignItems', function ($receiver) {
+    BoundedTypedStyle$TypedPropertyDelegate.call(this, void 0, getCallableRef('toAlignItems', function ($receiver) {
       return toAlignItems($receiver);
     }));
   }
   BoundedTypedStyle$AlignItemsDelegate.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     simpleName: 'AlignItemsDelegate',
     interfaces: [BoundedTypedStyle$TypedPropertyDelegate]
   };
@@ -5022,17 +5181,17 @@ var elements = function (_, Kotlin) {
     return Unit;
   }
   BoundedTypedStyle$BorderDelegate.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     simpleName: 'BorderDelegate',
     interfaces: [BoundedTypedStyle$TypedPropertyDelegate2]
   };
   function BoundedTypedStyle$DisplayDelegate() {
-    BoundedTypedStyle$TypedPropertyDelegate.call(this, void 0, Kotlin.getCallableRef('toDisplay', function ($receiver) {
+    BoundedTypedStyle$TypedPropertyDelegate.call(this, void 0, getCallableRef('toDisplay', function ($receiver) {
       return toDisplay($receiver);
     }));
   }
   BoundedTypedStyle$DisplayDelegate.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     simpleName: 'DisplayDelegate',
     interfaces: [BoundedTypedStyle$TypedPropertyDelegate]
   };
@@ -5045,7 +5204,7 @@ var elements = function (_, Kotlin) {
     return RgbColor$Factory_getInstance().from_61zpoe$(it);
   }
   BoundedTypedStyle$RgbColorDelegate.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     simpleName: 'RgbColorDelegate',
     interfaces: [BoundedTypedStyle$TypedPropertyDelegate]
   };
@@ -5055,93 +5214,92 @@ var elements = function (_, Kotlin) {
     BoundedTypedStyle$TypedPropertyDelegate.call(this, attributeName, BoundedTypedStyle$BoundedTypedStyle$DimensionDelegate_init$lambda);
   }
   function BoundedTypedStyle$BoundedTypedStyle$DimensionDelegate_init$lambda(it) {
-    var tmp$;
-    return (tmp$ = toDimension(it)) != null ? tmp$ : Kotlin.throwNPE();
+    return ensureNotNull(toDimension(it));
   }
   BoundedTypedStyle$DimensionDelegate.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     simpleName: 'DimensionDelegate',
     interfaces: [BoundedTypedStyle$TypedPropertyDelegate]
   };
   function BoundedTypedStyle$FlexDirectionDelegate() {
-    BoundedTypedStyle$TypedPropertyDelegate.call(this, void 0, Kotlin.getCallableRef('toFlexDirection', function ($receiver) {
+    BoundedTypedStyle$TypedPropertyDelegate.call(this, void 0, getCallableRef('toFlexDirection', function ($receiver) {
       return toFlexDirection($receiver);
     }));
   }
   BoundedTypedStyle$FlexDirectionDelegate.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     simpleName: 'FlexDirectionDelegate',
     interfaces: [BoundedTypedStyle$TypedPropertyDelegate]
   };
   function BoundedTypedStyle$FlexDelegate() {
-    BoundedTypedStyle$TypedPropertyDelegate.call(this, void 0, Kotlin.getCallableRef('toFlex', function ($receiver) {
+    BoundedTypedStyle$TypedPropertyDelegate.call(this, void 0, getCallableRef('toFlex', function ($receiver) {
       return toFlex($receiver);
     }));
   }
   BoundedTypedStyle$FlexDelegate.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     simpleName: 'FlexDelegate',
     interfaces: [BoundedTypedStyle$TypedPropertyDelegate]
   };
   function BoundedTypedStyle$FlexGrowDelegate() {
-    BoundedTypedStyle$TypedPropertyDelegate.call(this, void 0, Kotlin.getCallableRef('toFlexGrow', function ($receiver) {
+    BoundedTypedStyle$TypedPropertyDelegate.call(this, void 0, getCallableRef('toFlexGrow', function ($receiver) {
       return toFlexGrow($receiver);
     }));
   }
   BoundedTypedStyle$FlexGrowDelegate.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     simpleName: 'FlexGrowDelegate',
     interfaces: [BoundedTypedStyle$TypedPropertyDelegate]
   };
   function BoundedTypedStyle$FlexShrinkDelegate() {
-    BoundedTypedStyle$TypedPropertyDelegate.call(this, void 0, Kotlin.getCallableRef('toFlexShrink', function ($receiver) {
+    BoundedTypedStyle$TypedPropertyDelegate.call(this, void 0, getCallableRef('toFlexShrink', function ($receiver) {
       return toFlexShrink($receiver);
     }));
   }
   BoundedTypedStyle$FlexShrinkDelegate.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     simpleName: 'FlexShrinkDelegate',
     interfaces: [BoundedTypedStyle$TypedPropertyDelegate]
   };
   function BoundedTypedStyle$FlexBasisDelegate() {
-    BoundedTypedStyle$TypedPropertyDelegate.call(this, void 0, Kotlin.getCallableRef('toFlexBasis', function ($receiver) {
+    BoundedTypedStyle$TypedPropertyDelegate.call(this, void 0, getCallableRef('toFlexBasis', function ($receiver) {
       return toFlexBasis($receiver);
     }));
   }
   BoundedTypedStyle$FlexBasisDelegate.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     simpleName: 'FlexBasisDelegate',
     interfaces: [BoundedTypedStyle$TypedPropertyDelegate]
   };
   function BoundedTypedStyle$IntDelegate(attributeName) {
     if (attributeName === void 0)
       attributeName = null;
-    BoundedTypedStyle$TypedPropertyDelegate.call(this, attributeName, Kotlin.getCallableRef('toInt', function ($receiver) {
+    BoundedTypedStyle$TypedPropertyDelegate.call(this, attributeName, getCallableRef('toInt', function ($receiver) {
       return toInt($receiver);
     }));
   }
   BoundedTypedStyle$IntDelegate.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     simpleName: 'IntDelegate',
     interfaces: [BoundedTypedStyle$TypedPropertyDelegate]
   };
   function BoundedTypedStyle$JustifyContentDelegate() {
-    BoundedTypedStyle$TypedPropertyDelegate.call(this, void 0, Kotlin.getCallableRef('toJustifyContent', function ($receiver) {
+    BoundedTypedStyle$TypedPropertyDelegate.call(this, void 0, getCallableRef('toJustifyContent', function ($receiver) {
       return toJustifyContent($receiver);
     }));
   }
   BoundedTypedStyle$JustifyContentDelegate.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     simpleName: 'JustifyContentDelegate',
     interfaces: [BoundedTypedStyle$TypedPropertyDelegate]
   };
   function BoundedTypedStyle$PositionDelegate() {
-    BoundedTypedStyle$TypedPropertyDelegate.call(this, void 0, Kotlin.getCallableRef('toPosition', function ($receiver) {
+    BoundedTypedStyle$TypedPropertyDelegate.call(this, void 0, getCallableRef('toPosition', function ($receiver) {
       return toPosition($receiver);
     }));
   }
   BoundedTypedStyle$PositionDelegate.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     simpleName: 'PositionDelegate',
     interfaces: [BoundedTypedStyle$TypedPropertyDelegate]
   };
@@ -5169,7 +5327,7 @@ var elements = function (_, Kotlin) {
     }
   };
   BoundedTypedStyle$TypedPropertyDelegate.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     simpleName: 'TypedPropertyDelegate',
     interfaces: [ReadWriteProperty]
   };
@@ -5184,12 +5342,12 @@ var elements = function (_, Kotlin) {
     return this.setFn(value, thisRef.element_0);
   };
   BoundedTypedStyle$TypedPropertyDelegate2.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     simpleName: 'TypedPropertyDelegate2',
     interfaces: [ReadWriteProperty]
   };
   BoundedTypedStyle.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     simpleName: 'BoundedTypedStyle',
     interfaces: [TypedStyle]
   };
@@ -5568,7 +5726,7 @@ var elements = function (_, Kotlin) {
     }
   };
   DeferredTypedStyle.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     simpleName: 'DeferredTypedStyle',
     interfaces: [TypedStyle]
   };
@@ -5628,7 +5786,7 @@ var elements = function (_, Kotlin) {
     return this.asString;
   };
   Display.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     simpleName: 'Display',
     interfaces: [Enum]
   };
@@ -5652,7 +5810,7 @@ var elements = function (_, Kotlin) {
         return Display$contents_getInstance();
       case 'listItem':
         return Display$listItem_getInstance();
-      default:Kotlin.throwISE('No enum constant fg.elements.style.typed.Display.' + name);
+      default:throwISE('No enum constant fg.elements.style.typed.Display.' + name);
     }
   }
   Display.valueOf_61zpoe$ = Display$valueOf;
@@ -5661,11 +5819,11 @@ var elements = function (_, Kotlin) {
     tmp$ = Display$values();
     for (tmp$_0 = 0; tmp$_0 !== tmp$.length; ++tmp$_0) {
       var one = tmp$[tmp$_0];
-      if (Kotlin.equals(one.asString, $receiver)) {
+      if (equals(one.asString, $receiver)) {
         return one;
       }
     }
-    throw new IllegalArgumentException('Unknown display: ' + $receiver);
+    throw IllegalArgumentException_init('Unknown display: ' + $receiver);
   }
   function Flex(number, keyword) {
     Flex$Statics_getInstance();
@@ -5675,11 +5833,10 @@ var elements = function (_, Kotlin) {
     this.keyword = keyword;
   }
   Flex.prototype.toString = function () {
-    var tmp$;
     if (this.keyword != null) {
       return this.keyword.name;
     }
-    return ((tmp$ = this.number) != null ? tmp$ : Kotlin.throwNPE()).toString();
+    return ensureNotNull(this.number).toString();
   };
   function Flex$Keyword(name, ordinal) {
     Enum.call(this);
@@ -5709,7 +5866,7 @@ var elements = function (_, Kotlin) {
     return Flex$Keyword$none_instance;
   }
   Flex$Keyword.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     simpleName: 'Keyword',
     interfaces: [Enum]
   };
@@ -5725,7 +5882,7 @@ var elements = function (_, Kotlin) {
         return Flex$Keyword$auto_getInstance();
       case 'none':
         return Flex$Keyword$none_getInstance();
-      default:Kotlin.throwISE('No enum constant fg.elements.style.typed.Flex.Keyword.' + name);
+      default:throwISE('No enum constant fg.elements.style.typed.Flex.Keyword.' + name);
     }
   }
   Flex$Keyword.valueOf_61zpoe$ = Flex$Keyword$valueOf;
@@ -5736,7 +5893,7 @@ var elements = function (_, Kotlin) {
     this.none = new Flex(null, Flex$Keyword$none_getInstance());
   }
   Flex$Statics.$metadata$ = {
-    kind: Kotlin.Kind.OBJECT,
+    kind: Kind_OBJECT,
     simpleName: 'Statics',
     interfaces: []
   };
@@ -5748,7 +5905,7 @@ var elements = function (_, Kotlin) {
     return Flex$Statics_instance;
   }
   Flex.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     simpleName: 'Flex',
     interfaces: []
   };
@@ -5759,7 +5916,7 @@ var elements = function (_, Kotlin) {
       var tmp$;
       for (tmp$ = 0; tmp$ !== $receiver_0.length; ++tmp$) {
         var element = $receiver_0[tmp$];
-        if (Kotlin.equals(element.name, $receiver)) {
+        if (equals(element.name, $receiver)) {
           firstOrNull$result = element;
           break firstOrNull$break;
         }
@@ -5784,11 +5941,10 @@ var elements = function (_, Kotlin) {
     this.keyword = keyword;
   }
   FlexBasis.prototype.toString = function () {
-    var tmp$;
     if (this.keyword != null) {
       return this.keyword.toString();
     }
-    return ((tmp$ = this.dimension) != null ? tmp$ : Kotlin.throwNPE()).toString();
+    return ensureNotNull(this.dimension).toString();
   };
   function FlexBasis$Keyword(name, ordinal, asString) {
     Enum.call(this);
@@ -5858,7 +6014,7 @@ var elements = function (_, Kotlin) {
     return this.asString;
   };
   FlexBasis$Keyword.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     simpleName: 'Keyword',
     interfaces: [Enum]
   };
@@ -5886,7 +6042,7 @@ var elements = function (_, Kotlin) {
         return FlexBasis$Keyword$minContent_getInstance();
       case 'fitContent':
         return FlexBasis$Keyword$fitContent_getInstance();
-      default:Kotlin.throwISE('No enum constant fg.elements.style.typed.FlexBasis.Keyword.' + name);
+      default:throwISE('No enum constant fg.elements.style.typed.FlexBasis.Keyword.' + name);
     }
   }
   FlexBasis$Keyword.valueOf_61zpoe$ = FlexBasis$Keyword$valueOf;
@@ -5903,7 +6059,7 @@ var elements = function (_, Kotlin) {
     this.fitContent = new FlexBasis(void 0, FlexBasis$Keyword$fitContent_getInstance());
   }
   FlexBasis$Statics.$metadata$ = {
-    kind: Kotlin.Kind.OBJECT,
+    kind: Kind_OBJECT,
     simpleName: 'Statics',
     interfaces: []
   };
@@ -5915,7 +6071,7 @@ var elements = function (_, Kotlin) {
     return FlexBasis$Statics_instance;
   }
   FlexBasis.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     simpleName: 'FlexBasis',
     interfaces: []
   };
@@ -5926,7 +6082,7 @@ var elements = function (_, Kotlin) {
       var tmp$;
       for (tmp$ = 0; tmp$ !== $receiver_0.length; ++tmp$) {
         var element = $receiver_0[tmp$];
-        if (Kotlin.equals(element.name, $receiver)) {
+        if (equals(element.name, $receiver)) {
           firstOrNull$result = element;
           break firstOrNull$break;
         }
@@ -5979,7 +6135,7 @@ var elements = function (_, Kotlin) {
     return this.asString;
   };
   FlexDirection.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     simpleName: 'FlexDirection',
     interfaces: [Enum]
   };
@@ -5997,7 +6153,7 @@ var elements = function (_, Kotlin) {
         return FlexDirection$column_getInstance();
       case 'columnReverse':
         return FlexDirection$columnReverse_getInstance();
-      default:Kotlin.throwISE('No enum constant fg.elements.style.typed.FlexDirection.' + name);
+      default:throwISE('No enum constant fg.elements.style.typed.FlexDirection.' + name);
     }
   }
   FlexDirection.valueOf_61zpoe$ = FlexDirection$valueOf;
@@ -6006,11 +6162,11 @@ var elements = function (_, Kotlin) {
     tmp$ = FlexDirection$values();
     for (tmp$_0 = 0; tmp$_0 !== tmp$.length; ++tmp$_0) {
       var one = tmp$[tmp$_0];
-      if (Kotlin.equals(one.asString, $receiver)) {
+      if (equals(one.asString, $receiver)) {
         return one;
       }
     }
-    throw new IllegalArgumentException('Unknown flex-direction: ' + $receiver);
+    throw IllegalArgumentException_init('Unknown flex-direction: ' + $receiver);
   }
   function FlexGrow(number, keyword) {
     FlexGrow$Statics_getInstance();
@@ -6022,11 +6178,10 @@ var elements = function (_, Kotlin) {
     this.keyword = keyword;
   }
   FlexGrow.prototype.toString = function () {
-    var tmp$;
     if (this.keyword != null) {
       return this.keyword.toString();
     }
-    return ((tmp$ = this.number) != null ? tmp$ : Kotlin.throwNPE()).toString();
+    return ensureNotNull(this.number).toString();
   };
   function FlexGrow$Keyword(name, ordinal) {
     Enum.call(this);
@@ -6059,7 +6214,7 @@ var elements = function (_, Kotlin) {
     return this.name;
   };
   FlexGrow$Keyword.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     simpleName: 'Keyword',
     interfaces: [Enum]
   };
@@ -6075,7 +6230,7 @@ var elements = function (_, Kotlin) {
         return FlexGrow$Keyword$initial_getInstance();
       case 'unset':
         return FlexGrow$Keyword$unset_getInstance();
-      default:Kotlin.throwISE('No enum constant fg.elements.style.typed.FlexGrow.Keyword.' + name);
+      default:throwISE('No enum constant fg.elements.style.typed.FlexGrow.Keyword.' + name);
     }
   }
   FlexGrow$Keyword.valueOf_61zpoe$ = FlexGrow$Keyword$valueOf;
@@ -6086,7 +6241,7 @@ var elements = function (_, Kotlin) {
     this.unset = new FlexGrow(void 0, FlexGrow$Keyword$unset_getInstance());
   }
   FlexGrow$Statics.$metadata$ = {
-    kind: Kotlin.Kind.OBJECT,
+    kind: Kind_OBJECT,
     simpleName: 'Statics',
     interfaces: []
   };
@@ -6098,7 +6253,7 @@ var elements = function (_, Kotlin) {
     return FlexGrow$Statics_instance;
   }
   FlexGrow.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     simpleName: 'FlexGrow',
     interfaces: []
   };
@@ -6109,7 +6264,7 @@ var elements = function (_, Kotlin) {
       var tmp$;
       for (tmp$ = 0; tmp$ !== $receiver_0.length; ++tmp$) {
         var element = $receiver_0[tmp$];
-        if (Kotlin.equals(element.name, $receiver)) {
+        if (equals(element.name, $receiver)) {
           firstOrNull$result = element;
           break firstOrNull$break;
         }
@@ -6137,7 +6292,7 @@ var elements = function (_, Kotlin) {
     if (this.keyword != null) {
       return this.keyword.toString();
     }
-    return Kotlin.toString(this.number);
+    return toString(this.number);
   };
   function FlexShrink$Keyword(name, ordinal) {
     Enum.call(this);
@@ -6170,7 +6325,7 @@ var elements = function (_, Kotlin) {
     return this.name;
   };
   FlexShrink$Keyword.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     simpleName: 'Keyword',
     interfaces: [Enum]
   };
@@ -6186,7 +6341,7 @@ var elements = function (_, Kotlin) {
         return FlexShrink$Keyword$initial_getInstance();
       case 'unset':
         return FlexShrink$Keyword$unset_getInstance();
-      default:Kotlin.throwISE('No enum constant fg.elements.style.typed.FlexShrink.Keyword.' + name);
+      default:throwISE('No enum constant fg.elements.style.typed.FlexShrink.Keyword.' + name);
     }
   }
   FlexShrink$Keyword.valueOf_61zpoe$ = FlexShrink$Keyword$valueOf;
@@ -6197,7 +6352,7 @@ var elements = function (_, Kotlin) {
     this.unset = new FlexShrink(void 0, FlexShrink$Keyword$unset_getInstance());
   }
   FlexShrink$Statics.$metadata$ = {
-    kind: Kotlin.Kind.OBJECT,
+    kind: Kind_OBJECT,
     simpleName: 'Statics',
     interfaces: []
   };
@@ -6209,7 +6364,7 @@ var elements = function (_, Kotlin) {
     return FlexShrink$Statics_instance;
   }
   FlexShrink.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     simpleName: 'FlexShrink',
     interfaces: []
   };
@@ -6220,7 +6375,7 @@ var elements = function (_, Kotlin) {
       var tmp$;
       for (tmp$ = 0; tmp$ !== $receiver_0.length; ++tmp$) {
         var element = $receiver_0[tmp$];
-        if (Kotlin.equals(element.name, $receiver)) {
+        if (equals(element.name, $receiver)) {
           firstOrNull$result = element;
           break firstOrNull$break;
         }
@@ -6303,7 +6458,7 @@ var elements = function (_, Kotlin) {
     return this.asString;
   };
   JustifyContent.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     simpleName: 'JustifyContent',
     interfaces: [Enum]
   };
@@ -6331,7 +6486,7 @@ var elements = function (_, Kotlin) {
         return JustifyContent$initial_getInstance();
       case 'unset':
         return JustifyContent$unset_getInstance();
-      default:Kotlin.throwISE('No enum constant fg.elements.style.typed.JustifyContent.' + name);
+      default:throwISE('No enum constant fg.elements.style.typed.JustifyContent.' + name);
     }
   }
   JustifyContent.valueOf_61zpoe$ = JustifyContent$valueOf;
@@ -6340,11 +6495,11 @@ var elements = function (_, Kotlin) {
     tmp$ = JustifyContent$values();
     for (tmp$_0 = 0; tmp$_0 !== tmp$.length; ++tmp$_0) {
       var one = tmp$[tmp$_0];
-      if (Kotlin.equals(one.asString, $receiver)) {
+      if (equals(one.asString, $receiver)) {
         return one;
       }
     }
-    throw new IllegalArgumentException('Unknown justify-content: ' + $receiver);
+    throw IllegalArgumentException_init('Unknown justify-content: ' + $receiver);
   }
   function Position(name, ordinal, asString) {
     Enum.call(this);
@@ -6408,7 +6563,7 @@ var elements = function (_, Kotlin) {
     return this.asString;
   };
   Position.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     simpleName: 'Position',
     interfaces: [Enum]
   };
@@ -6434,7 +6589,7 @@ var elements = function (_, Kotlin) {
         return Position$initial_getInstance();
       case 'unset':
         return Position$unset_getInstance();
-      default:Kotlin.throwISE('No enum constant fg.elements.style.typed.Position.' + name);
+      default:throwISE('No enum constant fg.elements.style.typed.Position.' + name);
     }
   }
   Position.valueOf_61zpoe$ = Position$valueOf;
@@ -6443,16 +6598,16 @@ var elements = function (_, Kotlin) {
     tmp$ = Position$values();
     for (tmp$_0 = 0; tmp$_0 !== tmp$.length; ++tmp$_0) {
       var one = tmp$[tmp$_0];
-      if (Kotlin.equals(one.asString, $receiver)) {
+      if (equals(one.asString, $receiver)) {
         return one;
       }
     }
-    throw new IllegalArgumentException('Unknown position: ' + $receiver);
+    throw IllegalArgumentException_init('Unknown position: ' + $receiver);
   }
   function TypedStyle() {
   }
   TypedStyle.$metadata$ = {
-    kind: Kotlin.Kind.INTERFACE,
+    kind: Kind_INTERFACE,
     simpleName: 'TypedStyle',
     interfaces: []
   };
@@ -6460,7 +6615,7 @@ var elements = function (_, Kotlin) {
     Element.call(this, 'table');
   }
   Table.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     simpleName: 'Table',
     interfaces: [Element]
   };
@@ -6468,7 +6623,7 @@ var elements = function (_, Kotlin) {
     Element.call(this, 'caption');
   }
   Caption.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     simpleName: 'Caption',
     interfaces: [Element]
   };
@@ -6476,7 +6631,7 @@ var elements = function (_, Kotlin) {
     Element.call(this, 'colgroup');
   }
   Colgroup.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     simpleName: 'Colgroup',
     interfaces: [Element]
   };
@@ -6484,7 +6639,7 @@ var elements = function (_, Kotlin) {
     Element.call(this, 'col');
   }
   Col.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     simpleName: 'Col',
     interfaces: [Element]
   };
@@ -6492,7 +6647,7 @@ var elements = function (_, Kotlin) {
     Element.call(this, 'tbody');
   }
   Tbody.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     simpleName: 'Tbody',
     interfaces: [Element]
   };
@@ -6500,7 +6655,7 @@ var elements = function (_, Kotlin) {
     Element.call(this, 'thead');
   }
   Thead.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     simpleName: 'Thead',
     interfaces: [Element]
   };
@@ -6508,7 +6663,7 @@ var elements = function (_, Kotlin) {
     Element.call(this, 'tfoot');
   }
   Tfoot.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     simpleName: 'Tfoot',
     interfaces: [Element]
   };
@@ -6516,7 +6671,7 @@ var elements = function (_, Kotlin) {
     Element.call(this, 'tr');
   }
   Tr.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     simpleName: 'Tr',
     interfaces: [Element]
   };
@@ -6524,7 +6679,7 @@ var elements = function (_, Kotlin) {
     Element.call(this, 'td');
   }
   Td.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     simpleName: 'Td',
     interfaces: [Element]
   };
@@ -6532,7 +6687,7 @@ var elements = function (_, Kotlin) {
     Element.call(this, 'th');
   }
   Th.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     simpleName: 'Th',
     interfaces: [Element]
   };
@@ -6545,56 +6700,62 @@ var elements = function (_, Kotlin) {
     this._hreflang_cbgu9l$_0 = W3cDelegates_getInstance().nullableAttribute_61zpoe$('hreflang');
     this._type_gx9554$_0 = W3cDelegates_getInstance().nullableAttribute_61zpoe$('type');
   }
+  var A$_href_metadata = new PropertyMetadata('_href');
   Object.defineProperty(A.prototype, '_href', {
     get: function () {
-      return this._href_h3zdax$_0.getValue_lrcp0p$(this, new Kotlin.PropertyMetadata('_href'));
+      return this._href_h3zdax$_0.getValue_lrcp0p$(this, A$_href_metadata);
     },
     set: function (_href) {
-      this._href_h3zdax$_0.setValue_9rddgb$(this, new Kotlin.PropertyMetadata('_href'), _href);
+      this._href_h3zdax$_0.setValue_9rddgb$(this, A$_href_metadata, _href);
     }
   });
+  var A$_target_metadata = new PropertyMetadata('_target');
   Object.defineProperty(A.prototype, '_target', {
     get: function () {
-      return this._target_8y6sov$_0.getValue_lrcp0p$(this, new Kotlin.PropertyMetadata('_target'));
+      return this._target_8y6sov$_0.getValue_lrcp0p$(this, A$_target_metadata);
     },
     set: function (_target) {
-      this._target_8y6sov$_0.setValue_9rddgb$(this, new Kotlin.PropertyMetadata('_target'), _target);
+      this._target_8y6sov$_0.setValue_9rddgb$(this, A$_target_metadata, _target);
     }
   });
+  var A$_download_metadata = new PropertyMetadata('_download');
   Object.defineProperty(A.prototype, '_download', {
     get: function () {
-      return this._download_tac1m2$_0.getValue_lrcp0p$(this, new Kotlin.PropertyMetadata('_download'));
+      return this._download_tac1m2$_0.getValue_lrcp0p$(this, A$_download_metadata);
     },
     set: function (_download) {
-      this._download_tac1m2$_0.setValue_9rddgb$(this, new Kotlin.PropertyMetadata('_download'), _download);
+      this._download_tac1m2$_0.setValue_9rddgb$(this, A$_download_metadata, _download);
     }
   });
+  var A$_rel_metadata = new PropertyMetadata('_rel');
   Object.defineProperty(A.prototype, '_rel', {
     get: function () {
-      return this._rel_c04ypj$_0.getValue_lrcp0p$(this, new Kotlin.PropertyMetadata('_rel'));
+      return this._rel_c04ypj$_0.getValue_lrcp0p$(this, A$_rel_metadata);
     },
     set: function (_rel) {
-      this._rel_c04ypj$_0.setValue_9rddgb$(this, new Kotlin.PropertyMetadata('_rel'), _rel);
+      this._rel_c04ypj$_0.setValue_9rddgb$(this, A$_rel_metadata, _rel);
     }
   });
+  var A$_hreflang_metadata = new PropertyMetadata('_hreflang');
   Object.defineProperty(A.prototype, '_hreflang', {
     get: function () {
-      return this._hreflang_cbgu9l$_0.getValue_lrcp0p$(this, new Kotlin.PropertyMetadata('_hreflang'));
+      return this._hreflang_cbgu9l$_0.getValue_lrcp0p$(this, A$_hreflang_metadata);
     },
     set: function (_hreflang) {
-      this._hreflang_cbgu9l$_0.setValue_9rddgb$(this, new Kotlin.PropertyMetadata('_hreflang'), _hreflang);
+      this._hreflang_cbgu9l$_0.setValue_9rddgb$(this, A$_hreflang_metadata, _hreflang);
     }
   });
+  var A$_type_metadata = new PropertyMetadata('_type');
   Object.defineProperty(A.prototype, '_type', {
     get: function () {
-      return this._type_gx9554$_0.getValue_lrcp0p$(this, new Kotlin.PropertyMetadata('_type'));
+      return this._type_gx9554$_0.getValue_lrcp0p$(this, A$_type_metadata);
     },
     set: function (_type) {
-      this._type_gx9554$_0.setValue_9rddgb$(this, new Kotlin.PropertyMetadata('_type'), _type);
+      this._type_gx9554$_0.setValue_9rddgb$(this, A$_type_metadata, _type);
     }
   });
   A.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     simpleName: 'A',
     interfaces: [Element]
   };
@@ -6602,7 +6763,7 @@ var elements = function (_, Kotlin) {
     Element.call(this, 'br');
   }
   Br.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     simpleName: 'Br',
     interfaces: [Element]
   };
@@ -6610,7 +6771,7 @@ var elements = function (_, Kotlin) {
     Element.call(this, 'span');
   }
   Span.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     simpleName: 'Span',
     interfaces: [Element]
   };
@@ -6618,10 +6779,13 @@ var elements = function (_, Kotlin) {
     Element.call(this, 'i');
   }
   I.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     simpleName: 'I',
     interfaces: [Element]
   };
+  function onResize($receiver, listener) {
+    window.addEventListener('resize', listener);
+  }
   function AdjacentSiblingRule(selector) {
     Rule.call(this, selector);
   }
@@ -6629,7 +6793,7 @@ var elements = function (_, Kotlin) {
     return this.cssText_zbbjui$(this.selector);
   };
   AdjacentSiblingRule.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     simpleName: 'AdjacentSiblingRule',
     interfaces: [Rule]
   };
@@ -6640,7 +6804,7 @@ var elements = function (_, Kotlin) {
     return this.cssText_zbbjui$(this.selector);
   };
   AndRule.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     simpleName: 'AndRule',
     interfaces: [Rule]
   };
@@ -6651,7 +6815,7 @@ var elements = function (_, Kotlin) {
     return Rule.prototype.cssText_zbbjui$.call(this, this.selector);
   };
   AnyRule.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     simpleName: 'AnyRule',
     interfaces: [Rule]
   };
@@ -6662,7 +6826,7 @@ var elements = function (_, Kotlin) {
     return this.cssText_zbbjui$(this.selector);
   };
   ChildRule.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     simpleName: 'ChildRule',
     interfaces: [Rule]
   };
@@ -6678,7 +6842,7 @@ var elements = function (_, Kotlin) {
     return Rule.prototype.cssText_zbbjui$.call(this, this.selector);
   };
   ClassRule.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     simpleName: 'ClassRule',
     interfaces: [Rule]
   };
@@ -6883,7 +7047,7 @@ var elements = function (_, Kotlin) {
     return this.cssText_zbbjui$(this.selector);
   };
   DescendantRule.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     simpleName: 'DescendantRule',
     interfaces: [Rule]
   };
@@ -6894,7 +7058,7 @@ var elements = function (_, Kotlin) {
     return this.cssText_zbbjui$(this.selector);
   };
   KeyFrameRule.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     simpleName: 'KeyFrameRule',
     interfaces: [Rule]
   };
@@ -6923,7 +7087,7 @@ var elements = function (_, Kotlin) {
     return s.v;
   };
   KeyframesRule.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     simpleName: 'KeyframesRule',
     interfaces: [Rule]
   };
@@ -7173,1812 +7337,2038 @@ var elements = function (_, Kotlin) {
     s += '}';
     return s;
   };
+  var Rule$_cssFloat_metadata = new PropertyMetadata('_cssFloat');
   Object.defineProperty(Rule.prototype, '_cssFloat', {
     get: function () {
-      return this._cssFloat_8w4ct2$_0.getValue_4hb8sp$(this, new Kotlin.PropertyMetadata('_cssFloat'));
+      return this._cssFloat_8w4ct2$_0.getValue_4hb8sp$(this, Rule$_cssFloat_metadata);
     },
     set: function (_cssFloat) {
-      this._cssFloat_8w4ct2$_0.setValue_8ibblj$(this, new Kotlin.PropertyMetadata('_cssFloat'), _cssFloat);
+      this._cssFloat_8w4ct2$_0.setValue_8ibblj$(this, Rule$_cssFloat_metadata, _cssFloat);
     }
   });
+  var Rule$_dashed_attribute_metadata = new PropertyMetadata('_dashed_attribute');
   Object.defineProperty(Rule.prototype, '_dashed_attribute', {
     get: function () {
-      return this._dashed_attribute_d5l2s5$_0.getValue_4hb8sp$(this, new Kotlin.PropertyMetadata('_dashed_attribute'));
+      return this._dashed_attribute_d5l2s5$_0.getValue_4hb8sp$(this, Rule$_dashed_attribute_metadata);
     },
     set: function (_dashed_attribute) {
-      this._dashed_attribute_d5l2s5$_0.setValue_8ibblj$(this, new Kotlin.PropertyMetadata('_dashed_attribute'), _dashed_attribute);
+      this._dashed_attribute_d5l2s5$_0.setValue_8ibblj$(this, Rule$_dashed_attribute_metadata, _dashed_attribute);
     }
   });
+  var Rule$_camel_cased_attribute_metadata = new PropertyMetadata('_camel_cased_attribute');
   Object.defineProperty(Rule.prototype, '_camel_cased_attribute', {
     get: function () {
-      return this._camel_cased_attribute_a8hauh$_0.getValue_4hb8sp$(this, new Kotlin.PropertyMetadata('_camel_cased_attribute'));
+      return this._camel_cased_attribute_a8hauh$_0.getValue_4hb8sp$(this, Rule$_camel_cased_attribute_metadata);
     },
     set: function (_camel_cased_attribute) {
-      this._camel_cased_attribute_a8hauh$_0.setValue_8ibblj$(this, new Kotlin.PropertyMetadata('_camel_cased_attribute'), _camel_cased_attribute);
+      this._camel_cased_attribute_a8hauh$_0.setValue_8ibblj$(this, Rule$_camel_cased_attribute_metadata, _camel_cased_attribute);
     }
   });
+  var Rule$_alignContent_metadata = new PropertyMetadata('_alignContent');
   Object.defineProperty(Rule.prototype, '_alignContent', {
     get: function () {
-      return this._alignContent_sinuz5$_0.getValue_4hb8sp$(this, new Kotlin.PropertyMetadata('_alignContent'));
+      return this._alignContent_sinuz5$_0.getValue_4hb8sp$(this, Rule$_alignContent_metadata);
     },
     set: function (_alignContent) {
-      this._alignContent_sinuz5$_0.setValue_8ibblj$(this, new Kotlin.PropertyMetadata('_alignContent'), _alignContent);
+      this._alignContent_sinuz5$_0.setValue_8ibblj$(this, Rule$_alignContent_metadata, _alignContent);
     }
   });
+  var Rule$_alignItems_metadata = new PropertyMetadata('_alignItems');
   Object.defineProperty(Rule.prototype, '_alignItems', {
     get: function () {
-      return this._alignItems_rf6c1k$_0.getValue_4hb8sp$(this, new Kotlin.PropertyMetadata('_alignItems'));
+      return this._alignItems_rf6c1k$_0.getValue_4hb8sp$(this, Rule$_alignItems_metadata);
     },
     set: function (_alignItems) {
-      this._alignItems_rf6c1k$_0.setValue_8ibblj$(this, new Kotlin.PropertyMetadata('_alignItems'), _alignItems);
+      this._alignItems_rf6c1k$_0.setValue_8ibblj$(this, Rule$_alignItems_metadata, _alignItems);
     }
   });
+  var Rule$_alignSelf_metadata = new PropertyMetadata('_alignSelf');
   Object.defineProperty(Rule.prototype, '_alignSelf', {
     get: function () {
-      return this._alignSelf_5bkzts$_0.getValue_4hb8sp$(this, new Kotlin.PropertyMetadata('_alignSelf'));
+      return this._alignSelf_5bkzts$_0.getValue_4hb8sp$(this, Rule$_alignSelf_metadata);
     },
     set: function (_alignSelf) {
-      this._alignSelf_5bkzts$_0.setValue_8ibblj$(this, new Kotlin.PropertyMetadata('_alignSelf'), _alignSelf);
+      this._alignSelf_5bkzts$_0.setValue_8ibblj$(this, Rule$_alignSelf_metadata, _alignSelf);
     }
   });
+  var Rule$_animation_metadata = new PropertyMetadata('_animation');
   Object.defineProperty(Rule.prototype, '_animation', {
     get: function () {
-      return this._animation_hb7er1$_0.getValue_4hb8sp$(this, new Kotlin.PropertyMetadata('_animation'));
+      return this._animation_hb7er1$_0.getValue_4hb8sp$(this, Rule$_animation_metadata);
     },
     set: function (_animation) {
-      this._animation_hb7er1$_0.setValue_8ibblj$(this, new Kotlin.PropertyMetadata('_animation'), _animation);
+      this._animation_hb7er1$_0.setValue_8ibblj$(this, Rule$_animation_metadata, _animation);
     }
   });
+  var Rule$_animationDelay_metadata = new PropertyMetadata('_animationDelay');
   Object.defineProperty(Rule.prototype, '_animationDelay', {
     get: function () {
-      return this._animationDelay_fwc6xo$_0.getValue_4hb8sp$(this, new Kotlin.PropertyMetadata('_animationDelay'));
+      return this._animationDelay_fwc6xo$_0.getValue_4hb8sp$(this, Rule$_animationDelay_metadata);
     },
     set: function (_animationDelay) {
-      this._animationDelay_fwc6xo$_0.setValue_8ibblj$(this, new Kotlin.PropertyMetadata('_animationDelay'), _animationDelay);
+      this._animationDelay_fwc6xo$_0.setValue_8ibblj$(this, Rule$_animationDelay_metadata, _animationDelay);
     }
   });
+  var Rule$_animationDirection_metadata = new PropertyMetadata('_animationDirection');
   Object.defineProperty(Rule.prototype, '_animationDirection', {
     get: function () {
-      return this._animationDirection_6vjehk$_0.getValue_4hb8sp$(this, new Kotlin.PropertyMetadata('_animationDirection'));
+      return this._animationDirection_6vjehk$_0.getValue_4hb8sp$(this, Rule$_animationDirection_metadata);
     },
     set: function (_animationDirection) {
-      this._animationDirection_6vjehk$_0.setValue_8ibblj$(this, new Kotlin.PropertyMetadata('_animationDirection'), _animationDirection);
+      this._animationDirection_6vjehk$_0.setValue_8ibblj$(this, Rule$_animationDirection_metadata, _animationDirection);
     }
   });
+  var Rule$_animationDuration_metadata = new PropertyMetadata('_animationDuration');
   Object.defineProperty(Rule.prototype, '_animationDuration', {
     get: function () {
-      return this._animationDuration_b52xtz$_0.getValue_4hb8sp$(this, new Kotlin.PropertyMetadata('_animationDuration'));
+      return this._animationDuration_b52xtz$_0.getValue_4hb8sp$(this, Rule$_animationDuration_metadata);
     },
     set: function (_animationDuration) {
-      this._animationDuration_b52xtz$_0.setValue_8ibblj$(this, new Kotlin.PropertyMetadata('_animationDuration'), _animationDuration);
+      this._animationDuration_b52xtz$_0.setValue_8ibblj$(this, Rule$_animationDuration_metadata, _animationDuration);
     }
   });
+  var Rule$_animationFillMode_metadata = new PropertyMetadata('_animationFillMode');
   Object.defineProperty(Rule.prototype, '_animationFillMode', {
     get: function () {
-      return this._animationFillMode_318iwp$_0.getValue_4hb8sp$(this, new Kotlin.PropertyMetadata('_animationFillMode'));
+      return this._animationFillMode_318iwp$_0.getValue_4hb8sp$(this, Rule$_animationFillMode_metadata);
     },
     set: function (_animationFillMode) {
-      this._animationFillMode_318iwp$_0.setValue_8ibblj$(this, new Kotlin.PropertyMetadata('_animationFillMode'), _animationFillMode);
+      this._animationFillMode_318iwp$_0.setValue_8ibblj$(this, Rule$_animationFillMode_metadata, _animationFillMode);
     }
   });
+  var Rule$_animationIterationCount_metadata = new PropertyMetadata('_animationIterationCount');
   Object.defineProperty(Rule.prototype, '_animationIterationCount', {
     get: function () {
-      return this._animationIterationCount_dmego5$_0.getValue_4hb8sp$(this, new Kotlin.PropertyMetadata('_animationIterationCount'));
+      return this._animationIterationCount_dmego5$_0.getValue_4hb8sp$(this, Rule$_animationIterationCount_metadata);
     },
     set: function (_animationIterationCount) {
-      this._animationIterationCount_dmego5$_0.setValue_8ibblj$(this, new Kotlin.PropertyMetadata('_animationIterationCount'), _animationIterationCount);
+      this._animationIterationCount_dmego5$_0.setValue_8ibblj$(this, Rule$_animationIterationCount_metadata, _animationIterationCount);
     }
   });
+  var Rule$_animationName_metadata = new PropertyMetadata('_animationName');
   Object.defineProperty(Rule.prototype, '_animationName', {
     get: function () {
-      return this._animationName_ruvuce$_0.getValue_4hb8sp$(this, new Kotlin.PropertyMetadata('_animationName'));
+      return this._animationName_ruvuce$_0.getValue_4hb8sp$(this, Rule$_animationName_metadata);
     },
     set: function (_animationName) {
-      this._animationName_ruvuce$_0.setValue_8ibblj$(this, new Kotlin.PropertyMetadata('_animationName'), _animationName);
+      this._animationName_ruvuce$_0.setValue_8ibblj$(this, Rule$_animationName_metadata, _animationName);
     }
   });
+  var Rule$_animationPlayState_metadata = new PropertyMetadata('_animationPlayState');
   Object.defineProperty(Rule.prototype, '_animationPlayState', {
     get: function () {
-      return this._animationPlayState_fl5v8q$_0.getValue_4hb8sp$(this, new Kotlin.PropertyMetadata('_animationPlayState'));
+      return this._animationPlayState_fl5v8q$_0.getValue_4hb8sp$(this, Rule$_animationPlayState_metadata);
     },
     set: function (_animationPlayState) {
-      this._animationPlayState_fl5v8q$_0.setValue_8ibblj$(this, new Kotlin.PropertyMetadata('_animationPlayState'), _animationPlayState);
+      this._animationPlayState_fl5v8q$_0.setValue_8ibblj$(this, Rule$_animationPlayState_metadata, _animationPlayState);
     }
   });
+  var Rule$_animationTimingFunction_metadata = new PropertyMetadata('_animationTimingFunction');
   Object.defineProperty(Rule.prototype, '_animationTimingFunction', {
     get: function () {
-      return this._animationTimingFunction_mnwqnp$_0.getValue_4hb8sp$(this, new Kotlin.PropertyMetadata('_animationTimingFunction'));
+      return this._animationTimingFunction_mnwqnp$_0.getValue_4hb8sp$(this, Rule$_animationTimingFunction_metadata);
     },
     set: function (_animationTimingFunction) {
-      this._animationTimingFunction_mnwqnp$_0.setValue_8ibblj$(this, new Kotlin.PropertyMetadata('_animationTimingFunction'), _animationTimingFunction);
+      this._animationTimingFunction_mnwqnp$_0.setValue_8ibblj$(this, Rule$_animationTimingFunction_metadata, _animationTimingFunction);
     }
   });
+  var Rule$_backfaceVisibility_metadata = new PropertyMetadata('_backfaceVisibility');
   Object.defineProperty(Rule.prototype, '_backfaceVisibility', {
     get: function () {
-      return this._backfaceVisibility_5ls23x$_0.getValue_4hb8sp$(this, new Kotlin.PropertyMetadata('_backfaceVisibility'));
+      return this._backfaceVisibility_5ls23x$_0.getValue_4hb8sp$(this, Rule$_backfaceVisibility_metadata);
     },
     set: function (_backfaceVisibility) {
-      this._backfaceVisibility_5ls23x$_0.setValue_8ibblj$(this, new Kotlin.PropertyMetadata('_backfaceVisibility'), _backfaceVisibility);
+      this._backfaceVisibility_5ls23x$_0.setValue_8ibblj$(this, Rule$_backfaceVisibility_metadata, _backfaceVisibility);
     }
   });
+  var Rule$_background_metadata = new PropertyMetadata('_background');
   Object.defineProperty(Rule.prototype, '_background', {
     get: function () {
-      return this._background_n8lz0r$_0.getValue_4hb8sp$(this, new Kotlin.PropertyMetadata('_background'));
+      return this._background_n8lz0r$_0.getValue_4hb8sp$(this, Rule$_background_metadata);
     },
     set: function (_background) {
-      this._background_n8lz0r$_0.setValue_8ibblj$(this, new Kotlin.PropertyMetadata('_background'), _background);
+      this._background_n8lz0r$_0.setValue_8ibblj$(this, Rule$_background_metadata, _background);
     }
   });
+  var Rule$_backgroundAttachment_metadata = new PropertyMetadata('_backgroundAttachment');
   Object.defineProperty(Rule.prototype, '_backgroundAttachment', {
     get: function () {
-      return this._backgroundAttachment_rtdz9u$_0.getValue_4hb8sp$(this, new Kotlin.PropertyMetadata('_backgroundAttachment'));
+      return this._backgroundAttachment_rtdz9u$_0.getValue_4hb8sp$(this, Rule$_backgroundAttachment_metadata);
     },
     set: function (_backgroundAttachment) {
-      this._backgroundAttachment_rtdz9u$_0.setValue_8ibblj$(this, new Kotlin.PropertyMetadata('_backgroundAttachment'), _backgroundAttachment);
+      this._backgroundAttachment_rtdz9u$_0.setValue_8ibblj$(this, Rule$_backgroundAttachment_metadata, _backgroundAttachment);
     }
   });
+  var Rule$_backgroundClip_metadata = new PropertyMetadata('_backgroundClip');
   Object.defineProperty(Rule.prototype, '_backgroundClip', {
     get: function () {
-      return this._backgroundClip_l0qyyj$_0.getValue_4hb8sp$(this, new Kotlin.PropertyMetadata('_backgroundClip'));
+      return this._backgroundClip_l0qyyj$_0.getValue_4hb8sp$(this, Rule$_backgroundClip_metadata);
     },
     set: function (_backgroundClip) {
-      this._backgroundClip_l0qyyj$_0.setValue_8ibblj$(this, new Kotlin.PropertyMetadata('_backgroundClip'), _backgroundClip);
+      this._backgroundClip_l0qyyj$_0.setValue_8ibblj$(this, Rule$_backgroundClip_metadata, _backgroundClip);
     }
   });
+  var Rule$_backgroundColor_metadata = new PropertyMetadata('_backgroundColor');
   Object.defineProperty(Rule.prototype, '_backgroundColor', {
     get: function () {
-      return this._backgroundColor_cbiakk$_0.getValue_4hb8sp$(this, new Kotlin.PropertyMetadata('_backgroundColor'));
+      return this._backgroundColor_cbiakk$_0.getValue_4hb8sp$(this, Rule$_backgroundColor_metadata);
     },
     set: function (_backgroundColor) {
-      this._backgroundColor_cbiakk$_0.setValue_kcp8eu$(this, new Kotlin.PropertyMetadata('_backgroundColor'), _backgroundColor);
+      this._backgroundColor_cbiakk$_0.setValue_kcp8eu$(this, Rule$_backgroundColor_metadata, _backgroundColor);
     }
   });
+  var Rule$_backgroundImage_metadata = new PropertyMetadata('_backgroundImage');
   Object.defineProperty(Rule.prototype, '_backgroundImage', {
     get: function () {
-      return this._backgroundImage_9ijcho$_0.getValue_4hb8sp$(this, new Kotlin.PropertyMetadata('_backgroundImage'));
+      return this._backgroundImage_9ijcho$_0.getValue_4hb8sp$(this, Rule$_backgroundImage_metadata);
     },
     set: function (_backgroundImage) {
-      this._backgroundImage_9ijcho$_0.setValue_8ibblj$(this, new Kotlin.PropertyMetadata('_backgroundImage'), _backgroundImage);
+      this._backgroundImage_9ijcho$_0.setValue_8ibblj$(this, Rule$_backgroundImage_metadata, _backgroundImage);
     }
   });
+  var Rule$_backgroundOrigin_metadata = new PropertyMetadata('_backgroundOrigin');
   Object.defineProperty(Rule.prototype, '_backgroundOrigin', {
     get: function () {
-      return this._backgroundOrigin_8oop0v$_0.getValue_4hb8sp$(this, new Kotlin.PropertyMetadata('_backgroundOrigin'));
+      return this._backgroundOrigin_8oop0v$_0.getValue_4hb8sp$(this, Rule$_backgroundOrigin_metadata);
     },
     set: function (_backgroundOrigin) {
-      this._backgroundOrigin_8oop0v$_0.setValue_8ibblj$(this, new Kotlin.PropertyMetadata('_backgroundOrigin'), _backgroundOrigin);
+      this._backgroundOrigin_8oop0v$_0.setValue_8ibblj$(this, Rule$_backgroundOrigin_metadata, _backgroundOrigin);
     }
   });
+  var Rule$_backgroundPosition_metadata = new PropertyMetadata('_backgroundPosition');
   Object.defineProperty(Rule.prototype, '_backgroundPosition', {
     get: function () {
-      return this._backgroundPosition_3504hg$_0.getValue_4hb8sp$(this, new Kotlin.PropertyMetadata('_backgroundPosition'));
+      return this._backgroundPosition_3504hg$_0.getValue_4hb8sp$(this, Rule$_backgroundPosition_metadata);
     },
     set: function (_backgroundPosition) {
-      this._backgroundPosition_3504hg$_0.setValue_8ibblj$(this, new Kotlin.PropertyMetadata('_backgroundPosition'), _backgroundPosition);
+      this._backgroundPosition_3504hg$_0.setValue_8ibblj$(this, Rule$_backgroundPosition_metadata, _backgroundPosition);
     }
   });
+  var Rule$_backgroundRepeat_metadata = new PropertyMetadata('_backgroundRepeat');
   Object.defineProperty(Rule.prototype, '_backgroundRepeat', {
     get: function () {
-      return this._backgroundRepeat_od0h0m$_0.getValue_4hb8sp$(this, new Kotlin.PropertyMetadata('_backgroundRepeat'));
+      return this._backgroundRepeat_od0h0m$_0.getValue_4hb8sp$(this, Rule$_backgroundRepeat_metadata);
     },
     set: function (_backgroundRepeat) {
-      this._backgroundRepeat_od0h0m$_0.setValue_8ibblj$(this, new Kotlin.PropertyMetadata('_backgroundRepeat'), _backgroundRepeat);
+      this._backgroundRepeat_od0h0m$_0.setValue_8ibblj$(this, Rule$_backgroundRepeat_metadata, _backgroundRepeat);
     }
   });
+  var Rule$_backgroundSize_metadata = new PropertyMetadata('_backgroundSize');
   Object.defineProperty(Rule.prototype, '_backgroundSize', {
     get: function () {
-      return this._backgroundSize_krzu30$_0.getValue_4hb8sp$(this, new Kotlin.PropertyMetadata('_backgroundSize'));
+      return this._backgroundSize_krzu30$_0.getValue_4hb8sp$(this, Rule$_backgroundSize_metadata);
     },
     set: function (_backgroundSize) {
-      this._backgroundSize_krzu30$_0.setValue_8ibblj$(this, new Kotlin.PropertyMetadata('_backgroundSize'), _backgroundSize);
+      this._backgroundSize_krzu30$_0.setValue_8ibblj$(this, Rule$_backgroundSize_metadata, _backgroundSize);
     }
   });
+  var Rule$_border_metadata = new PropertyMetadata('_border');
   Object.defineProperty(Rule.prototype, '_border', {
     get: function () {
-      return this._border_rjm8qf$_0.getValue_4hb8sp$(this, new Kotlin.PropertyMetadata('_border'));
+      return this._border_rjm8qf$_0.getValue_4hb8sp$(this, Rule$_border_metadata);
     },
     set: function (_border) {
-      this._border_rjm8qf$_0.setValue_8ibblj$(this, new Kotlin.PropertyMetadata('_border'), _border);
+      this._border_rjm8qf$_0.setValue_8ibblj$(this, Rule$_border_metadata, _border);
     }
   });
+  var Rule$_borderBottom_metadata = new PropertyMetadata('_borderBottom');
   Object.defineProperty(Rule.prototype, '_borderBottom', {
     get: function () {
-      return this._borderBottom_vaub5g$_0.getValue_4hb8sp$(this, new Kotlin.PropertyMetadata('_borderBottom'));
+      return this._borderBottom_vaub5g$_0.getValue_4hb8sp$(this, Rule$_borderBottom_metadata);
     },
     set: function (_borderBottom) {
-      this._borderBottom_vaub5g$_0.setValue_8ibblj$(this, new Kotlin.PropertyMetadata('_borderBottom'), _borderBottom);
+      this._borderBottom_vaub5g$_0.setValue_8ibblj$(this, Rule$_borderBottom_metadata, _borderBottom);
     }
   });
+  var Rule$_borderBottomColor_metadata = new PropertyMetadata('_borderBottomColor');
   Object.defineProperty(Rule.prototype, '_borderBottomColor', {
     get: function () {
-      return this._borderBottomColor_3dquo5$_0.getValue_4hb8sp$(this, new Kotlin.PropertyMetadata('_borderBottomColor'));
+      return this._borderBottomColor_3dquo5$_0.getValue_4hb8sp$(this, Rule$_borderBottomColor_metadata);
     },
     set: function (_borderBottomColor) {
-      this._borderBottomColor_3dquo5$_0.setValue_8ibblj$(this, new Kotlin.PropertyMetadata('_borderBottomColor'), _borderBottomColor);
+      this._borderBottomColor_3dquo5$_0.setValue_8ibblj$(this, Rule$_borderBottomColor_metadata, _borderBottomColor);
     }
   });
+  var Rule$_borderBottomLeftRadius_metadata = new PropertyMetadata('_borderBottomLeftRadius');
   Object.defineProperty(Rule.prototype, '_borderBottomLeftRadius', {
     get: function () {
-      return this._borderBottomLeftRadius_vnsjyr$_0.getValue_4hb8sp$(this, new Kotlin.PropertyMetadata('_borderBottomLeftRadius'));
+      return this._borderBottomLeftRadius_vnsjyr$_0.getValue_4hb8sp$(this, Rule$_borderBottomLeftRadius_metadata);
     },
     set: function (_borderBottomLeftRadius) {
-      this._borderBottomLeftRadius_vnsjyr$_0.setValue_8ibblj$(this, new Kotlin.PropertyMetadata('_borderBottomLeftRadius'), _borderBottomLeftRadius);
+      this._borderBottomLeftRadius_vnsjyr$_0.setValue_8ibblj$(this, Rule$_borderBottomLeftRadius_metadata, _borderBottomLeftRadius);
     }
   });
+  var Rule$_borderBottomRightRadius_metadata = new PropertyMetadata('_borderBottomRightRadius');
   Object.defineProperty(Rule.prototype, '_borderBottomRightRadius', {
     get: function () {
-      return this._borderBottomRightRadius_bmwxm$_0.getValue_4hb8sp$(this, new Kotlin.PropertyMetadata('_borderBottomRightRadius'));
+      return this._borderBottomRightRadius_bmwxm$_0.getValue_4hb8sp$(this, Rule$_borderBottomRightRadius_metadata);
     },
     set: function (_borderBottomRightRadius) {
-      this._borderBottomRightRadius_bmwxm$_0.setValue_8ibblj$(this, new Kotlin.PropertyMetadata('_borderBottomRightRadius'), _borderBottomRightRadius);
+      this._borderBottomRightRadius_bmwxm$_0.setValue_8ibblj$(this, Rule$_borderBottomRightRadius_metadata, _borderBottomRightRadius);
     }
   });
+  var Rule$_borderBottomStyle_metadata = new PropertyMetadata('_borderBottomStyle');
   Object.defineProperty(Rule.prototype, '_borderBottomStyle', {
     get: function () {
-      return this._borderBottomStyle_b1g08n$_0.getValue_4hb8sp$(this, new Kotlin.PropertyMetadata('_borderBottomStyle'));
+      return this._borderBottomStyle_b1g08n$_0.getValue_4hb8sp$(this, Rule$_borderBottomStyle_metadata);
     },
     set: function (_borderBottomStyle) {
-      this._borderBottomStyle_b1g08n$_0.setValue_8ibblj$(this, new Kotlin.PropertyMetadata('_borderBottomStyle'), _borderBottomStyle);
+      this._borderBottomStyle_b1g08n$_0.setValue_8ibblj$(this, Rule$_borderBottomStyle_metadata, _borderBottomStyle);
     }
   });
+  var Rule$_borderBottomWidth_metadata = new PropertyMetadata('_borderBottomWidth');
   Object.defineProperty(Rule.prototype, '_borderBottomWidth', {
     get: function () {
-      return this._borderBottomWidth_cr7iki$_0.getValue_4hb8sp$(this, new Kotlin.PropertyMetadata('_borderBottomWidth'));
+      return this._borderBottomWidth_cr7iki$_0.getValue_4hb8sp$(this, Rule$_borderBottomWidth_metadata);
     },
     set: function (_borderBottomWidth) {
-      this._borderBottomWidth_cr7iki$_0.setValue_8ibblj$(this, new Kotlin.PropertyMetadata('_borderBottomWidth'), _borderBottomWidth);
+      this._borderBottomWidth_cr7iki$_0.setValue_8ibblj$(this, Rule$_borderBottomWidth_metadata, _borderBottomWidth);
     }
   });
+  var Rule$_borderCollapse_metadata = new PropertyMetadata('_borderCollapse');
   Object.defineProperty(Rule.prototype, '_borderCollapse', {
     get: function () {
-      return this._borderCollapse_rfmgsq$_0.getValue_4hb8sp$(this, new Kotlin.PropertyMetadata('_borderCollapse'));
+      return this._borderCollapse_rfmgsq$_0.getValue_4hb8sp$(this, Rule$_borderCollapse_metadata);
     },
     set: function (_borderCollapse) {
-      this._borderCollapse_rfmgsq$_0.setValue_8ibblj$(this, new Kotlin.PropertyMetadata('_borderCollapse'), _borderCollapse);
+      this._borderCollapse_rfmgsq$_0.setValue_8ibblj$(this, Rule$_borderCollapse_metadata, _borderCollapse);
     }
   });
+  var Rule$_borderColor_metadata = new PropertyMetadata('_borderColor');
   Object.defineProperty(Rule.prototype, '_borderColor', {
     get: function () {
-      return this._borderColor_awzkl6$_0.getValue_4hb8sp$(this, new Kotlin.PropertyMetadata('_borderColor'));
+      return this._borderColor_awzkl6$_0.getValue_4hb8sp$(this, Rule$_borderColor_metadata);
     },
     set: function (_borderColor) {
-      this._borderColor_awzkl6$_0.setValue_kcp8eu$(this, new Kotlin.PropertyMetadata('_borderColor'), _borderColor);
+      this._borderColor_awzkl6$_0.setValue_kcp8eu$(this, Rule$_borderColor_metadata, _borderColor);
     }
   });
+  var Rule$_borderImage_metadata = new PropertyMetadata('_borderImage');
   Object.defineProperty(Rule.prototype, '_borderImage', {
     get: function () {
-      return this._borderImage_dpyio2$_0.getValue_4hb8sp$(this, new Kotlin.PropertyMetadata('_borderImage'));
+      return this._borderImage_dpyio2$_0.getValue_4hb8sp$(this, Rule$_borderImage_metadata);
     },
     set: function (_borderImage) {
-      this._borderImage_dpyio2$_0.setValue_8ibblj$(this, new Kotlin.PropertyMetadata('_borderImage'), _borderImage);
+      this._borderImage_dpyio2$_0.setValue_8ibblj$(this, Rule$_borderImage_metadata, _borderImage);
     }
   });
+  var Rule$_borderImageOutset_metadata = new PropertyMetadata('_borderImageOutset');
   Object.defineProperty(Rule.prototype, '_borderImageOutset', {
     get: function () {
-      return this._borderImageOutset_ymxo1e$_0.getValue_4hb8sp$(this, new Kotlin.PropertyMetadata('_borderImageOutset'));
+      return this._borderImageOutset_ymxo1e$_0.getValue_4hb8sp$(this, Rule$_borderImageOutset_metadata);
     },
     set: function (_borderImageOutset) {
-      this._borderImageOutset_ymxo1e$_0.setValue_8ibblj$(this, new Kotlin.PropertyMetadata('_borderImageOutset'), _borderImageOutset);
+      this._borderImageOutset_ymxo1e$_0.setValue_8ibblj$(this, Rule$_borderImageOutset_metadata, _borderImageOutset);
     }
   });
+  var Rule$_borderImageRepeat_metadata = new PropertyMetadata('_borderImageRepeat');
   Object.defineProperty(Rule.prototype, '_borderImageRepeat', {
     get: function () {
-      return this._borderImageRepeat_1r315z$_0.getValue_4hb8sp$(this, new Kotlin.PropertyMetadata('_borderImageRepeat'));
+      return this._borderImageRepeat_1r315z$_0.getValue_4hb8sp$(this, Rule$_borderImageRepeat_metadata);
     },
     set: function (_borderImageRepeat) {
-      this._borderImageRepeat_1r315z$_0.setValue_8ibblj$(this, new Kotlin.PropertyMetadata('_borderImageRepeat'), _borderImageRepeat);
+      this._borderImageRepeat_1r315z$_0.setValue_8ibblj$(this, Rule$_borderImageRepeat_metadata, _borderImageRepeat);
     }
   });
+  var Rule$_borderImageSlice_metadata = new PropertyMetadata('_borderImageSlice');
   Object.defineProperty(Rule.prototype, '_borderImageSlice', {
     get: function () {
-      return this._borderImageSlice_1nom9s$_0.getValue_4hb8sp$(this, new Kotlin.PropertyMetadata('_borderImageSlice'));
+      return this._borderImageSlice_1nom9s$_0.getValue_4hb8sp$(this, Rule$_borderImageSlice_metadata);
     },
     set: function (_borderImageSlice) {
-      this._borderImageSlice_1nom9s$_0.setValue_8ibblj$(this, new Kotlin.PropertyMetadata('_borderImageSlice'), _borderImageSlice);
+      this._borderImageSlice_1nom9s$_0.setValue_8ibblj$(this, Rule$_borderImageSlice_metadata, _borderImageSlice);
     }
   });
+  var Rule$_borderImageSource_metadata = new PropertyMetadata('_borderImageSource');
   Object.defineProperty(Rule.prototype, '_borderImageSource', {
     get: function () {
-      return this._borderImageSource_l8wu93$_0.getValue_4hb8sp$(this, new Kotlin.PropertyMetadata('_borderImageSource'));
+      return this._borderImageSource_l8wu93$_0.getValue_4hb8sp$(this, Rule$_borderImageSource_metadata);
     },
     set: function (_borderImageSource) {
-      this._borderImageSource_l8wu93$_0.setValue_8ibblj$(this, new Kotlin.PropertyMetadata('_borderImageSource'), _borderImageSource);
+      this._borderImageSource_l8wu93$_0.setValue_8ibblj$(this, Rule$_borderImageSource_metadata, _borderImageSource);
     }
   });
+  var Rule$_borderImageWidth_metadata = new PropertyMetadata('_borderImageWidth');
   Object.defineProperty(Rule.prototype, '_borderImageWidth', {
     get: function () {
-      return this._borderImageWidth_6rn9o$_0.getValue_4hb8sp$(this, new Kotlin.PropertyMetadata('_borderImageWidth'));
+      return this._borderImageWidth_6rn9o$_0.getValue_4hb8sp$(this, Rule$_borderImageWidth_metadata);
     },
     set: function (_borderImageWidth) {
-      this._borderImageWidth_6rn9o$_0.setValue_8ibblj$(this, new Kotlin.PropertyMetadata('_borderImageWidth'), _borderImageWidth);
+      this._borderImageWidth_6rn9o$_0.setValue_8ibblj$(this, Rule$_borderImageWidth_metadata, _borderImageWidth);
     }
   });
+  var Rule$_borderLeft_metadata = new PropertyMetadata('_borderLeft');
   Object.defineProperty(Rule.prototype, '_borderLeft', {
     get: function () {
-      return this._borderLeft_wk9ptc$_0.getValue_4hb8sp$(this, new Kotlin.PropertyMetadata('_borderLeft'));
+      return this._borderLeft_wk9ptc$_0.getValue_4hb8sp$(this, Rule$_borderLeft_metadata);
     },
     set: function (_borderLeft) {
-      this._borderLeft_wk9ptc$_0.setValue_8ibblj$(this, new Kotlin.PropertyMetadata('_borderLeft'), _borderLeft);
+      this._borderLeft_wk9ptc$_0.setValue_8ibblj$(this, Rule$_borderLeft_metadata, _borderLeft);
     }
   });
+  var Rule$_borderLeftColor_metadata = new PropertyMetadata('_borderLeftColor');
   Object.defineProperty(Rule.prototype, '_borderLeftColor', {
     get: function () {
-      return this._borderLeftColor_f2t38f$_0.getValue_4hb8sp$(this, new Kotlin.PropertyMetadata('_borderLeftColor'));
+      return this._borderLeftColor_f2t38f$_0.getValue_4hb8sp$(this, Rule$_borderLeftColor_metadata);
     },
     set: function (_borderLeftColor) {
-      this._borderLeftColor_f2t38f$_0.setValue_8ibblj$(this, new Kotlin.PropertyMetadata('_borderLeftColor'), _borderLeftColor);
+      this._borderLeftColor_f2t38f$_0.setValue_8ibblj$(this, Rule$_borderLeftColor_metadata, _borderLeftColor);
     }
   });
+  var Rule$_borderLeftStyle_metadata = new PropertyMetadata('_borderLeftStyle');
   Object.defineProperty(Rule.prototype, '_borderLeftStyle', {
     get: function () {
-      return this._borderLeftStyle_7f3xnx$_0.getValue_4hb8sp$(this, new Kotlin.PropertyMetadata('_borderLeftStyle'));
+      return this._borderLeftStyle_7f3xnx$_0.getValue_4hb8sp$(this, Rule$_borderLeftStyle_metadata);
     },
     set: function (_borderLeftStyle) {
-      this._borderLeftStyle_7f3xnx$_0.setValue_8ibblj$(this, new Kotlin.PropertyMetadata('_borderLeftStyle'), _borderLeftStyle);
+      this._borderLeftStyle_7f3xnx$_0.setValue_8ibblj$(this, Rule$_borderLeftStyle_metadata, _borderLeftStyle);
     }
   });
+  var Rule$_borderLeftWidth_metadata = new PropertyMetadata('_borderLeftWidth');
   Object.defineProperty(Rule.prototype, '_borderLeftWidth', {
     get: function () {
-      return this._borderLeftWidth_5pcfc2$_0.getValue_4hb8sp$(this, new Kotlin.PropertyMetadata('_borderLeftWidth'));
+      return this._borderLeftWidth_5pcfc2$_0.getValue_4hb8sp$(this, Rule$_borderLeftWidth_metadata);
     },
     set: function (_borderLeftWidth) {
-      this._borderLeftWidth_5pcfc2$_0.setValue_8ibblj$(this, new Kotlin.PropertyMetadata('_borderLeftWidth'), _borderLeftWidth);
+      this._borderLeftWidth_5pcfc2$_0.setValue_8ibblj$(this, Rule$_borderLeftWidth_metadata, _borderLeftWidth);
     }
   });
+  var Rule$_borderRadius_metadata = new PropertyMetadata('_borderRadius');
   Object.defineProperty(Rule.prototype, '_borderRadius', {
     get: function () {
-      return this._borderRadius_gfg8sb$_0.getValue_4hb8sp$(this, new Kotlin.PropertyMetadata('_borderRadius'));
+      return this._borderRadius_gfg8sb$_0.getValue_4hb8sp$(this, Rule$_borderRadius_metadata);
     },
     set: function (_borderRadius) {
-      this._borderRadius_gfg8sb$_0.setValue_kcp8eu$(this, new Kotlin.PropertyMetadata('_borderRadius'), _borderRadius);
+      this._borderRadius_gfg8sb$_0.setValue_kcp8eu$(this, Rule$_borderRadius_metadata, _borderRadius);
     }
   });
+  var Rule$_borderRight_metadata = new PropertyMetadata('_borderRight');
   Object.defineProperty(Rule.prototype, '_borderRight', {
     get: function () {
-      return this._borderRight_hx9sv5$_0.getValue_4hb8sp$(this, new Kotlin.PropertyMetadata('_borderRight'));
+      return this._borderRight_hx9sv5$_0.getValue_4hb8sp$(this, Rule$_borderRight_metadata);
     },
     set: function (_borderRight) {
-      this._borderRight_hx9sv5$_0.setValue_8ibblj$(this, new Kotlin.PropertyMetadata('_borderRight'), _borderRight);
+      this._borderRight_hx9sv5$_0.setValue_8ibblj$(this, Rule$_borderRight_metadata, _borderRight);
     }
   });
+  var Rule$_borderRightColor_metadata = new PropertyMetadata('_borderRightColor');
   Object.defineProperty(Rule.prototype, '_borderRightColor', {
     get: function () {
-      return this._borderRightColor_j2th8w$_0.getValue_4hb8sp$(this, new Kotlin.PropertyMetadata('_borderRightColor'));
+      return this._borderRightColor_j2th8w$_0.getValue_4hb8sp$(this, Rule$_borderRightColor_metadata);
     },
     set: function (_borderRightColor) {
-      this._borderRightColor_j2th8w$_0.setValue_8ibblj$(this, new Kotlin.PropertyMetadata('_borderRightColor'), _borderRightColor);
+      this._borderRightColor_j2th8w$_0.setValue_8ibblj$(this, Rule$_borderRightColor_metadata, _borderRightColor);
     }
   });
+  var Rule$_borderRightStyle_metadata = new PropertyMetadata('_borderRightStyle');
   Object.defineProperty(Rule.prototype, '_borderRightStyle', {
     get: function () {
-      return this._borderRightStyle_qqimte$_0.getValue_4hb8sp$(this, new Kotlin.PropertyMetadata('_borderRightStyle'));
+      return this._borderRightStyle_qqimte$_0.getValue_4hb8sp$(this, Rule$_borderRightStyle_metadata);
     },
     set: function (_borderRightStyle) {
-      this._borderRightStyle_qqimte$_0.setValue_8ibblj$(this, new Kotlin.PropertyMetadata('_borderRightStyle'), _borderRightStyle);
+      this._borderRightStyle_qqimte$_0.setValue_8ibblj$(this, Rule$_borderRightStyle_metadata, _borderRightStyle);
     }
   });
+  var Rule$_borderRightWidth_metadata = new PropertyMetadata('_borderRightWidth');
   Object.defineProperty(Rule.prototype, '_borderRightWidth', {
     get: function () {
-      return this._borderRightWidth_sga559$_0.getValue_4hb8sp$(this, new Kotlin.PropertyMetadata('_borderRightWidth'));
+      return this._borderRightWidth_sga559$_0.getValue_4hb8sp$(this, Rule$_borderRightWidth_metadata);
     },
     set: function (_borderRightWidth) {
-      this._borderRightWidth_sga559$_0.setValue_8ibblj$(this, new Kotlin.PropertyMetadata('_borderRightWidth'), _borderRightWidth);
+      this._borderRightWidth_sga559$_0.setValue_8ibblj$(this, Rule$_borderRightWidth_metadata, _borderRightWidth);
     }
   });
+  var Rule$_borderSpacing_metadata = new PropertyMetadata('_borderSpacing');
   Object.defineProperty(Rule.prototype, '_borderSpacing', {
     get: function () {
-      return this._borderSpacing_mae0re$_0.getValue_4hb8sp$(this, new Kotlin.PropertyMetadata('_borderSpacing'));
+      return this._borderSpacing_mae0re$_0.getValue_4hb8sp$(this, Rule$_borderSpacing_metadata);
     },
     set: function (_borderSpacing) {
-      this._borderSpacing_mae0re$_0.setValue_8ibblj$(this, new Kotlin.PropertyMetadata('_borderSpacing'), _borderSpacing);
+      this._borderSpacing_mae0re$_0.setValue_8ibblj$(this, Rule$_borderSpacing_metadata, _borderSpacing);
     }
   });
+  var Rule$_borderStyle_metadata = new PropertyMetadata('_borderStyle');
   Object.defineProperty(Rule.prototype, '_borderStyle', {
     get: function () {
-      return this._borderStyle_ikoq5o$_0.getValue_4hb8sp$(this, new Kotlin.PropertyMetadata('_borderStyle'));
+      return this._borderStyle_ikoq5o$_0.getValue_4hb8sp$(this, Rule$_borderStyle_metadata);
     },
     set: function (_borderStyle) {
-      this._borderStyle_ikoq5o$_0.setValue_kcp8eu$(this, new Kotlin.PropertyMetadata('_borderStyle'), _borderStyle);
+      this._borderStyle_ikoq5o$_0.setValue_kcp8eu$(this, Rule$_borderStyle_metadata, _borderStyle);
     }
   });
+  var Rule$_borderTop_metadata = new PropertyMetadata('_borderTop');
   Object.defineProperty(Rule.prototype, '_borderTop', {
     get: function () {
-      return this._borderTop_sqdhiw$_0.getValue_4hb8sp$(this, new Kotlin.PropertyMetadata('_borderTop'));
+      return this._borderTop_sqdhiw$_0.getValue_4hb8sp$(this, Rule$_borderTop_metadata);
     },
     set: function (_borderTop) {
-      this._borderTop_sqdhiw$_0.setValue_8ibblj$(this, new Kotlin.PropertyMetadata('_borderTop'), _borderTop);
+      this._borderTop_sqdhiw$_0.setValue_8ibblj$(this, Rule$_borderTop_metadata, _borderTop);
     }
   });
+  var Rule$_borderTopColor_metadata = new PropertyMetadata('_borderTopColor');
   Object.defineProperty(Rule.prototype, '_borderTopColor', {
     get: function () {
-      return this._borderTopColor_f18gc7$_0.getValue_4hb8sp$(this, new Kotlin.PropertyMetadata('_borderTopColor'));
+      return this._borderTopColor_f18gc7$_0.getValue_4hb8sp$(this, Rule$_borderTopColor_metadata);
     },
     set: function (_borderTopColor) {
-      this._borderTopColor_f18gc7$_0.setValue_8ibblj$(this, new Kotlin.PropertyMetadata('_borderTopColor'), _borderTopColor);
+      this._borderTopColor_f18gc7$_0.setValue_8ibblj$(this, Rule$_borderTopColor_metadata, _borderTopColor);
     }
   });
+  var Rule$_borderTopLeftRadius_metadata = new PropertyMetadata('_borderTopLeftRadius');
   Object.defineProperty(Rule.prototype, '_borderTopLeftRadius', {
     get: function () {
-      return this._borderTopLeftRadius_xaawpb$_0.getValue_4hb8sp$(this, new Kotlin.PropertyMetadata('_borderTopLeftRadius'));
+      return this._borderTopLeftRadius_xaawpb$_0.getValue_4hb8sp$(this, Rule$_borderTopLeftRadius_metadata);
     },
     set: function (_borderTopLeftRadius) {
-      this._borderTopLeftRadius_xaawpb$_0.setValue_8ibblj$(this, new Kotlin.PropertyMetadata('_borderTopLeftRadius'), _borderTopLeftRadius);
+      this._borderTopLeftRadius_xaawpb$_0.setValue_8ibblj$(this, Rule$_borderTopLeftRadius_metadata, _borderTopLeftRadius);
     }
   });
+  var Rule$_borderTopRightRadius_metadata = new PropertyMetadata('_borderTopRightRadius');
   Object.defineProperty(Rule.prototype, '_borderTopRightRadius', {
     get: function () {
-      return this._borderTopRightRadius_kbo66a$_0.getValue_4hb8sp$(this, new Kotlin.PropertyMetadata('_borderTopRightRadius'));
+      return this._borderTopRightRadius_kbo66a$_0.getValue_4hb8sp$(this, Rule$_borderTopRightRadius_metadata);
     },
     set: function (_borderTopRightRadius) {
-      this._borderTopRightRadius_kbo66a$_0.setValue_8ibblj$(this, new Kotlin.PropertyMetadata('_borderTopRightRadius'), _borderTopRightRadius);
+      this._borderTopRightRadius_kbo66a$_0.setValue_8ibblj$(this, Rule$_borderTopRightRadius_metadata, _borderTopRightRadius);
     }
   });
+  var Rule$_borderTopStyle_metadata = new PropertyMetadata('_borderTopStyle');
   Object.defineProperty(Rule.prototype, '_borderTopStyle', {
     get: function () {
-      return this._borderTopStyle_7djarp$_0.getValue_4hb8sp$(this, new Kotlin.PropertyMetadata('_borderTopStyle'));
+      return this._borderTopStyle_7djarp$_0.getValue_4hb8sp$(this, Rule$_borderTopStyle_metadata);
     },
     set: function (_borderTopStyle) {
-      this._borderTopStyle_7djarp$_0.setValue_8ibblj$(this, new Kotlin.PropertyMetadata('_borderTopStyle'), _borderTopStyle);
+      this._borderTopStyle_7djarp$_0.setValue_8ibblj$(this, Rule$_borderTopStyle_metadata, _borderTopStyle);
     }
   });
+  var Rule$_borderTopWidth_metadata = new PropertyMetadata('_borderTopWidth');
   Object.defineProperty(Rule.prototype, '_borderTopWidth', {
     get: function () {
-      return this._borderTopWidth_5nrsfu$_0.getValue_4hb8sp$(this, new Kotlin.PropertyMetadata('_borderTopWidth'));
+      return this._borderTopWidth_5nrsfu$_0.getValue_4hb8sp$(this, Rule$_borderTopWidth_metadata);
     },
     set: function (_borderTopWidth) {
-      this._borderTopWidth_5nrsfu$_0.setValue_8ibblj$(this, new Kotlin.PropertyMetadata('_borderTopWidth'), _borderTopWidth);
+      this._borderTopWidth_5nrsfu$_0.setValue_8ibblj$(this, Rule$_borderTopWidth_metadata, _borderTopWidth);
     }
   });
+  var Rule$_borderWidth_metadata = new PropertyMetadata('_borderWidth');
   Object.defineProperty(Rule.prototype, '_borderWidth', {
     get: function () {
-      return this._borderWidth_kag8hj$_0.getValue_4hb8sp$(this, new Kotlin.PropertyMetadata('_borderWidth'));
+      return this._borderWidth_kag8hj$_0.getValue_4hb8sp$(this, Rule$_borderWidth_metadata);
     },
     set: function (_borderWidth) {
-      this._borderWidth_kag8hj$_0.setValue_kcp8eu$(this, new Kotlin.PropertyMetadata('_borderWidth'), _borderWidth);
+      this._borderWidth_kag8hj$_0.setValue_kcp8eu$(this, Rule$_borderWidth_metadata, _borderWidth);
     }
   });
+  var Rule$_bottom_metadata = new PropertyMetadata('_bottom');
   Object.defineProperty(Rule.prototype, '_bottom', {
     get: function () {
-      return this._bottom_rl0908$_0.getValue_4hb8sp$(this, new Kotlin.PropertyMetadata('_bottom'));
+      return this._bottom_rl0908$_0.getValue_4hb8sp$(this, Rule$_bottom_metadata);
     },
     set: function (_bottom) {
-      this._bottom_rl0908$_0.setValue_8ibblj$(this, new Kotlin.PropertyMetadata('_bottom'), _bottom);
+      this._bottom_rl0908$_0.setValue_8ibblj$(this, Rule$_bottom_metadata, _bottom);
     }
   });
+  var Rule$_boxDecorationBreak_metadata = new PropertyMetadata('_boxDecorationBreak');
   Object.defineProperty(Rule.prototype, '_boxDecorationBreak', {
     get: function () {
-      return this._boxDecorationBreak_cgoxa9$_0.getValue_4hb8sp$(this, new Kotlin.PropertyMetadata('_boxDecorationBreak'));
+      return this._boxDecorationBreak_cgoxa9$_0.getValue_4hb8sp$(this, Rule$_boxDecorationBreak_metadata);
     },
     set: function (_boxDecorationBreak) {
-      this._boxDecorationBreak_cgoxa9$_0.setValue_8ibblj$(this, new Kotlin.PropertyMetadata('_boxDecorationBreak'), _boxDecorationBreak);
+      this._boxDecorationBreak_cgoxa9$_0.setValue_8ibblj$(this, Rule$_boxDecorationBreak_metadata, _boxDecorationBreak);
     }
   });
+  var Rule$_boxShadow_metadata = new PropertyMetadata('_boxShadow');
   Object.defineProperty(Rule.prototype, '_boxShadow', {
     get: function () {
-      return this._boxShadow_x46tx6$_0.getValue_4hb8sp$(this, new Kotlin.PropertyMetadata('_boxShadow'));
+      return this._boxShadow_x46tx6$_0.getValue_4hb8sp$(this, Rule$_boxShadow_metadata);
     },
     set: function (_boxShadow) {
-      this._boxShadow_x46tx6$_0.setValue_kcp8eu$(this, new Kotlin.PropertyMetadata('_boxShadow'), _boxShadow);
+      this._boxShadow_x46tx6$_0.setValue_kcp8eu$(this, Rule$_boxShadow_metadata, _boxShadow);
     }
   });
+  var Rule$_boxSizing_metadata = new PropertyMetadata('_boxSizing');
   Object.defineProperty(Rule.prototype, '_boxSizing', {
     get: function () {
-      return this._boxSizing_w9b6vs$_0.getValue_4hb8sp$(this, new Kotlin.PropertyMetadata('_boxSizing'));
+      return this._boxSizing_w9b6vs$_0.getValue_4hb8sp$(this, Rule$_boxSizing_metadata);
     },
     set: function (_boxSizing) {
-      this._boxSizing_w9b6vs$_0.setValue_8ibblj$(this, new Kotlin.PropertyMetadata('_boxSizing'), _boxSizing);
+      this._boxSizing_w9b6vs$_0.setValue_8ibblj$(this, Rule$_boxSizing_metadata, _boxSizing);
     }
   });
+  var Rule$_breakAfter_metadata = new PropertyMetadata('_breakAfter');
   Object.defineProperty(Rule.prototype, '_breakAfter', {
     get: function () {
-      return this._breakAfter_z20u3q$_0.getValue_4hb8sp$(this, new Kotlin.PropertyMetadata('_breakAfter'));
+      return this._breakAfter_z20u3q$_0.getValue_4hb8sp$(this, Rule$_breakAfter_metadata);
     },
     set: function (_breakAfter) {
-      this._breakAfter_z20u3q$_0.setValue_8ibblj$(this, new Kotlin.PropertyMetadata('_breakAfter'), _breakAfter);
+      this._breakAfter_z20u3q$_0.setValue_8ibblj$(this, Rule$_breakAfter_metadata, _breakAfter);
     }
   });
+  var Rule$_breakBefore_metadata = new PropertyMetadata('_breakBefore');
   Object.defineProperty(Rule.prototype, '_breakBefore', {
     get: function () {
-      return this._breakBefore_z9v21f$_0.getValue_4hb8sp$(this, new Kotlin.PropertyMetadata('_breakBefore'));
+      return this._breakBefore_z9v21f$_0.getValue_4hb8sp$(this, Rule$_breakBefore_metadata);
     },
     set: function (_breakBefore) {
-      this._breakBefore_z9v21f$_0.setValue_8ibblj$(this, new Kotlin.PropertyMetadata('_breakBefore'), _breakBefore);
+      this._breakBefore_z9v21f$_0.setValue_8ibblj$(this, Rule$_breakBefore_metadata, _breakBefore);
     }
   });
+  var Rule$_breakInside_metadata = new PropertyMetadata('_breakInside');
   Object.defineProperty(Rule.prototype, '_breakInside', {
     get: function () {
-      return this._breakInside_euqly$_0.getValue_4hb8sp$(this, new Kotlin.PropertyMetadata('_breakInside'));
+      return this._breakInside_euqly$_0.getValue_4hb8sp$(this, Rule$_breakInside_metadata);
     },
     set: function (_breakInside) {
-      this._breakInside_euqly$_0.setValue_8ibblj$(this, new Kotlin.PropertyMetadata('_breakInside'), _breakInside);
+      this._breakInside_euqly$_0.setValue_8ibblj$(this, Rule$_breakInside_metadata, _breakInside);
     }
   });
+  var Rule$_captionSide_metadata = new PropertyMetadata('_captionSide');
   Object.defineProperty(Rule.prototype, '_captionSide', {
     get: function () {
-      return this._captionSide_mi95ho$_0.getValue_4hb8sp$(this, new Kotlin.PropertyMetadata('_captionSide'));
+      return this._captionSide_mi95ho$_0.getValue_4hb8sp$(this, Rule$_captionSide_metadata);
     },
     set: function (_captionSide) {
-      this._captionSide_mi95ho$_0.setValue_8ibblj$(this, new Kotlin.PropertyMetadata('_captionSide'), _captionSide);
+      this._captionSide_mi95ho$_0.setValue_8ibblj$(this, Rule$_captionSide_metadata, _captionSide);
     }
   });
+  var Rule$_clear_metadata = new PropertyMetadata('_clear');
   Object.defineProperty(Rule.prototype, '_clear', {
     get: function () {
-      return this._clear_uro9fg$_0.getValue_4hb8sp$(this, new Kotlin.PropertyMetadata('_clear'));
+      return this._clear_uro9fg$_0.getValue_4hb8sp$(this, Rule$_clear_metadata);
     },
     set: function (_clear) {
-      this._clear_uro9fg$_0.setValue_8ibblj$(this, new Kotlin.PropertyMetadata('_clear'), _clear);
+      this._clear_uro9fg$_0.setValue_8ibblj$(this, Rule$_clear_metadata, _clear);
     }
   });
+  var Rule$_clip_metadata = new PropertyMetadata('_clip');
   Object.defineProperty(Rule.prototype, '_clip', {
     get: function () {
-      return this._clip_5vqes3$_0.getValue_4hb8sp$(this, new Kotlin.PropertyMetadata('_clip'));
+      return this._clip_5vqes3$_0.getValue_4hb8sp$(this, Rule$_clip_metadata);
     },
     set: function (_clip) {
-      this._clip_5vqes3$_0.setValue_8ibblj$(this, new Kotlin.PropertyMetadata('_clip'), _clip);
+      this._clip_5vqes3$_0.setValue_8ibblj$(this, Rule$_clip_metadata, _clip);
     }
   });
+  var Rule$_color_metadata = new PropertyMetadata('_color');
   Object.defineProperty(Rule.prototype, '_color', {
     get: function () {
-      return this._color_upw4cy$_0.getValue_4hb8sp$(this, new Kotlin.PropertyMetadata('_color'));
+      return this._color_upw4cy$_0.getValue_4hb8sp$(this, Rule$_color_metadata);
     },
     set: function (_color) {
-      this._color_upw4cy$_0.setValue_8ibblj$(this, new Kotlin.PropertyMetadata('_color'), _color);
+      this._color_upw4cy$_0.setValue_8ibblj$(this, Rule$_color_metadata, _color);
     }
   });
+  var Rule$_columnCount_metadata = new PropertyMetadata('_columnCount');
   Object.defineProperty(Rule.prototype, '_columnCount', {
     get: function () {
-      return this._columnCount_jm1pjc$_0.getValue_4hb8sp$(this, new Kotlin.PropertyMetadata('_columnCount'));
+      return this._columnCount_jm1pjc$_0.getValue_4hb8sp$(this, Rule$_columnCount_metadata);
     },
     set: function (_columnCount) {
-      this._columnCount_jm1pjc$_0.setValue_8ibblj$(this, new Kotlin.PropertyMetadata('_columnCount'), _columnCount);
+      this._columnCount_jm1pjc$_0.setValue_8ibblj$(this, Rule$_columnCount_metadata, _columnCount);
     }
   });
+  var Rule$_columnFill_metadata = new PropertyMetadata('_columnFill');
   Object.defineProperty(Rule.prototype, '_columnFill', {
     get: function () {
-      return this._columnFill_6a8362$_0.getValue_4hb8sp$(this, new Kotlin.PropertyMetadata('_columnFill'));
+      return this._columnFill_6a8362$_0.getValue_4hb8sp$(this, Rule$_columnFill_metadata);
     },
     set: function (_columnFill) {
-      this._columnFill_6a8362$_0.setValue_8ibblj$(this, new Kotlin.PropertyMetadata('_columnFill'), _columnFill);
+      this._columnFill_6a8362$_0.setValue_8ibblj$(this, Rule$_columnFill_metadata, _columnFill);
     }
   });
+  var Rule$_columnGap_metadata = new PropertyMetadata('_columnGap');
   Object.defineProperty(Rule.prototype, '_columnGap', {
     get: function () {
-      return this._columnGap_mpkban$_0.getValue_4hb8sp$(this, new Kotlin.PropertyMetadata('_columnGap'));
+      return this._columnGap_mpkban$_0.getValue_4hb8sp$(this, Rule$_columnGap_metadata);
     },
     set: function (_columnGap) {
-      this._columnGap_mpkban$_0.setValue_8ibblj$(this, new Kotlin.PropertyMetadata('_columnGap'), _columnGap);
+      this._columnGap_mpkban$_0.setValue_8ibblj$(this, Rule$_columnGap_metadata, _columnGap);
     }
   });
+  var Rule$_columnRule_metadata = new PropertyMetadata('_columnRule');
   Object.defineProperty(Rule.prototype, '_columnRule', {
     get: function () {
-      return this._columnRule_6h19yp$_0.getValue_4hb8sp$(this, new Kotlin.PropertyMetadata('_columnRule'));
+      return this._columnRule_6h19yp$_0.getValue_4hb8sp$(this, Rule$_columnRule_metadata);
     },
     set: function (_columnRule) {
-      this._columnRule_6h19yp$_0.setValue_8ibblj$(this, new Kotlin.PropertyMetadata('_columnRule'), _columnRule);
+      this._columnRule_6h19yp$_0.setValue_8ibblj$(this, Rule$_columnRule_metadata, _columnRule);
     }
   });
+  var Rule$_columnRuleColor_metadata = new PropertyMetadata('_columnRuleColor');
   Object.defineProperty(Rule.prototype, '_columnRuleColor', {
     get: function () {
-      return this._columnRuleColor_wbmn9c$_0.getValue_4hb8sp$(this, new Kotlin.PropertyMetadata('_columnRuleColor'));
+      return this._columnRuleColor_wbmn9c$_0.getValue_4hb8sp$(this, Rule$_columnRuleColor_metadata);
     },
     set: function (_columnRuleColor) {
-      this._columnRuleColor_wbmn9c$_0.setValue_8ibblj$(this, new Kotlin.PropertyMetadata('_columnRuleColor'), _columnRuleColor);
+      this._columnRuleColor_wbmn9c$_0.setValue_8ibblj$(this, Rule$_columnRuleColor_metadata, _columnRuleColor);
     }
   });
+  var Rule$_columnRuleStyle_metadata = new PropertyMetadata('_columnRuleStyle');
   Object.defineProperty(Rule.prototype, '_columnRuleStyle', {
     get: function () {
-      return this._columnRuleStyle_v1s95a$_0.getValue_4hb8sp$(this, new Kotlin.PropertyMetadata('_columnRuleStyle'));
+      return this._columnRuleStyle_v1s95a$_0.getValue_4hb8sp$(this, Rule$_columnRuleStyle_metadata);
     },
     set: function (_columnRuleStyle) {
-      this._columnRuleStyle_v1s95a$_0.setValue_8ibblj$(this, new Kotlin.PropertyMetadata('_columnRuleStyle'), _columnRuleStyle);
+      this._columnRuleStyle_v1s95a$_0.setValue_8ibblj$(this, Rule$_columnRuleStyle_metadata, _columnRuleStyle);
     }
   });
+  var Rule$_columnRuleWidth_metadata = new PropertyMetadata('_columnRuleWidth');
   Object.defineProperty(Rule.prototype, '_columnRuleWidth', {
     get: function () {
-      return this._columnRuleWidth_tc0qtf$_0.getValue_4hb8sp$(this, new Kotlin.PropertyMetadata('_columnRuleWidth'));
+      return this._columnRuleWidth_tc0qtf$_0.getValue_4hb8sp$(this, Rule$_columnRuleWidth_metadata);
     },
     set: function (_columnRuleWidth) {
-      this._columnRuleWidth_tc0qtf$_0.setValue_8ibblj$(this, new Kotlin.PropertyMetadata('_columnRuleWidth'), _columnRuleWidth);
+      this._columnRuleWidth_tc0qtf$_0.setValue_8ibblj$(this, Rule$_columnRuleWidth_metadata, _columnRuleWidth);
     }
   });
+  var Rule$_columnSpan_metadata = new PropertyMetadata('_columnSpan');
   Object.defineProperty(Rule.prototype, '_columnSpan', {
     get: function () {
-      return this._columnSpan_6hhnoj$_0.getValue_4hb8sp$(this, new Kotlin.PropertyMetadata('_columnSpan'));
+      return this._columnSpan_6hhnoj$_0.getValue_4hb8sp$(this, Rule$_columnSpan_metadata);
     },
     set: function (_columnSpan) {
-      this._columnSpan_6hhnoj$_0.setValue_8ibblj$(this, new Kotlin.PropertyMetadata('_columnSpan'), _columnSpan);
+      this._columnSpan_6hhnoj$_0.setValue_8ibblj$(this, Rule$_columnSpan_metadata, _columnSpan);
     }
   });
+  var Rule$_columnWidth_metadata = new PropertyMetadata('_columnWidth');
   Object.defineProperty(Rule.prototype, '_columnWidth', {
     get: function () {
-      return this._columnWidth_a8qrtr$_0.getValue_4hb8sp$(this, new Kotlin.PropertyMetadata('_columnWidth'));
+      return this._columnWidth_a8qrtr$_0.getValue_4hb8sp$(this, Rule$_columnWidth_metadata);
     },
     set: function (_columnWidth) {
-      this._columnWidth_a8qrtr$_0.setValue_8ibblj$(this, new Kotlin.PropertyMetadata('_columnWidth'), _columnWidth);
+      this._columnWidth_a8qrtr$_0.setValue_8ibblj$(this, Rule$_columnWidth_metadata, _columnWidth);
     }
   });
+  var Rule$_columns_metadata = new PropertyMetadata('_columns');
   Object.defineProperty(Rule.prototype, '_columns', {
     get: function () {
-      return this._columns_rrn65w$_0.getValue_4hb8sp$(this, new Kotlin.PropertyMetadata('_columns'));
+      return this._columns_rrn65w$_0.getValue_4hb8sp$(this, Rule$_columns_metadata);
     },
     set: function (_columns) {
-      this._columns_rrn65w$_0.setValue_8ibblj$(this, new Kotlin.PropertyMetadata('_columns'), _columns);
+      this._columns_rrn65w$_0.setValue_8ibblj$(this, Rule$_columns_metadata, _columns);
     }
   });
+  var Rule$_content_metadata = new PropertyMetadata('_content');
   Object.defineProperty(Rule.prototype, '_content', {
     get: function () {
-      return this._content_sp1ihk$_0.getValue_4hb8sp$(this, new Kotlin.PropertyMetadata('_content'));
+      return this._content_sp1ihk$_0.getValue_4hb8sp$(this, Rule$_content_metadata);
     },
     set: function (_content) {
-      this._content_sp1ihk$_0.setValue_8ibblj$(this, new Kotlin.PropertyMetadata('_content'), _content);
+      this._content_sp1ihk$_0.setValue_8ibblj$(this, Rule$_content_metadata, _content);
     }
   });
+  var Rule$_counterIncrement_metadata = new PropertyMetadata('_counterIncrement');
   Object.defineProperty(Rule.prototype, '_counterIncrement', {
     get: function () {
-      return this._counterIncrement_2yymvk$_0.getValue_4hb8sp$(this, new Kotlin.PropertyMetadata('_counterIncrement'));
+      return this._counterIncrement_2yymvk$_0.getValue_4hb8sp$(this, Rule$_counterIncrement_metadata);
     },
     set: function (_counterIncrement) {
-      this._counterIncrement_2yymvk$_0.setValue_8ibblj$(this, new Kotlin.PropertyMetadata('_counterIncrement'), _counterIncrement);
+      this._counterIncrement_2yymvk$_0.setValue_8ibblj$(this, Rule$_counterIncrement_metadata, _counterIncrement);
     }
   });
+  var Rule$_counterReset_metadata = new PropertyMetadata('_counterReset');
   Object.defineProperty(Rule.prototype, '_counterReset', {
     get: function () {
-      return this._counterReset_66yrhs$_0.getValue_4hb8sp$(this, new Kotlin.PropertyMetadata('_counterReset'));
+      return this._counterReset_66yrhs$_0.getValue_4hb8sp$(this, Rule$_counterReset_metadata);
     },
     set: function (_counterReset) {
-      this._counterReset_66yrhs$_0.setValue_8ibblj$(this, new Kotlin.PropertyMetadata('_counterReset'), _counterReset);
+      this._counterReset_66yrhs$_0.setValue_8ibblj$(this, Rule$_counterReset_metadata, _counterReset);
     }
   });
+  var Rule$_cursor_metadata = new PropertyMetadata('_cursor');
   Object.defineProperty(Rule.prototype, '_cursor', {
     get: function () {
-      return this._cursor_pyk0fn$_0.getValue_4hb8sp$(this, new Kotlin.PropertyMetadata('_cursor'));
+      return this._cursor_pyk0fn$_0.getValue_4hb8sp$(this, Rule$_cursor_metadata);
     },
     set: function (_cursor) {
-      this._cursor_pyk0fn$_0.setValue_kcp8eu$(this, new Kotlin.PropertyMetadata('_cursor'), _cursor);
+      this._cursor_pyk0fn$_0.setValue_kcp8eu$(this, Rule$_cursor_metadata, _cursor);
     }
   });
+  var Rule$_direction_metadata = new PropertyMetadata('_direction');
   Object.defineProperty(Rule.prototype, '_direction', {
     get: function () {
-      return this._direction_ftumz6$_0.getValue_4hb8sp$(this, new Kotlin.PropertyMetadata('_direction'));
+      return this._direction_ftumz6$_0.getValue_4hb8sp$(this, Rule$_direction_metadata);
     },
     set: function (_direction) {
-      this._direction_ftumz6$_0.setValue_8ibblj$(this, new Kotlin.PropertyMetadata('_direction'), _direction);
+      this._direction_ftumz6$_0.setValue_8ibblj$(this, Rule$_direction_metadata, _direction);
     }
   });
+  var Rule$_display_metadata = new PropertyMetadata('_display');
   Object.defineProperty(Rule.prototype, '_display', {
     get: function () {
-      return this._display_s8kksx$_0.getValue_4hb8sp$(this, new Kotlin.PropertyMetadata('_display'));
+      return this._display_s8kksx$_0.getValue_4hb8sp$(this, Rule$_display_metadata);
     },
     set: function (_display) {
-      this._display_s8kksx$_0.setValue_8ibblj$(this, new Kotlin.PropertyMetadata('_display'), _display);
+      this._display_s8kksx$_0.setValue_8ibblj$(this, Rule$_display_metadata, _display);
     }
   });
+  var Rule$_emptyCells_metadata = new PropertyMetadata('_emptyCells');
   Object.defineProperty(Rule.prototype, '_emptyCells', {
     get: function () {
-      return this._emptyCells_w8gwnz$_0.getValue_4hb8sp$(this, new Kotlin.PropertyMetadata('_emptyCells'));
+      return this._emptyCells_w8gwnz$_0.getValue_4hb8sp$(this, Rule$_emptyCells_metadata);
     },
     set: function (_emptyCells) {
-      this._emptyCells_w8gwnz$_0.setValue_8ibblj$(this, new Kotlin.PropertyMetadata('_emptyCells'), _emptyCells);
+      this._emptyCells_w8gwnz$_0.setValue_8ibblj$(this, Rule$_emptyCells_metadata, _emptyCells);
     }
   });
+  var Rule$_filter_metadata = new PropertyMetadata('_filter');
   Object.defineProperty(Rule.prototype, '_filter', {
     get: function () {
-      return this._filter_cat1ij$_0.getValue_4hb8sp$(this, new Kotlin.PropertyMetadata('_filter'));
+      return this._filter_cat1ij$_0.getValue_4hb8sp$(this, Rule$_filter_metadata);
     },
     set: function (_filter) {
-      this._filter_cat1ij$_0.setValue_8ibblj$(this, new Kotlin.PropertyMetadata('_filter'), _filter);
+      this._filter_cat1ij$_0.setValue_8ibblj$(this, Rule$_filter_metadata, _filter);
     }
   });
+  var Rule$_flex_metadata = new PropertyMetadata('_flex');
   Object.defineProperty(Rule.prototype, '_flex', {
     get: function () {
-      return this._flex_5xdpsa$_0.getValue_4hb8sp$(this, new Kotlin.PropertyMetadata('_flex'));
+      return this._flex_5xdpsa$_0.getValue_4hb8sp$(this, Rule$_flex_metadata);
     },
     set: function (_flex) {
-      this._flex_5xdpsa$_0.setValue_8ibblj$(this, new Kotlin.PropertyMetadata('_flex'), _flex);
+      this._flex_5xdpsa$_0.setValue_8ibblj$(this, Rule$_flex_metadata, _flex);
     }
   });
+  var Rule$_flexBasis_metadata = new PropertyMetadata('_flexBasis');
   Object.defineProperty(Rule.prototype, '_flexBasis', {
     get: function () {
-      return this._flexBasis_l0iong$_0.getValue_4hb8sp$(this, new Kotlin.PropertyMetadata('_flexBasis'));
+      return this._flexBasis_l0iong$_0.getValue_4hb8sp$(this, Rule$_flexBasis_metadata);
     },
     set: function (_flexBasis) {
-      this._flexBasis_l0iong$_0.setValue_8ibblj$(this, new Kotlin.PropertyMetadata('_flexBasis'), _flexBasis);
+      this._flexBasis_l0iong$_0.setValue_8ibblj$(this, Rule$_flexBasis_metadata, _flexBasis);
     }
   });
+  var Rule$_flexDirection_metadata = new PropertyMetadata('_flexDirection');
   Object.defineProperty(Rule.prototype, '_flexDirection', {
     get: function () {
-      return this._flexDirection_6e6k7p$_0.getValue_4hb8sp$(this, new Kotlin.PropertyMetadata('_flexDirection'));
+      return this._flexDirection_6e6k7p$_0.getValue_4hb8sp$(this, Rule$_flexDirection_metadata);
     },
     set: function (_flexDirection) {
-      this._flexDirection_6e6k7p$_0.setValue_8ibblj$(this, new Kotlin.PropertyMetadata('_flexDirection'), _flexDirection);
+      this._flexDirection_6e6k7p$_0.setValue_8ibblj$(this, Rule$_flexDirection_metadata, _flexDirection);
     }
   });
+  var Rule$_flexFlow_metadata = new PropertyMetadata('_flexFlow');
   Object.defineProperty(Rule.prototype, '_flexFlow', {
     get: function () {
-      return this._flexFlow_ehpyrg$_0.getValue_4hb8sp$(this, new Kotlin.PropertyMetadata('_flexFlow'));
+      return this._flexFlow_ehpyrg$_0.getValue_4hb8sp$(this, Rule$_flexFlow_metadata);
     },
     set: function (_flexFlow) {
-      this._flexFlow_ehpyrg$_0.setValue_8ibblj$(this, new Kotlin.PropertyMetadata('_flexFlow'), _flexFlow);
+      this._flexFlow_ehpyrg$_0.setValue_8ibblj$(this, Rule$_flexFlow_metadata, _flexFlow);
     }
   });
+  var Rule$_flexGrow_metadata = new PropertyMetadata('_flexGrow');
   Object.defineProperty(Rule.prototype, '_flexGrow', {
     get: function () {
-      return this._flexGrow_eidl9z$_0.getValue_4hb8sp$(this, new Kotlin.PropertyMetadata('_flexGrow'));
+      return this._flexGrow_eidl9z$_0.getValue_4hb8sp$(this, Rule$_flexGrow_metadata);
     },
     set: function (_flexGrow) {
-      this._flexGrow_eidl9z$_0.setValue_8ibblj$(this, new Kotlin.PropertyMetadata('_flexGrow'), _flexGrow);
+      this._flexGrow_eidl9z$_0.setValue_8ibblj$(this, Rule$_flexGrow_metadata, _flexGrow);
     }
   });
+  var Rule$_flexShrink_metadata = new PropertyMetadata('_flexShrink');
   Object.defineProperty(Rule.prototype, '_flexShrink', {
     get: function () {
-      return this._flexShrink_j4v60v$_0.getValue_4hb8sp$(this, new Kotlin.PropertyMetadata('_flexShrink'));
+      return this._flexShrink_j4v60v$_0.getValue_4hb8sp$(this, Rule$_flexShrink_metadata);
     },
     set: function (_flexShrink) {
-      this._flexShrink_j4v60v$_0.setValue_8ibblj$(this, new Kotlin.PropertyMetadata('_flexShrink'), _flexShrink);
+      this._flexShrink_j4v60v$_0.setValue_8ibblj$(this, Rule$_flexShrink_metadata, _flexShrink);
     }
   });
+  var Rule$_flexWrap_metadata = new PropertyMetadata('_flexWrap');
   Object.defineProperty(Rule.prototype, '_flexWrap', {
     get: function () {
-      return this._flexWrap_er6080$_0.getValue_4hb8sp$(this, new Kotlin.PropertyMetadata('_flexWrap'));
+      return this._flexWrap_er6080$_0.getValue_4hb8sp$(this, Rule$_flexWrap_metadata);
     },
     set: function (_flexWrap) {
-      this._flexWrap_er6080$_0.setValue_8ibblj$(this, new Kotlin.PropertyMetadata('_flexWrap'), _flexWrap);
+      this._flexWrap_er6080$_0.setValue_8ibblj$(this, Rule$_flexWrap_metadata, _flexWrap);
     }
   });
+  var Rule$_font_metadata = new PropertyMetadata('_font');
   Object.defineProperty(Rule.prototype, '_font', {
     get: function () {
-      return this._font_5xftbo$_0.getValue_4hb8sp$(this, new Kotlin.PropertyMetadata('_font'));
+      return this._font_5xftbo$_0.getValue_4hb8sp$(this, Rule$_font_metadata);
     },
     set: function (_font) {
-      this._font_5xftbo$_0.setValue_8ibblj$(this, new Kotlin.PropertyMetadata('_font'), _font);
+      this._font_5xftbo$_0.setValue_8ibblj$(this, Rule$_font_metadata, _font);
     }
   });
+  var Rule$_fontFamily_metadata = new PropertyMetadata('_fontFamily');
   Object.defineProperty(Rule.prototype, '_fontFamily', {
     get: function () {
-      return this._fontFamily_vvfa9c$_0.getValue_4hb8sp$(this, new Kotlin.PropertyMetadata('_fontFamily'));
+      return this._fontFamily_vvfa9c$_0.getValue_4hb8sp$(this, Rule$_fontFamily_metadata);
     },
     set: function (_fontFamily) {
-      this._fontFamily_vvfa9c$_0.setValue_8ibblj$(this, new Kotlin.PropertyMetadata('_fontFamily'), _fontFamily);
+      this._fontFamily_vvfa9c$_0.setValue_8ibblj$(this, Rule$_fontFamily_metadata, _fontFamily);
     }
   });
+  var Rule$_fontFeatureSettings_metadata = new PropertyMetadata('_fontFeatureSettings');
   Object.defineProperty(Rule.prototype, '_fontFeatureSettings', {
     get: function () {
-      return this._fontFeatureSettings_qu5s6x$_0.getValue_4hb8sp$(this, new Kotlin.PropertyMetadata('_fontFeatureSettings'));
+      return this._fontFeatureSettings_qu5s6x$_0.getValue_4hb8sp$(this, Rule$_fontFeatureSettings_metadata);
     },
     set: function (_fontFeatureSettings) {
-      this._fontFeatureSettings_qu5s6x$_0.setValue_8ibblj$(this, new Kotlin.PropertyMetadata('_fontFeatureSettings'), _fontFeatureSettings);
+      this._fontFeatureSettings_qu5s6x$_0.setValue_8ibblj$(this, Rule$_fontFeatureSettings_metadata, _fontFeatureSettings);
     }
   });
+  var Rule$_fontKerning_metadata = new PropertyMetadata('_fontKerning');
   Object.defineProperty(Rule.prototype, '_fontKerning', {
     get: function () {
-      return this._fontKerning_e74mek$_0.getValue_4hb8sp$(this, new Kotlin.PropertyMetadata('_fontKerning'));
+      return this._fontKerning_e74mek$_0.getValue_4hb8sp$(this, Rule$_fontKerning_metadata);
     },
     set: function (_fontKerning) {
-      this._fontKerning_e74mek$_0.setValue_8ibblj$(this, new Kotlin.PropertyMetadata('_fontKerning'), _fontKerning);
+      this._fontKerning_e74mek$_0.setValue_8ibblj$(this, Rule$_fontKerning_metadata, _fontKerning);
     }
   });
+  var Rule$_fontLanguageOverride_metadata = new PropertyMetadata('_fontLanguageOverride');
   Object.defineProperty(Rule.prototype, '_fontLanguageOverride', {
     get: function () {
-      return this._fontLanguageOverride_rymb3k$_0.getValue_4hb8sp$(this, new Kotlin.PropertyMetadata('_fontLanguageOverride'));
+      return this._fontLanguageOverride_rymb3k$_0.getValue_4hb8sp$(this, Rule$_fontLanguageOverride_metadata);
     },
     set: function (_fontLanguageOverride) {
-      this._fontLanguageOverride_rymb3k$_0.setValue_8ibblj$(this, new Kotlin.PropertyMetadata('_fontLanguageOverride'), _fontLanguageOverride);
+      this._fontLanguageOverride_rymb3k$_0.setValue_8ibblj$(this, Rule$_fontLanguageOverride_metadata, _fontLanguageOverride);
     }
   });
+  var Rule$_fontSize_metadata = new PropertyMetadata('_fontSize');
   Object.defineProperty(Rule.prototype, '_fontSize', {
     get: function () {
-      return this._fontSize_i9qwxf$_0.getValue_4hb8sp$(this, new Kotlin.PropertyMetadata('_fontSize'));
+      return this._fontSize_i9qwxf$_0.getValue_4hb8sp$(this, Rule$_fontSize_metadata);
     },
     set: function (_fontSize) {
-      this._fontSize_i9qwxf$_0.setValue_8ibblj$(this, new Kotlin.PropertyMetadata('_fontSize'), _fontSize);
+      this._fontSize_i9qwxf$_0.setValue_8ibblj$(this, Rule$_fontSize_metadata, _fontSize);
     }
   });
+  var Rule$_fontSizeAdjust_metadata = new PropertyMetadata('_fontSizeAdjust');
   Object.defineProperty(Rule.prototype, '_fontSizeAdjust', {
     get: function () {
-      return this._fontSizeAdjust_omtz8k$_0.getValue_4hb8sp$(this, new Kotlin.PropertyMetadata('_fontSizeAdjust'));
+      return this._fontSizeAdjust_omtz8k$_0.getValue_4hb8sp$(this, Rule$_fontSizeAdjust_metadata);
     },
     set: function (_fontSizeAdjust) {
-      this._fontSizeAdjust_omtz8k$_0.setValue_8ibblj$(this, new Kotlin.PropertyMetadata('_fontSizeAdjust'), _fontSizeAdjust);
+      this._fontSizeAdjust_omtz8k$_0.setValue_8ibblj$(this, Rule$_fontSizeAdjust_metadata, _fontSizeAdjust);
     }
   });
+  var Rule$_fontStretch_metadata = new PropertyMetadata('_fontStretch');
   Object.defineProperty(Rule.prototype, '_fontStretch', {
     get: function () {
-      return this._fontStretch_a8dqyj$_0.getValue_4hb8sp$(this, new Kotlin.PropertyMetadata('_fontStretch'));
+      return this._fontStretch_a8dqyj$_0.getValue_4hb8sp$(this, Rule$_fontStretch_metadata);
     },
     set: function (_fontStretch) {
-      this._fontStretch_a8dqyj$_0.setValue_8ibblj$(this, new Kotlin.PropertyMetadata('_fontStretch'), _fontStretch);
+      this._fontStretch_a8dqyj$_0.setValue_8ibblj$(this, Rule$_fontStretch_metadata, _fontStretch);
     }
   });
+  var Rule$_fontStyle_metadata = new PropertyMetadata('_fontStyle');
   Object.defineProperty(Rule.prototype, '_fontStyle', {
     get: function () {
-      return this._fontStyle_1oot81$_0.getValue_4hb8sp$(this, new Kotlin.PropertyMetadata('_fontStyle'));
+      return this._fontStyle_1oot81$_0.getValue_4hb8sp$(this, Rule$_fontStyle_metadata);
     },
     set: function (_fontStyle) {
-      this._fontStyle_1oot81$_0.setValue_8ibblj$(this, new Kotlin.PropertyMetadata('_fontStyle'), _fontStyle);
+      this._fontStyle_1oot81$_0.setValue_8ibblj$(this, Rule$_fontStyle_metadata, _fontStyle);
     }
   });
+  var Rule$_fontSynthesis_metadata = new PropertyMetadata('_fontSynthesis');
   Object.defineProperty(Rule.prototype, '_fontSynthesis', {
     get: function () {
-      return this._fontSynthesis_iqugs4$_0.getValue_4hb8sp$(this, new Kotlin.PropertyMetadata('_fontSynthesis'));
+      return this._fontSynthesis_iqugs4$_0.getValue_4hb8sp$(this, Rule$_fontSynthesis_metadata);
     },
     set: function (_fontSynthesis) {
-      this._fontSynthesis_iqugs4$_0.setValue_8ibblj$(this, new Kotlin.PropertyMetadata('_fontSynthesis'), _fontSynthesis);
+      this._fontSynthesis_iqugs4$_0.setValue_8ibblj$(this, Rule$_fontSynthesis_metadata, _fontSynthesis);
     }
   });
+  var Rule$_fontVariant_metadata = new PropertyMetadata('_fontVariant');
   Object.defineProperty(Rule.prototype, '_fontVariant', {
     get: function () {
-      return this._fontVariant_uyx7wb$_0.getValue_4hb8sp$(this, new Kotlin.PropertyMetadata('_fontVariant'));
+      return this._fontVariant_uyx7wb$_0.getValue_4hb8sp$(this, Rule$_fontVariant_metadata);
     },
     set: function (_fontVariant) {
-      this._fontVariant_uyx7wb$_0.setValue_8ibblj$(this, new Kotlin.PropertyMetadata('_fontVariant'), _fontVariant);
+      this._fontVariant_uyx7wb$_0.setValue_8ibblj$(this, Rule$_fontVariant_metadata, _fontVariant);
     }
   });
+  var Rule$_fontVariantAlternates_metadata = new PropertyMetadata('_fontVariantAlternates');
   Object.defineProperty(Rule.prototype, '_fontVariantAlternates', {
     get: function () {
-      return this._fontVariantAlternates_7li9qa$_0.getValue_4hb8sp$(this, new Kotlin.PropertyMetadata('_fontVariantAlternates'));
+      return this._fontVariantAlternates_7li9qa$_0.getValue_4hb8sp$(this, Rule$_fontVariantAlternates_metadata);
     },
     set: function (_fontVariantAlternates) {
-      this._fontVariantAlternates_7li9qa$_0.setValue_8ibblj$(this, new Kotlin.PropertyMetadata('_fontVariantAlternates'), _fontVariantAlternates);
+      this._fontVariantAlternates_7li9qa$_0.setValue_8ibblj$(this, Rule$_fontVariantAlternates_metadata, _fontVariantAlternates);
     }
   });
+  var Rule$_fontVariantCaps_metadata = new PropertyMetadata('_fontVariantCaps');
   Object.defineProperty(Rule.prototype, '_fontVariantCaps', {
     get: function () {
-      return this._fontVariantCaps_1js9pi$_0.getValue_4hb8sp$(this, new Kotlin.PropertyMetadata('_fontVariantCaps'));
+      return this._fontVariantCaps_1js9pi$_0.getValue_4hb8sp$(this, Rule$_fontVariantCaps_metadata);
     },
     set: function (_fontVariantCaps) {
-      this._fontVariantCaps_1js9pi$_0.setValue_8ibblj$(this, new Kotlin.PropertyMetadata('_fontVariantCaps'), _fontVariantCaps);
+      this._fontVariantCaps_1js9pi$_0.setValue_8ibblj$(this, Rule$_fontVariantCaps_metadata, _fontVariantCaps);
     }
   });
+  var Rule$_fontVariantEastAsian_metadata = new PropertyMetadata('_fontVariantEastAsian');
   Object.defineProperty(Rule.prototype, '_fontVariantEastAsian', {
     get: function () {
-      return this._fontVariantEastAsian_m3ol8u$_0.getValue_4hb8sp$(this, new Kotlin.PropertyMetadata('_fontVariantEastAsian'));
+      return this._fontVariantEastAsian_m3ol8u$_0.getValue_4hb8sp$(this, Rule$_fontVariantEastAsian_metadata);
     },
     set: function (_fontVariantEastAsian) {
-      this._fontVariantEastAsian_m3ol8u$_0.setValue_8ibblj$(this, new Kotlin.PropertyMetadata('_fontVariantEastAsian'), _fontVariantEastAsian);
+      this._fontVariantEastAsian_m3ol8u$_0.setValue_8ibblj$(this, Rule$_fontVariantEastAsian_metadata, _fontVariantEastAsian);
     }
   });
+  var Rule$_fontVariantLigatures_metadata = new PropertyMetadata('_fontVariantLigatures');
   Object.defineProperty(Rule.prototype, '_fontVariantLigatures', {
     get: function () {
-      return this._fontVariantLigatures_w6ot3j$_0.getValue_4hb8sp$(this, new Kotlin.PropertyMetadata('_fontVariantLigatures'));
+      return this._fontVariantLigatures_w6ot3j$_0.getValue_4hb8sp$(this, Rule$_fontVariantLigatures_metadata);
     },
     set: function (_fontVariantLigatures) {
-      this._fontVariantLigatures_w6ot3j$_0.setValue_8ibblj$(this, new Kotlin.PropertyMetadata('_fontVariantLigatures'), _fontVariantLigatures);
+      this._fontVariantLigatures_w6ot3j$_0.setValue_8ibblj$(this, Rule$_fontVariantLigatures_metadata, _fontVariantLigatures);
     }
   });
+  var Rule$_fontVariantNumeric_metadata = new PropertyMetadata('_fontVariantNumeric');
   Object.defineProperty(Rule.prototype, '_fontVariantNumeric', {
     get: function () {
-      return this._fontVariantNumeric_o1pulw$_0.getValue_4hb8sp$(this, new Kotlin.PropertyMetadata('_fontVariantNumeric'));
+      return this._fontVariantNumeric_o1pulw$_0.getValue_4hb8sp$(this, Rule$_fontVariantNumeric_metadata);
     },
     set: function (_fontVariantNumeric) {
-      this._fontVariantNumeric_o1pulw$_0.setValue_8ibblj$(this, new Kotlin.PropertyMetadata('_fontVariantNumeric'), _fontVariantNumeric);
+      this._fontVariantNumeric_o1pulw$_0.setValue_8ibblj$(this, Rule$_fontVariantNumeric_metadata, _fontVariantNumeric);
     }
   });
+  var Rule$_fontVariantPosition_metadata = new PropertyMetadata('_fontVariantPosition');
   Object.defineProperty(Rule.prototype, '_fontVariantPosition', {
     get: function () {
-      return this._fontVariantPosition_z6wj6a$_0.getValue_4hb8sp$(this, new Kotlin.PropertyMetadata('_fontVariantPosition'));
+      return this._fontVariantPosition_z6wj6a$_0.getValue_4hb8sp$(this, Rule$_fontVariantPosition_metadata);
     },
     set: function (_fontVariantPosition) {
-      this._fontVariantPosition_z6wj6a$_0.setValue_8ibblj$(this, new Kotlin.PropertyMetadata('_fontVariantPosition'), _fontVariantPosition);
+      this._fontVariantPosition_z6wj6a$_0.setValue_8ibblj$(this, Rule$_fontVariantPosition_metadata, _fontVariantPosition);
     }
   });
+  var Rule$_fontWeight_metadata = new PropertyMetadata('_fontWeight');
   Object.defineProperty(Rule.prototype, '_fontWeight', {
     get: function () {
-      return this._fontWeight_wc5pg$_0.getValue_4hb8sp$(this, new Kotlin.PropertyMetadata('_fontWeight'));
+      return this._fontWeight_wc5pg$_0.getValue_4hb8sp$(this, Rule$_fontWeight_metadata);
     },
     set: function (_fontWeight) {
-      this._fontWeight_wc5pg$_0.setValue_8ibblj$(this, new Kotlin.PropertyMetadata('_fontWeight'), _fontWeight);
+      this._fontWeight_wc5pg$_0.setValue_8ibblj$(this, Rule$_fontWeight_metadata, _fontWeight);
     }
   });
+  var Rule$_hangingPunctuation_metadata = new PropertyMetadata('_hangingPunctuation');
   Object.defineProperty(Rule.prototype, '_hangingPunctuation', {
     get: function () {
-      return this._hangingPunctuation_nkanmh$_0.getValue_4hb8sp$(this, new Kotlin.PropertyMetadata('_hangingPunctuation'));
+      return this._hangingPunctuation_nkanmh$_0.getValue_4hb8sp$(this, Rule$_hangingPunctuation_metadata);
     },
     set: function (_hangingPunctuation) {
-      this._hangingPunctuation_nkanmh$_0.setValue_8ibblj$(this, new Kotlin.PropertyMetadata('_hangingPunctuation'), _hangingPunctuation);
+      this._hangingPunctuation_nkanmh$_0.setValue_8ibblj$(this, Rule$_hangingPunctuation_metadata, _hangingPunctuation);
     }
   });
+  var Rule$_height_metadata = new PropertyMetadata('_height');
   Object.defineProperty(Rule.prototype, '_height', {
     get: function () {
-      return this._height_vbkjxg$_0.getValue_4hb8sp$(this, new Kotlin.PropertyMetadata('_height'));
+      return this._height_vbkjxg$_0.getValue_4hb8sp$(this, Rule$_height_metadata);
     },
     set: function (_height) {
-      this._height_vbkjxg$_0.setValue_8ibblj$(this, new Kotlin.PropertyMetadata('_height'), _height);
+      this._height_vbkjxg$_0.setValue_8ibblj$(this, Rule$_height_metadata, _height);
     }
   });
+  var Rule$_hyphens_metadata = new PropertyMetadata('_hyphens');
   Object.defineProperty(Rule.prototype, '_hyphens', {
     get: function () {
-      return this._hyphens_ysxu7k$_0.getValue_4hb8sp$(this, new Kotlin.PropertyMetadata('_hyphens'));
+      return this._hyphens_ysxu7k$_0.getValue_4hb8sp$(this, Rule$_hyphens_metadata);
     },
     set: function (_hyphens) {
-      this._hyphens_ysxu7k$_0.setValue_8ibblj$(this, new Kotlin.PropertyMetadata('_hyphens'), _hyphens);
+      this._hyphens_ysxu7k$_0.setValue_8ibblj$(this, Rule$_hyphens_metadata, _hyphens);
     }
   });
+  var Rule$_imageOrientation_metadata = new PropertyMetadata('_imageOrientation');
   Object.defineProperty(Rule.prototype, '_imageOrientation', {
     get: function () {
-      return this._imageOrientation_ugqxqm$_0.getValue_4hb8sp$(this, new Kotlin.PropertyMetadata('_imageOrientation'));
+      return this._imageOrientation_ugqxqm$_0.getValue_4hb8sp$(this, Rule$_imageOrientation_metadata);
     },
     set: function (_imageOrientation) {
-      this._imageOrientation_ugqxqm$_0.setValue_8ibblj$(this, new Kotlin.PropertyMetadata('_imageOrientation'), _imageOrientation);
+      this._imageOrientation_ugqxqm$_0.setValue_8ibblj$(this, Rule$_imageOrientation_metadata, _imageOrientation);
     }
   });
+  var Rule$_imageRendering_metadata = new PropertyMetadata('_imageRendering');
   Object.defineProperty(Rule.prototype, '_imageRendering', {
     get: function () {
-      return this._imageRendering_ra8c2a$_0.getValue_4hb8sp$(this, new Kotlin.PropertyMetadata('_imageRendering'));
+      return this._imageRendering_ra8c2a$_0.getValue_4hb8sp$(this, Rule$_imageRendering_metadata);
     },
     set: function (_imageRendering) {
-      this._imageRendering_ra8c2a$_0.setValue_8ibblj$(this, new Kotlin.PropertyMetadata('_imageRendering'), _imageRendering);
+      this._imageRendering_ra8c2a$_0.setValue_8ibblj$(this, Rule$_imageRendering_metadata, _imageRendering);
     }
   });
+  var Rule$_imageResolution_metadata = new PropertyMetadata('_imageResolution');
   Object.defineProperty(Rule.prototype, '_imageResolution', {
     get: function () {
-      return this._imageResolution_irfsd2$_0.getValue_4hb8sp$(this, new Kotlin.PropertyMetadata('_imageResolution'));
+      return this._imageResolution_irfsd2$_0.getValue_4hb8sp$(this, Rule$_imageResolution_metadata);
     },
     set: function (_imageResolution) {
-      this._imageResolution_irfsd2$_0.setValue_8ibblj$(this, new Kotlin.PropertyMetadata('_imageResolution'), _imageResolution);
+      this._imageResolution_irfsd2$_0.setValue_8ibblj$(this, Rule$_imageResolution_metadata, _imageResolution);
     }
   });
+  var Rule$_imeMode_metadata = new PropertyMetadata('_imeMode');
   Object.defineProperty(Rule.prototype, '_imeMode', {
     get: function () {
-      return this._imeMode_pd39v1$_0.getValue_4hb8sp$(this, new Kotlin.PropertyMetadata('_imeMode'));
+      return this._imeMode_pd39v1$_0.getValue_4hb8sp$(this, Rule$_imeMode_metadata);
     },
     set: function (_imeMode) {
-      this._imeMode_pd39v1$_0.setValue_8ibblj$(this, new Kotlin.PropertyMetadata('_imeMode'), _imeMode);
+      this._imeMode_pd39v1$_0.setValue_8ibblj$(this, Rule$_imeMode_metadata, _imeMode);
     }
   });
+  var Rule$_justifyContent_metadata = new PropertyMetadata('_justifyContent');
   Object.defineProperty(Rule.prototype, '_justifyContent', {
     get: function () {
-      return this._justifyContent_bs2qti$_0.getValue_4hb8sp$(this, new Kotlin.PropertyMetadata('_justifyContent'));
+      return this._justifyContent_bs2qti$_0.getValue_4hb8sp$(this, Rule$_justifyContent_metadata);
     },
     set: function (_justifyContent) {
-      this._justifyContent_bs2qti$_0.setValue_8ibblj$(this, new Kotlin.PropertyMetadata('_justifyContent'), _justifyContent);
+      this._justifyContent_bs2qti$_0.setValue_8ibblj$(this, Rule$_justifyContent_metadata, _justifyContent);
     }
   });
+  var Rule$_left_metadata = new PropertyMetadata('_left');
   Object.defineProperty(Rule.prototype, '_left', {
     get: function () {
-      return this._left_60k130$_0.getValue_4hb8sp$(this, new Kotlin.PropertyMetadata('_left'));
+      return this._left_60k130$_0.getValue_4hb8sp$(this, Rule$_left_metadata);
     },
     set: function (_left) {
-      this._left_60k130$_0.setValue_8ibblj$(this, new Kotlin.PropertyMetadata('_left'), _left);
+      this._left_60k130$_0.setValue_8ibblj$(this, Rule$_left_metadata, _left);
     }
   });
+  var Rule$_letterSpacing_metadata = new PropertyMetadata('_letterSpacing');
   Object.defineProperty(Rule.prototype, '_letterSpacing', {
     get: function () {
-      return this._letterSpacing_d710es$_0.getValue_4hb8sp$(this, new Kotlin.PropertyMetadata('_letterSpacing'));
+      return this._letterSpacing_d710es$_0.getValue_4hb8sp$(this, Rule$_letterSpacing_metadata);
     },
     set: function (_letterSpacing) {
-      this._letterSpacing_d710es$_0.setValue_8ibblj$(this, new Kotlin.PropertyMetadata('_letterSpacing'), _letterSpacing);
+      this._letterSpacing_d710es$_0.setValue_8ibblj$(this, Rule$_letterSpacing_metadata, _letterSpacing);
     }
   });
+  var Rule$_lineBreak_metadata = new PropertyMetadata('_lineBreak');
   Object.defineProperty(Rule.prototype, '_lineBreak', {
     get: function () {
-      return this._lineBreak_xx5ra$_0.getValue_4hb8sp$(this, new Kotlin.PropertyMetadata('_lineBreak'));
+      return this._lineBreak_xx5ra$_0.getValue_4hb8sp$(this, Rule$_lineBreak_metadata);
     },
     set: function (_lineBreak) {
-      this._lineBreak_xx5ra$_0.setValue_8ibblj$(this, new Kotlin.PropertyMetadata('_lineBreak'), _lineBreak);
+      this._lineBreak_xx5ra$_0.setValue_8ibblj$(this, Rule$_lineBreak_metadata, _lineBreak);
     }
   });
+  var Rule$_lineHeight_metadata = new PropertyMetadata('_lineHeight');
   Object.defineProperty(Rule.prototype, '_lineHeight', {
     get: function () {
-      return this._lineHeight_uvkjqw$_0.getValue_4hb8sp$(this, new Kotlin.PropertyMetadata('_lineHeight'));
+      return this._lineHeight_uvkjqw$_0.getValue_4hb8sp$(this, Rule$_lineHeight_metadata);
     },
     set: function (_lineHeight) {
-      this._lineHeight_uvkjqw$_0.setValue_8ibblj$(this, new Kotlin.PropertyMetadata('_lineHeight'), _lineHeight);
+      this._lineHeight_uvkjqw$_0.setValue_8ibblj$(this, Rule$_lineHeight_metadata, _lineHeight);
     }
   });
+  var Rule$_listStyle_metadata = new PropertyMetadata('_listStyle');
   Object.defineProperty(Rule.prototype, '_listStyle', {
     get: function () {
-      return this._listStyle_i5no66$_0.getValue_4hb8sp$(this, new Kotlin.PropertyMetadata('_listStyle'));
+      return this._listStyle_i5no66$_0.getValue_4hb8sp$(this, Rule$_listStyle_metadata);
     },
     set: function (_listStyle) {
-      this._listStyle_i5no66$_0.setValue_8ibblj$(this, new Kotlin.PropertyMetadata('_listStyle'), _listStyle);
+      this._listStyle_i5no66$_0.setValue_8ibblj$(this, Rule$_listStyle_metadata, _listStyle);
     }
   });
+  var Rule$_listStyleImage_metadata = new PropertyMetadata('_listStyleImage');
   Object.defineProperty(Rule.prototype, '_listStyleImage', {
     get: function () {
-      return this._listStyleImage_bpvt39$_0.getValue_4hb8sp$(this, new Kotlin.PropertyMetadata('_listStyleImage'));
+      return this._listStyleImage_bpvt39$_0.getValue_4hb8sp$(this, Rule$_listStyleImage_metadata);
     },
     set: function (_listStyleImage) {
-      this._listStyleImage_bpvt39$_0.setValue_8ibblj$(this, new Kotlin.PropertyMetadata('_listStyleImage'), _listStyleImage);
+      this._listStyleImage_bpvt39$_0.setValue_8ibblj$(this, Rule$_listStyleImage_metadata, _listStyleImage);
     }
   });
+  var Rule$_listStylePosition_metadata = new PropertyMetadata('_listStylePosition');
   Object.defineProperty(Rule.prototype, '_listStylePosition', {
     get: function () {
-      return this._listStylePosition_vpu03v$_0.getValue_4hb8sp$(this, new Kotlin.PropertyMetadata('_listStylePosition'));
+      return this._listStylePosition_vpu03v$_0.getValue_4hb8sp$(this, Rule$_listStylePosition_metadata);
     },
     set: function (_listStylePosition) {
-      this._listStylePosition_vpu03v$_0.setValue_8ibblj$(this, new Kotlin.PropertyMetadata('_listStylePosition'), _listStylePosition);
+      this._listStylePosition_vpu03v$_0.setValue_8ibblj$(this, Rule$_listStylePosition_metadata, _listStylePosition);
     }
   });
+  var Rule$_listStyleType_metadata = new PropertyMetadata('_listStyleType');
   Object.defineProperty(Rule.prototype, '_listStyleType', {
     get: function () {
-      return this._listStyleType_y5z11g$_0.getValue_4hb8sp$(this, new Kotlin.PropertyMetadata('_listStyleType'));
+      return this._listStyleType_y5z11g$_0.getValue_4hb8sp$(this, Rule$_listStyleType_metadata);
     },
     set: function (_listStyleType) {
-      this._listStyleType_y5z11g$_0.setValue_8ibblj$(this, new Kotlin.PropertyMetadata('_listStyleType'), _listStyleType);
+      this._listStyleType_y5z11g$_0.setValue_8ibblj$(this, Rule$_listStyleType_metadata, _listStyleType);
     }
   });
+  var Rule$_margin_metadata = new PropertyMetadata('_margin');
   Object.defineProperty(Rule.prototype, '_margin', {
     get: function () {
-      return this._margin_upxiff$_0.getValue_4hb8sp$(this, new Kotlin.PropertyMetadata('_margin'));
+      return this._margin_upxiff$_0.getValue_4hb8sp$(this, Rule$_margin_metadata);
     },
     set: function (_margin) {
-      this._margin_upxiff$_0.setValue_kcp8eu$(this, new Kotlin.PropertyMetadata('_margin'), _margin);
+      this._margin_upxiff$_0.setValue_kcp8eu$(this, Rule$_margin_metadata, _margin);
     }
   });
+  var Rule$_marginBottom_metadata = new PropertyMetadata('_marginBottom');
   Object.defineProperty(Rule.prototype, '_marginBottom', {
     get: function () {
-      return this._marginBottom_40oofq$_0.getValue_4hb8sp$(this, new Kotlin.PropertyMetadata('_marginBottom'));
+      return this._marginBottom_40oofq$_0.getValue_4hb8sp$(this, Rule$_marginBottom_metadata);
     },
     set: function (_marginBottom) {
-      this._marginBottom_40oofq$_0.setValue_8ibblj$(this, new Kotlin.PropertyMetadata('_marginBottom'), _marginBottom);
+      this._marginBottom_40oofq$_0.setValue_8ibblj$(this, Rule$_marginBottom_metadata, _marginBottom);
     }
   });
+  var Rule$_marginLeft_metadata = new PropertyMetadata('_marginLeft');
   Object.defineProperty(Rule.prototype, '_marginLeft', {
     get: function () {
-      return this._marginLeft_yisklu$_0.getValue_4hb8sp$(this, new Kotlin.PropertyMetadata('_marginLeft'));
+      return this._marginLeft_yisklu$_0.getValue_4hb8sp$(this, Rule$_marginLeft_metadata);
     },
     set: function (_marginLeft) {
-      this._marginLeft_yisklu$_0.setValue_8ibblj$(this, new Kotlin.PropertyMetadata('_marginLeft'), _marginLeft);
+      this._marginLeft_yisklu$_0.setValue_8ibblj$(this, Rule$_marginLeft_metadata, _marginLeft);
     }
   });
+  var Rule$_marginRight_metadata = new PropertyMetadata('_marginRight');
   Object.defineProperty(Rule.prototype, '_marginRight', {
     get: function () {
-      return this._marginRight_1tfkwt$_0.getValue_4hb8sp$(this, new Kotlin.PropertyMetadata('_marginRight'));
+      return this._marginRight_1tfkwt$_0.getValue_4hb8sp$(this, Rule$_marginRight_metadata);
     },
     set: function (_marginRight) {
-      this._marginRight_1tfkwt$_0.setValue_8ibblj$(this, new Kotlin.PropertyMetadata('_marginRight'), _marginRight);
+      this._marginRight_1tfkwt$_0.setValue_8ibblj$(this, Rule$_marginRight_metadata, _marginRight);
     }
   });
+  var Rule$_marginTop_metadata = new PropertyMetadata('_marginTop');
   Object.defineProperty(Rule.prototype, '_marginTop', {
     get: function () {
-      return this._marginTop_qbaz5i$_0.getValue_4hb8sp$(this, new Kotlin.PropertyMetadata('_marginTop'));
+      return this._marginTop_qbaz5i$_0.getValue_4hb8sp$(this, Rule$_marginTop_metadata);
     },
     set: function (_marginTop) {
-      this._marginTop_qbaz5i$_0.setValue_8ibblj$(this, new Kotlin.PropertyMetadata('_marginTop'), _marginTop);
+      this._marginTop_qbaz5i$_0.setValue_8ibblj$(this, Rule$_marginTop_metadata, _marginTop);
     }
   });
+  var Rule$_mark_metadata = new PropertyMetadata('_mark');
   Object.defineProperty(Rule.prototype, '_mark', {
     get: function () {
-      return this._mark_611ieu$_0.getValue_4hb8sp$(this, new Kotlin.PropertyMetadata('_mark'));
+      return this._mark_611ieu$_0.getValue_4hb8sp$(this, Rule$_mark_metadata);
     },
     set: function (_mark) {
-      this._mark_611ieu$_0.setValue_8ibblj$(this, new Kotlin.PropertyMetadata('_mark'), _mark);
+      this._mark_611ieu$_0.setValue_8ibblj$(this, Rule$_mark_metadata, _mark);
     }
   });
+  var Rule$_markAfter_metadata = new PropertyMetadata('_markAfter');
   Object.defineProperty(Rule.prototype, '_markAfter', {
     get: function () {
-      return this._markAfter_dcn5fm$_0.getValue_4hb8sp$(this, new Kotlin.PropertyMetadata('_markAfter'));
+      return this._markAfter_dcn5fm$_0.getValue_4hb8sp$(this, Rule$_markAfter_metadata);
     },
     set: function (_markAfter) {
-      this._markAfter_dcn5fm$_0.setValue_8ibblj$(this, new Kotlin.PropertyMetadata('_markAfter'), _markAfter);
+      this._markAfter_dcn5fm$_0.setValue_8ibblj$(this, Rule$_markAfter_metadata, _markAfter);
     }
   });
+  var Rule$_markBefore_metadata = new PropertyMetadata('_markBefore');
   Object.defineProperty(Rule.prototype, '_markBefore', {
     get: function () {
-      return this._markBefore_1p3b1z$_0.getValue_4hb8sp$(this, new Kotlin.PropertyMetadata('_markBefore'));
+      return this._markBefore_1p3b1z$_0.getValue_4hb8sp$(this, Rule$_markBefore_metadata);
     },
     set: function (_markBefore) {
-      this._markBefore_1p3b1z$_0.setValue_8ibblj$(this, new Kotlin.PropertyMetadata('_markBefore'), _markBefore);
+      this._markBefore_1p3b1z$_0.setValue_8ibblj$(this, Rule$_markBefore_metadata, _markBefore);
     }
   });
+  var Rule$_marks_metadata = new PropertyMetadata('_marks');
   Object.defineProperty(Rule.prototype, '_marks', {
     get: function () {
-      return this._marks_q719qt$_0.getValue_4hb8sp$(this, new Kotlin.PropertyMetadata('_marks'));
+      return this._marks_q719qt$_0.getValue_4hb8sp$(this, Rule$_marks_metadata);
     },
     set: function (_marks) {
-      this._marks_q719qt$_0.setValue_8ibblj$(this, new Kotlin.PropertyMetadata('_marks'), _marks);
+      this._marks_q719qt$_0.setValue_8ibblj$(this, Rule$_marks_metadata, _marks);
     }
   });
+  var Rule$_marqueeDirection_metadata = new PropertyMetadata('_marqueeDirection');
   Object.defineProperty(Rule.prototype, '_marqueeDirection', {
     get: function () {
-      return this._marqueeDirection_wmjmfa$_0.getValue_4hb8sp$(this, new Kotlin.PropertyMetadata('_marqueeDirection'));
+      return this._marqueeDirection_wmjmfa$_0.getValue_4hb8sp$(this, Rule$_marqueeDirection_metadata);
     },
     set: function (_marqueeDirection) {
-      this._marqueeDirection_wmjmfa$_0.setValue_8ibblj$(this, new Kotlin.PropertyMetadata('_marqueeDirection'), _marqueeDirection);
+      this._marqueeDirection_wmjmfa$_0.setValue_8ibblj$(this, Rule$_marqueeDirection_metadata, _marqueeDirection);
     }
   });
+  var Rule$_marqueePlayCount_metadata = new PropertyMetadata('_marqueePlayCount');
   Object.defineProperty(Rule.prototype, '_marqueePlayCount', {
     get: function () {
-      return this._marqueePlayCount_nkzfg6$_0.getValue_4hb8sp$(this, new Kotlin.PropertyMetadata('_marqueePlayCount'));
+      return this._marqueePlayCount_nkzfg6$_0.getValue_4hb8sp$(this, Rule$_marqueePlayCount_metadata);
     },
     set: function (_marqueePlayCount) {
-      this._marqueePlayCount_nkzfg6$_0.setValue_8ibblj$(this, new Kotlin.PropertyMetadata('_marqueePlayCount'), _marqueePlayCount);
+      this._marqueePlayCount_nkzfg6$_0.setValue_8ibblj$(this, Rule$_marqueePlayCount_metadata, _marqueePlayCount);
     }
   });
+  var Rule$_marqueeSpeed_metadata = new PropertyMetadata('_marqueeSpeed');
   Object.defineProperty(Rule.prototype, '_marqueeSpeed', {
     get: function () {
-      return this._marqueeSpeed_c697gi$_0.getValue_4hb8sp$(this, new Kotlin.PropertyMetadata('_marqueeSpeed'));
+      return this._marqueeSpeed_c697gi$_0.getValue_4hb8sp$(this, Rule$_marqueeSpeed_metadata);
     },
     set: function (_marqueeSpeed) {
-      this._marqueeSpeed_c697gi$_0.setValue_8ibblj$(this, new Kotlin.PropertyMetadata('_marqueeSpeed'), _marqueeSpeed);
+      this._marqueeSpeed_c697gi$_0.setValue_8ibblj$(this, Rule$_marqueeSpeed_metadata, _marqueeSpeed);
     }
   });
+  var Rule$_marqueeStyle_metadata = new PropertyMetadata('_marqueeStyle');
   Object.defineProperty(Rule.prototype, '_marqueeStyle', {
     get: function () {
-      return this._marqueeStyle_c3p44s$_0.getValue_4hb8sp$(this, new Kotlin.PropertyMetadata('_marqueeStyle'));
+      return this._marqueeStyle_c3p44s$_0.getValue_4hb8sp$(this, Rule$_marqueeStyle_metadata);
     },
     set: function (_marqueeStyle) {
-      this._marqueeStyle_c3p44s$_0.setValue_8ibblj$(this, new Kotlin.PropertyMetadata('_marqueeStyle'), _marqueeStyle);
+      this._marqueeStyle_c3p44s$_0.setValue_8ibblj$(this, Rule$_marqueeStyle_metadata, _marqueeStyle);
     }
   });
+  var Rule$_mask_metadata = new PropertyMetadata('_mask');
   Object.defineProperty(Rule.prototype, '_mask', {
     get: function () {
-      return this._mask_611j5j$_0.getValue_4hb8sp$(this, new Kotlin.PropertyMetadata('_mask'));
+      return this._mask_611j5j$_0.getValue_4hb8sp$(this, Rule$_mask_metadata);
     },
     set: function (_mask) {
-      this._mask_611j5j$_0.setValue_8ibblj$(this, new Kotlin.PropertyMetadata('_mask'), _mask);
+      this._mask_611j5j$_0.setValue_8ibblj$(this, Rule$_mask_metadata, _mask);
     }
   });
+  var Rule$_maskType_metadata = new PropertyMetadata('_maskType');
   Object.defineProperty(Rule.prototype, '_maskType', {
     get: function () {
-      return this._maskType_s4kv37$_0.getValue_4hb8sp$(this, new Kotlin.PropertyMetadata('_maskType'));
+      return this._maskType_s4kv37$_0.getValue_4hb8sp$(this, Rule$_maskType_metadata);
     },
     set: function (_maskType) {
-      this._maskType_s4kv37$_0.setValue_8ibblj$(this, new Kotlin.PropertyMetadata('_maskType'), _maskType);
+      this._maskType_s4kv37$_0.setValue_8ibblj$(this, Rule$_maskType_metadata, _maskType);
     }
   });
+  var Rule$_maxHeight_metadata = new PropertyMetadata('_maxHeight');
   Object.defineProperty(Rule.prototype, '_maxHeight', {
     get: function () {
-      return this._maxHeight_q806oq$_0.getValue_4hb8sp$(this, new Kotlin.PropertyMetadata('_maxHeight'));
+      return this._maxHeight_q806oq$_0.getValue_4hb8sp$(this, Rule$_maxHeight_metadata);
     },
     set: function (_maxHeight) {
-      this._maxHeight_q806oq$_0.setValue_8ibblj$(this, new Kotlin.PropertyMetadata('_maxHeight'), _maxHeight);
+      this._maxHeight_q806oq$_0.setValue_8ibblj$(this, Rule$_maxHeight_metadata, _maxHeight);
     }
   });
+  var Rule$_maxWidth_metadata = new PropertyMetadata('_maxWidth');
   Object.defineProperty(Rule.prototype, '_maxWidth', {
     get: function () {
-      return this._maxWidth_yxfl27$_0.getValue_4hb8sp$(this, new Kotlin.PropertyMetadata('_maxWidth'));
+      return this._maxWidth_yxfl27$_0.getValue_4hb8sp$(this, Rule$_maxWidth_metadata);
     },
     set: function (_maxWidth) {
-      this._maxWidth_yxfl27$_0.setValue_8ibblj$(this, new Kotlin.PropertyMetadata('_maxWidth'), _maxWidth);
+      this._maxWidth_yxfl27$_0.setValue_8ibblj$(this, Rule$_maxWidth_metadata, _maxWidth);
     }
   });
+  var Rule$_minHeight_metadata = new PropertyMetadata('_minHeight');
   Object.defineProperty(Rule.prototype, '_minHeight', {
     get: function () {
-      return this._minHeight_enrc6w$_0.getValue_4hb8sp$(this, new Kotlin.PropertyMetadata('_minHeight'));
+      return this._minHeight_enrc6w$_0.getValue_4hb8sp$(this, Rule$_minHeight_metadata);
     },
     set: function (_minHeight) {
-      this._minHeight_enrc6w$_0.setValue_8ibblj$(this, new Kotlin.PropertyMetadata('_minHeight'), _minHeight);
+      this._minHeight_enrc6w$_0.setValue_8ibblj$(this, Rule$_minHeight_metadata, _minHeight);
     }
   });
+  var Rule$_minWidth_metadata = new PropertyMetadata('_minWidth');
   Object.defineProperty(Rule.prototype, '_minWidth', {
     get: function () {
-      return this._minWidth_m5ios1$_0.getValue_4hb8sp$(this, new Kotlin.PropertyMetadata('_minWidth'));
+      return this._minWidth_m5ios1$_0.getValue_4hb8sp$(this, Rule$_minWidth_metadata);
     },
     set: function (_minWidth) {
-      this._minWidth_m5ios1$_0.setValue_8ibblj$(this, new Kotlin.PropertyMetadata('_minWidth'), _minWidth);
+      this._minWidth_m5ios1$_0.setValue_8ibblj$(this, Rule$_minWidth_metadata, _minWidth);
     }
   });
+  var Rule$_navDown_metadata = new PropertyMetadata('_navDown');
   Object.defineProperty(Rule.prototype, '_navDown', {
     get: function () {
-      return this._navDown_19a25o$_0.getValue_4hb8sp$(this, new Kotlin.PropertyMetadata('_navDown'));
+      return this._navDown_19a25o$_0.getValue_4hb8sp$(this, Rule$_navDown_metadata);
     },
     set: function (_navDown) {
-      this._navDown_19a25o$_0.setValue_8ibblj$(this, new Kotlin.PropertyMetadata('_navDown'), _navDown);
+      this._navDown_19a25o$_0.setValue_8ibblj$(this, Rule$_navDown_metadata, _navDown);
     }
   });
+  var Rule$_navIndex_metadata = new PropertyMetadata('_navIndex');
   Object.defineProperty(Rule.prototype, '_navIndex', {
     get: function () {
-      return this._navIndex_tp45m4$_0.getValue_4hb8sp$(this, new Kotlin.PropertyMetadata('_navIndex'));
+      return this._navIndex_tp45m4$_0.getValue_4hb8sp$(this, Rule$_navIndex_metadata);
     },
     set: function (_navIndex) {
-      this._navIndex_tp45m4$_0.setValue_8ibblj$(this, new Kotlin.PropertyMetadata('_navIndex'), _navIndex);
+      this._navIndex_tp45m4$_0.setValue_8ibblj$(this, Rule$_navIndex_metadata, _navIndex);
     }
   });
+  var Rule$_navLeft_metadata = new PropertyMetadata('_navLeft');
   Object.defineProperty(Rule.prototype, '_navLeft', {
     get: function () {
-      return this._navLeft_1dhokn$_0.getValue_4hb8sp$(this, new Kotlin.PropertyMetadata('_navLeft'));
+      return this._navLeft_1dhokn$_0.getValue_4hb8sp$(this, Rule$_navLeft_metadata);
     },
     set: function (_navLeft) {
-      this._navLeft_1dhokn$_0.setValue_8ibblj$(this, new Kotlin.PropertyMetadata('_navLeft'), _navLeft);
+      this._navLeft_1dhokn$_0.setValue_8ibblj$(this, Rule$_navLeft_metadata, _navLeft);
     }
   });
+  var Rule$_navRight_metadata = new PropertyMetadata('_navRight');
   Object.defineProperty(Rule.prototype, '_navRight', {
     get: function () {
-      return this._navRight_piejxy$_0.getValue_4hb8sp$(this, new Kotlin.PropertyMetadata('_navRight'));
+      return this._navRight_piejxy$_0.getValue_4hb8sp$(this, Rule$_navRight_metadata);
     },
     set: function (_navRight) {
-      this._navRight_piejxy$_0.setValue_8ibblj$(this, new Kotlin.PropertyMetadata('_navRight'), _navRight);
+      this._navRight_piejxy$_0.setValue_8ibblj$(this, Rule$_navRight_metadata, _navRight);
     }
   });
+  var Rule$_navUp_metadata = new PropertyMetadata('_navUp');
   Object.defineProperty(Rule.prototype, '_navUp', {
     get: function () {
-      return this._navUp_ppxjsd$_0.getValue_4hb8sp$(this, new Kotlin.PropertyMetadata('_navUp'));
+      return this._navUp_ppxjsd$_0.getValue_4hb8sp$(this, Rule$_navUp_metadata);
     },
     set: function (_navUp) {
-      this._navUp_ppxjsd$_0.setValue_8ibblj$(this, new Kotlin.PropertyMetadata('_navUp'), _navUp);
+      this._navUp_ppxjsd$_0.setValue_8ibblj$(this, Rule$_navUp_metadata, _navUp);
     }
   });
+  var Rule$_objectFit_metadata = new PropertyMetadata('_objectFit');
   Object.defineProperty(Rule.prototype, '_objectFit', {
     get: function () {
-      return this._objectFit_tr4yfz$_0.getValue_4hb8sp$(this, new Kotlin.PropertyMetadata('_objectFit'));
+      return this._objectFit_tr4yfz$_0.getValue_4hb8sp$(this, Rule$_objectFit_metadata);
     },
     set: function (_objectFit) {
-      this._objectFit_tr4yfz$_0.setValue_8ibblj$(this, new Kotlin.PropertyMetadata('_objectFit'), _objectFit);
+      this._objectFit_tr4yfz$_0.setValue_8ibblj$(this, Rule$_objectFit_metadata, _objectFit);
     }
   });
+  var Rule$_objectPosition_metadata = new PropertyMetadata('_objectPosition');
   Object.defineProperty(Rule.prototype, '_objectPosition', {
     get: function () {
-      return this._objectPosition_gz2dyd$_0.getValue_4hb8sp$(this, new Kotlin.PropertyMetadata('_objectPosition'));
+      return this._objectPosition_gz2dyd$_0.getValue_4hb8sp$(this, Rule$_objectPosition_metadata);
     },
     set: function (_objectPosition) {
-      this._objectPosition_gz2dyd$_0.setValue_8ibblj$(this, new Kotlin.PropertyMetadata('_objectPosition'), _objectPosition);
+      this._objectPosition_gz2dyd$_0.setValue_8ibblj$(this, Rule$_objectPosition_metadata, _objectPosition);
     }
   });
+  var Rule$_opacity_metadata = new PropertyMetadata('_opacity');
   Object.defineProperty(Rule.prototype, '_opacity', {
     get: function () {
-      return this._opacity_roiava$_0.getValue_4hb8sp$(this, new Kotlin.PropertyMetadata('_opacity'));
+      return this._opacity_roiava$_0.getValue_4hb8sp$(this, Rule$_opacity_metadata);
     },
     set: function (_opacity) {
-      this._opacity_roiava$_0.setValue_8ibblj$(this, new Kotlin.PropertyMetadata('_opacity'), _opacity);
+      this._opacity_roiava$_0.setValue_8ibblj$(this, Rule$_opacity_metadata, _opacity);
     }
   });
+  var Rule$_order_metadata = new PropertyMetadata('_order');
   Object.defineProperty(Rule.prototype, '_order', {
     get: function () {
-      return this._order_ozul5p$_0.getValue_4hb8sp$(this, new Kotlin.PropertyMetadata('_order'));
+      return this._order_ozul5p$_0.getValue_4hb8sp$(this, Rule$_order_metadata);
     },
     set: function (_order) {
-      this._order_ozul5p$_0.setValue_8ibblj$(this, new Kotlin.PropertyMetadata('_order'), _order);
+      this._order_ozul5p$_0.setValue_8ibblj$(this, Rule$_order_metadata, _order);
     }
   });
+  var Rule$_orphans_metadata = new PropertyMetadata('_orphans');
   Object.defineProperty(Rule.prototype, '_orphans', {
     get: function () {
-      return this._orphans_6tj49m$_0.getValue_4hb8sp$(this, new Kotlin.PropertyMetadata('_orphans'));
+      return this._orphans_6tj49m$_0.getValue_4hb8sp$(this, Rule$_orphans_metadata);
     },
     set: function (_orphans) {
-      this._orphans_6tj49m$_0.setValue_8ibblj$(this, new Kotlin.PropertyMetadata('_orphans'), _orphans);
+      this._orphans_6tj49m$_0.setValue_8ibblj$(this, Rule$_orphans_metadata, _orphans);
     }
   });
+  var Rule$_outline_metadata = new PropertyMetadata('_outline');
   Object.defineProperty(Rule.prototype, '_outline', {
     get: function () {
-      return this._outline_vuxk29$_0.getValue_4hb8sp$(this, new Kotlin.PropertyMetadata('_outline'));
+      return this._outline_vuxk29$_0.getValue_4hb8sp$(this, Rule$_outline_metadata);
     },
     set: function (_outline) {
-      this._outline_vuxk29$_0.setValue_kcp8eu$(this, new Kotlin.PropertyMetadata('_outline'), _outline);
+      this._outline_vuxk29$_0.setValue_kcp8eu$(this, Rule$_outline_metadata, _outline);
     }
   });
+  var Rule$_outlineColor_metadata = new PropertyMetadata('_outlineColor');
   Object.defineProperty(Rule.prototype, '_outlineColor', {
     get: function () {
-      return this._outlineColor_jwmd8i$_0.getValue_4hb8sp$(this, new Kotlin.PropertyMetadata('_outlineColor'));
+      return this._outlineColor_jwmd8i$_0.getValue_4hb8sp$(this, Rule$_outlineColor_metadata);
     },
     set: function (_outlineColor) {
-      this._outlineColor_jwmd8i$_0.setValue_8ibblj$(this, new Kotlin.PropertyMetadata('_outlineColor'), _outlineColor);
+      this._outlineColor_jwmd8i$_0.setValue_8ibblj$(this, Rule$_outlineColor_metadata, _outlineColor);
     }
   });
+  var Rule$_outlineOffset_metadata = new PropertyMetadata('_outlineOffset');
   Object.defineProperty(Rule.prototype, '_outlineOffset', {
     get: function () {
-      return this._outlineOffset_7j55wc$_0.getValue_4hb8sp$(this, new Kotlin.PropertyMetadata('_outlineOffset'));
+      return this._outlineOffset_7j55wc$_0.getValue_4hb8sp$(this, Rule$_outlineOffset_metadata);
     },
     set: function (_outlineOffset) {
-      this._outlineOffset_7j55wc$_0.setValue_8ibblj$(this, new Kotlin.PropertyMetadata('_outlineOffset'), _outlineOffset);
+      this._outlineOffset_7j55wc$_0.setValue_8ibblj$(this, Rule$_outlineOffset_metadata, _outlineOffset);
     }
   });
+  var Rule$_outlineStyle_metadata = new PropertyMetadata('_outlineStyle');
   Object.defineProperty(Rule.prototype, '_outlineStyle', {
     get: function () {
-      return this._outlineStyle_rkbit0$_0.getValue_4hb8sp$(this, new Kotlin.PropertyMetadata('_outlineStyle'));
+      return this._outlineStyle_rkbit0$_0.getValue_4hb8sp$(this, Rule$_outlineStyle_metadata);
     },
     set: function (_outlineStyle) {
-      this._outlineStyle_rkbit0$_0.setValue_8ibblj$(this, new Kotlin.PropertyMetadata('_outlineStyle'), _outlineStyle);
+      this._outlineStyle_rkbit0$_0.setValue_8ibblj$(this, Rule$_outlineStyle_metadata, _outlineStyle);
     }
   });
+  var Rule$_outlineWidth_metadata = new PropertyMetadata('_outlineWidth');
   Object.defineProperty(Rule.prototype, '_outlineWidth', {
     get: function () {
-      return this._outlineWidth_ta314v$_0.getValue_4hb8sp$(this, new Kotlin.PropertyMetadata('_outlineWidth'));
+      return this._outlineWidth_ta314v$_0.getValue_4hb8sp$(this, Rule$_outlineWidth_metadata);
     },
     set: function (_outlineWidth) {
-      this._outlineWidth_ta314v$_0.setValue_8ibblj$(this, new Kotlin.PropertyMetadata('_outlineWidth'), _outlineWidth);
+      this._outlineWidth_ta314v$_0.setValue_8ibblj$(this, Rule$_outlineWidth_metadata, _outlineWidth);
     }
   });
+  var Rule$_overflowWrap_metadata = new PropertyMetadata('_overflowWrap');
   Object.defineProperty(Rule.prototype, '_overflowWrap', {
     get: function () {
-      return this._overflowWrap_c3n3xz$_0.getValue_4hb8sp$(this, new Kotlin.PropertyMetadata('_overflowWrap'));
+      return this._overflowWrap_c3n3xz$_0.getValue_4hb8sp$(this, Rule$_overflowWrap_metadata);
     },
     set: function (_overflowWrap) {
-      this._overflowWrap_c3n3xz$_0.setValue_8ibblj$(this, new Kotlin.PropertyMetadata('_overflowWrap'), _overflowWrap);
+      this._overflowWrap_c3n3xz$_0.setValue_8ibblj$(this, Rule$_overflowWrap_metadata, _overflowWrap);
     }
   });
+  var Rule$_overflowX_metadata = new PropertyMetadata('_overflowX');
   Object.defineProperty(Rule.prototype, '_overflowX', {
     get: function () {
-      return this._overflowX_mustb9$_0.getValue_4hb8sp$(this, new Kotlin.PropertyMetadata('_overflowX'));
+      return this._overflowX_mustb9$_0.getValue_4hb8sp$(this, Rule$_overflowX_metadata);
     },
     set: function (_overflowX) {
-      this._overflowX_mustb9$_0.setValue_8ibblj$(this, new Kotlin.PropertyMetadata('_overflowX'), _overflowX);
+      this._overflowX_mustb9$_0.setValue_8ibblj$(this, Rule$_overflowX_metadata, _overflowX);
     }
   });
+  var Rule$_overflowY_metadata = new PropertyMetadata('_overflowY');
   Object.defineProperty(Rule.prototype, '_overflowY', {
     get: function () {
-      return this._overflowY_mustae$_0.getValue_4hb8sp$(this, new Kotlin.PropertyMetadata('_overflowY'));
+      return this._overflowY_mustae$_0.getValue_4hb8sp$(this, Rule$_overflowY_metadata);
     },
     set: function (_overflowY) {
-      this._overflowY_mustae$_0.setValue_8ibblj$(this, new Kotlin.PropertyMetadata('_overflowY'), _overflowY);
+      this._overflowY_mustae$_0.setValue_8ibblj$(this, Rule$_overflowY_metadata, _overflowY);
     }
   });
+  var Rule$_padding_metadata = new PropertyMetadata('_padding');
   Object.defineProperty(Rule.prototype, '_padding', {
     get: function () {
-      return this._padding_k5wukg$_0.getValue_4hb8sp$(this, new Kotlin.PropertyMetadata('_padding'));
+      return this._padding_k5wukg$_0.getValue_4hb8sp$(this, Rule$_padding_metadata);
     },
     set: function (_padding) {
-      this._padding_k5wukg$_0.setValue_8ibblj$(this, new Kotlin.PropertyMetadata('_padding'), _padding);
+      this._padding_k5wukg$_0.setValue_8ibblj$(this, Rule$_padding_metadata, _padding);
     }
   });
+  var Rule$_paddingBottom_metadata = new PropertyMetadata('_paddingBottom');
   Object.defineProperty(Rule.prototype, '_paddingBottom', {
     get: function () {
-      return this._paddingBottom_t222fp$_0.getValue_4hb8sp$(this, new Kotlin.PropertyMetadata('_paddingBottom'));
+      return this._paddingBottom_t222fp$_0.getValue_4hb8sp$(this, Rule$_paddingBottom_metadata);
     },
     set: function (_paddingBottom) {
-      this._paddingBottom_t222fp$_0.setValue_8ibblj$(this, new Kotlin.PropertyMetadata('_paddingBottom'), _paddingBottom);
+      this._paddingBottom_t222fp$_0.setValue_8ibblj$(this, Rule$_paddingBottom_metadata, _paddingBottom);
     }
   });
+  var Rule$_paddingLeft_metadata = new PropertyMetadata('_paddingLeft');
   Object.defineProperty(Rule.prototype, '_paddingLeft', {
     get: function () {
-      return this._paddingLeft_776os9$_0.getValue_4hb8sp$(this, new Kotlin.PropertyMetadata('_paddingLeft'));
+      return this._paddingLeft_776os9$_0.getValue_4hb8sp$(this, Rule$_paddingLeft_metadata);
     },
     set: function (_paddingLeft) {
-      this._paddingLeft_776os9$_0.setValue_8ibblj$(this, new Kotlin.PropertyMetadata('_paddingLeft'), _paddingLeft);
+      this._paddingLeft_776os9$_0.setValue_8ibblj$(this, Rule$_paddingLeft_metadata, _paddingLeft);
     }
   });
+  var Rule$_paddingRight_metadata = new PropertyMetadata('_paddingRight');
   Object.defineProperty(Rule.prototype, '_paddingRight', {
     get: function () {
-      return this._paddingRight_czwins$_0.getValue_4hb8sp$(this, new Kotlin.PropertyMetadata('_paddingRight'));
+      return this._paddingRight_czwins$_0.getValue_4hb8sp$(this, Rule$_paddingRight_metadata);
     },
     set: function (_paddingRight) {
-      this._paddingRight_czwins$_0.setValue_8ibblj$(this, new Kotlin.PropertyMetadata('_paddingRight'), _paddingRight);
+      this._paddingRight_czwins$_0.setValue_8ibblj$(this, Rule$_paddingRight_metadata, _paddingRight);
     }
   });
+  var Rule$_paddingTop_metadata = new PropertyMetadata('_paddingTop');
   Object.defineProperty(Rule.prototype, '_paddingTop', {
     get: function () {
-      return this._paddingTop_4cgsgx$_0.getValue_4hb8sp$(this, new Kotlin.PropertyMetadata('_paddingTop'));
+      return this._paddingTop_4cgsgx$_0.getValue_4hb8sp$(this, Rule$_paddingTop_metadata);
     },
     set: function (_paddingTop) {
-      this._paddingTop_4cgsgx$_0.setValue_8ibblj$(this, new Kotlin.PropertyMetadata('_paddingTop'), _paddingTop);
+      this._paddingTop_4cgsgx$_0.setValue_8ibblj$(this, Rule$_paddingTop_metadata, _paddingTop);
     }
   });
+  var Rule$_pageBreakAfter_metadata = new PropertyMetadata('_pageBreakAfter');
   Object.defineProperty(Rule.prototype, '_pageBreakAfter', {
     get: function () {
-      return this._pageBreakAfter_7oh6p5$_0.getValue_4hb8sp$(this, new Kotlin.PropertyMetadata('_pageBreakAfter'));
+      return this._pageBreakAfter_7oh6p5$_0.getValue_4hb8sp$(this, Rule$_pageBreakAfter_metadata);
     },
     set: function (_pageBreakAfter) {
-      this._pageBreakAfter_7oh6p5$_0.setValue_8ibblj$(this, new Kotlin.PropertyMetadata('_pageBreakAfter'), _pageBreakAfter);
+      this._pageBreakAfter_7oh6p5$_0.setValue_8ibblj$(this, Rule$_pageBreakAfter_metadata, _pageBreakAfter);
     }
   });
+  var Rule$_pageBreakBefore_metadata = new PropertyMetadata('_pageBreakBefore');
   Object.defineProperty(Rule.prototype, '_pageBreakBefore', {
     get: function () {
-      return this._pageBreakBefore_azmn9a$_0.getValue_4hb8sp$(this, new Kotlin.PropertyMetadata('_pageBreakBefore'));
+      return this._pageBreakBefore_azmn9a$_0.getValue_4hb8sp$(this, Rule$_pageBreakBefore_metadata);
     },
     set: function (_pageBreakBefore) {
-      this._pageBreakBefore_azmn9a$_0.setValue_8ibblj$(this, new Kotlin.PropertyMetadata('_pageBreakBefore'), _pageBreakBefore);
+      this._pageBreakBefore_azmn9a$_0.setValue_8ibblj$(this, Rule$_pageBreakBefore_metadata, _pageBreakBefore);
     }
   });
+  var Rule$_pageBreakInside_metadata = new PropertyMetadata('_pageBreakInside');
   Object.defineProperty(Rule.prototype, '_pageBreakInside', {
     get: function () {
-      return this._pageBreakInside_p6h3ad$_0.getValue_4hb8sp$(this, new Kotlin.PropertyMetadata('_pageBreakInside'));
+      return this._pageBreakInside_p6h3ad$_0.getValue_4hb8sp$(this, Rule$_pageBreakInside_metadata);
     },
     set: function (_pageBreakInside) {
-      this._pageBreakInside_p6h3ad$_0.setValue_8ibblj$(this, new Kotlin.PropertyMetadata('_pageBreakInside'), _pageBreakInside);
+      this._pageBreakInside_p6h3ad$_0.setValue_8ibblj$(this, Rule$_pageBreakInside_metadata, _pageBreakInside);
     }
   });
+  var Rule$_perspective_metadata = new PropertyMetadata('_perspective');
   Object.defineProperty(Rule.prototype, '_perspective', {
     get: function () {
-      return this._perspective_v2okj9$_0.getValue_4hb8sp$(this, new Kotlin.PropertyMetadata('_perspective'));
+      return this._perspective_v2okj9$_0.getValue_4hb8sp$(this, Rule$_perspective_metadata);
     },
     set: function (_perspective) {
-      this._perspective_v2okj9$_0.setValue_8ibblj$(this, new Kotlin.PropertyMetadata('_perspective'), _perspective);
+      this._perspective_v2okj9$_0.setValue_8ibblj$(this, Rule$_perspective_metadata, _perspective);
     }
   });
+  var Rule$_perspectiveOrigin_metadata = new PropertyMetadata('_perspectiveOrigin');
   Object.defineProperty(Rule.prototype, '_perspectiveOrigin', {
     get: function () {
-      return this._perspectiveOrigin_8mlqun$_0.getValue_4hb8sp$(this, new Kotlin.PropertyMetadata('_perspectiveOrigin'));
+      return this._perspectiveOrigin_8mlqun$_0.getValue_4hb8sp$(this, Rule$_perspectiveOrigin_metadata);
     },
     set: function (_perspectiveOrigin) {
-      this._perspectiveOrigin_8mlqun$_0.setValue_8ibblj$(this, new Kotlin.PropertyMetadata('_perspectiveOrigin'), _perspectiveOrigin);
+      this._perspectiveOrigin_8mlqun$_0.setValue_8ibblj$(this, Rule$_perspectiveOrigin_metadata, _perspectiveOrigin);
     }
   });
+  var Rule$_phonemes_metadata = new PropertyMetadata('_phonemes');
   Object.defineProperty(Rule.prototype, '_phonemes', {
     get: function () {
-      return this._phonemes_qx4qom$_0.getValue_4hb8sp$(this, new Kotlin.PropertyMetadata('_phonemes'));
+      return this._phonemes_qx4qom$_0.getValue_4hb8sp$(this, Rule$_phonemes_metadata);
     },
     set: function (_phonemes) {
-      this._phonemes_qx4qom$_0.setValue_8ibblj$(this, new Kotlin.PropertyMetadata('_phonemes'), _phonemes);
+      this._phonemes_qx4qom$_0.setValue_8ibblj$(this, Rule$_phonemes_metadata, _phonemes);
     }
   });
+  var Rule$_position_metadata = new PropertyMetadata('_position');
   Object.defineProperty(Rule.prototype, '_position', {
     get: function () {
-      return this._position_14lfdm$_0.getValue_4hb8sp$(this, new Kotlin.PropertyMetadata('_position'));
+      return this._position_14lfdm$_0.getValue_4hb8sp$(this, Rule$_position_metadata);
     },
     set: function (_position) {
-      this._position_14lfdm$_0.setValue_8ibblj$(this, new Kotlin.PropertyMetadata('_position'), _position);
+      this._position_14lfdm$_0.setValue_8ibblj$(this, Rule$_position_metadata, _position);
     }
   });
+  var Rule$_quotes_metadata = new PropertyMetadata('_quotes');
   Object.defineProperty(Rule.prototype, '_quotes', {
     get: function () {
-      return this._quotes_xlz5f8$_0.getValue_4hb8sp$(this, new Kotlin.PropertyMetadata('_quotes'));
+      return this._quotes_xlz5f8$_0.getValue_4hb8sp$(this, Rule$_quotes_metadata);
     },
     set: function (_quotes) {
-      this._quotes_xlz5f8$_0.setValue_8ibblj$(this, new Kotlin.PropertyMetadata('_quotes'), _quotes);
+      this._quotes_xlz5f8$_0.setValue_8ibblj$(this, Rule$_quotes_metadata, _quotes);
     }
   });
+  var Rule$_resize_metadata = new PropertyMetadata('_resize');
   Object.defineProperty(Rule.prototype, '_resize', {
     get: function () {
-      return this._resize_qga8r5$_0.getValue_4hb8sp$(this, new Kotlin.PropertyMetadata('_resize'));
+      return this._resize_qga8r5$_0.getValue_4hb8sp$(this, Rule$_resize_metadata);
     },
     set: function (_resize) {
-      this._resize_qga8r5$_0.setValue_8ibblj$(this, new Kotlin.PropertyMetadata('_resize'), _resize);
+      this._resize_qga8r5$_0.setValue_8ibblj$(this, Rule$_resize_metadata, _resize);
     }
   });
+  var Rule$_rest_metadata = new PropertyMetadata('_rest');
   Object.defineProperty(Rule.prototype, '_rest', {
     get: function () {
-      return this._rest_63v2a7$_0.getValue_4hb8sp$(this, new Kotlin.PropertyMetadata('_rest'));
+      return this._rest_63v2a7$_0.getValue_4hb8sp$(this, Rule$_rest_metadata);
     },
     set: function (_rest) {
-      this._rest_63v2a7$_0.setValue_8ibblj$(this, new Kotlin.PropertyMetadata('_rest'), _rest);
+      this._rest_63v2a7$_0.setValue_8ibblj$(this, Rule$_rest_metadata, _rest);
     }
   });
+  var Rule$_restAfter_metadata = new PropertyMetadata('_restAfter');
   Object.defineProperty(Rule.prototype, '_restAfter', {
     get: function () {
-      return this._restAfter_wkpsl3$_0.getValue_4hb8sp$(this, new Kotlin.PropertyMetadata('_restAfter'));
+      return this._restAfter_wkpsl3$_0.getValue_4hb8sp$(this, Rule$_restAfter_metadata);
     },
     set: function (_restAfter) {
-      this._restAfter_wkpsl3$_0.setValue_8ibblj$(this, new Kotlin.PropertyMetadata('_restAfter'), _restAfter);
+      this._restAfter_wkpsl3$_0.setValue_8ibblj$(this, Rule$_restAfter_metadata, _restAfter);
     }
   });
+  var Rule$_restBefore_metadata = new PropertyMetadata('_restBefore');
   Object.defineProperty(Rule.prototype, '_restBefore', {
     get: function () {
-      return this._restBefore_1esw1c$_0.getValue_4hb8sp$(this, new Kotlin.PropertyMetadata('_restBefore'));
+      return this._restBefore_1esw1c$_0.getValue_4hb8sp$(this, Rule$_restBefore_metadata);
     },
     set: function (_restBefore) {
-      this._restBefore_1esw1c$_0.setValue_8ibblj$(this, new Kotlin.PropertyMetadata('_restBefore'), _restBefore);
+      this._restBefore_1esw1c$_0.setValue_8ibblj$(this, Rule$_restBefore_metadata, _restBefore);
     }
   });
+  var Rule$_right_metadata = new PropertyMetadata('_right');
   Object.defineProperty(Rule.prototype, '_right', {
     get: function () {
-      return this._right_nplw2z$_0.getValue_4hb8sp$(this, new Kotlin.PropertyMetadata('_right'));
+      return this._right_nplw2z$_0.getValue_4hb8sp$(this, Rule$_right_metadata);
     },
     set: function (_right) {
-      this._right_nplw2z$_0.setValue_8ibblj$(this, new Kotlin.PropertyMetadata('_right'), _right);
+      this._right_nplw2z$_0.setValue_8ibblj$(this, Rule$_right_metadata, _right);
     }
   });
+  var Rule$_tabSize_metadata = new PropertyMetadata('_tabSize');
   Object.defineProperty(Rule.prototype, '_tabSize', {
     get: function () {
-      return this._tabSize_mw1hob$_0.getValue_4hb8sp$(this, new Kotlin.PropertyMetadata('_tabSize'));
+      return this._tabSize_mw1hob$_0.getValue_4hb8sp$(this, Rule$_tabSize_metadata);
     },
     set: function (_tabSize) {
-      this._tabSize_mw1hob$_0.setValue_8ibblj$(this, new Kotlin.PropertyMetadata('_tabSize'), _tabSize);
+      this._tabSize_mw1hob$_0.setValue_8ibblj$(this, Rule$_tabSize_metadata, _tabSize);
     }
   });
+  var Rule$_tableLayout_metadata = new PropertyMetadata('_tableLayout');
   Object.defineProperty(Rule.prototype, '_tableLayout', {
     get: function () {
-      return this._tableLayout_izq0pl$_0.getValue_4hb8sp$(this, new Kotlin.PropertyMetadata('_tableLayout'));
+      return this._tableLayout_izq0pl$_0.getValue_4hb8sp$(this, Rule$_tableLayout_metadata);
     },
     set: function (_tableLayout) {
-      this._tableLayout_izq0pl$_0.setValue_8ibblj$(this, new Kotlin.PropertyMetadata('_tableLayout'), _tableLayout);
+      this._tableLayout_izq0pl$_0.setValue_8ibblj$(this, Rule$_tableLayout_metadata, _tableLayout);
     }
   });
+  var Rule$_textAlign_metadata = new PropertyMetadata('_textAlign');
   Object.defineProperty(Rule.prototype, '_textAlign', {
     get: function () {
-      return this._textAlign_y3ed95$_0.getValue_4hb8sp$(this, new Kotlin.PropertyMetadata('_textAlign'));
+      return this._textAlign_y3ed95$_0.getValue_4hb8sp$(this, Rule$_textAlign_metadata);
     },
     set: function (_textAlign) {
-      this._textAlign_y3ed95$_0.setValue_8ibblj$(this, new Kotlin.PropertyMetadata('_textAlign'), _textAlign);
+      this._textAlign_y3ed95$_0.setValue_8ibblj$(this, Rule$_textAlign_metadata, _textAlign);
     }
   });
+  var Rule$_textAlignLast_metadata = new PropertyMetadata('_textAlignLast');
   Object.defineProperty(Rule.prototype, '_textAlignLast', {
     get: function () {
-      return this._textAlignLast_mc67z1$_0.getValue_4hb8sp$(this, new Kotlin.PropertyMetadata('_textAlignLast'));
+      return this._textAlignLast_mc67z1$_0.getValue_4hb8sp$(this, Rule$_textAlignLast_metadata);
     },
     set: function (_textAlignLast) {
-      this._textAlignLast_mc67z1$_0.setValue_8ibblj$(this, new Kotlin.PropertyMetadata('_textAlignLast'), _textAlignLast);
+      this._textAlignLast_mc67z1$_0.setValue_8ibblj$(this, Rule$_textAlignLast_metadata, _textAlignLast);
     }
   });
+  var Rule$_textCombineUpright_metadata = new PropertyMetadata('_textCombineUpright');
   Object.defineProperty(Rule.prototype, '_textCombineUpright', {
     get: function () {
-      return this._textCombineUpright_5f9jo$_0.getValue_4hb8sp$(this, new Kotlin.PropertyMetadata('_textCombineUpright'));
+      return this._textCombineUpright_5f9jo$_0.getValue_4hb8sp$(this, Rule$_textCombineUpright_metadata);
     },
     set: function (_textCombineUpright) {
-      this._textCombineUpright_5f9jo$_0.setValue_8ibblj$(this, new Kotlin.PropertyMetadata('_textCombineUpright'), _textCombineUpright);
+      this._textCombineUpright_5f9jo$_0.setValue_8ibblj$(this, Rule$_textCombineUpright_metadata, _textCombineUpright);
     }
   });
+  var Rule$_textDecoration_metadata = new PropertyMetadata('_textDecoration');
   Object.defineProperty(Rule.prototype, '_textDecoration', {
     get: function () {
-      return this._textDecoration_43z612$_0.getValue_4hb8sp$(this, new Kotlin.PropertyMetadata('_textDecoration'));
+      return this._textDecoration_43z612$_0.getValue_4hb8sp$(this, Rule$_textDecoration_metadata);
     },
     set: function (_textDecoration) {
-      this._textDecoration_43z612$_0.setValue_8ibblj$(this, new Kotlin.PropertyMetadata('_textDecoration'), _textDecoration);
+      this._textDecoration_43z612$_0.setValue_8ibblj$(this, Rule$_textDecoration_metadata, _textDecoration);
     }
   });
+  var Rule$_textDecorationColor_metadata = new PropertyMetadata('_textDecorationColor');
   Object.defineProperty(Rule.prototype, '_textDecorationColor', {
     get: function () {
-      return this._textDecorationColor_ar9iyd$_0.getValue_4hb8sp$(this, new Kotlin.PropertyMetadata('_textDecorationColor'));
+      return this._textDecorationColor_ar9iyd$_0.getValue_4hb8sp$(this, Rule$_textDecorationColor_metadata);
     },
     set: function (_textDecorationColor) {
-      this._textDecorationColor_ar9iyd$_0.setValue_8ibblj$(this, new Kotlin.PropertyMetadata('_textDecorationColor'), _textDecorationColor);
+      this._textDecorationColor_ar9iyd$_0.setValue_8ibblj$(this, Rule$_textDecorationColor_metadata, _textDecorationColor);
     }
   });
+  var Rule$_textDecorationLine_metadata = new PropertyMetadata('_textDecorationLine');
   Object.defineProperty(Rule.prototype, '_textDecorationLine', {
     get: function () {
-      return this._textDecorationLine_7ndji$_0.getValue_4hb8sp$(this, new Kotlin.PropertyMetadata('_textDecorationLine'));
+      return this._textDecorationLine_7ndji$_0.getValue_4hb8sp$(this, Rule$_textDecorationLine_metadata);
     },
     set: function (_textDecorationLine) {
-      this._textDecorationLine_7ndji$_0.setValue_8ibblj$(this, new Kotlin.PropertyMetadata('_textDecorationLine'), _textDecorationLine);
+      this._textDecorationLine_7ndji$_0.setValue_8ibblj$(this, Rule$_textDecorationLine_metadata, _textDecorationLine);
     }
   });
+  var Rule$_textDecorationStyle_metadata = new PropertyMetadata('_textDecorationStyle');
   Object.defineProperty(Rule.prototype, '_textDecorationStyle', {
     get: function () {
-      return this._textDecorationStyle_33kddv$_0.getValue_4hb8sp$(this, new Kotlin.PropertyMetadata('_textDecorationStyle'));
+      return this._textDecorationStyle_33kddv$_0.getValue_4hb8sp$(this, Rule$_textDecorationStyle_metadata);
     },
     set: function (_textDecorationStyle) {
-      this._textDecorationStyle_33kddv$_0.setValue_8ibblj$(this, new Kotlin.PropertyMetadata('_textDecorationStyle'), _textDecorationStyle);
+      this._textDecorationStyle_33kddv$_0.setValue_8ibblj$(this, Rule$_textDecorationStyle_metadata, _textDecorationStyle);
     }
   });
+  var Rule$_textIndent_metadata = new PropertyMetadata('_textIndent');
   Object.defineProperty(Rule.prototype, '_textIndent', {
     get: function () {
-      return this._textIndent_wb27na$_0.getValue_4hb8sp$(this, new Kotlin.PropertyMetadata('_textIndent'));
+      return this._textIndent_wb27na$_0.getValue_4hb8sp$(this, Rule$_textIndent_metadata);
     },
     set: function (_textIndent) {
-      this._textIndent_wb27na$_0.setValue_8ibblj$(this, new Kotlin.PropertyMetadata('_textIndent'), _textIndent);
+      this._textIndent_wb27na$_0.setValue_8ibblj$(this, Rule$_textIndent_metadata, _textIndent);
     }
   });
+  var Rule$_textJustify_metadata = new PropertyMetadata('_textJustify');
   Object.defineProperty(Rule.prototype, '_textJustify', {
     get: function () {
-      return this._textJustify_a9bno2$_0.getValue_4hb8sp$(this, new Kotlin.PropertyMetadata('_textJustify'));
+      return this._textJustify_a9bno2$_0.getValue_4hb8sp$(this, Rule$_textJustify_metadata);
     },
     set: function (_textJustify) {
-      this._textJustify_a9bno2$_0.setValue_8ibblj$(this, new Kotlin.PropertyMetadata('_textJustify'), _textJustify);
+      this._textJustify_a9bno2$_0.setValue_8ibblj$(this, Rule$_textJustify_metadata, _textJustify);
     }
   });
+  var Rule$_textOrientation_metadata = new PropertyMetadata('_textOrientation');
   Object.defineProperty(Rule.prototype, '_textOrientation', {
     get: function () {
-      return this._textOrientation_ecl2aa$_0.getValue_4hb8sp$(this, new Kotlin.PropertyMetadata('_textOrientation'));
+      return this._textOrientation_ecl2aa$_0.getValue_4hb8sp$(this, Rule$_textOrientation_metadata);
     },
     set: function (_textOrientation) {
-      this._textOrientation_ecl2aa$_0.setValue_8ibblj$(this, new Kotlin.PropertyMetadata('_textOrientation'), _textOrientation);
+      this._textOrientation_ecl2aa$_0.setValue_8ibblj$(this, Rule$_textOrientation_metadata, _textOrientation);
     }
   });
+  var Rule$_textOverflow_metadata = new PropertyMetadata('_textOverflow');
   Object.defineProperty(Rule.prototype, '_textOverflow', {
     get: function () {
-      return this._textOverflow_5v5gi4$_0.getValue_4hb8sp$(this, new Kotlin.PropertyMetadata('_textOverflow'));
+      return this._textOverflow_5v5gi4$_0.getValue_4hb8sp$(this, Rule$_textOverflow_metadata);
     },
     set: function (_textOverflow) {
-      this._textOverflow_5v5gi4$_0.setValue_8ibblj$(this, new Kotlin.PropertyMetadata('_textOverflow'), _textOverflow);
+      this._textOverflow_5v5gi4$_0.setValue_8ibblj$(this, Rule$_textOverflow_metadata, _textOverflow);
     }
   });
+  var Rule$_textShadow_metadata = new PropertyMetadata('_textShadow');
   Object.defineProperty(Rule.prototype, '_textShadow', {
     get: function () {
-      return this._textShadow_uh97oq$_0.getValue_4hb8sp$(this, new Kotlin.PropertyMetadata('_textShadow'));
+      return this._textShadow_uh97oq$_0.getValue_4hb8sp$(this, Rule$_textShadow_metadata);
     },
     set: function (_textShadow) {
-      this._textShadow_uh97oq$_0.setValue_8ibblj$(this, new Kotlin.PropertyMetadata('_textShadow'), _textShadow);
+      this._textShadow_uh97oq$_0.setValue_8ibblj$(this, Rule$_textShadow_metadata, _textShadow);
     }
   });
+  var Rule$_textTransform_metadata = new PropertyMetadata('_textTransform');
   Object.defineProperty(Rule.prototype, '_textTransform', {
     get: function () {
-      return this._textTransform_xcpkha$_0.getValue_4hb8sp$(this, new Kotlin.PropertyMetadata('_textTransform'));
+      return this._textTransform_xcpkha$_0.getValue_4hb8sp$(this, Rule$_textTransform_metadata);
     },
     set: function (_textTransform) {
-      this._textTransform_xcpkha$_0.setValue_8ibblj$(this, new Kotlin.PropertyMetadata('_textTransform'), _textTransform);
+      this._textTransform_xcpkha$_0.setValue_8ibblj$(this, Rule$_textTransform_metadata, _textTransform);
     }
   });
+  var Rule$_textUnderlinePosition_metadata = new PropertyMetadata('_textUnderlinePosition');
   Object.defineProperty(Rule.prototype, '_textUnderlinePosition', {
     get: function () {
-      return this._textUnderlinePosition_koe07d$_0.getValue_4hb8sp$(this, new Kotlin.PropertyMetadata('_textUnderlinePosition'));
+      return this._textUnderlinePosition_koe07d$_0.getValue_4hb8sp$(this, Rule$_textUnderlinePosition_metadata);
     },
     set: function (_textUnderlinePosition) {
-      this._textUnderlinePosition_koe07d$_0.setValue_8ibblj$(this, new Kotlin.PropertyMetadata('_textUnderlinePosition'), _textUnderlinePosition);
+      this._textUnderlinePosition_koe07d$_0.setValue_8ibblj$(this, Rule$_textUnderlinePosition_metadata, _textUnderlinePosition);
     }
   });
+  var Rule$_top_metadata = new PropertyMetadata('_top');
   Object.defineProperty(Rule.prototype, '_top', {
     get: function () {
-      return this._top_fua1ok$_0.getValue_4hb8sp$(this, new Kotlin.PropertyMetadata('_top'));
+      return this._top_fua1ok$_0.getValue_4hb8sp$(this, Rule$_top_metadata);
     },
     set: function (_top) {
-      this._top_fua1ok$_0.setValue_8ibblj$(this, new Kotlin.PropertyMetadata('_top'), _top);
+      this._top_fua1ok$_0.setValue_8ibblj$(this, Rule$_top_metadata, _top);
     }
   });
+  var Rule$_transform_metadata = new PropertyMetadata('_transform');
   Object.defineProperty(Rule.prototype, '_transform', {
     get: function () {
-      return this._transform_gg1awr$_0.getValue_4hb8sp$(this, new Kotlin.PropertyMetadata('_transform'));
+      return this._transform_gg1awr$_0.getValue_4hb8sp$(this, Rule$_transform_metadata);
     },
     set: function (_transform) {
-      this._transform_gg1awr$_0.setValue_8ibblj$(this, new Kotlin.PropertyMetadata('_transform'), _transform);
+      this._transform_gg1awr$_0.setValue_8ibblj$(this, Rule$_transform_metadata, _transform);
     }
   });
+  var Rule$_transformOrigin_metadata = new PropertyMetadata('_transformOrigin');
   Object.defineProperty(Rule.prototype, '_transformOrigin', {
     get: function () {
-      return this._transformOrigin_7ge3b5$_0.getValue_4hb8sp$(this, new Kotlin.PropertyMetadata('_transformOrigin'));
+      return this._transformOrigin_7ge3b5$_0.getValue_4hb8sp$(this, Rule$_transformOrigin_metadata);
     },
     set: function (_transformOrigin) {
-      this._transformOrigin_7ge3b5$_0.setValue_8ibblj$(this, new Kotlin.PropertyMetadata('_transformOrigin'), _transformOrigin);
+      this._transformOrigin_7ge3b5$_0.setValue_8ibblj$(this, Rule$_transformOrigin_metadata, _transformOrigin);
     }
   });
+  var Rule$_transformStyle_metadata = new PropertyMetadata('_transformStyle');
   Object.defineProperty(Rule.prototype, '_transformStyle', {
     get: function () {
-      return this._transformStyle_hqbk9q$_0.getValue_4hb8sp$(this, new Kotlin.PropertyMetadata('_transformStyle'));
+      return this._transformStyle_hqbk9q$_0.getValue_4hb8sp$(this, Rule$_transformStyle_metadata);
     },
     set: function (_transformStyle) {
-      this._transformStyle_hqbk9q$_0.setValue_8ibblj$(this, new Kotlin.PropertyMetadata('_transformStyle'), _transformStyle);
+      this._transformStyle_hqbk9q$_0.setValue_8ibblj$(this, Rule$_transformStyle_metadata, _transformStyle);
     }
   });
+  var Rule$_transition_metadata = new PropertyMetadata('_transition');
   Object.defineProperty(Rule.prototype, '_transition', {
     get: function () {
-      return this._transition_b3luc2$_0.getValue_4hb8sp$(this, new Kotlin.PropertyMetadata('_transition'));
+      return this._transition_b3luc2$_0.getValue_4hb8sp$(this, Rule$_transition_metadata);
     },
     set: function (_transition) {
-      this._transition_b3luc2$_0.setValue_8ibblj$(this, new Kotlin.PropertyMetadata('_transition'), _transition);
+      this._transition_b3luc2$_0.setValue_8ibblj$(this, Rule$_transition_metadata, _transition);
     }
   });
+  var Rule$_transitionDelay_metadata = new PropertyMetadata('_transitionDelay');
   Object.defineProperty(Rule.prototype, '_transitionDelay', {
     get: function () {
-      return this._transitionDelay_7pe283$_0.getValue_4hb8sp$(this, new Kotlin.PropertyMetadata('_transitionDelay'));
+      return this._transitionDelay_7pe283$_0.getValue_4hb8sp$(this, Rule$_transitionDelay_metadata);
     },
     set: function (_transitionDelay) {
-      this._transitionDelay_7pe283$_0.setValue_8ibblj$(this, new Kotlin.PropertyMetadata('_transitionDelay'), _transitionDelay);
+      this._transitionDelay_7pe283$_0.setValue_8ibblj$(this, Rule$_transitionDelay_metadata, _transitionDelay);
     }
   });
+  var Rule$_transitionDuration_metadata = new PropertyMetadata('_transitionDuration');
   Object.defineProperty(Rule.prototype, '_transitionDuration', {
     get: function () {
-      return this._transitionDuration_si7tve$_0.getValue_4hb8sp$(this, new Kotlin.PropertyMetadata('_transitionDuration'));
+      return this._transitionDuration_si7tve$_0.getValue_4hb8sp$(this, Rule$_transitionDuration_metadata);
     },
     set: function (_transitionDuration) {
-      this._transitionDuration_si7tve$_0.setValue_8ibblj$(this, new Kotlin.PropertyMetadata('_transitionDuration'), _transitionDuration);
+      this._transitionDuration_si7tve$_0.setValue_8ibblj$(this, Rule$_transitionDuration_metadata, _transitionDuration);
     }
   });
+  var Rule$_transitionProperty_metadata = new PropertyMetadata('_transitionProperty');
   Object.defineProperty(Rule.prototype, '_transitionProperty', {
     get: function () {
-      return this._transitionProperty_rmx3qf$_0.getValue_4hb8sp$(this, new Kotlin.PropertyMetadata('_transitionProperty'));
+      return this._transitionProperty_rmx3qf$_0.getValue_4hb8sp$(this, Rule$_transitionProperty_metadata);
     },
     set: function (_transitionProperty) {
-      this._transitionProperty_rmx3qf$_0.setValue_8ibblj$(this, new Kotlin.PropertyMetadata('_transitionProperty'), _transitionProperty);
+      this._transitionProperty_rmx3qf$_0.setValue_8ibblj$(this, Rule$_transitionProperty_metadata, _transitionProperty);
     }
   });
+  var Rule$_transitionTimingFunction_metadata = new PropertyMetadata('_transitionTimingFunction');
   Object.defineProperty(Rule.prototype, '_transitionTimingFunction', {
     get: function () {
-      return this._transitionTimingFunction_xfkhzg$_0.getValue_4hb8sp$(this, new Kotlin.PropertyMetadata('_transitionTimingFunction'));
+      return this._transitionTimingFunction_xfkhzg$_0.getValue_4hb8sp$(this, Rule$_transitionTimingFunction_metadata);
     },
     set: function (_transitionTimingFunction) {
-      this._transitionTimingFunction_xfkhzg$_0.setValue_8ibblj$(this, new Kotlin.PropertyMetadata('_transitionTimingFunction'), _transitionTimingFunction);
+      this._transitionTimingFunction_xfkhzg$_0.setValue_8ibblj$(this, Rule$_transitionTimingFunction_metadata, _transitionTimingFunction);
     }
   });
+  var Rule$_unicodeBidi_metadata = new PropertyMetadata('_unicodeBidi');
   Object.defineProperty(Rule.prototype, '_unicodeBidi', {
     get: function () {
-      return this._unicodeBidi_pe86dk$_0.getValue_4hb8sp$(this, new Kotlin.PropertyMetadata('_unicodeBidi'));
+      return this._unicodeBidi_pe86dk$_0.getValue_4hb8sp$(this, Rule$_unicodeBidi_metadata);
     },
     set: function (_unicodeBidi) {
-      this._unicodeBidi_pe86dk$_0.setValue_8ibblj$(this, new Kotlin.PropertyMetadata('_unicodeBidi'), _unicodeBidi);
+      this._unicodeBidi_pe86dk$_0.setValue_8ibblj$(this, Rule$_unicodeBidi_metadata, _unicodeBidi);
     }
   });
+  var Rule$_verticalAlign_metadata = new PropertyMetadata('_verticalAlign');
   Object.defineProperty(Rule.prototype, '_verticalAlign', {
     get: function () {
-      return this._verticalAlign_jtfm1q$_0.getValue_4hb8sp$(this, new Kotlin.PropertyMetadata('_verticalAlign'));
+      return this._verticalAlign_jtfm1q$_0.getValue_4hb8sp$(this, Rule$_verticalAlign_metadata);
     },
     set: function (_verticalAlign) {
-      this._verticalAlign_jtfm1q$_0.setValue_8ibblj$(this, new Kotlin.PropertyMetadata('_verticalAlign'), _verticalAlign);
+      this._verticalAlign_jtfm1q$_0.setValue_8ibblj$(this, Rule$_verticalAlign_metadata, _verticalAlign);
     }
   });
+  var Rule$_visibility_metadata = new PropertyMetadata('_visibility');
   Object.defineProperty(Rule.prototype, '_visibility', {
     get: function () {
-      return this._visibility_lbyz9t$_0.getValue_4hb8sp$(this, new Kotlin.PropertyMetadata('_visibility'));
+      return this._visibility_lbyz9t$_0.getValue_4hb8sp$(this, Rule$_visibility_metadata);
     },
     set: function (_visibility) {
-      this._visibility_lbyz9t$_0.setValue_8ibblj$(this, new Kotlin.PropertyMetadata('_visibility'), _visibility);
+      this._visibility_lbyz9t$_0.setValue_8ibblj$(this, Rule$_visibility_metadata, _visibility);
     }
   });
+  var Rule$_voiceBalance_metadata = new PropertyMetadata('_voiceBalance');
   Object.defineProperty(Rule.prototype, '_voiceBalance', {
     get: function () {
-      return this._voiceBalance_6hxhev$_0.getValue_4hb8sp$(this, new Kotlin.PropertyMetadata('_voiceBalance'));
+      return this._voiceBalance_6hxhev$_0.getValue_4hb8sp$(this, Rule$_voiceBalance_metadata);
     },
     set: function (_voiceBalance) {
-      this._voiceBalance_6hxhev$_0.setValue_8ibblj$(this, new Kotlin.PropertyMetadata('_voiceBalance'), _voiceBalance);
+      this._voiceBalance_6hxhev$_0.setValue_8ibblj$(this, Rule$_voiceBalance_metadata, _voiceBalance);
     }
   });
+  var Rule$_voiceDuration_metadata = new PropertyMetadata('_voiceDuration');
   Object.defineProperty(Rule.prototype, '_voiceDuration', {
     get: function () {
-      return this._voiceDuration_msgchh$_0.getValue_4hb8sp$(this, new Kotlin.PropertyMetadata('_voiceDuration'));
+      return this._voiceDuration_msgchh$_0.getValue_4hb8sp$(this, Rule$_voiceDuration_metadata);
     },
     set: function (_voiceDuration) {
-      this._voiceDuration_msgchh$_0.setValue_8ibblj$(this, new Kotlin.PropertyMetadata('_voiceDuration'), _voiceDuration);
+      this._voiceDuration_msgchh$_0.setValue_8ibblj$(this, Rule$_voiceDuration_metadata, _voiceDuration);
     }
   });
+  var Rule$_voicePitch_metadata = new PropertyMetadata('_voicePitch');
   Object.defineProperty(Rule.prototype, '_voicePitch', {
     get: function () {
-      return this._voicePitch_hwq0z9$_0.getValue_4hb8sp$(this, new Kotlin.PropertyMetadata('_voicePitch'));
+      return this._voicePitch_hwq0z9$_0.getValue_4hb8sp$(this, Rule$_voicePitch_metadata);
     },
     set: function (_voicePitch) {
-      this._voicePitch_hwq0z9$_0.setValue_8ibblj$(this, new Kotlin.PropertyMetadata('_voicePitch'), _voicePitch);
+      this._voicePitch_hwq0z9$_0.setValue_8ibblj$(this, Rule$_voicePitch_metadata, _voicePitch);
     }
   });
+  var Rule$_voicePitchRange_metadata = new PropertyMetadata('_voicePitchRange');
   Object.defineProperty(Rule.prototype, '_voicePitchRange', {
     get: function () {
-      return this._voicePitchRange_xtn6vy$_0.getValue_4hb8sp$(this, new Kotlin.PropertyMetadata('_voicePitchRange'));
+      return this._voicePitchRange_xtn6vy$_0.getValue_4hb8sp$(this, Rule$_voicePitchRange_metadata);
     },
     set: function (_voicePitchRange) {
-      this._voicePitchRange_xtn6vy$_0.setValue_8ibblj$(this, new Kotlin.PropertyMetadata('_voicePitchRange'), _voicePitchRange);
+      this._voicePitchRange_xtn6vy$_0.setValue_8ibblj$(this, Rule$_voicePitchRange_metadata, _voicePitchRange);
     }
   });
+  var Rule$_voiceRate_metadata = new PropertyMetadata('_voiceRate');
   Object.defineProperty(Rule.prototype, '_voiceRate', {
     get: function () {
-      return this._voiceRate_d563y9$_0.getValue_4hb8sp$(this, new Kotlin.PropertyMetadata('_voiceRate'));
+      return this._voiceRate_d563y9$_0.getValue_4hb8sp$(this, Rule$_voiceRate_metadata);
     },
     set: function (_voiceRate) {
-      this._voiceRate_d563y9$_0.setValue_8ibblj$(this, new Kotlin.PropertyMetadata('_voiceRate'), _voiceRate);
+      this._voiceRate_d563y9$_0.setValue_8ibblj$(this, Rule$_voiceRate_metadata, _voiceRate);
     }
   });
+  var Rule$_voiceStress_metadata = new PropertyMetadata('_voiceStress');
   Object.defineProperty(Rule.prototype, '_voiceStress', {
     get: function () {
-      return this._voiceStress_yvz02d$_0.getValue_4hb8sp$(this, new Kotlin.PropertyMetadata('_voiceStress'));
+      return this._voiceStress_yvz02d$_0.getValue_4hb8sp$(this, Rule$_voiceStress_metadata);
     },
     set: function (_voiceStress) {
-      this._voiceStress_yvz02d$_0.setValue_8ibblj$(this, new Kotlin.PropertyMetadata('_voiceStress'), _voiceStress);
+      this._voiceStress_yvz02d$_0.setValue_8ibblj$(this, Rule$_voiceStress_metadata, _voiceStress);
     }
   });
+  var Rule$_voiceVolume_metadata = new PropertyMetadata('_voiceVolume');
   Object.defineProperty(Rule.prototype, '_voiceVolume', {
     get: function () {
-      return this._voiceVolume_6oz22t$_0.getValue_4hb8sp$(this, new Kotlin.PropertyMetadata('_voiceVolume'));
+      return this._voiceVolume_6oz22t$_0.getValue_4hb8sp$(this, Rule$_voiceVolume_metadata);
     },
     set: function (_voiceVolume) {
-      this._voiceVolume_6oz22t$_0.setValue_8ibblj$(this, new Kotlin.PropertyMetadata('_voiceVolume'), _voiceVolume);
+      this._voiceVolume_6oz22t$_0.setValue_8ibblj$(this, Rule$_voiceVolume_metadata, _voiceVolume);
     }
   });
+  var Rule$_whiteSpace_metadata = new PropertyMetadata('_whiteSpace');
   Object.defineProperty(Rule.prototype, '_whiteSpace', {
     get: function () {
-      return this._whiteSpace_58bup2$_0.getValue_4hb8sp$(this, new Kotlin.PropertyMetadata('_whiteSpace'));
+      return this._whiteSpace_58bup2$_0.getValue_4hb8sp$(this, Rule$_whiteSpace_metadata);
     },
     set: function (_whiteSpace) {
-      this._whiteSpace_58bup2$_0.setValue_8ibblj$(this, new Kotlin.PropertyMetadata('_whiteSpace'), _whiteSpace);
+      this._whiteSpace_58bup2$_0.setValue_8ibblj$(this, Rule$_whiteSpace_metadata, _whiteSpace);
     }
   });
+  var Rule$_widows_metadata = new PropertyMetadata('_widows');
   Object.defineProperty(Rule.prototype, '_widows', {
     get: function () {
-      return this._widows_mfdiwm$_0.getValue_4hb8sp$(this, new Kotlin.PropertyMetadata('_widows'));
+      return this._widows_mfdiwm$_0.getValue_4hb8sp$(this, Rule$_widows_metadata);
     },
     set: function (_widows) {
-      this._widows_mfdiwm$_0.setValue_8ibblj$(this, new Kotlin.PropertyMetadata('_widows'), _widows);
+      this._widows_mfdiwm$_0.setValue_8ibblj$(this, Rule$_widows_metadata, _widows);
     }
   });
+  var Rule$_width_metadata = new PropertyMetadata('_width');
   Object.defineProperty(Rule.prototype, '_width', {
     get: function () {
-      return this._width_lcfggl$_0.getValue_4hb8sp$(this, new Kotlin.PropertyMetadata('_width'));
+      return this._width_lcfggl$_0.getValue_4hb8sp$(this, Rule$_width_metadata);
     },
     set: function (_width) {
-      this._width_lcfggl$_0.setValue_8ibblj$(this, new Kotlin.PropertyMetadata('_width'), _width);
+      this._width_lcfggl$_0.setValue_8ibblj$(this, Rule$_width_metadata, _width);
     }
   });
+  var Rule$_wordBreak_metadata = new PropertyMetadata('_wordBreak');
   Object.defineProperty(Rule.prototype, '_wordBreak', {
     get: function () {
-      return this._wordBreak_sil4ak$_0.getValue_4hb8sp$(this, new Kotlin.PropertyMetadata('_wordBreak'));
+      return this._wordBreak_sil4ak$_0.getValue_4hb8sp$(this, Rule$_wordBreak_metadata);
     },
     set: function (_wordBreak) {
-      this._wordBreak_sil4ak$_0.setValue_8ibblj$(this, new Kotlin.PropertyMetadata('_wordBreak'), _wordBreak);
+      this._wordBreak_sil4ak$_0.setValue_8ibblj$(this, Rule$_wordBreak_metadata, _wordBreak);
     }
   });
+  var Rule$_wordSpacing_metadata = new PropertyMetadata('_wordSpacing');
   Object.defineProperty(Rule.prototype, '_wordSpacing', {
     get: function () {
-      return this._wordSpacing_itcjqw$_0.getValue_4hb8sp$(this, new Kotlin.PropertyMetadata('_wordSpacing'));
+      return this._wordSpacing_itcjqw$_0.getValue_4hb8sp$(this, Rule$_wordSpacing_metadata);
     },
     set: function (_wordSpacing) {
-      this._wordSpacing_itcjqw$_0.setValue_8ibblj$(this, new Kotlin.PropertyMetadata('_wordSpacing'), _wordSpacing);
+      this._wordSpacing_itcjqw$_0.setValue_8ibblj$(this, Rule$_wordSpacing_metadata, _wordSpacing);
     }
   });
+  var Rule$_wordWrap_metadata = new PropertyMetadata('_wordWrap');
   Object.defineProperty(Rule.prototype, '_wordWrap', {
     get: function () {
-      return this._wordWrap_ci9j2p$_0.getValue_4hb8sp$(this, new Kotlin.PropertyMetadata('_wordWrap'));
+      return this._wordWrap_ci9j2p$_0.getValue_4hb8sp$(this, Rule$_wordWrap_metadata);
     },
     set: function (_wordWrap) {
-      this._wordWrap_ci9j2p$_0.setValue_8ibblj$(this, new Kotlin.PropertyMetadata('_wordWrap'), _wordWrap);
+      this._wordWrap_ci9j2p$_0.setValue_8ibblj$(this, Rule$_wordWrap_metadata, _wordWrap);
     }
   });
+  var Rule$_writingMode_metadata = new PropertyMetadata('_writingMode');
   Object.defineProperty(Rule.prototype, '_writingMode', {
     get: function () {
-      return this._writingMode_gv2vaq$_0.getValue_4hb8sp$(this, new Kotlin.PropertyMetadata('_writingMode'));
+      return this._writingMode_gv2vaq$_0.getValue_4hb8sp$(this, Rule$_writingMode_metadata);
     },
     set: function (_writingMode) {
-      this._writingMode_gv2vaq$_0.setValue_8ibblj$(this, new Kotlin.PropertyMetadata('_writingMode'), _writingMode);
+      this._writingMode_gv2vaq$_0.setValue_8ibblj$(this, Rule$_writingMode_metadata, _writingMode);
     }
   });
+  var Rule$_zIndex_metadata = new PropertyMetadata('_zIndex');
   Object.defineProperty(Rule.prototype, '_zIndex', {
     get: function () {
-      return this._zIndex_6lnyzv$_0.getValue_4hb8sp$(this, new Kotlin.PropertyMetadata('_zIndex'));
+      return this._zIndex_6lnyzv$_0.getValue_4hb8sp$(this, Rule$_zIndex_metadata);
     },
     set: function (_zIndex) {
-      this._zIndex_6lnyzv$_0.setValue_8ibblj$(this, new Kotlin.PropertyMetadata('_zIndex'), _zIndex);
+      this._zIndex_6lnyzv$_0.setValue_8ibblj$(this, Rule$_zIndex_metadata, _zIndex);
     }
   });
   function Rule$Property($outer, name) {
@@ -9003,7 +9393,7 @@ var elements = function (_, Kotlin) {
     }
   };
   Rule$Property.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     simpleName: 'Property',
     interfaces: []
   };
@@ -9033,7 +9423,7 @@ var elements = function (_, Kotlin) {
     }
   };
   Rule$NullableProperty.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     simpleName: 'NullableProperty',
     interfaces: []
   };
@@ -9041,7 +9431,7 @@ var elements = function (_, Kotlin) {
     return camelsToDashes(prop.callableName.substring(1));
   };
   Rule.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     simpleName: 'Rule',
     interfaces: []
   };
@@ -9052,7 +9442,7 @@ var elements = function (_, Kotlin) {
     return Rule.prototype.cssText_zbbjui$.call(this, this.selector);
   };
   TypeRule.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     simpleName: 'TypeRule',
     interfaces: [Rule]
   };
@@ -9068,7 +9458,7 @@ var elements = function (_, Kotlin) {
     return TypedRule.prototype.cssText_zbbjui$.call(this, this.selector);
   };
   TypedClassRule.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     simpleName: 'TypedClassRule',
     interfaces: [TypedRule]
   };
@@ -9081,71 +9471,77 @@ var elements = function (_, Kotlin) {
     this.height_fw0bpd$_0 = new TypedRule$DimensionDelegate();
     this.width_ul4co6$_0 = new TypedRule$DimensionDelegate();
   }
+  var TypedRule$display_metadata = new PropertyMetadata('display');
   Object.defineProperty(TypedRule.prototype, 'display', {
     get: function () {
-      return this.display_eo5kbu$_0.getValue_lrcp0p$(this, new Kotlin.PropertyMetadata('display'));
+      return this.display_eo5kbu$_0.getValue_lrcp0p$(this, TypedRule$display_metadata);
     },
     set: function (display) {
-      this.display_eo5kbu$_0.setValue_9rddgb$(this, new Kotlin.PropertyMetadata('display'), display);
+      this.display_eo5kbu$_0.setValue_9rddgb$(this, TypedRule$display_metadata, display);
     }
   });
+  var TypedRule$flexDirection_metadata = new PropertyMetadata('flexDirection');
   Object.defineProperty(TypedRule.prototype, 'flexDirection', {
     get: function () {
-      return this.flexDirection_7vyuli$_0.getValue_lrcp0p$(this, new Kotlin.PropertyMetadata('flexDirection'));
+      return this.flexDirection_7vyuli$_0.getValue_lrcp0p$(this, TypedRule$flexDirection_metadata);
     },
     set: function (flexDirection) {
-      this.flexDirection_7vyuli$_0.setValue_9rddgb$(this, new Kotlin.PropertyMetadata('flexDirection'), flexDirection);
+      this.flexDirection_7vyuli$_0.setValue_9rddgb$(this, TypedRule$flexDirection_metadata, flexDirection);
     }
   });
+  var TypedRule$alignItems_metadata = new PropertyMetadata('alignItems');
   Object.defineProperty(TypedRule.prototype, 'alignItems', {
     get: function () {
-      return this.alignItems_47j225$_0.getValue_lrcp0p$(this, new Kotlin.PropertyMetadata('alignItems'));
+      return this.alignItems_47j225$_0.getValue_lrcp0p$(this, TypedRule$alignItems_metadata);
     },
     set: function (alignItems) {
-      this.alignItems_47j225$_0.setValue_9rddgb$(this, new Kotlin.PropertyMetadata('alignItems'), alignItems);
+      this.alignItems_47j225$_0.setValue_9rddgb$(this, TypedRule$alignItems_metadata, alignItems);
     }
   });
+  var TypedRule$backgroundColor_metadata = new PropertyMetadata('backgroundColor');
   Object.defineProperty(TypedRule.prototype, 'backgroundColor', {
     get: function () {
-      return this.backgroundColor_3o7hiv$_0.getValue_lrcp0p$(this, new Kotlin.PropertyMetadata('backgroundColor'));
+      return this.backgroundColor_3o7hiv$_0.getValue_lrcp0p$(this, TypedRule$backgroundColor_metadata);
     },
     set: function (backgroundColor) {
-      this.backgroundColor_3o7hiv$_0.setValue_9rddgb$(this, new Kotlin.PropertyMetadata('backgroundColor'), backgroundColor);
+      this.backgroundColor_3o7hiv$_0.setValue_9rddgb$(this, TypedRule$backgroundColor_metadata, backgroundColor);
     }
   });
+  var TypedRule$height_metadata = new PropertyMetadata('height');
   Object.defineProperty(TypedRule.prototype, 'height', {
     get: function () {
-      return this.height_fw0bpd$_0.getValue_lrcp0p$(this, new Kotlin.PropertyMetadata('height'));
+      return this.height_fw0bpd$_0.getValue_lrcp0p$(this, TypedRule$height_metadata);
     },
     set: function (height) {
-      this.height_fw0bpd$_0.setValue_9rddgb$(this, new Kotlin.PropertyMetadata('height'), height);
+      this.height_fw0bpd$_0.setValue_9rddgb$(this, TypedRule$height_metadata, height);
     }
   });
+  var TypedRule$width_metadata = new PropertyMetadata('width');
   Object.defineProperty(TypedRule.prototype, 'width', {
     get: function () {
-      return this.width_ul4co6$_0.getValue_lrcp0p$(this, new Kotlin.PropertyMetadata('width'));
+      return this.width_ul4co6$_0.getValue_lrcp0p$(this, TypedRule$width_metadata);
     },
     set: function (width) {
-      this.width_ul4co6$_0.setValue_9rddgb$(this, new Kotlin.PropertyMetadata('width'), width);
+      this.width_ul4co6$_0.setValue_9rddgb$(this, TypedRule$width_metadata, width);
     }
   });
   function TypedRule$DisplayDelegate() {
-    TypedRule$TypedPropertyDelegate.call(this, void 0, Kotlin.getCallableRef('toDisplay', function ($receiver) {
+    TypedRule$TypedPropertyDelegate.call(this, void 0, getCallableRef('toDisplay', function ($receiver) {
       return toDisplay($receiver);
     }));
   }
   TypedRule$DisplayDelegate.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     simpleName: 'DisplayDelegate',
     interfaces: [TypedRule$TypedPropertyDelegate]
   };
   function TypedRule$PositionDelegate() {
-    TypedRule$TypedPropertyDelegate.call(this, void 0, Kotlin.getCallableRef('toPosition', function ($receiver) {
+    TypedRule$TypedPropertyDelegate.call(this, void 0, getCallableRef('toPosition', function ($receiver) {
       return toPosition($receiver);
     }));
   }
   TypedRule$PositionDelegate.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     simpleName: 'PositionDelegate',
     interfaces: [TypedRule$TypedPropertyDelegate]
   };
@@ -9158,19 +9554,19 @@ var elements = function (_, Kotlin) {
     return RgbColor$Factory_getInstance().from_61zpoe$(it);
   }
   TypedRule$RgbColorDelegate.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     simpleName: 'RgbColorDelegate',
     interfaces: [TypedRule$TypedPropertyDelegate]
   };
   function TypedRule$IntDelegate(attributeName) {
     if (attributeName === void 0)
       attributeName = null;
-    TypedRule$TypedPropertyDelegate.call(this, attributeName, Kotlin.getCallableRef('toInt', function ($receiver) {
+    TypedRule$TypedPropertyDelegate.call(this, attributeName, getCallableRef('toInt', function ($receiver) {
       return toInt($receiver);
     }));
   }
   TypedRule$IntDelegate.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     simpleName: 'IntDelegate',
     interfaces: [TypedRule$TypedPropertyDelegate]
   };
@@ -9180,81 +9576,80 @@ var elements = function (_, Kotlin) {
     TypedRule$TypedPropertyDelegate.call(this, attributeName, TypedRule$TypedRule$DimensionDelegate_init$lambda);
   }
   function TypedRule$TypedRule$DimensionDelegate_init$lambda(it) {
-    var tmp$;
-    return (tmp$ = toDimension(it)) != null ? tmp$ : Kotlin.throwNPE();
+    return ensureNotNull(toDimension(it));
   }
   TypedRule$DimensionDelegate.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     simpleName: 'DimensionDelegate',
     interfaces: [TypedRule$TypedPropertyDelegate]
   };
   function TypedRule$FlexDirectionDelegate() {
-    TypedRule$TypedPropertyDelegate.call(this, void 0, Kotlin.getCallableRef('toFlexDirection', function ($receiver) {
+    TypedRule$TypedPropertyDelegate.call(this, void 0, getCallableRef('toFlexDirection', function ($receiver) {
       return toFlexDirection($receiver);
     }));
   }
   TypedRule$FlexDirectionDelegate.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     simpleName: 'FlexDirectionDelegate',
     interfaces: [TypedRule$TypedPropertyDelegate]
   };
   function TypedRule$AlignItemsDelegate() {
-    TypedRule$TypedPropertyDelegate.call(this, void 0, Kotlin.getCallableRef('toAlignItems', function ($receiver) {
+    TypedRule$TypedPropertyDelegate.call(this, void 0, getCallableRef('toAlignItems', function ($receiver) {
       return toAlignItems($receiver);
     }));
   }
   TypedRule$AlignItemsDelegate.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     simpleName: 'AlignItemsDelegate',
     interfaces: [TypedRule$TypedPropertyDelegate]
   };
   function TypedRule$JustifyContentDelegate() {
-    TypedRule$TypedPropertyDelegate.call(this, void 0, Kotlin.getCallableRef('toJustifyContent', function ($receiver) {
+    TypedRule$TypedPropertyDelegate.call(this, void 0, getCallableRef('toJustifyContent', function ($receiver) {
       return toJustifyContent($receiver);
     }));
   }
   TypedRule$JustifyContentDelegate.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     simpleName: 'JustifyContentDelegate',
     interfaces: [TypedRule$TypedPropertyDelegate]
   };
   function TypedRule$FlexDelegate() {
-    TypedRule$TypedPropertyDelegate.call(this, void 0, Kotlin.getCallableRef('toFlex', function ($receiver) {
+    TypedRule$TypedPropertyDelegate.call(this, void 0, getCallableRef('toFlex', function ($receiver) {
       return toFlex($receiver);
     }));
   }
   TypedRule$FlexDelegate.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     simpleName: 'FlexDelegate',
     interfaces: [TypedRule$TypedPropertyDelegate]
   };
   function TypedRule$FlexGrowDelegate() {
-    TypedRule$TypedPropertyDelegate.call(this, void 0, Kotlin.getCallableRef('toFlexGrow', function ($receiver) {
+    TypedRule$TypedPropertyDelegate.call(this, void 0, getCallableRef('toFlexGrow', function ($receiver) {
       return toFlexGrow($receiver);
     }));
   }
   TypedRule$FlexGrowDelegate.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     simpleName: 'FlexGrowDelegate',
     interfaces: [TypedRule$TypedPropertyDelegate]
   };
   function TypedRule$FlexShrinkDelegate() {
-    TypedRule$TypedPropertyDelegate.call(this, void 0, Kotlin.getCallableRef('toFlexShrink', function ($receiver) {
+    TypedRule$TypedPropertyDelegate.call(this, void 0, getCallableRef('toFlexShrink', function ($receiver) {
       return toFlexShrink($receiver);
     }));
   }
   TypedRule$FlexShrinkDelegate.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     simpleName: 'FlexShrinkDelegate',
     interfaces: [TypedRule$TypedPropertyDelegate]
   };
   function TypedRule$FlexBasisDelegate() {
-    TypedRule$TypedPropertyDelegate.call(this, void 0, Kotlin.getCallableRef('toFlexBasis', function ($receiver) {
+    TypedRule$TypedPropertyDelegate.call(this, void 0, getCallableRef('toFlexBasis', function ($receiver) {
       return toFlexBasis($receiver);
     }));
   }
   TypedRule$FlexBasisDelegate.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     simpleName: 'FlexBasisDelegate',
     interfaces: [TypedRule$TypedPropertyDelegate]
   };
@@ -9286,7 +9681,7 @@ var elements = function (_, Kotlin) {
     }
   };
   TypedRule$TypedPropertyDelegate.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     simpleName: 'TypedPropertyDelegate',
     interfaces: [ReadWriteProperty]
   };
@@ -9294,14 +9689,14 @@ var elements = function (_, Kotlin) {
     return camelsToDashes(prop.callableName.substring(1));
   };
   TypedRule.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     simpleName: 'TypedRule',
     interfaces: [Rule]
   };
   function Colour() {
   }
   Colour.$metadata$ = {
-    kind: Kotlin.Kind.INTERFACE,
+    kind: Kind_INTERFACE,
     simpleName: 'Colour',
     interfaces: []
   };
@@ -9316,7 +9711,7 @@ var elements = function (_, Kotlin) {
   }
   Hsl.prototype.toHtml = function () {
     if (this.a != null) {
-      return 'hsl(' + this.h + ', ' + this.s + '%, ' + this.l + '%, ' + Kotlin.toString(this.a) + ')';
+      return 'hsl(' + this.h + ', ' + this.s + '%, ' + this.l + '%, ' + toString(this.a) + ')';
     }
      else {
       return 'hsl(' + this.h + ', ' + this.s + '%, ' + this.l + '%)';
@@ -9337,7 +9732,7 @@ var elements = function (_, Kotlin) {
     this.BLUE = new Hsl(240, 100, 50);
   }
   Hsl$Statics.$metadata$ = {
-    kind: Kotlin.Kind.OBJECT,
+    kind: Kind_OBJECT,
     simpleName: 'Statics',
     interfaces: []
   };
@@ -9349,7 +9744,7 @@ var elements = function (_, Kotlin) {
     return Hsl$Statics_instance;
   }
   Hsl.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     simpleName: 'Hsl',
     interfaces: [Colour]
   };
@@ -9399,7 +9794,7 @@ var elements = function (_, Kotlin) {
   };
   RgbColor.prototype.toString = function () {
     if (this.a != null) {
-      return 'rgba(' + this.r + ',' + this.g + ',' + this.b + ',' + Kotlin.toString(this.a) + ')';
+      return 'rgba(' + this.r + ',' + this.g + ',' + this.b + ',' + toString(this.a) + ')';
     }
      else {
       return 'rgb(' + this.r + ',' + this.g + ',' + this.b + ')';
@@ -9428,7 +9823,7 @@ var elements = function (_, Kotlin) {
     var result = this.r;
     result = (31 * result | 0) + this.g | 0;
     result = (31 * result | 0) + this.b | 0;
-    result = (31 * result | 0) + ((tmp$_0 = (tmp$ = this.a) != null ? Kotlin.hashCode(tmp$) : null) != null ? tmp$_0 : 0) | 0;
+    result = (31 * result | 0) + ((tmp$_0 = (tmp$ = this.a) != null ? hashCode(tmp$) : null) != null ? tmp$_0 : 0) | 0;
     return result;
   };
   function RgbColor$Factory() {
@@ -9462,7 +9857,7 @@ var elements = function (_, Kotlin) {
     }
   };
   RgbColor$Factory.$metadata$ = {
-    kind: Kotlin.Kind.OBJECT,
+    kind: Kind_OBJECT,
     simpleName: 'Factory',
     interfaces: []
   };
@@ -9474,7 +9869,7 @@ var elements = function (_, Kotlin) {
     return RgbColor$Factory_instance;
   }
   RgbColor.$metadata$ = {
-    kind: Kotlin.Kind.CLASS,
+    kind: Kind_CLASS,
     simpleName: 'RgbColor',
     interfaces: [Colour]
   };
@@ -10110,6 +10505,7 @@ var elements = function (_, Kotlin) {
   package$elements.Br = Br;
   package$elements.Span = Span;
   package$elements.I = I;
+  package$elements.onResize_nvde5v$ = onResize;
   var package$style_0 = package$fg.style || (package$fg.style = {});
   package$style_0.AdjacentSiblingRule = AdjacentSiblingRule;
   package$style_0.AndRule = AndRule;
